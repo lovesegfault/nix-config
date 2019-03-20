@@ -5,6 +5,7 @@
     beets
     exa
     gnupg
+    gopass
     lynx
     nix-index
     ripgrep
