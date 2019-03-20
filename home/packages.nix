@@ -5,7 +5,6 @@
     beets
     exa
     gnupg
-    gopass
     lynx
     nix-index
     ripgrep
@@ -15,6 +14,7 @@
     travis
   ] ++ lib.optionals (config.isDesktop) [
     alacritty
+    gopass
     i3status-rust
     lollypop
     mako
