@@ -2,20 +2,21 @@
 
 {
   programs.home-manager.enable = true;
-  imports = [
-    ./options.nix
 
-    ./git.nix
-    ./gtk.nix
-    ./htop.nix
-    ./neovim.nix
-    ./packages.nix
-    ./services.nix
-    ./ssh.nix
-    ./tmux.nix
-    ./variables.nix
-    ./xdg.nix
-    ./zsh.nix
+  imports = [
+    ./config/options.nix
+
+    ./config/git.nix
+    ./config/gtk.nix
+    ./config/htop.nix
+    ./config/neovim.nix
+    ./config/packages.nix
+    ./config/services.nix
+    ./config/ssh.nix
+    ./config/tmux.nix
+    ./config/variables.nix
+    ./config/xdg.nix
+    ./config/zsh.nix
   ];
 
   isArm = false;
