@@ -4,6 +4,7 @@
     arcanist
     beets
     exa
+    fzf
     gnupg
     lynx
     nix-index
@@ -21,18 +22,27 @@
     llvmPackages_latest.clang-unwrapped
   ] ++ lib.optionals (config.isDesktop) [
     alacritty
+    feh
     gopass
+    grim
     i3status-rust
     jetbrains.clion
+    light
     lollypop
     mako
     pavucontrol
     slack
+    playerctl
+    slurp
     spotify
     sway
     swayidle
     swaylock
     vlc
+    wl-clipboard
+    xdg_utils
+    xorg.setxkbmap
+    xorg.xhost
     zoom-us
   ];
 }

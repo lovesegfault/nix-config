@@ -151,9 +151,6 @@
         nnoremap <C-p> :Files<CR>
         set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
         command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
-        " ---- Ctrl+P search with ripgrep
-        let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-        let g:ctrlp_user_caching = 0
         " ---- Deoplete
         let g:deoplete#enable_at_startup = 1
 
@@ -209,6 +206,7 @@
           ale
           deoplete-nvim
           fzf-vim
+          fzfWrapper
           gist-vim
           goyo
           idris-vim

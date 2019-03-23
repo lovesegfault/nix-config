@@ -4,7 +4,8 @@
   programs.git = {
     enable = true;
     extraConfig = {
-      core = { editor = "nvim"; };
+      core = { editor = "${config.home.sessionVariables.VISUAL}"; };
+      github = { user = "bemeurer"; };
       merge = { tool = "nvimdiff"; };
       mergetool = { prompt = true; };
       "mergetool \"nvimdiff\"" = { cmd = "nvim -d $LOCAL $REMOTE"; };
