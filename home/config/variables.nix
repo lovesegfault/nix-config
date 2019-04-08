@@ -4,6 +4,7 @@
     EDITOR = "nvim";
     VISUAL = EDITOR;
   } // lib.optionals (config.isDesktop) {
+    SSH_ASKPASS = "${pkgs.gnome3.seahorse}/libexec/seahorse/ssh-askpass";
     DESKTOP_SESSION = "gnome";
     ECORE_EVAS_ENGINE = "wayland_egl";
     ELM_ENGINE = "wayland_egl";
