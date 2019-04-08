@@ -3,6 +3,5 @@
 {
   programs.keychain = {
     enable = true;
-
   };
 }

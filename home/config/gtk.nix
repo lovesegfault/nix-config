@@ -1,12 +1,13 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
-  gtk = if config.isDesktop then
-  {
-    enable = true;
-    theme.package = pkgs.arc-theme;
-    theme.name = "Arc";
-  } else
-  {
-    enable = false;
-  };
+  gtk = lib.mkMerge [
+    {
+      enable = config.isDesktop;
+    }
+
+    (lib.mkIf config.isDesktop {
+      theme.package = pkgs.arc-theme;
+      theme.name = "Arc";
+    })
+  ];
 }

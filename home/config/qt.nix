@@ -1,11 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
-  qt = if config.isDesktop then
-  {
-    enable = true;
-    platformTheme = "gnome";
-  } else
-  {
-    enable = false;
-  };
+  qt = lib.mkMerge [
+    {
+      enable = config.isDesktop;
+    }
+
+    (lib.mkIf config.isDesktop {
+      platformTheme = "gnome";
+    })
+  ];
 }

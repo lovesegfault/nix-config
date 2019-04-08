@@ -1,8 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
-  programs.rofi = if config.isDesktop then {
-    enable = true;
+  programs.rofi = lib.mkMerge [
+    {
+      enable = config.isDesktop;
+    }
+
+    (lib.mkIf config.isDesktop {
     extraConfig = ''
       modi: combi,drun
       rofi.combi-modi: window,drun,ssh
@@ -15,7 +19,6 @@
     terminal = "${pkgs.alacritty}/bin/alacritty";
     theme = "glue_pro_blue";
     width = 20;
-  } else {
-    enable = false;
-  };
+    })
+  ];
 }
