@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  programs.zsh = {
+  programs.zsh = rec {
     enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
@@ -10,7 +10,7 @@
       expireDuplicatesFirst = true;
       extended = true;
       ignoreDups = true;
-      path = "${config.programs.zsh.dotDir}/zsh_history";
+      path = "${dotDir}/zsh_history";
       save = 10000;
       share = true;
       size = 10000;
@@ -140,7 +140,7 @@
       gpl = "git pull --rebase";
       gr = "git rebase";
       gs = "git status --find-renames --show-stash";
-      l = "${config.programs.zsh.shellAliases.ls}";
+      l = "${shellAliases.ls}";
       la ="exa -bhlFa";
       ls = "exa -bhlF";
       sync = "sync & watch -n 1 rg -e Dirty: /proc/meminfo";

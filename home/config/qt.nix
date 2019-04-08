@@ -3,7 +3,7 @@
   qt = if config.isDesktop then
   {
     enable = true;
-    useGtkTheme = true;
+    platformTheme = "gnome";
   } else
   {
     enable = false;

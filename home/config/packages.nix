@@ -11,7 +11,6 @@
     ripgrep
     rustup
     skim
-    texlive.combined.scheme-full
     travis
     (python3.withPackages(ps: with ps; [
       python-language-server
@@ -22,27 +21,46 @@
     llvmPackages_latest.clang-unwrapped
   ] ++ lib.optionals (config.isDesktop) [
     alacritty
+    pantheon.elementary-files
     feh
+    font-awesome
     gopass
     grim
+    hack-font
     i3status-rust
+    imagemagick
     jetbrains.clion
+    libnotify
     light
     lollypop
     mako
+    passff-host
     pavucontrol
-    slack
+    pinentry_gnome
     playerctl
+    powerline-fonts
+    shotwell
+    slack
     slurp
     spotify
+    sublime3-dev
     sway
     swayidle
     swaylock
+    texlive.combined.scheme-full
     vlc
+    vscode
+    weechat
     wl-clipboard
+    xclip
     xdg_utils
     xorg.setxkbmap
     xorg.xhost
+    xsel
+    yubikey-personalization-gui
+    yubioath-desktop
+    zathura
     zoom-us
   ];
+
 }

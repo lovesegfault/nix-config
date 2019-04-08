@@ -16,7 +16,7 @@
             workspaceNumbers = false;
           }
         ];
-        floating.modifier = "${config.xsession.windowManager.i3.config.modifier}";
+        floating.modifier = config.xsession.windowManager.i3.config.modifier;
         fonts = [ "FontAwesome 8" "Hack 8"];
         gaps = {
           inner = 5;
@@ -25,14 +25,16 @@
           smartGaps = false;
         };
         keybindings = let
-          chkbd = "${config.home.homeDirectory}/bin/chkbd";
+          # chkbd = "${config.home.homeDirectory}/bin/chkbd";
+          chkbd = "";
           clip = "${pkgs.wl-clipboard}/bin/wl-copy";
           light = "${pkgs.light}/bin/light";
           menu = "${pkgs.rofi}/bin/rofi";
           mod = config.xsession.windowManager.i3.config.modifier;
           nag = "${config.xsession.windowManager.i3.package}/bin/i3-nagbar";
           pactl = "${pkgs.pulseaudio}/bin/pactl";
-          passmenu = "${config.home.homeDirectory}/bin/passmenu";
+          # passmenu = "${config.home.homeDirectory}/bin/passmenu";
+          passmenu = "";
           playerctl = "${pkgs.playerctl}/bin/playerctl";
           screenshot = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${clip}";
           term = "${pkgs.alacritty}/bin/alacritty";

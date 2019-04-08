@@ -1,8 +1,28 @@
 { config, pkgs, ... }:
 {
   xdg = if config.isDesktop then
-  {
+  rec {
     enable = true;
+
+    configFile.yubico = {
+      executable = false;
+      target = "${config.xdg.configHome}/Yubico/u2f_keys";
+      text = "bemeurer:mGTYMD45F-CbfcJTGnRLD4jfq5U3jqbIMr_9ZgyoAIyoDfJjXjWFDvunyVQO1X9rxTCgSWUQfCJer4wIJPp6iw,04b557d0dba653ab6844f4118ea3fda4d429fe0ff112c6df3267a781a55d1cfd8549a4593a01a1b03f18ca13f1a656b2367336167a91c4091d7ba3b0f378163ab2";
+    };
+
+    configFile.mako = {
+      executable = false;
+      target = "${config.xdg.configHome}/mako/config";
+      text = ''
+        sort=-time
+        font=Hack 10
+        background-color=#2d2d2d
+        text-color=#eaeaea
+        border-color=#9a9a9a
+        default-timeout=10000
+      '';
+    };
+
     configFile.sway = {
       executable = false;
       target = "${config.xdg.configHome}/sway/config";
@@ -16,6 +36,7 @@
         swayidle = "${pkgs.swayidle}/bin/swayidle";
         swaynag = "${pkgs.sway}/bin/swaynag";
         pactl = "${pkgs.pulseaudio}/bin/pactl";
+        rofi = "${pkgs.rofi}/bin/rofi";
         screenshot = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${clip}";
         terminal = "${pkgs.alacritty}/bin/alacritty";
       in
@@ -24,7 +45,8 @@
         #### Variables #####
         set $down j
         set $left h
-        set $menu ${terminal} -d 80 20 -t aopen --class aopen -e ~/bin/aopen
+        set $menu ${rofi} -show combi
+        # set $menu ${terminal} -d 80 20 -t aopen --class aopen -e ~/bin/aopen
         set $mod Mod4
         set $right l
         set $up k
@@ -81,7 +103,7 @@
         bindsym $mod+Shift+q kill
         bindsym $mod+d exec --no-startup-id $menu
         # FIXME
-        # bindsym $mod+p exec --no-startup-id ~/bin/passmenu
+        bindsym $mod+p exec --no-startup-id ~/bin/passmenu
         bindsym Print exec ${screenshot}
         bindsym XF86MonBrightnessUp exec --no-startup-id ${light} -A 1
         bindsym XF86MonBrightnessDown exec --no-startup-id ${light} -U 1
@@ -97,9 +119,7 @@
         # reload the configuration file
         bindsym $mod+Shift+c reload
         # exit sway (logs you out of your Wayland session)
-        bindsym $mod+Shift+e exec ${swaynag} -t warning -m 'You pressed the exit
-        shortcut. Do you really want to exit sway? This will end your Wayland
-        session.' -b 'Yes, exit sway' '${swaymsg} exit'
+        bindsym $mod+Shift+e exec ${swaynag} -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' '${swaymsg} exit'
 
         ####  Move around ####
         bindsym $mod+$left focus left

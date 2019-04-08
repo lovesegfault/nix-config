@@ -27,7 +27,7 @@
 
   isArm = false;
   isDesktop = true;
-  iwFace = "wlp3s0";
+  iwFace = "wlp0s20f3";
   bgImage = "${config.home.homeDirectory}/pictures/walls/ocean.jpg";
   # Only allow unfree on Desktops
   nixpkgs.config.allowUnfree = config.isDesktop;

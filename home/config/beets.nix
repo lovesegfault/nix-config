@@ -3,28 +3,28 @@
 {
   programs.beets = {
     enable = true;
-    settings = {
+    settings = rec {
       art_filename = "cover";
-      asciify_paths = "no";
+      asciify_paths = false;
       clutter = [ "Thumbs.DB" ".DS_Store" ];
       directory = "${config.home.homeDirectory}/music";
       format_album = "$albumartist - $album";
       format_item = "$artist - $album - $title";
-      format_raw_length = "no";
-      id3v23 = "no";
+      format_raw_length = false;
+      id3v23 = false;
       ignore = [ ".*" "*~" "System Volume Information" "lost+found" ];
-      ignore_hidden = "yes";
-      library = "${config.programs.beets.settings.directory}/library.db";
+      ignore_hidden = true;
+      library = "${directory}/library.db";
       max_filename_length = 0;
-      original_date = "yes";
+      original_date = true;
       path_sep_replace = "_";
-      per_disc_numbering = "yes";
+      per_disc_numbering = true;
       pluginpath = [];
       sort_album = "albumartist+ album+";
-      sort_case_insensitive = "yes";
+      sort_case_insensitive = true;
       sort_item = "artist+ album+ disc+ track+";
       statefile = "state.pickle";
-      threaded = "yes";
+      threaded = true;
       time_format = "%Y-%m-%d %H:%M:%S";
       timeout = 5.0;
       va_name = "Various Artists";
@@ -51,17 +51,17 @@
 
       absubmit = {
         # FIXME: Write formula for essentia
-        auto = "yes";
+        auto = true;
         extractor = "";
       };
 
       acoustid = { apikey = "***REMOVED***"; };
 
-      embedart = { auto = "yes"; };
+      embedart = { auto = true; };
 
       fetchart = {
-        auto= "yes";
-        cautious = "no";
+        auto= true;
+        cautious = false;
         enforce_ratio = "10%";
         fanarttv_key = "***REMOVED***";
         google_key = "***REMOVED***";
@@ -71,42 +71,42 @@
       };
 
       "import" = {
-        autotag = "yes";
-        bell = "yes";
-        copy = "yes";
+        autotag = true;
+        bell = true;
+        copy = true;
         default_action = "apply";
-        delete = "no";
-        detail = "yes";
+        delete = false;
+        detail = true;
         duplicate_action = "ask";
-        flat = "no";
-        from_scratch = "yes";
-        group_albums = "no";
-        hardlink = "no";
-        incremental = "yes";
+        flat = false;
+        from_scratch = true;
+        group_albums = false;
+        hardlink = false;
+        incremental = true;
         languages = [ "en" ];
-        link = "no";
+        link = false;
         log = "${config.xdg.dataHome}/beets/beets.log";
-        move = "yes";
+        move = true;
         none_rec_action = "ask";
-        pretend = "no";
-        quiet = "no";
+        pretend = false;
+        quiet = false;
         quiet_fallback = "skip";
         resume = "ask";
         search_ids = [];
         set_fields = {};
-        singletons = "no";
-        timid = "yes";
-        write = "yes";
+        singletons = false;
+        timid = true;
+        write = true;
       };
 
       lastgenre = {
-        auto = "yes";
-        canonical = "yes";
+        auto = true;
+        canonical = true;
         fallback = "";
       };
 
       lyrics = {
-        auto = "yes";
+        auto = true;
         fallback = "";
         google_API_key = "***REMOVED***";
       };
@@ -149,7 +149,7 @@
         preferred = {
           countries = ["US" "GB|UK"];
           media = [ "Digital Media|File" "CD" ];
-          original_year = "yes";
+          original_year = true;
         };
       };
 
@@ -177,7 +177,7 @@
       };
 
       ui = {
-        color = "yes";
+        color = true;
         length_diff_thresh = 10.0;
         terminal_width = 120;
 

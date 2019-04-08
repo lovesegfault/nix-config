@@ -4,13 +4,14 @@
   programs.git = {
     enable = true;
     extraConfig = {
+      "mergetool \"nvimdiff\"" = { cmd = "nvim -d $LOCAL $REMOTE"; };
       core = { editor = "${config.home.sessionVariables.VISUAL}"; };
+      credential = { helper = "${pkgs.gitFull}/bin/git-credential-libsecret"; };
+      diff = { tool = "nvimdiff"; };
+      difftool = { prompt = true; };
       github = { user = "bemeurer"; };
       merge = { tool = "nvimdiff"; };
       mergetool = { prompt = true; };
-      "mergetool \"nvimdiff\"" = { cmd = "nvim -d $LOCAL $REMOTE"; };
-      difftool = { prompt = true; };
-      diff = { tool = "nvimdiff"; };
     };
     lfs.enable = true;
     package = pkgs.gitFull;

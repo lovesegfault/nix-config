@@ -4,7 +4,7 @@
   programs.rofi = if config.isDesktop then {
     enable = true;
     extraConfig = ''
-      modi: drun
+      modi: combi,drun
       rofi.combi-modi: window,drun,ssh
       run-shell-command: {terminal} -e {cmd}
       threads: 0

@@ -15,6 +15,11 @@
   } // lib.optionalAttrs (config.isDesktop) {
     enableExtraSocket = true;
     enableScDaemon = true;
-    enableSshSupport = false;
+    enableSshSupport = true;
+    extraConfig = ''
+      pinentry-program ${pkgs.pinentry_gnome}/bin/pinentry-gnome3
+    '';
   };
+
+  services.xembed-sni-proxy.enable = config.isDesktop;
 }

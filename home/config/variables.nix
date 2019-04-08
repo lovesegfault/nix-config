@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 {
-  config.home.sessionVariables = {
+  config.home.sessionVariables = rec {
     EDITOR = "nvim";
-    VISUAL = "${config.home.sessionVariables.EDITOR}";
+    VISUAL = EDITOR;
   } // lib.optionals (config.isDesktop) {
     DESKTOP_SESSION = "gnome";
     ECORE_EVAS_ENGINE = "wayland_egl";
