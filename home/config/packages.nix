@@ -39,6 +39,7 @@
     pinentry_gnome
     playerctl
     powerline-fonts
+    qutebrowser
     shotwell
     slack
     slurp
