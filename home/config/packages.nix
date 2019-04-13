@@ -6,6 +6,7 @@
       beets
       exa
       fzf
+      gist
       gnupg
       llvmPackages_latest.clang-unwrapped
       lynx
