@@ -21,6 +21,7 @@
       rustup
       skim
       travis
+      vimpager-latest
     ]
 
     (lib.mkIf config.isDesktop [

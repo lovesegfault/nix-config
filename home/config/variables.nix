@@ -4,6 +4,7 @@
     rec {
       EDITOR = "nvim";
       VISUAL = EDITOR;
+      PAGER = "vimpager";
     }
 
     (lib.mkIf config.isDesktop {
