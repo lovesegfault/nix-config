@@ -26,6 +26,8 @@
 
     (lib.mkIf config.isDesktop [
       alacritty
+      bookworm
+      calibre
       feh
       font-awesome
       gopass
