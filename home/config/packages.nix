@@ -28,8 +28,10 @@
       alacritty
       bookworm
       calibre
+      darktable
       feh
       font-awesome
+      gimp
       gopass
       grim
       hack-font
