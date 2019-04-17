@@ -1,4 +1,7 @@
 { config, pkgs, lib, ... }:
+let
+  hie-nix = import (builtins.fetchTarball https://github.com/domenkozar/hie-nix/archive/master.tar.gz) {};
+in
 {
   config.home.packages = with pkgs; lib.mkMerge [
     [
@@ -12,6 +15,7 @@
       llvmPackages_latest.clang-unwrapped
       lynx
       nix-index
+	  hie-nix.hies
       (python3.withPackages(ps: with ps; [
         python-language-server
         ps.pyls-mypy
