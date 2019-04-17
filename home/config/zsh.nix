@@ -117,6 +117,7 @@
       }
     ];
     shellAliases = {
+      cat = "bat";
       cb = "cargo build";
       cbr = "cargo build --release";
       cc = "cargo check";

@@ -3,6 +3,7 @@
   config.home.packages = with pkgs; lib.mkMerge [
     [
       arcanist
+      bat
       beets
       exa
       fzf
