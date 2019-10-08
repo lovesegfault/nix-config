@@ -1,34 +1,30 @@
 { config, pkgs, ... }:
 
 {
-  programs.home-manager.enable = true;
-
   imports = [
-    ./config/options.nix
-
-    ./config/beets.nix
-    ./config/git.nix
-    ./config/gtk.nix
-    ./config/htop.nix
-    ./config/neovim.nix
-    ./config/packages.nix
-    ./config/qt.nix
-    ./config/services.nix
-    ./config/rofi.nix
-    ./config/ssh.nix
-    ./config/systemd.nix
-    ./config/tmux.nix
-    ./config/variables.nix
-    ./config/xdg.nix
-    ./config/xresources.nix
-    ./config/xsession.nix
-    ./config/zsh.nix
+    modules/alacritty.nix
+    modules/dunst.nix
+    modules/firefox.nix
+    modules/git.nix
+    modules/gnome-keyring.nix
+    modules/gpg-agent.nix
+    modules/gpg.nix
+    modules/gtk.nix
+    modules/htop.nix
+    modules/i3.nix
+    modules/neovim.nix
+    modules/newsboat.nix
+    modules/packages.nix
+    # modules/polybar.nix
+    modules/qt.nix
+    modules/rofi.nix
+    modules/ssh.nix
+    modules/tmux.nix
+    modules/xdg.nix
+    modules/xresources.nix
+    modules/xsession.nix
+    modules/zsh.nix
   ];
 
-  isArm = false;
-  isDesktop = true;
-  iwFace = "wlp0s20f3";
-  bgImage = "${config.home.homeDirectory}/pictures/walls/ocean.jpg";
-  # Only allow unfree on Desktops
-  nixpkgs.config.allowUnfree = config.isDesktop;
+  programs.home-manager.enable = true;
 }
