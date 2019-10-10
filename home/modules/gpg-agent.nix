@@ -1,9 +1,9 @@
 { config, pkgs, ... }: {
   services.gpg-agent = {
     enable = true;
-    enableExtraSocket = true;
-    enableScDaemon = true;
-    enableSshSupport = true;
+    enableExtraSocket = false;
+    enableScDaemon = false;
+    enableSshSupport = false;
     defaultCacheTtl = 604800;
   };
 }

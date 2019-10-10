@@ -29,6 +29,7 @@ in {
     neovim
     qt5.qtwayland
     xorg.xinit
+    qgnomeplatform
   ];
 
   # Configure aspell system wide
@@ -85,12 +86,16 @@ in {
     networkmanager = {
       enable = true;
       dns = "systemd-resolved";
-      # wifi.backend = "iwd";
+      wifi.backend = "iwd";
     };
   };
 
   nix = {
     allowedUsers = [ "@wheel" ];
+    binaryCaches = [ "https://standard.cachix.org/" ];
+    binaryCachePublicKeys = [
+      "standard.cachix.org-1:+HFtC20D1DDrZz4yCXthdaqb3p2zBimNk9Mb+FeergI="
+    ];
     daemonIONiceLevel = 5;
     daemonNiceLevel = 10;
     gc = {
@@ -110,6 +115,10 @@ in {
     gphoto2.enable = true;
     light.enable = true;
     seahorse.enable = true;
+    ssh = {
+      askPassword = "${pkgs.gnome3.seahorse}/libexec/seahorse/ssh-askpass";
+      startAgent = true;
+    };
     sway = {
       enable = true;
       extraPackages = with pkgs; [
@@ -157,6 +166,10 @@ in {
 
   security = {
     rtkit.enable = true;
+    pam.services.login = {
+      enableGnomeKeyring = true;
+      setEnvironment = true;
+    };
     sudo = {
       enable = true;
       wheelNeedsPassword = false;
@@ -317,19 +330,24 @@ in {
 
   sound.enable = true;
 
+  # This value determines the NixOS release with which your system is to be
+  # compatible, in order to avoid breaking some software such as database
+  # servers. You should change this only after NixOS release notes say you
+  # should.
+  system.stateVersion = "19.09";
+
   users.users.bemeurer = {
     createHome = true;
-    extraGroups = [ "camera" "input" "video" "wheel" ];
+    extraGroups = [ "camera" "input" "lxd" "video" "wheel" ];
     hashedPassword =
       "***REMOVED***";
     isNormalUser = true;
     shell = pkgs.zsh;
   };
 
-  # This value determines the NixOS release with which your system is to be
-  # compatible, in order to avoid breaking some software such as database
-  # servers. You should change this only after NixOS release notes say you
-  # should.
-  system.stateVersion = "19.09";
+  virtualisation = {
+    lxc.enable = true;
+    lxd.enable = true;
+  };
 
 }

@@ -15,6 +15,7 @@
     shotwell
     skim
     slack
+    thunderbird
     weechat
   ];
 }

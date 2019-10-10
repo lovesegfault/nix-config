@@ -38,7 +38,6 @@
         forwardAgent = true;
         identitiesOnly = true;
         identityFile = [
-          "~/.ssh/bemeurer_rsa"
           "~/.ssh/lovesegfault_rsa"
           "~/.ssh/standard_rsa"
         ];

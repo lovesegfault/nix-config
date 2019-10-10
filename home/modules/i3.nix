@@ -2,15 +2,14 @@
   xsession.windowManager.i3 = {
     enable = true;
     config = {
-      bars = [
-        {
-          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rs.toml";
-          fonts = [ "FontAwesome 10" "Hack 10" ];
-          position = "top";
-          workspaceNumbers = false;
-          colors.background = "#424242";
-        }
-      ];
+      bars = [{
+        statusCommand =
+          "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rs.toml";
+        fonts = [ "FontAwesome 10" "Hack 10" ];
+        position = "top";
+        workspaceNumbers = false;
+        colors.background = "#424242";
+      }];
       floating = {
         border = 0;
         criteria = [ { title = "menu"; } { title = "passmenu"; } ];
@@ -41,10 +40,13 @@
         "Print" = "exec ${prtsc}";
         "XF86MonBrightnessUp" = "exec light -A 1";
         "XF86MonBrightnessDown" = "exec light -U 1";
-        "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +1%";
-        "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -1%";
+        "XF86AudioRaiseVolume" =
+          "exec pactl set-sink-volume @DEFAULT_SINK@ +1%";
+        "XF86AudioLowerVolume" =
+          "exec pactl set-sink-volume @DEFAULT_SINK@ -1%";
         "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
-        "XF86AudioMicMute" = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+        "XF86AudioMicMute" =
+          "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
         "XF86Display" = "exec i3lock -i ~/pictures/walls/clouds.jpg -e -f";
         "${modifier}+Shift+c" = "reload";
         "${modifier}+Shift+r" = "restart";
