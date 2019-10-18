@@ -157,6 +157,14 @@
       ];
       isNormalUser = true;
     };
+    ogle = {
+      createHome = true;
+      extraGroups = [ "input" "lxd" "video" "wheel" ];
+      openssh.authorizedKeys.keys = [
+      "***REMOVED***"
+      ];
+      isNormalUser = true;
+    };
   };
 
   virtualisation = {
