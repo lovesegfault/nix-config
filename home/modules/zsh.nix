@@ -23,31 +23,17 @@
       bindkey "^[[1;3C" forward-word
       bindkey "^[[1;5D" backward-word
       bindkey "^[[1;3D" backward-word
-
-      source $ZPLUG_HOME/init.zsh
-      zplug "zplug/zplug", hook-build:"zplug --self-manage"
-      zplug "zdharma/fast-syntax-highlighting", defer:2
-      zplug "zdharma/history-search-multi-word", defer:2
-      zplug "zsh-users/zsh-history-substring-search", defer:2
-      zplug "zsh-users/zsh-completions", defer:2
-      zplug "zsh-users/zsh-autosuggestions", defer:2
-      zplug "hlissner/zsh-autopair", defer:2
-      zplug "hcgraf/zsh-sudo"
-      zplug "chisui/zsh-nix-shell"
-      zplug "spwhitt/nix-zsh-completions", defer:2
-      zplug "mafredri/zsh-async", from:github
-      zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
-      zplug load
     '';
-    localVariables = { ZPLUG_HOME = "$HOME/.zplug"; };
     profileExtra = ''
       if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
         exec sway > /tmp/sway.log 2>&1
       fi
     '';
     shellAliases = {
-      c = "cargo";
+      # misc
       cat = "bat";
+      # rust
+      c = "cargo";
       cb = "cargo build";
       cbr = "cargo build --release";
       cc = "cargo check";
@@ -58,6 +44,7 @@
       crr = "cargo run --release";
       ct = "cargo test";
       ctr = "cargo test --release";
+      # git
       g = "git";
       ga = "git add";
       gaa = "git add -A";
@@ -80,9 +67,49 @@
       grc = "git rebase --continue";
       grsn = "git rebase --exec 'git commit --amend --no-edit -n -S'";
       gs = "git status";
+      # exa
       l = "exa -bhlF";
       la = "exa -bhlFa";
       ls = "exa -bhlF";
     };
+    plugins = [
+      {
+        name = "zsh-async";
+        src = pkgs.fetchFromGitHub {
+          owner = "mafredri";
+          repo = "zsh-async";
+          rev = "v1.7.2";
+          sha256 = "0vl5dymd07mi42wgkh0c3q8vf76hls1759dirlh3ryrq6w9nrdbf";
+        };
+      }
+      {
+        name = "pure";
+        file = "pure.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "sindresorhus";
+          repo = "pure";
+          rev = "v1.11.0";
+          sha256 = "0vl5dymd07mi42wgkh0c3q8vf76hls1759dirlh3ryrq6w9nrdbf";
+        };
+      }
+      {
+        name = "fast-syntax-highlighting";
+        src = pkgs.fetchFromGitHub {
+          owner = "zdharma";
+          repo = "fast-syntax-highlighting";
+          rev = "v1.54";
+          sha256 = "0vl5dymd07mi42wgkh0c3q8vf76hls1759dirlh3ryrq6w9nrdbf";
+        };
+      }
+      {
+        name = "history-search-multi-word";
+        src = pkgs.fetchFromGitHub {
+          owner = "zdharma";
+          repo = "history-search-multi-word";
+          rev = "ab2cb3444b543bd1f0f983956f9dbad4620368b8";
+          sha256 = "0vl5dymd07mi42wgkh0c3q8vf76hls1759dirlh3ryrq6w9nrdbf";
+        };
+      }
+    ];
   };
 }
