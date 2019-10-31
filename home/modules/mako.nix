@@ -1,5 +1,5 @@
 { config, pkgs, ... }: {
   xdg.configFile."mako/config" = {
-      source = "/home/bemeurer/.config/nixpkgs/files/mako.conf";
+      source = "${config.home.homeDirectory}/src/nix-config/home/files/mako.conf";
     };
 }
