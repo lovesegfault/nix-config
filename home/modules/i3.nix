@@ -4,7 +4,7 @@
     config = {
       bars = [{
         statusCommand =
-          "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rs.toml";
+          "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust.toml";
         fonts = [ "FontAwesome 10" "Hack 10" ];
         position = "top";
         workspaceNumbers = false;
