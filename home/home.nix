@@ -18,6 +18,7 @@
     modules/htop.nix
     modules/mako.nix
     modules/neovim.nix
+    modules/home.nix
     modules/newsboat.nix
     modules/packages.nix
     modules/qt.nix
