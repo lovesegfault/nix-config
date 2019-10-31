@@ -7,15 +7,17 @@
     gist
     gnome3.seahorse
     gopass
-    gtk3-x11
     libnotify
     lollypop
+    neofetch
     nix-index
     ripgrep
+    nodejs
+    yarn
     shotwell
-    skim
     slack
     thunderbird
     weechat
+    zoom-us
   ];
 }
