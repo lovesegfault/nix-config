@@ -21,7 +21,7 @@
     modules/home.nix
     modules/htop.nix
     modules/mako.nix
-    modules/mako/config
+    modules/libinput-gestures.nix
     modules/neovim.nix
     modules/newsboat.nix
     modules/packages.nix
