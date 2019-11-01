@@ -11,9 +11,13 @@ in {
   boot = rec {
     consoleLogLevel = 1;
     earlyVconsoleSetup = true;
-    extraModulePackages = with kernelPackages; [ acpi_call ];
+    extraModulePackages = with kernelPackages; [ acpi_call tp_smapi v4l2loopback ];
     kernelModules = [ "acpi_call" ];
     kernelPackages = pkgs.linuxPackages_latest;
+    initrd = {
+      availableKernelModules = [ "nvme" "aesni_intel" "cryptd" "aes_x86_64" ];
+      supportedFilesystems = [ "xfs" ];
+    };
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -28,7 +32,6 @@ in {
     aspellDicts.en-science
     neovim
     qt5.qtwayland
-    xorg.xinit
     qgnomeplatform
   ];
 
@@ -42,7 +45,6 @@ in {
   fonts = { fonts = with pkgs; [ hack-font font-awesome ]; };
 
   hardware = {
-    enableAllFirmware = true;
     enableRedistributableFirmware = true;
     bluetooth = {
       enable = true;
@@ -75,7 +77,7 @@ in {
   };
 
   i18n = {
-    consoleFont = "ter-v32n";
+    consoleFont = "ter-v28n";
     consoleKeyMap = "us";
     consolePackages = with pkgs; [ terminus_font ];
     defaultLocale = "en_US.UTF-8";
@@ -85,6 +87,7 @@ in {
     hostName = "bergman";
     networkmanager = {
       enable = true;
+      dhcp = "dhclient";
       dns = "systemd-resolved";
       wifi.backend = "iwd";
     };
@@ -111,13 +114,22 @@ in {
 
   nixpkgs.config.allowUnfree = true;
 
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+  };
+
   programs = {
     gphoto2.enable = true;
+    gnupg.agent = {
+      enable = true;
+      pinentryFlavor = "gnome3";
+    };
     light.enable = true;
     seahorse.enable = true;
     ssh = {
       askPassword = "${pkgs.gnome3.seahorse}/libexec/seahorse/ssh-askpass";
-      startAgent = true;
+      startAgent = false;
     };
     sway = {
       enable = true;
@@ -133,6 +145,7 @@ in {
         swayidle
         waybar
         wl-clipboard
+        wf-recorder
         xwayland
       ];
       extraSessionCommands = ''
@@ -140,6 +153,7 @@ in {
         export QT_WAYLAND_FORCE_DPI=physical
         export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
         export _JAVA_AWT_WM_NONREPARENTING=1
+        export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dsun.java2d.xrender=true"
         export ECORE_EVAS_ENGINE=wayland_egl
         export ELM_ENGINE=wayland_egl
         export SDL_VIDEODRIVER=wayland
@@ -165,6 +179,7 @@ in {
   time.timeZone = "America/Los_Angeles";
 
   security = {
+    audit.enable=false;
     rtkit.enable = true;
     pam.services.login = {
       enableGnomeKeyring = true;
@@ -178,12 +193,8 @@ in {
 
   services = {
     acpid.enable = true;
-    btrfs.autoScrub = {
-      enable = true;
-      interval = "weekly";
-    };
     fwupd.enable = true;
-    gnome3.gnome-keyring.enable = true;
+    nscd.enable = false;
     printing = {
       enable = true;
       drivers = with pkgs; [ gutenprint cups-googlecloudprint ];
@@ -276,54 +287,22 @@ in {
     xserver = {
       enable = true;
       exportConfiguration = true;
-      autorun = false;
+      autorun = true;
       libinput = {
         enable = true;
         accelSpeed = "0.7";
         naturalScrolling = true;
       };
       useGlamor = true;
-      # videoDrivers = [ "intel" "modesetting" "nvidia" ];
       wacom.enable = true;
-      windowManager.i3 = {
-        enable = true;
-        package = pkgs.i3-gaps;
-        extraPackages = with pkgs; [
-          alacritty
-          dunst
-          feh
-          i3lock
-          light
-          i3status-rust
-          scrot
-          xclip
-          xorg.xset
-          xsel
-        ];
-        extraSessionCommands = ''
-          unset QT_QPA_PLATFORM
-          unset QT_WAYLAND_FORCE_DPI
-          unset QT_WAYLAND_DISABLE_WINDOWDECORATION
-          unset _JAVA_AWT_WM_NONREPARENTING
-          unset ECORE_EVAS_ENGINE
-          unset ELM_ENGINE
-          unset SDL_VIDEODRIVER
-          unset MOZ_ENABLE_WAYLAND
-        '';
-      };
-      xautolock = rec {
-        enable = true;
-        enableNotifier = true;
-        extraOptions = [ "-lockaftersleep" "-secure" ];
-        killer = "${pkgs.xorg.xset}/bin/xset dpms force off";
-        killtime = 10;
-        locker =
-          "${pkgs.i3lock}/bin/i3lock -i ~/pictures/walls/clouds.png -e -f";
-        notifier =
-          ''${pkgs.libnotify}/bin/notify-send "Locking in 30 seconds"'';
-        notify = 30;
-        nowlocker = locker;
-        time = 5;
+      desktopManager.gnome3.enable = true;
+      displayManager = {
+        gdm = {
+          enable = true;
+          autoSuspend = false;
+          wayland = true;
+        };
+        extraSessionFilePackages = [ pkgs.sway ];
       };
     };
   };
@@ -338,16 +317,10 @@ in {
 
   users.users.bemeurer = {
     createHome = true;
-    extraGroups = [ "camera" "input" "lxd" "video" "wheel" ];
+    extraGroups = [ "camera" "input" "networkmanager" "video" "wheel" ];
     hashedPassword =
       "***REMOVED***";
     isNormalUser = true;
     shell = pkgs.zsh;
   };
-
-  virtualisation = {
-    lxc.enable = true;
-    lxd.enable = true;
-  };
-
 }

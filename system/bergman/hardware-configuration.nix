@@ -14,33 +14,23 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/c7467d00-b7c6-41c7-abda-50713976d18e";
-      fsType = "btrfs";
+    { device = "/dev/disk/by-uuid/8056ab1f-f55d-47f8-a151-a67c2b2c2f25";
+      fsType = "xfs";
     };
 
-  boot.initrd.luks.devices."nixos".device = "/dev/disk/by-uuid/0951bcc3-a1b4-49cc-aca8-5a1eaeffa018";
-
-  fileSystems."/srv" =
-    { device = "/dev/disk/by-uuid/c7467d00-b7c6-41c7-abda-50713976d18e";
-      fsType = "btrfs";
-      options = [ "subvol=srv" ];
-    };
-
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/c7467d00-b7c6-41c7-abda-50713976d18e";
-      fsType = "btrfs";
-      options = [ "subvol=home" ];
-    };
+  boot.initrd.luks.devices."nixos".device = "/dev/disk/by-uuid/6a455874-231d-4cc6-887d-67f1d0c94304";
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/4EA4-0858";
+    { device = "/dev/disk/by-uuid/9111-CFE2";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/0d052256-6979-4b33-a0bf-2ca2b51e4d4a"; }
+    [ { device = "/dev/disk/by-uuid/5d7e625b-4144-4685-9597-47ee8b529824"; }
     ];
 
   nix.maxJobs = lib.mkDefault 12;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  # High-DPI console
+  i18n.consoleFont = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 }
