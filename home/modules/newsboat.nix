@@ -18,42 +18,59 @@
       highlight article "\\[image\\ [0-9]+\\]" color10 default bold
       highlight feedlist "^─.*$" color6 color236 bold
     '';
-    queries = {
-      news = ''tags # "news"'';
-      comics = ''tags # "comics"'';
-      gentoo = ''tags # "gentoo"'';
-      releases = ''tags # "releases"'';
-    };
     reloadThreads = 12;
     reloadTime = 15;
     urls = [
       {
+        url = "\"query:News:tags # \\\"news\\\"\"";
+      }
+      {
+        url = "\"query:Comics:tags # \\\"comics\\\"\"";
+      }
+      {
+        url = "\"query:Gentoo:tags # \\\"gentoo\\\"\"";
+      }
+      {
+        url = "\"query:Releases:tags # \\\"releases\\\"\"";
+      }
+      {
+        url = "---";
+        tags = [ ];
+      }
+      {
         url = "https://news.ycombinator.com/rss";
-        tags = [ "~Hacker News" "news" ];
+        title = "Hacker News";
+        tags = [ "news" ];
       }
       {
         url = "https://lwn.net/headlines/newrss";
-        tags = [ "~LWN" "news" ];
+        title = "LWN";
+        tags = [ "news" ];
       }
       {
         url = "http://n-gate.com/index.rss";
-        tags = [ "~n-gate" "news" ];
+        title = "n-gate";
+        tags = [ "news" ];
       }
       {
         url = "https://www.phoronix.com/phoronix-rss.php";
-        tags = [ "~Phoronix" "news" ];
+        title = "Phoronix";
+        tags = [ "news" ];
       }
       {
         url = "https://www.quantamagazine.org/feed";
-        tags = [ "~Quanta Magazine" "news" ];
+        title = "Quanta Magazine";
+        tags = [ "news" ];
       }
       {
         url = "https://stallman.org/rss/rss.xml";
-        tags = [ "~Richard Stallman's Political Notes" "news" ];
+        title =  "Richard Stallman's Political Notes";
+        tags = [ "news" ];
       }
       {
         url = "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml";
-        tags = [ "~The New York Times" "news" ];
+        title =  "The New York Times";
+        tags = [ "news" ];
       }
       {
         url = "---";
@@ -61,11 +78,13 @@
       }
       {
         url = "https://www.smbc-comics.com/rss.php";
-        tags = [ "~Saturday Morning Breakfast Cereal" "comics" ];
+        title =  "Saturday Morning Breakfast Cereal";
+        tags = [ "comics" ];
       }
       {
         url = "https://xkcd.com/rss.xml";
-        tags = [ "~XKCD" "comics" ];
+        title = "XKCD";
+        tags = [ "comics" ];
       }
       {
         url = "---";
@@ -74,12 +93,14 @@
       {
         url =
           "https://bugs.gentoo.org/buglist.cgi?email1=bernardo%40standard.ai&emailreporter1=1&emailtype1=substring&list_id=4339928&query_format=advanced&resolution=---&title=Bug%20List&ctype=atom";
-        tags = [ "~Gentoo Reported" "gentoo" ];
+        title = "Gentoo Reported";
+        tags = [ "gentoo" ];
       }
       {
         url =
           "https://bugs.gentoo.org/buglist.cgi?email1=bernardo%40standard.ai&emailassigned_to1=1&emailtype1=substring&list_id=4339930&query_format=advanced&resolution=---&title=Bug%20List&ctype=atom";
-        tags = [ "~Gentoo Assigned" "gentoo" ];
+        title = "Gentoo Assigned";
+        tags = [ "gentoo" ];
       }
       {
         url = "---";
@@ -87,64 +108,74 @@
       }
       {
         url = "https://github.com/neovim/neovim/releases.atom";
-        tags = [ "~neovim" "releases" ];
+        title = "neovim";
+        tags = [ "releases" ];
       }
       {
         url = "https://github.com/elementary/granite/releases.atom";
-        tags = [ "~granite" "releases" ];
+        title = "granite";
+        tags = [ "releases" ];
       }
       {
         url = "http://feeds.launchpad.net/libvterm/revisions.atom";
-        tags = [ "~libvterm" "releases" ];
+        title = "libvterm";
+        tags = [ "releases" ];
       }
       {
         url = "https://github.com/luvit/luv/releases.atom";
-        tags = [ "~luv" "releases" ];
+        title = "luv";
+        tags = [ "releases" ];
       }
       {
         url = "https://github.com/beetbox/confuse/releases.atom";
-        tags = [ "~confuse" "releases" ];
+        title = "confuse";
+        tags = [ "releases" ];
       }
       {
         url = "https://github.com/beetbox/mediafile/releases.atom";
-        tags = [ "~mediafile" "releases" ];
+        title = "mediafile";
+        tags = [ "releases" ];
       }
       {
         url =
           "https://github.com/sphinx-contrib/sphinx-pretty-searchresults/releases.atom";
-        tags = [ "~sphinx-pretty-searchresults" "releases" ];
+          title = "sphinx-pretty-searchresults";
+          tags = [ "releases" ];
       }
       {
         url = "https://github.com/emersion/grim/releases.atom";
-        tags = [ "~grim" "releases" ];
+        title = "grim";
+        tags = [ "releases" ];
       }
       {
         url = "https://github.com/emersion/slurp/releases.atom";
-        tags = [ "~slurp" "releases" ];
+        title = "slurp";
+        tags = [ "releases" ];
       }
       {
         url = "https://github.com/Alexays/Waybar/releases.atom";
-        tags = [ "~waybar" "releases" ];
+        title = "waybar";
+        tags = [ "releases" ];
       }
       {
         url = "https://github.com/FortAwesome/Font-Awesome/releases.atom";
-        tags = [ "~font-awesome" "releases" ];
+        title = "font-awesome";
+        tags = [ "releases" ];
       }
       {
         url = "https://gitlab.gnome.org/GNOME/gexiv2/-/tags?format=atom";
-        tags = [ "~gexiv2" "releases" ];
+        title = "gexiv2";
+        tags = [ "releases" ];
       }
       {
         url = "https://github.com/beetbox/beets/releases.atom";
-        tags = [ "~beets" "releases" ];
+        title = "beets";
+        tags = [ "releases" ];
       }
       {
         url = "https://github.com/AravisProject/aravis/releases.atom";
-        tags = [ "~aravis" "releases" ];
-      }
-      {
-        url = "---";
-        tags = [ ];
+        title = "aravis";
+        tags = [ "releases" ];
       }
     ];
   };
