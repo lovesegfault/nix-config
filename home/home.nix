@@ -3,32 +3,33 @@
 {
   imports = [
     # modules/dunst.nix
+    # modules/gpg-agent.nix
+    # modules/gpg.nix
     # modules/i3.nix
     # modules/i3status-rust.nix
     # modules/polybar.nix
     # modules/rofi.nix
+    # modules/ssh.nix
+    # modules/xresources.nix
+    # modules/xsession.nix
     modules/alacritty.nix
     modules/bat.nix
     modules/firefox.nix
     modules/git.nix
     modules/gnome-keyring.nix
-    # modules/gpg-agent.nix
-    # modules/gpg.nix
     modules/gtk.nix
+    modules/home.nix
     modules/htop.nix
     modules/mako.nix
+    modules/mako/config
     modules/neovim.nix
-    modules/home.nix
     modules/newsboat.nix
     modules/packages.nix
     modules/qt.nix
-    # modules/ssh.nix
     modules/sway.nix
     modules/swaylock.nix
     modules/tmux.nix
     modules/xdg.nix
-    # modules/xresources.nix
-    # modules/xsession.nix
     modules/zsh.nix
   ];
 
