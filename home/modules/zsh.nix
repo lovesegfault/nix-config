@@ -17,6 +17,10 @@
       bindkey "$${terminfo[khome]}" beginning-of-line
       bindkey "$${terminfo[kend]}" end-of-line
       bindkey "$${terminfo[kdch1]}" delete-char
+      bindkey '\eOA' history-substring-search-up
+      bindkey '\eOB' history-substring-search-down
+      bindkey "^[[A" history-substring-search-up
+      bindkey "^[[B" history-substring-search-down
       bindkey "$$terminfo[kcuu1]" history-substring-search-up
       bindkey "$$terminfo[kcud1]" history-substring-search-down
       bindkey "^[[1;5C" forward-word
