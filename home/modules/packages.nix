@@ -4,6 +4,7 @@
     bat
     exa
     fzf
+    gimp
     gist
     gnome3.seahorse
     gopass
@@ -11,13 +12,14 @@
     lollypop
     neofetch
     nix-index
-    ripgrep
     nodejs
-    yarn
+    pavucontrol
+    ripgrep
     shotwell
     slack
     thunderbird
     weechat
+    yarn
     zoom-us
   ];
 }
