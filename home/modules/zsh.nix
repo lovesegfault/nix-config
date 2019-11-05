@@ -72,9 +72,9 @@
       grsn = "git rebase --exec 'git commit --amend --no-edit -n -S'";
       gs = "git status";
       # exa
-      l = "exa -bhlF";
-      la = "exa -bhlFa";
-      ls = "exa -bhlF";
+      l = "exa --binary --header --long --classify --git";
+      la = "l --all";
+      ls = "l";
     };
     plugins = [
       {
