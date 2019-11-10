@@ -11,11 +11,26 @@ in {
   boot = rec {
     consoleLogLevel = 1;
     earlyVconsoleSetup = true;
-    extraModulePackages = with kernelPackages; [ acpi_call tp_smapi v4l2loopback ];
+    extraModulePackages = with kernelPackages; [
+      acpi_call
+      tp_smapi
+      v4l2loopback
+    ];
     kernelModules = [ "acpi_call" ];
     kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [
+      "quiet"
+      "loglevel=2"
+      "rd.systemd.show_status=auto"
+      "rd.udev.log_priority=3"
+      "i915.fastboot=1"
+      "vga=current"
+      "intel_iommu=on"
+      "rd.shell"
+    ];
     initrd = {
-      availableKernelModules = [ "nvme" "aesni_intel" "cryptd" "aes_x86_64" ];
+      availableKernelModules = [ "nvme" "cryptd" "aes_x86_64" ];
+      kernelModules = [ "i915" "battery" "aesni_intel" ];
       supportedFilesystems = [ "xfs" ];
     };
     loader = {
@@ -31,8 +46,10 @@ in {
     aspellDicts.en-computers
     aspellDicts.en-science
     neovim
+    powertop
     qt5.qtwayland
     qgnomeplatform
+    pinentry-gnome
   ];
 
   # Configure aspell system wide
@@ -48,7 +65,12 @@ in {
     enableRedistributableFirmware = true;
     bluetooth = {
       enable = true;
+      package = pkgs.bluezFull;
       powerOnBoot = false;
+      extraConfig = ''
+        [General]
+        Enable=Source,Sink,Media,Socket
+      '';
     };
     bumblebee = {
       enable = true;
@@ -61,12 +83,7 @@ in {
     nvidia.modesetting.enable = true;
     opengl = {
       enable = true;
-      extraPackages = with pkgs; [
-        vaapiIntel
-        vaapiVdpau
-        libvdpau-va-gl
-        intel-ocl
-      ];
+      extraPackages = with pkgs; [ vaapiIntel vaapiVdpau libvdpau-va-gl ];
     };
     pulseaudio = {
       enable = true;
@@ -96,9 +113,8 @@ in {
   nix = {
     allowedUsers = [ "@wheel" ];
     binaryCaches = [ "https://standard.cachix.org/" ];
-    binaryCachePublicKeys = [
-      "standard.cachix.org-1:+HFtC20D1DDrZz4yCXthdaqb3p2zBimNk9Mb+FeergI="
-    ];
+    binaryCachePublicKeys =
+      [ "standard.cachix.org-1:+HFtC20D1DDrZz4yCXthdaqb3p2zBimNk9Mb+FeergI=" ];
     daemonIONiceLevel = 5;
     daemonNiceLevel = 10;
     gc = {
@@ -114,10 +130,7 @@ in {
 
   nixpkgs.config.allowUnfree = true;
 
-  powerManagement = {
-    enable = true;
-    powertop.enable = true;
-  };
+  powerManagement = { enable = true; };
 
   programs = {
     gphoto2.enable = true;
@@ -179,7 +192,7 @@ in {
   time.timeZone = "America/Los_Angeles";
 
   security = {
-    audit.enable=false;
+    audit.enable = false;
     rtkit.enable = true;
     pam.services.login = {
       enableGnomeKeyring = true;
@@ -193,6 +206,7 @@ in {
 
   services = {
     acpid.enable = true;
+    fstrim.enable = true;
     fwupd.enable = true;
     nscd.enable = false;
     printing = {
@@ -317,10 +331,17 @@ in {
 
   users.users.bemeurer = {
     createHome = true;
-    extraGroups = [ "camera" "input" "networkmanager" "video" "wheel" ];
+    extraGroups = [ "camera" "input" "lxd" "networkmanager" "video" "wheel" ];
     hashedPassword =
       "***REMOVED***";
     isNormalUser = true;
     shell = pkgs.zsh;
+  };
+
+  virtualisation = {
+    kvmgt.enable = true;
+    libvirtd.enable = true;
+    lxc.enable = true;
+    lxd.enable = true;
   };
 }
