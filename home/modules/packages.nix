@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     arcanist
     bat
+    beets
     exa
     fzf
     gimp

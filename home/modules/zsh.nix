@@ -27,6 +27,8 @@
       bindkey "^[[1;3C" forward-word
       bindkey "^[[1;5D" backward-word
       bindkey "^[[1;3D" backward-word
+
+      bindkey -s "^O" 'nvim $(fzf -m)^M'
     '';
     profileExtra = ''
       if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
@@ -35,6 +37,7 @@
     '';
     shellAliases = {
       # misc
+      tupd = "rsync -Pav --delete ~/documents/torrents/ viking.whatbox.ca:watch/";
       cat = "bat";
       # rust
       c = "cargo";
@@ -125,6 +128,16 @@
           repo = "zsh-autopair";
           rev = "v1.0";
           sha256 = "1h0vm2dgrmb8i2pvsgis3lshc5b0ad846836m62y8h3rdb3zmpy1";
+        };
+      }
+      {
+        name = "zsh-nix-shell";
+        file = "nix-shell.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "chisui";
+          repo = "zsh-nix-shell";
+          rev = "b2609ca787803f523a18bb9f53277d0121e30389";
+          sha256 = "01w59zzdj12p4ag9yla9ycxx58pg3rah2hnnf3sw4yk95w3hlzi6";
         };
       }
       {

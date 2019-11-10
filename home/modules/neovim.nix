@@ -335,7 +335,7 @@
           \ 'ebuild':['shellcheck'],
           \ 'python': ['bandit', 'pylama', 'vulture'],
           \ 'rust': ['cargo', 'rls'],
-          \ 'text':['proselint', 'languagetool'],
+          \ 'text':['mdl', 'proselint', 'languagetool'],
       \ }
       let g:ale_fixers = {
           \ 'c':['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
