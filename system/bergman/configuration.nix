@@ -16,6 +16,7 @@ in {
       tp_smapi
       v4l2loopback
     ];
+    kernel.sysctl = { "kernel.sysrq" = 1; };
     kernelModules = [ "acpi_call" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
