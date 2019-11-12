@@ -29,6 +29,7 @@
     modules/sway.nix
     modules/swaylock.nix
     modules/tmux.nix
+    modules/waybar.nix
     modules/xdg.nix
     modules/zsh.nix
   ];
