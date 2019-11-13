@@ -57,7 +57,10 @@ in {
     add-extra-dicts en_US-science.rws
   '';
 
-  fonts = { fonts = with pkgs; [ hack-font font-awesome ]; };
+  fonts = {
+    fontconfig.ultimate.enable = true;
+    fonts = with pkgs; [ hack-font font-awesome ];
+  };
 
   hardware = {
     enableRedistributableFirmware = true;
@@ -92,9 +95,7 @@ in {
   };
 
   i18n = {
-    consoleFont = "ter-v12n";
     consoleKeyMap = "us";
-    consolePackages = with pkgs; [ terminus_font ];
     defaultLocale = "en_US.UTF-8";
   };
 
@@ -194,6 +195,7 @@ in {
     rtkit.enable = true;
     pam.services.login = {
       enableGnomeKeyring = true;
+      fprintAuth = true;
       setEnvironment = true;
     };
     sudo = {
@@ -204,6 +206,7 @@ in {
 
   services = {
     acpid.enable = true;
+    fprintd.enable = true;
     fstrim.enable = true;
     fwupd.enable = true;
     nscd.enable = false;
@@ -324,9 +327,8 @@ in {
 
   users.users.bemeurer = {
     createHome = true;
+    description = "Bernardo Meurer";
     extraGroups = [ "camera" "input" "lxd" "networkmanager" "video" "wheel" ];
-    hashedPassword =
-      "***REMOVED***";
     isNormalUser = true;
     shell = pkgs.zsh;
   };
