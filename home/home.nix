@@ -3,8 +3,6 @@
 {
   imports = [
     # modules/dunst.nix
-    # modules/gpg-agent.nix
-    # modules/gpg.nix
     # modules/i3.nix
     # modules/i3status-rust.nix
     # modules/polybar.nix
@@ -14,6 +12,7 @@
     # modules/xsession.nix
     modules/alacritty.nix
     modules/bat.nix
+    modules/beets.nix
     modules/firefox.nix
     modules/git.nix
     modules/gnome-keyring.nix
