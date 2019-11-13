@@ -25,6 +25,7 @@
     modules/newsboat.nix
     modules/packages.nix
     modules/qt.nix
+    modules/starship.nix
     modules/sway.nix
     modules/swaylock.nix
     modules/tmux.nix

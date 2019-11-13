@@ -90,16 +90,16 @@
           sha256 = "0kp94pqpy7qbmy51s6iwpnc96a1aq0nmmdp5fgssksan070hnw96";
         };
       }
-      {
-        name = "pure";
-        file = "pure.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "sindresorhus";
-          repo = "pure";
-          rev = "v1.11.0";
-          sha256 = "0nzvb5iqyn3fv9z5xba850mxphxmnsiq3wxm1rclzffislm8ml1j";
-        };
-      }
+      # {
+      #   name = "pure";
+      #   file = "pure.zsh";
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "sindresorhus";
+      #     repo = "pure";
+      #     rev = "v1.11.0";
+      #     sha256 = "0nzvb5iqyn3fv9z5xba850mxphxmnsiq3wxm1rclzffislm8ml1j";
+      #   };
+      # }
       {
         name = "fast-syntax-highlighting";
         file = "fast-syntax-highlighting.plugin.zsh";
