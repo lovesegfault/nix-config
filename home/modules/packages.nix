@@ -8,6 +8,8 @@
     gimp
     gist
     gnome3.seahorse
+    gnome3.gnome-calendar
+    gnome3.evolution
     gopass
     libnotify
     lollypop

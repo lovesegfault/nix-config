@@ -11,29 +11,26 @@ in {
   boot = rec {
     consoleLogLevel = 1;
     earlyVconsoleSetup = true;
-    extraModulePackages = with kernelPackages; [
-      acpi_call
-      v4l2loopback
-    ];
+    extraModulePackages = with kernelPackages; [ acpi_call v4l2loopback ];
     kernelModules = [ "acpi_call" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "quiet"
-      "loglevel=2"
-      "rd.systemd.show_status=auto"
-      "rd.udev.log_priority=3"
+      "systemd.show_status=auto"
+      "udev.log_priority=3"
       "i915.fastboot=1"
       "vga=current"
       "intel_iommu=on"
     ];
     initrd = {
       availableKernelModules = [ "nvme" "cryptd" "aes_x86_64" ];
-      kernelModules = [ "i915" "battery" "aesni_intel" ];
+      kernelModules = [ "i915" "aesni_intel" ];
       supportedFilesystems = [ "xfs" ];
     };
     loader = {
-      systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
+      timeout = 2;
     };
   };
 
@@ -133,6 +130,7 @@ in {
   powerManagement.enable = true;
 
   programs = {
+    dconf.enable = true;
     gphoto2.enable = true;
     gnupg.agent = {
       enable = true;
@@ -209,6 +207,18 @@ in {
     fprintd.enable = true;
     fstrim.enable = true;
     fwupd.enable = true;
+    geoclue2.enable = true;
+    gvfs.enable = true;
+    gnome3 = {
+        evolution-data-server.enable = true;
+        gnome-keyring.enable = true;
+        gnome-settings-daemon.enable = true;
+        gnome-online-accounts.enable = true;
+        gnome-online-miners.enable = true;
+        tracker.enable = true;
+        tracker-miners.enable = true;
+        core-shell.enable = true;
+    };
     nscd.enable = false;
     printing = {
       enable = true;
@@ -309,7 +319,6 @@ in {
       };
       useGlamor = true;
       wacom.enable = true;
-      desktopManager.gnome3.enable = true;
       displayManager = {
         gdm = {
           enable = true;
@@ -334,8 +343,8 @@ in {
   };
 
   virtualisation = {
-    kvmgt.enable = true;
-    libvirtd.enable = true;
+    kvmgt.enable = false;
+    libvirtd.enable = false;
     lxc.enable = true;
     lxd.enable = true;
   };
