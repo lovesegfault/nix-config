@@ -37,7 +37,8 @@
     '';
     shellAliases = {
       # misc
-      tupd = "rsync -Pav --delete ~/documents/torrents/ viking.whatbox.ca:watch/";
+      tupd =
+        "rsync -Pav --delete ~/documents/torrents/ viking.whatbox.ca:watch/";
       cat = "bat";
       # rust
       c = "cargo";

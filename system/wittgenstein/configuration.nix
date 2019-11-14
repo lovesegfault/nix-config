@@ -210,14 +210,14 @@ in {
     geoclue2.enable = true;
     gvfs.enable = true;
     gnome3 = {
-        evolution-data-server.enable = true;
-        gnome-keyring.enable = true;
-        gnome-settings-daemon.enable = true;
-        gnome-online-accounts.enable = true;
-        gnome-online-miners.enable = true;
-        tracker.enable = true;
-        tracker-miners.enable = true;
-        core-shell.enable = true;
+      evolution-data-server.enable = true;
+      gnome-keyring.enable = true;
+      gnome-settings-daemon.enable = true;
+      gnome-online-accounts.enable = true;
+      gnome-online-miners.enable = true;
+      tracker.enable = true;
+      tracker-miners.enable = true;
+      core-shell.enable = true;
     };
     nscd.enable = false;
     printing = {

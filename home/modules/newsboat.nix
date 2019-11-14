@@ -21,18 +21,10 @@
     reloadThreads = 12;
     reloadTime = 15;
     urls = [
-      {
-        url = "\"query:News:tags # \\\"news\\\"\"";
-      }
-      {
-        url = "\"query:Comics:tags # \\\"comics\\\"\"";
-      }
-      {
-        url = "\"query:Gentoo:tags # \\\"gentoo\\\"\"";
-      }
-      {
-        url = "\"query:Releases:tags # \\\"releases\\\"\"";
-      }
+      { url = ''"query:News:tags # \"news\""''; }
+      { url = ''"query:Comics:tags # \"comics\""''; }
+      { url = ''"query:Gentoo:tags # \"gentoo\""''; }
+      { url = ''"query:Releases:tags # \"releases\""''; }
       {
         url = "---";
         tags = [ ];
@@ -64,12 +56,12 @@
       }
       {
         url = "https://stallman.org/rss/rss.xml";
-        title =  "Richard Stallman's Political Notes";
+        title = "Richard Stallman's Political Notes";
         tags = [ "news" ];
       }
       {
         url = "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml";
-        title =  "The New York Times";
+        title = "The New York Times";
         tags = [ "news" ];
       }
       {
@@ -78,7 +70,7 @@
       }
       {
         url = "https://www.smbc-comics.com/rss.php";
-        title =  "Saturday Morning Breakfast Cereal";
+        title = "Saturday Morning Breakfast Cereal";
         tags = [ "comics" ];
       }
       {
@@ -139,8 +131,8 @@
       {
         url =
           "https://github.com/sphinx-contrib/sphinx-pretty-searchresults/releases.atom";
-          title = "sphinx-pretty-searchresults";
-          tags = [ "releases" ];
+        title = "sphinx-pretty-searchresults";
+        tags = [ "releases" ];
       }
       {
         url = "https://github.com/emersion/grim/releases.atom";

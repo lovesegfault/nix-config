@@ -4,39 +4,38 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    ];
+  imports = [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
 
-  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "ehci_pci" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "ahci" "xhci_pci" "ehci_pci" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "wl" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
-  fileSystems."/" =
-    { device = "rpool/root/nixos";
-      fsType = "zfs";
-    };
+  fileSystems."/" = {
+    device = "rpool/root/nixos";
+    fsType = "zfs";
+  };
 
-  fileSystems."/home" =
-    { device = "rpool/home";
-      fsType = "zfs";
-    };
+  fileSystems."/home" = {
+    device = "rpool/home";
+    fsType = "zfs";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/336A-8D8C";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/336A-8D8C";
+    fsType = "vfat";
+  };
 
-  fileSystems."/fallback-boot-0" =
-    { device = "/dev/disk/by-uuid/336E-C1BF";
-      fsType = "vfat";
-    };
+  fileSystems."/fallback-boot-0" = {
+    device = "/dev/disk/by-uuid/336E-C1BF";
+    fsType = "vfat";
+  };
 
-  fileSystems."/fallback-boot-1" =
-    { device = "/dev/disk/by-uuid/3373-AAA2";
-      fsType = "vfat";
-    };
+  fileSystems."/fallback-boot-1" = {
+    device = "/dev/disk/by-uuid/3373-AAA2";
+    fsType = "vfat";
+  };
 
   nix.maxJobs = lib.mkDefault 12;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   imports = [ ./hardware-configuration.nix ];
 
   boot = rec {
@@ -20,7 +19,7 @@
           }
           {
             devices = [ "/dev/disk/by-uuid/3373-AAA2" ];
-            path = "/fallback-boot-1" ;
+            path = "/fallback-boot-1";
           }
         ];
         font = "${pkgs.terminus_font}/share/fonts/terminus/ter-x16n.pcf.gz";
@@ -81,9 +80,8 @@
   nix = {
     allowedUsers = [ "@wheel" ];
     binaryCaches = [ "https://standard.cachix.org/" ];
-    binaryCachePublicKeys = [
-      "standard.cachix.org-1:+HFtC20D1DDrZz4yCXthdaqb3p2zBimNk9Mb+FeergI="
-    ];
+    binaryCachePublicKeys =
+      [ "standard.cachix.org-1:+HFtC20D1DDrZz4yCXthdaqb3p2zBimNk9Mb+FeergI=" ];
     daemonIONiceLevel = 5;
     daemonNiceLevel = 10;
     gc = {
@@ -130,9 +128,7 @@
     fwupd.enable = true;
     smartd.enable = true;
     upower.enable = true;
-    openssh = {
-      enable = true;
-    };
+    openssh = { enable = true; };
     zfs = {
       autoScrub = {
         enable = true;
@@ -163,7 +159,7 @@
       createHome = true;
       extraGroups = [ "input" "lxd" "video" "wheel" ];
       openssh.authorizedKeys.keys = [
-      "***REMOVED***"
+        "***REMOVED***"
       ];
       isNormalUser = true;
     };
@@ -171,7 +167,7 @@
       createHome = true;
       extraGroups = [ "input" "lxd" "video" "wheel" ];
       openssh.authorizedKeys.keys = [
-      "***REMOVED***"
+        "***REMOVED***"
       ];
       isNormalUser = true;
     };

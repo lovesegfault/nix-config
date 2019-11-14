@@ -4,33 +4,33 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    ];
+  imports = [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/8056ab1f-f55d-47f8-a151-a67c2b2c2f25";
-      fsType = "xfs";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/8056ab1f-f55d-47f8-a151-a67c2b2c2f25";
+    fsType = "xfs";
+  };
 
-  boot.initrd.luks.devices."nixos".device = "/dev/disk/by-uuid/6a455874-231d-4cc6-887d-67f1d0c94304";
+  boot.initrd.luks.devices."nixos".device =
+    "/dev/disk/by-uuid/6a455874-231d-4cc6-887d-67f1d0c94304";
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/9111-CFE2";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/9111-CFE2";
+    fsType = "vfat";
+  };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/5d7e625b-4144-4685-9597-47ee8b529824"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/5d7e625b-4144-4685-9597-47ee8b529824"; }];
 
   nix.maxJobs = lib.mkDefault 12;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   # High-DPI console
-  i18n.consoleFont = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+  i18n.consoleFont =
+    lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 }

@@ -37,10 +37,7 @@
         host = "* !github.com viking.whatbox.ca";
         forwardAgent = true;
         identitiesOnly = true;
-        identityFile = [
-          "~/.ssh/lovesegfault_rsa"
-          "~/.ssh/standard_rsa"
-        ];
+        identityFile = [ "~/.ssh/lovesegfault_rsa" "~/.ssh/standard_rsa" ];
       }
     ];
   };

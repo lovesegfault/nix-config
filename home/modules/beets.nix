@@ -19,7 +19,7 @@
       original_date = true;
       path_sep_replace = "_";
       per_disc_numbering = true;
-      pluginpath = [];
+      pluginpath = [ ];
       sort_album = "albumartist+ album+";
       sort_case_insensitive = true;
       sort_item = "artist+ album+ disc+ track+";
@@ -31,27 +31,28 @@
       verbose = 0;
 
       plugins = [
-       "absubmit"
-       "acousticbrainz"
-       "badfiles"
-       "chroma"
-       "edit"
-       "embedart"
-       "fetchart"
-       "fromfilename"
-       "info"
-       "lastgenre"
-       "lyrics"
-       "mbsync"
-       "missing"
-       "scrub"
-       "thumbnails"
+        "absubmit"
+        "acousticbrainz"
+        "badfiles"
+        "chroma"
+        "edit"
+        "embedart"
+        "fetchart"
+        "fromfilename"
+        "info"
+        "lastgenre"
+        "lyrics"
+        "mbsync"
+        "missing"
+        "scrub"
+        "thumbnails"
       ];
 
       absubmit = {
         # FIXME: Write formula for essentia
         auto = true;
-        extractor = "${config.home.homeDirectory}/bin/streaming_extractor_music";
+        extractor =
+          "${config.home.homeDirectory}/bin/streaming_extractor_music";
       };
 
       acoustid = { apikey = "***REMOVED***"; };
@@ -59,7 +60,7 @@
       embedart = { auto = true; };
 
       fetchart = {
-        auto= true;
+        auto = true;
         cautious = false;
         enforce_ratio = "10%";
         fanarttv_key = "***REMOVED***";
@@ -91,8 +92,8 @@
         quiet = false;
         quiet_fallback = "skip";
         resume = "ask";
-        search_ids = [];
-        set_fields = {};
+        search_ids = [ ];
+        set_fields = { };
         singletons = false;
         timid = true;
         write = true;
@@ -111,11 +112,11 @@
       };
 
       match = {
-        ignored = [];
+        ignored = [ ];
         medium_rec_thresh = 0.25;
         rec_gap_thresh = 0.25;
-        required = [];
-        strong_rec_thresh = 0.04;
+        required = [ ];
+        strong_rec_thresh = 4.0e-2;
         track_length_grace = 10;
         track_length_max = 30;
         distance_weights = {
@@ -146,7 +147,7 @@
         };
 
         preferred = {
-          countries = ["US" "GB|UK"];
+          countries = [ "US" "GB|UK" ];
           media = [ "Digital Media|File" "CD" ];
           original_year = true;
         };
@@ -168,7 +169,7 @@
         "[\\\\/]" = "_";
         "^\\." = "_";
         "[\\x00-\\x1f]" = "_";
-        "[<>:\"\\?\\*\\|]"= "_";
+        "[<>:\"\\?\\*\\|]" = "_";
         "\\.$" = "_";
         "\\s+$" = "";
         "^\\s+" = "";
@@ -190,6 +191,6 @@
           text_warning = "yellow";
         };
       };
-     };
+    };
   };
 }
