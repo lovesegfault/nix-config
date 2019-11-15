@@ -34,6 +34,11 @@ in {
     };
   };
 
+  documentation = {
+    dev.enable = true;
+    man.enable = true;
+  };
+
   environment.pathsToLink = [ "/share/zsh" ];
 
   environment.systemPackages = with pkgs; [
@@ -123,6 +128,7 @@ in {
       automatic = true;
       dates = [ "01:10" "12:10" ];
     };
+    trustedUsers = [ "root" "@wheel" ];
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -183,7 +189,10 @@ in {
       terminal = "tmux-256color";
     };
     vim.defaultEditor = true;
-    zsh.enable = true;
+    zsh = {
+      enable = true;
+      enableGlobalCompInit = false;
+    };
   };
 
   time.timeZone = "America/Los_Angeles";
@@ -262,7 +271,7 @@ in {
         DISK_DEVICES="nvme0n1"
         DISK_IDLE_SECS_ON_AC=0
         DISK_IDLE_SECS_ON_BAT=2
-        DISK_IOSCHED="mq-deadline mq-deadline"
+        DISK_IOSCHED="mq-deadline"
         ENERGY_PERF_POLICY_ON_AC=performance
         ENERGY_PERF_POLICY_ON_BAT=power
         MAX_LOST_WORK_SECS_ON_AC=15
