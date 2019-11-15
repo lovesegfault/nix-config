@@ -35,51 +35,7 @@
         exec sway > /tmp/sway.log 2>&1
       fi
     '';
-    shellAliases = {
-      # misc
-      tupd =
-        "rsync -Pav --delete ~/documents/torrents/ viking.whatbox.ca:watch/";
-      cat = "bat";
-      # rust
-      c = "cargo";
-      cb = "cargo build";
-      cbr = "cargo build --release";
-      cc = "cargo check";
-      ccl = "cargo clean";
-      cdoc = "cargo doc";
-      clp = "cargo clippy";
-      cr = "cargo run";
-      crr = "cargo run --release";
-      ct = "cargo test";
-      ctr = "cargo test --release";
-      # git
-      g = "git";
-      ga = "git add";
-      gaa = "git add -A";
-      gaap = "git add -A --patch";
-      gap = "git add --patch";
-      gch = "git checkout";
-      gcl = "git clone";
-      gco = "git commit";
-      gdf = "git diff";
-      gdt = "git difftool";
-      gf = "git fetch --prune --all";
-      gl = "git log --graph --abbrev-commit --decorate";
-      gm = "git merge";
-      gma = "git merge --abort";
-      gmc = "git merge --continue";
-      gpl = "git pull --rebase";
-      gps = "git push";
-      gr = "git rebase";
-      gra = "git rebase --abort";
-      grc = "git rebase --continue";
-      grsn = "git rebase --exec 'git commit --amend --no-edit -n -S'";
-      gs = "git status";
-      # exa
-      l = "exa --binary --header --long --classify --git";
-      la = "l --all";
-      ls = "l";
-    };
+    sessionVariables = { RPROMPT = ""; };
     plugins = [
       {
         name = "zsh-async";
@@ -91,16 +47,6 @@
           sha256 = "0kp94pqpy7qbmy51s6iwpnc96a1aq0nmmdp5fgssksan070hnw96";
         };
       }
-      # {
-      #   name = "pure";
-      #   file = "pure.zsh";
-      #   src = pkgs.fetchFromGitHub {
-      #     owner = "sindresorhus";
-      #     repo = "pure";
-      #     rev = "v1.11.0";
-      #     sha256 = "0nzvb5iqyn3fv9z5xba850mxphxmnsiq3wxm1rclzffislm8ml1j";
-      #   };
-      # }
       {
         name = "fast-syntax-highlighting";
         file = "fast-syntax-highlighting.plugin.zsh";
@@ -162,5 +108,50 @@
         };
       }
     ];
+    shellAliases = {
+      # misc
+      tupd =
+        "rsync -Pav --delete ~/documents/torrents/ viking.whatbox.ca:watch/";
+      cat = "bat";
+      # rust
+      c = "cargo";
+      cb = "cargo build";
+      cbr = "cargo build --release";
+      cc = "cargo check";
+      ccl = "cargo clean";
+      cdoc = "cargo doc";
+      clp = "cargo clippy";
+      cr = "cargo run";
+      crr = "cargo run --release";
+      ct = "cargo test";
+      ctr = "cargo test --release";
+      # git
+      g = "git";
+      ga = "git add";
+      gaa = "git add -A";
+      gaap = "git add -A --patch";
+      gap = "git add --patch";
+      gch = "git checkout";
+      gcl = "git clone";
+      gco = "git commit";
+      gdf = "git diff";
+      gdt = "git difftool";
+      gf = "git fetch --prune --all";
+      gl = "git log --graph --abbrev-commit --decorate";
+      gm = "git merge";
+      gma = "git merge --abort";
+      gmc = "git merge --continue";
+      gpl = "git pull --rebase";
+      gps = "git push";
+      gr = "git rebase";
+      gra = "git rebase --abort";
+      grc = "git rebase --continue";
+      grsn = "git rebase --exec 'git commit --amend --no-edit -n -S'";
+      gs = "git status";
+      # exa
+      l = "exa --binary --header --long --classify --git";
+      la = "l --all";
+      ls = "l";
+    };
   };
 }
