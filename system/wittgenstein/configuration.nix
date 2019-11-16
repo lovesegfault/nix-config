@@ -60,8 +60,8 @@ in {
   '';
 
   fonts = {
-    fontconfig.ultimate.enable = true;
     fonts = with pkgs; [ hack-font font-awesome ];
+    fontconfig.defaultFonts.monospace = [ "Hack" ];
   };
 
   hardware = {
