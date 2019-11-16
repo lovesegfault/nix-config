@@ -38,16 +38,6 @@
     sessionVariables = { RPROMPT = ""; };
     plugins = [
       {
-        name = "zsh-async";
-        file = "async.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "mafredri";
-          repo = "zsh-async";
-          rev = "v1.7.2";
-          sha256 = "0kp94pqpy7qbmy51s6iwpnc96a1aq0nmmdp5fgssksan070hnw96";
-        };
-      }
-      {
         name = "fast-syntax-highlighting";
         file = "fast-syntax-highlighting.plugin.zsh";
         src = pkgs.fetchFromGitHub {
