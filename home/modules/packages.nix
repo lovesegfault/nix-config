@@ -32,6 +32,7 @@
     ripgrep
     shotwell
     slack
+    spotify
     thunderbird
     weechat
     yarn
