@@ -7,6 +7,8 @@
     ../modules/tlp.nix
   ];
 
+  i18n.consoleKeyMap = "us";
+
   services = {
     fstrim.enable = true;
     undervolt = {
