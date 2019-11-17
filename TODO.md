@@ -2,7 +2,6 @@
 
 ## Nixify
 walls
-bin/
 ssh
 tabnine
 
@@ -14,4 +13,3 @@ sway
 
 ## Automate
 zsh updates
-
