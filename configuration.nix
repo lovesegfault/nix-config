@@ -1,8 +1,6 @@
-{ config, pkgs, ... }: {
+{
   imports = [
     ./hardware-configuration.nix
-    "./machines/${networking.hostName}.nix"
+    ./machines/HOSTNAME.nix
   ];
-
-  networking.hostName = "wittgenstein";
 }
