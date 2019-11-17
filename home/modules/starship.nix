@@ -3,8 +3,5 @@
     enable = true;
     enableZshIntegration = true;
   };
-  xdg.configFile."starship.toml" = {
-    source =
-      "${config.home.homeDirectory}/src/nix-config/home/files/starship.toml";
-  };
+  xdg.configFile."starship.toml" = { source = ../files/starship.toml; };
 }

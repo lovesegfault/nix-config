@@ -1,6 +1,3 @@
 { config, pkgs, ... }: {
-  xdg.configFile."swaylock/config" = {
-    source =
-      "${config.home.homeDirectory}/src/nix-config/home/files/swaylock.conf";
-  };
+  xdg.configFile."swaylock/config" = { source = ../files/swaylock.conf; };
 }

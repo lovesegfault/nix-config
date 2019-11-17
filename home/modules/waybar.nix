@@ -1,10 +1,4 @@
 { config, pkgs, ... }: {
-  xdg.configFile."waybar/config" = {
-    source =
-      "${config.home.homeDirectory}/src/nix-config/home/files/waybar.conf";
-  };
-  xdg.configFile."waybar/style.css" = {
-    source =
-      "${config.home.homeDirectory}/src/nix-config/home/files/waybar.style.css";
-  };
+  xdg.configFile."waybar/config" = { source = ../files/waybar.conf; };
+  xdg.configFile."waybar/style.css" = { source = ../files/waybar.style.css; };
 }
