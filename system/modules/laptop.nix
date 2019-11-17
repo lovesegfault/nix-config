@@ -1,9 +1,5 @@
 { pkgs, ... }: {
-  boot = rec {
-    extraModulePackages = with kernelPackages; [ acpi_call ];
-    kernelModules = [ "acpi_call" ];
-    kernelPackages = pkgs.linuxPackages_latest;
-  };
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   environment.systemPackages = with pkgs; [ powertop ];
 
