@@ -1,4 +1,0 @@
-add_newline = false
-
-[nix_shell]
-use_name = true

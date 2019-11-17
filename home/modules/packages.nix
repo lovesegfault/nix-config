@@ -29,11 +29,14 @@
     passmenu
     pavucontrol
     prtsc
+    ranger
     ripgrep
     shotwell
     slack
     spotify
-    thunderbird
+    sublime3
+    tealdeer
+    vscode
     weechat
     yarn
     zoom-us

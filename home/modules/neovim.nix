@@ -5,7 +5,6 @@
     vimAlias = true;
     plugins = with pkgs.vimPlugins; [
       coc-nvim
-      vim-plug
       ale
       ayu-vim
       fzf-vim
@@ -17,7 +16,7 @@
       lightline-ale
       lightline-vim
       meson
-      rainbow
+      # rainbow
       rust-vim
       vim-flatbuffers
       vim-indent-guides
