@@ -1,13 +1,12 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   waylandOverlayUrl =
     "https://github.com/colemickens/nixpkgs-wayland/archive/master.tar.gz";
   waylandOverlay = (import (builtins.fetchTarball waylandOverlayUrl));
-in
-{
-  boot = rec {
-    extraModulePackages = with kernelPackages; [ v4l2loopback ];
-    kernelModuels = [ "v4l2loopback" ];
+in {
+  boot = {
+    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+    kernelModules = [ "v4l2loopback" ];
   };
 
   environment.systemPackages = [ pkgs.qt5.qtwayland ];

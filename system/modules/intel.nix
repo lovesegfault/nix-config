@@ -1,4 +1,4 @@
-{
+{ pkgs, ... }: {
   boot.kernelParams = [ "intel_iommu=on" ];
   hardware = {
     cpu.intel.updateMicrocode = true;

@@ -1,3 +1,1 @@
-{
-  hardware.u2f.enable = true;
-}
+{ hardware.u2f.enable = true; }

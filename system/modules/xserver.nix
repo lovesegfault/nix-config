@@ -1,9 +1,9 @@
 {
   services.xserver = {
+    enable = true;
+    libinput = {
       enable = true;
-      libinput = {
-        enable = true;
-        naturalScrolling = true;
-      };
+      naturalScrolling = true;
     };
+  };
 }
