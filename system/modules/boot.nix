@@ -6,6 +6,7 @@
       systemd-boot.enable = true;
       timeout = 2;
     };
+    tmpOnTmpfs = true;
   };
 
 }
