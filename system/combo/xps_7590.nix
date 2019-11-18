@@ -9,12 +9,5 @@
 
   i18n.consoleKeyMap = "us";
 
-  services = {
-    fstrim.enable = true;
-    undervolt = {
-      enable = true;
-      coreOffset = "-70";
-      temp = "95";
-    };
-  };
+  services.fstrim.enable = true;
 }
