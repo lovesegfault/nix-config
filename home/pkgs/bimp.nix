@@ -2,7 +2,7 @@
 let
   parallel = "${pkgs.parallel}/bin/parallel";
   id3v2 = "${pkgs.id3v2}/bin/id3v2";
-  flac = "${pkgs.flac}/bin/flac}";
+  flac = "${pkgs.flac}/bin/flac";
   beet = "${pkgs.beets}/bin/beet";
 in
 {
