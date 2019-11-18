@@ -1,4 +1,8 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
+  boot = {
+    extraModulePackages = with config.boot.kernelPackages; [ nvidia_x11 ];
+  };
+
   hardware = {
     bumblebee = {
       enable = true;

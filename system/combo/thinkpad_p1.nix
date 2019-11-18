@@ -30,6 +30,5 @@
     };
 
     xserver.libinput.accelSpeed = "0.7";
-
   };
 }

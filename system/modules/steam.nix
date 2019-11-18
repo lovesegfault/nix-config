@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  environment.systemPackages = with pkgs; [ steam ];
+  environment.systemPackages = with pkgs; [ steam steam-run lutris ];
   hardware = {
     opengl = {
       driSupport32Bit = true;
