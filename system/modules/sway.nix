@@ -42,4 +42,6 @@ in {
       export MOZ_ENABLE_WAYLAND=1
     '';
   };
+
+  users.users.bemeurer.extraGroups = [ "input" "video" ];
 }

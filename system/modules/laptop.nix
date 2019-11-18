@@ -12,4 +12,6 @@
   programs.light.enable = true;
 
   services.fwupd.enable = true;
+
+  users.users.bemeurer.extraGroups = [ "camera" ];
 }
