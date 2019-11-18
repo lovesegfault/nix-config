@@ -21,7 +21,7 @@ in
         # Defaulting terminal to urxvt, but feel free to either change
         # this or override with an environment variable in your sway config
         # It would be good to move this to a config file eventually
-        TERMINAL_COMMAND="''${TERMINAL_COMMAND:="urxvt -e"}"
+        TERMINAL_COMMAND="''${TERMINAL_COMMAND:="${alacritty} -e"}"
         GLYPH_COMMAND="  "
         GLYPH_DESKTOP="  "
         HIST_FILE="''${XDG_CACHE_HOME:-$HOME/.cache}/''${0##*/}-history.txt"
@@ -187,7 +187,7 @@ in
             tail -n +0 -f "$FZFPIPE" &
             echo $! >"$PIDFILE"
           ) |
-            fzf +s -x -d '\034' --nth ..3 --with-nth 3 \
+            ${fzf} +s -x -d '\034' --nth ..3 --with-nth 3 \
               --preview "$0 describe {1} {2}" \
               --preview-window=up:3:wrap --ansi
           (kill -9 "$(<"$PIDFILE")"; exit 0) | tail -n1
@@ -223,7 +223,8 @@ in
           ;;
         esac
 
-        exec setsid /bin/sh -c "$command"
+        # exec setsid /bin/sh -c "$command"
+        exec ${swaymsg} -t command "exec $command"
       '';
     })
   ];
