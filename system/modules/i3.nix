@@ -18,6 +18,6 @@
       ];
     };
 
-    xautolock.locker = "${pkgs.i3lock}/bin/i3lock -i ~/pictures/walls/clouds.png";
+    xautolock.locker = "${pkgs.i3lock}/bin/i3lock -i ~/pictures/walls/clouds.png -e -f";
   };
 }
