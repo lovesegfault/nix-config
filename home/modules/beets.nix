@@ -1,6 +1,4 @@
-{ config, pkgs, ... }:
-
-{
+{ config, pkgs, ... }: {
   programs.beets = {
     enable = true;
     settings = rec {
@@ -49,10 +47,8 @@
       ];
 
       absubmit = {
-        # FIXME: Write formula for essentia
         auto = true;
-        extractor =
-          "${config.home.homeDirectory}/bin/streaming_extractor_music";
+        extractor = "${pkgs.essentia-extractor}/bin/streaming_extractor_music";
       };
 
       acoustid = { apikey = "***REMOVED***"; };
@@ -85,7 +81,7 @@
         incremental = true;
         languages = [ "en" ];
         link = false;
-        log = "${config.xdg.dataHome}/beets/beets.log";
+        log = "${config.xdg.dataHome}/beets.log";
         move = true;
         none_rec_action = "ask";
         pretend = false;

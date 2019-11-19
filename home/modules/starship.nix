@@ -1,8 +1,9 @@
-{ config, pkgs, ... }: {
+{
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
   };
+
   xdg.configFile.starship = {
     target = "starship.toml";
     text = ''

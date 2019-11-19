@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   light = "${pkgs.light}/bin/light";
   pactl = "${pkgs.pulseaudioFull}/bin/pactl";

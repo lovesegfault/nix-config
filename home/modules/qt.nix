@@ -1,1 +1,1 @@
-{ config, pkgs, ... }: { qt = { enable = true; }; }
+{ qt.enable = true; }

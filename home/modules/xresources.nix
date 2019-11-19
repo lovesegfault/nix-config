@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{
   xresources.properties = {
     "Xft.dpi" = 200;
     "Xft.autohint" = 1;

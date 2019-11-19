@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{
   xdg.configFile.swaylock = {
     target = "swaylock/config";
     text = ''

@@ -7,7 +7,7 @@ in
 {
   nixpkgs.overlays = [
     (self: super: {
-      menew = super.writeScriptBin "menew" ''
+      swaymenu = super.writeScriptBin "swaymenu" ''
         #!${super.stdenv.shell}
         # terminal application launcher for sway, using fzf
         # Based on: https://gitlab.com/FlyingWombat/my-scripts/blob/master/sway-launcher

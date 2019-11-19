@@ -1,7 +1,7 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
     ../pkgs/bimp.nix
-    ../pkgs/menew.nix
+    ../pkgs/swaymenu.nix
     ../pkgs/passmenu.nix
     ../pkgs/prtsc.nix
     ../pkgs/emojimenu.nix
@@ -21,7 +21,6 @@
     gopass
     libnotify
     lollypop
-    menew
     mosh
     neofetch
     nix-index
@@ -35,6 +34,7 @@
     slack
     spotify
     sublime3
+    swaymenu
     tealdeer
     vscode
     weechat

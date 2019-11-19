@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{
   services.gpg-agent = {
     enable = true;
     enableExtraSocket = false;

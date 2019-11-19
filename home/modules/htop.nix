@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{
   programs.htop = {
     enable = true;
     delay = 10;

@@ -77,7 +77,7 @@
       };
       modifier = "Mod4";
       startup = [
-        { command = "feh --bg-fill ~/pictures/walls/clouds.jpg"; }
+        { command = "feh --bg-fill ~/pictures/walls/clouds.png"; }
         { command = "dbus-update-activation-environment --all"; }
         {
           command =
@@ -89,6 +89,7 @@
           command = "systemctl --user restart polybar";
           always = true;
         }
+        { command = "systemctl --user start gnome-keyring"; }
         { command = "pactl set-sink-mute @DEFAULT_SINK@ true"; }
         { command = "pactl set-source-mute @DEFAULT_SOURCE@ true"; }
       ];
