@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -9,7 +9,7 @@
       expireDuplicatesFirst = true;
       extended = true;
       ignoreDups = true;
-      path = ".local/share/zsh/history";
+      path = "${config.xdg.dataHome}/zsh/history";
       save = 30000;
       share = true;
     };
