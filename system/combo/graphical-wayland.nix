@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   waylandOverlayUrl =
     "https://github.com/colemickens/nixpkgs-wayland/archive/master.tar.gz";
@@ -20,5 +20,8 @@ in {
 
   nixpkgs.overlays = [ waylandOverlay ];
 
-  services.xserver.displayManager.gdm.wayland = true;
+  services.xserver = {
+    displayManager.gdm.wayland = true;
+    videoDrivers = lib.mkForce [ "modesetting" ];
+  };
 }
