@@ -15,5 +15,5 @@
     nvidia.modesetting.enable = true;
   };
 
-  # services.xserver.videoDrivers = [ "intel" "nvidia" ];
+  services.xserver.videoDrivers = [ "intel" "nvidia" ];
 }
