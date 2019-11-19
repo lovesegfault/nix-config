@@ -1,17 +1,10 @@
-{ config, pkgs, ... }:
-let
-  waylandOverlayUrl =
-    "https://github.com/colemickens/nixpkgs-wayland/archive/master.tar.gz";
-  waylandOverlay = (import (builtins.fetchTarball waylandOverlayUrl));
-in {
+{ config, pkgs, ... }: {
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
     kernelModules = [ "v4l2loopback" ];
   };
 
   environment.systemPackages = [ pkgs.qt5.qtwayland ];
-
-  nixpkgs.overlays = [ waylandOverlay ];
 
   programs.sway = {
     enable = true;
@@ -42,6 +35,8 @@ in {
       export MOZ_ENABLE_WAYLAND=1
     '';
   };
+
+  services.xserver.displayManager.extraSessionFilePackages = with pkgs; [ sway ];
 
   users.users.bemeurer.extraGroups = [ "input" "video" ];
 }
