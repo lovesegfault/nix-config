@@ -15,8 +15,7 @@
       config = rec {
         bars = let
           bar = "i3status-rs";
-          cfg = config.xdg.configHome
-            + "/${config.xdg.configFile.i3status-rust.target}";
+          cfg = "${config.xdg.configFile.i3status-rust.target}";
         in [{
           statusCommand = "${bar} ${cfg}";
           fonts = [ "FontAwesome 10" "Hack 10" ];
@@ -27,7 +26,7 @@
 
         floating = {
           border = 0;
-          criteria = [ { title = "menu"; } { title = "passmenu"; } ];
+          criteria = [ { title = "swaymenu"; } { title = "passmenu"; } ];
           modifier = modifier;
         };
 

@@ -2,11 +2,11 @@
   environment.systemPackages = with pkgs; [ qgnomeplatform ];
 
   programs = {
-
     dconf.enable = true;
     gphoto2.enable = true;
   };
   services = {
+    dbus.packages = [ pkgs.gnome3.dconf ];
     geoclue2.enable = true;
     gvfs.enable = true;
     gnome3 = {

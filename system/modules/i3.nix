@@ -1,6 +1,10 @@
 { pkgs, ... }: {
   services.xserver = {
     enable = true;
+    desktopManager = {
+      default = "none";
+      xterm.enable = false;
+    };
     windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
@@ -18,6 +22,7 @@
       ];
     };
 
-    xautolock.locker = "${pkgs.i3lock}/bin/i3lock -i ~/pictures/walls/clouds.png -e -f";
+    xautolock.locker =
+      "${pkgs.i3lock}/bin/i3lock -i ~/pictures/walls/clouds.png -e -f";
   };
 }

@@ -1,8 +1,5 @@
 { config, pkgs, ... }: {
-  boot = {
-    blacklistedKernelModules = [ "nouveau" ];
-    extraModulePackages = with config.boot.kernelPackages; [ nvidia_x11 ];
-  };
+  boot.extraModulePackages = with config.boot.kernelPackages; [ nvidia_x11 ];
 
   hardware = {
     bumblebee = {
@@ -12,7 +9,7 @@
       group = "video";
       pmMethod = "bbswitch";
     };
-    nvidia.modesetting.enable = true;
+    nvidia.modesetting.enable = false;
   };
 
   services.xserver.videoDrivers = [ "intel" "nvidia" ];

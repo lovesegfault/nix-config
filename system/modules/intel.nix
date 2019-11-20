@@ -5,7 +5,13 @@
     cpu.intel.updateMicrocode = true;
     opengl = {
       enable = true;
-      extraPackages = with pkgs; [ vaapiIntel vaapiVdpau libvdpau-va-gl libva intel-compute-runtime ];
+      extraPackages = with pkgs; [
+        vaapiIntel
+        vaapiVdpau
+        libvdpau-va-gl
+        libva
+        intel-compute-runtime
+      ];
     };
   };
 

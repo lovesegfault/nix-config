@@ -2,8 +2,8 @@
   services.xserver = {
     enable = true;
     displayManager.gdm = {
-        enable = true;
-        autoSuspend = false;
+      enable = true;
+      autoSuspend = false;
     };
   };
 }
