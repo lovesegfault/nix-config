@@ -33,11 +33,6 @@
 
       bindkey -s "^O" '${editor} $(fzf -m)^M'
     '';
-    profileExtra = ''
-      if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-        exec sway > /tmp/sway.log 2>&1
-      fi
-    '';
     sessionVariables = { RPROMPT = ""; };
     plugins = [
       {
