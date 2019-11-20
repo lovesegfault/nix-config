@@ -2,7 +2,8 @@
   imports = [
     ../combo/core.nix
     ../combo/dev.nix
-    ../combo/graphical-wayland.nix
+    ../combo/graphical.nix
+    ../combo/wayland.nix
     ../combo/thinkpad_p1.nix
   ];
 

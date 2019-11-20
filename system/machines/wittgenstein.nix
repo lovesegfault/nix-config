@@ -3,7 +3,8 @@
     ../combo/core.nix
     ../combo/dev.nix
     ../combo/games.nix
-    ../combo/graphical-wayland.nix
+    ../combo/graphical.nix
+    ../combo/wayland.nix
     ../combo/xps_7590.nix
   ];
 
