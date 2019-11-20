@@ -3,10 +3,9 @@
 
   xdg.configFile.libinput-gestures = {
     target = "libinput-gestures.conf";
-    text = let i3-msg = "${pkgs.i3-gaps}/bin/i3-msg";
-    in ''
-      gesture swipe left 3 ${i3-msg} "workspace next"
-      gesture swipe right 3 ${i3-msg} "workspace prev"
+    text = ''
+      gesture swipe left 3 i3-msg "workspace next"
+      gesture swipe right 3 i3-msg "workspace prev"
     '';
   };
 
@@ -16,7 +15,7 @@
       enable = true;
       config = {
         bars = let
-          bar = "${pkgs.i3status-rust}/bin/i3status-rs";
+          bar = "i3status-rs";
           cfg = config.xdg.configHome
             + "/${config.xdg.configFile.i3status-rust.target}";
         in [{
@@ -49,28 +48,26 @@
         };
 
         keybindings = let
-          light = "${pkgs.light}/bin/light";
-          lock = "${pkgs.i3lock} -i ~/pictures/walls/clouds.png -e -f";
-          pactl = "${pkgs.pulseaudioFull}/bin/pactl";
+          lock = "i3lock -i ~/pictures/walls/clouds.png -e -f";
+          menu = "${term} -d 80 20 -t swaymenu -e ${swaymenu}";
           passmenu = "${pkgs.passmenu}/bin/passmenu";
           prtsc = "${pkgs.prtsc}/bin/prtsc";
-          swaymenu =
-            "${term} -d 80 20 -t swaymenu -e ${pkgs.swaymenu}/bin/swaymenu";
-          term = "${pkgs.alacritty}/bin/alacritty";
+          swaymenu = "${pkgs.swaymenu}/bin/swaymenu";
+          term = "alacritty";
         in lib.mkOptionDefault {
           "${modifier}+Return" = "exec ${term}";
-          "${modifier}+d" = "exec ${swaymenu}";
+          "${modifier}+d" = "exec ${menu}";
           "${modifier}+p" = "exec ${passmenu}";
           "Print" = "exec ${prtsc}";
-          "XF86MonBrightnessUp" = "exec ${light} -A 1";
-          "XF86MonBrightnessDown" = "exec ${light} -U 1";
+          "XF86MonBrightnessUp" = "exec light -A 1";
+          "XF86MonBrightnessDown" = "exec light -U 1";
           "XF86AudioRaiseVolume" =
-            "exec ${pactl} set-sink-volume @DEFAULT_SINK@ +1%";
+            "exec pactl set-sink-volume @DEFAULT_SINK@ +1%";
           "XF86AudioLowerVolume" =
-            "exec ${pactl} set-sink-volume @DEFAULT_SINK@ -1%";
-          "XF86AudioMute" = "exec ${pactl} set-sink-mute @DEFAULT_SINK@ toggle";
+            "exec pactl set-sink-volume @DEFAULT_SINK@ -1%";
+          "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
           "XF86AudioMicMute" =
-            "exec ${pactl} set-source-mute @DEFAULT_SOURCE@ toggle";
+            "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
           "XF86Display" = "exec ${lock}";
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+r" = "restart";
@@ -102,19 +99,14 @@
 
         modifier = "Mod4";
 
-        startup = let
-          dunst = "${pkgs.dunst}/bin/dunst";
-          feh = "${pkgs.feh}/bin/feh";
-          pactl = "${pkgs.pulseaudioFull}/bin/pactl";
-          libinput-gestures = "${pkgs.libinput-gestures}/bin/libinput-gestures";
-        in [
-          { command = "${feh} --bg-fill ~/pictures/walls/clouds.png"; }
-          { command = "${pactl} set-sink-mute @DEFAULT_SINK@ true"; }
-          { command = "${pactl} set-source-mute @DEFAULT_SOURCE@ true"; }
+        startup = [
           { command = "dbus-update-activation-environment --all"; }
+          { command = "dunst"; }
+          { command = "feh --bg-fill ~/pictures/walls/clouds.png"; }
+          { command = "libinput-gestures"; }
+          { command = "pactl set-sink-mute @DEFAULT_SINK@ true"; }
+          { command = "pactl set-source-mute @DEFAULT_SOURCE@ true"; }
           { command = "systemctl --user start gnome-keyring"; }
-          { command = dunst; }
-          { command = libinput-gestures; }
         ];
 
         window.border = 0;

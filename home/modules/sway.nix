@@ -3,27 +3,21 @@
 
   xdg.configFile.libinput-gestures = {
     target = "libinput-gestures.conf";
-    text = let swaymsg = "${pkgs.sway}/bin/swaymsg";
-    in ''
-      gesture swipe left 3 ${swaymsg} "workspace next"
-      gesture swipe right 3 ${swaymsg} "workspace prev"
+    text = ''
+      gesture swipe left 3 swaymsg "workspace next"
+      gesture swipe right 3 swaymsg "workspace prev"
     '';
   };
 
   xdg.configFile.sway = {
     target = "sway/config";
     text = let
-      light = "${pkgs.light}/bin/light";
-      pactl = "${pkgs.pulseaudioFull}/bin/pactl";
       passmenu = "${pkgs.passmenu}/bin/passmenu";
-      swayidle = "${pkgs.swayidle}/bin/swayidle";
-      swaylock = "${pkgs.swaylock}/bin/swaylock";
       swaymenu = "${pkgs.swaymenu}/bin/swaymenu";
-      term = "${pkgs.alacritty}/bin/alacritty";
+      term = "alacritty";
       menu = "${term} -d 80 20 -t swaymenu -e ${swaymenu}";
-      waybar = "${pkgs.waybar}/bin/waybar";
-      mako = "${pkgs.mako}/bin/mako";
-      libinput-gestures = "${pkgs.libinput-gestures}/bin/libinput-gestures";
+      waybar = "waybar";
+      mako = "mako";
     in ''
       ### Variables
       set $mod Mod4
@@ -41,7 +35,7 @@
       output LVDS-1 resolution 1920x1080 position 0,0 scale 1 subpixel rgb
 
       ### Idle configuration
-      exec ${swayidle} -w \
+      exec swayidle -w \
                timeout 300 'swaylock -f -c 000000' \
                timeout 600 'swaymsg "output * dpms off"' \
                     resume 'swaymsg "output * dpms on"' \
@@ -111,13 +105,13 @@
           bindsym $mod+p exec ${passmenu}
 
           bindsym Print exec prtsc
-          bindsym XF86MonBrightnessUp exec ${light} -A 1
-          bindsym XF86MonBrightnessDown exec ${light} -U 1
-          bindsym XF86AudioRaiseVolume exec ${pactl} set-sink-volume @DEFAULT_SINK@ +1%
-          bindsym XF86AudioLowerVolume exec ${pactl} set-sink-volume @DEFAULT_SINK@ -1%
-          bindsym XF86AudioMute exec ${pactl} set-sink-mute @DEFAULT_SINK@ toggle
-          bindsym XF86AudioMicMute exec ${pactl} set-source-mute @DEFAULT_SOURCE@ toggle
-          bindsym XF86Display exec ${swaylock} -f
+          bindsym XF86MonBrightnessUp exec light -A 1
+          bindsym XF86MonBrightnessDown exec light -U 1
+          bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1%
+          bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
+          bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+          bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+          bindsym XF86Display exec swaylock -f
 
           # Drag floating windows by holding down $mod and left mouse button.
           # Resize them with right mouse button + $mod.
@@ -258,15 +252,15 @@
       ### Status Bar:
       bar {
           font pango: Hack, FontAwesome 10
-          swaybar_command ${waybar}
+          swaybar_command waybar
       }
 
       exec "dbus-update-activation-environment --systemd DISPLAY"
       exec "systemctl --user start gnome-keyring"
-      exec "${mako}"
-      exec "${pactl} set-source-mute @DEFAULT_SOURCE@ true"
-      exec "${pactl} set-sink-mute @DEFAULT_SINK@ true"
-      exec "${libinput-gestures}"
+      exec "mako"
+      exec "pactl set-source-mute @DEFAULT_SOURCE@ true"
+      exec "pactl set-sink-mute @DEFAULT_SINK@ true"
+      exec "libinput-gestures"
 
       include /etc/sway/config.d/*
     '';
