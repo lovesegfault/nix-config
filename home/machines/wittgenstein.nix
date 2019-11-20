@@ -6,5 +6,7 @@
     ../combo/music.nix
     ../combo/sway.nix
     ../combo/xps_7590.nix
+
+    ../secrets/secrets.nix
   ];
 }

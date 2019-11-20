@@ -51,7 +51,7 @@
         extractor = "${pkgs.essentia-extractor}/bin/streaming_extractor_music";
       };
 
-      acoustid = { apikey = "***REMOVED***"; };
+      acoustid.apikey = "";
 
       embedart = { auto = true; };
 
@@ -59,8 +59,8 @@
         auto = true;
         cautious = false;
         enforce_ratio = "10%";
-        fanarttv_key = "***REMOVED***";
-        google_key = "***REMOVED***";
+        fanarttv_key = "";
+        google_key = "";
         maxwidth = 2000;
         minwidth = 900;
         sources = "filesystem fanarttv *";
@@ -104,7 +104,7 @@
       lyrics = {
         auto = true;
         fallback = "";
-        google_API_key = "***REMOVED***";
+        google_API_key = "";
       };
 
       match = {
