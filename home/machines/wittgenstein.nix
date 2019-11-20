@@ -2,8 +2,9 @@
   imports = [
     ../combo/core.nix
     ../combo/dev.nix
+    ../combo/graphical.nix
     ../combo/music.nix
-    ../combo/graphical-wayland.nix
+    ../combo/sway.nix
     ../combo/xps_7590.nix
   ];
 }
