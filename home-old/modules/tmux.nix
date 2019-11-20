@@ -18,7 +18,7 @@
       bind-key -n M-j select-pane -D
       bind-key -n M-k select-pane -U
       bind-key -n M-l select-pane -R
-      bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+      bind r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded..."
 
       set -g base-index 0
       #set-option -g default-shell /bin/zsh

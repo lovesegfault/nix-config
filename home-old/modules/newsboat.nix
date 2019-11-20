@@ -2,6 +2,7 @@
   programs.newsboat = {
     enable = true;
     autoReload = true;
+    browser = "${pkgs.firefox}/bin/firefox";
     extraConfig = ''
       color background          color236   default
       color listnormal          color248   default

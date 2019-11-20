@@ -5,7 +5,8 @@ let
   gopass = "${pkgs.gopass}/bin/gopass";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
   wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
-in {
+in
+{
   nixpkgs.overlays = [
     (self: super: {
       passmenu = super.writeScriptBin "passmenu" ''

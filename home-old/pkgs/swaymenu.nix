@@ -3,7 +3,8 @@ let
   alacritty = "${pkgs.alacritty}/bin/alacritty";
   fzf = "${pkgs.fzf}/bin/fzf";
   swaymsg = "${pkgs.sway}/bin/swaymsg";
-in {
+in
+{
   nixpkgs.overlays = [
     (self: super: {
       swaymenu = super.writeScriptBin "swaymenu" ''

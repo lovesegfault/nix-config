@@ -4,7 +4,8 @@ let
   id3v2 = "${pkgs.id3v2}/bin/id3v2";
   flac = "${pkgs.flac}/bin/flac";
   beet = "${pkgs.beets}/bin/beet";
-in {
+in
+{
   nixpkgs.overlays = [
     (self: super: {
       bimp = super.writeScriptBin "bimp" ''

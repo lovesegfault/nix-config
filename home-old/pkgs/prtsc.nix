@@ -6,7 +6,8 @@ let
   slurp = "${pkgs.slurp}/bin/slurp";
   wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
   xclip = "${pkgs.xclip}/bin/xclip";
-in {
+in
+{
   nixpkgs.overlays = [
     (self: super: {
       prtsc = super.writeScriptBin "prtsc" ''

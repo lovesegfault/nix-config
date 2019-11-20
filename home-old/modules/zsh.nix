@@ -1,6 +1,4 @@
 { config, pkgs, ... }: {
-  programs.starship.enableZshIntegration = true;
-
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -15,8 +13,7 @@
       save = 30000;
       share = true;
     };
-    initExtra = let editor = "${config.home.sessionVariables.EDITOR}";
-    in ''
+    initExtra = ''
       bindkey "$${terminfo[khome]}" beginning-of-line
       bindkey "$${terminfo[kend]}" end-of-line
       bindkey "$${terminfo[kdch1]}" delete-char
@@ -31,7 +28,7 @@
       bindkey "^[[1;5D" backward-word
       bindkey "^[[1;3D" backward-word
 
-      bindkey -s "^O" '${editor} $(fzf -m)^M'
+      bindkey -s "^O" 'nvim $(fzf -m)^M'
     '';
     profileExtra = ''
       if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then

@@ -78,13 +78,24 @@ function check_home() {
     fi
 
     if ! [ -d "$home_manager_path" ]; then
-        warn "User $USER has no ~/.config/nixpkgs, symlinking"
-        ln -s "$user_src_path" "$home_manager_path" ||
-            error "Failed to symlink $user_src_path to $home_manager_path"
+        warn "User $USER has no ~/.config/nixpkgs, creating"
+        mkdir -p "$home_manager_path"
+        ln -s "$user_src_path/home" "$home_manager_path/home" ||
+            error "Failed to symlink $user_src_path/home to $home_manager_path/home"
     fi
 
-    if ! [ -L "$home_manager_path" ]; then
-        warn "$home_manager_path is not a symlink while it should be"
+    if ! [ -f "$home_manager_path/config.nix" ]; then
+        warn "User $USER has no $home_manager_path/config.nix, creating"
+        cp "$user_src_path/misc/config.nix" "$home_manager_path"
+    fi
+
+    if ! [ -f "$home_manager_path/home.nix" ]; then
+        warn "User $USER has no $home_manager_path/home.nix, you MUST create it."
+        warn "See $user_src_path/misc/home.nix"
+    fi
+
+    if ! [ -L "$home_manager_path/home" ]; then
+        warn "$home_manager_path/home is not a symlink while it should be"
     fi
 }
 

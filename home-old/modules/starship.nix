@@ -1,5 +1,8 @@
 {
-  programs.starship.enable = true;
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   xdg.configFile.starship = {
     target = "starship.toml";

@@ -1,14 +1,9 @@
 { pkgs, ... }: {
-  imports = [ ../pkgs/passmenu.nix ../pkgs/prtsc.nix ../pkgs/swaymenu.nix ];
-
-  xdg.configFile.libinput-gestures = {
-    target = "libinput-gestures.conf";
-    text = let swaymsg = "${pkgs.sway}/bin/swaymsg";
-    in ''
-      gesture swipe left 3 ${swaymsg} "workspace next"
-      gesture swipe right 3 ${swaymsg} "workspace prev"
-    '';
-  };
+  imports = [
+    ../pkgs/passmenu.nix
+    ../pkgs/prtsc.nix
+    ../pkgs/swaymenu.nix
+  ];
 
   xdg.configFile.sway = {
     target = "sway/config";

@@ -1,19 +1,4 @@
 { pkgs, ... }: {
-  home = {
-    packages = with pkgs; [ nodejs yarn ];
-    sessionVariables = rec {
-      EDITOR = "${pkgs.neovim}/bin/nvim";
-      VISUAL = EDITOR;
-    };
-  };
-
-  programs.git.extraConfig = rec {
-    core.editor = "${pkgs.neovim}/bin/neovim";
-    merge.tool = "nvimdiff";
-    "mergetool \"nvimdiff\"" = { cmd = "${core.editor} -d $LOCAL $REMOTE"; };
-    diff.tool = "nvimdiff";
-  };
-
   programs.neovim = {
     enable = true;
     viAlias = true;
