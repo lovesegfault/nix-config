@@ -13,6 +13,7 @@
     target = "sway/config";
     text = let
       passmenu = "${pkgs.passmenu}/bin/passmenu";
+      prtsc = "${pkgs.prtsc}/bin/prtsc";
       swaymenu = "${pkgs.swaymenu}/bin/swaymenu";
       term = "alacritty";
       menu = "${term} -d 80 20 -t swaymenu -e ${swaymenu}";
@@ -104,7 +105,7 @@
           bindsym $mod+d exec ${menu}
           bindsym $mod+p exec ${passmenu}
 
-          bindsym Print exec prtsc
+          bindsym Print exec ${prtsc}
           bindsym XF86MonBrightnessUp exec light -A 1
           bindsym XF86MonBrightnessDown exec light -U 1
           bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1%
