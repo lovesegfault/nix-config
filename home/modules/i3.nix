@@ -10,10 +10,9 @@
   };
 
   xsession = rec {
-    windowManager.command = "${windowManager.i3.package}/bin/i3";
-    windowManager.i3 = rec {
+    windowManager.i3 = {
       enable = true;
-      config = {
+      config = rec {
         bars = let
           bar = "i3status-rs";
           cfg = config.xdg.configHome
@@ -44,7 +43,7 @@
           inner = 5;
           outer = 10;
           smartBorders = "on";
-          smartGaps = "false";
+          smartGaps = false;
         };
 
         keybindings = let
