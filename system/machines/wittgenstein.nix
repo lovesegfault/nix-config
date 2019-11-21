@@ -4,7 +4,7 @@
     ../combo/dev.nix
     ../combo/games.nix
     ../combo/graphical.nix
-    ../combo/x.nix
+    ../combo/wayland.nix
     ../combo/xps_7590.nix
   ];
 
