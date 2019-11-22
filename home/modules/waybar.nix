@@ -48,7 +48,7 @@ let
     };
     memory = { format = "{}% "; };
     temperature = {
-      thermal-zone = "/sys/class/thermal/thermal_zone1/temp";
+      thermal-zone = 1;
       critical-threshold = 80;
       format = "{temperatureC}°C {icon}";
       format-icons = [ "" "" "" ];
