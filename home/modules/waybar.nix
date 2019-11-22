@@ -60,6 +60,7 @@ let
       on-scroll-down = "${light} -U 1";
     };
     battery = {
+      bat = "BAT0";
       states = {
         good = 90;
         warning = 30;
