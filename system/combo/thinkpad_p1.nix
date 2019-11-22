@@ -2,6 +2,7 @@
   imports = [
     ../modules/bluetooth.nix
     ../modules/bumblebee.nix
+    ../modules/fprint.nix
     ../modules/intel.nix
     ../modules/laptop.nix
     ../modules/tlp.nix
@@ -23,6 +24,7 @@
   };
 
   services = {
+    fprintd.package = pkgs.fprintd-thinkpad;
     fstrim.enable = true;
     undervolt = {
       enable = true;
