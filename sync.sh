@@ -72,7 +72,7 @@ function check_home() {
     if ! [ -d "$user_src_path" ]; then
         warn "User has no ~/src/$repo_name, creating"
         mkdir -p "$HOME/src"
-        rsync -irhlt "$script_dir" "$user_src_path" ||
+        rsync -irhlt "$script_dir/" "$user_src_path/" ||
             error "Failed to copy $repo_name"
         fix_perms "$USER" "$user_src_path"
     fi
