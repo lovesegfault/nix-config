@@ -5,6 +5,7 @@
     ../modules/intel.nix
     ../modules/laptop.nix
     ../modules/tlp.nix
+    ../modules/thunderbolt.nix
   ];
 
   boot = {
