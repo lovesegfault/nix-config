@@ -6,11 +6,23 @@
       enable = true;
       connectDisplay = true;
       driver = "nvidia";
-      group = "video";
-      pmMethod = "bbswitch";
     };
     nvidia.modesetting.enable = false;
   };
+
+  nixpkgs.config.packageOverrides = pkgs: rec {
+  bumblebee = pkgs.bumblebee.override {
+    extraNvidiaDeviceOptions = ''
+      EndSection # close option section
+
+      Section "Screen"
+        Identifier "Default Screen"
+        Device "DiscreteNvidia"
+
+        # our section is closed later
+    '';
+  };
+};
 
   services.xserver.videoDrivers = [ "intel" "nvidia" ];
 }
