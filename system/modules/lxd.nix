@@ -5,6 +5,11 @@
     "fs.inotify.max_user_watches" = 1048576;
   };
 
+  security.pam.loginlimits = [
+    { domain = "bemeurer"; type = "soft"; item ="nofile"; value = "1000000"; }
+    { domain = "bemeurer"; type = "hard"; item ="nofile"; value = "1000000"; }
+  ];
+
   users.users.bemeurer.extraGroups = [ "lxd" ];
 
   virtualisation = {
