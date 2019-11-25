@@ -257,11 +257,12 @@
       }
 
       exec "dbus-update-activation-environment --systemd DISPLAY"
-      exec "systemctl --user start gnome-keyring"
-      exec "mako"
-      exec "pactl set-source-mute @DEFAULT_SOURCE@ true"
-      exec "pactl set-sink-mute @DEFAULT_SINK@ true"
       exec "libinput-gestures"
+      exec "mako"
+      exec "pactl set-sink-mute @DEFAULT_SINK@ true"
+      exec "pactl set-source-mute @DEFAULT_SOURCE@ true"
+      exec "redshift"
+      exec "systemctl --user start gnome-keyring"
 
       include /etc/sway/config.d/*
     '';
