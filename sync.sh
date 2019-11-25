@@ -105,14 +105,24 @@ function check_sudo() {
         error "$USER does not have sudo privileges"
 }
 
+function rebuild_system() {
+    sudo nixos-rebuild switch --upgrade
+}
+
+function rebuild_home() {
+    home-manager switch
+}
+
 function main() {
     [ "$#" -eq 0 ] || error "This program takes no arguments."
     [ "$(id -u)" != 0 ] || error "Run this as a your user, not root."
     check_sudo
     sync_system
     check_system
+    rebuild_system
     ok "System OK"
     check_home
+    rebuild_home
     ok "Home OK"
 }
 
