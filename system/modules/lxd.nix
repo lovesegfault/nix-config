@@ -6,9 +6,11 @@
   };
 
   security.pam.loginLimits = [
-    { domain = "bemeurer"; type = "soft"; item ="nofile"; value = "1000000"; }
-    { domain = "bemeurer"; type = "hard"; item ="nofile"; value = "1000000"; }
+    { domain = "lxd"; type = "soft"; item ="nofile"; value = "1000000"; }
+    { domain = "lxd"; type = "hard"; item ="nofile"; value = "1000000"; }
   ];
+
+  systemd.services.lxd.serviceConfig.LimitNOFILE = 49152;
 
   users.users.bemeurer.extraGroups = [ "lxd" ];
 
