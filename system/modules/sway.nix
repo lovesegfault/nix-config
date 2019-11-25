@@ -14,13 +14,14 @@
       libinput-gestures
       light
       mako
+      redshift-wlr
       slurp
       swaybg
-      swaylock
       swayidle
+      swaylock
       waybar
-      wl-clipboard
       wf-recorder
+      wl-clipboard
       xwayland
     ];
     extraSessionCommands = ''
