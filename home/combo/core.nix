@@ -7,9 +7,10 @@
     ../modules/htop.nix
     ../modules/neovim.nix
     ../modules/newsboat.nix
+    ../modules/ranger.nix
+    ../modules/starship.nix
     ../modules/tmux.nix
     ../modules/xdg.nix
-    ../modules/starship.nix
     ../modules/zsh.nix
   ];
 
@@ -22,7 +23,6 @@
       mosh
       neofetch
       nix-index
-      ranger
       ripgrep
       tealdeer
       weechat
