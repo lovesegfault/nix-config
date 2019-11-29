@@ -110,6 +110,7 @@ function rebuild_system() {
 }
 
 function rebuild_home() {
+    nix-channel --update
     home-manager switch
 }
 
