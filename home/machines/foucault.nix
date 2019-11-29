@@ -6,7 +6,7 @@
     ../combo/music.nix
     ../combo/sway.nix
     ../combo/i3.nix
-    ../combo/thinkpad_p1.nix
+    ../combo/thinkpad-p1.nix
 
     ../secrets/secrets.nix
   ];
