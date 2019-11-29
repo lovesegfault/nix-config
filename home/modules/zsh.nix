@@ -41,8 +41,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "zdharma";
           repo = "fast-syntax-highlighting";
-          rev = "v1.54";
-          sha256 = "019hda2pj8lf7px4h1z07b9l6icxx4b2a072jw36lz9bh6jahp32";
+          rev = "bb2da8f833924acab543154a9ec636c6b6434140";
+          sha256 = "1sb12nhzcfiqf57sclkpm691fwgns9h6kfyyv28bl9hqpyzicvxc";
         };
       }
       {
@@ -51,8 +51,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "zdharma";
           repo = "history-search-multi-word";
-          rev = "v1.2.4";
-          sha256 = "1r1kyy1w2g2jhal4zjj2zp5i2giya6j4v7a7vk32g4vjg12q8hv0";
+          rev = "0713e6dd8a8757d8caa100009487b520c15e94fa";
+          sha256 = "0fmsy96f6kvzcnd2shb6s1qmymrf1ddqgf3l1zj1isd1fhzwqsnw";
         };
       }
       {
@@ -61,7 +61,7 @@
         src = pkgs.fetchFromGitHub {
           owner = "hlissner";
           repo = "zsh-autopair";
-          rev = "v1.0";
+          rev = "34a8bca0c18fcf3ab1561caef9790abffc1d3d49";
           sha256 = "1h0vm2dgrmb8i2pvsgis3lshc5b0ad846836m62y8h3rdb3zmpy1";
         };
       }
@@ -71,8 +71,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "chisui";
           repo = "zsh-nix-shell";
-          rev = "b2609ca787803f523a18bb9f53277d0121e30389";
-          sha256 = "01w59zzdj12p4ag9yla9ycxx58pg3rah2hnnf3sw4yk95w3hlzi6";
+          rev = "166c86c609a5398453f6386efd70c3cdb66b2058";
+          sha256 = "1d2j6968w89ll1nf9wxjll6cbrwnaj0lxcf27kyy4sx12fd3nd5x";
         };
       }
       {
