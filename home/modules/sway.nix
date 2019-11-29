@@ -191,6 +191,10 @@
           default_border none
           default_floating_border normal
 
+          client.focused #30535F #30535F #F0BC8D #A43C0F #A43C0F
+          client.unfocused #00122A #00122A #F0BC8D #A43C0F #A43C0F
+          client.urgent #A43C0F #A43C0F #000000 #A43C0F #A43C0F
+
           # You can "split" the current object of your focus with
           # $mod+b or $mod+v, for horizontal and vertical splits
           # respectively.

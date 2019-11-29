@@ -118,9 +118,9 @@ in {
       }
 
       window#waybar {
-          background-color: rgba(43, 48, 59, 0.5);
-          border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-          color: #ffffff;
+          background-color: rgba(0, 18, 42, 1);
+          border-bottom: 0px rgba(100, 114, 125, 1);
+          color: #FFFFFF;
           transition-property: background-color;
           transition-duration: .5s;
       }
@@ -132,7 +132,7 @@ in {
       #workspaces button {
           padding: 0 5px;
           background-color: transparent;
-          color: #ffffff;
+          color: #F0BC8D;
           border-bottom: 3px solid transparent;
       }
 
@@ -143,12 +143,13 @@ in {
       }
 
       #workspaces button.focused {
-          background-color: #64727D;
+          background-color: #17374A;
           border-bottom: 3px solid #ffffff;
       }
 
       #workspaces button.urgent {
-          background-color: #eb4d4b;
+          background-color: #A43C0F;
+          color: #000000;
       }
 
       #mode {
@@ -168,23 +169,24 @@ in {
       #tray,
       #mode,
       #idle_inhibitor {
-        padding: 0 10px;
-        margin: 0 4px;
+        padding: 0 5px;
+        margin: 0 2px;
         color: #ffffff;
       }
 
       #clock {
-          background-color: #64727D;
+          color: #F0BC8D;
+          background-color: #17374A;
       }
 
       #battery {
-          background-color: #ffffff;
-          color: #000000;
+          color: #F0BC8D;
+          background-color: #17374A;
       }
 
       #battery.charging {
-          color: #ffffff;
-          background-color: #26A65B;
+          color: #F0BC8D;
+          background-color: #17374A;
       }
 
       @keyframes blink {
@@ -195,8 +197,8 @@ in {
       }
 
       #battery.critical:not(.charging) {
-          background-color: #f53c3c;
-          color: #ffffff;
+          background-color: #A43C0F;
+          color: #000000;
           animation-name: blink;
           animation-duration: 0.5s;
           animation-timing-function: linear;
@@ -209,55 +211,63 @@ in {
       }
 
       #cpu {
-          background-color: #2ecc71;
-          color: #000000;
+          color: #F0BC8D;
+          background-color: #17374A;
       }
 
       #memory {
-          background-color: #9b59b6;
+          color: #F0BC8D;
+          background-color: #17374A;
       }
 
       #backlight {
-          background-color: #90b1b1;
+          color: #F0BC8D;
+          background-color: #17374A;
       }
 
       #network {
-          background-color: #2980b9;
+          color: #F0BC8D;
+          background-color: #17374A;
       }
 
       #network.disconnected {
-          background-color: #f53c3c;
+          color: #F0BC8D;
+          background-color: #17374A;
       }
 
       #pulseaudio {
-          background-color: #f1c40f;
-          color: #000000;
+          color: #F0BC8D;
+          background-color: #17374A;
       }
 
       #pulseaudio.muted {
-          background-color: #90b1b1;
-          color: #2a5c45;
+          color: #F0BC8D;
+          background-color: #30535F;
       }
 
       #temperature {
-          background-color: #f0932b;
+          color: #F0BC8D;
+          background-color: #17374A;
       }
 
       #temperature.critical {
-          background-color: #eb4d4b;
+          background-color: #A43C0F;
+          color: #000000;
       }
 
       #tray {
-          background-color: #2980b9;
+          color: #F0BC8D;
+          background-color: #17374A;
       }
 
       #idle_inhibitor {
-          background-color: #2d3436;
+          color: #F0BC8D;
+          background-color: #17374A;
       }
 
       #idle_inhibitor.activated {
-          background-color: #ecf0f1;
-          color: #2d3436;
+          color: #F0BC8D;
+          background-color: #30535F;
       }
     '';
   };
