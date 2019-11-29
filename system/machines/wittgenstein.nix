@@ -5,7 +5,7 @@
     ../combo/games.nix
     ../combo/graphical.nix
     ../combo/wayland.nix
-    ../combo/xps_7590.nix
+    ../combo/xps-7590.nix
   ];
 
   networking.hostName = "wittgenstein";

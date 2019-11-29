@@ -4,7 +4,7 @@
     ../combo/dev.nix
     ../combo/graphical.nix
     ../combo/wayland.nix
-    ../combo/thinkpad_p1.nix
+    ../combo/thinkpad-p1.nix
   ];
 
   networking.hostName = "foucault";

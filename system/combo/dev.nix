@@ -2,7 +2,7 @@
   imports = [
     ../modules/documentation.nix
     ../modules/lxd.nix
-    ../modules/stcg_cachix.nix
+    ../modules/stcg-cachix.nix
   ];
 
   environment.systemPackages = with pkgs; [ neovim ];
