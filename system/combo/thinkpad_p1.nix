@@ -1,9 +1,9 @@
 { config, pkgs, ... }: {
   imports = [
     ../modules/bluetooth.nix
-    ../modules/bumblebee.nix
     ../modules/fprint.nix
     ../modules/intel.nix
+    ../modules/no-nvidia.nix
     ../modules/laptop.nix
     ../modules/tlp.nix
     ../modules/thunderbolt.nix
