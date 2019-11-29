@@ -11,6 +11,6 @@
     master en_US
     add-extra-dicts en-computers.rws
     add-extra-dicts en_US-science.rws
-    add-extra-dicts pt_BR
+    add-extra-dicts pt_BR.rws
   '';
 }
