@@ -2,67 +2,21 @@
   services.tlp = {
     enable = true;
     extraConfig = ''
-      AHCI_RUNTIME_PM_TIMEOUT=15
-      CPU_BOOST_ON_AC=1
-      CPU_BOOST_ON_BAT=0
-      CPU_HWP_ON_AC=performance
-      CPU_HWP_ON_BAT=balance_power
-      CPU_MAX_PERF_ON_AC=100
-      CPU_MAX_PERF_ON_BAT=50
-      CPU_MIN_PERF_ON_AC=0
-      CPU_MIN_PERF_ON_BAT=0
-      CPU_SCALING_GOVERNOR_ON_AC=performance
-      CPU_SCALING_GOVERNOR_ON_BAT=powersave
-      DEVICES_TO_DISABLE_ON_BAT=""
-      DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE="bluetooth"
-      DEVICES_TO_DISABLE_ON_SHUTDOWN=""
-      DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"
-      DEVICES_TO_ENABLE_ON_AC="bluetooth wifi wwan"
-      DEVICES_TO_ENABLE_ON_SHUTDOWN="bluetooth wifi"
-      DEVICES_TO_ENABLE_ON_STARTUP="wifi"
-      DISK_APM_LEVEL_ON_AC="254"
-      DISK_APM_LEVEL_ON_BAT="128"
-      DISK_DEVICES="nvme0n1"
-      DISK_IDLE_SECS_ON_AC=0
-      DISK_IDLE_SECS_ON_BAT=2
-      DISK_IOSCHED="mq-deadline"
-      ENERGY_PERF_POLICY_ON_AC=performance
-      ENERGY_PERF_POLICY_ON_BAT=power
-      MAX_LOST_WORK_SECS_ON_AC=15
-      MAX_LOST_WORK_SECS_ON_BAT=15
-      NATACPI_ENABLE=1
-      NMI_WATCHDOG=0
-      PCIE_ASPM_ON_AC=performance
-      PCIE_ASPM_ON_BAT=powersave
-      RESTORE_DEVICE_STATE_ON_STARTUP=1
-      RUNTIME_PM_DRIVER_BLACKLIST="nvidia"
-      RUNTIME_PM_ON_AC=auto
-      RUNTIME_PM_ON_BAT=auto
-      SATA_LINKPWR_ON_AC="max_performance max_performance"
-      SATA_LINKPWR_ON_BAT="min_power"
-      SCHED_POWERSAVE_ON_AC=0
-      SCHED_POWERSAVE_ON_BAT=1
-      SOUND_POWER_SAVE_CONTROLLER=Y
-      SOUND_POWER_SAVE_ON_AC=0
-      SOUND_POWER_SAVE_ON_BAT=1
-      START_CHARGE_THRESH_BAT0=90
-      STOP_CHARGE_THRESH_BAT0=100
-      TLP_DEFAULT_MODE=AC
-      TLP_ENABLE=1
-      TLP_LOAD_MODULES=y
-      TLP_PERSISTENT_DEFAULT=0
-      TPACPI_ENABLE=1
-      TPSMAPI_ENABLE=1
-      USB_AUTOSUSPEND=1
-      USB_AUTOSUSPEND_DISABLE_ON_SHUTDOWN=1
-      USB_BLACKLIST_BTUSB=0
-      USB_BLACKLIST_PHONE=1
-      USB_BLACKLIST_PRINTER=0
-      USB_BLACKLIST_WWAN=0
-      USB_WHITELIST="1050:0407 056a:5193"
-      WIFI_PWR_ON_AC=on
-      WIFI_PWR_ON_BAT=on
-      WOL_DISABLE=Y
+      # Select I/O scheduler for the disk devices.
+      # Multi queue (blk-mq) schedulers:
+      #   mq-deadline(*), none, kyber, bfq
+      # Single queue schedulers:
+      #   deadline(*), cfq, bfq, noop
+      # (*) recommended.
+      # Separate values for multiple disks with spaces. Use the special value 'keep'
+      # to keep the kernel default scheduler for the particular disk.
+      # Notes:
+      # - Multi queue (blk-mq) may need kernel boot option 'scsi_mod.use_blk_mq=1'
+      #   and 'modprobe mq-deadline-iosched|kyber|bfq' on kernels < 5.0
+      # - Single queue schedulers are legacy now and were removed together with
+      #   the old block layer in kernel 5.0
+      # Default: keep
+      DISK_IOSCHED="mq-deadline bfq"
     '';
   };
 }
