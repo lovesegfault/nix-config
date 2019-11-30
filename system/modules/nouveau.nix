@@ -1,3 +1,1 @@
-{
-  services.xserver.videoDrivers = [ "modesetting" "nouveau" ];
-}
+{ services.xserver.videoDrivers = [ "modesetting" "nouveau" ]; }

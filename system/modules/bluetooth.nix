@@ -3,9 +3,6 @@
     enable = true;
     package = pkgs.bluezFull;
     powerOnBoot = false;
-    extraConfig = ''
-      [General]
-      Enable=Source,Sink,Media,Socket
-    '';
+    config = { General = { Enable = "Source,Sink,Media,Socket"; }; };
   };
 }
