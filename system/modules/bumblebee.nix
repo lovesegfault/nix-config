@@ -4,7 +4,7 @@
   hardware = {
     bumblebee = {
       enable = true;
-      connectDisplay = true;
+      connectDisplay = false;
       driver = "nvidia";
     };
     nvidia.modesetting.enable = false;

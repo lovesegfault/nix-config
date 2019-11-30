@@ -3,7 +3,7 @@
     ../modules/bluetooth.nix
     ../modules/fprint.nix
     ../modules/intel.nix
-    ../modules/no-nvidia.nix
+    ../modules/bumblebee.nix
     ../modules/laptop.nix
     ../modules/tlp.nix
     ../modules/thunderbolt.nix

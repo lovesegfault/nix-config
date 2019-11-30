@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_5_3;
 
   environment.systemPackages = with pkgs; [ powertop ];
 
