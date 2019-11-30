@@ -1,1 +1,1 @@
-{ config, pkgs, ... }: { imports = [ ./home/machines/wittgenstein.nix ]; }
+{ config, pkgs, ... }: { imports = [ ./home/machines/HOSTNAME.nix ]; }
