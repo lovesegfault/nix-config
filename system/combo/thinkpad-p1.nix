@@ -1,27 +1,35 @@
 { config, pkgs, ... }: {
   imports = [
     ../modules/bluetooth.nix
-    ../modules/fprint.nix
-    ../modules/intel.nix
     ../modules/bumblebee.nix
-    ../modules/laptop.nix
-    ../modules/tlp.nix
+    ../modules/fwupd.nix
+    ../modules/intel.nix
     ../modules/thunderbolt.nix
+    ../modules/tlp.nix
   ];
 
-  boot = {
-    extraModulePackages = with config.boot.kernelPackages; [
+  boot = rec {
+    extraModulePackages = with kernelPackages; [
       acpi_call
       tp_smapi
     ];
     kernelModules = [ "acpi_call" ];
+    kernelPackages = pkgs.linuxPackages_5_3;
   };
+
+  environment.systemPackages = with pkgs; [ powertop ];
+
+  hardware.enableRedistributableFirmware = true;
 
   i18n = {
     consoleFont = "ter-v28n";
     consoleKeyMap = "us";
     consolePackages = with pkgs; [ terminus_font ];
   };
+
+  nixpkgs.config.allowUnfree = true;
+
+  programs.light.enable = true;
 
   services = {
     fprintd.package = pkgs.fprintd-thinkpad;
@@ -34,4 +42,6 @@
 
     xserver.libinput.accelSpeed = "0.7";
   };
+
+  users.users.bemeurer.extraGroups = [ "camera" ];
 }
