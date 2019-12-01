@@ -1,4 +1,17 @@
 #! /usr/bin/env bash
+set -o pipefail -o noclobber -o nounset
+
+SYSTEM_SYNC=0
+HOME_SYNC=0
+
+NIXOS_BOOT=0
+NIXOS_BUILD=0
+NIXOS_SWITCH=1
+
+HOME_BUILD=0
+HOME_SWITCH=1
+
+UPGRADE=0
 
 function cprint() {
     if [ "$#" -lt 2 ]; then
@@ -106,25 +119,120 @@ function check_sudo() {
 }
 
 function rebuild_system() {
-    sudo nixos-rebuild switch --upgrade
+    local op=""
+    local arg=""
+    if [ $NIXOS_SWITCH = 1 ]; then
+        op="switch"
+    elif [ $NIXOS_BOOT = 1 ]; then
+        op="boot"
+    elif [ $NIXOS_BUILD = 1 ]; then
+        op="build"
+    else
+        error "Neither build,boot,nor switch passed to NixOS?"
+    fi
+    [ $UPGRADE == 1 ] && arg="--upgrade"
+    sudo nixos-rebuild "$op" $arg
 }
 
 function rebuild_home() {
-    nix-channel --update
-    home-manager switch
+    local op
+    if [ $HOME_SWITCH = 1 ]; then
+        op="switch"
+    elif [ $HOME_BUILD = 1 ]; then
+        op="build"
+    else
+        error "Neither build,nor switch passed to home-manager?"
+    fi
+    [ $UPGRADE == 1 ] && nix-channel --update
+    home-manager "$op"
+}
+
+function check_getopt() {
+    ! getopt --test > /dev/null
+    if [[ ${PIPESTATUS[0]} -ne 4 ]]; then
+        error '`getopt --test` failed in this environment.'
+    fi
+}
+
+function parse_opts() {
+    local options="sbtuyha"
+    local longopts="switch,build,boot,upgrade,system,home,all"
+    local parsed
+    ! parsed=$(getopt --options="$options" --longoptions="$longopts" --name "$0" -- "$@")
+    if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+        error "Wrong arguments passed"
+    fi
+    eval set -- "$parsed"
+    while true; do
+        case "$1" in
+            -s|--switch)
+                NIXOS_SWITCH=1
+                NIXOS_BOOT=0
+                NIXOS_BUILD=0
+                HOME_SWITCH=1
+                HOME_BUILD=0
+                shift
+                ;;
+            -b|--build)
+                NIXOS_SWITCH=0
+                NIXOS_BOOT=0
+                NIXOS_BUILD=1
+                HOME_SWITCH=0
+                HOME_BUILD=1
+                shift
+                ;;
+            -t|--boot)
+                NIXOS_SWITCH=0
+                NIXOS_BOOT=1
+                NIXOS_BUILD=0
+                HOME_SWITCH=1
+                HOME_BUILD=0
+                shift
+                ;;
+            -u|--upgrade)
+                UPGRADE=1
+                shift
+                ;;
+            -y|--system)
+                SYSTEM_SYNC=1
+                shift
+                ;;
+            -h|--home)
+                HOME_SYNC=1
+                shift
+                ;;
+            -a|--all)
+                SYSTEM_SYNC=1
+                HOME_SYNC=1
+                shift
+                ;;
+            --)
+                shift
+                break
+                ;;
+            *)
+                error "Invalid argument"
+                ;;
+        esac
+    done
 }
 
 function main() {
-    [ "$#" -eq 0 ] || error "This program takes no arguments."
     [ "$(id -u)" != 0 ] || error "Run this as a your user, not root."
-    check_sudo
-    sync_system
-    check_system
-    rebuild_system
-    ok "System OK"
-    check_home
-    rebuild_home
-    ok "Home OK"
+    check_getopt
+    parse_opts "$@"
+    if [ $SYSTEM_SYNC = 1 ]; then
+        check_sudo
+        sync_system
+        check_system
+        rebuild_system
+        ok "System OK"
+    fi
+    if [ $HOME_SYNC == 1 ]; then
+        check_home
+        rebuild_home
+        ok "Home OK"
+    fi
 }
 
 main "$@"
