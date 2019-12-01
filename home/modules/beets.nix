@@ -43,7 +43,6 @@
         "mbsync"
         "missing"
         "scrub"
-        "thumbnails"
       ];
 
       absubmit = {
