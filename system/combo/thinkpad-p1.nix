@@ -9,10 +9,7 @@
   ];
 
   boot = rec {
-    extraModulePackages = with kernelPackages; [
-      acpi_call
-      tp_smapi
-    ];
+    extraModulePackages = with kernelPackages; [ acpi_call tp_smapi ];
     kernelModules = [ "acpi_call" ];
     kernelPackages = pkgs.linuxPackages_5_3;
   };
