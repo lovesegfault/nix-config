@@ -14,7 +14,7 @@ in {
         set -o pipefail
         [ $# -eq 1 ] || exit 1
         original_path="$1"
-        path=$(mktemp -d)
+        path=$(mktemp -d -p /tmp)
         cp -r -v "$original_path" "$path"
         mus="$path/$original_path"
 
