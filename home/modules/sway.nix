@@ -120,6 +120,10 @@
           bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
           bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
           bindsym XF86Display exec swaylock -f
+          bindsym XF86AudioPlay exec playerctl play
+          bindsym XF86AudioPause exec playerctl pause
+          bindsym XF86AudioNext exec playerctl next
+          bindsym XF86AudioPrev exec playerctl previous
 
           # Drag floating windows by holding down $mod and left mouse button.
           # Resize them with right mouse button + $mod.

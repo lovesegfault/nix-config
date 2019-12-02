@@ -14,6 +14,7 @@
       grim
       light
       mako
+      playerctl
       redshift-wlr
       slurp
       swaybg
