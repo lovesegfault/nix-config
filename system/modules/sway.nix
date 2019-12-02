@@ -10,8 +10,8 @@
     enable = true;
     extraPackages = with pkgs; [
       alacritty
+      gebaar-libinput
       grim
-      libinput-gestures
       light
       mako
       redshift-wlr
@@ -37,8 +37,7 @@
     '';
   };
 
-  services.xserver.displayManager.extraSessionFilePackages = with pkgs;
-    [ sway ];
+  services.xserver.displayManager.extraSessionFilePackages = [ pkgs.sway ];
 
   users.users.bemeurer.extraGroups = [ "input" "video" ];
 }

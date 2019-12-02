@@ -1,11 +1,18 @@
 { pkgs, ... }: {
   imports = [ ../pkgs/passmenu.nix ../pkgs/prtsc.nix ../pkgs/swaymenu.nix ];
 
-  xdg.configFile.libinput-gestures = {
-    target = "libinput-gestures.conf";
+  xdg.configFile.gebaar = {
+    target = "gebaar/gebaard.toml";
     text = ''
-      gesture swipe left 3 swaymsg "workspace next"
-      gesture swipe right 3 swaymsg "workspace prev"
+      [commands.swipe.three]
+      left_up = ""
+      right_up = ""
+      up = ""
+      left_down = ""
+      right_down = ""
+      down = ""
+      left = "swaymsg \"workspace next\""
+      right = "swaymsg \"workspace prev\""
     '';
   };
 
@@ -261,7 +268,7 @@
       }
 
       exec "dbus-update-activation-environment --systemd DISPLAY"
-      exec "libinput-gestures"
+      exec "gebaard -b"
       exec "mako"
       exec "pactl set-sink-mute @DEFAULT_SINK@ true"
       exec "pactl set-source-mute @DEFAULT_SOURCE@ true"
