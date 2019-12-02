@@ -9,6 +9,5 @@
 
   networking.hostName = "foucault";
 
-  # time.timeZone = "America/Los_Angeles";
-  time.timeZone = "Pacific/Honolulu";
+  time.timeZone = "America/Los_Angeles";
 }
