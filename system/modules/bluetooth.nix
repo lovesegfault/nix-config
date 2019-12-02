@@ -3,7 +3,14 @@
     enable = true;
     package = pkgs.bluezFull;
     powerOnBoot = false;
-    config = { General = { Enable = "Source,Sink,Media,Socket"; }; };
+    config = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Disable="Headset";
+        Autoconnect = true;
+        MultiProfile = "multiple";
+      };
+    };
   };
 
   hardware.pulseaudio = {
