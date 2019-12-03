@@ -27,6 +27,6 @@
         label = "%time%  %date%";
       };
     };
-    script = "polybar bar &";
+    script = "polybar top &";
   };
 }
