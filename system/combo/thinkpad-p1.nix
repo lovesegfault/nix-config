@@ -42,13 +42,9 @@
         accelSpeed = "0.7";
       };
       windowManager.i3.extraSessionCommands = ''
-        export GDK_SCALE = "2";
-        export GDK_DPI_SCALE = "0.5";
-        export QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-
-        xrdb -merge ~/.Xresources
-
-        xrandr --output eDP1 --scale 0.5x0.5 --auto
+        export GDK_SCALE="2"
+        export GDK_DPI_SCALE="0.5"
+        export QT_AUTO_SCREEN_SCALE_FACTOR="1"
       '';
     };
   };

@@ -20,6 +20,8 @@
     windowManager.i3 = {
       enable = true;
       config = rec {
+        bars = [];
+
         floating = {
           border = 0;
           criteria = [ { title = "swaymenu"; } { title = "passmenu"; } ];
