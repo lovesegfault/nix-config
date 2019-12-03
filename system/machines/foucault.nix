@@ -2,6 +2,7 @@
   imports = [
     ../combo/core.nix
     ../combo/dev.nix
+    ../combo/games.nix
     ../combo/graphical.nix
     ../combo/wayland.nix
     ../combo/x.nix
