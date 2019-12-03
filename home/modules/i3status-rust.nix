@@ -15,6 +15,7 @@
 
       [[block]]
       block = "net"
+      device = "wlp0s20f3"
       ssid = true
       ip = true
       speed_up = false
