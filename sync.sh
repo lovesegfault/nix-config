@@ -95,6 +95,8 @@ function check_home() {
         mkdir -p "$home_manager_path"
         ln -s "$user_src_path/home" "$home_manager_path/home" ||
             error "Failed to symlink $user_src_path/home to $home_manager_path/home"
+        ln -s "$user_src_path/share" "$home_manager_path/share" ||
+            error "Failed to symlink $user_src_path/share to $home_manager_path/share"
     fi
 
     if ! [ -f "$home_manager_path/config.nix" ]; then
@@ -109,6 +111,10 @@ function check_home() {
 
     if ! [ -L "$home_manager_path/home" ]; then
         warn "$home_manager_path/home is not a symlink while it should be"
+    fi
+
+    if ! [ -L "$share_manager_path/share" ]; then
+        warn "$share_manager_path/share is not a symlink while it should be"
     fi
 }
 
