@@ -112,9 +112,12 @@
 
         interval = 5;
         thermal-zone = 1;
+
+        base-temperature = 40;
+        warn-temperature = 80;
         units = true;
 
-        format = "<label>";
+        format = "<ramp><label>";
         format-background = colors.background-alt;
         format-padding = 1;
 
@@ -122,13 +125,17 @@
         label-background = colors.background-alt;
         label-padding = 1;
 
-        format-warn = "<label-warn>";
+        format-warn = "<ramp><label-warn>";
         format-warn-background = colors.alert;
         format-warn-padding = 1;
 
         label-warn = label;
         label-warn-background = colors.alert;
         label-warn-padding = 1;
+
+        ramp-0 = "";
+        ramp-1 = "";
+        ramp-2 = "";
       };
     };
 
