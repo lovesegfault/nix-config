@@ -113,8 +113,8 @@ function check_home() {
         warn "$home_manager_path/home is not a symlink while it should be"
     fi
 
-    if ! [ -L "$share_manager_path/share" ]; then
-        warn "$share_manager_path/share is not a symlink while it should be"
+    if ! [ -L "$home_manager_path/share" ]; then
+        warn "$home_manager_path/share is not a symlink while it should be"
     fi
 }
 
