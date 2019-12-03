@@ -31,7 +31,6 @@
       lightline-ale
       lightline-vim
       meson
-      # rainbow
       rust-vim
       vim-flatbuffers
       vim-indent-guides
