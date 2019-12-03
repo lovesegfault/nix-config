@@ -15,12 +15,11 @@
       extraPackages = with pkgs; [
         alacritty
         scrot
-        libinput-gestures
         light
         dunst
         feh
         i3lock
-        i3status-rust
+        polybar
         xclip
         xsel
       ];
