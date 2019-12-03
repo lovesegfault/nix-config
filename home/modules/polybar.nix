@@ -10,21 +10,71 @@
       mpdSupport = true;
       githubSupport = true;
     };
-    config = {
-      "bar/top" = {
+    config = rec {
+      "colors" = {
+        background = "#00122A";
+        background-alt = "#17374A";
+        foreground = "#F0BC8D";
+        foreground-alt = "#F0BC8D";
+        alert = "#A43C0F";
+      };
+
+      "bar/top" = rec {
         monitor = "\${env:MONITOR:eDP-1}";
         width = "100%";
-        height = "3%";
+        height = 35;
         radius = 0;
-        modules-center = "date";
+
+        background = colors.background;
+        foreground = colors.foreground;
+
+        font-size = "10";
+
+        font-0 = "Hack:style=Regular:size=${font-size};5";
+        font-1 = "Noto Color Emoji:style=Regular:scale=5;2";
+        font-2 = "Font Awesome 5 Free:style=Regular:size=${font-size};5";
+        font-3 = "Font Awesome 5 Free:style=Solid:size=${font-size};5";
+        font-4 = "Font Awesome 5 Brands:style=Regular:size=${font-size};5";
+
+        modules-left = [ "i3" ];
+        modules-center = [ "date" ];
+
+        tray-position = "right";
+        tray-maxsize = 512;
+
+        dpi-x = 200;
+        dpi-y = 200;
+
+        scroll-up = "i3-msg workspace next_on_output";
+        scroll-down = "i3-msg workspace prev_on_output";
       };
 
       "module/date" = {
         type = "internal/date";
-        internal = 5;
-        date = "%d.%m.%y";
-        time = "%H:%M";
-        label = "%time%  %date%";
+        interval = 1;
+        date = "%F %Z";
+        time = "%T";
+        label = "%time% %date%";
+      };
+
+      "module/i3" = {
+        type = "internal/i3";
+        strip-wsnumbers = true;
+        wrapping-scroll = false;
+
+        label-focused = "%name%:";
+        label-focused-foreground = colors.foreground-alt;
+        label-focused-background = colors.background-alt;
+        label-focused-padding = 1;
+
+        label-unfocused = "%name%:";
+        label-unfocused-padding = 1;
+
+        label-visible = "%name%:";
+        label-visible-padding = 1;
+
+        label-urgent ="%name%:";
+        label-urgent-padding = 1;
       };
     };
     script = "polybar top &";
