@@ -19,14 +19,39 @@
   xsession = rec {
     windowManager.i3 = {
       enable = true;
+      extraConfig = ''
+        for_window [title="swaymenu"] floating enable, border pixel 5, sticky enable
+        for_window [title="passmenu"] floating enable, border pixel 5, sticky enable
+      '';
       config = rec {
         bars = [];
 
-        floating = {
-          border = 0;
-          criteria = [ { title = "swaymenu"; } { title = "passmenu"; } ];
-          modifier = modifier;
+        colors = {
+          background = "#00122A";
+          focused = {
+            background = "#30535F";
+            border = "#30535F";
+            childBorder = "#30535F";
+            indicator = "#30535F";
+            text = "#F0BC8D";
+          };
+          unfocused = {
+            background = "#00122A";
+            border = "#00122A";
+            childBorder = "#00122A";
+            indicator = "#00122A";
+            text = "#F0BC8D";
+          };
+          urgent = {
+            background = "#A43C0F";
+            border = "#A43C0F";
+            childBorder = "#A43C0F";
+            indicator = "#A43C0F";
+            text = "#F0BC8D";
+          };
         };
+
+        floating.modifier = modifier;
 
         focus = {
           followMouse = false;
