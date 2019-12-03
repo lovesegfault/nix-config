@@ -1,6 +1,6 @@
 {
   xresources.properties = {
-    "Xft.autohint" = 1;
+    "Xft.autohint" = 0;
     "Xft.lcdfilter" = "lcddefault";
     "Xft.hintstyle" = "hintfull";
     "Xft.hinting" = 1;
