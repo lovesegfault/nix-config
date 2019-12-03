@@ -19,7 +19,9 @@ in {
             area="$(${slurp})"
             ${grim} -g "$area" - | ${wl-copy}
         elif [ "$(pgrep -x i3)" ]; then
-            ${scrot} -s "/tmp/screenshot-$(date +%F_%T).png" -e "${xclip} -selection c -t image/png < \$f"
+            ${scrot} \
+                -s "/tmp/screenshot-$(date +%F_%T).png" \
+                -e "${xclip} -selection c -t image/png < \$f"
         else
             ${notify-send} "No tool set for WM"
         fi
