@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }: {
-  imports = [ ../pkgs/gebaar.nix ../pkgs/passmenu.nix ../pkgs/prtsc.nix ../pkgs/swaymenu.nix ];
+  imports = [ ../pkgs/passmenu.nix ../pkgs/prtsc.nix ../pkgs/swaymenu.nix ];
 
   xdg.configFile.gebaar = {
     target = "gebaar/gebaard.toml";
@@ -42,16 +42,12 @@
         };
 
         keybindings = let
-          dunst = "${pkgs.dunst}/bin/dunst";
-          feh = "${pkgs.feh}/bin/feh";
-          gebaard = "${pkgs.gebaar}/bin/gebaard";
           light = "${pkgs.light}/bin/light";
           lock = "i3lock -i ~/pictures/walls/clouds.png -e -f";
           menu = "${term} -d 80 20 -t swaymenu -e ${swaymenu}";
           passmenu = "${pkgs.passmenu}/bin/passmenu";
           playerctl = "${pkgs.playerctl}/bin/playerctl";
           prtsc = "${pkgs.prtsc}/bin/prtsc";
-          redshift = "${pkgs.redshift}/bin/redshift";
           swaymenu = "${pkgs.swaymenu}/bin/swaymenu";
           term = "${pkgs.alacritty}/bin/alacritty";
         in lib.mkOptionDefault {
@@ -100,14 +96,18 @@
 
         modifier = "Mod4";
 
-        startup = [
+        startup = let
+          dunst = "${pkgs.dunst}/bin/dunst";
+          feh = "${pkgs.feh}/bin/feh";
+          redshift = "${pkgs.redshift}/bin/redshift";
+        in [
           { command = "dbus-update-activation-environment --systemd DISPLAY"; }
-          { command = "${dunst}"; }
+          { command = dunst; }
           { command = "${feh} --bg-fill ~/pictures/walls/clouds.png"; }
-          { command = "${gebaard}"; }
+          { command = "gebaard"; }
           { command = "pactl set-sink-mute @DEFAULT_SINK@ true"; }
           { command = "pactl set-source-mute @DEFAULT_SOURCE@ true"; }
-          { command = "${redshift}"; }
+          { command = redshift; }
           { command = "systemctl --user start gnome-keyring"; }
         ];
 

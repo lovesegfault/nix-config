@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ../pkgs/gebaar.nix ../pkgs/passmenu.nix ../pkgs/prtsc.nix ../pkgs/swaymenu.nix ];
+  imports = [ ../pkgs/passmenu.nix ../pkgs/prtsc.nix ../pkgs/swaymenu.nix ];
 
   xdg.configFile.gebaar = {
     target = "gebaar/gebaard.toml";
@@ -19,7 +19,6 @@
   xdg.configFile.sway = {
     target = "sway/config";
     text = let
-      gebaard = "${pkgs.gebaar}/bin/gebaard";
       passmenu = "${pkgs.passmenu}/bin/passmenu";
       prtsc = "${pkgs.prtsc}/bin/prtsc";
       swaymenu = "${pkgs.swaymenu}/bin/swaymenu";
@@ -273,7 +272,7 @@
       }
 
       exec "dbus-update-activation-environment --systemd DISPLAY"
-      exec "${gebaard}"
+      exec "gebaard"
       exec "mako"
       exec "pactl set-sink-mute @DEFAULT_SINK@ true"
       exec "pactl set-source-mute @DEFAULT_SOURCE@ true"
