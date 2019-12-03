@@ -36,9 +36,17 @@
         font-3 = "Font Awesome 5 Free:style=Solid:size=${font-size};5";
         font-4 = "Font Awesome 5 Brands:style=Regular:size=${font-size};5";
 
+        padding = 1;
+        # https://en.wikipedia.org/wiki/Thin_space
+        separator = " ";
+        module-margin = 0;
+
         modules-left = [ "i3" ];
         modules-center = [ "date" ];
+        modules-right = [ "cpu" "memory" "temperature" ];
 
+
+        tray-padding = 1;
         tray-position = "right";
         tray-maxsize = 512;
 
@@ -47,6 +55,19 @@
 
         scroll-up = "i3-msg workspace next_on_output";
         scroll-down = "i3-msg workspace prev_on_output";
+      };
+
+      "module/backlight" = {
+        type = "internal/backlight";
+        card = "intel_backlight";
+      };
+
+      "module/cpu" = {
+        type = "internal/cpu";
+        interval = 5;
+        label = " %percentage%%";
+        label-background = colors.background-alt;
+        label-padding = 1;
       };
 
       "module/date" = {
@@ -62,21 +83,55 @@
         strip-wsnumbers = true;
         wrapping-scroll = false;
 
-        label-focused = "%name%:";
+        label-focused = "%name%";
         label-focused-foreground = colors.foreground-alt;
         label-focused-background = colors.background-alt;
         label-focused-padding = 1;
 
-        label-unfocused = "%name%:";
+        label-unfocused = "%name%";
         label-unfocused-padding = 1;
 
-        label-visible = "%name%:";
+        label-visible = "%name%";
         label-visible-padding = 1;
 
-        label-urgent ="%name%:";
+        label-urgent ="%name%";
+        label-urgent-background = colors.alert;
         label-urgent-padding = 1;
       };
+
+      "module/memory" = {
+        type = "internal/memory";
+        interval = 5;
+        label = " %percentage_used%%";
+        label-background = colors.background-alt;
+        label-padding = 1;
+      };
+
+      "module/temperature" = rec {
+        type = "internal/temperature";
+
+        interval = 5;
+        thermal-zone = 1;
+        units = true;
+
+        format = "<label>";
+        format-background = colors.background-alt;
+        format-padding = 1;
+
+        label = "%temperature-c%";
+        label-background = colors.background-alt;
+        label-padding = 1;
+
+        format-warn = "<label-warn>";
+        format-warn-background = colors.alert;
+        format-warn-padding = 1;
+
+        label-warn = label;
+        label-warn-background = colors.alert;
+        label-warn-padding = 1;
+      };
     };
+
     script = "polybar top &";
   };
 }
