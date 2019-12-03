@@ -8,6 +8,6 @@
     ../combo/i3.nix
     ../combo/xps-7590.nix
 
-    ../secrets/secrets.nix
+    ../../share/secrets/secrets.nix
   ];
 }
