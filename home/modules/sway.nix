@@ -272,7 +272,7 @@
       }
 
       exec "dbus-update-activation-environment --systemd DISPLAY"
-      exec "gebaard -b"
+      exec "gebaard"
       exec "mako"
       exec "pactl set-sink-mute @DEFAULT_SINK@ true"
       exec "pactl set-source-mute @DEFAULT_SOURCE@ true"
