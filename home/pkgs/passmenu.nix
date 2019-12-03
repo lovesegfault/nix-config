@@ -15,7 +15,7 @@ in {
         passmenu_path="$(readlink -f "$0")"
         passmenu_fifo="/tmp/passmenu_fifo"
         passmenu_lock="/tmp/passmenu_lock"
-        passmenu_icon="${config.home.configDirectory}/gopass/gopass-logo-small.png"
+        passmenu_icon="${config.home.homeDirectory}/.config/gopass/gopass-logo-small.png"
 
         function passmenu_lock() {
             if [[ -f "$passmenu_lock" ]]; then
