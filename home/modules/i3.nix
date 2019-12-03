@@ -111,6 +111,7 @@
           { command = "pactl set-source-mute @DEFAULT_SOURCE@ true"; }
           { command = redshift; }
           { command = "systemctl --user start gnome-keyring"; }
+          { command = "systemctl --user restart polybar"; }
         ];
 
         window.border = 0;
