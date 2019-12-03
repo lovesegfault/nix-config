@@ -31,10 +31,10 @@
         font-size = "10";
 
         font-0 = "Hack:style=Regular:size=${font-size};5";
-        font-1 = "Noto Color Emoji:style=Regular:scale=5;2";
-        font-2 = "Font Awesome 5 Free:style=Regular:size=${font-size};5";
-        font-3 = "Font Awesome 5 Free:style=Solid:size=${font-size};5";
-        font-4 = "Font Awesome 5 Brands:style=Regular:size=${font-size};5";
+        font-1 = "Font Awesome 5 Free:style=Regular:size=${font-size};5";
+        font-2 = "Font Awesome 5 Free:style=Solid:size=${font-size};5";
+        font-3 = "Font Awesome 5 Brands:style=Regular:size=${font-size};5";
+        font-4 = "Noto Color Emoji:style=Regular:scale=10;4";
 
         padding = 1;
         # https://en.wikipedia.org/wiki/Thin_space
@@ -43,7 +43,7 @@
 
         modules-left = [ "i3" ];
         modules-center = [ "date" ];
-        modules-right = [ "cpu" "memory" "temperature" ];
+        modules-right = [ "cpu" "memory" "temperature" "cpu" "backlight" ];
 
 
         tray-padding = 1;
@@ -60,6 +60,12 @@
       "module/backlight" = {
         type = "internal/backlight";
         card = "intel_backlight";
+
+        format = " <label>";
+        format-padding = 1;
+        format-background = colors.background-alt;
+
+        label = "%percentage%%";
       };
 
       "module/cpu" = {
@@ -119,7 +125,6 @@
 
         format = "<ramp><label>";
         format-background = colors.background-alt;
-        format-padding = 1;
 
         label = "%temperature-c%";
         label-background = colors.background-alt;
@@ -127,12 +132,12 @@
 
         format-warn = "<ramp><label-warn>";
         format-warn-background = colors.alert;
-        format-warn-padding = 1;
 
         label-warn = label;
         label-warn-background = colors.alert;
         label-warn-padding = 1;
 
+        ramp-left-padding = 1;
         ramp-0 = "";
         ramp-1 = "";
         ramp-2 = "";
