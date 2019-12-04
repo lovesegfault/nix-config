@@ -3,7 +3,7 @@
     target = "swaylock/config";
     text = ''
       ignore-empty-password
-      image=~/pictures/walls/clouds.jpg
+      image=~/pictures/walls/wall.jpg
       indicator-caps-lock
       scaling=fill
       show-failed-attempts

@@ -74,7 +74,7 @@
 
         keybindings = let
           light = "${pkgs.light}/bin/light";
-          lock = "i3lock -i ~/pictures/walls/clouds.png -e -f";
+          lock = "i3lock -i ~/pictures/walls/wall.jpg -e -f";
           menu = "${term} -d 80 20 -t swaymenu -e ${swaymenu}";
           passmenu = "${pkgs.passmenu}/bin/passmenu";
           playerctl = "${pkgs.playerctl}/bin/playerctl";
@@ -137,7 +137,7 @@
         in [
           { command = "dbus-update-activation-environment --systemd DISPLAY"; }
           { command = dunst; }
-          { command = "${feh} --bg-fill ~/pictures/walls/clouds.png"; }
+          { command = "${feh} --bg-fill ~/pictures/walls/wall.jpg"; }
           { command = "gebaard"; }
           { command = "pactl set-sink-mute @DEFAULT_SINK@ true"; }
           { command = "pactl set-source-mute @DEFAULT_SOURCE@ true"; }

@@ -41,7 +41,7 @@
       for_window [title="passmenu"] floating enable, border pixel 5, sticky enable
 
       ### Output configuration
-      output * bg ~/pictures/walls/clouds.jpg fill
+      output * bg ~/pictures/walls/wall.jpg fill
       output eDP-1 resolution 3840x2160 position 0,0 scale 2 subpixel rgb
       # output eDP-1 resolution 1920x1080 position 0,0 scale 1 subpixel rgb
       output LVDS-1 resolution 1920x1080 position 0,0 scale 1 subpixel rgb
