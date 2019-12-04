@@ -9,4 +9,7 @@ in {
   environment.systemPackages = [ pkgs.qt5.qtwayland ];
 
   nixpkgs.overlays = [ waylandOverlay ];
+
+  services.xserver.displayManager.gdm.nvidiaWayland = true;
+  services.xserver.displayManager.gdm.wayland = true;
 }
