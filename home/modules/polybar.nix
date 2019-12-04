@@ -42,7 +42,15 @@
 
         modules-left = [ "i3" ];
         modules-center = [ "date" ];
-        modules-right = [ "pulseaudio" "network" "cpu" "memory" "temperature" "backlight" "battery"];
+        modules-right = [
+          "pulseaudio"
+          "network"
+          "cpu"
+          "memory"
+          "temperature"
+          "backlight"
+          "battery"
+        ];
 
         tray-padding = 1;
         tray-position = "right";
@@ -135,7 +143,7 @@
         label-visible = "%name%";
         label-visible-padding = 1;
 
-        label-urgent ="%name%";
+        label-urgent = "%name%";
         label-urgent-background = colors.alert;
         label-urgent-padding = 1;
       };

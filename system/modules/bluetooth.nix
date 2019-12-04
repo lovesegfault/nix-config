@@ -6,7 +6,7 @@
     config = {
       General = {
         Enable = "Source,Sink,Media,Socket";
-        Disable="Headset";
+        Disable = "Headset";
         Autoconnect = true;
         MultiProfile = "multiple";
       };

@@ -1,5 +1,9 @@
 { config, lib, pkgs, ... }: {
-  imports = [ ../../share/pkgs/passmenu.nix ../../share/pkgs/prtsc.nix ../../share/pkgs/swaymenu.nix ];
+  imports = [
+    ../../share/pkgs/passmenu.nix
+    ../../share/pkgs/prtsc.nix
+    ../../share/pkgs/swaymenu.nix
+  ];
 
   xdg.configFile.gebaar = {
     target = "gebaar/gebaard.toml";
@@ -24,7 +28,7 @@
         for_window [title="passmenu"] floating enable, border pixel 5, sticky enable
       '';
       config = rec {
-        bars = [];
+        bars = [ ];
 
         colors = {
           background = "#00122A";
@@ -84,10 +88,13 @@
           "--release Print" = "exec ${prtsc}";
           "XF86MonBrightnessUp" = "exec ${light} -A 1";
           "XF86MonBrightnessDown" = "exec ${light} -U 1";
-          "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +1%";
-          "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -1%";
+          "XF86AudioRaiseVolume" =
+            "exec pactl set-sink-volume @DEFAULT_SINK@ +1%";
+          "XF86AudioLowerVolume" =
+            "exec pactl set-sink-volume @DEFAULT_SINK@ -1%";
           "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
-          "XF86AudioMicMute" = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+          "XF86AudioMicMute" =
+            "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
           "XF86Display" = "exec ${lock}";
           "XF86AudioPlay" = "exec ${playerctl} play";
           "XF86AudioPause" = "exec ${playerctl} pause";
