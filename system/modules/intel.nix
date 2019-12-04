@@ -14,6 +14,4 @@
       ];
     };
   };
-
-  services.xserver.useGlamor = true;
 }
