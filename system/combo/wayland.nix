@@ -10,6 +10,9 @@ in {
 
   nixpkgs.overlays = [ waylandOverlay ];
 
-  services.xserver.displayManager.gdm.nvidiaWayland = true;
-  services.xserver.displayManager.gdm.wayland = true;
+  services.xserver = {
+    displayManager.gdm.wayland = true;
+    displayManager.gdm.nvidiaWayland = true;
+    videoDrivers = lib.mkForce [ "modesetting" ];
+  };
 }
