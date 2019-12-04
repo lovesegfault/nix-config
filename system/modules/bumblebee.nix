@@ -7,7 +7,7 @@
       connectDisplay = false;
       driver = "nvidia";
     };
-    nvidia.modesetting.enable = false;
+    nvidia.modesetting.enable = true;
   };
 
   nixpkgs.config.packageOverrides = pkgs: rec {
