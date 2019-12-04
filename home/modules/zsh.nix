@@ -122,8 +122,12 @@
       gch = "git checkout";
       gcl = "git clone";
       gco = "git commit";
+      gcom = "git commit --message";
+      gcoa = "git commit --amend";
       gdf = "git diff";
+      gdfs = "git diff --staged";
       gdt = "git difftool";
+      gdts = "git difftool --staged";
       gf = "git fetch --prune --all";
       gl = "git log --graph --abbrev-commit --decorate";
       gm = "git merge";
@@ -131,10 +135,12 @@
       gmc = "git merge --continue";
       gpl = "git pull --rebase";
       gps = "git push";
-      gr = "git rebase";
-      gra = "git rebase --abort";
-      grc = "git rebase --continue";
-      grsn = "git rebase --exec 'git commit --amend --no-edit -n -S'";
+      grb = "git rebase";
+      grba = "git rebase --abort";
+      grbc = "git rebase --continue";
+      grbsn = "git rebase --exec 'git commit --amend --no-edit -n -S'";
+      grs = "git restore";
+      grss = "git restore --staged";
       gs = "git status";
       # exa
       l = "exa --binary --header --long --classify --git";
