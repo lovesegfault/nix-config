@@ -4,7 +4,6 @@ let
   fzf = "${pkgs.fzf}/bin/fzf";
   gopass = "${pkgs.gopass}/bin/gopass";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
-  wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
 in {
   nixpkgs.overlays = [
     (self: super: {
@@ -55,8 +54,7 @@ in {
                 exit 1
             fi
 
-            ${gopass} --clip "$name"
-            ${gopass} show --password "$name" | ${wl-copy} -o
+            ${gopass} show --password "$name" | wl-copy -o
             ${notify-send} -i "$passmenu_icon" "Copied ''${name#*/} to clipboard."
             passmenu_unlock
         }
