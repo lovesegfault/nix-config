@@ -5,7 +5,7 @@
     ../combo/games.nix
     ../combo/graphical.nix
     ../combo/wayland.nix
-    ../combo/x.nix
+    # ../combo/x.nix
     ../combo/thinkpad-p1.nix
   ];
 
