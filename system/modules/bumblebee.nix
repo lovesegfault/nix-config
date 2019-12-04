@@ -1,11 +1,16 @@
 { config, pkgs, ... }: {
-  boot.extraModulePackages = with config.boot.kernelPackages; [ nvidia_x11 ];
+  boot = {
+    extraModulePackages = with config.boot.kernelPackages; [ bbswitch nvidia_x11 ];
+    kernelModules = [ "bbswitch" ];
+  };
 
   hardware = {
     bumblebee = {
       enable = true;
       connectDisplay = false;
       driver = "nvidia";
+      group = "video";
+      pmMethod = "bbswitch";
     };
     nvidia.modesetting.enable = true;
   };
@@ -24,5 +29,9 @@
     };
   };
 
-  services.xserver.videoDrivers = [ "intel" "nvidia" ];
+  services.xserver = {
+    libinput.enable = true;
+    modules = with pkgs.xorg; [ xf86inputlibinput xf86inputmouse ];
+    videoDrivers = [ "modesetting" "intel" "nvidia" ];
+  };
 }
