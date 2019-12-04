@@ -1,7 +1,10 @@
 {
   services.xserver = {
     enable = true;
-    autorun = false;
     displayManager.lightdm.enable = true;
+    displayManager.lightdm = {
+      greeters.gtk.cursorTheme.size = 64;
+      greeters.gtk.extraConfig = "xft-dpi=200";
+    };
   };
 }
