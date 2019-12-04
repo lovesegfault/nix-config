@@ -6,5 +6,7 @@
     pulseaudio.support32Bit = true;
   };
 
+  services.xserver.desktopManager.gnome3.enable = true;
+
   nixpkgs.config.allowUnfree = true;
 }
