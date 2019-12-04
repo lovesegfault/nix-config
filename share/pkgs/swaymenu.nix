@@ -2,7 +2,6 @@
 let
   alacritty = "${pkgs.alacritty}/bin/alacritty";
   fzf = "${pkgs.fzf}/bin/fzf";
-  swaymsg = "${pkgs.sway}/bin/swaymsg";
 in {
   nixpkgs.overlays = [
     (self: super: {
@@ -223,7 +222,7 @@ in {
         esac
 
         # exec setsid /bin/sh -c "$command"
-        exec ${swaymsg} -t command "exec $command"
+        exec swaymsg -t command "exec $command"
       '';
     })
   ];
