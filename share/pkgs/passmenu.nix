@@ -18,7 +18,7 @@ in {
 
         function passmenu_lock() {
             if [[ -f "$passmenu_lock" ]]; then
-                notify-send "✖️ Passmenu already running"
+                ${notify-send} "✖️ passmenu already running"
                 exit 1
             else
                 touch "$passmenu_lock"
@@ -44,18 +44,17 @@ in {
 
         function passmenu_backend() {
             passmenu_lock
-            export PASSMENU_BEHAVE_AS_WINDOW=1;
-            ${alacritty} -d 80 20 -t passmenu --class passmenu -e "$passmenu_path"
+            export PASSMENU_BEHAVE_AS_WINDOW=1
+            ${alacritty} -d 80 20 -t passmenu -e "$passmenu_path"
 
-            name="$(cat /tmp/passmenu_fifo)"
-            rm -f /tmp/passmenu_fifo
+            name="$(cat "$passmenu_fifo")"
+            rm -f "$passmenu_fifo"
             if [ "$name" == "" ]; then
                 passmenu_unlock
                 exit 1
             fi
 
             ${gopass} show --password "$name" | wl-copy -o
-            ${notify-send} -i "$passmenu_icon" "Copied ''${name#*/} to clipboard."
             passmenu_unlock
         }
 
