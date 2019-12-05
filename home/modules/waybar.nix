@@ -116,7 +116,7 @@ in {
       }
 
       window#waybar {
-          background-color: rgba(0, 18, 42, 1);
+          background-color: rgba(0, 18, 42, 0);
           border-bottom: 0px rgba(100, 114, 125, 1);
           color: #FFFFFF;
           transition-property: background-color;
