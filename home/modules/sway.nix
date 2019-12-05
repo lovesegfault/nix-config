@@ -102,6 +102,12 @@
           natural_scroll enabled
       }
 
+      input "1133:45085:MX_Ergo_Mouse" {
+          accel_profile adaptive
+          click_method button_areas
+          natural_scroll enabled
+      }
+
       ### Key bindings
       #
       # Basics:
