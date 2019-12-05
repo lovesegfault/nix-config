@@ -46,6 +46,16 @@
         };
       }
       {
+        name = "lxd-completion-zsh";
+        file = "_lxc";
+        src = pkgs.fetchFromGitHub {
+          owner = "endaaman";
+          repo = "lxd-completion-zsh";
+          rev = "87d20cb0c5d5261cdc469a2d16a679f577038204";
+          sha256 = "1s2l8w4hr8v0r26dqqflqgmqsl3yadq2gddlicpg9vkgwdhrf1lh";
+        };
+      }
+      {
         name = "history-search-multi-word";
         file = "history-search-multi-word.plugin.zsh";
         src = pkgs.fetchFromGitHub {
