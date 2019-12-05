@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   imports = [
+    ../../share/pkgs/emojimenu.nix
     ../../share/pkgs/passmenu.nix
     ../../share/pkgs/prtsc.nix
     ../../share/pkgs/swaymenu.nix
@@ -23,6 +24,7 @@
   xdg.configFile.sway = {
     target = "sway/config";
     text = let
+      emojimenu = "${pkgs.emojimenu}/bin/emojimenu";
       passmenu = "${pkgs.passmenu}/bin/passmenu";
       prtsc = "${pkgs.prtsc}/bin/prtsc";
       swaymenu = "${pkgs.swaymenu}/bin/swaymenu";
@@ -39,6 +41,7 @@
       set $right l
       for_window [title="swaymenu"] floating enable, border pixel 5, sticky enable
       for_window [title="passmenu"] floating enable, border pixel 5, sticky enable
+      for_window [title="emojimenu"] floating enable, border pixel 5, sticky enable
 
       ### Output configuration
       output * bg ~/pictures/walls/wall.jpg fill
@@ -121,6 +124,7 @@
           # start your launcher
           bindsym $mod+d exec ${menu}
           bindsym $mod+p exec ${passmenu}
+          bindsym $mod+m exec ${emojimenu}
 
           bindsym Print exec ${prtsc}
           bindsym XF86MonBrightnessUp exec light -A 1
@@ -207,7 +211,7 @@
       #
           font pango:Hack 8
           gaps inner 10
-          gaps outer 10
+          gaps outer 5
           smart_borders on
           default_border none
           default_floating_border normal
