@@ -1,15 +1,15 @@
 #! /usr/bin/env bash
 set -o pipefail -o noclobber -o nounset
 
+NIXOS_PATH="/etc/nixos"
+HOME_MANAGER_PATH="$HOME/.config/nixpkgs"
+SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
 SYSTEM_SYNC=0
 HOME_SYNC=0
 
 NIXOS_BOOT=0
-NIXOS_BUILD=0
 NIXOS_SWITCH=1
-
-HOME_BUILD=0
-HOME_SWITCH=1
 
 UPGRADE=0
 
@@ -56,113 +56,118 @@ function fix_perms() {
     local fix_dirs="find \"$path\" -type d -exec chmod 0755 {} \;"
     local fix_files="find \"$path\" -type f -exec chmod 0644 {} \;"
 
-    sudo runuser -l "$user" -c "${fix_dirs}"
-    sudo runuser -l "$user" -c "${fix_files}"
+    sudo runuser -l "$user" -c "$fix_dirs"
+    sudo runuser -l "$user" -c "$fix_files"
+}
+
+function sync_dir() {
+    [ "$#" -eq 3 ] || error "sync_dir USER SOURCE DEST"
+    local user="$1"
+    local src="$2"
+    local dest="$3"
+
+    # Fix paths (damn rsync)
+    if [ "${src:(-1)}" != "/" ]; then
+        # add trailing / to src
+        src="$src/"
+    fi
+    if [ "${dest:(-1)}" != "/" ]; then
+        # add trailing / to dest
+        dest="$dest/"
+    fi
+
+    # -i, --itemize-changes       output a change-summary for all updates
+    # -r, --recursive             recurse into directories
+    # -h, --human-readable        output numbers in a human-readable format
+    # -l, --links                 copy symlinks as symlinks
+    # -t, --times                 preserve modification times
+    local rsync_cmd="rsync -irhlt --delete \"$src\" \"$dest\""
+    sudo runuser -l "$user" -c "$rsync_cmd"
+    fix_perms "$user" "$dest"
+}
+
+function sync_module() {
+    [ "$#" -eq 3 ] || error "sync_module USER ROOT_PATH DIRS"
+    local user="$1"
+    local root_path="$2"
+    local dirs=("${!3}")
+
+    for dir in "${dirs[@]}"; do
+        sync_dir "$user" "$SCRIPT_PATH/$dir" "$root_path/$dir"
+    done
+}
+
+function check_module() {
+    [ "$#" -eq 3 ] || error "check_module ROOT_PATH FILES DIRS"
+    local root_path="$1"
+    local files=("${!2}")
+    local dirs=("${!3}")
+
+    for rel_path in "${files[@]}"; do
+        local abs_path="$root_path/$rel_path"
+        [ -f "${abs_path}" ] || warn "${abs_path} missing!"
+    done
+
+    for rel_path in "${dirs[@]}"; do
+        local abs_path="$root_path/$rel_path"
+        [ -d "${abs_path}" ] || warn "${abs_path} missing!"
+    done
 }
 
 function sync_system() {
-    sudo rsync -irhlt --delete ./system/combo/ /etc/nixos/combo/
-    sudo rsync -irhlt --delete ./system/modules/ /etc/nixos/modules/
-    sudo rsync -irhlt --delete ./system/machines/ /etc/nixos/machines/
-    fix_perms "root" /etc/nixos
+    [ "$#" -eq 0 ] || error "sync_system"
+    local files=("configuration.nix" "hardware-configuration.nix")
+    local dirs=("system" "share")
+    sync_module "root" "$NIXOS_PATH" dirs[@]
+    check_module "$NIXOS_PATH" files[@] dirs[@]
 }
 
-function check_system() {
-    [ -f /etc/nixos/configuration.nix ] ||
-        warn "No /etc/nixos/configuration.nix present!"
-    [ -f /etc/nixos/hardware-configuration.nix ] ||
-        warn "No/etc/nixos/hardware-configuration.nix present!"
-}
-
-function check_home() {
-    local script_dir
-    script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-    local repo_name
-    repo_name="$(basename "$script_dir")"
-    local home_manager_path="$HOME/.config/nixpkgs"
-    local user_src_path="$HOME/src/$repo_name"
-
-    if ! [ -d "$user_src_path" ]; then
-        warn "User has no ~/src/$repo_name, creating"
-        mkdir -p "$HOME/src"
-        rsync -irhlt "$script_dir/" "$user_src_path/" ||
-            error "Failed to copy $repo_name"
-        fix_perms "$USER" "$user_src_path"
-    fi
-
-    if ! [ -d "$home_manager_path" ]; then
-        warn "User $USER has no ~/.config/nixpkgs, creating"
-        mkdir -p "$home_manager_path"
-        ln -s "$user_src_path/home" "$home_manager_path/home" ||
-            error "Failed to symlink $user_src_path/home to $home_manager_path/home"
-        ln -s "$user_src_path/share" "$home_manager_path/share" ||
-            error "Failed to symlink $user_src_path/share to $home_manager_path/share"
-    fi
-
-    if ! [ -f "$home_manager_path/config.nix" ]; then
-        warn "User $USER has no $home_manager_path/config.nix, creating"
-        cp "$user_src_path/misc/config.nix" "$home_manager_path"
-    fi
-
-    if ! [ -f "$home_manager_path/home.nix" ]; then
-        warn "User $USER has no $home_manager_path/home.nix, you MUST create it."
-        warn "See $user_src_path/misc/home.nix"
-    fi
-
-    if ! [ -L "$home_manager_path/home" ]; then
-        warn "$home_manager_path/home is not a symlink while it should be"
-    fi
-
-    if ! [ -L "$home_manager_path/share" ]; then
-        warn "$home_manager_path/share is not a symlink while it should be"
-    fi
+function sync_home() {
+    [ "$#" -eq 0 ] || error "sync_home"
+    local files=("config.nix" "home.nix")
+    local dirs=("home" "share")
+    sync_module "$USER" "$HOME_MANAGER_PATH" dirs[@]
+    check_module "$HOME_MANAGER_PATH" files[@] dirs[@]
 }
 
 function check_sudo() {
+    [ "$#" -eq 0 ] || error "check_sudo"
     [ -x "$(command -v sudo)" ] || error "Sudo not available."
     [[ "$USER" == *"not allowed to run sudo"* ]] &&
         error "$USER does not have sudo privileges"
 }
 
 function rebuild_system() {
+    [ "$#" -eq 0 ] || error "rebuild_system"
     local op=""
-    local arg=""
     if [ $NIXOS_SWITCH = 1 ]; then
         op="switch"
     elif [ $NIXOS_BOOT = 1 ]; then
         op="boot"
-    elif [ $NIXOS_BUILD = 1 ]; then
-        op="build"
     else
-        error "Neither build,boot,nor switch passed to NixOS?"
+        error "rebuild_system ENOOP"
     fi
-    [ $UPGRADE == 1 ] && arg="--upgrade"
-    sudo nixos-rebuild "$op" $arg
+    [ $UPGRADE == 1 ] && sudo nix-channel --update
+    sudo nixos-rebuild "$op"
 }
 
 function rebuild_home() {
-    local op
-    if [ $HOME_SWITCH = 1 ]; then
-        op="switch"
-    elif [ $HOME_BUILD = 1 ]; then
-        op="build"
-    else
-        error "Neither build,nor switch passed to home-manager?"
-    fi
+    [ "$#" -eq 0 ] || error "rebuild_home"
     [ $UPGRADE == 1 ] && nix-channel --update
-    home-manager "$op"
+    home-manager switch
 }
 
 function check_getopt() {
-    ! getopt --test > /dev/null
+    [ "$#" -eq 0 ] || error "check_getopt"
+    ! getopt --test >/dev/null
     if [[ ${PIPESTATUS[0]} -ne 4 ]]; then
-        error '`getopt --test` failed in this environment.'
+        error '"getopt --test" failed in this environment.'
     fi
 }
 
 function parse_opts() {
-    local options="sbtuyha"
-    local longopts="switch,build,boot,upgrade,system,home,all"
+    local options="sbuSHA"
+    local longopts="switch,boot,upgrade,system,home,all"
     local parsed
     ! parsed=$(getopt --options="$options" --longoptions="$longopts" --name "$0" -- "$@")
     if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
@@ -171,54 +176,40 @@ function parse_opts() {
     eval set -- "$parsed"
     while true; do
         case "$1" in
-            -s|--switch)
-                NIXOS_SWITCH=1
-                NIXOS_BOOT=0
-                NIXOS_BUILD=0
-                HOME_SWITCH=1
-                HOME_BUILD=0
-                shift
-                ;;
-            -b|--build)
-                NIXOS_SWITCH=0
-                NIXOS_BOOT=0
-                NIXOS_BUILD=1
-                HOME_SWITCH=0
-                HOME_BUILD=1
-                shift
-                ;;
-            -t|--boot)
-                NIXOS_SWITCH=0
-                NIXOS_BOOT=1
-                NIXOS_BUILD=0
-                HOME_SWITCH=1
-                HOME_BUILD=0
-                shift
-                ;;
-            -u|--upgrade)
-                UPGRADE=1
-                shift
-                ;;
-            -y|--system)
-                SYSTEM_SYNC=1
-                shift
-                ;;
-            -h|--home)
-                HOME_SYNC=1
-                shift
-                ;;
-            -a|--all)
-                SYSTEM_SYNC=1
-                HOME_SYNC=1
-                shift
-                ;;
-            --)
-                shift
-                break
-                ;;
-            *)
-                error "Invalid argument"
-                ;;
+        -s | --switch)
+            NIXOS_SWITCH=1
+            NIXOS_BOOT=0
+            shift
+            ;;
+        -b | --boot)
+            NIXOS_SWITCH=0
+            NIXOS_BOOT=1
+            shift
+            ;;
+        -u | --upgrade)
+            UPGRADE=1
+            shift
+            ;;
+        -S | --system)
+            SYSTEM_SYNC=1
+            shift
+            ;;
+        -H | --home)
+            HOME_SYNC=1
+            shift
+            ;;
+        -A | --all)
+            SYSTEM_SYNC=1
+            HOME_SYNC=1
+            shift
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            error "Invalid argument"
+            ;;
         esac
     done
 }
@@ -230,12 +221,11 @@ function main() {
     if [ $SYSTEM_SYNC = 1 ]; then
         check_sudo
         sync_system
-        check_system
         rebuild_system
         ok "System OK"
     fi
     if [ $HOME_SYNC == 1 ]; then
-        check_home
+        sync_home
         rebuild_home
         ok "Home OK"
     fi
