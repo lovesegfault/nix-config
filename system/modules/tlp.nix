@@ -10,7 +10,7 @@
       CPU_MIN_PERF_ON_AC=0
       CPU_MAX_PERF_ON_AC=100
       CPU_MIN_PERF_ON_BAT=0
-      CPU_MAX_PERF_ON_BAT=60
+      CPU_MAX_PERF_ON_BAT=33
 
       # Select I/O scheduler for the disk devices.
       # Multi queue (blk-mq) schedulers:
