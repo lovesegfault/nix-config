@@ -13,6 +13,8 @@ NIXOS_SWITCH=1
 
 UPGRADE=0
 
+DRY_RUN=0
+
 function cprint() {
     if [ "$#" -lt 2 ]; then
         printf "Broken usage of cprint\n"
@@ -46,6 +48,12 @@ function ok() {
     local green
     green="$(tput setaf 2)"
     cprint "$green" "$@"
+}
+
+function debug() {
+    local blue
+    blue="$(tput setaf 4)"
+    cprint "$blue" "$@"
 }
 
 function fix_perms() {
@@ -82,8 +90,8 @@ function sync_dir() {
     # -l, --links                 copy symlinks as symlinks
     # -t, --times                 preserve modification times
     local rsync_cmd="rsync -irhlt --delete \"$src\" \"$dest\""
-    sudo runuser -l "$user" -c "$rsync_cmd"
-    fix_perms "$user" "$dest"
+    [ $DRY_RUN == 0 ] && sudo runuser -l "$user" -c "$rsync_cmd"
+    [ $DRY_RUN == 0 ] && fix_perms "$user" "$dest"
 }
 
 function sync_module() {
@@ -147,14 +155,14 @@ function rebuild_system() {
     else
         error "rebuild_system ENOOP"
     fi
-    [ $UPGRADE == 1 ] && sudo nix-channel --update
-    sudo nixos-rebuild "$op"
+    [ $DRY_RUN == 0 ] && [ $UPGRADE == 1 ] && sudo nix-channel --update
+    [ $DRY_RUN == 0 ] && sudo nixos-rebuild "$op"
 }
 
 function rebuild_home() {
     [ "$#" -eq 0 ] || error "rebuild_home"
-    [ $UPGRADE == 1 ] && nix-channel --update
-    home-manager switch
+    [ $DRY_RUN == 0 ] && [ $UPGRADE == 1 ] && nix-channel --update
+    [ $DRY_RUN == 0 ] && home-manager switch
 }
 
 function check_getopt() {
@@ -166,8 +174,8 @@ function check_getopt() {
 }
 
 function parse_opts() {
-    local options="sbuSHA"
-    local longopts="switch,boot,upgrade,system,home,all"
+    local options="sbuSHAd"
+    local longopts="switch,boot,upgrade,system,home,all,dry-run"
     local parsed
     ! parsed=$(getopt --options="$options" --longoptions="$longopts" --name "$0" -- "$@")
     if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
@@ -201,6 +209,10 @@ function parse_opts() {
         -A | --all)
             SYSTEM_SYNC=1
             HOME_SYNC=1
+            shift
+            ;;
+        -d | --dry-run)
+            DRY_RUN=1
             shift
             ;;
         --)
