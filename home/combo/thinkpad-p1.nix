@@ -1,1 +1,1 @@
-{ xresources.properties = { "Xft.dpi" = 200; }; }
+{ xresources.properties = { "Xft.dpi" = 96; }; }
