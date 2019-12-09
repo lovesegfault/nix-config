@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   imports = [
+    ../modules/aarch64-build-box.nix
     ../modules/documentation.nix
     ../modules/lxd.nix
     ../modules/qemu.nix
