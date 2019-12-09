@@ -154,6 +154,7 @@
       #
       # Moving around:
       #
+          focus_follows_mouse no
           # Move your focus around
           bindsym $mod+$left focus left
           bindsym $mod+$down focus down
