@@ -11,7 +11,7 @@
   home.packages = with pkgs; [
     gimp
     gnome3.evince
-    gnome3.evolution
+    # gnome3.evolution
     gnome3.seahorse
     gopass
     libnotify
@@ -20,6 +20,7 @@
     slack
     spotify
     sublime3
+    thunderbird
     vscode
     zoom-us
   ];

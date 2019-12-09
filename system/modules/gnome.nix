@@ -10,7 +10,7 @@
     geoclue2.enable = true;
     gvfs.enable = true;
     gnome3 = {
-      evolution-data-server.enable = true;
+      # evolution-data-server.enable = true;
       gnome-keyring.enable = true;
       gnome-settings-daemon.enable = true;
       gnome-online-accounts.enable = true;
