@@ -9,9 +9,9 @@
   ];
 
   home.packages = with pkgs; [
+    discord
     gimp
     gnome3.evince
-    # gnome3.evolution
     gnome3.seahorse
     gopass
     libnotify
