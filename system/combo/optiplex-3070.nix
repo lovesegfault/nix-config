@@ -5,7 +5,10 @@
     ../modules/intel.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [ "pci=noaer" ];
+  };
 
   hardware.enableRedistributableFirmware = true;
 
