@@ -3,6 +3,7 @@
     ../modules/bluetooth.nix
     ../modules/fwupd.nix
     ../modules/intel.nix
+    ../modules/openssh.nix
   ];
 
   boot = {
