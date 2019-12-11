@@ -4,6 +4,6 @@
       defaultFonts.monospace = [ "Hack" ];
       penultimate.enable = true;
     };
-    fonts = with pkgs; [ hack-font font-awesome ];
+    fonts = with pkgs; [ hack-font font-awesome noto-fonts-cjk ];
   };
 }
