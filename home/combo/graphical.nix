@@ -18,6 +18,7 @@
     pavucontrol
     shotwell
     slack
+    speedcrunch
     spotify
     sublime3
     thunderbird
