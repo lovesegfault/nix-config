@@ -24,6 +24,7 @@
   xdg.configFile.sway = {
     target = "sway/config";
     text = let
+      polkit-gnome = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
       emojimenu = "${pkgs.emojimenu}/bin/emojimenu";
       passmenu = "${pkgs.passmenu}/bin/passmenu";
       prtsc = "${pkgs.prtsc}/bin/prtsc";
@@ -286,6 +287,7 @@
           swaybar_command waybar
       }
 
+      exec "${polkit-gnome}"
       exec "dbus-update-activation-environment --systemd DISPLAY"
       exec "gebaard"
       exec "mako"
