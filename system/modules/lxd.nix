@@ -25,7 +25,12 @@
   users.users.bemeurer.extraGroups = [ "lxd" ];
 
   virtualisation = {
-    lxc.enable = true;
+    lxc = {
+      enable = true;
+      systemConfig = ''
+          lxc.cgroup.devices.allow = c 189:* rwm
+      '';
+    };
     lxd.enable = true;
   };
 }
