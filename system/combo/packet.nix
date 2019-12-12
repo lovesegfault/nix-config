@@ -1,4 +1,3 @@
-
 { config, pkgs, ... }: {
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -13,5 +12,5 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  services. fstrim.enable = true;
+  services.fstrim.enable = true;
 }

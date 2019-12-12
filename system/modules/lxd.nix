@@ -28,7 +28,7 @@
     lxc = {
       enable = true;
       systemConfig = ''
-          lxc.cgroup.devices.allow = c 189:* rwm
+        lxc.cgroup.devices.allow = c 189:* rwm
       '';
     };
     lxd.enable = true;

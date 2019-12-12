@@ -1,6 +1,9 @@
 { config, pkgs, ... }: {
   boot = {
-    extraModulePackages = with config.boot.kernelPackages; [ bbswitch nvidia_x11 ];
+    extraModulePackages = with config.boot.kernelPackages; [
+      bbswitch
+      nvidia_x11
+    ];
     kernelModules = [ "bbswitch" ];
   };
 

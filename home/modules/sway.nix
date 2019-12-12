@@ -24,7 +24,8 @@
   xdg.configFile.sway = {
     target = "sway/config";
     text = let
-      polkit-gnome = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      polkit-gnome =
+        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
       emojimenu = "${pkgs.emojimenu}/bin/emojimenu";
       passmenu = "${pkgs.passmenu}/bin/passmenu";
       prtsc = "${pkgs.prtsc}/bin/prtsc";

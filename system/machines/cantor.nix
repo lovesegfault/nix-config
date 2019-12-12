@@ -1,8 +1,5 @@
 { config, pkgs, ... }: {
-  imports = [
-    ../combo/core.nix
-    ../combo/packet.nix
-  ];
+  imports = [ ../combo/core.nix ../combo/packet.nix ];
 
   networking.hostName = "cantor";
 
