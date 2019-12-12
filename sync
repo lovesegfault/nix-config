@@ -228,7 +228,6 @@ function parse_opts() {
 }
 
 function main() {
-    [ "$(id -u)" != 0 ] || error "Run this as a your user, not root."
     check_getopt
     parse_opts "$@"
     if [ $SYSTEM_SYNC = 1 ]; then
@@ -238,6 +237,7 @@ function main() {
         ok "System OK"
     fi
     if [ $HOME_SYNC == 1 ]; then
+        [ "$(id -u)" != 0 ] || error "Run this as a your user, not root."
         sync_home
         rebuild_home
         ok "Home OK"
