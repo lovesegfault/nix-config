@@ -27,6 +27,6 @@
     };
 
     xautolock.locker =
-      "${pkgs.i3lock}/bin/i3lock -i ~/pictures/walls/wall.jpg -e -f";
+      "${pkgs.i3lock}/bin/i3lock -i ~/.wall -e -f";
   };
 }
