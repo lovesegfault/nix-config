@@ -9,6 +9,8 @@
 
   networking.hostName = "comte";
 
+  nix.trustedUsers = [ "exclusivor" ];
+
   users.users.exclusivor = {
     createHome = true;
     isNormalUser = true;
