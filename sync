@@ -67,7 +67,6 @@ function fix_perms() {
         ${fix_dirs[*]}
         ${fix_files[*]}
     else
-        warn "needs sudo"
         sudo runuser -l "$user" -c "$(eval echo ${fix_dirs[@]})"
         sudo runuser -l "$user" -c "$(eval echo ${fix_files[@]})"
     fi
@@ -94,8 +93,14 @@ function sync_dir() {
     # -h, --human-readable        output numbers in a human-readable format
     # -l, --links                 copy symlinks as symlinks
     # -t, --times                 preserve modification times
-    local rsync_cmd="rsync -irhlt --delete \"$src\" \"$dest\""
-    [ $DRY_RUN == 0 ] && sudo runuser -l "$user" -c "$rsync_cmd"
+    local rsync_cmd=("rsync" "-irhlt" "--delete" "\"$src\"" "\"$dest\"")
+
+    if [ $USER == $user ] && [ $DRY_RUN == 0 ]; then
+        ${rsync_cmd[*]}
+    else
+        sudo runuser -l "$user" -c "$(eval echo ${rsync_cmd[@]})"
+    fi
+
     [ $DRY_RUN == 0 ] && fix_perms "$user" "$dest"
 }
 
