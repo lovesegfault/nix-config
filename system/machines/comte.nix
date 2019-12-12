@@ -10,6 +10,11 @@
 
   nix.trustedUsers = [ "exclusivor" ];
 
+  services.xserver.displayManager.gdm.autoLogin = {
+    enable = true;
+    user = "exclusivor";
+  };
+
   users.users.exclusivor = {
     createHome = true;
     isNormalUser = true;
