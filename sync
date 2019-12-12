@@ -67,6 +67,7 @@ function fix_perms() {
         ${fix_dirs[*]}
         ${fix_files[*]}
     else
+        warn "needs sudo"
         sudo runuser -l "$user" -c "$(eval echo ${fix_dirs[@]})"
         sudo runuser -l "$user" -c "$(eval echo ${fix_files[@]})"
     fi
