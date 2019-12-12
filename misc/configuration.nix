@@ -1,1 +1,1 @@
-{ imports = [ ./hardware-configuration.nix ./machines/HOSTNAME.nix ]; }
+{ imports = [ ./hardware-configuration.nix ./system/machines/HOSTNAME.nix ]; }
