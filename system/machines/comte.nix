@@ -1,7 +1,6 @@
 { config, pkgs, ... }: {
   imports = [
     ../combo/core.nix
-    ../combo/dev.nix
     ../combo/graphical.nix
     ../combo/wayland.nix
     ../combo/optiplex-3070.nix
