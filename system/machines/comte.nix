@@ -15,6 +15,16 @@
     user = "exclusivor";
   };
 
+  users.users.cloud = {
+    createHome = true;
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICfPRiesz2VviTkRJAd3mzGRm2P+K67SutblfJ9I1+rU cloud@standard.ai"
+    ];
+    shell = pkgs.zsh;
+  };
+
   users.users.exclusivor = {
     createHome = true;
     isNormalUser = true;
