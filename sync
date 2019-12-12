@@ -61,17 +61,15 @@ function fix_perms() {
     local user="$1"
     local path="$2"
 
-    local cmd_base=()
-    [ $USER == $user ] || cmd+=( "sudo" "runuser" "-l" "$user" "-c" )
-
     local fix_dirs=("find" "$path" "-type" "d" "-exec" "chmod 0755 {} +")
-    local cmd_fix_dirs=("${cmd_base[@]}" "${fix_dirs[@]}")
-
     local fix_files=("find" "$path" "-type" "f" "-exec" "chmod 0644 {} +")
-    local cmd_fix_files=("${cmd_base[@]}" "${fix_files[@]}")
-
-    ${cmd_fix_dirs[*]}
-    ${cmd_fix_files[*]}
+    if [ $USER == $user ]; then
+        ${fix_dirs[*]}
+        ${fix_files[*]}
+    else
+        sudo runuser -l "$user" -c "$(eval echo ${fix_dirs[@]})"
+        sudo runuser -l "$user" -c "$(eval echo ${fix_files[@]})"
+    fi
 }
 
 function sync_dir() {
