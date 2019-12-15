@@ -20,9 +20,7 @@
     slack
     speedcrunch
     spotify
-    sublime3
     thunderbird
-    vscode
     zoom-us
   ];
 }
