@@ -5,4 +5,5 @@
     ../modules/swaylock.nix
     ../modules/waybar.nix
   ];
+  home.packages = with pkgs; [ imv ];
 }
