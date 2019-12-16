@@ -32,13 +32,7 @@ in {
         }
 
         function passmenu_window() {
-            prefix=''${PASSWORD_STORE_DIR-~/.password-store}
-            password_files=( "$prefix"/**/*.gpg )
-            password_files=( "''${password_files[@]#"$prefix"/}" )
-            password_files=( "''${password_files[@]%.gpg}" )
-
-            name="$(printf '%s\n' "''${password_files[@]}" | ${fzf} --delimiter '/' --nth 2)"
-
+            name="$(${gopass} ls -f | ${fzf})"
             echo "$name" > "$passmenu_fifo"
         }
 
