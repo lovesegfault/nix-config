@@ -2,7 +2,7 @@
   imports = [
     ../combo/core.nix
     ../combo/graphical.nix
-    ../combo/wayland.nix
+    ../combo/x.nix
     ../combo/optiplex-3070.nix
   ];
 
@@ -11,7 +11,7 @@
   nix.trustedUsers = [ "exclusivor" ];
 
   services.xserver.displayManager.gdm.autoLogin = {
-    enable = true;
+    enable = false;
     user = "exclusivor";
   };
 

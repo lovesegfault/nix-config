@@ -3,7 +3,7 @@
     ../combo/core.nix
     ../combo/dev.nix
     ../combo/graphical.nix
-    ../combo/sway.nix
+    ../combo/i3.nix
     ../combo/optiplex-3070.nix
   ];
 
