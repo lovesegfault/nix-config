@@ -5,6 +5,7 @@
     ../modules/lxd.nix
     ../modules/qemu.nix
     ../modules/stcg-cachix.nix
+    ../modules/stcg-cameras.nix
   ];
 
   environment.systemPackages = with pkgs; [ neovim ];
