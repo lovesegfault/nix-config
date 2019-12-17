@@ -20,8 +20,6 @@
     }
   ];
 
-  systemd.services.lxd.serviceConfig.LimitNOFILE = 49152;
-
   users.users.bemeurer.extraGroups = [ "lxd" ];
 
   virtualisation = {
