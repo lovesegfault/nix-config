@@ -32,6 +32,7 @@
         "absubmit"
         "acousticbrainz"
         "badfiles"
+        "check"
         "chroma"
         "edit"
         "embedart"
