@@ -7,6 +7,9 @@
     ../combo/wayland.nix
     # ../combo/x.nix
     ../combo/thinkpad-p1.nix
+
+    ../modules/aarch64-build-box.nix
+    ../modules/stcg-cameras.nix
   ];
 
   networking.hostName = "foucault";
