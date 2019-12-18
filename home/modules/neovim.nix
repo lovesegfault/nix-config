@@ -23,19 +23,20 @@
     viAlias = true;
     vimAlias = true;
     plugins = with pkgs.vimPlugins; [
-      coc-nvim
       ale
       ayu-vim
+      coc-nvim
+      fugitive
       fzf-vim
       gentoo-syntax
       gist-vim
-      tagbar
       goyo
       lalrpop-vim
       lightline-ale
       lightline-vim
       meson
       rust-vim
+      tagbar
       vim-flatbuffers
       vim-indent-guides
       vim-multiple-cursors
