@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
 
-  boot = {
+  boot = rec {
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "l1tf=off"
