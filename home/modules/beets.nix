@@ -1,6 +1,7 @@
 { config, pkgs, ... }: {
   programs.beets = {
     enable = true;
+    package = (pkgs.beets.override { enableCheck = true; });
     settings = rec {
       art_filename = "cover";
       asciify_paths = false;
