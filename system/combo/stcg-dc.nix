@@ -1,5 +1,7 @@
 { config, pkgs, ... }: {
 
+  imports = [ ../modules/openssh.nix ];
+
   boot = rec {
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
