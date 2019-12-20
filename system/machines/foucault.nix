@@ -11,7 +11,7 @@
 
     ../modules/stcg-cachix.nix
     ../modules/stcg-cameras.nix
-    ../../share/secrets/stcg-cachix.nix
+    ../../share/secrets/modules/stcg-cachix.nix
   ];
 
   networking.hostName = "foucault";

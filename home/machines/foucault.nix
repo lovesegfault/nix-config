@@ -8,6 +8,6 @@
     # ../combo/i3.nix
     ../combo/thinkpad-p1.nix
 
-    ../../share/secrets/beets.nix
+    ../../share/secrets/modules/beets.nix
   ];
 }
