@@ -10,11 +10,6 @@
   networking = {
     hostName = "cantor";
     hostId = "e387c8da";
-    useDHCP = false;
-    interfaces.enp1s0f0.useDHCP = false;
-    interfaces.enp1s0f1.useDHCP = false;
-    interfaces.enp24s0f0.useDHCP = true;
-    interfaces.enp24s0f1.useDHCP = false;
   };
 
   time.timeZone = "America/Los_Angeles";
