@@ -1,5 +1,11 @@
 { config, pkgs, ... }: {
-  imports = [ ../combo/core.nix ../combo/rpi3.nix ];
+  imports = [
+    ../combo/core.nix
+    ../combo/rpi3.nix
+
+    ../modules/ddclient.nix
+    ../../share/secrets/modules/ddclient-home-lovesegfault-com.nix
+  ];
 
   networking.hostName = "bohr";
 
