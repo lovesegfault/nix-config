@@ -1,10 +1,10 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   environment.systemPackages = with pkgs; [ pinentry-gnome ];
 
   programs = {
     gnupg.agent = {
       enable = true;
-      pinentryFlavor = "gnome3";
+      pinentryFlavor = lib.mkForce "gnome3";
     };
     seahorse.enable = true;
     ssh = {

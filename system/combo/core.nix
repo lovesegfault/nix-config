@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ../modules/aspell.nix
+    ../modules/gpg.nix
     ../modules/i18n.nix
     ../modules/networkmanager.nix
     ../modules/nix.nix
@@ -11,8 +12,6 @@
     ../modules/users.nix
     ../modules/zsh.nix
   ];
-
-  environment.systemPackages = with pkgs; [ pinentry-curses ];
 
   nixpkgs.config.allowUnfree = true;
 
