@@ -14,9 +14,7 @@
     diff.tool = "nvimdiff";
   };
 
-  programs.zsh.shellAliases = {
-    v = "nvim";
-  };
+  programs.zsh.shellAliases = { v = "nvim"; };
 
   programs.neovim = {
     enable = true;

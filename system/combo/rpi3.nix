@@ -39,5 +39,8 @@
 
   services.fstrim.enable = true;
 
-  swapDevices = [ { device = "/swap"; size = 1024; } ];
+  swapDevices = [{
+    device = "/swap";
+    size = 1024;
+  }];
 }

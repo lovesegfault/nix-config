@@ -1,8 +1,5 @@
 { config, pkgs, ... }: {
-  imports = [
-    ../combo/core.nix
-    ../combo/rpi3.nix
-  ];
+  imports = [ ../combo/core.nix ../combo/rpi3.nix ];
 
   networking.hostName = "bohr";
 
