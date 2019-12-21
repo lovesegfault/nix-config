@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   home = {
     extraOutputsToInstall = [ "doc" "info" "devdoc" ];
-    packages = with pkgs; [ arcanist gitFull ];
+    packages = with pkgs; [ arcanist ];
   };
 }
