@@ -3,6 +3,8 @@
     ../combo/core.nix
     ../combo/rpi3.nix
 
+    ../modules/sshguard.nix
+
     ../modules/ddclient.nix
     ../../share/secrets/modules/ddclient-home-lovesegfault-com.nix
   ];
