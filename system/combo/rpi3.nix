@@ -18,7 +18,7 @@
 
   fileSystems = {
     "/boot" = {
-      device = "/dev/disk/by-label/NIXOS_BOOT";
+      device = "/dev/disk/by-label/FIRMWARE";
       fsType = "vfat";
     };
     "/" = {
