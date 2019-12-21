@@ -7,7 +7,25 @@
     ../modules/sound.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot = {
+    loader = {
+      generic-extlinux-compatible.enable = true;
+      grub.enable = false;
+    };
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [ "cma=32M" ];
+  };
+
+  filesystems = {
+    "/boot" = {
+      device = "/dev/disk/by-label/NIXOS_BOOT";
+      fsType = "vfat";
+    };
+    "/" = {
+      device = "/dev/disk/by-label/NIXOS_SD";
+      fsType = "ext4";
+    };
+  };
 
   hardware.enableRedistributableFirmware = true;
 
@@ -20,4 +38,6 @@
   nixpkgs.config.allowUnfree = true;
 
   services.fstrim.enable = true;
+
+  swapDevices = [ { device = "/swap"; size = 1024; } ];
 }
