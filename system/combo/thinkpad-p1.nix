@@ -1,5 +1,6 @@
 { config, pkgs, ... }: {
   imports = [
+    ../modules/efi.nix
     ../modules/bluetooth.nix
     ../modules/bumblebee.nix
     ../modules/fwupd.nix

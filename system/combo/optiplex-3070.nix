@@ -4,6 +4,7 @@
     ../modules/fwupd.nix
     ../modules/intel.nix
     ../modules/openssh.nix
+    ../modules/efi.nix
   ];
 
   boot = {

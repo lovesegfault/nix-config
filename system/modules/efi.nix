@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   boot = {
     earlyVconsoleSetup = true;
     loader = {
@@ -8,5 +8,4 @@
     };
     tmpOnTmpfs = true;
   };
-
 }

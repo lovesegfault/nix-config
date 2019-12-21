@@ -1,7 +1,6 @@
 {
   imports = [
     ../modules/aspell.nix
-    ../modules/boot.nix
     ../modules/i18n.nix
     ../modules/networkmanager.nix
     ../modules/nix.nix
