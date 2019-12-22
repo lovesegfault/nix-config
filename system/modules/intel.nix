@@ -7,9 +7,8 @@
       enable = true;
       extraPackages = with pkgs; [
         vaapiIntel
-        vaapiVdpau
-        libvdpau-va-gl
         libva
+        intel-media-driver
         intel-compute-runtime
       ];
     };
