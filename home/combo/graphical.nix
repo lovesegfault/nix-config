@@ -4,6 +4,7 @@
     ../modules/firefox.nix
     ../modules/gnome-keyring.nix
     ../modules/gpg-agent.nix
+    ../modules/mpv.nix
     ../modules/gtk.nix
     ../modules/qt.nix
   ];
@@ -21,7 +22,6 @@
     speedcrunch
     spotify
     thunderbird
-    mpv
     zoom-us
   ];
 }
