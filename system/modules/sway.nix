@@ -38,7 +38,7 @@
     '';
   };
 
-  services.xserver.displayManager.extraSessionFilePackages = [ pkgs.sway ];
+  services.xserver.displayManager.sessionPackages = [ pkgs.sway ];
 
   users.users.bemeurer.extraGroups = [ "input" "video" ];
 }
