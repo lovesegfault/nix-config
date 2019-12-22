@@ -14,10 +14,10 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  console = {
-    font = "ter-v14n";
-    keyMap = "us";
-    packages = with pkgs; [ terminus_font ];
+  i18n = {
+    consoleFont = "ter-v14n";
+    consoleKeyMap = "us";
+    consolePackages = with pkgs; [ terminus_font ];
   };
 
   nixpkgs.config.allowUnfree = true;
