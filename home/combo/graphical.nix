@@ -21,6 +21,7 @@
     speedcrunch
     spotify
     thunderbird
+    vlc
     zoom-us
   ];
 }
