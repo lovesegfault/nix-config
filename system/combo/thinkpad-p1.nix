@@ -19,10 +19,10 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  i18n = {
-    consoleFont = "ter-v28n";
-    consoleKeyMap = "us";
-    consolePackages = with pkgs; [ terminus_font ];
+  console = {
+    font = "ter-v28n";
+    keyMap = "us";
+    packages = with pkgs; [ terminus_font ];
   };
 
   nixpkgs.config.allowUnfree = true;

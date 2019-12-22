@@ -1,6 +1,5 @@
 { lib, pkgs, ... }: {
   boot = {
-    earlyVconsoleSetup = true;
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
@@ -8,4 +7,5 @@
     };
     tmpOnTmpfs = true;
   };
+  console.earlySetup = true;
 }
