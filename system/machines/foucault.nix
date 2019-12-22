@@ -7,6 +7,8 @@
     ../combo/wayland.nix
     ../combo/thinkpad-p1.nix
 
+    ../modules/keybase.nix
+
     ../modules/aarch64-build-box.nix
 
     ../modules/stcg-cachix.nix
