@@ -4,7 +4,6 @@
   hardware = {
     cpu.intel.updateMicrocode = true;
     opengl = {
-      enable = true;
       extraPackages = with pkgs; [
         vaapiIntel
         libva
