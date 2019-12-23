@@ -36,6 +36,7 @@
     sessionVariables = { RPROMPT = ""; };
     plugins = [
       {
+        # https://github.com/zdharma/fast-syntax-highlighting
         name = "fast-syntax-highlighting";
         file = "fast-syntax-highlighting.plugin.zsh";
         src = pkgs.fetchFromGitHub {
@@ -46,6 +47,7 @@
         };
       }
       {
+        # https://github.com/endaaman/lxd-completion-zsh
         name = "lxd-completion-zsh";
         file = "_lxc";
         src = pkgs.fetchFromGitHub {
@@ -56,6 +58,7 @@
         };
       }
       {
+        # https://github.com/zdharma/history-search-multi-word
         name = "history-search-multi-word";
         file = "history-search-multi-word.plugin.zsh";
         src = pkgs.fetchFromGitHub {
@@ -66,6 +69,7 @@
         };
       }
       {
+        # https://github.com/hlissner/zsh-autopair
         name = "zsh-autopair";
         file = "zsh-autopair.plugin.zsh";
         src = pkgs.fetchFromGitHub {
@@ -76,6 +80,7 @@
         };
       }
       {
+        # https://github.com/chisui/zsh-nix-shell
         name = "zsh-nix-shell";
         file = "nix-shell.plugin.zsh";
         src = pkgs.fetchFromGitHub {
@@ -86,6 +91,7 @@
         };
       }
       {
+        # https://github.com/hcgraf/zsh-sudo
         name = "zsh-sudo";
         file = "sudo.plugin.zsh";
         src = pkgs.fetchFromGitHub {
@@ -96,6 +102,7 @@
         };
       }
       {
+        # https://github.com/zsh-users/zsh-history-substring-search
         name = "zsh-history-substring-search";
         file = "zsh-history-substring-search.plugin.zsh";
         src = pkgs.fetchFromGitHub {
