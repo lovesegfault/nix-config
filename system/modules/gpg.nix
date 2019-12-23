@@ -2,7 +2,7 @@
   environment.systemPackages = with pkgs; [ pinentry-curses ];
 
   programs.gnupg.agent = {
-      enable = true;
-      pinentryFlavor = "curses";
+    enable = true;
+    pinentryFlavor = "curses";
   };
 }
