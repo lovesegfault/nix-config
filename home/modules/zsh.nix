@@ -42,8 +42,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "zdharma";
           repo = "fast-syntax-highlighting";
-          rev = "bb2da8f833924acab543154a9ec636c6b6434140";
-          sha256 = "1sb12nhzcfiqf57sclkpm691fwgns9h6kfyyv28bl9hqpyzicvxc";
+          rev = "634ab246365ef6b465b4cdf7c6f0727ec04759a9";
+          sha256 = "19hxd3176m1kz5969hfhgsjk5cjfxiacvzn47wm77vxg8zihrq89";
         };
       }
       {
@@ -86,8 +86,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "chisui";
           repo = "zsh-nix-shell";
-          rev = "166c86c609a5398453f6386efd70c3cdb66b2058";
-          sha256 = "1d2j6968w89ll1nf9wxjll6cbrwnaj0lxcf27kyy4sx12fd3nd5x";
+          rev = "a65382a353eaee5a98f068c330947c032a1263bb";
+          sha256 = "0l41ac5b7p8yyjvpfp438kw7zl9dblrpd7icjg1v3ig3xy87zv0n";
         };
       }
       {
