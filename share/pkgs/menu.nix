@@ -54,7 +54,7 @@ in ''
 
   function describe() {
     # shellcheck disable=SC2086
-    readarray -d $DEL -t PROVIDER_ARGS <<<''${PROVIDERS[${1}]}
+    readarray -d $DEL -t PROVIDER_ARGS <<<''${PROVIDERS[$1]}
     # shellcheck disable=SC2086
     [ -n "''${PROVIDER_ARGS[1]}" ] && eval "''${PROVIDER_ARGS[1]//\{1\}/$2}"
   }
@@ -86,7 +86,7 @@ in ''
   function list-entries() {
     # Get locations of desktop application folders according to spec
     # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
-    IFS=':' read -ra DIRS <<<"''${XDG_DATA_HOME-$HOME/.local/share}:''${XDG_DATA_DIRS-/usr/local/share:/usr/share}"
+    IFS=':' read -ra DIRS <<<"/run/current-system/sw/share":"$HOME/.nix-profile/share"
     for i in "''${!DIRS[@]}"; do
       if [[ ! -d "''${DIRS[i]}" ]]; then
         unset -v 'DIRS[$i]'
