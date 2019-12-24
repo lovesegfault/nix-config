@@ -2,7 +2,6 @@
   imports = [
     ../combo/core.nix
     ../combo/dev.nix
-    ../combo/games.nix
     ../combo/graphical.nix
     ../combo/wayland.nix
     ../combo/thinkpad-p1.nix
@@ -13,7 +12,6 @@
 
     ../modules/stcg-cachix.nix
     ../modules/stcg-cameras.nix
-    ../../share/secrets/modules/stcg-cachix.nix
   ];
 
   networking.hostName = "foucault";

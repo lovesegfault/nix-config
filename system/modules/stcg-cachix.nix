@@ -1,4 +1,5 @@
 {
+  imports = [ ../../share/secrets/modules/stcg-cachix.nix ];
   nix = {
     binaryCaches = [ "https://standard.cachix.org/" ];
     binaryCachePublicKeys =
