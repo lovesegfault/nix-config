@@ -1,4 +1,5 @@
 { config, pkgs, ... }: {
+  imports = [ ../../share/secrets/modules/beets.nix ];
   programs.beets = {
     enable = true;
     package = (pkgs.beets.override { enableCheck = true; });
