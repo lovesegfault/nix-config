@@ -13,5 +13,7 @@
     };
   };
 
-  security.pam.services.login = { enableGnomeKeyring = true; };
+  security.pam.services.login.enableGnomeKeyring = true;
+
+  services.gnome3.gnome-keyring.enable = true;
 }
