@@ -10,9 +10,10 @@
     userEmail = "meurerbernardo@gmail.com";
     userName = "Bernardo Meurer";
     extraConfig = {
+      core.pager = "${pkgs.gitAndTools.delta}/bin/delta --dark";
       mergetool.prompt = true;
       difftool.prompt = true;
-      github = { user = "lovesegfault"; };
+      github.user = "lovesegfault";
     };
   };
   programs.zsh.shellAliases = {
