@@ -1,4 +1,4 @@
-{ pkgs, ... }:{
+{ pkgs, ... }: {
   nixpkgs.overlays = [
     (self: super: {
       lollypop = super.lollypop.overrideAttrs (old: {

@@ -1,3 +1,1 @@
-{ pkgs, ... }: {
-  environment.systemPackages = with pkgs; [ qgnomeplatform ];
-}
+{ pkgs, ... }: { environment.systemPackages = with pkgs; [ qgnomeplatform ]; }
