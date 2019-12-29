@@ -1,4 +1,4 @@
-{ pkgs, ... }:{
+{ pkgs, ... }: {
   imports = [
     ../modules/boot-silent.nix
     ../modules/fonts.nix
