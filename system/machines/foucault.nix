@@ -12,7 +12,11 @@
 
     ../modules/stcg-cachix.nix
     ../modules/stcg-cameras.nix
+
+    ../../share/pkgs/intel-i915-drm-fix.nix
   ];
+
+  boot.kernelPatches = with pkgs; [ intel-i915-drm-fix ];
 
   networking.hostName = "foucault";
 
