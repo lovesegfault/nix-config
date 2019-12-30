@@ -33,12 +33,12 @@ let
       };
     };
     tray = {
-      icon-size = 20;
+      icon-size = 21;
       spacing = 5;
     };
     clock = {
-      tooltip-format = "{:%Y-%m-%d | %H:%M}";
-      format = "{:%F %T %Z}";
+      tooltip-format = "{:%Z}";
+      format = "{:%F | %H:%M}";
     };
     cpu = {
       format = "{usage}% ";
