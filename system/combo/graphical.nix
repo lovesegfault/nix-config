@@ -4,6 +4,7 @@
     ../modules/fonts.nix
     ../modules/gdm.nix
     ../modules/gnome-keyring.nix
+    ../modules/location.nix
     ../modules/printing.nix
     ../modules/sound.nix
   ];
