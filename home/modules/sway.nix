@@ -54,10 +54,10 @@
 
       ### Idle configuration
       exec swayidle -w \
-               timeout 300 'swaylock -f -c 000000' \
+               timeout 300 'swaylock -f' \
                timeout 600 'swaymsg "output * dpms off"' \
                     resume 'swaymsg "output * dpms on"' \
-               before-sleep 'swaylock -f -c 000000'
+               before-sleep 'swaylock -f'
 
 
       ### Input configuration
@@ -128,6 +128,7 @@
           bindsym $mod+d exec ${menu}
           bindsym $mod+p exec ${passmenu}
           bindsym $mod+m exec ${emojimenu}
+          bindsym $mod+q exec swaylock -f
 
           bindsym Print exec ${prtsc}
           bindsym XF86MonBrightnessUp exec light -A 1
@@ -136,7 +137,6 @@
           bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
           bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
           bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-          bindsym XF86Display exec swaylock -f
           bindsym XF86AudioPlay exec playerctl play
           bindsym XF86AudioPause exec playerctl pause
           bindsym XF86AudioNext exec playerctl next
