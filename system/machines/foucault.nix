@@ -12,9 +12,10 @@
     ../modules/stcg-cameras.nix
 
     ../../share/pkgs/intel-i915-drm-fix.nix
+    ../../share/pkgs/xfs-2038-fix.nix
   ];
 
-  boot.kernelPatches = with pkgs; [ intel-i915-drm-fix ];
+  boot.kernelPatches = with pkgs; [ intel-i915-drm-fix xfs-2038-fix ];
 
   networking.hostName = "foucault";
 
