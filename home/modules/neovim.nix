@@ -48,7 +48,7 @@
       webapi-vim
     ];
     extraConfig = let
-      basic = ''
+      baseConfig = ''
         """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         " => General
         """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -544,106 +544,134 @@
         " Resume latest coc list
         nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
       '';
+      fzfConfig = ''
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " => fzf
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " FZF selection window size
+        let g:fzf_layout = { 'window': '60split enew' }
+        " Different ways to open a new file/buffer
+        let g:fzf_action = {
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit' }
+        autocmd! FileType fzf
+        autocmd  FileType fzf set laststatus=0 noshowmode noruler
+            \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+        " Map ctrp-p/b to search files/buffers
+        nnoremap <C-p> :Files<CR>
+        nnoremap <C-b> :Buffers<CR>
+        set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+        command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
+      '';
+      vimtexConfig = ''
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " => vimtex
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " Enable shellescape for the LaTeX compiler
+        " NB: needed for syntax highlighting pkgs.
+        let g:vimtex_compiler_latexmk = {
+            \ 'options' : [
+            \   '-pdf',
+            \   '-shell-escape',
+            \   '-verbose',
+            \   '-file-line-error',
+            \   '-synctex=1',
+            \   '-interaction=nonstopmode',
+            \ ],
+        \ }
+        if has('nvim')
+          let g:vimtex_compiler_progname = 'nvr'
+        endif
+        let g:vimtex_view_general_viewer = 'evince'
+      '';
+      indentGuidesConfig = ''
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " => vim-indent-guides
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " Always show indent guides
+        let g:indent_guides_enable_on_vim_startup = 1
+      '';
+      ayuConfig = ''
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " => ayu-vim
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        let g:ayucolor="dark"
+        colorscheme ayu
+      '';
+      tagbarConfig = ''
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " => tagbar
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        noremap <leader>t :TagbarToggle<CR>
+      '';
+      aleConfig = ''
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " => ALE
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " Always apply ALEFix on save
+        let g:ale_fix_on_save = 1
+        noremap <leader>f :ALEFix <CR>
+        nmap <silent> <C-j> <Plug>(ale_next_wrap)
+        let g:ale_linters = {
+            \ 'c':['clangd', 'cppcheck', 'flawfinder'],
+            \ 'cpp':['clangd', 'cppcheck', 'flawfinder'],
+            \ 'python': ['bandit', 'pylama', 'vulture'],
+            \ 'text':['mdl', 'proselint', 'languagetool'],
+        \ }
+        let g:ale_fixers = {
+            \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \ 'c':['clang-format'],
+            \ 'cpp':['clang-format'],
+            \ 'json':['prettier', 'fixjson'],
+            \ 'markdown':['prettier'],
+            \ 'python':['isort', 'autopep8'],
+            \ 'rust':['rustfmt'],
+            \ 'sh':['shfmt'],
+        \ }
+      '';
+      lightlineConfig = ''
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " => lightline
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        let g:lightline = {
+            \ 'colorscheme': 'ayu',
+            \ 'active': {
+            \   'left': [
+            \       ['mode', 'paste'],
+            \       ['filename', 'modified']
+            \   ],
+            \   'right': [
+            \       ['lineinfo'],
+            \       ['percent'],
+            \       ['fileformat', 'fileencoding', 'filetype', 'readonly'],
+            \       ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok']
+            \   ]
+            \ },
+            \ 'component_expand': {
+            \   'linter_checking': 'lightline#ale#checking',
+            \   'linter_warnings': 'lightline#ale#warnings',
+            \   'linter_errors': 'lightline#ale#errors',
+            \   'linter_ok': 'lightline#ale#ok',
+            \ },
+            \ 'component_type': {
+            \   'linter_checking': 'left',
+            \   'linter_warnings': 'warning',
+            \   'linter_errors': 'error',
+            \   'linter_ok': 'left',
+            \ }
+        \ }
+      '';
     in ''
-      ${basic}
+      ${baseConfig}
       ${cocConfig}
-      " ---- Shortcuts using <leader>
-      noremap <leader>f :ALEFix <CR>
-
-      " Plugin settings
-      " ---- luochen1990/rainbow
-      let g:rainbow_active = 1
-      " ---- lotabout/skim.vim
-      let g:fzf_layout = { 'window': '60split enew' }
-      let g:fzf_action = {
-                  \ 'ctrl-t': 'tab split',
-                  \ 'ctrl-x': 'split',
-                  \ 'ctrl-v': 'vsplit' }
-      autocmd! FileType fzf
-      autocmd  FileType fzf set laststatus=0 noshowmode noruler
-                  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-      nnoremap <C-b> :Buffers<CR>
-      nnoremap <C-p> :Files<CR>
-      set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
-      command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
-      " ---- lervag/vimtex
-      let g:vimtex_compiler_latexmk = {
-          \ 'options' : [
-          \   '-pdf',
-          \   '-shell-escape',
-          \   '-verbose',
-          \   '-file-line-error',
-          \   '-synctex=1',
-          \   '-interaction=nonstopmode',
-          \ ],
-      \ }
-      let g:vimtex_compiler_progname = 'nvr'
-      let g:vimtex_view_general_viewer = 'evince'
-      " ---- nathanaelkane/vim-indent-guides
-      let g:indent_guides_enable_on_vim_startup = 1
-      " ---- ayu-theme/ayu-vim
-      let g:ayucolor="dark"
-      colorscheme ayu
-      " ---- majutsushi/tagbar
-      noremap <leader>t :TagbarToggle<CR>
-      " ---- wellle/tmux-complete.vim
-      let g:tmuxcomplete#trigger = '''
-      " ---- dense-analysis/ale
-      let g:ale_fix_on_save = 1
-      nmap <silent> <C-j> <Plug>(ale_next_wrap)
-      let g:ale_linters = {
-          \ 'c':['clangd', 'cppcheck', 'flawfinder'],
-          \ 'cpp':['clangd', 'cppcheck', 'flawfinder'],
-          \ 'ebuild':['shellcheck'],
-          \ 'python': ['bandit', 'pylama', 'vulture'],
-          \ 'rust': ['cargo', 'rls'],
-          \ 'text':['mdl', 'proselint', 'languagetool'],
-      \ }
-      let g:ale_fixers = {
-          \ 'c':['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
-          \ 'cpp':['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
-          \ 'ebuild':['remove_trailing_lines', 'trim_whitespace'],
-          \ 'fish':['remove_trailing_lines', 'trim_whitespace'],
-          \ 'gentoo-metadata':['remove_trailing_lines', 'trim_whitespace'],
-          \ 'i3':['remove_trailing_lines', 'trim_whitespace'],
-          \ 'json':['remove_trailing_lines', 'trim_whitespace', 'prettier', 'fixjson'],
-          \ 'markdown':['remove_trailing_lines', 'trim_whitespace', 'prettier'],
-          \ 'nix':['remove_trailing_lines', 'trim_whitespace'],
-          \ 'python':['remove_trailing_lines', 'trim_whitespace', 'isort', 'autopep8'],
-          \ 'rust':['remove_trailing_lines', 'trim_whitespace','rustfmt'],
-          \ 'sh':['shfmt','remove_trailing_lines','trim_whitespace'],
-          \ 'toml':['remove_trailing_lines', 'trim_whitespace'],
-          \ 'vim':['remove_trailing_lines', 'trim_whitespace'],
-          \ 'xml':['remove_trailing_lines', 'trim_whitespace'],
-      \ }
-      " ---- itchyny/lightline.vim
-      let g:lightline = {
-          \ 'colorscheme': 'ayu',
-          \ 'active': {
-          \   'left': [
-          \       ['mode', 'paste'],
-          \       ['filename', 'modified']
-          \   ],
-          \   'right': [
-          \       ['lineinfo'],
-          \       ['percent'],
-          \       ['fileformat', 'fileencoding', 'filetype', 'readonly'],
-          \       ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok']
-          \   ]
-          \ },
-          \ 'component_expand': {
-          \   'linter_checking': 'lightline#ale#checking',
-          \   'linter_warnings': 'lightline#ale#warnings',
-          \   'linter_errors': 'lightline#ale#errors',
-          \   'linter_ok': 'lightline#ale#ok',
-          \ },
-          \ 'component_type': {
-          \   'linter_checking': 'left',
-          \   'linter_warnings': 'warning',
-          \   'linter_errors': 'error',
-          \   'linter_ok': 'left',
-          \ }
-      \ }
+      ${fzfConfig}
+      ${vimtexConfig}
+      ${indentGuidesConfig}
+      ${ayuConfig}
+      ${tagbarConfig}
+      ${aleConfig}
+      ${lightlineConfig}
     '';
   };
 }
