@@ -9,6 +9,7 @@
       font-awesome
       noto-fonts-cjk
       noto-fonts-emoji
+      unifont
     ];
   };
 }
