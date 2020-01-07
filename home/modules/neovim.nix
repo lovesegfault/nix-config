@@ -21,31 +21,43 @@
     viAlias = true;
     vimAlias = true;
     plugins = with pkgs.vimPlugins; [
+      # Completion/IDE
       ale
+      deoplete-nvim
+      LanguageClient-neovim
+      # coc-nvim
+
+      # Colorscheme
       ayu-vim
-      coc-nvim
-      fugitive
-      fzf-vim
-      gentoo-syntax
-      gist-vim
-      goyo
-      lalrpop-vim
+
+      # Tools
+      fugitive # Git
+      fzf-vim # Search
+      gist-vim # Gist integration
+      webapi-vim # Gist dependency
       lightline-ale
       lightline-vim
-      meson
-      rust-vim
+      goyo
       tagbar
-      vim-flatbuffers
+      vim-abolish
       vim-indent-guides
       vim-multiple-cursors
+      vim-surround
+      vim-trailing-whitespace
+      vimtex
+
+      # Syntax
+      vim-flatbuffers
+      gentoo-syntax
+      lalrpop-vim
       vim-nftables
       vim-nix
       vim-protobuf
-      vim-surround
       vim-toml
-      vim-trailing-whitespace
-      vimtex
-      webapi-vim
+      rust-vim
+      meson
+
+
     ];
     extraConfig = let
       baseConfig = ''
@@ -251,10 +263,6 @@
         """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         " => Moving around, tabs, windows and buffers
         """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-        " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-        map <space> /
-        map <C-space> ?
-
         " Disable highlight when <leader><cr> is pressed
         map <silent> <leader><cr> :noh<cr>
 
@@ -544,6 +552,47 @@
         " Resume latest coc list
         nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
       '';
+      deopleteConfig = ''
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " => deoplete
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        let g:deoplete#enable_at_startup = 1
+      '';
+      languageClientConfig = ''
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " => LanguageClient-neovim
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        let g:deoplete#enable_at_startup = 1
+        " Required for operations modifying multiple buffers like rename.
+        set hidden
+
+        let g:LanguageClient_serverCommands = {
+            \ 'rust': ['rls'],
+            \ 'python': ['pyls'],
+        \ }
+
+        nnoremap <space> :call LanguageClient_contextMenu()<CR>
+        nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+        nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+        nnoremap <silent> gi :call LanguageClient#textDocument_implementation()<CR>
+        nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+        nnoremap <silent> gy :call LanguageClient#textDocument_typeDefinition()<CR>
+
+        " Rename - rn => rename
+        noremap <leader>rn :call LanguageClient#textDocument_rename()<CR>
+
+        " Rename - rc => rename camelCase
+        noremap <leader>rc :call LanguageClient#textDocument_rename(
+            \ {'newName': Abolish.camelcase(expand('<cword>'))})<CR>
+
+        " Rename - rs => rename snake_case
+        noremap <leader>rs :call LanguageClient#textDocument_rename(
+            \ {'newName': Abolish.snakecase(expand('<cword>'))})<CR>
+
+        " Rename - ru => rename UPPERCASE
+        noremap <leader>ru :call LanguageClient#textDocument_rename(
+            \ {'newName': Abolish.uppercase(expand('<cword>'))})<CR>
+      '';
       fzfConfig = ''
         """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         " => fzf
@@ -664,14 +713,18 @@
       '';
     in ''
       ${baseConfig}
-      ${cocConfig}
-      ${fzfConfig}
-      ${vimtexConfig}
-      ${indentGuidesConfig}
-      ${ayuConfig}
-      ${tagbarConfig}
+
       ${aleConfig}
+      ${ayuConfig}
+      ${fzfConfig}
+      ${indentGuidesConfig}
       ${lightlineConfig}
-    '';
+      ${tagbarConfig}
+      ${vimtexConfig}
+
+      ${deopleteConfig}
+      ${languageClientConfig}
+      '';
+      # ++ "${cocConfig}";
   };
 }
