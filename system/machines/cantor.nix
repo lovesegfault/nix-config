@@ -2,7 +2,8 @@
   imports = [
     ../combo/core.nix
     ../combo/dev.nix
-    ../combo/stcg-dc.nix
+
+    ../hardware/stcg-dc.nix
 
     ../modules/stcg-cachix.nix
   ];

@@ -3,7 +3,8 @@
     ../combo/core.nix
     ../combo/graphical.nix
     ../combo/x.nix
-    ../combo/optiplex-3070.nix
+
+    ../hardware/optiplex-3070.nix
   ];
 
   networking.hostName = "comte";
