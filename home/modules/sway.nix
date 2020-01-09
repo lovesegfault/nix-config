@@ -41,9 +41,9 @@
       set $down j
       set $up k
       set $right l
-      for_window [title="swaymenu"] floating enable, border pixel 5, sticky enable
-      for_window [title="passmenu"] floating enable, border pixel 5, sticky enable
-      for_window [title="emojimenu"] floating enable, border pixel 5, sticky enable
+      for_window [app_id="Alacritty" title="swaymenu"] floating enable, border pixel 5, sticky enable
+      for_window [app_id="Alacritty" title="passmenu"] floating enable, border pixel 5, sticky enable
+      for_window [app_id="Alacritty" title="emojimenu"] floating enable, border pixel 5, sticky enable
       for_window [title="imv"] floating enable, border pixel 5, sticky enable
       for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, sticky enable
 
