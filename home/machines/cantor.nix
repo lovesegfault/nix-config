@@ -1,1 +1,1 @@
-{ imports = [ ../combo/core.nix ../combo/dev.nix ../combo/stcg-dc.nix ]; }
+{ imports = [ ../combo/core.nix ../combo/dev.nix ../hardware/stcg-dc.nix ]; }

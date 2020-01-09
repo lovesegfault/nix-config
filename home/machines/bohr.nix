@@ -1,1 +1,1 @@
-{ imports = [ ../combo/core.nix ../combo/dev.nix ../combo/rpi3.nix ]; }
+{ imports = [ ../combo/core.nix ../combo/dev.nix ../hardware/rpi3.nix ]; }

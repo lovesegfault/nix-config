@@ -5,6 +5,7 @@
     ../combo/graphical.nix
     ../combo/music.nix
     ../combo/sway.nix
-    ../combo/thinkpad-p1.nix
+
+    ../hardware/thinkpad-p1.nix
   ];
 }
