@@ -57,7 +57,6 @@
       rust-vim
       meson
 
-
     ];
     extraConfig = let
       baseConfig = ''
@@ -739,7 +738,7 @@
 
       ${deopleteConfig}
       ${languageClientConfig}
-      '';
-      # ++ "${cocConfig}";
+    '';
+    # ++ "${cocConfig}";
   };
 }
