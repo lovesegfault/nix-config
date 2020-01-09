@@ -25,6 +25,8 @@
     packages = with pkgs; [ terminus_font ];
   };
 
+  nix.maxJobs = "auto";
+
   nixpkgs.config.allowUnfree = true;
 
   programs.light.enable = true;

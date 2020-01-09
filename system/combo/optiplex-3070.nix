@@ -12,13 +12,15 @@
     kernelParams = [ "pci=noaer" ];
   };
 
-  hardware.enableRedistributableFirmware = true;
-
   console = {
     font = "ter-v14n";
     keyMap = "us";
     packages = with pkgs; [ terminus_font ];
   };
+
+  hardware.enableRedistributableFirmware = true;
+
+  nix.maxJobs = "auto";
 
   nixpkgs.config.allowUnfree = true;
 

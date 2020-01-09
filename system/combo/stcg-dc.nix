@@ -24,6 +24,8 @@
 
   hardware.enableRedistributableFirmware = true;
 
+  nix.maxJobs = "auto";
+
   nixpkgs.config.allowUnfree = true;
 
   services.fstrim.enable = true;

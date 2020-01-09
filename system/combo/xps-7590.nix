@@ -17,6 +17,8 @@
 
   i18n.consoleKeyMap = "us";
 
+  nix.maxJobs = "auto";
+
   nixpkgs.config.allowUnfree = true;
 
   programs.light.enable = true;
