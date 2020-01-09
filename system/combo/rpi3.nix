@@ -16,6 +16,8 @@
     kernelParams = [ "cma=32M" ];
   };
 
+  console.keyMap = "us";
+
   fileSystems = {
     "/boot" = {
       device = "/dev/disk/by-label/FIRMWARE";
@@ -29,7 +31,7 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  console.keyMap = "us";
+  nix.maxJobs = 0;
 
   nixpkgs.config.allowUnfree = true;
 
