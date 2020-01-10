@@ -31,7 +31,10 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  nix.maxJobs = 0;
+  nix = {
+    buildCores = 32;
+    maxJobs = 0;
+  };
 
   nixpkgs.config.allowUnfree = true;
 
