@@ -8,65 +8,70 @@ function cprint() {
     fi
     local color="$1"
     local msg="${*:2}"
-    local reset
-    reset="$(tput sgr0)"
-
-    [ -z ${NO_COLOR+1} ] || color=""
-    [ -z ${NO_COLOR+1} ] || reset=""
+    local reset=""
+    [ -z ${NO_COLOR+1} ] && reset="$(tput sgr0)"
 
     printf "%s%s%s" "$color" "$msg" "$reset"
 }
 
 function error() {
-    local red
-    red="$(tput setaf 1)"
+    local red=""
+    [ -z ${NO_COLOR+1} ] && red="$(tput setaf 1)"
     cprint "$red" "$@" $'\n'
     exit 1
 }
 
 function warn() {
-    local yellow
-    yellow="$(tput setaf 3)"
+    local yellow=""
+    [ -z ${NO_COLOR+1} ] && yellow="$(tput setaf 3)"
     cprint "$yellow" "$@"
 }
 
 function ok() {
-    local green
-    green="$(tput setaf 2)"
+    local green=""
+    [ -z ${NO_COLOR+1} ] && green="$(tput setaf 2)"
     cprint "$green" "$@"
 }
 
 function info() {
-    local blue
-    blue="$(tput setaf 4)"
+    local blue=""
+    [ -z ${NO_COLOR+1} ] && blue="$(tput setaf 4)"
     cprint "$blue" "$@"
 }
 
 function test_syntax() {
-    ok $'Syntax Test\n'
+    ok $'>>>> Syntax Test\n'
     readarray -d '' files < <(find ./ -name "*.nix" -print0)
     for src in "${files[@]}"; do
-        info "Parsing $src "
-        nix-instantiate --quiet --parse "$src" > /dev/null || error "Failed to parse $src"
+        info "$src: "
+        nix-instantiate --quiet --parse "$src" >/dev/null || error "Failed to parse $src"
         ok $'OK\n'
     done
 }
 
 function test_machines() {
-    ok $'Machine Test\n'
+    ok $'>>>> Machine Test\n'
     readarray -d '' machines < <(find ./system/machines -name "*.nix" -print0)
     for machine in "${machines[@]}"; do
         local name
         name="$(basename -s ".nix" "$machine")"
 
         # FIXME
-        [ $name == "comte" ] && warn "Skipping $name" $'\n' && continue
+        [ "$name" == "comte" ] && warn "Skipping $name" $'\n' && continue
 
-        info "Testing $name "
-        local path
-        path="$((nix-build '<nixpkgs/nixos>' -A vm --arg configuration "$machine") 2>&1)"
-        [ $? == 0 ] || error "Failed to build $name"
-        ok 'OK' "($path)" $'\n'
+        info "$name: "
+        local out
+        local tmp
+        local err
+
+        tmp=$(mktemp)
+        out=$(nix-build '<nixpkgs/nixos>' -A vm --arg configuration "$machine" 2>|"$tmp")
+        local status="$?"
+        err=$(cat "$tmp")
+        rm "$tmp"
+
+        [ "$status" == "0" ] || error "Failed to build $name" $'\n' "$err"
+        ok 'OK' "($out)" $'\n'
     done
 }
 
