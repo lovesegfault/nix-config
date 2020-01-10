@@ -1,7 +1,12 @@
-{ config, lib, pkgs, ... }: let
+{ config, lib, pkgs, ... }:
+let
   secret = ../../share/secrets/modules/ddclient-home-lovesegfault-com.nix;
-  secret_settings = if builtins.pathExists secret then import secret else {
-    username = ""; password = ""; };
+  secret_settings = if builtins.pathExists secret then
+    import secret
+  else {
+    username = "";
+    password = "";
+  };
 in {
   imports = [
     ../combo/core.nix
