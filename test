@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 set -o pipefail -o noclobber -o nounset
 
+nixos-rebuild --help || true
 echo "noop"
 
 exit
