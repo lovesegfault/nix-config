@@ -17,7 +17,7 @@
 
   i18n.consoleKeyMap = "us";
 
-  nix.maxJobs = "auto";
+  nix.maxJobs = 12;
 
   nixpkgs.config.allowUnfree = true;
 

@@ -20,7 +20,7 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  nix.maxJobs = "auto";
+  nix.maxJobs = 4;
 
   nixpkgs.config.allowUnfree = true;
 
