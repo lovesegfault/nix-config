@@ -23,4 +23,4 @@ jobs:
               run: nix run nixpkgs.nixfmt -c find . -name "*.nix" -exec nixfmt -c {} +
 
             - name: Check Machines
-              run: ./test
+              run: NO_COLOR=1 ./test
