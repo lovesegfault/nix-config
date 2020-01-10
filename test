@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+set -o pipefail -o noclobber -o nounset
+
+echo "noop"
+
+exit
