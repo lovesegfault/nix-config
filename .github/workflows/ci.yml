@@ -1,0 +1,26 @@
+on:
+    push:
+        branches: [ "master" ]
+    pull_request:
+        branches: [ "**" ]
+
+name: Continuous Integration
+
+jobs:
+    ci:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - name: Setup Nix
+              uses: cachix/install-nix-action@v6
+
+            - name: Setup Channel
+              run: nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+
+            - name: Check Formatting
+              run: nix run nixpkgs.nixfmt -c find . -name "*.nix" -exec nixfmt -c {} +
+
+            - name: Check Machines
+              run: ./test
