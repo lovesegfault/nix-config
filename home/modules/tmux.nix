@@ -21,10 +21,7 @@
       bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
 
       set -g base-index 0
-      #set-option -g default-shell /bin/zsh
       set-window-option -g automatic-rename
-      set -g default-terminal 'screen-256color'
-      set-option -sa terminal-overrides ",screen*:Tc"
       setw -g monitor-activity on
       set -g visual-activity off
 
@@ -39,9 +36,14 @@
       set -g pane-active-border-style "bg=$bg,fg=$border_active_fg"
       set -g window-status-current-style "fg=$border_active_fg"
       set -g window-status-style "fg=$fg"
+
+      set -g status-right '#{prefix_highlight} %a | %Y-%m-%d | %H:%M'
+
+      set -g default-terminal "tmux-256color"
+      set -ga terminal-overrides ",*256col*:Tc"
     '';
     newSession = true;
     plugins = with pkgs.tmuxPlugins; [ prefix-highlight ];
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
   };
 }
