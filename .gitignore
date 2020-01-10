@@ -1,0 +1,8 @@
+*~
+,*
+.*.swp
+.*.swo
+result
+result-*
+
+.DS_Store
