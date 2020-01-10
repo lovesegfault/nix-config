@@ -1,7 +1,16 @@
 #! /usr/bin/env bash
 set -o pipefail -o noclobber -o nounset
 
-nixos-rebuild --help || true
-echo "noop"
+function test_machines() {
+    readarray -d '' machines < <(find ./system/machines -name "*.nix" -print0)
+    for machine in "${machines[@]}"; do
+        local name
+        name="$(basename -s ".nix" "$machine")"
+        echo ">>>> Testing $name"
+        nix-build '<nixpkgs/nixos>' -A vm --arg configuration "$machine" || exit 1
+    done
+}
+
+test_machines
 
 exit
