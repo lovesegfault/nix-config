@@ -55,11 +55,11 @@ function test_machines() {
     for machine in "${machines[@]}"; do
         local name
         name="$(basename -s ".nix" "$machine")"
+        info "$name: "
 
         # FIXME
-        [ "$name" == "comte" ] && warn "Skipping $name" $'\n' && continue
+        [ "$name" == "comte" ] && warn "skip" $'\n' && continue
 
-        info "$name: "
         local out
         local tmp
         local err
