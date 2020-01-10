@@ -1,16 +1,74 @@
 #! /usr/bin/env bash
 set -o pipefail -o noclobber -o nounset
 
+function cprint() {
+    if [ "$#" -lt 2 ]; then
+        printf "Broken usage of cprint\n"
+        exit 1
+    fi
+    local color="$1"
+    local msg="${*:2}"
+    local reset
+    reset="$(tput sgr0)"
+
+    [ -z ${NO_COLOR+1} ] || color=""
+    [ -z ${NO_COLOR+1} ] || reset=""
+
+    printf "%s%s%s" "$color" "$msg" "$reset"
+}
+
+function error() {
+    local red
+    red="$(tput setaf 1)"
+    cprint "$red" "$@" $'\n'
+    exit 1
+}
+
+function warn() {
+    local yellow
+    yellow="$(tput setaf 3)"
+    cprint "$yellow" "$@"
+}
+
+function ok() {
+    local green
+    green="$(tput setaf 2)"
+    cprint "$green" "$@"
+}
+
+function info() {
+    local blue
+    blue="$(tput setaf 4)"
+    cprint "$blue" "$@"
+}
+
+function test_syntax() {
+    ok $'Syntax Test\n'
+    readarray -d '' files < <(find ./ -name "*.nix" -print0)
+    for src in "${files[@]}"; do
+        info "Parsing $src "
+        nix-instantiate --quiet --parse "$src" > /dev/null || error "Failed to parse $src"
+        ok $'OK\n'
+    done
+}
+
 function test_machines() {
+    ok $'Machine Test\n'
     readarray -d '' machines < <(find ./system/machines -name "*.nix" -print0)
     for machine in "${machines[@]}"; do
         local name
         name="$(basename -s ".nix" "$machine")"
-        echo ">>>> Testing $name"
-        nix-build '<nixpkgs/nixos>' -A vm --arg configuration "$machine" || exit 1
+
+        # FIXME
+        [ $name == "comte" ] && warn "Skipping $name" $'\n' && continue
+
+        info "Testing $name "
+        local path
+        path="$((nix-build '<nixpkgs/nixos>' -A vm --arg configuration "$machine") 2>&1)"
+        [ $? == 0 ] || error "Failed to build $name"
+        ok 'OK' "($path)" $'\n'
     done
 }
 
+test_syntax
 test_machines
-
-exit
