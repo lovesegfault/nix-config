@@ -57,7 +57,8 @@ function test_machines() {
         name="$(basename -s ".nix" "$machine")"
 
         # FIXME
-        [ "$name" == "cantor" ] ||
+        [ "$name" == "bohr" ] ||
+            [ "$name" == "cantor" ] ||
             [ "$name" == "comte" ] ||
             [ "$name" == "foucault" ] &&
             warn "Skipping $name" $'\n' && continue
