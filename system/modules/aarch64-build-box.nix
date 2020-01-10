@@ -9,6 +9,9 @@
       system = "aarch64-linux";
       supportedFeatures = [ "big-parallel" ];
     }];
+    extraOptions = ''
+      builders-use-substitutes = true
+    '';
   };
 
   programs.ssh.knownHosts.aarch64-build-box = {
