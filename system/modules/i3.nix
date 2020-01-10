@@ -7,7 +7,7 @@
       xterm.enable = false;
     };
 
-    displayManager.extraSessionFilePackages = [ windowManager.i3.package ];
+    displayManager.SessionPackages = [ windowManager.i3.package ];
 
     windowManager.i3 = {
       enable = true;
