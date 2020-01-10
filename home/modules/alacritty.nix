@@ -2,7 +2,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      env.TERM = "alacritty";
+      env.TERM = "xterm-256color";
       font = {
         normal = {
           family = "Hack";
