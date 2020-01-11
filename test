@@ -111,4 +111,4 @@ function test_home() {
 test_syntax
 test_formatting
 test_system
-#test_home
+test_home
