@@ -8,7 +8,7 @@
   ];
 
   home.packages = with pkgs;
-    [ gimp gopass libnotify speedcrunch thunderbird zoom-us ]
+    [ gimp gopass libnotify speedcrunch zoom-us ]
     ++ (if pkgs.stdenv.isLinux then
       with pkgs; [
         discord
@@ -17,6 +17,7 @@
         pavucontrol
         slack
         spotify
+        thunderbird
       ]
     else
       [ ]);
