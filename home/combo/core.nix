@@ -20,6 +20,7 @@
     packages = with pkgs; [
       exa
       gist
+      gopass
       mosh
       neofetch
       nix-index
