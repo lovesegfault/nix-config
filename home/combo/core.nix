@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ../modules/bat.nix
     ../modules/fzf.nix
@@ -19,11 +19,11 @@
 
     packages = with pkgs;
       [ exa gist gopass mosh neofetch nix-index ripgrep tealdeer ]
-      ++ (if pkgs.stdenv.isLinux then with pkgs; [ weechat ] else [ ])
-      ++ (if pkgs.stdenv.isDarwin then
-        with pkgs; [ bashInteractive getopt ]
-      else
-        [ ]);
+      ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.weechat ]
+      ++ lib.optionals pkgs.stdenv.isDarwin [
+        pkgs.bashInteractive
+        pkgs.getopt
+      ];
   };
 
   programs.home-manager.enable = true;

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ lib, pkgs, ... }: {
   home.packages = with pkgs;
     [
       ranger
@@ -11,5 +11,5 @@
       jq
       mediainfo
       pythonPackages.pygments
-    ] ++ (if pkgs.stdenv.isLinux then [ pkgs.ffmpegthumbnailer ] else [ ]);
+    ] ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.ffmpegthumbnailer ];
 }

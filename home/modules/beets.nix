@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   secret = ../../share/secrets/modules/beets.nix;
-  secret_settings = if builtins.pathExists secret then import secret else { };
+  secret_settings = lib.optionalAttrs (builtins.pathExists secret) (import secret);
   normal_settings = rec {
     art_filename = "cover";
     asciify_paths = false;

@@ -1,7 +1,7 @@
 { lib, pkgs, ... }: {
   xdg = {
     enable = true;
-  } // (if pkgs.stdenv.isLinux then {
+  } // lib.optionalAttrs pkgs.stdenv.isLinux {
     userDirs = {
       enable = true;
       desktop = "$HOME/opt";
@@ -13,6 +13,5 @@
       templates = "$HOME/opt";
       videos = "$HOME/opt";
     };
-  } else
-    { });
+  };
 }

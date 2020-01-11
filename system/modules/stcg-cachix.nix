@@ -1,6 +1,6 @@
-let
+{ lib, ... }: let
   secret = ../../share/secrets/modules/stcg-cachix.nix;
-  password = if builtins.pathExists secret then import secret else "";
+  password = lib.optionalString (builtins.pathExists secret) (import secret);
 in {
   nix = {
     binaryCaches = [ "https://standard.cachix.org/" ];

@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   secret = ../../share/secrets/modules/arcanist.nix;
-  token = if builtins.pathExists secret then import secret else "";
+  token = lib.optionalString (builtins.pathExists secret) (import secret);
   arcrc = {
     hosts = { "https://phab.nonstandard.ai/api/" = { token = token; }; };
     config = {
