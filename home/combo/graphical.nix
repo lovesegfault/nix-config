@@ -12,7 +12,6 @@
       gimp
       gopass
       libnotify
-      pavucontrol
       shotwell
       slack
       speedcrunch
@@ -20,7 +19,7 @@
       thunderbird
       zoom-us
     ] ++ (if pkgs.stdenv.isLinux then
-      with pkgs; [ discord gnome3.evince ]
+      with pkgs; [ discord gnome3.evince pavucontrol ]
     else
       [ ]);
 }
