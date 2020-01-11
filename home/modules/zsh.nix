@@ -18,8 +18,7 @@
       save = 30000;
       share = true;
     };
-    initExtra = let editor = "${config.home.sessionVariables.EDITOR}";
-    in ''
+    initExtra = ''
       bindkey "$${terminfo[khome]}" beginning-of-line
       bindkey "$${terminfo[kend]}" end-of-line
       bindkey "$${terminfo[kdch1]}" delete-char
@@ -34,9 +33,10 @@
       bindkey "^[[1;5D" backward-word
       bindkey "^[[1;3D" backward-word
 
-      bindkey -s "^O" '${editor} $(fzf -m)^M'
+      bindkey -s "^O" '${config.home.sessionVariables.EDITOR} $(fzf -m)^M'
     '' + lib.optionalString pkgs.stdenv.isDarwin
     "export NIX_PATH=$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH";
+
     sessionVariables = { RPROMPT = ""; };
     plugins = [
       {
