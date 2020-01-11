@@ -17,7 +17,16 @@ jobs:
               uses: cachix/install-nix-action@v6
 
             - name: Setup Channel
-              run: nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+              run: |
+                  nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+                  nix-channel --update
+
+            - name: Setup home-manager
+              run: |
+                  nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
+                  nix-channel --update
+                  export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+                  nix-shell '<home-manager>' -A install
 
             - name: Setup Dependencies
               run: nix-env -Ai nixpkgs.nixfmt
