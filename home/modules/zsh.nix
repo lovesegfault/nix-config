@@ -35,7 +35,7 @@
 
       bindkey -s "^O" '${config.home.sessionVariables.EDITOR} $(fzf -m)^M'
     '' + lib.optionalString pkgs.stdenv.isDarwin
-    "export NIX_PATH=$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH";
+      "export NIX_PATH=$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH";
 
     sessionVariables = { RPROMPT = ""; };
     plugins = [
