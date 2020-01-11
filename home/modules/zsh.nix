@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }: {
-  programs.starship.enableZshIntegration = true;
+  programs = {
+    direnv.enableZshIntegration = true;
+    starship.enableZshIntegration = true;
+  };
 
   programs.zsh = {
     enable = true;
