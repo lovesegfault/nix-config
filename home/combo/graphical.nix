@@ -8,18 +8,9 @@
   ];
 
   home.packages = with pkgs;
-    [
-      gimp
-      gopass
-      libnotify
-      shotwell
-      slack
-      speedcrunch
-      spotify
-      thunderbird
-      zoom-us
-    ] ++ (if pkgs.stdenv.isLinux then
-      with pkgs; [ discord gnome3.evince pavucontrol ]
+    [ gimp gopass libnotify slack speedcrunch spotify thunderbird zoom-us ]
+    ++ (if pkgs.stdenv.isLinux then
+      with pkgs; [ discord gnome3.evince gnome3.shotwell pavucontrol ]
     else
       [ ]);
 }
