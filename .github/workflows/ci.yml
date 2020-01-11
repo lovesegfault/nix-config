@@ -21,6 +21,13 @@ jobs:
                   nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
                   nix-channel --update
 
+            - name: Setup Cachix
+              uses: cachix/cachix-action@v3
+              with:
+                  name: nix-config
+                  signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+                  skipNixBuild: true
+
             - name: Setup home-manager
               run: |
                   nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
@@ -29,7 +36,7 @@ jobs:
                   nix-shell '<home-manager>' -A install
 
             - name: Setup Dependencies
-              run: nix-env -Ai nixpkgs.nixfmt
+              run: nix-env -iA nixpkgs.nixfmt
 
             - name: Tests
-              run: NO_COLOR=1 ./test
+              run: NO_COLOR=1 CACHIX_PUSH=1 ./test
