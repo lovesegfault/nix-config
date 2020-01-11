@@ -1,6 +1,6 @@
-{
-  xdg = {
-    enable = true;
+{ lib, pkgs, ... }:
+let
+  userDirs = if pkgs.stdenv.isLinux then {
     userDirs = {
       enable = true;
       desktop = "$HOME/opt";
@@ -12,5 +12,6 @@
       templates = "$HOME/opt";
       videos = "$HOME/opt";
     };
-  };
-}
+  } else
+    { };
+in { xdg = { enable = true; } // userDirs; }
