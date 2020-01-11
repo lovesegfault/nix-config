@@ -3,7 +3,7 @@
     ranger
 
     atool
-    elinks
+    lynx
     exiftool
     ffmpegthumbnailer
     file
