@@ -7,17 +7,20 @@
     ../modules/qt.nix
   ];
 
-  home.packages = with pkgs; [
-    gimp
-    gnome3.evince
-    gopass
-    libnotify
-    pavucontrol
-    shotwell
-    slack
-    speedcrunch
-    spotify
-    thunderbird
-    zoom-us
-  ] ++ (if pkgs.stdenv.isLinux then [ pkgs.discord ] else []);
+  home.packages = with pkgs;
+    [
+      gimp
+      gopass
+      libnotify
+      pavucontrol
+      shotwell
+      slack
+      speedcrunch
+      spotify
+      thunderbird
+      zoom-us
+    ] ++ (if pkgs.stdenv.isLinux then
+      with pkgs; [ discord gnome3.evince ]
+    else
+      [ ]);
 }
