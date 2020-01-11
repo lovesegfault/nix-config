@@ -2,7 +2,8 @@
   imports = [
     ../combo/core.nix
     ../combo/dev.nix
-    ../combo/graphical.nix
+
+    ../modules/alacritty.nix
 
     ../hardware/macbook-pro.nix
   ];
