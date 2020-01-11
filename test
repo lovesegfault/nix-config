@@ -49,8 +49,8 @@ function test_syntax() {
     done
 }
 
-function test_machines() {
-    ok $'>>>> Machine Test\n'
+function test_system() {
+    ok $'>>>> System Test\n'
     readarray -d '' machines < <(find ./system/machines -name "*.nix" -print0)
     for machine in "${machines[@]}"; do
         local name
@@ -75,5 +75,29 @@ function test_machines() {
     done
 }
 
+function test_home() {
+    ok $'>>>> Home Test\n'
+    readarray -d '' machines < <(find ./home/machines -name "*.nix" -print0)
+    for machine in "${machines[@]}"; do
+        local name
+        name="$(basename -s ".nix" "$machine")"
+        info "$name: "
+
+        local out
+        local tmp
+        local err
+
+        tmp=$(mktemp)
+        out=$(home-manager -f "$machine" build 2>|"$tmp")
+        local status="$?"
+        err=$(cat "$tmp")
+        rm "$tmp"
+
+        [ "$status" == "0" ] || error "Failed to build $name" $'\n' "$err"
+        ok 'OK' "($out)" $'\n'
+    done
+}
+
 test_syntax
-test_machines
+test_system
+#test_home
