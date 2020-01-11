@@ -1,7 +1,8 @@
 { lib, ... }:
 let
   secret = ../../share/secrets/modules/ddclient-home-lovesegfault-com.nix;
-  secret_settings = lib.optionalAttrs (builtins.pathExists secret) (import secret);
+  secret_settings =
+    lib.optionalAttrs (builtins.pathExists secret) (import secret);
 in {
   imports = [
     ../combo/core.nix

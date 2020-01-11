@@ -1,4 +1,5 @@
-{ lib, ... }: let
+{ lib, ... }:
+let
   secret = ../../share/secrets/modules/stcg-cachix.nix;
   password = lib.optionalString (builtins.pathExists secret) (import secret);
 in {
