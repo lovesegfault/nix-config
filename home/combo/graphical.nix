@@ -8,7 +8,6 @@
   ];
 
   home.packages = with pkgs; [
-    discord
     gimp
     gnome3.evince
     gopass
@@ -20,5 +19,5 @@
     spotify
     thunderbird
     zoom-us
-  ];
+  ] ++ (if pkgs.stdenv.isLinux then [ pkgs.discord ] else []);
 }
