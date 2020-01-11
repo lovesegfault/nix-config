@@ -44,6 +44,7 @@
     '';
     newSession = true;
     plugins = with pkgs.tmuxPlugins; [ prefix-highlight ];
+    secureSocket = false;
     terminal = "tmux-256color";
   };
 }

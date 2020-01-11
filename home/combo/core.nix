@@ -17,17 +17,10 @@
   home = {
     stateVersion = "20.03";
 
-    packages = with pkgs; [
-      exa
-      gist
-      gopass
-      mosh
-      neofetch
-      nix-index
-      ripgrep
-      tealdeer
-      weechat
-    ];
+    packages = with pkgs;
+      [ exa gist gopass mosh neofetch nix-index ripgrep tealdeer ]
+      ++ (if pkgs.stdenv.isLinux then with pkgs; [ weechat ] else [ ])
+      ++ (if pkgs.stdenv.isDarwin then with pkgs; [ bashInteractive getopt ] else [ ]);
   };
 
   programs.home-manager.enable = true;

@@ -32,7 +32,10 @@
       bindkey "^[[1;3D" backward-word
 
       bindkey -s "^O" '${editor} $(fzf -m)^M'
-    '';
+    '' + (if pkgs.stdenv.isDarwin then
+      "export NIX_PATH=$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH"
+    else
+      "");
     sessionVariables = { RPROMPT = ""; };
     plugins = [
       {
