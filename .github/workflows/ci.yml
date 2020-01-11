@@ -39,4 +39,8 @@ jobs:
               run: nix-env -iA nixpkgs.nixfmt
 
             - name: Tests
-              run: NO_COLOR=1 CACHIX_PUSH=1 ./test
+              run: |
+                  export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+                  export NO_COLOR=1
+                  export CACHIX_PUSH=1
+                  ./test
