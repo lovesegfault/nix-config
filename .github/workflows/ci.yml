@@ -19,8 +19,8 @@ jobs:
             - name: Setup Channel
               run: nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
 
-            - name: Check Formatting
-              run: nix run nixpkgs.nixfmt -c find . -name "*.nix" -exec nixfmt -c {} +
+            - name: Setup Dependencies
+              run: nix-env -Ai nixpkgs.nixfmt
 
             - name: Tests
               run: NO_COLOR=1 ./test

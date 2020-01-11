@@ -49,6 +49,16 @@ function test_syntax() {
     done
 }
 
+function test_formatting() {
+    ok $'>>>> Formatting Test\n'
+    readarray -d '' files < <(find ./ -name "*.nix" -print0)
+    for src in "${files[@]}"; do
+        info "$src: "
+        nixfmt -c "$src" >/dev/null || error "Formatting check failed for $src"
+        ok $'OK\n'
+    done
+}
+
 function test_system() {
     ok $'>>>> System Test\n'
     readarray -d '' machines < <(find ./system/machines -name "*.nix" -print0)
@@ -99,5 +109,6 @@ function test_home() {
 }
 
 test_syntax
+test_formatting
 test_system
 #test_home
