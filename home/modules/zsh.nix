@@ -34,8 +34,10 @@
       bindkey "^[[1;3D" backward-word
 
       bindkey -s "^O" '${config.home.sessionVariables.EDITOR} $(fzf -m)^M'
-    '' + lib.optionalString pkgs.stdenv.isDarwin
-      "export NIX_PATH=$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH";
+    '' + lib.optionalString pkgs.stdenv.isDarwin ''
+      export NIX_PATH=$HOME/.nix-defexpr/channels''${NIX_PATH:+:}$NIX_PATH
+      export PATH=$PATH:/usr/local/bin/
+    '';
 
     sessionVariables = { RPROMPT = ""; };
     plugins = [
