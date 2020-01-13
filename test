@@ -82,6 +82,7 @@ function test_system() {
 
         [ "$status" == "0" ] || error "Failed to build $name" $'\n' "$err"
         [ -z ${CACHIX_PUSH+1} ] || cachix push nix-config "$out"
+        rm ./result
         ok 'OK' "($out)" $'\n'
     done
 }
@@ -106,6 +107,7 @@ function test_home() {
 
         [ "$status" == "0" ] || error "Failed to build $name" $'\n' "$err"
         [ -z ${CACHIX_PUSH+1} ] || cachix push nix-config "$out"
+        rm ./result
         ok 'OK' "($out)" $'\n'
     done
 }
