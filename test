@@ -75,14 +75,13 @@ function test_system() {
         local err
 
         tmp=$(mktemp)
-        out=$(nix-build '<nixpkgs/nixos>' -A vm --arg configuration "$machine" 2>|"$tmp")
+        out=$(nix-build '<nixpkgs/nixos>' --no-out-link -A vm --arg configuration "$machine" 2>|"$tmp")
         local status="$?"
         err=$(cat "$tmp")
         rm "$tmp"
 
         [ "$status" == "0" ] || error "Failed to build $name" $'\n' "$err"
         [ -z ${CACHIX_PUSH+1} ] || cachix push nix-config "$out"
-        rm ./result
         ok 'OK' "($out)" $'\n'
     done
 }
