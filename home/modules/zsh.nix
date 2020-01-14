@@ -120,18 +120,15 @@
       }
     ];
     shellAliases = {
-      # misc
-      tupd =
-        "rsync -Pav --delete ~/documents/torrents/ viking.whatbox.ca:watch/";
       cat = "bat";
       # rust
       c = "cargo";
       cb = "cargo build";
       cbr = "cargo build --release";
-      cc = "cargo check";
-      ccl = "cargo clean";
-      cdoc = "cargo doc";
-      clp = "cargo clippy";
+      cch = "cargo check";
+      cce = "cargo clean";
+      cdo = "cargo doc";
+      ccp = "cargo clippy";
       cr = "cargo run";
       crr = "cargo run --release";
       ct = "cargo test";
