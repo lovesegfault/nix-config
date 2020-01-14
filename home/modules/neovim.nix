@@ -584,7 +584,6 @@
       '';
     in ''
       ${baseConfig}
-
       ${aleConfig}
       ${ayuConfig}
       ${fzfConfig}
@@ -592,7 +591,6 @@
       ${lightlineConfig}
       ${tagbarConfig}
       ${vimtexConfig}
-
       ${deopleteConfig}
       ${languageClientConfig}
     '';
