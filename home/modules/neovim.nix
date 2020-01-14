@@ -47,16 +47,10 @@
       vimtex
 
       # Syntax
-      vim-flatbuffers
+      polyglot
       gentoo-syntax
       lalrpop-vim
-      vim-nftables
       vim-nix
-      vim-protobuf
-      vim-toml
-      rust-vim
-      meson
-
     ];
     extraConfig = let
       baseConfig = ''
