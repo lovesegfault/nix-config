@@ -1,10 +1,7 @@
 { pkgs, ... }: {
-  home = {
-    packages = with pkgs; [ nodejs yarn ];
-    sessionVariables = rec {
-      EDITOR = "nvim";
-      VISUAL = EDITOR;
-    };
+  home.sessionVariables = rec {
+    EDITOR = "nvim";
+    VISUAL = EDITOR;
   };
 
   programs.git.extraConfig = rec {
