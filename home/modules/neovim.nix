@@ -538,13 +538,13 @@
             \ 'cpp':['clangd', 'cppcheck', 'flawfinder'],
             \ 'python': ['bandit', 'pylama', 'vulture'],
             \ 'text':['mdl', 'proselint', 'languagetool'],
+            \ 'markdown':['mdl', 'proselint', 'languagetool'],
         \ }
         let g:ale_fixers = {
             \ '*': ['remove_trailing_lines', 'trim_whitespace'],
             \ 'c':['clang-format'],
             \ 'cpp':['clang-format'],
-            \ 'json':['prettier', 'fixjson'],
-            \ 'markdown':['prettier'],
+            \ 'json':['fixjson'],
             \ 'python':['isort', 'autopep8'],
             \ 'rust':['rustfmt'],
             \ 'sh':['shfmt'],
