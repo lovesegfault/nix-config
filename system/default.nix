@@ -1,7 +1,7 @@
 let
-  systemPkg = path: arch:
+  systemPkg = machine: arch:
     (import <nixpkgs/nixos> {
-      configuration = path;
+      configuration = machine;
       system = arch;
     }).system;
 in {
