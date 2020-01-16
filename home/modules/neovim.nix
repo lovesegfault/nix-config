@@ -59,8 +59,7 @@
         " => Plugins
         """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         filetype off | syn off
-        ${builtins.concatStringsSep "\n"
-        (map loadPlugin plugins)}
+        ${builtins.concatStringsSep "\n" (map loadPlugin plugins)}
         filetype indent plugin on | syn on
       '';
       baseConfig = ''
