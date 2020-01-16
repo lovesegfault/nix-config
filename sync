@@ -134,7 +134,7 @@ function check_module() {
 
 function sync_system() {
     [ "$#" -eq 0 ] || error "sync_system"
-    local files=("configuration.nix" "hardware-configuration.nix")
+    local files=("configuration.nix")
     local dirs=("system" "share")
     sync_module "root" "$NIXOS_PATH" dirs[@]
     check_module "$NIXOS_PATH" files[@] dirs[@]
