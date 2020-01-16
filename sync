@@ -61,8 +61,8 @@ function fix_perms() {
     local user="$1"
     local path="$2"
 
-    local fix_dirs=("find" "$path" "-type" "d" "-exec" "chmod 0755 {} +")
-    local fix_files=("find" "$path" "-type" "f" "-exec" "chmod 0644 {} +")
+    local fix_dirs=("find" "$path" "-type" "d" "-exec" "chmod 0700 {} +")
+    local fix_files=("find" "$path" "-type" "f" "-exec" "chmod 0600 {} +")
     if [ "$USER" == "$user" ]; then
         ${fix_dirs[*]}
         ${fix_files[*]}
