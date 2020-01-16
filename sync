@@ -63,12 +63,12 @@ function fix_perms() {
 
     local fix_dirs=("find" "$path" "-type" "d" "-exec" "chmod 0755 {} +")
     local fix_files=("find" "$path" "-type" "f" "-exec" "chmod 0644 {} +")
-    if [ $USER == $user ]; then
+    if [ "$USER" == "$user" ]; then
         ${fix_dirs[*]}
         ${fix_files[*]}
     else
-        sudo runuser -l "$user" -c "$(eval echo ${fix_dirs[@]})"
-        sudo runuser -l "$user" -c "$(eval echo ${fix_files[@]})"
+        sudo runuser -l "$user" -c "$(eval echo "${fix_dirs[@]}")"
+        sudo runuser -l "$user" -c "$(eval echo "${fix_files[@]}")"
     fi
 }
 
@@ -95,10 +95,10 @@ function sync_dir() {
     # -t, --times                 preserve modification times
     local rsync_cmd=("rsync" "-irhlt" "--delete" "$src" "$dest")
 
-    if [ $USER == $user ] && [ $DRY_RUN == 0 ]; then
+    if [ "$USER" == "$user" ] && [ $DRY_RUN == 0 ]; then
         ${rsync_cmd[*]}
     else
-        sudo runuser -l "$user" -c "$(eval echo ${rsync_cmd[@]})"
+        sudo runuser -l "$user" -c "$(eval echo "${rsync_cmd[@]}")"
     fi
 
     [ $DRY_RUN == 0 ] && fix_perms "$user" "$dest"
