@@ -1,6 +1,6 @@
 let
   homePkg = machine: arch:
-  (import <home-manager/home-manager/home-manager.nix> {
+    (import <home-manager/home-manager/home-manager.nix> {
       pkgs = import <nixpkgs> { system = arch; };
       confPath = machine;
       confAttr = "";
