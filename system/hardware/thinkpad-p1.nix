@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ../modules/efi.nix
     ../modules/bluetooth.nix
@@ -54,7 +54,7 @@
     };
   };
 
-  powerManagement.cpuFreqGovernor = "powersave";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 
   users.users.bemeurer.extraGroups = [ "camera" ];
 }
