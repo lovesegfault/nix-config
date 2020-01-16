@@ -13,15 +13,16 @@
 
   programs.zsh.shellAliases = { v = "nvim"; };
 
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
+  programs.neovim = let
+    loadPlugin = plugin: ''
+      set rtp^=${plugin.rtp}
+      set rtp+=${plugin.rtp}/after
+    '';
     plugins = with pkgs.vimPlugins; [
       # Completion/IDE
-      ale
-      deoplete-nvim
-      LanguageClient-neovim
+      ale # Linting
+      deoplete-nvim # Completion
+      LanguageClient-neovim # LSP
 
       # Colorscheme
       ayu-vim
@@ -31,24 +32,37 @@
       fzf-vim # Search
       gist-vim # Gist integration
       webapi-vim # Gist dependency
-      lightline-ale
-      lightline-vim
-      goyo
-      tagbar
-      vim-abolish
-      vim-indent-guides
-      vim-multiple-cursors
-      vim-surround
-      vim-trailing-whitespace
-      vimtex
+      lightline-ale # Linter integration
+      lightline-vim # Statusbar
+      goyo # Distraction-free writing
+      tagbar # Code navigation
+      vim-indent-guides # Indentation highlighting
+      vim-multiple-cursors # Sublime-like multipel cursors
+      vim-trailing-whitespace # Highlight trailing whitespaces
+      vimtex # LaTeX integration
 
       # Syntax
-      polyglot
-      gentoo-syntax
-      lalrpop-vim
-      vim-nix
+      polyglot # Shitload of syntaxes
+      gentoo-syntax # Ebuild and metadata syntax
+      lalrpop-vim # LALRPOP syntax
+      vim-nix # Nix syntax highlighting
     ];
+  in {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
     extraConfig = let
+      # FIXME: Workaround for broken handling of packpath by vim8/neovim for ftplugins
+      # https://github.com/NixOS/nixpkgs/issues/39364#issuecomment-425536054
+      pluginConfig = ''
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " => Plugins
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        filetype off | syn off
+        ${builtins.concatStringsSep "\n"
+        (map loadPlugin plugins)}
+        filetype indent plugin on | syn on
+      '';
       baseConfig = ''
         """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         " => General
@@ -583,6 +597,7 @@
         \ }
       '';
     in ''
+      ${pluginConfig}
       ${baseConfig}
       ${aleConfig}
       ${ayuConfig}
