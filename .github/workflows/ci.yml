@@ -39,9 +39,14 @@ jobs:
             - name: Setup Dependencies
               run: nix-env -iA nixpkgs.nixfmt
 
-            - name: Tests
-              run: |
-                  export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
-                  export NO_COLOR=1
-                  export CACHIX_PUSH=1
-                  ./test
+            - name: Parsing Tests
+              run: find . -name "*.nix" -exec nix-instantiate --parse --quiet {} >/dev/null +
+
+            - name: Formatting Tests
+              run: nix run nixpkgs.nixfmt -c find . -iname "*.nix" -exec nixfmt -c {} +
+
+            - name: System Tests
+              run: nix-build -A system.foucault | cachix
+
+            - name: Home Tests
+              run: nix-build -A home.foucault | cachix
