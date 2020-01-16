@@ -10,8 +10,10 @@
   ];
 
   boot = rec {
+    initrd.availableKernelModules =
+      [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     extraModulePackages = with kernelPackages; [ acpi_call tp_smapi ];
-    kernelModules = [ "acpi_call" ];
+    kernelModules = [ "acpi_call" "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
   };
 
@@ -51,6 +53,8 @@
       '';
     };
   };
+
+  powerManagement.cpuFreqGovernor = "powersave";
 
   users.users.bemeurer.extraGroups = [ "camera" ];
 }
