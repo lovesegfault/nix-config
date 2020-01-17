@@ -18,7 +18,7 @@
     stateVersion = "20.03";
 
     packages = with pkgs;
-      [ exa gist gopass mosh neofetch nixfmt nix-index ripgrep tealdeer ]
+      [ exa gist gopass mosh neofetch nix-index ripgrep tealdeer ]
       ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.weechat ]
       ++ lib.optionals pkgs.stdenv.isDarwin [
         pkgs.bashInteractive
