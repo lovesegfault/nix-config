@@ -2,7 +2,6 @@
   imports = [
     ../modules/aarch64-build-box.nix
     ../modules/bluetooth.nix
-    ../modules/fwupd.nix
     ../modules/openssh.nix
     ../modules/sound.nix
   ];
