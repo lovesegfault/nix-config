@@ -50,12 +50,6 @@ function ok() {
     cprint "$green" "$@"
 }
 
-function debug() {
-    local blue
-    blue="$(tput setaf 4)"
-    cprint "$blue" "$@"
-}
-
 function fix_perms() {
     [ "$#" -eq 2 ] || error "fix_perms USER PATH"
     local user="$1"
