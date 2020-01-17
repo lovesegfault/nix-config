@@ -18,8 +18,8 @@ jobs:
 
             - name: Setup Channel
               run: |
-                  nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-                  nix-channel --update
+                nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+                nix-channel --update
 
             - name: Setup Cachix
               uses: cachix/cachix-action@v3
@@ -30,11 +30,11 @@ jobs:
 
             - name: Setup home-manager
               run: |
-                  nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
-                  nix-channel --update
-                  export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
-                  nix-shell '<home-manager>' -A install
-                  echo "{ allowUnfree = true; }" > ~/.config/nixpkgs/config.nix
+                nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
+                nix-channel --update
+                export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+                nix-shell '<home-manager>' -A install
+                echo "{ allowUnfree = true; }" > ~/.config/nixpkgs/config.nix
 
             - name: Setup Dependencies
               run: nix-env -iA nixpkgs.nixfmt
@@ -49,4 +49,6 @@ jobs:
               run: nix-build -A system.foucault | cachix push nix-config
 
             - name: Home Tests
-              run: nix-build -A home.foucault | cachix push nix-config
+              run: |
+                export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+                nix-build -A home.foucault | cachix push nix-config
