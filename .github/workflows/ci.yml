@@ -46,7 +46,7 @@ jobs:
               run: nix run nixpkgs.nixfmt -c find . -iname "*.nix" -exec nixfmt -c {} +
 
             - name: System Tests
-              run: nix-build -A system.foucault | cachix push
+              run: nix-build -A system.foucault | cachix push nix-config
 
             - name: Home Tests
-              run: nix-build -A home.foucault | cachix push
+              run: nix-build -A home.foucault | cachix push nix-config
