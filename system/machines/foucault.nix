@@ -12,12 +12,11 @@
     ../modules/stcg-cachix.nix
     ../modules/stcg-cameras.nix
 
-    ../../share/pkgs/intel-i915-drm-fix.nix
-    ../../share/pkgs/xfs-2038-fix.nix
+    ../../share/pkgs/linux-5.4-fixes.nix
   ];
 
   boot = {
-    kernelPatches = with pkgs; [ intel-i915-drm-fix xfs-2038-fix ];
+    kernelPatches = with pkgs; [ i915-cmd-fix i915-drm-fix xfs-2038-fix ];
     initrd.luks.devices."nixos".device =
       "/dev/disk/by-uuid/2d6ff3d0-cdfd-4b6e-a689-c43d21627279";
   };
