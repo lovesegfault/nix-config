@@ -16,12 +16,18 @@ jobs:
             - name: Setup Nix
               uses: cachix/install-nix-action@v6
 
-            - name: Setup Channel
+            - name: Setup Nix store cache
+              uses: actions/cache@v1
+              with:
+                path: /nix/store
+                key: ${{ runner.os }}-nix-store
+
+            - name: Setup channel
               run: |
                 nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
                 nix-channel --update
 
-            - name: Setup Cachix
+            - name: Setup cachix
               uses: cachix/cachix-action@v3
               with:
                   name: nix-config
@@ -36,19 +42,19 @@ jobs:
                 nix-shell '<home-manager>' -A install
                 echo "{ allowUnfree = true; }" > ~/.config/nixpkgs/config.nix
 
-            - name: Setup Dependencies
+            - name: Setup dependencies
               run: nix-env -iA nixpkgs.nixfmt
 
-            - name: Parsing Tests
+            - name: Parsing tests
               run: find . -name "*.nix" -exec nix-instantiate --parse --quiet {} >/dev/null +
 
-            - name: Formatting Tests
+            - name: Formatting tests
               run: nix run nixpkgs.nixfmt -c find . -iname "*.nix" -exec nixfmt -c {} +
 
-            - name: System Tests
+            - name: System tests
               run: nix-build -A system.foucault | cachix push nix-config
 
-            - name: Home Tests
+            - name: Home tests
               run: |
                 export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
                 nix-build -A home.foucault | cachix push nix-config
