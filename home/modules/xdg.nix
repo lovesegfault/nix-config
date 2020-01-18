@@ -9,7 +9,7 @@
       download = "$HOME/tmp";
       music = "$HOME/music";
       pictures = "$HOME/pictures";
-      publishShare = "$HOME/opt";
+      publicShare = "$HOME/opt";
       templates = "$HOME/opt";
       videos = "$HOME/opt";
     };
