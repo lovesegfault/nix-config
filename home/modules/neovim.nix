@@ -18,6 +18,11 @@
       set rtp^=${plugin.rtp}
       set rtp+=${plugin.rtp}/after
     '';
+    brokenPlugins = with pkgs.vimPlugins; [ rust-vim vimtex ];
+  in {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
     plugins = with pkgs.vimPlugins; [
       # Completion/IDE
       ale # Linting
@@ -45,12 +50,9 @@
       polyglot # Shitload of syntaxes
       gentoo-syntax # Ebuild and metadata syntax
       lalrpop-vim # LALRPOP syntax
+      rust-vim # Rust 2018 syntax
       vim-nix # Nix syntax highlighting
     ];
-  in {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
     extraConfig = let
       # FIXME: Workaround for broken handling of packpath by vim8/neovim for ftplugins
       # https://github.com/NixOS/nixpkgs/issues/39364#issuecomment-425536054
@@ -59,7 +61,7 @@
         " => Plugins
         """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         filetype off | syn off
-        ${builtins.concatStringsSep "\n" (map loadPlugin plugins)}
+        ${builtins.concatStringsSep "\n" (map loadPlugin brokenPlugins)}
         filetype indent plugin on | syn on
       '';
       baseConfig = ''
