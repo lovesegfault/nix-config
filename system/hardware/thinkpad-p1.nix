@@ -5,7 +5,6 @@
     ../modules/bumblebee.nix
     ../modules/fwupd.nix
     ../modules/intel.nix
-    ../modules/thunderbolt.nix
     ../modules/tlp.nix
   ];
 
@@ -34,8 +33,8 @@
   programs.light.enable = true;
 
   services = {
-    fprintd.package = pkgs.fprintd-thinkpad;
     fstrim.enable = true;
+    hardware.bolt.enable = true;
     undervolt = {
       enable = true;
       coreOffset = "-70";
