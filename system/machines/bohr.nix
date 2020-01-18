@@ -10,12 +10,12 @@ in {
     ../hardware/rpi3.nix
 
     ../modules/sshguard.nix
-    ../modules/ddclient.nix
   ];
 
   networking.hostName = "bohr";
 
   services.ddclient = (lib.recursiveUpdate {
+    enable = true;
     ssl = true;
     protocol = "googledomains";
     domains = [ "home.lovesegfault.com" ];
