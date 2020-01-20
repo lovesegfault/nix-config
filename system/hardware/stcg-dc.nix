@@ -3,6 +3,10 @@
   imports = [ ../modules/openssh.nix ../modules/efi.nix ];
 
   boot = rec {
+    blacklistedKernelModules = [ "nouveau" ];
+    extraModulePackages = [ kernelPackages.nvidia_x11 ];
+    initrd.availableKernelModules = [ "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+    kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "l1tf=off"
@@ -16,8 +20,6 @@
       "nospectre_v1"
       "nospectre_v2"
     ];
-    blacklistedKernelModules = [ "nouveau" ];
-    extraModulePackages = [ kernelPackages.nvidia_x11 ];
   };
 
   environment.systemPackages = [ config.boot.kernelPackages.nvidia_x11 ];
