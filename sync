@@ -44,12 +44,6 @@ function warn() {
     cprint "$yellow" "$@"
 }
 
-function ok() {
-    local green
-    green="$(tput setaf 2)"
-    cprint "$green" "$@"
-}
-
 function fix_perms() {
     [ "$#" -eq 2 ] || error "fix_perms USER PATH"
     local user="$1"
@@ -240,13 +234,11 @@ function main() {
         check_sudo
         sync_system
         rebuild_system
-        ok "System OK"
     fi
     if [ $HOME_SYNC == 1 ]; then
         [ "$(id -u)" != 0 ] || error "Run this as a your user, not root."
         sync_home
         rebuild_home
-        ok "Home OK"
     fi
 }
 
