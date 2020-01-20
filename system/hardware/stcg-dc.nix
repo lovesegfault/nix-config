@@ -5,7 +5,8 @@
   boot = rec {
     blacklistedKernelModules = [ "nouveau" ];
     extraModulePackages = [ kernelPackages.nvidia_x11 ];
-    initrd.availableKernelModules = [ "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+    initrd.availableKernelModules =
+      [ "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
