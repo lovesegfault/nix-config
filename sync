@@ -86,7 +86,8 @@ function sync_dir() {
     # -r, --recursive             recurse into directories
     # -h, --human-readable        output numbers in a human-readable format
     # -l, --links                 copy symlinks as symlinks
-    local rsync_cmd=("rsync" "-irhl" "--delete" "$src" "$dest")
+    # -t, --times                 preserve modification times
+    local rsync_cmd=("rsync" "-irhlt" "--delete" "$src" "$dest")
 
     if [ "$USER" == "$user" ] && [ $DRY_RUN == 0 ]; then
         ${rsync_cmd[*]}
