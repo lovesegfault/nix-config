@@ -20,8 +20,7 @@ system/
 ├── modules/          # Composable modules (e.g. bumblebee, sudo, sway, xserver)
 └── pkgs/             # Personal packages (e.g. kernel patches)
 
-share/
-└── secrets/          # Secrets (API keys)
+secrets/              # Secrets (API keys)
 
 misc/
 ├── config.nix        # Example NixOS user configuration
