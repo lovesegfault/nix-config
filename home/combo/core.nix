@@ -13,7 +13,7 @@
     ../modules/xdg.nix
     ../modules/zsh.nix
 
-    ../../share/pkgs/weechat.nix
+    ../pkgs/weechat.nix
   ];
 
   home = {

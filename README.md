@@ -10,17 +10,17 @@ home/
 ├── combo/            # Meta-configurations (e.g. core, desktop, development)
 ├── hardware/         # Hardware-specific configuration (e.g. DPI, resolution)
 ├── machines/         # Configuration for actual hosts (selectively imports combos)
-└── modules/          # Composable modules (e.g. neovim, zsh, sway)
+├── modules/          # Composable modules (e.g. neovim, zsh, sway)
+└── pkgs/             # Personal packages (e.g. swaymenu, patched weechat)
 
 system/
 ├── combo/            # Meta-configurations (e.g. core, desktop, development)
 ├── hardware/         # Hardware-specific configuration (e.g. kernel modules, peripherals)
 ├── machines/         # Configuration for actual hosts (selectively imports combos)
-└── modules/          # Composable modules (e.g. bumblebee, sudo, sway, xserver)
+├── modules/          # Composable modules (e.g. bumblebee, sudo, sway, xserver)
+└── pkgs/             # Personal packages (e.g. kernel patches)
 
 share/
-├── patches/          # Patches for broken software
-├── pkgs/             # Personal packages
 └── secrets/          # Secrets (API keys)
 
 misc/

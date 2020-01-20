@@ -1,9 +1,5 @@
 { config, lib, pkgs, ... }: {
-  imports = [
-    ../../share/pkgs/passmenu.nix
-    ../../share/pkgs/prtsc.nix
-    ../../share/pkgs/swaymenu.nix
-  ];
+  imports = [ ../pkgs/passmenu.nix ../pkgs/prtsc.nix ../pkgs/i3menu.nix ];
 
   xdg.configFile.gebaar = {
     target = "gebaar/gebaard.toml";

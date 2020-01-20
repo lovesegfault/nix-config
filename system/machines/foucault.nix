@@ -13,7 +13,7 @@
     ../modules/stcg-cachix.nix
     ../modules/stcg-cameras.nix
 
-    ../../share/pkgs/linux-5.4-fixes.nix
+    ../pkgs/linux-5.4-fixes.nix
   ];
 
   boot = {

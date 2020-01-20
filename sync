@@ -125,7 +125,7 @@ function check_module() {
 function sync_system() {
     [ "$#" -eq 0 ] || error "sync_system"
     local files=("configuration.nix")
-    local dirs=("system" "share/pkgs")
+    local dirs=("system")
     if [ -d "$SCRIPT_PATH/share/secrets/system" ]; then
         dirs+=("share/secrets/system")
     fi
@@ -136,7 +136,7 @@ function sync_system() {
 function sync_home() {
     [ "$#" -eq 0 ] || error "sync_home"
     local files=("config.nix" "home.nix")
-    local dirs=("home" "share/pkgs")
+    local dirs=("home")
     if [ -d "$SCRIPT_PATH/share/secrets/system" ]; then
         dirs+=("share/secrets/home")
     fi

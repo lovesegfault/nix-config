@@ -1,9 +1,9 @@
 { pkgs, ... }: {
   imports = [
-    ../../share/pkgs/emojimenu.nix
-    ../../share/pkgs/passmenu.nix
-    ../../share/pkgs/prtsc.nix
-    ../../share/pkgs/swaymenu.nix
+    ../pkgs/emojimenu.nix
+    ../pkgs/passmenu.nix
+    ../pkgs/prtsc.nix
+    ../pkgs/swaymenu.nix
   ];
 
   xdg.configFile.gebaar = {
