@@ -1,6 +1,6 @@
 { lib, ... }:
 let
-  secret = ../../share/secrets/system/ddclient-home-lovesegfault-com.nix;
+  secret = ../../secrets/system/ddclient-home-lovesegfault-com.nix;
   secret_settings =
     lib.optionalAttrs (builtins.pathExists secret) (import secret);
 in {

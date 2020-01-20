@@ -126,8 +126,8 @@ function sync_system() {
     [ "$#" -eq 0 ] || error "sync_system"
     local files=("configuration.nix")
     local dirs=("system")
-    if [ -d "$SCRIPT_PATH/share/secrets/system" ]; then
-        dirs+=("share/secrets/system")
+    if [ -d "$SCRIPT_PATH/secrets/system" ]; then
+        dirs+=("secrets/system")
     fi
     sync_module "root" "$NIXOS_PATH" dirs[@]
     check_module "$NIXOS_PATH" files[@]
@@ -137,8 +137,8 @@ function sync_home() {
     [ "$#" -eq 0 ] || error "sync_home"
     local files=("config.nix" "home.nix")
     local dirs=("home")
-    if [ -d "$SCRIPT_PATH/share/secrets/system" ]; then
-        dirs+=("share/secrets/home")
+    if [ -d "$SCRIPT_PATH/secrets/system" ]; then
+        dirs+=("secrets/home")
     fi
     sync_module "$USER" "$HOME_MANAGER_PATH" dirs[@]
     check_module "$HOME_MANAGER_PATH" files[@]
