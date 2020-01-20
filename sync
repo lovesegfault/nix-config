@@ -90,8 +90,10 @@ function sync_dir() {
     local rsync_cmd=("rsync" "-irhlt" "--delete" "$src" "$dest")
 
     if [ "$USER" == "$user" ] && [ $DRY_RUN == 0 ]; then
+        mkdir -p "$dest"
         ${rsync_cmd[*]}
     else
+        sudo runuser -l "$user" -c "mkdir -p $dest"
         sudo runuser -l "$user" -c "$(eval echo "${rsync_cmd[@]}")"
     fi
 
@@ -110,36 +112,36 @@ function sync_module() {
 }
 
 function check_module() {
-    [ "$#" -eq 3 ] || error "check_module ROOT_PATH FILES DIRS"
+    [ "$#" -eq 2 ] || error "check_module ROOT_PATH FILES"
     local root_path="$1"
     local files=("${!2}")
-    local dirs=("${!3}")
 
     for rel_path in "${files[@]}"; do
         local abs_path="$root_path/$rel_path"
         [ -f "${abs_path}" ] || warn "${abs_path} missing!"
-    done
-
-    for rel_path in "${dirs[@]}"; do
-        local abs_path="$root_path/$rel_path"
-        [ -d "${abs_path}" ] || warn "${abs_path} missing!"
     done
 }
 
 function sync_system() {
     [ "$#" -eq 0 ] || error "sync_system"
     local files=("configuration.nix")
-    local dirs=("system" "share")
+    local dirs=("system" "share/pkgs")
+    if [ -d "$SCRIPT_PATH/share/secrets/system" ]; then
+        dirs+=("share/secrets/system")
+    fi
     sync_module "root" "$NIXOS_PATH" dirs[@]
-    check_module "$NIXOS_PATH" files[@] dirs[@]
+    check_module "$NIXOS_PATH" files[@]
 }
 
 function sync_home() {
     [ "$#" -eq 0 ] || error "sync_home"
     local files=("config.nix" "home.nix")
-    local dirs=("home" "share")
+    local dirs=("home" "share/pkgs")
+    if [ -d "$SCRIPT_PATH/share/secrets/system" ]; then
+        dirs+=("share/secrets/home")
+    fi
     sync_module "$USER" "$HOME_MANAGER_PATH" dirs[@]
-    check_module "$HOME_MANAGER_PATH" files[@] dirs[@]
+    check_module "$HOME_MANAGER_PATH" files[@]
 }
 
 function check_sudo() {

@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  secret = ../../share/secrets/modules/beets.nix;
+  secret = ../../share/secrets/home/beets.nix;
   secret_settings =
     lib.optionalAttrs (builtins.pathExists secret) (import secret);
   normal_settings = rec {
