@@ -10,7 +10,6 @@
     ../hardware/thinkpad-p1.nix
 
     ../modules/aarch64-build-box.nix
-    ../modules/networkmanager.nix
     ../modules/stcg-cachix.nix
     ../modules/stcg-cameras.nix
 
