@@ -172,39 +172,39 @@ function check_getopt() {
 }
 
 function parse_opts() {
-    local options="buSHAd"
-    local longopts="boot,upgrade,system,home,all,dry-run"
+    local short_opts="abdhsu"
+    local long_opts="all,boot,dry-run,home,system,upgrade"
     local parsed
-    ! parsed=$(getopt --options="$options" --longoptions="$longopts" --name "$0" -- "$@")
+    ! parsed=$(getopt --options="$short_opts" --longoptions="$long_opts" --name "$0" -- "$@")
     if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
         error "Wrong arguments passed"
     fi
     eval set -- "$parsed"
     while true; do
         case "$1" in
+        -a | --all)
+            SYSTEM_SYNC=1
+            HOME_SYNC=1
+            shift
+            ;;
         -b | --boot)
             NIXOS_BOOT=1
             shift
             ;;
-        -u | --upgrade)
-            UPGRADE=1
-            shift
-            ;;
-        -S | --system)
-            SYSTEM_SYNC=1
-            shift
-            ;;
-        -H | --home)
-            HOME_SYNC=1
-            shift
-            ;;
-        -A | --all)
-            SYSTEM_SYNC=1
-            HOME_SYNC=1
-            shift
-            ;;
         -d | --dry-run)
             DRY_RUN=1
+            shift
+            ;;
+        -h | --home)
+            HOME_SYNC=1
+            shift
+            ;;
+        -s | --system)
+            SYSTEM_SYNC=1
+            shift
+            ;;
+        -u | --upgrade)
+            UPGRADE=1
             shift
             ;;
         --)
