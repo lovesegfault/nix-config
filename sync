@@ -9,7 +9,6 @@ SYSTEM_SYNC=0
 HOME_SYNC=0
 
 NIXOS_BOOT=0
-NIXOS_SWITCH=1
 
 UPGRADE=0
 
@@ -149,12 +148,10 @@ function check_sudo() {
 function rebuild_system() {
     [ "$#" -eq 0 ] || error "rebuild_system"
     local op=""
-    if [ $NIXOS_SWITCH = 1 ]; then
-        op="switch"
-    elif [ $NIXOS_BOOT = 1 ]; then
+    if [ $NIXOS_BOOT = 1 ]; then
         op="boot"
     else
-        error "rebuild_system ENOOP"
+        op="switch"
     fi
     [ $DRY_RUN == 0 ] && [ $UPGRADE == 1 ] && sudo nix-channel --update
     [ $DRY_RUN == 0 ] && sudo nixos-rebuild "$op"
@@ -175,8 +172,8 @@ function check_getopt() {
 }
 
 function parse_opts() {
-    local options="sbuSHAd"
-    local longopts="switch,boot,upgrade,system,home,all,dry-run"
+    local options="buSHAd"
+    local longopts="boot,upgrade,system,home,all,dry-run"
     local parsed
     ! parsed=$(getopt --options="$options" --longoptions="$longopts" --name "$0" -- "$@")
     if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
@@ -185,13 +182,7 @@ function parse_opts() {
     eval set -- "$parsed"
     while true; do
         case "$1" in
-        -s | --switch)
-            NIXOS_SWITCH=1
-            NIXOS_BOOT=0
-            shift
-            ;;
         -b | --boot)
-            NIXOS_SWITCH=0
             NIXOS_BOOT=1
             shift
             ;;
