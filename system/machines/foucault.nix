@@ -24,9 +24,7 @@
 
   networking = {
     hostName = "foucault";
-    interfaces = {
-      enp0s31f6.mtu = 9000;
-    };
+    interfaces = { enp0s31f6.mtu = 9000; };
   };
 
   time.timeZone = "America/Los_Angeles";
