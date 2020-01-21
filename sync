@@ -139,7 +139,7 @@ function sync_home() {
 
 function check_sudo() {
     [ "$#" -eq 0 ] || error "check_sudo"
-    [ $DRY_RUN == 0 ] && return
+    [ $DRY_RUN == 0 ] || return
     [ -x "$(command -v sudo)" ] || error "Sudo not available."
     [[ "$USER" == *"not allowed to run sudo"* ]] &&
         error "$USER does not have sudo privileges"
