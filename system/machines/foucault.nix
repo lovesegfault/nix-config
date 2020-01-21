@@ -23,7 +23,12 @@
       "/dev/disk/by-uuid/2d6ff3d0-cdfd-4b6e-a689-c43d21627279";
   };
 
-  networking.hostName = "foucault";
+  networking = {
+    hostName = "foucault";
+    interfaces = {
+      enp0s31f6.mtu = 9000;
+    };
+  };
 
   time.timeZone = "America/Los_Angeles";
 
