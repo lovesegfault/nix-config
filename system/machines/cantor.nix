@@ -6,6 +6,7 @@
 
     ../hardware/stcg-dc.nix
 
+    ../modules/networkmanager.nix
     ../modules/stcg-cachix.nix
   ];
 

@@ -9,6 +9,7 @@ in {
 
     ../hardware/rpi3.nix
 
+    ../modules/networkmanager.nix
     ../modules/sshguard.nix
   ];
 

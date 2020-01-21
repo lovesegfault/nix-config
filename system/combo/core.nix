@@ -2,7 +2,6 @@
   imports = [
     ../modules/aspell.nix
     ../modules/gpg.nix
-    ../modules/networkmanager.nix
     ../modules/nix.nix
     ../modules/resolved.nix
     ../modules/sudo.nix
