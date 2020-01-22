@@ -20,7 +20,7 @@
       subnet 192.168.2.0 netmask 255.255.255.0 {
         range 192.168.2.10 192.168.2.255;
         host camus {
-          hardware ethernet b8:27:eb:77:ae:48;
+          hardware ethernet dc:a6:32:63:47:40;
           fixed-address 192.168.2.1;
         }
         host foucault {
