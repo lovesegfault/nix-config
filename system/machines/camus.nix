@@ -18,14 +18,14 @@
       authoritative;
       option subnet-mask 255.255.255.0;
       subnet 192.168.2.0 netmask 255.255.255.0 {
-        range 192.168.2.0 192.168.2.255;
+        range 192.168.2.10 192.168.2.255;
         host camus {
           hardware ethernet b8:27:eb:77:ae:48;
-          fixed-address 192.168.2.0;
+          fixed-address 192.168.2.1;
         }
         host foucault {
           hardware ethernet 48:2a:e3:61:39:66;
-          fixed-address 192.168.2.1;
+          fixed-address 192.168.2.2;
         }
       }
 
