@@ -3,9 +3,14 @@
     ../combo/core.nix
 
     ../hardware/rpi3.nix
+
+    ../modules/stcg-cameras.nix
   ];
 
-  networking.hostName = "camus";
+  networking = {
+    hostName = "camus";
+    interfaces.eth0.mtu = 9000;
+  };
 
   services.dhcpd4 = {
     enable = true;
