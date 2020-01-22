@@ -36,7 +36,6 @@
   hardware = {
     enableAllFirmware = true;
     opengl = {
-      enable = true;
       setLdLibraryPath = true;
       package = pkgs.mesa_drivers;
     };
