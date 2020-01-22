@@ -12,6 +12,9 @@
       raspberryPi = {
         enable = true;
         version = 4;
+        firmwareConfig = ''
+          gpu_mem=192
+        '';
       };
     };
     kernelPackages = pkgs.linuxPackages_rpi4;
@@ -30,7 +33,18 @@
     };
   };
 
-  hardware.enableAllFirmware = true;
+  hardware = {
+    enableAllFirmware = true;
+    opengl = {
+      enable = true;
+      setLdLibraryPath = true;
+      package = pkgs.mesa_drivers;
+    };
+    deviceTree = {
+      base = pkgs.device-tree_rpi;
+      overlays = [ "${pkgs.device-tree_rpi.overlays}/vc4-fkms-v3d.dtbo" ];
+    };
+  };
 
   nix = {
     buildCores = 64;
@@ -39,7 +53,10 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  services.fstrim.enable = true;
+  services = {
+    fstrim.enable = true;
+    xserver.videoDrivers = [ "modesetting" ];
+  };
 
   swapDevices = [{
     device = "/swap";
