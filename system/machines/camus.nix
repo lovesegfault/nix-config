@@ -2,7 +2,7 @@
   imports = [
     ../combo/core.nix
 
-    ../hardware/rpi3.nix
+    ../hardware/rpi4.nix
 
     ../modules/stcg-cameras.nix
   ];
