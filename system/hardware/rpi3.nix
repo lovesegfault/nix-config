@@ -28,7 +28,7 @@
     };
   };
 
-  hardware.enableRedistributableFirmware = true;
+  hardware.enableAllFirmware = true;
 
   nix = {
     buildCores = 32;
