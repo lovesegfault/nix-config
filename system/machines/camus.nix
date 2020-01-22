@@ -10,7 +10,6 @@
   networking = {
     hostName = "camus";
     interfaces.eth0.mtu = 9000;
-    networkmanager.wifi.backend = "iwd";
   };
 
   services.dhcpd4 = {
