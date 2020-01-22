@@ -44,7 +44,7 @@
       for_window [app_id="Alacritty" title="swaymenu"] floating enable, border pixel 5, sticky enable
       for_window [app_id="Alacritty" title="passmenu"] floating enable, border pixel 5, sticky enable
       for_window [app_id="Alacritty" title="emojimenu"] floating enable, border pixel 5, sticky enable
-      for_window [app_id="imv"] floating enable, sticky enable
+      for_window [app_id="imv"] floating enable
       for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, sticky enable
 
       ### Output configuration
