@@ -8,6 +8,7 @@
     ../modules/nvidia.nix
     ../modules/zfs.nix
 
+    ../modules/gdm.nix
     ../modules/openssh.nix
     ../modules/stcg-cachix.nix
     ../modules/stcg-cameras.nix
@@ -65,6 +66,8 @@
   };
 
   nix.maxJobs = 12;
+
+  services.xserver.desktopManager.gnome3.enable = true;
 
   time.timeZone = "America/Los_Angeles";
 
