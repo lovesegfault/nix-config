@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ../combo/core.nix
@@ -50,7 +50,6 @@
   networking = {
     hostName = "abel";
     hostId = "9fc799ef";
-    useDHCP = false;
     interfaces = {
       eno1.useDHCP = false;
       enp4s0f0 = {
@@ -61,6 +60,8 @@
       enp4s0f2.useDHCP = false;
       enp4s0f3.useDHCP = false;
     };
+    networkmanager.enable = lib.mkforce false;
+    useDHCP = false;
   };
 
   nix.maxJobs = 12;
