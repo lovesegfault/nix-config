@@ -6,7 +6,10 @@
       enable = true;
       interval = "weekly";
     };
-    autoSnapshot.enable = true;
+    autoSnapshot = {
+      enable = true;
+      flags = "-k -p --utc";
+    };
     trim.enable = true;
   };
 }
