@@ -5,6 +5,7 @@ let
       system = arch;
     }).system;
 in {
+  abel = systemPkg ./machines/abel.nix "x86_64-linux";
   bohr = systemPkg ./machines/bohr.nix "aarch64-linux";
   camus = systemPkg ./machines/camus.nix "aarch64-linux";
   cantor = systemPkg ./machines/cantor.nix "x86_64-linux";
