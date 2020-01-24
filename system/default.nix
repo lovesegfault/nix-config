@@ -10,4 +10,5 @@ in {
   camus = systemPkg ./machines/camus.nix "aarch64-linux";
   cantor = systemPkg ./machines/cantor.nix "x86_64-linux";
   foucault = systemPkg ./machines/foucault.nix "x86_64-linux";
+  peano = systemPkg ./machines/peano.nix "x86_64-linux";
 }
