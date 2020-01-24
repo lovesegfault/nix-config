@@ -1,6 +1,1 @@
-{
-  imports = [
-    ../combo/core.nix
-    ../combo/dev.nix
-  ];
-}
+{ imports = [ ../combo/core.nix ../combo/dev.nix ]; }
