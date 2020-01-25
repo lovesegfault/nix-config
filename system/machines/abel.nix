@@ -67,11 +67,20 @@
 
   nix.maxJobs = 12;
 
+  services.xserver.displayManager.gdm.autologin = {
+    enable = true;
+    user = "clock";
+  };
   services.xserver.desktopManager.gnome3.enable = true;
 
   time.timeZone = "America/Los_Angeles";
 
   users.users = {
+    clock = {
+      createHome = true;
+      isNormalUser = true;
+      hashedPassoword = "$6$O3fiKzeie2Woy$DsVuPscv2q838lCt.NP9J0bWo0FrxGtHsJtVr5qp/EpbLvnD7B6ixbosWer2pf5YPao1yyf29ICbKTF8PrBe./";
+    };
     tushar = {
       createHome = true;
       extraGroups = [ "lxd" ];
