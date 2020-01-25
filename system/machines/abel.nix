@@ -67,9 +67,12 @@
 
   nix.maxJobs = 12;
 
-  services.xserver.displayManager.gdm.autoLogin = {
-    enable = true;
-    user = "clock";
+  services.xserver.displayManager.gdm = {
+    autoLogin = {
+      enable = true;
+      user = "clock";
+    };
+    wayland = false;
   };
   services.xserver.desktopManager.gnome3.enable = true;
 
@@ -79,7 +82,8 @@
     clock = {
       createHome = true;
       isNormalUser = true;
-      hashedPassword = "$6$O3fiKzeie2Woy$DsVuPscv2q838lCt.NP9J0bWo0FrxGtHsJtVr5qp/EpbLvnD7B6ixbosWer2pf5YPao1yyf29ICbKTF8PrBe./";
+      hashedPassword =
+        "$6$O3fiKzeie2Woy$DsVuPscv2q838lCt.NP9J0bWo0FrxGtHsJtVr5qp/EpbLvnD7B6ixbosWer2pf5YPao1yyf29ICbKTF8PrBe./";
     };
     tushar = {
       createHome = true;
