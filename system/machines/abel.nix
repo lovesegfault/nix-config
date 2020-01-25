@@ -67,7 +67,7 @@
 
   nix.maxJobs = 12;
 
-  services.xserver.displayManager.gdm.autologin = {
+  services.xserver.displayManager.gdm.autoLogin = {
     enable = true;
     user = "clock";
   };
