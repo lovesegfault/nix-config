@@ -7,4 +7,6 @@
   environment.systemPackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
   services.xserver.videoDrivers = [ "nvidia" ];
+
+  virtualisation.docker.enableNvidia = true;
 }
