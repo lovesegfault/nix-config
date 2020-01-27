@@ -23,6 +23,7 @@
       { url = ''"query:News:tags # \"news\""''; }
       { url = ''"query:Comics:tags # \"comics\""''; }
       { url = ''"query:Gentoo:tags # \"gentoo\""''; }
+      { url = ''"query:Mailing Lists:tags # \"ml\""''; }
       { url = ''"query:Releases:tags # \"releases\""''; }
       {
         url = "---";
@@ -92,6 +93,15 @@
           "https://bugs.gentoo.org/buglist.cgi?email1=bernardo%40standard.ai&emailassigned_to1=1&emailtype1=substring&list_id=4339930&query_format=advanced&resolution=---&title=Bug%20List&ctype=atom";
         title = "Gentoo Assigned";
         tags = [ "gentoo" ];
+      }
+      {
+        url = "---";
+        tags = [ ];
+      }
+      {
+        url = "https://lkml.org/rss.php";
+        title = "LKML";
+        tags = [ "ml" ];
       }
       {
         url = "---";
