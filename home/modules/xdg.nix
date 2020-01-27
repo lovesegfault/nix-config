@@ -13,5 +13,9 @@
       templates = "$HOME/opt";
       videos = "$HOME/opt";
     };
+    configFile.userDirs = {
+      target = "user-dirs.conf";
+      text = "enabled=false";
+    };
   };
 }
