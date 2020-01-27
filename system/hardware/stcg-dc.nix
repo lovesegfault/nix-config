@@ -1,10 +1,8 @@
 { config, pkgs, ... }: {
 
-  imports = [ ../modules/openssh.nix ../modules/efi.nix ];
+  imports = [ ../modules/openssh.nix ../modules/efi.nix ../modules/nvidia.nix ];
 
   boot = rec {
-    blacklistedKernelModules = [ "nouveau" ];
-    extraModulePackages = [ kernelPackages.nvidia_x11 ];
     initrd.availableKernelModules =
       [ "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
     kernelModules = [ "kvm-intel" ];
@@ -22,8 +20,6 @@
       "nospectre_v2"
     ];
   };
-
-  environment.systemPackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
   hardware.enableRedistributableFirmware = true;
 
