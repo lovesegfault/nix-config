@@ -7,7 +7,6 @@ let
     config = {
       base = "git:upstream/master";
       "arc.land.onto.default" = "master";
-      "arc.land.onto.remote" = "upstream";
     };
   };
 in rec {
