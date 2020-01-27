@@ -13,8 +13,8 @@ let
 in rec {
   home.packages = with pkgs; [ arcanist ];
 
-  # home.file.arcrc = {
-  #   text = (builtins.toJSON arcrc);
-  #   target = ".arcrc";
-  # };
+  home.file.arcrc = {
+    text = (builtins.toJSON arcrc);
+    target = ".arcrc";
+  };
 }
