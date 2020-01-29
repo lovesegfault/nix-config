@@ -9,7 +9,15 @@
 
   networking = {
     hostName = "camus";
-    interfaces.eth0.mtu = 9000;
+    interfaces.eth0 = {
+      mtu = 9000;
+      ip4 = {
+        address = "192.168.2.1";
+        prefixLength = 24;
+      };
+      useDHCP = false;
+    };
+    networkmanager.unmanaged = [ "eth0" ];
   };
 
   services.dhcpd4 = {
