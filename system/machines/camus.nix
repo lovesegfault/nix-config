@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 let
   secret = ../../secrets/system/stcg-wifi-password.nix;
   password = lib.optionalString (builtins.pathExists secret) (import secret);
