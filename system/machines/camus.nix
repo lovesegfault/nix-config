@@ -11,6 +11,8 @@ in {
     ../modules/stcg-cameras.nix
   ];
 
+  boot.kernelParams = [ "fbcon=rotate:3" ];
+
   console = {
     font = "ter-v28n";
     packages = with pkgs; [ terminus_font ];
