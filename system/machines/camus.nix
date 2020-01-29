@@ -7,6 +7,11 @@
     ../modules/stcg-cameras.nix
   ];
 
+  console = {
+    font = "ter-v28n";
+    packages = with pkgs; [ terminus_font ];
+  };
+
   networking = {
     hostName = "camus";
     interfaces.eth0 = {
