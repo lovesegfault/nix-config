@@ -37,10 +37,13 @@ in {
   services.dhcpd4 = {
     enable = true;
     extraConfig = ''
-      authoritative;
-      option subnet-mask 255.255.255.0;
+
       subnet 192.168.2.0 netmask 255.255.255.0 {
-        range 192.168.2.10 192.168.2.255;
+        authoritative;
+        option routers 192.168.0.1;
+        option subnet-mask 255.255.255.0;
+        range 192.168.2.10 192.168.2.254;
+
         host camus {
           hardware ethernet dc:a6:32:63:47:40;
           fixed-address 192.168.2.1;
