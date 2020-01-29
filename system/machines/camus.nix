@@ -7,8 +7,6 @@ in {
     ../combo/core.nix
 
     ../hardware/rpi4.nix
-
-    ../modules/stcg-cameras.nix
   ];
 
   boot.kernelParams = [ "fbcon=rotate:3" ];
