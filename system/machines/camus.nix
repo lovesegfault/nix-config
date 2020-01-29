@@ -1,4 +1,8 @@
-{ lib, ... }: {
+{ lib, ... }:
+let
+  secret = ../../secrets/system/stcg-wifi-password.nix;
+  password = lib.optionalString (builtins.pathExists secret) (import secret);
+in {
   imports = [
     ../combo/core.nix
 
@@ -22,7 +26,12 @@
       }];
       useDHCP = false;
     };
-    networkmanager.unmanaged = [ "eth0" ];
+    networkmanager.enable = lib.mkForce false;
+    wireless = {
+      enable = true;
+      interfaces = [ "wlan0" ];
+      networks."StandardCognition".psk = password;
+    };
   };
 
   services.dhcpd4 = {
