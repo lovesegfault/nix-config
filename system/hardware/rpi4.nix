@@ -46,8 +46,8 @@
   };
 
   nix = {
-    buildCores = 64;
-    maxJobs = 0;
+    buildCores = 2;
+    maxJobs = 2;
   };
 
   nixpkgs.config.allowUnfree = true;

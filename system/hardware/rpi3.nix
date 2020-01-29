@@ -31,8 +31,8 @@
   hardware.enableAllFirmware = true;
 
   nix = {
-    buildCores = 32;
-    maxJobs = 0;
+    buildCores = 2;
+    maxJobs = 2;
   };
 
   nixpkgs.config.allowUnfree = true;
