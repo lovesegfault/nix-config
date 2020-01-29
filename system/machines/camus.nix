@@ -25,7 +25,9 @@ in {
       }];
       useDHCP = false;
     };
+    interfaces.wlan0.useDHCP = true;
     networkmanager.enable = lib.mkForce false;
+    useDHCP = false;
     wireless = {
       enable = true;
       interfaces = [ "wlan0" ];
