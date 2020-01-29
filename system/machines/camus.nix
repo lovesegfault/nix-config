@@ -19,7 +19,6 @@ in {
   networking = {
     hostName = "camus";
     interfaces.eth0 = {
-      mtu = 9000;
       ipv4.addresses = [{
         address = "192.168.2.1";
         prefixLength = 24;
