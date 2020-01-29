@@ -87,7 +87,8 @@ function sync_dir() {
 }
 
 function find_script_path() {
-    local script_path="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+    local script_path
+    script_path="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
     echo "$script_path"
 }
 
@@ -96,10 +97,9 @@ function sync_module() {
     local user="$1"
     local root_path="$2"
     local dirs=("${!3}")
-    local script_path="$(find_script_path)"
 
     for dir in "${dirs[@]}"; do
-        sync_dir "$user" "$script_path/$dir" "$root_path/$dir"
+        sync_dir "$user" "$(find_script_path)/$dir" "$root_path/$dir"
     done
 }
 
@@ -119,9 +119,7 @@ function sync_system() {
     local nixos_cfg_path="/etc/nixos"
     local files=("configuration.nix")
     local dirs=("system")
-
-    local script_path="$(find_script_path)"
-    if [ -d "$script_path/secrets/system" ]; then
+    if [ -d "$(find_script_path)/secrets/system" ]; then
         dirs+=("secrets/system")
     fi
 
@@ -135,8 +133,7 @@ function sync_home() {
     local files=("config.nix" "home.nix")
     local dirs=("home")
 
-    local script_path="$(find_script_path)"
-    if [ -d "$script_path/secrets/home" ]; then
+    if [ -d "$(find_script_path)/secrets/home" ]; then
         dirs+=("secrets/home")
     fi
 
