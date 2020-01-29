@@ -10,6 +10,8 @@ let
     };
   };
 in rec {
+  imports = [ ../pkgs/arcanist.nix ];
+
   home.packages = with pkgs; [ arcanist ];
 
   home.file.arcrc = {
