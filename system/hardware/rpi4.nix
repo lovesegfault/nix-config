@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ../modules/aarch64-build-box.nix
     ../modules/bluetooth.nix
@@ -45,10 +45,20 @@
     };
   };
 
-  nix = {
-    buildCores = 2;
-    maxJobs = 2;
+  networking = {
+    useDHCP = false;
+    interfaces = {
+      eth0.useDHCP = true;
+      wlan0.useDHCP = true;
+    };
+    networkmanager.enable = lib.mkForce false;
+    wireless = {
+      enable = true;
+      interfaces = [ "wlan0" ];
+    };
   };
+
+  nix.maxJobs = 4;
 
   nixpkgs.config.allowUnfree = true;
 

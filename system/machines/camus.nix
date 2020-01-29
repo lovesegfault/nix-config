@@ -25,16 +25,9 @@ in {
         address = "192.168.2.1";
         prefixLength = 24;
       }];
-      useDHCP = false;
+      useDHCP = lib.mkForce false;
     };
-    interfaces.wlan0.useDHCP = true;
-    networkmanager.enable = lib.mkForce false;
-    useDHCP = false;
-    wireless = {
-      enable = true;
-      interfaces = [ "wlan0" ];
-      networks."StandardCognition".psk = password;
-    };
+    wireless.networks."StandardCognition".psk = password;
   };
 
   services.dhcpd4 = {
