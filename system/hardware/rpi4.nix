@@ -23,7 +23,7 @@
   console.keyMap = "us";
 
   fileSystems = {
-    "/boot/firmware" = {
+    "/boot" = {
       device = "/dev/disk/by-label/FIRMWARE";
       fsType = "vfat";
     };
