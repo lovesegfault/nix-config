@@ -33,6 +33,7 @@
       ayu-vim
 
       # Tools
+      editorconfig-vim # EditorConfig support
       fugitive # Git
       fzf-vim # Search
       gist-vim # Gist integration
@@ -423,6 +424,9 @@
             let @" = l:saved_reg
         endfunction
       '';
+      editorConfigConfig = ''
+        let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+      '';
       deopleteConfig = ''
         """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         " => deoplete
@@ -600,15 +604,17 @@
     in ''
       ${pluginConfig}
       ${baseConfig}
+
       ${aleConfig}
       ${ayuConfig}
+      ${deopleteConfig}
+      ${editorConfigConfig}
       ${fzfConfig}
       ${indentGuidesConfig}
+      ${languageClientConfig}
       ${lightlineConfig}
       ${tagbarConfig}
       ${vimtexConfig}
-      ${deopleteConfig}
-      ${languageClientConfig}
     '';
   };
 }
