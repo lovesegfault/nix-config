@@ -7,42 +7,47 @@ on:
 name: Continuous Integration
 
 jobs:
+    parsing:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Setup Nix
+          uses: cachix/install-nix-action@v6
+        - name: Parsing tests
+          run: find . -name "*.nix" -exec nix-instantiate --parse --quiet {} >/dev/null +
+    formatting:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Setup Nix
+          uses: cachix/install-nix-action@v6
+        - name: Formatting tests
+          run: nix run nixpkgs.nixfmt -c find . -iname "*.nix" -exec nixfmt -c {} +
     ci:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v2
-
-            - name: Setup Nix
-              uses: cachix/install-nix-action@v6
-
-            - name: Setup channel
-              run: |
-                nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-                nix-channel --update
-
-            - name: Setup cachix
-              uses: cachix/cachix-action@v3
-              with:
-                  name: nix-config
-                  signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-                  skipNixBuild: true
-
-            - name: Setup home-manager
-              run: |
-                nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
-                nix-channel --update
-                export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
-                nix-shell '<home-manager>' -A install
-                echo "{ allowUnfree = true; }" > ~/.config/nixpkgs/config.nix
-
-            - name: Parsing tests
-              run: find . -name "*.nix" -exec nix-instantiate --parse --quiet {} >/dev/null +
-
-            - name: Formatting tests
-              run: nix run nixpkgs.nixfmt -c find . -iname "*.nix" -exec nixfmt -c {} +
-
-            - name: Build foucault
-              run: |
-                export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
-                nix-build -A foucault | cachix push nix-config
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Setup channel
+          run: |
+            nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+            nix-channel --update
+        - name: Setup cachix
+          uses: cachix/cachix-action@v3
+          with:
+              name: nix-config
+              signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+              skipNixBuild: true
+        - name: Setup home-manager
+          run: |
+            nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
+            nix-channel --update
+            export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+            nix-shell '<home-manager>' -A install
+            echo "{ allowUnfree = true; }" > ~/.config/nixpkgs/config.nix
+        - name: Build foucault
+          run: |
+            export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+            nix-build -A foucault | cachix push nix-config
