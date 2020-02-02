@@ -9,8 +9,6 @@ name: Continuous Integration
 jobs:
     ci:
         runs-on: ubuntu-latest
-        env:
-          NIX_PATH: "$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH"
         steps:
             - name: Checkout
               uses: actions/checkout@v2
@@ -34,6 +32,7 @@ jobs:
               run: |
                 nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
                 nix-channel --update
+                export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
                 nix-shell '<home-manager>' -A install
                 echo "{ allowUnfree = true; }" > ~/.config/nixpkgs/config.nix
 
@@ -45,4 +44,5 @@ jobs:
 
             - name: Build foucault
               run: |
+                export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
                 nix-build -A foucault | cachix push nix-config
