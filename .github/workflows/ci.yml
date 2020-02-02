@@ -2,7 +2,7 @@ on:
   push:
     branches: [ "master" ]
 
-name: Continuous Integration
+name: CI
 
 jobs:
     parsing:
