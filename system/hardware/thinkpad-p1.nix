@@ -35,11 +35,7 @@
   services = {
     fstrim.enable = true;
     hardware.bolt.enable = true;
-    undervolt = {
-      enable = true;
-      coreOffset = "-70";
-      temp = "95";
-    };
+    throttled.enable = true;
     xserver = {
       libinput = {
         accelProfile = "flat";

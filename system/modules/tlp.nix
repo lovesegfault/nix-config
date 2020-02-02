@@ -26,7 +26,7 @@
       # - Single queue schedulers are legacy now and were removed together with
       #   the old block layer in kernel 5.0
       # Default: keep
-      DISK_IOSCHED="mq-deadline bfq"
+      DISK_IOSCHED="mq-deadline"
 
       # Dirty page values (timeouts in secs).
       # Default: 15 (AC + BAT)
