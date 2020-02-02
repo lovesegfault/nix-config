@@ -16,12 +16,6 @@ jobs:
             - name: Setup Nix
               uses: cachix/install-nix-action@v6
 
-            - name: Setup Nix store cache
-              uses: actions/cache@v1
-              with:
-                path: /nix/store
-                key: ${{ runner.os }}-nix-store
-
             - name: Setup channel
               run: |
                 nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
