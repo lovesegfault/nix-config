@@ -34,12 +34,6 @@ jobs:
           run: |
             nix-channel --add https://nixos.org/channels/nixos-unstable nixpkgs
             nix-channel --update
-        - name: Setup cachix
-          uses: cachix/cachix-action@v3
-          with:
-              name: nix-config
-              signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-              skipNixBuild: true
         - name: Setup home-manager
           env:
             NIX_PATH: "/home/runner/.nix-defexpr/channels:nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos:/nix/var/nix/profiles/per-user/root/channels"
@@ -54,9 +48,12 @@ jobs:
             echo "${{ secrets.AARCH64_BOX_KEY }}" | sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
             echo "${{ secrets.KNOWN_HOSTS }}" | sudo tee -a /root/.ssh/known_hosts > /dev/null
             echo "lovesegfault@aarch64.nixos.community aarch64-linux /root/.ssh/aarch64.community.nixos 64 8 big-parallel" | sudo tee /etc/nix/machines > /dev/null
-        - name: Build machines
+        - name: Cachix
           env:
             NIX_PATH: "/home/runner/.nix-defexpr/channels:nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos:/nix/var/nix/profiles/per-user/root/channels"
-          run: nix-build ci.nix -A x86_64
-        - name: Push to Cachix
-          run: cachix push nix-config ./result*
+          uses: cachix/cachix-action@v3
+          with:
+              name: nix-config
+              signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+              file: ci.nix
+              attributes: x86_64
