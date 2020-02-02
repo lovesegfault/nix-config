@@ -51,10 +51,7 @@ jobs:
             - name: Formatting tests
               run: nix run nixpkgs.nixfmt -c find . -iname "*.nix" -exec nixfmt -c {} +
 
-            - name: System tests
-              run: nix-build -A system.foucault | cachix push nix-config
-
-            - name: Home tests
+            - name: Build foucault
               run: |
                 export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
-                nix-build -A home.foucault | cachix push nix-config
+                nix-build -A foucault | cachix push nix-config
