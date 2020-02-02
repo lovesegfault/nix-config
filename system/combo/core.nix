@@ -17,7 +17,9 @@
 
   nix = {
     binaryCaches = [ "https://nix-config.cachix.org" ];
-    binaryCachePublicKeys = [ "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4=" ];
+    binaryCachePublicKeys = [
+      "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
+    ];
   };
 
   nixpkgs.config.allowUnfree = true;
