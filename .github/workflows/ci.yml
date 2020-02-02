@@ -23,9 +23,11 @@ jobs:
           uses: cachix/install-nix-action@v6
         - name: Formatting tests
           run: nix run nixpkgs.nixfmt -c find . -iname "*.nix" -exec nixfmt -c {} +
-    ci-aarch64:
+    build:
       runs-on: ubuntu-latest
       needs: parsing
+      env:
+        NIX_PATH: "/home/runner/.nix-defexpr/channels:nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixpkgs:/nix/var/nix/profiles/per-user/root/channels"
       steps:
         - name: Checkout
           uses: actions/checkout@v2
@@ -33,7 +35,7 @@ jobs:
           uses: cachix/install-nix-action@v6
         - name: Setup channel
           run: |
-            nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+            nix-channel --add https://nixos.org/channels/nixos-unstable nixpkgs
             nix-channel --update
         - name: Setup cachix
           uses: cachix/cachix-action@v3
@@ -45,50 +47,15 @@ jobs:
           run: |
             nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
             nix-channel --update
-            export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
             nix-shell '<home-manager>' -A install
             echo "{ allowUnfree = true; }" > ~/.config/nixpkgs/config.nix
-        - name: Install SSH Key
-          uses: shimataro/ssh-key-action@v1.6.4
-          with:
-            private-key: '${{ secrets.AARCH64_BOX_KEY }}'
-            name: 'aarch64.community.nixos'
-            known-hosts: '${{ secrets.KNOWN_HOSTS }}'
         - name: Setup AArch64 Build Box
           run: |
             sudo mkdir -p /root/.ssh
-            echo "${{ secrets.KNOWN_HOSTS }}" | sudo tee -a /root/.ssh/know_hosts > /dev/null
-            echo "lovesegfault@aarch64.nixos.community aarch64-linux /home/runner/.ssh/aarch64.community.nixos 64 8 big-parallel" | sudo tee -a /etc/nix/machines > /dev/null
+            echo "${{ secrets.AARCH64_BOX_KEY }}" | sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
+            echo "${{ secrets.KNOWN_HOSTS }}" | sudo tee -a /root/.ssh/known_hosts > /dev/null
+            echo "lovesegfault@aarch64.nixos.community aarch64-linux /root/.ssh/aarch64.community.nixos 64 8 big-parallel" | sudo tee /etc/nix/machines > /dev/null
         - name: Build machines
-          run: |
-            export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
-            nix-build --no-out-link -A bohr -A camus | cachix push nix-config
-    ci-x86_64:
-      runs-on: ubuntu-latest
-      needs: parsing
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v2
-        - name: Setup Nix
-          uses: cachix/install-nix-action@v6
-        - name: Setup channel
-          run: |
-            nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-            nix-channel --update
-        - name: Setup cachix
-          uses: cachix/cachix-action@v3
-          with:
-              name: nix-config
-              signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-              skipNixBuild: true
-        - name: Setup home-manager
-          run: |
-            nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
-            nix-channel --update
-            export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
-            nix-shell '<home-manager>' -A install
-            echo "{ allowUnfree = true; }" > ~/.config/nixpkgs/config.nix
-        - name: Build machines
-          env:
-            NIX_PATH: "/home/runner/.nix-defexpr/channels:nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixpkgs:/nix/var/nix/profiles/per-user/root/channels"
-          run: nix-build --no-out-link -A abel -A cantor -A foucault -A peano | cachix push nix-config
+          run: nix build -f. --keep-going foucault
+        - name: Push to Cachix
+          run: cachix push nix-config ./result*
