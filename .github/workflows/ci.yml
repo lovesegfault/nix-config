@@ -57,6 +57,6 @@ jobs:
         - name: Build machines
           env:
             NIX_PATH: "/home/runner/.nix-defexpr/channels:nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos:/nix/var/nix/profiles/per-user/root/channels"
-          run: nix build -f. --keep-going foucault
+          run: nix build -f. --keep-going -L foucault
         - name: Push to Cachix
           run: cachix push nix-config ./result*
