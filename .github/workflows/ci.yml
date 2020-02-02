@@ -56,6 +56,8 @@ jobs:
             known-hosts: '${{ secrets.KNOWN_HOSTS }}'
         - name: Setup AArch64 Build Box
           run: |
+            sudo mkdir -p /root/.ssh
+            echo "${{ secrets.KNOWN_HOSTS }}" | sudo tee -a /root/.ssh/know_hosts > /dev/null
             echo "lovesegfault@aarch64.nixos.community aarch64-linux /home/runner/.ssh/aarch64.community.nixos 64 8 big-parallel" | sudo tee -a /etc/nix/machines > /dev/null
         - name: Build machines
           run: |
