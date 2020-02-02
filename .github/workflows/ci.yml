@@ -89,6 +89,6 @@ jobs:
             nix-shell '<home-manager>' -A install
             echo "{ allowUnfree = true; }" > ~/.config/nixpkgs/config.nix
         - name: Build machines
-          run: |
-            export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
-            nix-build --no-out-link -A abel -A cantor -A foucault -A peano | cachix push nix-config
+          env:
+            NIX_PATH: "/home/runner/.nix-defexpr/channels:nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixpkgs:/nix/var/nix/profiles/per-user/root/channels"
+          run: nix-build --no-out-link -A abel -A cantor -A foucault -A peano | cachix push nix-config
