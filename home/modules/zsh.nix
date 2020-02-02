@@ -18,7 +18,14 @@
       save = 30000;
       share = true;
     };
+    envExtra = lib.optionalString pkgs.stdenv.isDarwin ''
+      export NIX_PATH=$HOME/.nix-defexpr/channels''${NIX_PATH:+:}$NIX_PATH
+      export PATH=$PATH:/usr/local/bin/
+    '';
     initExtra = ''
+      # c.f. https://wiki.gnupg.org/AgentForwarding
+      gpgconf --create-socketdir &!
+
       bindkey "$${terminfo[khome]}" beginning-of-line
       bindkey "$${terminfo[kend]}" end-of-line
       bindkey "$${terminfo[kdch1]}" delete-char
@@ -33,12 +40,8 @@
       bindkey "^[[1;5D" backward-word
       bindkey "^[[1;3D" backward-word
 
-      bindkey -s "^O" '${config.home.sessionVariables.EDITOR} $(fzf -m)^M'
-    '' + lib.optionalString pkgs.stdenv.isDarwin ''
-      export NIX_PATH=$HOME/.nix-defexpr/channels''${NIX_PATH:+:}$NIX_PATH
-      export PATH=$PATH:/usr/local/bin/
+      bindkey -s "^O" '${config.home.sessionVariables.EDITOR} $(fzf)^M'
     '';
-
     sessionVariables = { RPROMPT = ""; };
     plugins = [
       {
