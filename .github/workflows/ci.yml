@@ -42,9 +42,6 @@ jobs:
                 nix-shell '<home-manager>' -A install
                 echo "{ allowUnfree = true; }" > ~/.config/nixpkgs/config.nix
 
-            - name: Setup dependencies
-              run: nix-env -iA nixpkgs.nixfmt
-
             - name: Parsing tests
               run: find . -name "*.nix" -exec nix-instantiate --parse --quiet {} >/dev/null +
 
