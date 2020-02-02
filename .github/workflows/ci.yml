@@ -50,7 +50,7 @@ jobs:
         - name: Install SSH Key
           uses: shimataro/ssh-key-action@v1.6.4
           with:
-            private_key: ${{ secrets.AARCH64_BOX_KEY }}
+            private-key: ${{ secrets.AARCH64_BOX_KEY }}
             name: aarch64.community.nixos
             known-hosts: ${{ secrets.KNOWN_HOSTS }}
         - name: Setup AArch64 Build Box
