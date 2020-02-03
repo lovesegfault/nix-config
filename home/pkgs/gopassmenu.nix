@@ -5,6 +5,7 @@ let
   gopass = "${pkgs.gopass}/bin/gopass";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
   rg = "${pkgs.ripgrep}/bin/rg";
+  wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
 in ''
   gopassmenu_path="$(readlink -f "$0")"
   gopassmenu_fifo="/tmp/gopassmenu_fifo"
@@ -42,8 +43,8 @@ in ''
           exit 1
       fi
 
-      local password="$(${gopass} show --password "$name")"
-      gopass_paste "$password"
+      local password="$(gopass_get "$name")"
+      ${wl-copy} -o "$password"
       gopassmenu_unlock
   }
 

@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ../pkgs/emojimenu.nix
+    ../pkgs/otpmenu.nix
     ../pkgs/passmenu.nix
     ../pkgs/prtsc.nix
     ../pkgs/swaymenu.nix
@@ -28,6 +29,7 @@
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
       emojimenu = "${pkgs.emojimenu}/bin/emojimenu";
       passmenu = "${pkgs.passmenu}/bin/passmenu";
+      otpmenu = "${pkgs.otpmenu}/bin/otpmenu";
       prtsc = "${pkgs.prtsc}/bin/prtsc";
       swaymenu = "${pkgs.swaymenu}/bin/swaymenu";
       term = "alacritty";
@@ -127,6 +129,7 @@
 
           # start your launcher
           bindsym $mod+d exec ${menu}
+          bindsym $mod+o exec ${otpmenu}
           bindsym $mod+p exec ${passmenu}
           bindsym $mod+m exec ${emojimenu}
           bindsym $mod+q exec swaylock -f
