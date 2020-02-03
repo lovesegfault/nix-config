@@ -13,6 +13,9 @@
       default-fragment-size-msec = 125;
       resample-method = "src-sinc-best-quality";
     };
+    extraConfig = ''
+      unload-module module-esound-protocol-unix
+    '';
   };
 
   security.rtkit.enable = true;
