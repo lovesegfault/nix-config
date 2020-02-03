@@ -1,5 +1,5 @@
-{ config, lib, pkgs, ... }: let
-  shellConfig = import ./shell.nix { inherit config lib pkgs; };
+{ config, lib, pkgs, ... }:
+let shellConfig = import ./shell.nix { inherit config lib pkgs; };
 in {
   programs = {
     direnv.enableZshIntegration = true;
