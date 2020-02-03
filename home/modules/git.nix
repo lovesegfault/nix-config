@@ -11,9 +11,9 @@
     userName = "Bernardo Meurer";
     extraConfig = {
       core.pager = "${pkgs.gitAndTools.delta}/bin/delta --dark";
-      mergetool.prompt = true;
       difftool.prompt = true;
       github.user = "lovesegfault";
+      mergetool.prompt = true;
     };
   };
   programs.zsh.shellAliases = {
