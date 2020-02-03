@@ -1,5 +1,6 @@
 { lib, pkgs, ... }: {
   imports = [
+    ../modules/bash.nix
     ../modules/bat.nix
     ../modules/fzf.nix
     ../modules/git.nix
