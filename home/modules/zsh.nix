@@ -11,7 +11,7 @@ in {
     enableAutosuggestions = true;
     enableCompletion = true;
     autocd = true;
-    dotDir = "${config.xdg.configHome}/zsh";
+    dotDir = ".config/zsh";
     history = {
       expireDuplicatesFirst = true;
       extended = true;
