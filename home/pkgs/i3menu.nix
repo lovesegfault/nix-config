@@ -1,5 +1,5 @@
 { config, pkgs, ... }:
-let menu = import ./menu.nix { inherit pkgs; };
+let menu = import ./execmenu.nix { inherit pkgs; };
 in {
   nixpkgs.overlays = [
     (self: super: {
