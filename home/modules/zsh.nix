@@ -1,4 +1,6 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: let
+  shellConfig = import ./shell.nix { inherit config lib pkgs; };
+in {
   programs = {
     direnv.enableZshIntegration = true;
     starship.enableZshIntegration = true;
@@ -9,19 +11,16 @@
     enableAutosuggestions = true;
     enableCompletion = true;
     autocd = true;
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
     history = {
       expireDuplicatesFirst = true;
       extended = true;
       ignoreDups = true;
       path = "${config.xdg.dataHome}/zsh/history";
-      save = 30000;
+      save = shellConfig.historySize;
       share = true;
     };
-    envExtra = lib.optionalString pkgs.stdenv.isDarwin ''
-      export NIX_PATH=$HOME/.nix-defexpr/channels''${NIX_PATH:+:}$NIX_PATH
-      export PATH=$PATH:/usr/local/bin/
-    '';
+    envExtra = shellConfig.env;
     initExtra = ''
       # c.f. https://wiki.gnupg.org/AgentForwarding
       gpgconf --create-socketdir &!
@@ -122,24 +121,6 @@
         };
       }
     ];
-    shellAliases = {
-      cat = "bat";
-      # rust
-      c = "cargo";
-      cb = "cargo build";
-      cbr = "cargo build --release";
-      cch = "cargo check";
-      cce = "cargo clean";
-      cdo = "cargo doc";
-      ccp = "cargo clippy";
-      cr = "cargo run";
-      crr = "cargo run --release";
-      ct = "cargo test";
-      ctr = "cargo test --release";
-      # exa
-      l = "exa --binary --header --long --classify --git";
-      la = "l --all";
-      ls = "l";
-    };
+    shellAliases = shellConfig.aliases;
   };
 }
