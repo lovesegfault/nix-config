@@ -4,6 +4,7 @@ let
   fzf = "${pkgs.fzf}/bin/fzf";
   gopass = "${pkgs.gopass}/bin/gopass";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
+  rg = "${pkgs.ripgrep}/bin/rg";
 in {
   nixpkgs.overlays = [
     (self: super: {
@@ -32,7 +33,7 @@ in {
         }
 
         function passmenu_window() {
-            name="$(${gopass} ls -f | ${fzf})"
+            name="$(${gopass} ls -f | ${rg} "^(misc|ssh|websites)/.*$" | ${fzf})"
             echo "$name" > "$passmenu_fifo"
         }
 
