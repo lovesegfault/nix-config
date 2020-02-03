@@ -8,14 +8,14 @@ in {
 
   environment.systemPackages = [ pkgs.qt5.qtwayland ];
 
-  # nix = {
-  #   binaryCaches = [ "https://nixpkgs-wayland.cachix.org/" ];
-  #   binaryCachePublicKeys = [
-  #     "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
-  #   ];
-  # };
+  nix = {
+    binaryCaches = [ "https://nixpkgs-wayland.cachix.org/" ];
+    binaryCachePublicKeys = [
+      "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+    ];
+  };
 
-  # nixpkgs.overlays = [ waylandOverlay ];
+  nixpkgs.overlays = [ waylandOverlay ];
 
   services.xserver = {
     displayManager.gdm.wayland = true;
