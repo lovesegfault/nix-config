@@ -16,7 +16,7 @@ in {
       expireDuplicatesFirst = true;
       extended = true;
       ignoreDups = true;
-      path = "${config.xdg.dataHome}/zsh/history";
+      path = "${config.xdg.dataHome}/zsh_history";
       save = shellConfig.historySize;
       share = true;
     };

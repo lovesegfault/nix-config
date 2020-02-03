@@ -20,6 +20,7 @@
   };
 
   env = ''
+    export LESSHISTFILE="${config.xdg.dataHome}/less_history"
     export CARGO_HOME="${config.xdg.cacheHome}/cargo"
   '' + lib.optionalString pkgs.stdenv.isDarwin ''
     export NIX_PATH="$HOME/.nix-defexpr/channels''${NIX_PATH:+:}$NIX_PATH"
