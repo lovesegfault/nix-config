@@ -15,7 +15,7 @@
       [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     extraModulePackages = with kernelPackages; [ acpi_call tp_smapi ];
     kernelModules = [ "acpi_call" "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_5_4;
+    kernelPackages = pkgs.linuxPackages;
     # kernelPatches = with pkgs; [ i915-cmd-fix i915-drm-fix xfs-2038-fix ];
   };
 
