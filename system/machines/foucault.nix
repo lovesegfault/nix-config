@@ -13,14 +13,10 @@
     ../modules/stcg-cachix.nix
     ../modules/stcg-cameras.nix
 
-    ../pkgs/linux-5.4-fixes.nix
   ];
 
-  boot = {
-    kernelPatches = with pkgs; [ i915-cmd-fix i915-drm-fix xfs-2038-fix ];
-    initrd.luks.devices."nixos".device =
+  boot.initrd.luks.devices."nixos".device =
       "/dev/disk/by-uuid/2d6ff3d0-cdfd-4b6e-a689-c43d21627279";
-  };
 
   fileSystems = {
     "/" = {
@@ -35,7 +31,7 @@
 
   networking = {
     hostName = "foucault";
-    interfaces = { enp0s31f6.mtu = 9000; };
+    interfaces.enp0s31f6.mtu = 9000;
   };
 
   services.xserver.desktopManager.gnome3.enable = true;
