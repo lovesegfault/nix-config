@@ -16,7 +16,7 @@
   ];
 
   boot.initrd.luks.devices."nixos".device =
-      "/dev/disk/by-uuid/2d6ff3d0-cdfd-4b6e-a689-c43d21627279";
+    "/dev/disk/by-uuid/2d6ff3d0-cdfd-4b6e-a689-c43d21627279";
 
   fileSystems = {
     "/" = {
