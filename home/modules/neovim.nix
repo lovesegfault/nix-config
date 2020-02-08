@@ -464,8 +464,8 @@
         endfunction
 
         " Disable the truncate feature.
-        call deoplete#custom#source('_', 'max_abbr_width', 0)
-        call deoplete#custom#source('_', 'max_menu_width', 0)
+        call deoplete#custom#source('_', 'max_abbr_width', 20)
+        call deoplete#custom#source('_', 'max_menu_width', 80)
       '';
       languageClientConfig = ''
         """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
