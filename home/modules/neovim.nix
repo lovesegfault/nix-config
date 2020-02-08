@@ -26,7 +26,7 @@
     plugins = with pkgs.vimPlugins; [
       # Completion/IDE
       ale # Linting
-      deoplete-nvim # Completion
+      # deoplete-nvim # Completion
       LanguageClient-neovim # LSP
 
       # Colorscheme
@@ -46,13 +46,13 @@
       vim-indent-guides # Indentation highlighting
       vim-multiple-cursors # Sublime-like multipel cursors
       vim-trailing-whitespace # Highlight trailing whitespaces
-      vimtex # LaTeX integration
+      # vimtex # LaTeX integration
 
       # Syntax
       polyglot # Shitload of syntaxes
       gentoo-syntax # Ebuild and metadata syntax
       lalrpop-vim # LALRPOP syntax
-      rust-vim # Rust 2018 syntax
+      # rust-vim # Rust 2018 syntax
       vim-nix # Nix syntax highlighting
     ];
     extraConfig = let
