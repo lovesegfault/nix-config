@@ -18,7 +18,7 @@
       set rtp^=${plugin.rtp}
       set rtp+=${plugin.rtp}/after
     '';
-    brokenPlugins = with pkgs.vimPlugins; [ rust-vim vimtex ];
+    brokenPlugins = with pkgs.vimPlugins; [ deoplete-nvim rust-vim vimtex ];
   in {
     enable = true;
     viAlias = true;
@@ -33,6 +33,7 @@
       ayu-vim
 
       # Tools
+      echodoc # Print documents in echo area.
       editorconfig-vim # EditorConfig support
       fugitive # Git
       fzf-vim # Search
@@ -424,7 +425,20 @@
             let @" = l:saved_reg
         endfunction
       '';
+      echodocConfig = ''
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " => echodot
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        let g:echodoc#enable_at_startup = 1
+        let g:echodoc#type = 'floating'
+        " To use a custom highlight for the float window,
+        " change Pmenu to your highlight group
+        highlight link EchoDocFloat Pmenu
+      '';
       editorConfigConfig = ''
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        " => editorconfig
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
       '';
       deopleteConfig = ''
@@ -448,6 +462,10 @@
         function g:Multiple_cursors_after()
             call deoplete#custom#buffer_option('auto_complete', v:true)
         endfunction
+
+        " Disable the truncate feature.
+        call deoplete#custom#source('_', 'max_abbr_width', 0)
+        call deoplete#custom#source('_', 'max_menu_width', 0)
       '';
       languageClientConfig = ''
         """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -608,6 +626,7 @@
       ${aleConfig}
       ${ayuConfig}
       ${deopleteConfig}
+      ${echodocConfig}
       ${editorConfigConfig}
       ${fzfConfig}
       ${indentGuidesConfig}
