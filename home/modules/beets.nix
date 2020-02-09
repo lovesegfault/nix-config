@@ -19,7 +19,7 @@ let
     original_date = true;
     path_sep_replace = "_";
     per_disc_numbering = true;
-    pluginpath = [ ];
+    pluginpath = [];
     sort_album = "albumartist+ album+";
     sort_case_insensitive = true;
     sort_item = "artist+ album+ disc+ track+";
@@ -90,8 +90,8 @@ let
       quiet = false;
       quiet_fallback = "skip";
       resume = "ask";
-      search_ids = [ ];
-      set_fields = { };
+      search_ids = [];
+      set_fields = {};
       singletons = false;
       timid = true;
       write = true;
@@ -110,10 +110,10 @@ let
     };
 
     match = {
-      ignored = [ ];
+      ignored = [];
       medium_rec_thresh = 0.25;
       rec_gap_thresh = 0.25;
-      required = [ ];
+      required = [];
       strong_rec_thresh = 4.0e-2;
       track_length_grace = 10;
       track_length_max = 30;
@@ -190,7 +190,8 @@ let
       };
     };
   };
-in {
+in
+{
   programs.beets = {
     enable = true;
     package = (pkgs.beets.override { enableCheck = true; });

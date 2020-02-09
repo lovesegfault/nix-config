@@ -6,26 +6,29 @@ let
   slurp = "${pkgs.slurp}/bin/slurp";
   wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
   xclip = "${pkgs.xclip}/bin/xclip";
-in {
+in
+{
   nixpkgs.overlays = [
-    (self: super: {
-      prtsc = super.writeScriptBin "prtsc" ''
-        #!${super.stdenv.shell}
-        set -o errexit
-        set -o nounset
-        set -o pipefail
+    (
+      self: super: {
+        prtsc = super.writeScriptBin "prtsc" ''
+          #!${super.stdenv.shell}
+          set -o errexit
+          set -o nounset
+          set -o pipefail
 
-        if [ "$(pgrep -x sway)" ]; then
-            area="$(${slurp})"
-            ${grim} -g "$area" - | ${wl-copy}
-        elif [ "$(pgrep -x i3)" ]; then
-            ${scrot} \
-                -s "/tmp/screenshot-$(date +%F_%T).png" \
-                -e "${xclip} -selection c -t image/png < \$f"
-        else
-            ${notify-send} "No tool set for WM"
-        fi
-      '';
-    })
+          if [ "$(pgrep -x sway)" ]; then
+              area="$(${slurp})"
+              ${grim} -g "$area" - | ${wl-copy}
+          elif [ "$(pgrep -x i3)" ]; then
+              ${scrot} \
+                  -s "/tmp/screenshot-$(date +%F_%T).png" \
+                  -e "${xclip} -selection c -t image/png < \$f"
+          else
+              ${notify-send} "No tool set for WM"
+          fi
+        '';
+      }
+    )
   ];
 }

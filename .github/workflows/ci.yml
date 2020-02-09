@@ -22,7 +22,7 @@ jobs:
         - name: Setup Nix
           uses: cachix/install-nix-action@v6
         - name: Formatting tests
-          run: nix run nixpkgs.nixfmt -c find . -iname "*.nix" -exec nixfmt -c {} +
+          run: nix run nixpkgs.nixpkgs-fmt -c find . -iname "*.nix" -exec nixpkgs-fmt --check {} +
     build:
       runs-on: ubuntu-latest
       steps:

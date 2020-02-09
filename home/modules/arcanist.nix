@@ -9,7 +9,8 @@ let
       "arc.land.onto.default" = "master";
     };
   };
-in rec {
+in
+rec {
   imports = [ ../pkgs/arcanist.nix ];
 
   home.packages = with pkgs; [ arcanist ];

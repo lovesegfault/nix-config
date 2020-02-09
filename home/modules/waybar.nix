@@ -98,7 +98,8 @@ let
       on-scroll-down = "pactl set-sink-volume @DEFAULT_SINK@ -1%";
     };
   };
-in {
+in
+{
   xdg.configFile.waybar = {
     target = "waybar/config";
     text = (builtins.toJSON config);

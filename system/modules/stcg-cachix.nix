@@ -2,7 +2,8 @@
 let
   secret = ../../secrets/system/stcg-cachix.nix;
   password = lib.optionalString (builtins.pathExists secret) (import secret);
-in {
+in
+{
   nix = {
     binaryCaches = [ "https://standard.cachix.org/" ];
     binaryCachePublicKeys =

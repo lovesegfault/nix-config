@@ -6,7 +6,8 @@ let
   notify-send = "${pkgs.libnotify}/bin/notify-send";
   rg = "${pkgs.ripgrep}/bin/rg";
   wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
-in ''
+in
+''
   gopassmenu_path="$(readlink -f "$0")"
   gopassmenu_fifo="/tmp/gopassmenu_fifo"
   gopassmenu_lock="/tmp/gopassmenu_lock"

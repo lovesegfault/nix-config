@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
-let shellConfig = import ./shell.nix { inherit config lib pkgs; };
-in {
+let
+  shellConfig = import ./shell.nix { inherit config lib pkgs; };
+in
+{
   programs = {
     direnv.enableZshIntegration = true;
     starship.enableZshIntegration = true;

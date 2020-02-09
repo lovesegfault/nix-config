@@ -2,7 +2,8 @@
 let
   alacritty = "${pkgs.alacritty}/bin/alacritty";
   fzf = "${pkgs.fzf}/bin/fzf";
-in ''
+in
+''
   shopt -s nullglob globstar
   set -o pipefail
   # shellcheck disable=SC2154

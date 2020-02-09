@@ -2,7 +2,8 @@
 let
   secret = ../../secrets/system/stcg-wifi-password.nix;
   password = lib.optionalString (builtins.pathExists secret) (import secret);
-in {
+in
+{
   imports = [
     ../combo/core.nix
 
@@ -21,10 +22,12 @@ in {
   networking = {
     hostName = "camus";
     interfaces.eth0 = {
-      ipv4.addresses = [{
-        address = "192.168.2.1";
-        prefixLength = 24;
-      }];
+      ipv4.addresses = [
+        {
+          address = "192.168.2.1";
+          prefixLength = 24;
+        }
+      ];
       useDHCP = lib.mkForce false;
     };
     wireless.networks."StandardCognition".psk = password;

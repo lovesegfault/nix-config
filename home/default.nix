@@ -1,11 +1,14 @@
 let
   homePkg = machine: arch:
-    (import <home-manager/home-manager/home-manager.nix> {
-      pkgs = import <nixpkgs> { system = arch; };
-      confPath = machine;
-      confAttr = "";
-    }).activationPackage;
-in {
+    (
+      import <home-manager/home-manager/home-manager.nix> {
+        pkgs = import <nixpkgs> { system = arch; };
+        confPath = machine;
+        confAttr = "";
+      }
+    ).activationPackage;
+in
+{
   foucault = homePkg ./machines/foucault.nix "x86_64-linux";
   abel = homePkg ./machines/abel.nix "x86_64-linux";
   peano = homePkg ./machines/peano.nix "x86_64-linux";
