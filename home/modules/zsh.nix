@@ -52,8 +52,8 @@ in
         src = pkgs.fetchFromGitHub {
           owner = "zdharma";
           repo = "fast-syntax-highlighting";
-          rev = "634ab246365ef6b465b4cdf7c6f0727ec04759a9";
-          sha256 = "19hxd3176m1kz5969hfhgsjk5cjfxiacvzn47wm77vxg8zihrq89";
+          rev = "94b6b5b8e58aeecd7587a973dbe110a352d7314d";
+          sha256 = "1lvq9qk0jz65swbghg4j08353z27v7nhd1r5i454y91s6w6n4b46";
         };
       }
       {
