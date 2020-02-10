@@ -74,8 +74,8 @@ in
         src = pkgs.fetchFromGitHub {
           owner = "zdharma";
           repo = "history-search-multi-word";
-          rev = "0713e6dd8a8757d8caa100009487b520c15e94fa";
-          sha256 = "0fmsy96f6kvzcnd2shb6s1qmymrf1ddqgf3l1zj1isd1fhzwqsnw";
+          rev = "71e00938a72393f09ebab9d87be27dc5d06b701e";
+          sha256 = "02aw432fp64drvn13fj1h4jflfn6ys59sx135hqmzyax667vmibw";
         };
       }
       {
