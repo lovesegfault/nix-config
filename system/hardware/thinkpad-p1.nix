@@ -6,8 +6,6 @@
     ../modules/fwupd.nix
     ../modules/intel.nix
     ../modules/tlp.nix
-
-    ../pkgs/linux-5.4-fixes.nix
   ];
 
   boot = rec {
@@ -15,8 +13,7 @@
       [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     extraModulePackages = with kernelPackages; [ acpi_call tp_smapi ];
     kernelModules = [ "acpi_call" "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages;
-    # kernelPatches = with pkgs; [ i915-cmd-fix i915-drm-fix xfs-2038-fix ];
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   environment.systemPackages = with pkgs; [ powertop ];
