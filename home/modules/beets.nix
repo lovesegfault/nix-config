@@ -194,7 +194,6 @@ in
 {
   programs.beets = {
     enable = true;
-    package = (pkgs.beets.override { enableCheck = true; });
     settings = (lib.recursiveUpdate normal_settings secret_settings);
   };
 }

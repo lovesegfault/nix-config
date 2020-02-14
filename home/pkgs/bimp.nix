@@ -3,8 +3,7 @@ let
   parallel = "${pkgs.parallel}/bin/parallel";
   id3v2 = "${pkgs.id3v2}/bin/id3v2";
   flac = "${pkgs.flac}/bin/flac";
-  beetsPkg = (pkgs.beets.override { enableCheck = true; });
-  beet = "${beetsPkg}/bin/beet";
+  beet = "${pkgs.beets}/bin/beet";
 in
 {
   nixpkgs.overlays = [
