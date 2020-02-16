@@ -3,7 +3,6 @@
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ../combo/core.nix
     ../combo/dev.nix
-    ../combo/games.nix
     ../combo/graphical.nix
     ../combo/wayland.nix
 
