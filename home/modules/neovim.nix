@@ -478,6 +478,7 @@
           let g:LanguageClient_serverCommands = {
               \ 'rust': ['rls'],
               \ 'python': ['pyls'],
+              \ 'tex': ['texlab'],
           \ }
 
           nnoremap <space> :call LanguageClient_contextMenu()<CR>
