@@ -30,7 +30,7 @@
 
   networking = {
     hostName = "foucault";
-    interfaces.enp0s31f6.mtu = 9000;
+    interfaces.ens1u2u1u2.mtu = 9000;
   };
 
   services.xserver.desktopManager.gnome3.enable = true;
