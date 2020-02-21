@@ -24,5 +24,10 @@ in
     } secret_settings
   );
 
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = true;
+  };
+
   time.timeZone = "America/Los_Angeles";
 }

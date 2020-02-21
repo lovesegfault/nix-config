@@ -57,5 +57,10 @@ in
     interfaces = [ "eth0" ];
   };
 
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = true;
+  };
+
   time.timeZone = "America/Los_Angeles";
 }
