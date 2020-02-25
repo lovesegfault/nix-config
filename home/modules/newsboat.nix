@@ -21,6 +21,7 @@
     reloadTime = 15;
     urls = [
       { url = ''"query:News:tags # \"news\""''; }
+      { url = ''"query:Blogs:tags # \"blogs\""''; }
       { url = ''"query:Comics:tags # \"comics\""''; }
       { url = ''"query:Gentoo:tags # \"gentoo\""''; }
       { url = ''"query:Mailing Lists:tags # \"ml\""''; }
@@ -63,6 +64,25 @@
         url = "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml";
         title = "The New York Times";
         tags = [ "news" ];
+      }
+      {
+        url = "---";
+        tags = [];
+      }
+      {
+        url = "https://drewdevault.com/feed.xml";
+        title = "Drew DeVault's Blog";
+        tags = [ "blogs" ];
+      }
+      {
+        url = "https://ewontfix.com/feed.rss";
+        title = "EWONTFIX";
+        tags = [ "blogs" ];
+      }
+      {
+        url = "https://emersion.fr/blog/atom.xml";
+        title = "emersion";
+        tags = [ "blogs" ];
       }
       {
         url = "---";
