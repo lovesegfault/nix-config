@@ -11,7 +11,7 @@
   boot = rec {
     initrd.availableKernelModules =
       [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-    extraModulePackages = with kernelPackages; [ acpi_call tp_smapi ];
+    extraModulePackages = with kernelPackages; [ acpi_call ];
     kernelModules = [ "acpi_call" "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
   };
