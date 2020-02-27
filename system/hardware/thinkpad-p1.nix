@@ -2,10 +2,11 @@
   imports = [
     ../modules/efi.nix
     ../modules/bluetooth.nix
-    ../modules/bumblebee.nix
+    # ../modules/bumblebee.nix
     ../modules/fwupd.nix
     ../modules/intel.nix
     ../modules/tlp.nix
+    ../pkgs/linux-5.5-fixes.nix
   ];
 
   boot = rec {
@@ -14,11 +15,13 @@
     extraModulePackages = with kernelPackages; [ acpi_call ];
     kernelModules = [ "acpi_call" "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
+    kernelPatches = with pkgs; [ nouveau-gr-fix nouveau-pci-fix ];
+    kernelParams = [ "log_buf_len=5M" ];
   };
 
   environment.systemPackages = with pkgs; [ powertop ];
 
-  hardware.enableRedistributableFirmware = true;
+  hardware.enableAllFirmware = true;
 
   console = {
     font = "ter-v28n";
