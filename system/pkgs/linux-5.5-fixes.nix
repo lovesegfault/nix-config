@@ -7,7 +7,7 @@
           patch = (builtins.fetchurl {
             url =
               "https://github.com/karolherbst/linux/commit/0a4d0a9f2ab29b4765ee819753fbbcbc2aa7da97.patch";
-            sha256 = "0ir453x9k736hqxk0wklsxyxcsh72qvlndf74wgbry3fhb8ii1xi";
+            sha256 = "1k4lf1cnydckjn2fqdqiizba3rzjg27xa97xjaif4ss5m7mh4ckn";
           });
         };
         nouveau-pci-fix = {
