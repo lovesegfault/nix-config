@@ -1,7 +1,7 @@
-{ lib ? import <nixpkgs/lib>
-, pkgs ? import <nixpkgs>
-, system ? import ./system
-, home ? import ./home
+{ nixpkgs ? import <nixpkgs> {}
+, lib ? import (nixpkgs.path + "/lib")
+, system ? import ./system { pkgs = nixpkgs; }
+, home ? import ./home { pkgs = nixpkgs; }
 }: rec {
   machines = lib.zipAttrs [ system home ];
   x86_64 = with machines; [ abel cantor foucault peano ];
