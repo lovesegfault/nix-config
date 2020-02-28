@@ -11,7 +11,7 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v2
         - name: Setup Nix
-          uses: cachix/install-nix-action@v6
+          uses: cachix/install-nix-action@v7
         - name: Parsing tests
           run: find . -name "*.nix" -exec nix-instantiate --parse --quiet {} >/dev/null +
     formatting:
@@ -20,7 +20,7 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v2
         - name: Setup Nix
-          uses: cachix/install-nix-action@v6
+          uses: cachix/install-nix-action@v7
         - name: Formatting tests
           run: nix run nixpkgs.nixpkgs-fmt -c find . -iname "*.nix" -exec nixpkgs-fmt --check {} +
     build:
@@ -29,7 +29,7 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v2
         - name: Setup Nix
-          uses: cachix/install-nix-action@v6
+          uses: cachix/install-nix-action@v7
         - name: Setup channel
           run: |
             nix-channel --add https://nixos.org/channels/nixos-unstable nixpkgs
@@ -51,7 +51,7 @@ jobs:
         - name: Cachix
           env:
             NIX_PATH: "/home/runner/.nix-defexpr/channels:nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos:/nix/var/nix/profiles/per-user/root/channels"
-          uses: cachix/cachix-action@v3
+          uses: cachix/cachix-action@v4
           with:
               name: nix-config
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
