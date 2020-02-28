@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }: let
+{ pkgs ? import <nixpkgs> {} }: let
   systemPkg = machine: arch:
     (
       import (pkgs.path + "/nixos") {

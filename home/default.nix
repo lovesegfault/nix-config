@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }: let
+{ pkgs ? import <nixpkgs> {} }: let
   homePkg = machine: arch:
     (
       import <home-manager/home-manager/home-manager.nix> {
