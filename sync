@@ -5,6 +5,7 @@ DRY_RUN=0
 HOME_MANAGER_SYNC=0
 NIXOS_BOOT=0
 NIXOS_SYNC=0
+NO_BUILD=0
 UPGRADE=0
 
 function cprint() {
@@ -176,8 +177,8 @@ function check_getopt() {
 }
 
 function parse_opts() {
-    local short_opts="abdhsu"
-    local long_opts="all,boot,dry-run,home,system,upgrade"
+    local short_opts="abdhnsu"
+    local long_opts="all,boot,dry-run,home,no-build,system,upgrade"
     local parsed
     ! parsed=$(getopt --options="$short_opts" --longoptions="$long_opts" --name "$0" -- "$@")
     if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
@@ -201,6 +202,10 @@ function parse_opts() {
             ;;
         -h | --home)
             HOME_MANAGER_SYNC=1
+            shift
+            ;;
+        -n | --no-build)
+            NO_BUILD=1
             shift
             ;;
         -s | --system)
@@ -228,12 +233,12 @@ function main() {
     if [ $NIXOS_SYNC = 1 ]; then
         check_sudo
         sync_system
-        rebuild_system
+        [ $NO_BUILD == 0 ] && rebuild_system
     fi
     if [ $HOME_MANAGER_SYNC == 1 ]; then
         [ "$(id -u)" != 0 ] || error "Run this as a your user, not root."
         sync_home
-        rebuild_home
+        [ $NO_BUILD == 0 ] && rebuild_home
     fi
 }
 
