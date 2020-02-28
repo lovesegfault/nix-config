@@ -16,7 +16,7 @@
     kernelModules = [ "acpi_call" "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelPatches = with pkgs; [ nouveau-gr-fix nouveau-pci-fix ];
-    kernelParams = [ "log_buf_len=5M" "psmouse.synaptics_intertouch=1"];
+    kernelParams = [ "log_buf_len=5M" "psmouse.synaptics_intertouch=1" ];
   };
 
   environment.systemPackages = with pkgs; [ powertop ];
