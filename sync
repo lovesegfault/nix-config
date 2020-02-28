@@ -158,13 +158,13 @@ function rebuild_system() {
         op="switch"
     fi
     [ $DRY_RUN == 0 ] && [ $UPGRADE == 1 ] && sudo nix-channel --update
-    [ $DRY_RUN == 0 ] && sudo nixos-rebuild "$op"
+    [ $DRY_RUN == 0 ] && sudo nixos-rebuild "$op" || error "Failed to rebuild system"
 }
 
 function rebuild_home() {
     [ "$#" -eq 0 ] || error "rebuild_home"
     [ $DRY_RUN == 0 ] && [ $UPGRADE == 1 ] && nix-channel --update
-    [ $DRY_RUN == 0 ] && home-manager switch
+    [ $DRY_RUN == 0 ] && home-manager switch || error "failed to rebuild home"
 }
 
 function check_getopt() {
