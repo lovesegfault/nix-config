@@ -22,7 +22,8 @@
     ];
   };
 
-  networking.useNetworkd = true;
+  # FIXME: Report issue with systemd-networkd-wait-only to @flokli
+  #networking.useNetworkd = true;
 
   nixpkgs.config.allowUnfree = true;
 
