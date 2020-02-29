@@ -1,7 +1,10 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: let
+  pulseaudio = pkgs.pulseaudio.override { bluetoothSupport = true; };
+in
+{
   hardware.pulseaudio = {
     enable = true;
-    package = pkgs.pulseaudioFull;
+    package = pulseaudio;
     daemon.config = {
       avoid-resampling = "yes";
       alternate-sample-rate = 88200;
