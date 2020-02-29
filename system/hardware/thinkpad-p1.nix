@@ -35,12 +35,28 @@
   services = {
     fstrim.enable = true;
     hardware.bolt.enable = true;
-    throttled.enable = true;
     xserver.libinput = {
       accelProfile = "flat";
       accelSpeed = "0.7";
     };
   };
+
+  systemd.tmpfiles.rules = [
+    # MSR
+    # PL1
+    "w /sys/devices/virtual/powercap/intel-rapl/intel-rapl:0/constraint_0_power_limit_uw - - - - 44000000"
+    "w /sys/devices/virtual/powercap/intel-rapl/intel-rapl:0/constraint_0_time_window_us - - - - 28000000"
+    # PL2
+    "w /sys/devices/virtual/powercap/intel-rapl/intel-rapl:0/constraint_1_power_limit_uw - - - - 44000000"
+    "w /sys/devices/virtual/powercap/intel-rapl/intel-rapl:0/constraint_1_time_window_us - - - - 2440"
+    # MCHBAR
+    # PL1
+    "w /sys/devices/virtual/powercap/intel-rapl-mmio/intel-rapl-mmio:0/constraint_0_power_limit_uw - - - - 44000000"
+    "w /sys/devices/virtual/powercap/intel-rapl-mmio/intel-rapl-mmio:0/constraint_0_time_window_us - - - - 28000000"
+    # PL2
+    "w /sys/devices/virtual/powercap/intel-rapl-mmio/intel-rapl-mmio:0/constraint_1_power_limit_uw - - - - 44000000"
+    "w /sys/devices/virtual/powercap/intel-rapl-mmio/intel-rapl-mmio:0/constraint_1_time_window_us - - - - 2440"
+  ];
 
   powerManagement.cpuFreqGovernor = "powersave";
 
