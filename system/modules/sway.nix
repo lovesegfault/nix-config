@@ -5,7 +5,6 @@
     enable = true;
     extraPackages = with pkgs; [
       alacritty
-      gebaar-libinput
       grim
       light
       mako

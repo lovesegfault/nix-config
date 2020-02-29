@@ -7,21 +7,6 @@
     ../pkgs/swaymenu.nix
   ];
 
-  xdg.configFile.gebaar = {
-    target = "gebaar/gebaard.toml";
-    text = ''
-      [commands.swipe.three]
-      left_up = ""
-      right_up = ""
-      up = ""
-      left_down = ""
-      right_down = ""
-      down = ""
-      left = "swaymsg \"workspace next\""
-      right = "swaymsg \"workspace prev\""
-    '';
-  };
-
   xdg.configFile.sway = {
     target = "sway/config";
     text = let
@@ -305,7 +290,6 @@
 
         exec "${polkit-gnome}"
         exec "dbus-update-activation-environment --systemd DISPLAY"
-        exec "gebaard"
         exec "mako"
         exec "pactl set-sink-mute @DEFAULT_SINK@ true"
         exec "pactl set-source-mute @DEFAULT_SOURCE@ true"

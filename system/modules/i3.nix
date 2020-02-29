@@ -15,7 +15,6 @@
       extraPackages = with pkgs; [
         alacritty
         scrot
-        gebaar-libinput
         light
         dunst
         feh

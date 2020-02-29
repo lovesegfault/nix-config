@@ -1,21 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [ ../pkgs/passmenu.nix ../pkgs/prtsc.nix ../pkgs/i3menu.nix ];
 
-  xdg.configFile.gebaar = {
-    target = "gebaar/gebaard.toml";
-    text = ''
-      [commands.swipe.three]
-      left_up = ""
-      right_up = ""
-      up = ""
-      left_down = ""
-      right_down = ""
-      down = ""
-      left = "swaymsg \"workspace next\""
-      right = "swaymsg \"workspace prev\""
-    '';
-  };
-
   xsession = rec {
     windowManager.i3 = {
       enable = true;
@@ -136,7 +121,6 @@
             { command = "dbus-update-activation-environment --systemd DISPLAY"; }
             { command = dunst; }
             { command = "${feh} --bg-fill ~/.wall"; }
-            { command = "gebaard"; }
             { command = "pactl set-sink-mute @DEFAULT_SINK@ true"; }
             { command = "pactl set-source-mute @DEFAULT_SOURCE@ true"; }
             { command = redshift; }
