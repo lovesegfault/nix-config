@@ -19,7 +19,8 @@
   # will cause it to have 3 entries, the original, an empty, and the new
   systemd.services.bluetooth.serviceConfig.ExecStart = let
     bluez = "${hardware.bluetooth.package}/libexec/bluetooth/bluetoothd";
-  in [ "" "${bluez} --noplugin=sap" ];
+  in
+    [ "" "${bluez} --noplugin=sap" ];
 
   hardware.pulseaudio = {
     package = pkgs.pulseaudio.override { bluetoothSupport = true; };
