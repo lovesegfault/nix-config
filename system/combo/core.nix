@@ -22,6 +22,8 @@
     ];
   };
 
+  networking.useNetworkd = true;
+
   nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "19.09";
