@@ -33,6 +33,7 @@
     interfaces.enp0s31f6.mtu = 9000;
   };
 
+  services.avahi.enable = false;
   services.xserver.desktopManager.gnome3.enable = true;
 
   swapDevices =
