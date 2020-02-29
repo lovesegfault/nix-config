@@ -1,8 +1,7 @@
-{ config, lib, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
     ../modules/efi.nix
     ../modules/bluetooth.nix
-    # ../modules/bumblebee.nix
     ../modules/fwupd.nix
     ../modules/intel.nix
     ../modules/tlp.nix
@@ -21,7 +20,7 @@
 
   environment.systemPackages = with pkgs; [ powertop ];
 
-  hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
 
   console = {
     font = "ter-v28n";
@@ -31,28 +30,19 @@
 
   nix.maxJobs = 12;
 
-  nixpkgs.config.allowUnfree = true;
-
   programs.light.enable = true;
 
   services = {
     fstrim.enable = true;
     hardware.bolt.enable = true;
     throttled.enable = true;
-    xserver = {
-      libinput = {
-        accelProfile = "flat";
-        accelSpeed = "0.7";
-      };
-      windowManager.i3.extraSessionCommands = ''
-        export GDK_SCALE=2
-        export GDK_DPI_SCALE=0.5
-        export QT_AUTO_SCREEN_SCALE_FACTOR=1
-      '';
+    xserver.libinput = {
+      accelProfile = "flat";
+      accelSpeed = "0.7";
     };
   };
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  powerManagement.cpuFreqGovernor = "powersave";
 
   users.users.bemeurer.extraGroups = [ "camera" ];
 }
