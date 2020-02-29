@@ -240,6 +240,7 @@ function main() {
         sync_home
         [ $NO_BUILD == 0 ] && rebuild_home
     fi
+    exit 0
 }
 
 main "$@"
