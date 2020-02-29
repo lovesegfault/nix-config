@@ -1,8 +1,6 @@
 {
   networking.networkmanager.dns = "systemd-resolved";
 
-  services.nscd.enable = false;
-
   services.resolved = {
     enable = true;
     dnssec = "false";
