@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ../combo/core.nix
@@ -37,6 +37,9 @@
 
   swapDevices =
     [ { device = "/dev/disk/by-uuid/ec8c101f-65fd-47c4-8e17-f1b5395b68c7"; } ];
+
+  systemd.services.docker.wantedBy = lib.mkForce [];
+  systemd.services.libvirtd.wantedBy = lib.mkForce [];
 
   time.timeZone = "America/Los_Angeles";
 }
