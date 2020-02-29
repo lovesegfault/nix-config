@@ -16,6 +16,8 @@
       MAX_LOST_WORK_SECS_ON_AC=15
       MAX_LOST_WORK_SECS_ON_BAT=15
 
+      RUNTIME_PM_DRIVER_BLACKLIST="amdgpu nouveau nvidia radeon"
+
       USB_WHITELIST="1050:0407 056a:5193"
     '';
   };
