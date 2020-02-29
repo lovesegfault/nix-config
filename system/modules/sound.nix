@@ -16,6 +16,8 @@
     extraConfig = ''
       unload-module module-esound-protocol-unix
     '';
+    zeroconf.discovery.enable = false;
+    zeroconf.publish.enable = false;
   };
 
   security.rtkit.enable = true;
