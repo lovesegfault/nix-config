@@ -3,6 +3,7 @@
     enable = true;
     extraConfig = ''
       CPU_ENERGY_PERF_POLICY_ON_AC=performance
+      CPU_ENERGY_PERF_POLICY_ON_BAT=power
       CPU_MAX_PERF_ON_AC=100
       CPU_MAX_PERF_ON_BAT=50
       CPU_SCALING_GOVERNOR_ON_AC=performance
