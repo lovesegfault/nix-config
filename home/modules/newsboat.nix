@@ -71,7 +71,7 @@
       }
       {
         url = "https://drewdevault.com/feed.xml";
-        title = "Drew DeVault's Blog";
+        title = "Drew DeVault";
         tags = [ "blogs" ];
       }
       {
@@ -82,6 +82,11 @@
       {
         url = "https://emersion.fr/blog/atom.xml";
         title = "emersion";
+        tags = [ "blogs" ];
+      }
+      {
+        url = "https://eli.thegreenplace.net/feeds/all.atom.xml";
+        title = "Eli Bendersky";
         tags = [ "blogs" ];
       }
       {
