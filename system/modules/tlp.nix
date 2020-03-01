@@ -12,6 +12,8 @@
       DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE="bluetooth wifi"
       DEVICES_TO_ENABLE_ON_AC="bluetooth wifi"
 
+      DISK_APM_LEVEL_ON_AC="255 254"
+      DISK_APM_LEVEL_ON_BAT="128 1"
       DISK_DEVICES="nvme0n1 sda"
       DISK_IOSCHED="mq-deadline bfq"
 
