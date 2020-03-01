@@ -58,7 +58,7 @@
     "w /sys/devices/virtual/powercap/intel-rapl-mmio/intel-rapl-mmio:0/constraint_1_time_window_us - - - - 2440"
   ];
 
-  powerManagement.cpuFreqGovernor = "powersave";
+  # powerManagement.cpuFreqGovernor = "powersave";
 
   users.users.bemeurer.extraGroups = [ "camera" ];
 }
