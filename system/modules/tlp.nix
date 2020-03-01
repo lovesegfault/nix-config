@@ -7,6 +7,7 @@
       CPU_MAX_PERF_ON_AC=100
       CPU_MAX_PERF_ON_BAT=50
       CPU_SCALING_GOVERNOR_ON_AC=performance
+      CPU_SCALING_GOVERNOR_ON_BAT=powersave
 
       DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE="bluetooth wifi"
       DEVICES_TO_ENABLE_ON_AC="bluetooth wifi"
