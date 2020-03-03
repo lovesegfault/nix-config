@@ -2,7 +2,7 @@
   imports = [
     ../modules/boot-silent.nix
     ../modules/fonts.nix
-    ../modules/gdm.nix
+    # ../modules/gdm.nix
     ../modules/gnome-keyring.nix
     ../modules/location.nix
     ../modules/printing.nix
