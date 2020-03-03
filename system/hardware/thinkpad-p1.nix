@@ -16,7 +16,6 @@
     kernelPackages = pkgs.linuxPackages_latest;
     kernelPatches = with pkgs; [
       nouveau-gr-fix
-      nouveau-pci-fix
       nouveau-runpm-fix
     ];
     kernelParams = [
