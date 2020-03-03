@@ -38,8 +38,8 @@
         ### Output configuration
         output * bg ~/.wall fill
         output eDP-1 resolution 3840x2160 position 0,0 scale 2 subpixel rgb
+        output DP-3 resolution 3840x2160 position 1920,0 scale 2 subpixel rgb transform 270
         # output eDP-1 resolution 1920x1080 position 0,0 scale 1 subpixel rgb
-        output LVDS-1 resolution 1920x1080 position 0,0 scale 1 subpixel rgb
 
         ### Idle configuration
         exec swayidle -w \
