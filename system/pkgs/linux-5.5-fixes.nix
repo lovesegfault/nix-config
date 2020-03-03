@@ -12,16 +12,6 @@
             }
           );
         };
-        nouveau-pci-fix = {
-          name = "nouveau-pci-fix";
-          patch = (
-            builtins.fetchurl {
-              url =
-                "https://github.com/karolherbst/linux/commit/cb048d65b71ac05158918fba2c68ca6896e51492.patch";
-              sha256 = "1bh4pv6kmzq3nacvvzwzy0zlvvd3pgpamqgvpbma6rc37hgggxhn";
-            }
-          );
-        };
         nouveau-runpm-fix = {
           name = "nouveau-runpm-fix";
           patch = (
