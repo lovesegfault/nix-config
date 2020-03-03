@@ -21,6 +21,7 @@
     "/" = {
       device = "/dev/disk/by-uuid/4e217a4b-40ae-4bde-b771-04eabfe2369d";
       fsType = "xfs";
+      options = [ "defaults" "noatime" ];
     };
     "/boot" = {
       device = "/dev/disk/by-uuid/AD39-03D0";
