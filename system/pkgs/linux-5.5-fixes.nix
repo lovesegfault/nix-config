@@ -22,6 +22,16 @@
             }
           );
         };
+        nouveau-runpm-fix = {
+          name = "nouveau-runpm-fix";
+          patch = (
+            builtins.fetchurl {
+              url =
+                "https://github.com/karolherbst/linux/commit/1e6cef9e6c4d17f6d893dae3cd7d442d8574b4b5.patch";
+              sha256 = "103myhwmi55f7vaxk9yqrl4diql6z32am5mzd6kvk89j9m02h528";
+            }
+          );
+        };
       }
     )
   ];

@@ -22,6 +22,10 @@
 
       RUNTIME_PM_DRIVER_BLACKLIST="amdgpu nouveau nvidia radeon"
 
+      SOUND_POWER_SAVE_ON_AC=1
+      SOUND_POWER_SAVE_ON_BAT=1
+      SOUND_POWER_SAVE_CONTROLLER=Y
+
       USB_WHITELIST="1050:0407 056a:5193"
     '';
   };

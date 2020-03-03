@@ -14,12 +14,17 @@
     extraModulePackages = with kernelPackages; [ acpi_call ];
     kernelModules = [ "acpi_call" "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelPatches = with pkgs; [ nouveau-gr-fix nouveau-pci-fix ];
+    kernelPatches = with pkgs; [
+      nouveau-gr-fix
+      nouveau-pci-fix
+      nouveau-runpm-fix
+    ];
     kernelParams = [
       "log_buf_len=5M"
       "psmouse.synaptics_intertouch=1"
-      "nouveau.noaccel=1"
-      "nouveau.nofbaccel=1"
+      # "nouveau.runpm=0"
+      # "nouveau.noaccel=1"
+      # "nouveau.nofbaccel=1"
     ];
   };
 
