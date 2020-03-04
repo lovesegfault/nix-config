@@ -2,12 +2,18 @@
   imports = [
     ../modules/boot-silent.nix
     ../modules/fonts.nix
-    # ../modules/gdm.nix
     ../modules/gnome-keyring.nix
     ../modules/location.nix
     ../modules/printing.nix
     ../modules/sound.nix
   ];
 
-  environment.systemPackages = with pkgs; [ qgnomeplatform ];
+  environment.systemPackages = with pkgs; [ gnome3.adwaita-icon-theme ];
+
+  environment.systemPackages = with pkgs; [ adwaita-qt qgnomeplatform ];
+  qt5 = {
+    enable = true;
+    platformTheme = "gnome";
+    style = "adwaita";
+  };
 }
