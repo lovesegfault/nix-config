@@ -25,7 +25,7 @@
     gtk3.extraConfig = { gtk-application-prefer-dark-theme = true; };
   };
 
- qt = {
+  qt = {
     enable = true;
     platformTheme = "gnome";
   };
