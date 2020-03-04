@@ -19,7 +19,7 @@ in
 
           if [ "$(pgrep -x sway)" ]; then
               area="$(${slurp})"
-              ${grim} -g "$area" - | ${wl-copy}
+              ${grim} -t png -g "$area" - | ${wl-copy} -t image/png
           elif [ "$(pgrep -x i3)" ]; then
               ${scrot} \
                   -s "/tmp/screenshot-$(date +%F_%T).png" \
