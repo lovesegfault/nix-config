@@ -191,6 +191,7 @@
                 before-sleep '${swaylock}'
             '';
         }
+        { command = "${pkgs.xorg.xrdb}/bin/xrdb -load ~/.Xresources"; }
         { command = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY"; }
         { command = "pactl set-sink-mute @DEFAULT_SINK@ true"; }
         { command = "pactl set-source-mute @DEFAULT_SINK@ true"; }
