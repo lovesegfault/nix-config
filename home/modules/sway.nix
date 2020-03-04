@@ -105,7 +105,7 @@
         light = "${pkgs.light}/bin/light";
         playerctl = "${pkgs.playerctl}/bin/playerctl";
       in
-      lib.mkOptionDefault {
+        lib.mkOptionDefault {
           # fancy workspace names
           "${modifier}+1" = "workspace 1:α";
           "${modifier}+2" = "workspace 2:β";
@@ -186,15 +186,15 @@
 
       window = {
         commands = let
-            makeMenuWindow = "floating enable, border pixel 5, sticky enable";
-          in
-            [
-              { command = makeMenuWindow; criteria = { app_id = "Alacritty"; title = "swaymenu"; }; }
-              { command = makeMenuWindow; criteria = { app_id = "Alacritty"; title = "gopassmenu"; }; }
-              { command = makeMenuWindow; criteria = { app_id = "Alacritty"; title = "emojimenu"; }; }
-              { command = "floating enable"; criteria.app_id = "imv"; }
-              { command = "floating enable, sticky enable"; criteria = { app_id = "firefox"; title = "Picture-in-Picture"; }; }
-            ];
+          makeMenuWindow = "floating enable, border pixel 5, sticky enable";
+        in
+          [
+            { command = makeMenuWindow; criteria = { app_id = "Alacritty"; title = "swaymenu"; }; }
+            { command = makeMenuWindow; criteria = { app_id = "Alacritty"; title = "gopassmenu"; }; }
+            { command = makeMenuWindow; criteria = { app_id = "Alacritty"; title = "emojimenu"; }; }
+            { command = "floating enable"; criteria.app_id = "imv"; }
+            { command = "floating enable, sticky enable"; criteria = { app_id = "firefox"; title = "Picture-in-Picture"; }; }
+          ];
         border = 0;
       };
     };
