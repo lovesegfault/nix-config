@@ -19,7 +19,6 @@
       export SDL_VIDEODRIVER=wayland
       export MOZ_ENABLE_WAYLAND=1
     '';
-    wrapperFeatures.gtk = true;
   };
 
   services.xserver.displayManager.sessionPackages = [ pkgs.sway ];
