@@ -37,6 +37,5 @@ misc/
 ## issues
 * my wallpapers are maintained ad-hoc
 * no ssh configuration (`.ssh/config`)
-* zsh plugins must be manually updates
-* sway configuration is done in plaintext
+* zsh plugins must be manually updated
 * dunst is not configured sanely
