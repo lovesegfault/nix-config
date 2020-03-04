@@ -40,8 +40,8 @@
       };
 
       floating = {
-        modifier = modifier;
         border = 0;
+        modifier = modifier;
       };
 
       focus.followMouse = false;
@@ -204,6 +204,7 @@
       terminal = "${pkgs.alacritty}/bin/alacritty";
 
       window = {
+        border = 0;
         commands = let
           makeMenuWindow = "floating enable, border pixel 5, sticky enable";
         in
@@ -214,7 +215,6 @@
             { command = "floating enable"; criteria.app_id = "imv"; }
             { command = "floating enable, sticky enable"; criteria = { app_id = "firefox"; title = "Picture-in-Picture"; }; }
           ];
-        border = 0;
       };
     };
 
