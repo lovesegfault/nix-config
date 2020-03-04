@@ -15,7 +15,6 @@
       swayidle
       swaylock
       waybar
-      wf-recorder
       wl-clipboard
       xwayland
     ];

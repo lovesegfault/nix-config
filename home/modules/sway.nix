@@ -1,303 +1,218 @@
-{ pkgs, ... }: {
-  imports = [
-    ../pkgs/emojimenu.nix
-    ../pkgs/otpmenu.nix
-    ../pkgs/passmenu.nix
-    ../pkgs/prtsc.nix
-    ../pkgs/swaymenu.nix
-  ];
-
-  xdg.configFile.sway = {
-    target = "sway/config";
-    text = let
-      polkit-gnome =
-        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-      emojimenu = "${pkgs.emojimenu}/bin/emojimenu";
-      passmenu = "${pkgs.passmenu}/bin/passmenu";
-      otpmenu = "${pkgs.otpmenu}/bin/otpmenu";
-      prtsc = "${pkgs.prtsc}/bin/prtsc";
-      swaymenu = "${pkgs.swaymenu}/bin/swaymenu";
-      term = "alacritty";
-      menu = "${term} -d 80 20 -t swaymenu -e ${swaymenu}";
-      waybar = "waybar";
-      mako = "mako";
-    in
-      ''
-        ### Variables
-        set $mod Mod4
-        set $left h
-        set $down j
-        set $up k
-        set $right l
-        for_window [app_id="Alacritty" title="swaymenu"] floating enable, border pixel 5, sticky enable
-        for_window [app_id="Alacritty" title="gopassmenu"] floating enable, border pixel 5, sticky enable
-        for_window [app_id="Alacritty" title="emojimenu"] floating enable, border pixel 5, sticky enable
-        for_window [app_id="imv"] floating enable
-        for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, sticky enable
-
-        ### Output configuration
-        set $laptop "Unknown 0x32EB 0x00000000"
-        set $vmonitor "Dell Inc. DELL U2518D 0WG2J7C4A2AL"
-        output * bg ~/.wall fill
-        output $laptop resolution 3840x2160 position 0,0 scale 2 subpixel rgb
-        output $vmonitor resolution 3840x2160 position 1920,0 scale 2 subpixel rgb transform 90
-
-        ### Idle configuration
-        exec swayidle -w \
-                 timeout 300 'swaylock -f' \
-                 timeout 600 'swaymsg "output * dpms off"' \
-                      resume 'swaymsg "output * dpms on"' \
-                 before-sleep 'swaylock -f'
-
-
-        ### Input configuration
-        input "1:1:AT_Translated_Set_2_keyboard" {
-            xkb_layout us
-            repeat_rate 70
+{ config, lib, pkgs, ... }: {
+  wayland.windowManager.sway = {
+    enable = true;
+    config = rec {
+      bars = [
+        {
+          command = "${pkgs.waybar}/bin/waybar";
+          fonts = [ "FontAwesome 10" "Hack 10" ];
+          workspaceNumbers = false;
         }
+      ];
+      colors = {
+        focused = {
+          border = "#30535F";
+          background = "#30535F";
+          text = "#F0BC8D";
+          childBorder = "#A43C0F";
+          indicator = "#A43C0F";
+        };
+        unfocused = {
+          border = "#00122A";
+          background = "#00122A";
+          text = "#F0BC8D";
+          childBorder = "#A43C0F";
+          indicator = "#A43C0F";
+        };
+        urgent = {
+          border = "#A43C0F";
+          background = "#A43C0F";
+          text = "#000000";
+          childBorder = "#A43C0F";
+          indicator = "#A43C0F";
+        };
+      };
 
-        input "2131:308:LEOPOLD_Mini_Keyboard" {
-            xkb_layout us
-        }
+      floating = {
+        modifier = modifier;
+        border = 0;
+      };
 
-        input "2:7:SynPS/2_Synaptics_TouchPad" {
-            accel_profile adaptive
-            click_method button_areas
-            dwt disabled
-            natural_scroll enabled
-            scroll_method two_finger
-            tap enabled
-        }
+      focus.followMouse = false;
 
-        input "1739:0:Synaptics_TM3418-002" {
-            accel_profile adaptive
-            click_method button_areas
-            dwt disabled
-            natural_scroll enabled
-            scroll_method two_finger
-            tap enabled
-        }
+      fonts = [ "FontAwesome 8" "Hack 8" ];
 
-        input "1739:31251:SYNA2393:00_06CB:7A13_Touchpad" {
-            accel_profile adaptive
-            click_method button_areas
-            dwt enabled
-            natural_scroll enabled
-            scroll_method two_finger
-            tap enabled
-        }
+      gaps = {
+        inner = 10;
+        outer = 5;
+        smartBorders = "on";
+      };
 
-        input "2:8:AlpsPS/2_ALPS_DualPoint_TouchPad" {
-            accel_profile adaptive
-            click_method button_areas
-            dwt enabled
-            natural_scroll enabled
-            scroll_method two_finger
-            tap enabled
-        }
+      input = {
+        "1:1:AT_Translated_Set_2_keyboard" = {
+          xkb_layout = "us";
+          repeat_rate = "70";
+        };
 
-        input "2:10:TPPS/2_Elan_TrackPoint" {
-            accel_profile adaptive
-            dwt enabled
-        }
+        "2131:308:LEOPOLD_Mini_Keyboard" = { xkb_layout = "us"; };
 
-        input "1133:16495:Logitech_MX_Ergo" {
-            accel_profile adaptive
-            click_method button_areas
-            natural_scroll enabled
-        }
+        "2:7:SynPS/2_Synaptics_TouchPad" = {
+          accel_profile = "adaptive";
+          click_method = "button_areas";
+          dwt = "disabled";
+          natural_scroll = "enabled";
+          scroll_method = "two_finger";
+          tap = "enabled";
+        };
 
-        input "1133:45085:MX_Ergo_Mouse" {
-            accel_profile adaptive
-            click_method button_areas
-            natural_scroll enabled
-        }
+        "1739:0:Synaptics_TM3418-002" = {
+          accel_profile = "adaptive";
+          click_method = "button_areas";
+          dwt = "disabled";
+          natural_scroll = "enabled";
+          scroll_method = "two_finger";
+          tap = "enabled";
+        };
 
-        ### Key bindings
-        #
-        # Basics:
-        #
-            # start a terminal
-            bindsym $mod+Return exec ${term}
+        "2:8:AlpsPS/2_ALPS_DualPoint_TouchPad" = {
+          accel_profile = "adaptive";
+          click_method = "button_areas";
+          dwt = "enabled";
+          natural_scroll = "enabled";
+          scroll_method = "two_finger";
+          tap = "enabled";
+        };
 
-            # kill focused window
-            bindsym $mod+Shift+q kill
+        "2:10:TPPS/2_Elan_TrackPoint" = {
+          accel_profile = "adaptive";
+          dwt = "enabled";
+        };
 
-            # start your launcher
-            bindsym $mod+d exec ${menu}
-            bindsym $mod+o exec ${otpmenu}
-            bindsym $mod+p exec ${passmenu}
-            bindsym $mod+m exec ${emojimenu}
-            bindsym $mod+q exec swaylock -f
+        "1133:16495:Logitech_MX_Ergo" = {
+          accel_profile = "adaptive";
+          click_method = "button_areas";
+          natural_scroll = "enabled";
+        };
 
-            bindsym Print exec ${prtsc}
-            bindsym XF86MonBrightnessUp exec light -A 1
-            bindsym XF86MonBrightnessDown exec light -U 1
-            bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1%
-            bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
-            bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-            bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-            bindsym XF86AudioPlay exec playerctl play
-            bindsym XF86AudioPause exec playerctl pause
-            bindsym XF86AudioNext exec playerctl next
-            bindsym XF86AudioPrev exec playerctl previous
+        "1133:45085:MX_Ergo_Mouse" = {
+          accel_profile = "adaptive";
+          click_method = "button_areas";
+          natural_scroll = "enabled";
+        };
+      };
 
-            # Drag floating windows by holding down $mod and left mouse button.
-            # Resize them with right mouse button + $mod.
-            # Despite the name, also works for non-floating windows.
-            # Change normal to inverse to use left mouse button for resizing and right
-            # mouse button for dragging.
-            floating_modifier $mod normal
+      keybindings = let
+        light = "${pkgs.light}/bin/light";
+        playerctl = "${pkgs.playerctl}/bin/playerctl";
+      in
+      lib.mkOptionDefault {
+          # fancy workspace names
+          "${modifier}+1" = "workspace 1:α";
+          "${modifier}+2" = "workspace 2:β";
+          "${modifier}+3" = "workspace 3:γ";
+          "${modifier}+4" = "workspace 4:δ";
+          "${modifier}+5" = "workspace 5:ε";
+          "${modifier}+6" = "workspace 6:ζ";
+          "${modifier}+7" = "workspace 7:η";
+          "${modifier}+8" = "workspace 8:θ";
+          "${modifier}+9" = "workspace 9:ι";
+          "${modifier}+0" = "workspace 10:κ";
+          "${modifier}+Shift+1" = "move container to workspace 1:α";
+          "${modifier}+Shift+2" = "move container to workspace 2:β";
+          "${modifier}+Shift+3" = "move container to workspace 3:γ";
+          "${modifier}+Shift+4" = "move container to workspace 4:δ";
+          "${modifier}+Shift+5" = "move container to workspace 5:ε";
+          "${modifier}+Shift+6" = "move container to workspace 6:ζ";
+          "${modifier}+Shift+7" = "move container to workspace 7:η";
+          "${modifier}+Shift+8" = "move container to workspace 8:θ";
+          "${modifier}+Shift+9" = "move container to workspace 9:ι";
+          "${modifier}+Shift+0" = "move container to workspace 10:κ";
+          # normal ones
+          "${modifier}+Return" = "exec ${terminal}";
+          "${modifier}+d" = "exec ${menu}";
+          "${modifier}+m" = "exec ${pkgs.emojimenu}/bin/emojimenu";
+          "${modifier}+o" = "exec ${pkgs.otpmenu}/bin/otpmenu";
+          "${modifier}+p" = "exec ${pkgs.passmenu}/bin/passmenu";
+          "${modifier}+q" = "exec ${pkgs.swaylock}/bin/swaylock -f";
+          "Mod1+Tab" = " workspace next";
+          "Mod4+Tab" = " workspace prev";
+          "Mod4+comma" = " workspace prev";
+          "Mod4+period" = " workspace next";
+          "Print" = "exec ${pkgs.prtsc}/bin/prtsc";
+          "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -1%";
+          "XF86AudioMicMute" = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+          "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
+          "XF86AudioNext" = "exec ${playerctl} next";
+          "XF86AudioPause" = "exec ${playerctl} pause";
+          "XF86AudioPlay" = "exec ${playerctl} play";
+          "XF86AudioPrev" = "exec ${playerctl} previous";
+          "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +1%";
+          "XF86MonBrightnessDown" = "exec ${light} -U 1";
+          "XF86MonBrightnessUp" = "exec ${light} -A 1";
+        };
 
-            # reload the configuration file
-            bindsym $mod+Shift+c reload
+      menu = "${terminal} -d 80 20 -t swaymenu -e ${pkgs.swaymenu}/bin/swaymenu";
 
-            # exit sway (logs you out of your Wayland session)
-            bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
-        #
-        # Moving around:
-        #
-            focus_follows_mouse no
-            # Move your focus around
-            bindsym $mod+$left focus left
-            bindsym $mod+$down focus down
-            bindsym $mod+$up focus up
-            bindsym $mod+$right focus right
-            # or use $mod+[up|down|left|right]
-            bindsym $mod+Left focus left
-            bindsym $mod+Down focus down
-            bindsym $mod+Up focus up
-            bindsym $mod+Right focus right
+      modifier = "Mod4";
 
-            # _move_ the focused window with the same, but add Shift
-            bindsym $mod+Shift+$left move left
-            bindsym $mod+Shift+$down move down
-            bindsym $mod+Shift+$up move up
-            bindsym $mod+Shift+$right move right
-            # ditto, with arrow keys
-            bindsym $mod+Shift+Left move left
-            bindsym $mod+Shift+Down move down
-            bindsym $mod+Shift+Up move up
-            bindsym $mod+Shift+Right move right
-        #
-        # Workspaces:
-        #
-            # switch to workspace
-            bindsym $mod+1 workspace 1:α
-            bindsym $mod+2 workspace 2:β
-            bindsym $mod+3 workspace 3:γ
-            bindsym $mod+4 workspace 4:δ
-            bindsym $mod+5 workspace 5:ε
-            bindsym $mod+6 workspace 6:ζ
-            bindsym $mod+7 workspace 7:η
-            bindsym $mod+8 workspace 8:θ
-            bindsym $mod+9 workspace 9:ι
-            bindsym $mod+0 workspace 10:κ
-            # move focused container to workspace
-            bindsym $mod+Shift+1 move container to workspace 1:α
-            bindsym $mod+Shift+2 move container to workspace 2:β
-            bindsym $mod+Shift+3 move container to workspace 3:γ
-            bindsym $mod+Shift+4 move container to workspace 4:δ
-            bindsym $mod+Shift+5 move container to workspace 5:ε
-            bindsym $mod+Shift+6 move container to workspace 6:ζ
-            bindsym $mod+Shift+7 move container to workspace 7:η
-            bindsym $mod+Shift+8 move container to workspace 8:θ
-            bindsym $mod+Shift+9 move container to workspace 9:ι
-            bindsym $mod+Shift+0 move container to workspace 10:κ
-            # Note: workspaces can have any name you want, not just numbers.
-            # We just use 1-10 as the default.
-            bindsym Mod1+Tab workspace next
-            bindsym $mod+Tab workspace prev
-            bindsym $mod+period workspace next
-            bindsym $mod+comma workspace prev
-        #
-        # Layout stuff:
-        #
-            font pango:Hack 8
-            gaps inner 10
-            gaps outer 5
-            smart_borders on
-            default_border none
-            default_floating_border normal
+      output = {
+        "*" = { bg = "~/.wall fill"; };
+        "Unknown 0x32EB 0x00000000" = {
+          position = "0,0";
+          resolution = "3840x2160";
+          scale = "2";
+          subpixel = "rgb";
+        };
+        "Dell Inc. DELL U2518D 0WG2J7C4A2AL" = {
+          position = "1920,0";
+          resolution = "3840x2160";
+          scale = "2";
+          subpixel = "rgb";
+          transform = "90";
+        };
+      };
 
-            client.focused #30535F #30535F #F0BC8D #A43C0F #A43C0F
-            client.unfocused #00122A #00122A #F0BC8D #A43C0F #A43C0F
-            client.urgent #A43C0F #A43C0F #000000 #A43C0F #A43C0F
+      startup = [
+        { command = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY"; }
+        { command = "pactl set-sink-mute @DEFAULT_SINK@ true"; }
+        { command = "pactl set-source-mute @DEFAULT_SINK@ true"; }
+        { command = "systemctl --user start gnome-keyring"; }
+        { command = "${pkgs.mako}/bin/mako"; }
+        { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
+        { command = "${pkgs.redshift-wlr}/bin/redshift"; }
+      ];
 
-            # You can "split" the current object of your focus with
-            # $mod+b or $mod+v, for horizontal and vertical splits
-            # respectively.
-            bindsym $mod+b splith
-            bindsym $mod+v splitv
+      terminal = "${pkgs.alacritty}/bin/alacritty";
 
-            # Switch the current container between different layout styles
-            bindsym $mod+s layout stacking
-            bindsym $mod+w layout tabbed
-            bindsym $mod+e layout toggle split
+      window = {
+        commands = let
+            makeMenuWindow = "floating enable, border pixel 5, sticky enable";
+          in
+            [
+              { command = makeMenuWindow; criteria = { app_id = "Alacritty"; title = "swaymenu"; }; }
+              { command = makeMenuWindow; criteria = { app_id = "Alacritty"; title = "gopassmenu"; }; }
+              { command = makeMenuWindow; criteria = { app_id = "Alacritty"; title = "emojimenu"; }; }
+              { command = "floating enable"; criteria.app_id = "imv"; }
+              { command = "floating enable, sticky enable"; criteria = { app_id = "firefox"; title = "Picture-in-Picture"; }; }
+            ];
+        border = 0;
+      };
+    };
 
-            # Make the current focus fullscreen
-            bindsym $mod+f fullscreen
+    extraSessionCommands = ''
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_FORCE_DPI=physical
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+      export _JAVA_AWT_WM_NONREPARENTING=1
+      export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dsun.java2d.xrender=true"
+      export ECORE_EVAS_ENGINE=wayland_egl
+      export ELM_ENGINE=wayland_egl
+      export SDL_VIDEODRIVER=wayland
+      export MOZ_ENABLE_WAYLAND=1
+    '';
 
-            # Toggle the current focus between tiling and floating mode
-            bindsym $mod+Shift+space floating toggle
+    systemdIntegration = true;
 
-            # Swap focus between the tiling area and the floating area
-            bindsym $mod+space focus mode_toggle
-
-            # move focus to the parent container
-            bindsym $mod+a focus parent
-        #
-        # Scratchpad:
-        #
-            # Sway has a "scratchpad", which is a bag of holding for windows.
-            # You can send windows there and get them back later.
-
-            # Move the currently focused window to the scratchpad
-            bindsym $mod+Shift+minus move scratchpad
-
-            # Show the next scratchpad window or hide the focused scratchpad window.
-            # If there are multiple scratchpad windows, this command cycles through them.
-            bindsym $mod+minus scratchpad show
-        #
-        # Resizing containers:
-        #
-        mode "resize" {
-            # left will shrink the containers width
-            # right will grow the containers width
-            # up will shrink the containers height
-            # down will grow the containers height
-            bindsym $left resize shrink width 10px
-            bindsym $down resize grow height 10px
-            bindsym $up resize shrink height 10px
-            bindsym $right resize grow width 10px
-
-            # ditto, with arrow keys
-            bindsym Left resize shrink width 10px
-            bindsym Down resize grow height 10px
-            bindsym Up resize shrink height 10px
-            bindsym Right resize grow width 10px
-
-            # return to default mode
-            bindsym Return mode "default"
-            bindsym Escape mode "default"
-        }
-        bindsym $mod+r mode "resize"
-
-        ### Status Bar:
-        bar {
-            font pango: Hack, FontAwesome 10
-            swaybar_command waybar
-        }
-
-        exec "${polkit-gnome}"
-        exec "dbus-update-activation-environment --systemd DISPLAY"
-        exec "mako"
-        exec "pactl set-sink-mute @DEFAULT_SINK@ true"
-        exec "pactl set-source-mute @DEFAULT_SOURCE@ true"
-        exec "redshift"
-        exec "systemctl --user start gnome-keyring"
-
-        include /etc/sway/config.d/*
-      '';
+    wrapperFeatures.gtk = true;
   };
 }
