@@ -173,6 +173,18 @@
       };
 
       startup = [
+        {
+          command = let
+            swaylock = "${pkgs.swaylock}/bin/swaylock -f";
+          in
+            ''
+              ${pkgs.swayidle}/bin/swayidle -w \
+                timeout 300 '${swaylock}' \
+                timeout 600 'swaymsg "output * dpms off"' \
+                resume 'swaymsg "output * dpms on"' \
+                before-sleep '${swaylock}'
+            '';
+        }
         { command = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY"; }
         { command = "pactl set-sink-mute @DEFAULT_SINK@ true"; }
         { command = "pactl set-source-mute @DEFAULT_SINK@ true"; }
