@@ -113,26 +113,26 @@
       in
         lib.mkOptionDefault {
           # fancy workspace names
-          "${modifier}+1" = "workspace 1:α";
-          "${modifier}+2" = "workspace 2:β";
-          "${modifier}+3" = "workspace 3:γ";
-          "${modifier}+4" = "workspace 4:δ";
-          "${modifier}+5" = "workspace 5:ε";
-          "${modifier}+6" = "workspace 6:ζ";
-          "${modifier}+7" = "workspace 7:η";
-          "${modifier}+8" = "workspace 8:θ";
-          "${modifier}+9" = "workspace 9:ι";
-          "${modifier}+0" = "workspace 10:κ";
-          "${modifier}+Shift+1" = "move container to workspace 1:α";
-          "${modifier}+Shift+2" = "move container to workspace 2:β";
-          "${modifier}+Shift+3" = "move container to workspace 3:γ";
-          "${modifier}+Shift+4" = "move container to workspace 4:δ";
-          "${modifier}+Shift+5" = "move container to workspace 5:ε";
-          "${modifier}+Shift+6" = "move container to workspace 6:ζ";
-          "${modifier}+Shift+7" = "move container to workspace 7:η";
-          "${modifier}+Shift+8" = "move container to workspace 8:θ";
-          "${modifier}+Shift+9" = "move container to workspace 9:ι";
-          "${modifier}+Shift+0" = "move container to workspace 10:κ";
+          "${modifier}+1" = "workspace 0:α";
+          "${modifier}+2" = "workspace 1:β";
+          "${modifier}+3" = "workspace 2:γ";
+          "${modifier}+4" = "workspace 3:δ";
+          "${modifier}+5" = "workspace 4:ε";
+          "${modifier}+6" = "workspace 5:ζ";
+          "${modifier}+7" = "workspace 6:η";
+          "${modifier}+8" = "workspace 7:θ";
+          "${modifier}+9" = "workspace 8:ι";
+          "${modifier}+0" = "workspace 9:κ";
+          "${modifier}+Shift+1" = "move container to workspace 0:α";
+          "${modifier}+Shift+2" = "move container to workspace 1:β";
+          "${modifier}+Shift+3" = "move container to workspace 2:γ";
+          "${modifier}+Shift+4" = "move container to workspace 3:δ";
+          "${modifier}+Shift+5" = "move container to workspace 4:ε";
+          "${modifier}+Shift+6" = "move container to workspace 5:ζ";
+          "${modifier}+Shift+7" = "move container to workspace 6:η";
+          "${modifier}+Shift+8" = "move container to workspace 7:θ";
+          "${modifier}+Shift+9" = "move container to workspace 8:ι";
+          "${modifier}+Shift+0" = "move container to workspace 9:κ";
           # normal ones
           "${modifier}+Return" = "exec ${terminal}";
           "${modifier}+d" = "exec ${menu}";
