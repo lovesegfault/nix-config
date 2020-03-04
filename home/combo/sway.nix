@@ -18,7 +18,11 @@ in
     ../pkgs/swaymenu.nix
   ];
 
-  home.packages = with pkgs; [ imv ];
+  home.packages = with pkgs; [
+    grim
+    imv
+    slurp
+  ];
 
   nixpkgs.overlays = [ waylandOverlay ];
 }

@@ -1,20 +1,10 @@
 { config, pkgs, ... }: {
-  environment.systemPackages = [ pkgs.qt5.qtwayland ];
-
   programs.sway = {
     enable = true;
     extraPackages = with pkgs; [
-      alacritty
-      grim
-      light
-      mako
-      playerctl
-      redshift-wlr
-      slurp
       swaybg
       swayidle
       swaylock
-      waybar
       wl-clipboard
       xwayland
     ];
