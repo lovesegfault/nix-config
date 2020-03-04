@@ -3,8 +3,6 @@
     ../modules/alacritty.nix
     ../modules/firefox.nix
     ../modules/mpv.nix
-    ../modules/gtk.nix
-    ../modules/qt.nix
   ];
 
   home.packages = with pkgs; [
@@ -20,4 +18,15 @@
     thunderbird
     zoom-us
   ];
+
+  gtk = {
+    enable = true;
+    gtk2.extraConfig = "gtk-application-prefer-dark-theme = true";
+    gtk3.extraConfig = { gtk-application-prefer-dark-theme = true; };
+  };
+
+ qt = {
+    enable = true;
+    platformTheme = "gnome";
+  };
 }
