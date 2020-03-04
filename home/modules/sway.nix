@@ -36,10 +36,11 @@
         for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, sticky enable
 
         ### Output configuration
+        set $laptop "Unknown 0x32EB 0x00000000"
+        set $vmonitor "Dell Inc. DELL U2518D 0WG2J7C4A2AL"
         output * bg ~/.wall fill
-        output eDP-1 resolution 3840x2160 position 0,0 scale 2 subpixel rgb
-        output DP-5 resolution 3840x2160 position 1920,0 scale 2 subpixel rgb transform 270
-        # output eDP-1 resolution 1920x1080 position 0,0 scale 1 subpixel rgb
+        output $laptop resolution 3840x2160 position 0,0 scale 2 subpixel rgb
+        output $vmonitor resolution 3840x2160 position 1920,0 scale 2 subpixel rgb transform 90
 
         ### Idle configuration
         exec swayidle -w \
