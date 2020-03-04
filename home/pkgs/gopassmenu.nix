@@ -35,7 +35,7 @@ in
   function gopassmenu_backend() {
       gopassmenu_lock
       export GOPASSMENU_BEHAVE_AS_WINDOW=1
-      ${alacritty} -d 80 20 -t gopassmenu -e "$gopassmenu_path"
+      ${alacritty} -d 55 18 -t gopassmenu -e "$gopassmenu_path"
 
       name="$(cat "$gopassmenu_fifo")"
       rm -f "$gopassmenu_fifo"

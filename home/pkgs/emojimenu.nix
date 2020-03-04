@@ -46,7 +46,7 @@ in
           function emojimenu_backend() {
             emojimenu_lock
             export EMOJIMENU_BEHAVE_AS_WINDOW=1
-            ${alacritty} -d 80 20 -t emojimenu -e "$emojimenu_path"
+            ${alacritty} -d 55 18 -t emojimenu -e "$emojimenu_path"
 
             emoji="$(cat "$emojimenu_fifo")"
             rm -f "$emojimenu_fifo"

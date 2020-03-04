@@ -157,7 +157,7 @@
           "XF86MonBrightnessUp" = "exec ${light} -A 1";
         };
 
-      menu = "${terminal} -d 80 20 -t swaymenu -e ${pkgs.swaymenu}/bin/swaymenu";
+      menu = "${terminal} -d 55 18 -t swaymenu -e ${pkgs.swaymenu}/bin/swaymenu";
 
       modifier = "Mod4";
 
