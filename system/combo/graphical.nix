@@ -8,10 +8,13 @@
     ../modules/sound.nix
   ];
 
-  environment.systemPackages = with pkgs; [ gnome3.adwaita-icon-theme hicolor-icon-theme ] ++ [ adwaita-qt qgnomeplatform ];
+  environment.systemPackages = with pkgs; [
+    gnome3.adwaita-icon-theme
+    hicolor-icon-theme
+  ] ++ [ adwaita-qt qgnomeplatform ];
 
   qt5 = {
-    enable = true;
+    enable = false;
     platformTheme = "gnome";
     style = "adwaita";
   };
