@@ -56,4 +56,4 @@ jobs:
               name: nix-config
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
               file: ci.nix
-              attributes: x86_64
+              attributes: ci
