@@ -33,7 +33,7 @@ let
       };
     };
     tray = {
-      icon-size = 21;
+      icon-size = 20;
       spacing = 5;
     };
     clock = {
