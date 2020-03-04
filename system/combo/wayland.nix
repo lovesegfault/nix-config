@@ -16,7 +16,7 @@ in
     ];
   };
 
-  nixpkgs.overlays = [ waylandOverlay ];
+  # nixpkgs.overlays = [ waylandOverlay ];
 
   services.xserver = {
     displayManager.gdm.wayland = true;

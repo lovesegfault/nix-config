@@ -24,5 +24,5 @@ in
     slurp
   ];
 
-  nixpkgs.overlays = [ waylandOverlay ];
+  # nixpkgs.overlays = [ waylandOverlay ];
 }
