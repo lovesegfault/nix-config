@@ -1,10 +1,4 @@
-{ pkgs, ... }:
-let
-  waylandOverlayUrl =
-    "https://github.com/colemickens/nixpkgs-wayland/archive/master.tar.gz";
-  waylandOverlay = (import (builtins.fetchTarball waylandOverlayUrl));
-in
-{
+{ pkgs, ... }: {
   imports = [
     ../modules/mako.nix
     ../modules/sway.nix
@@ -23,6 +17,4 @@ in
     imv
     slurp
   ];
-
-  # nixpkgs.overlays = [ waylandOverlay ];
 }
