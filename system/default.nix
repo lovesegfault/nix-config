@@ -1,7 +1,9 @@
-{ pkgs ? import <nixpkgs> {} }: let
+{ pkgs, ... }:
+let
+  nixos = import (pkgs.path + "/nixos");
   systemPkg = machine: arch:
     (
-      import (pkgs.path + "/nixos") {
+      nixos {
         configuration = machine;
         system = arch;
       }

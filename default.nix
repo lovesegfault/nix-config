@@ -1,5 +1,6 @@
-{ nixpkgs ? import <nixpkgs> {}
-, lib ? import (nixpkgs.path + "/lib")
-, system ? import ./system { pkgs = nixpkgs; }
-, home ? import ./home { pkgs = nixpkgs; }
-}: lib.zipAttrs [ system home ]
+{ sources ? import ./nix/sources.nix {}
+, home-manager ? import (sources.home-manager + "/home-manager/home-manager.nix")
+, pkgs ? import sources.nixpkgs {}
+, system ? import ./system { inherit pkgs; }
+, home ? import ./home { inherit home-manager pkgs; }
+}: pkgs.lib.zipAttrs [ system home ]

@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "*" ]
 
 name: CI
 
@@ -10,7 +10,7 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v2
-        - name: Setup Nix
+        - name: Nix
           uses: cachix/install-nix-action@v7
         - name: Parsing tests
           run: find . -name "*.nix" -exec nix-instantiate --parse --quiet {} >/dev/null +
@@ -19,42 +19,57 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v2
-        - name: Setup Nix
+        - name: Nix
           uses: cachix/install-nix-action@v7
+        - name: Cachix
+          uses: cachix/cachix-action@v4
+          with:
+              name: nix-config
+              signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+              skipNixBuild: true
         - name: Formatting tests
-          run: nix run nixpkgs.nixpkgs-fmt -c find . -iname "*.nix" -exec nixpkgs-fmt --check {} +
+          run: nix-shell --run 'find . -iname "*.nix" -not -path ./nix/sources.nix -exec nixpkgs-fmt {} +'
     build:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
           uses: actions/checkout@v2
-        - name: Setup Nix
+        - name: Nix
           uses: cachix/install-nix-action@v7
-        - name: Setup channel
+        - name: Allow Unfree
           run: |
-            nix-channel --add https://nixos.org/channels/nixos-unstable nixpkgs
-            nix-channel --update
-        - name: Setup home-manager
-          env:
-            NIX_PATH: "/home/runner/.nix-defexpr/channels:nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos:/nix/var/nix/profiles/per-user/root/channels"
+            mkdir -p ~/.config/nixpkgs
+            echo "{ allowUnfree = true; }" |
+                tee ~/.config/nixpkgs/config.nix
+        - name: AArch64 Build Box
           run: |
-            nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
-            nix-channel --update
-            nix-shell '<home-manager>' -A install
-            echo "{ allowUnfree = true; }" > ~/.config/nixpkgs/config.nix
-        - name: Setup AArch64 Build Box
-          run: |
+            # first create the ssh config dir for root
             sudo mkdir -p /root/.ssh
-            echo "${{ secrets.AARCH64_BOX_KEY }}" | sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
+
+            # now add the key for the build slave
+            echo "${{ secrets.AARCH64_BOX_KEY }}" |
+                sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
             sudo chmod 0600 /root/.ssh/aarch64.community.nixos
-            echo "${{ secrets.KNOWN_HOSTS }}" | sudo tee -a /root/.ssh/known_hosts > /dev/null
-            echo "lovesegfault@aarch64.nixos.community aarch64-linux /root/.ssh/aarch64.community.nixos 64 8 big-parallel" | sudo tee /etc/nix/machines > /dev/null
+
+            # and make it a known host
+            echo "${{ secrets.KNOWN_HOSTS }}" |
+                sudo tee -a /root/.ssh/known_hosts > /dev/null
+
+            # lastly register the build slave with nix
+            slave_cfg=(
+              lovesegfault@aarch64.nixos.community # user/addr
+              aarch64-linux                        # arch
+              /root/.ssh/aarch64.community.nixos   # key
+              64                                   # maxJobs
+              8                                    # speed factor
+              big-parallel                         # features
+            )
+            echo "${slave_cfg[*]}" |
+                sudo tee /etc/nix/machines > /dev/null
         - name: Cachix
-          env:
-            NIX_PATH: "/home/runner/.nix-defexpr/channels:nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos:/nix/var/nix/profiles/per-user/root/channels"
           uses: cachix/cachix-action@v4
           with:
+              attributes: ci
+              file: ci.nix
               name: nix-config
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-              file: ci.nix
-              attributes: ci
