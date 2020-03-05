@@ -17,6 +17,7 @@
     kernelPatches = with pkgs; [
       nouveau-gr-fix
       nouveau-runpm-fix
+      xfs-2038-fix
     ];
     kernelParams = [
       "log_buf_len=5M"
