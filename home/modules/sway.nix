@@ -13,7 +13,7 @@
           command = let
             waybar = (pkgs.waybar.override { pulseSupport = true; });
           in
-          "${waybar}/bin/waybar";
+            "${waybar}/bin/waybar";
           fonts = [ "FontAwesome 10" "Hack 10" ];
           workspaceNumbers = false;
         }
