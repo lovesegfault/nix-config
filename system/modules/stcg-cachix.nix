@@ -1,7 +1,8 @@
 { lib, ... }:
 let
-  secret = ../../secrets/system/stcg-cachix.nix;
-  password = lib.optionalString (builtins.pathExists secret) (import secret);
+  secretPath = ../../secrets/system/stcg-cachix.nix;
+  secretCondition = (builtins.pathExists secretPath);
+  secret = lib.optionalString secretCondition (import secretPath);
 in
 {
   nix = {
@@ -9,5 +10,5 @@ in
     binaryCachePublicKeys =
       [ "standard.cachix.org-1:+HFtC20D1DDrZz4yCXthdaqb3p2zBimNk9Mb+FeergI=" ];
   };
-  environment.etc."nix/netrc".text = password;
+  environment.etc."nix/netrc".text = secret;
 }

@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 let
-  secret = ../../secrets/home/beets.nix;
-  secret_settings =
-    lib.optionalAttrs (builtins.pathExists secret) (import secret);
+  secretPath = ../../secrets/home/beets.nix;
+  secretCondition = (builtins.pathExists secretPath);
+  secret = lib.optionalAttrs secretCondition (import secretPath);
   normal_settings = rec {
     art_filename = "cover";
     asciify_paths = false;
@@ -193,6 +193,6 @@ in
 {
   programs.beets = {
     enable = true;
-    settings = (lib.recursiveUpdate normal_settings secret_settings);
+    settings = (lib.recursiveUpdate normal_settings secret);
   };
 }

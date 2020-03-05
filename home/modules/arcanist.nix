@@ -1,9 +1,10 @@
 { lib, pkgs, ... }:
 let
-  secret = ../../secrets/home/arcanist.nix;
-  token = lib.optionalString (builtins.pathExists secret) (import secret);
+  secretPath = ../../secrets/home/arcanist.nix;
+  secretCondition = (builtins.pathExists secretPath);
+  secret = lib.optionalString secretCondition (import secretPath);
   arcrc = {
-    hosts = { "https://phab.nonstandard.ai/api/" = { token = token; }; };
+    hosts = { "https://phab.nonstandard.ai/api/" = { token = secret; }; };
     config = {
       base = "git:upstream/master";
       "arc.land.onto.default" = "master";

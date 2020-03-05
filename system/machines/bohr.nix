@@ -1,8 +1,8 @@
 { lib, ... }:
 let
-  secret = ../../secrets/system/ddclient-home-lovesegfault-com.nix;
-  secret_settings =
-    lib.optionalAttrs (builtins.pathExists secret) (import secret);
+  secretPath = ../../secrets/system/ddclient-home-lovesegfault-com.nix;
+  secretCondition = (builtins.pathExists secretPath);
+  secret = lib.optionalAttrs secretCondition (import secretPath);
 in
 {
   imports = [
@@ -21,7 +21,7 @@ in
       ssl = true;
       protocol = "googledomains";
       domains = [ "home.lovesegfault.com" ];
-    } secret_settings
+    } secret
   );
 
   system.autoUpgrade = {

@@ -1,7 +1,8 @@
 { lib, pkgs, ... }:
 let
-  secret = ../../secrets/system/stcg-wifi-password.nix;
-  password = lib.optionalString (builtins.pathExists secret) (import secret);
+  secretPath = ../../secrets/system/stcg-wifi-password.nix;
+  secretCondition = (builtins.pathExists secretPath);
+  secret = lib.optionalString secretCondition (import secretPath);
 in
 {
   imports = [
@@ -30,7 +31,7 @@ in
       ];
       useDHCP = lib.mkForce false;
     };
-    wireless.networks."StandardCognition".psk = password;
+    wireless.networks."StandardCognition".psk = secret;
   };
 
   services.dhcpd4 = {
