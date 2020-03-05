@@ -70,6 +70,5 @@ jobs:
           uses: cachix/cachix-action@v4
           with:
               attributes: ci
-              file: ci.nix
               name: nix-config
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
