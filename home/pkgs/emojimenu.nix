@@ -2,9 +2,8 @@
 let
   emoji_json = pkgs.fetchurl {
     name = "emojis.json";
-    url =
-      "https://raw.githubusercontent.com/github/gemoji/fd84af55cff8cfdf56ef9635bbd5fef5c8179672/db/emoji.json";
-    sha256 = "1ccaz1pxfraf8f7zb4z4p3siknvlkhpr13xp50rs3spbn8shm0sa";
+    url = "https://raw.githubusercontent.com/github/gemoji/d98617abf23cee2594381045440ad3cce490d12c/db/emoji.json";
+    sha256 = "0dd1mlhw2cfpr4l06f12xmapypvmg3299nxkqs0af8l8whq97jnz";
   };
   emojis = pkgs.runCommand "emojis.txt" { nativeBuildInputs = [ pkgs.jq ]; } ''
     cat ${emoji_json} | jq -r '.[] | "\(.emoji) \t   \(.description)"' | sed -e 's,\\t,\t,g' > $out
