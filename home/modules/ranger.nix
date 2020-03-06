@@ -7,9 +7,8 @@
       lynx
       exiftool
       file
-      imagemagick
       jq
       mediainfo
       pythonPackages.pygments
-    ] ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.ffmpegthumbnailer ];
+    ];
 }
