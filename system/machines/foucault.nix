@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }: {
   imports = [
-    <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ../combo/core.nix
     ../combo/dev.nix
     ../combo/graphical.nix
