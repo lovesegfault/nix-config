@@ -236,5 +236,6 @@
     '';
 
     systemdIntegration = true;
+    wrapperFeatures.gtk = true;
   };
 }
