@@ -1,5 +1,9 @@
 { pkgs, ... }: {
-  imports = [
+  imports = let
+    sources = (import ../nix/sources.nix {});
+  in [
+    (import "${sources.home-manager + "/nixos"}")
+
     ../modules/aspell.nix
     ../modules/gpg.nix
     ../modules/networkmanager.nix

@@ -10,7 +10,6 @@
     ../modules/aarch64-build-box.nix
     ../modules/stcg-cachix.nix
     ../modules/stcg-cameras.nix
-
   ];
 
   boot.initrd.luks.devices."nixos".device =
@@ -41,6 +40,10 @@
   systemd.services.docker.wantedBy = lib.mkForce [];
   systemd.services.libvirtd.wantedBy = lib.mkForce [];
   systemd.services.libvirt-guests.wantedBy = lib.mkForce [];
+
+  home-manager.users.bemeurer = _: {
+    nixpkgs = { inherit (config.nixpkgs) config overlays system; };
+  };
 
   time.timeZone = "America/Los_Angeles";
 }

@@ -1,20 +1,16 @@
 { sources ? import ./nix/sources.nix {} }:
 let
-  home-manager = import (sources.home-manager + "/nixos");
-  systemPkg = system: arch:
-    (
-      import (sources.nixpkgs + "/nixos") {
-        configuration = system;
-        system = arch;
-      }
-    ).system;
+  mkSystem = cfg: system:
+    let
+      pkgs = import sources.nixpkgs { inherit system; };
+    in (pkgs.nixos cfg);
   systems = {
-    abel = systemPkg ./systems/abel.nix "x86_64-linux";
-    bohr = systemPkg ./systems/bohr.nix "aarch64-linux";
-    camus = systemPkg ./systems/camus.nix "aarch64-linux";
-    cantor = systemPkg ./systems/cantor.nix "x86_64-linux";
-    foucault = systemPkg ./systems/foucault.nix "x86_64-linux";
-    peano = systemPkg ./systems/peano.nix "x86_64-linux";
+    abel = mkSystem ./systems/abel.nix "x86_64-linux";
+    bohr = mkSystem ./systems/bohr.nix "aarch64-linux";
+    camus = mkSystem ./systems/camus.nix "aarch64-linux";
+    cantor = mkSystem ./systems/cantor.nix "x86_64-linux";
+    foucault = mkSystem ./systems/foucault.nix "x86_64-linux";
+    peano = mkSystem ./systems/peano.nix "x86_64-linux";
   };
 in
 rec {
