@@ -7,152 +7,152 @@ SYSTEM_SWITCH=0
 SYSTEM_BOOT=0
 
 function cprint() {
-    if [ "$#" -lt 2 ]; then
-        printf "Broken usage of cprint\n"
-        exit 1
-    fi
-    local color="$1"
-    local msg="${*:2}"
-    local reset
-    reset="$(tput sgr0)"
+	if [ "$#" -lt 2 ]; then
+		printf "Broken usage of cprint\n"
+		exit 1
+	fi
+	local color="$1"
+	local msg="${*:2}"
+	local reset
+	reset="$(tput sgr0)"
 
-    [ -z ${NO_COLOR+1} ] || color=""
-    [ -z ${NO_COLOR+1} ] || reset=""
+	[ -z ${NO_COLOR+1} ] || color=""
+	[ -z ${NO_COLOR+1} ] || reset=""
 
-    printf "%s%s%s\n" "$color" "$msg" "$reset"
+	printf "%s%s%s\n" "$color" "$msg" "$reset"
 }
 
 function error() {
-    local red
-    red="$(tput setaf 1)"
-    cprint "$red" "$@"
-    exit 1
+	local red
+	red="$(tput setaf 1)"
+	cprint "$red" "$@"
+	exit 1
 }
 
 function warn() {
-    local yellow
-    yellow="$(tput setaf 3)"
-    cprint "$yellow" "$@"
+	local yellow
+	yellow="$(tput setaf 3)"
+	cprint "$yellow" "$@"
 }
 
 function check_sudo() {
-    [ "$#" -eq 0 ] || error "check_sudo"
-    [ $DRY_RUN == 0 ] || return
-    [ -x "$(command -v sudo)" ] || error "Sudo not available."
-    [[ "$USER" == *"not allowed to run sudo"* ]] &&
-        error "$USER does not have sudo privileges"
+	[ "$#" -eq 0 ] || error "check_sudo"
+	[ $DRY_RUN == 0 ] || return
+	[ -x "$(command -v sudo)" ] || error "Sudo not available."
+	[[ "$USER" == *"not allowed to run sudo"* ]] &&
+		error "$USER does not have sudo privileges"
 }
 
 function set_work_dir() {
-    if [[ ! -v WORK_DIR ]]; then
-        WORK_DIR="$(mktemp --tmpdir -d nix-config-sync.XXXXXXXXXX)"
-        # shellcheck disable=2064
-        trap "rm -r '$WORK_DIR'" EXIT
-    fi
+	if [[ ! -v WORK_DIR ]]; then
+		WORK_DIR="$(mktemp --tmpdir -d nix-config-sync.XXXXXXXXXX)"
+		# shellcheck disable=2064
+		trap "rm -r '$WORK_DIR'" EXIT
+	fi
 }
 
 function rebuild_system() {
-    [ "$#" -eq 1 ] || error "rebuild_system MACHINE"
-    set_work_dir
-    local machine="$1"
-    local op=""
-    if [ $SYSTEM_BOOT = 1 ]; then
-        op="boot"
-    else
-        op="switch"
-    fi
+	[ "$#" -eq 1 ] || error "rebuild_system MACHINE"
+	set_work_dir
+	local machine="$1"
+	local op=""
+	if [ $SYSTEM_BOOT = 1 ]; then
+		op="boot"
+	else
+		op="switch"
+	fi
 
-    local system_gen="$WORK_DIR/system_gen"
-    local system_activate="$system_gen/bin/switch-to-configuration"
-    local attr="system.$machine"
-    [ $DRY_RUN == 1 ] && return
-    nix-build --out-link "$system_gen" -A "$attr" ||
-        error "Failed to build system"
-    sudo "$system_activate" "$op" ||
-        error "Failed to activate system"
+	local system_gen="$WORK_DIR/system_gen"
+	local system_activate="$system_gen/bin/switch-to-configuration"
+	local attr="system.$machine"
+	[ $DRY_RUN == 1 ] && return
+	nix-build --out-link "$system_gen" -A "$attr" ||
+		error "Failed to build system"
+	sudo "$system_activate" "$op" ||
+		error "Failed to activate system"
 }
 
 function rebuild_home() {
-    [ "$#" -eq 1 ] || error "rebuild_home MACHINE"
-    set_work_dir
-    local machine="$1"
+	[ "$#" -eq 1 ] || error "rebuild_home MACHINE"
+	set_work_dir
+	local machine="$1"
 
-    local home_gen="$WORK_DIR/home_gen"
-    local home_activate="$home_gen/activate"
-    local attr="home.$machine"
-    [ $DRY_RUN == 1 ] && return
-    nix-build --out-link "$home_gen" -A "$attr" ||
-        error "Failed to build home"
-    "$home_activate" ||
-        error "Failed to activate home"
+	local home_gen="$WORK_DIR/home_gen"
+	local home_activate="$home_gen/activate"
+	local attr="home.$machine"
+	[ $DRY_RUN == 1 ] && return
+	nix-build --out-link "$home_gen" -A "$attr" ||
+		error "Failed to build home"
+	"$home_activate" ||
+		error "Failed to activate home"
 }
 
 function check_getopt() {
-    [ "$#" -eq 0 ] || error "check_getopt"
-    ! getopt --test >/dev/null
-    if [[ ${PIPESTATUS[0]} -ne 4 ]]; then
-        error '"getopt --test" failed in this environment.'
-    fi
+	[ "$#" -eq 0 ] || error "check_getopt"
+	! getopt --test >/dev/null
+	if [[ ${PIPESTATUS[0]} -ne 4 ]]; then
+		error '"getopt --test" failed in this environment.'
+	fi
 }
 
 function parse_opts() {
-    local short_opts="abdhs"
-    local long_opts="all,boot,dry-run,home,system"
-    local parsed
-    ! parsed=$(getopt --options="$short_opts" --longoptions="$long_opts" --name "$0" -- "$@")
-    if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
-        error "Wrong arguments passed"
-    fi
-    eval set -- "$parsed"
-    while true; do
-        case "$1" in
-        -a | --all)
-            SYSTEM_SWITCH=1
-            HOME_SWITCH=1
-            shift
-            ;;
-        -b | --boot)
-            SYSTEM_BOOT=1
-            shift
-            ;;
-        -d | --dry-run)
-            DRY_RUN=1
-            shift
-            ;;
-        -h | --home)
-            HOME_SWITCH=1
-            shift
-            ;;
-        -s | --system)
-            SYSTEM_SWITCH=1
-            shift
-            ;;
-        --)
-            shift
-            break
-            ;;
-        *)
-            error "Invalid argument"
-            ;;
-        esac
-    done
+	local short_opts="abdhs"
+	local long_opts="all,boot,dry-run,home,system"
+	local parsed
+	! parsed=$(getopt --options="$short_opts" --longoptions="$long_opts" --name "$0" -- "$@")
+	if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+		error "Wrong arguments passed"
+	fi
+	eval set -- "$parsed"
+	while true; do
+		case "$1" in
+		-a | --all)
+			SYSTEM_SWITCH=1
+			HOME_SWITCH=1
+			shift
+			;;
+		-b | --boot)
+			SYSTEM_BOOT=1
+			shift
+			;;
+		-d | --dry-run)
+			DRY_RUN=1
+			shift
+			;;
+		-h | --home)
+			HOME_SWITCH=1
+			shift
+			;;
+		-s | --system)
+			SYSTEM_SWITCH=1
+			shift
+			;;
+		--)
+			shift
+			break
+			;;
+		*)
+			error "Invalid argument"
+			;;
+		esac
+	done
 }
 
 function main() {
-    check_getopt
-    parse_opts "$@"
-    [ $DRY_RUN == 1 ] && warn "dry run"
-    local machine
-    machine="$(hostname)"
-    if [ $SYSTEM_SWITCH = 1 ]; then
-        check_sudo
-        rebuild_system "$machine"
-    fi
-    if [ $HOME_SWITCH == 1 ]; then
-        [ "$(id -u)" != 0 ] || error "Run this as a your user, not root."
-        rebuild_home "$machine"
-    fi
-    exit 0
+	check_getopt
+	parse_opts "$@"
+	[ $DRY_RUN == 1 ] && warn "dry run"
+	local machine
+	machine="$(hostname)"
+	if [ $SYSTEM_SWITCH = 1 ]; then
+		check_sudo
+		rebuild_system "$machine"
+	fi
+	if [ $HOME_SWITCH == 1 ]; then
+		[ "$(id -u)" != 0 ] || error "Run this as a your user, not root."
+		rebuild_home "$machine"
+	fi
+	exit 0
 }
 
 main "$@"
