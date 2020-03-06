@@ -25,6 +25,17 @@
   # FIXME: Report issue with systemd-networkd-wait-only to @flokli
   #networking.useNetworkd = true;
 
+  # Pinning
+  nix.nixPath = [
+    # "nixos-config=${cfg}"
+    "nixpkgs=/run/current-system/nixpkgs"
+    # "nixpkgs-overlays=/run/current-system/overlays"
+  ];
+  system.extraSystemBuilderCmds = ''
+    ln -sv ${pkgs.path} $out/nixpkgs
+    # ln -sv ${./overlays} $out/overlays
+  '';
+
   nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "19.09";
