@@ -64,7 +64,7 @@ function rebuild_system() {
 
     local system_gen="$WORK_DIR/system_gen"
     local system_activate="$system_gen/bin/switch-to-configuration"
-    local attr="system.$machine"
+    local attr="$machine"
     [ $DRY_RUN == 1 ] && return
     export NIX_PATH=''
     nix-build --out-link "$system_gen" -A "$attr" ||
