@@ -1,16 +1,27 @@
 { sources ? import ./nix/sources.nix {} }:
 let
-  home-manager = import (sources.home-manager + "/home-manager/home-manager.nix");
+  home-manager = import (sources.home-manager + "/nixos");
+  nixos = import ( sources.nixpkgs + "/nixos" );
   pkgs = import sources.nixpkgs {};
-  system = import ./system { inherit pkgs; };
-  home = import ./home { inherit home-manager pkgs; };
-  machines = pkgs.lib.zipAttrs [ system home ];
+  systemPkg = system: arch:
+    (
+      nixos {
+        configuration = system;
+        system = arch;
+      }
+    ).system;
+  systems = {
+    abel = systemPkg ./systems/abel.nix "x86_64-linux";
+    bohr = systemPkg ./systems/bohr.nix "aarch64-linux";
+    camus = systemPkg ./systems/camus.nix "aarch64-linux";
+    cantor = systemPkg ./systems/cantor.nix "x86_64-linux";
+    foucault = systemPkg ./systems/foucault.nix "x86_64-linux";
+    peano = systemPkg ./systems/peano.nix "x86_64-linux";
+  };
 in
 rec {
-  inherit system home;
-  x86_64 = with machines; [ abel cantor foucault peano ];
-  aarch64 = with machines; [ bohr camus ];
-  darwin = with machines; [ spinoza ];
+  x86_64 = with systems; [ abel cantor foucault peano ];
+  aarch64 = with systems; [ bohr camus ];
 
   shellHack = let
     drv = import ./shell.nix {};
@@ -34,4 +45,4 @@ rec {
       ];
     }
   );
-} // machines
+} // systems
