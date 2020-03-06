@@ -35,5 +35,5 @@ rec {
   aarch64 = with machines; [ bohr camus ];
   darwin = with machines; [ spinoza ];
 
-  ci = [ foucault camus shellHack ];
+  ci = [ x86_64.foucault aarch64.camus shellHack ];
 } // machines
