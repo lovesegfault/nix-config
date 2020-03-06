@@ -28,7 +28,7 @@ jobs:
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
               skipNixBuild: true
         - name: Formatting tests
-          run: nix-shell --run 'find . -iname "*.nix" -not -path ./nix/sources.nix -exec nixpkgs-fmt {} +'
+          run: nix-shell --run 'find . -iname "*.nix" -not -path ./nix/sources.nix -exec nixpkgs-fmt --check {} +'
     build_aarch64:
       runs-on: ubuntu-latest
       steps:
