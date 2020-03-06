@@ -6,5 +6,8 @@
     cachix
     niv
     nixpkgs-fmt
+    shfmt
+    shellcheck
+    ctags
   ];
 }
