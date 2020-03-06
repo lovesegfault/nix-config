@@ -1,6 +1,8 @@
-{ sources ? import ./nix/sources.nix {}
-, pkgs ? import sources.nixpkgs {}
-}: pkgs.mkShell {
+{ sources ? import ./nix/sources.nix {} }:
+let
+  pkgs = import sources.nixpkgs {};
+in
+pkgs.mkShell {
   name = "nix-config";
   buildInputs = with pkgs; [
     cachix
