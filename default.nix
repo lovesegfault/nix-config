@@ -1,7 +1,6 @@
 { sources ? import ./nix/sources.nix {} }:
 let
   home-manager = import (sources.home-manager + "/nixos");
-  pkgs = import sources.nixpkgs {};
   systemPkg = system: arch:
     (
       import ( sources.nixpkgs + "/nixos" ) {
