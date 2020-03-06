@@ -6,7 +6,8 @@ HOME_MANAGER_SYNC=0
 NIXOS_BOOT=0
 NIXOS_SYNC=0
 NO_BUILD=0
-UPGRADE=0
+# FIXME: Pinning
+# UPGRADE=0
 
 function cprint() {
     if [ "$#" -lt 2 ]; then
@@ -150,22 +151,62 @@ function check_sudo() {
         error "$USER does not have sudo privileges"
 }
 
+function set_work_dir() {
+    if [[ ! -v WORK_DIR ]]; then
+        WORK_DIR="$(mktemp --tmpdir -d nix-config-sync.XXXXXXXXXX)"
+        # shellcheck disable=2064
+        trap "rm -r '$WORK_DIR'" EXIT
+    fi
+}
+
 function rebuild_system() {
-    [ "$#" -eq 0 ] || error "rebuild_system"
+    [ "$#" -eq 1 ] || error "rebuild_system MACHINE"
+    set_work_dir
+    local machine="$1"
     local op=""
     if [ $NIXOS_BOOT = 1 ]; then
         op="boot"
     else
         op="switch"
     fi
-    [ $DRY_RUN == 0 ] && [ $UPGRADE == 1 ] && sudo nix-channel --update
-    [ $DRY_RUN == 0 ] && sudo nixos-rebuild "$op" || error "Failed to rebuild system"
+
+    # FIXME: Pinning
+    # [ $DRY_RUN == 0 ] && [ $UPGRADE == 1 ] && sudo nix-channel --update
+    # [ $DRY_RUN == 0 ] && sudo nixos-rebuild "$op" || error "Failed to rebuild system"
+
+    local system_gen="$WORK_DIR/system_gen"
+    local system_activate="$system_gen/bin/switch-to-configuration"
+    local attr="system.$machine"
+    # shellcheck disable=2015
+    [ $DRY_RUN == 0 ] &&
+        nix-build --out-link "$system_gen" -A "$attr" ||
+        error "Failed to build system"
+    # shellcheck disable=2015
+    [ $DRY_RUN == 0 ] &&
+        sudo "$system_activate" "$op" ||
+        error "Failed to activate system"
 }
 
 function rebuild_home() {
-    [ "$#" -eq 0 ] || error "rebuild_home"
-    [ $DRY_RUN == 0 ] && [ $UPGRADE == 1 ] && nix-channel --update
-    [ $DRY_RUN == 0 ] && home-manager switch || error "failed to rebuild home"
+    [ "$#" -eq 1 ] || error "rebuild_home MACHINE"
+    set_work_dir
+    local machine="$1"
+
+    # FIXME: Pinning
+    # [ $DRY_RUN == 0 ] && [ $UPGRADE == 1 ] && nix-channel --update
+    # [ $DRY_RUN == 0 ] && home-manager switch || error "failed to rebuild home"
+
+    local home_gen="$WORK_DIR/home_gen"
+    local home_activate="$home_gen/activate"
+    local attr="home.$machine"
+    # shellcheck disable=2015
+    [ $DRY_RUN == 0 ] &&
+        nix-build --out-link "$home_gen" -A "$attr" ||
+        error "Failed to build home"
+    # shellcheck disable=2015
+    [ $DRY_RUN == 0 ] &&
+        sudo "$home_activate" "$op" ||
+        error "Failed to activate home"
 }
 
 function check_getopt() {
@@ -213,7 +254,8 @@ function parse_opts() {
             shift
             ;;
         -u | --upgrade)
-            UPGRADE=1
+            # FIXME: Pinning
+            # UPGRADE=1
             shift
             ;;
         --)
@@ -230,15 +272,17 @@ function parse_opts() {
 function main() {
     check_getopt
     parse_opts "$@"
+    local machine
+    machine="$(hostname)"
     if [ $NIXOS_SYNC = 1 ]; then
         check_sudo
         sync_system
-        [ $NO_BUILD == 0 ] && rebuild_system
+        [ $NO_BUILD == 0 ] && rebuild_system "$machine"
     fi
     if [ $HOME_MANAGER_SYNC == 1 ]; then
         [ "$(id -u)" != 0 ] || error "Run this as a your user, not root."
         sync_home
-        [ $NO_BUILD == 0 ] && rebuild_home
+        [ $NO_BUILD == 0 ] && rebuild_home "$machine"
     fi
     exit 0
 }
