@@ -29,7 +29,7 @@ jobs:
               skipNixBuild: true
         - name: Formatting tests
           run: nix-shell --run 'find . -iname "*.nix" -not -path ./nix/sources.nix -exec nixpkgs-fmt {} +'
-    build:
+    build_aarch64:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
@@ -69,6 +69,37 @@ jobs:
         - name: Cachix
           uses: cachix/cachix-action@v4
           with:
-              attributes: ci
+              attributes: aarch64
+              name: nix-config
+              signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+    build_x86_64:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Nix
+          uses: cachix/install-nix-action@v7
+        - name: Allow Unfree
+          run: |
+            mkdir -p ~/.config/nixpkgs
+            echo "{ allowUnfree = true; }" |
+                tee ~/.config/nixpkgs/config.nix
+        - name: Cachix
+          uses: cachix/cachix-action@v4
+          with:
+              attributes: x86_64
+              name: nix-config
+              signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+    build_shell:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Nix
+          uses: cachix/install-nix-action@v7
+        - name: Cachix
+          uses: cachix/cachix-action@v4
+          with:
+              attributes: shellHack
               name: nix-config
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
