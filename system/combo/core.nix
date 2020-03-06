@@ -26,8 +26,13 @@
   #networking.useNetworkd = true;
 
   # Pinning
-  nix.nixPath = [
-    # "nixos-config=${cfg}"
+  nix.nixPath = let
+    dummyConfig = pkgs.writeText "configuration.nix" ''
+      assert builtins.trace "This is a dummy config, use NixOps!" false;
+      {}
+    '';
+  in [
+    "nixos-config=${dummyConfig}"
     "nixpkgs=/run/current-system/nixpkgs"
     # "nixpkgs-overlays=/run/current-system/overlays"
   ];
