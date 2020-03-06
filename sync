@@ -144,7 +144,7 @@ function main() {
 	[ $DRY_RUN == 1 ] && warn "dry run"
 	local machine
 	machine="$(hostname)"
-	if [ $SYSTEM_SWITCH = 1 ]; then
+	if [ $SYSTEM_SWITCH == 1 ]; then
 		check_sudo
 		rebuild_system "$machine"
 	fi
@@ -152,6 +152,9 @@ function main() {
 		[ "$(id -u)" != 0 ] || error "Run this as a your user, not root."
 		rebuild_home "$machine"
 	fi
+	[ $DRY_RUN == 0 ] &&
+		{ [ $SYSTEM_SWITCH == 1 ] || [ $HOME_SWITCH == 1 ]; } &&
+		nix optimise-store
 	exit 0
 }
 
