@@ -3,7 +3,7 @@ let
   home-manager = import (sources.home-manager + "/nixos");
   systemPkg = system: arch:
     (
-      import ( sources.nixpkgs + "/nixos" ) {
+      import (sources.nixpkgs + "/nixos") {
         configuration = system;
         system = arch;
       }
