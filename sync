@@ -2,12 +2,9 @@
 set -o pipefail -o noclobber -o nounset
 
 DRY_RUN=0
-HOME_MANAGER_SYNC=0
-NIXOS_BOOT=0
-NIXOS_SYNC=0
-NO_BUILD=0
-# FIXME: Pinning
-# UPGRADE=0
+HOME_SWITCH=0
+SYSTEM_SWITCH=0
+SYSTEM_BOOT=0
 
 function cprint() {
     if [ "$#" -lt 2 ]; then
@@ -38,111 +35,6 @@ function warn() {
     cprint "$yellow" "$@"
 }
 
-function fix_perms() {
-    [ "$#" -eq 2 ] || error "fix_perms USER PATH"
-    local user="$1"
-    local path="$2"
-
-    local fix_dirs=("find" "$path" "-type" "d" "-exec" "chmod 0700 {} +")
-    local fix_files=("find" "$path" "-type" "f" "-exec" "chmod 0600 {} +")
-    if [ "$USER" == "$user" ]; then
-        ${fix_dirs[*]}
-        ${fix_files[*]}
-    else
-        sudo runuser -l "$user" -c "$(eval echo "${fix_dirs[@]}")"
-        sudo runuser -l "$user" -c "$(eval echo "${fix_files[@]}")"
-    fi
-}
-
-function sync_dir() {
-    [ "$#" -eq 3 ] || error "sync_dir USER SOURCE DEST"
-    local user="$1"
-    local src="$2"
-    local dest="$3"
-
-    # Fix paths (damn rsync)
-    if [ "${src:(-1)}" != "/" ]; then
-        # add trailing / to src
-        src="$src/"
-    fi
-    if [ "${dest:(-1)}" != "/" ]; then
-        # add trailing / to dest
-        dest="$dest/"
-    fi
-
-    # -i, --itemize-changes       output a change-summary for all updates
-    # -r, --recursive             recurse into directories
-    # -h, --human-readable        output numbers in a human-readable format
-    # -l, --links                 copy symlinks as symlinks
-    # -t, --times                 preserve modification times
-    local rsync_cmd=("rsync" "-irhlt" "--delete" "$src" "$dest")
-
-    if [ "$USER" == "$user" ] && [ $DRY_RUN == 0 ]; then
-        mkdir -p "$dest"
-        ${rsync_cmd[*]}
-    else
-        sudo runuser -l "$user" -c "mkdir -p $dest"
-        sudo runuser -l "$user" -c "$(eval echo "${rsync_cmd[@]}")"
-    fi
-
-    [ $DRY_RUN == 0 ] && fix_perms "$user" "$dest"
-}
-
-function find_script_path() {
-    local script_path
-    script_path="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-    echo "$script_path"
-}
-
-function sync_module() {
-    [ "$#" -eq 3 ] || error "sync_module USER ROOT_PATH DIRS"
-    local user="$1"
-    local root_path="$2"
-    local dirs=("${!3}")
-
-    for dir in "${dirs[@]}"; do
-        sync_dir "$user" "$(find_script_path)/$dir" "$root_path/$dir"
-    done
-}
-
-function check_module() {
-    [ "$#" -eq 2 ] || error "check_module ROOT_PATH FILES"
-    local root_path="$1"
-    local files=("${!2}")
-
-    for rel_path in "${files[@]}"; do
-        local abs_path="$root_path/$rel_path"
-        [ -f "${abs_path}" ] || warn "${abs_path} missing!"
-    done
-}
-
-function sync_system() {
-    [ "$#" -eq 0 ] || error "sync_system"
-    local nixos_cfg_path="/etc/nixos"
-    local files=("configuration.nix")
-    local dirs=("system")
-    if [ -d "$(find_script_path)/secrets/system" ]; then
-        dirs+=("secrets/system")
-    fi
-
-    sync_module "root" "$nixos_cfg_path" dirs[@]
-    check_module "$nixos_cfg_path" files[@]
-}
-
-function sync_home() {
-    [ "$#" -eq 0 ] || error "sync_home"
-    local home_manager_cfg_path="$HOME/.config/nixpkgs"
-    local files=("config.nix" "home.nix")
-    local dirs=("home")
-
-    if [ -d "$(find_script_path)/secrets/home" ]; then
-        dirs+=("secrets/home")
-    fi
-
-    sync_module "$USER" "$home_manager_cfg_path" dirs[@]
-    check_module "$home_manager_cfg_path" files[@]
-}
-
 function check_sudo() {
     [ "$#" -eq 0 ] || error "check_sudo"
     [ $DRY_RUN == 0 ] || return
@@ -164,26 +56,19 @@ function rebuild_system() {
     set_work_dir
     local machine="$1"
     local op=""
-    if [ $NIXOS_BOOT = 1 ]; then
+    if [ $SYSTEM_BOOT = 1 ]; then
         op="boot"
     else
         op="switch"
     fi
 
-    # FIXME: Pinning
-    # [ $DRY_RUN == 0 ] && [ $UPGRADE == 1 ] && sudo nix-channel --update
-    # [ $DRY_RUN == 0 ] && sudo nixos-rebuild "$op" || error "Failed to rebuild system"
-
     local system_gen="$WORK_DIR/system_gen"
     local system_activate="$system_gen/bin/switch-to-configuration"
     local attr="system.$machine"
-    # shellcheck disable=2015
-    [ $DRY_RUN == 0 ] &&
-        nix-build --out-link "$system_gen" -A "$attr" ||
+    [ $DRY_RUN == 1 ] && return
+    nix-build --out-link "$system_gen" -A "$attr" ||
         error "Failed to build system"
-    # shellcheck disable=2015
-    [ $DRY_RUN == 0 ] &&
-        sudo "$system_activate" "$op" ||
+    sudo "$system_activate" "$op" ||
         error "Failed to activate system"
 }
 
@@ -192,20 +77,13 @@ function rebuild_home() {
     set_work_dir
     local machine="$1"
 
-    # FIXME: Pinning
-    # [ $DRY_RUN == 0 ] && [ $UPGRADE == 1 ] && nix-channel --update
-    # [ $DRY_RUN == 0 ] && home-manager switch || error "failed to rebuild home"
-
     local home_gen="$WORK_DIR/home_gen"
     local home_activate="$home_gen/activate"
     local attr="home.$machine"
-    # shellcheck disable=2015
-    [ $DRY_RUN == 0 ] &&
-        nix-build --out-link "$home_gen" -A "$attr" ||
+    [ $DRY_RUN == 1 ] && return
+    nix-build --out-link "$home_gen" -A "$attr" ||
         error "Failed to build home"
-    # shellcheck disable=2015
-    [ $DRY_RUN == 0 ] &&
-        "$home_activate" ||
+    "$home_activate" ||
         error "Failed to activate home"
 }
 
@@ -218,8 +96,8 @@ function check_getopt() {
 }
 
 function parse_opts() {
-    local short_opts="abdhnsu"
-    local long_opts="all,boot,dry-run,home,no-build,system,upgrade"
+    local short_opts="abdhs"
+    local long_opts="all,boot,dry-run,home,system"
     local parsed
     ! parsed=$(getopt --options="$short_opts" --longoptions="$long_opts" --name "$0" -- "$@")
     if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
@@ -229,12 +107,12 @@ function parse_opts() {
     while true; do
         case "$1" in
         -a | --all)
-            NIXOS_SYNC=1
-            HOME_MANAGER_SYNC=1
+            SYSTEM_SWITCH=1
+            HOME_SWITCH=1
             shift
             ;;
         -b | --boot)
-            NIXOS_BOOT=1
+            SYSTEM_BOOT=1
             shift
             ;;
         -d | --dry-run)
@@ -242,20 +120,11 @@ function parse_opts() {
             shift
             ;;
         -h | --home)
-            HOME_MANAGER_SYNC=1
-            shift
-            ;;
-        -n | --no-build)
-            NO_BUILD=1
+            HOME_SWITCH=1
             shift
             ;;
         -s | --system)
-            NIXOS_SYNC=1
-            shift
-            ;;
-        -u | --upgrade)
-            # FIXME: Pinning
-            # UPGRADE=1
+            SYSTEM_SWITCH=1
             shift
             ;;
         --)
@@ -272,17 +141,16 @@ function parse_opts() {
 function main() {
     check_getopt
     parse_opts "$@"
+    [ $DRY_RUN == 1 ] && warn "dry run"
     local machine
     machine="$(hostname)"
-    if [ $NIXOS_SYNC = 1 ]; then
+    if [ $SYSTEM_SWITCH = 1 ]; then
         check_sudo
-        sync_system
-        [ $NO_BUILD == 0 ] && rebuild_system "$machine"
+        rebuild_system "$machine"
     fi
-    if [ $HOME_MANAGER_SYNC == 1 ]; then
+    if [ $HOME_SWITCH == 1 ]; then
         [ "$(id -u)" != 0 ] || error "Run this as a your user, not root."
-        sync_home
-        [ $NO_BUILD == 0 ] && rebuild_home "$machine"
+        rebuild_home "$machine"
     fi
     exit 0
 }
