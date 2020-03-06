@@ -1,7 +1,6 @@
-{ lib, pkgs, ... }: {
+{
   xdg = {
     enable = true;
-  } // lib.optionalAttrs pkgs.stdenv.isLinux {
     userDirs = {
       enable = true;
       desktop = "$HOME/opt";

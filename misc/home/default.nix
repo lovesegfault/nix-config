@@ -15,5 +15,4 @@ in
   camus = homePkg ./machines/camus.nix "aarch64-linux";
   foucault = homePkg ./machines/foucault.nix "x86_64-linux";
   peano = homePkg ./machines/peano.nix "x86_64-linux";
-  spinoza = homePkg ./machines/spinoza.nix "x86_64-darwin";
 }
