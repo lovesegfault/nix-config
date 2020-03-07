@@ -42,10 +42,5 @@
   systemd.services.libvirtd.wantedBy = lib.mkForce [];
   systemd.services.libvirt-guests.wantedBy = lib.mkForce [];
 
-  home-manager.users.bemeurer = {
-    # nixpkgs = { inherit (config.nixpkgs) config overlays system; };
-    programs.tmux.enable = true;
-  };
-
   time.timeZone = "America/Los_Angeles";
 }
