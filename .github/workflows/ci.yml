@@ -100,6 +100,6 @@ jobs:
         - name: Cachix
           uses: cachix/cachix-action@v4
           with:
-              attributes: shellHack
+              attributes: shellBuildInputs
               name: nix-config
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'

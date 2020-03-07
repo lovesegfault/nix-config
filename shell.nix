@@ -1,15 +1,9 @@
-{ sources ? import ./nix/sources.nix {} }:
 let
-  pkgs = import sources.nixpkgs {};
+  nix-config = import ./. {};
+  buildInputs = nix-config.shellBuildInputs;
+  pkgs = nix-config.pkgs;
 in
 pkgs.mkShell {
+  inherit buildInputs;
   name = "nix-config";
-  buildInputs = with pkgs; [
-    cachix
-    niv
-    nixpkgs-fmt
-    shfmt
-    shellcheck
-    ctags
-  ];
 }
