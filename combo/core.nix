@@ -41,8 +41,6 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = (import ../overlays);
 
-  environment.systemPackages = [ pkgs.arcanist ];
-
   system.extraSystemBuilderCmds = ''
     ln -sv ${pkgs.path} $out/nixpkgs
     ln -sv ${../overlays} $out/overlays
