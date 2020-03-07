@@ -8,5 +8,6 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQgTWfmR/Z4Szahx/uahdPqvEP/e/KQ1dKUYLenLuY2 bemeurer.personal"
     ];
   };
-  home-manager.users.bemeurer = {};
+  home-manager.users.bemeurer = {
+  };
 }
