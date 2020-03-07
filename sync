@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 set -o pipefail -o noclobber -o nounset
 
-ACTIVATE=1
+SWITCH=1
 DRY_RUN=0
 SYSTEM_BOOT=0
 
@@ -50,11 +50,20 @@ function set_work_dir() {
     fi
 }
 
-function rebuild_system() {
-    [ "$#" -eq 0 ] || error "rebuild_system"
+function build() {
+    [ "$#" -eq 0 ] || error "build"
     set_work_dir
     local machine
     machine="$(hostname)"
+    [ $DRY_RUN == 1 ] && return
+    unset NIX_PATH
+    nix-build --out-link "$WORK_DIR" -A "$machine" ||
+        error "Failed to build system"
+}
+
+function switch() {
+    [ "$#" -eq 0 ] || error "switch"
+    set_work_dir
     local op=""
     if [ $SYSTEM_BOOT = 1 ]; then
         op="boot"
@@ -62,18 +71,10 @@ function rebuild_system() {
         op="switch"
     fi
 
-    local system_gen="$WORK_DIR/system_gen"
-    local system_activate="$system_gen/bin/switch-to-configuration"
-    local attr="$machine"
+    local switch="$WORK_DIR/bin/switch-to-configuration"
     [ $DRY_RUN == 1 ] && return
-    export NIX_PATH=''
-    nix-build --out-link "$system_gen" -A "$attr" ||
-        error "Failed to build system"
-    if [ $ACTIVATE == 1 ]; then
-        sudo "$system_activate" "$op" ||
-            error "Failed to activate system"
-    fi
-    nix optimise-store
+    sudo "$switch" "$op" ||
+        error "Failed to activate system"
 }
 
 function check_getopt() {
@@ -87,7 +88,7 @@ function check_getopt() {
 function parse_opts() {
     check_getopt
     local short_opts="bdn"
-    local long_opts="boot,dry-run,no-activate"
+    local long_opts="boot,dry-run,no-switch"
     local parsed
     ! parsed=$(getopt --options="$short_opts" --longoptions="$long_opts" --name "$0" -- "$@")
     if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
@@ -104,8 +105,8 @@ function parse_opts() {
             DRY_RUN=1
             shift
             ;;
-        -n | --no-activate)
-            ACTIVATE=0
+        -n | --no-switch)
+            SWITCH=0
             shift
             ;;
         --)
@@ -123,7 +124,9 @@ function main() {
     [ $DRY_RUN == 1 ] && warn "dry run"
     parse_opts "$@"
     check_sudo
-    rebuild_system
+    build
+    [ $SWITCH == 1 ] && switch
+    nix optimise-store
     exit 0
 }
 
