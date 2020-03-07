@@ -1,4 +1,4 @@
-# nix-config
+# nix-config ![CI](https://github.com/lovesegfault/nix-config/workflows/CI/badge.svg)
 
 This repository holds both my NixOS configuration (`system/`) as well as my Home
 Manager configuration (`home/`), both work together to generate fully
