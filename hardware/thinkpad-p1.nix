@@ -68,9 +68,12 @@
   services = {
     fstrim.enable = true;
     hardware.bolt.enable = true;
-    xserver.libinput = {
-      accelProfile = "flat";
-      accelSpeed = "0.7";
+    xserver = {
+      dpi = 96;
+      libinput = {
+        accelProfile = "adaptive";
+        accelSpeed = "0.7";
+      };
     };
   };
 
