@@ -5,9 +5,7 @@
     ../combo/dev.nix
     ../combo/graphical.nix
     ../combo/wayland.nix
-
     ../hardware/thinkpad-p1.nix
-
     ../modules/aarch64-build-box.nix
     ../modules/stcg-cachix.nix
     ../modules/stcg-cameras.nix
