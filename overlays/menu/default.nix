@@ -1,8 +1,10 @@
-self: super: let
+self: super:
+let
   menu = import ./execmenu.nix { inherit super; };
   gopassmenu = import ./gopassmenu.nix { inherit super; };
   gopass = "${super.gopass}/bin/gopass";
-in {
+in
+{
 
   i3menu = super.writeScriptBin "i3menu" ''
     #!${super.stdenv.shell}
