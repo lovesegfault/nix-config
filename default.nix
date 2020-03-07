@@ -1,9 +1,11 @@
 { sources ? import ./nix/sources.nix {} }:
 let
-  mkSystem = cfg: system:
-    let
-      pkgs = import sources.nixpkgs { inherit system; };
-    in (pkgs.nixos cfg);
+  mkSystem = configuration: system:
+  let
+      nixos = import (sources.nixpkgs + "/nixos");
+      eval = (nixos { inherit configuration system; });
+  in eval.system;
+
   systems = {
     abel = mkSystem ./systems/abel.nix "x86_64-linux";
     bohr = mkSystem ./systems/bohr.nix "aarch64-linux";
