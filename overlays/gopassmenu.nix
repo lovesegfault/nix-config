@@ -1,11 +1,11 @@
-{ pkgs, ... }:
+{ super }:
 let
-  alacritty = "${pkgs.alacritty}/bin/alacritty";
-  fzf = "${pkgs.fzf}/bin/fzf";
-  gopass = "${pkgs.gopass}/bin/gopass";
-  notify-send = "${pkgs.libnotify}/bin/notify-send";
-  rg = "${pkgs.ripgrep}/bin/rg";
-  wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
+  alacritty = "${super.alacritty}/bin/alacritty";
+  fzf = "${super.fzf}/bin/fzf";
+  gopass = "${super.gopass}/bin/gopass";
+  notify-send = "${super.libnotify}/bin/notify-send";
+  rg = "${super.ripgrep}/bin/rg";
+  wl-copy = "${super.wl-clipboard}/bin/wl-copy";
 in
 ''
   gopassmenu_path="$(readlink -f "$0")"

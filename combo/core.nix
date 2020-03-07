@@ -36,15 +36,16 @@
   in [
     "nixos-config=${dummyConfig}"
     "nixpkgs=/run/current-system/nixpkgs"
-    # "nixpkgs-overlays=/run/current-system/overlays"
+    "nixpkgs-overlays=/run/current-system/overlays"
   ];
 
   system.extraSystemBuilderCmds = ''
     ln -sv ${pkgs.path} $out/nixpkgs
-    # ln -sv ''${./overlays} $out/overlays
+    ln -sv ${./overlays} $out/overlays
   '';
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = import ./overlays;
 
   system.stateVersion = "19.09";
 
