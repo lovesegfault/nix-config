@@ -46,7 +46,7 @@ function set_work_dir() {
     if [[ ! -v WORK_DIR ]]; then
         WORK_DIR="$(mktemp --tmpdir -u nix-config-sync.XXXXXXXXXX)"
         # shellcheck disable=2064
-        trap "rm -r '$WORK_DIR'" EXIT
+        trap "rm -rf '$WORK_DIR'" EXIT
     fi
 }
 
