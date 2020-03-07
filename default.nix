@@ -1,10 +1,10 @@
 { sources ? import ./nix/sources.nix {} }:
 let
   mkSystem = configuration: system:
-  let
+    let
       nixos = import (sources.nixpkgs + "/nixos");
       eval = (nixos { inherit configuration system; });
-  in eval.system;
+    in eval.system;
 
   systems = {
     abel = mkSystem ./systems/abel.nix "x86_64-linux";
