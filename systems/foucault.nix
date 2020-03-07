@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [
+    (import ../users).bemeurer
     ../combo/core.nix
     ../combo/dev.nix
     ../combo/graphical.nix
@@ -47,4 +48,4 @@
   };
 
   time.timeZone = "America/Los_Angeles";
-} // (import ../users).bemeurer
+}

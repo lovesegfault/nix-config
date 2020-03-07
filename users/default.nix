@@ -3,8 +3,7 @@ let
   nameValuePair = name: value: { inherit name value; };
   genAttrs = names: f: builtins.listToAttrs (map (n: nameValuePair n (f n)) names);
   userDirs = builtins.attrNames (builtins.readDir ./.);
-  mkUser = path: import (./. + "/${path}");
-  users = genAttrs userDirs mkUser;
+  users = genAttrs userDirs (path: ./. + "/${path}");
 in {
   ops = with users; [ bemeurer ];
   all = builtins.attrNames users;
