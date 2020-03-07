@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = let
     sources = (import ../nix/sources.nix {});
   in [
@@ -27,7 +27,6 @@
     ];
   };
 
-  # Pinning
   nix.nixPath = let
     dummyConfig = pkgs.writeText "configuration.nix" ''
       assert builtins.trace "This is a dummy config, use NixOps!" false;
@@ -39,13 +38,16 @@
     "nixpkgs-overlays=/run/current-system/overlays"
   ];
 
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = (import ../overlays);
+
+  environment.systemPackages = [ pkgs.arcanist ];
+
   system.extraSystemBuilderCmds = ''
     ln -sv ${pkgs.path} $out/nixpkgs
-    ln -sv ${./overlays} $out/overlays
+    ln -sv ${../overlays} $out/overlays
   '';
 
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = import ./overlays;
 
   system.stateVersion = "19.09";
 

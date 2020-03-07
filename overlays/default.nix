@@ -1,6 +1,6 @@
 let
   overlayIncl = overlayFile: import ( ./. + "/${overlayFile}" );
   overlayFiles = builtins.attrNames (builtins.readDir ./.);
-  overlayObjs = builtins.map (f: overlayIncl f ) overlayFiles;
-  overlays = builtins.filter (elem: builtins.isFunction elem) overlayObjs;
+  overlayMods = builtins.filter ( e: e != "default.nix" ) overlayFiles;
+  overlays = builtins.map ( n: overlayIncl n) overlayMods;
 in overlays

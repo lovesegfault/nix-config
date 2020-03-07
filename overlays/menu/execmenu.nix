@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ super }:
 let
-  alacritty = "${pkgs.alacritty}/bin/alacritty";
-  fzf = "${pkgs.fzf}/bin/fzf";
+  alacritty = "${super.alacritty}/bin/alacritty";
+  fzf = "${super.fzf}/bin/fzf";
 in
 ''
   shopt -s nullglob globstar
