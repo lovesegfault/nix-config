@@ -41,7 +41,10 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = (import ../overlays);
 
-  system.extraSystemBuilderCmds = ''
+  system.extraSystemBuilderCmds = let
+    commitId = (lib.commitIdFromGitRepo ../.git);
+  in ''
+    echo "${commitId}" > $out/nix-config-commit
     ln -sv ${pkgs.path} $out/nixpkgs
     ln -sv ${../overlays} $out/overlays
   '';
