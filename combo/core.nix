@@ -11,7 +11,6 @@
     ../modules/resolved.nix
     ../modules/sudo.nix
     ../modules/tmux.nix
-    ../modules/users.nix
     ../modules/zsh.nix
   ];
 
@@ -28,9 +27,6 @@
     ];
   };
 
-  # FIXME: Report issue with systemd-networkd-wait-only to @flokli
-  #networking.useNetworkd = true;
-
   # Pinning
   nix.nixPath = let
     dummyConfig = pkgs.writeText "configuration.nix" ''
@@ -42,6 +38,7 @@
     "nixpkgs=/run/current-system/nixpkgs"
     # "nixpkgs-overlays=/run/current-system/overlays"
   ];
+
   system.extraSystemBuilderCmds = ''
     ln -sv ${pkgs.path} $out/nixpkgs
     # ln -sv ''${./overlays} $out/overlays

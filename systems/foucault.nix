@@ -47,4 +47,4 @@
   };
 
   time.timeZone = "America/Los_Angeles";
-}
+} // (import ../users).bemeurer
