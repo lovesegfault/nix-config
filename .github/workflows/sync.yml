@@ -1,0 +1,66 @@
+name: Sync
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+    build_aarch64:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Nix
+          uses: cachix/install-nix-action@v7
+        - name: Allow Unfree
+          run: |
+            mkdir -p ~/.config/nixpkgs
+            echo "{ allowUnfree = true; }" |
+                tee ~/.config/nixpkgs/config.nix
+        - name: AArch64 Build Box
+          run: |
+            # first create the ssh config dir for root
+            sudo mkdir -p /root/.ssh
+
+            # now add the key for the build slave
+            echo "${{ secrets.AARCH64_BOX_KEY }}" |
+                sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
+            sudo chmod 0600 /root/.ssh/aarch64.community.nixos
+
+            # and make it a known host
+            echo "${{ secrets.KNOWN_HOSTS }}" |
+                sudo tee -a /root/.ssh/known_hosts > /dev/null
+
+            # lastly register the build slave with nix
+            slave_cfg=(
+              lovesegfault@aarch64.nixos.community # user/addr
+              aarch64-linux                        # arch
+              /root/.ssh/aarch64.community.nixos   # key
+              64                                   # maxJobs
+              8                                    # speed factor
+              big-parallel                         # features
+            )
+            echo "${slave_cfg[*]}" |
+                sudo tee /etc/nix/machines > /dev/null
+        - name: Update
+          run: |
+            unset NIX_PATH
+            nix-shell --pure --run "niv update"
+        - name: Build shell
+          uses: cachix/cachix-action@v4
+          with:
+              attributes: shellBuildInputs
+              name: nix-config
+              signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+        - name: Build aarch64
+          uses: cachix/cachix-action@v4
+          with:
+              attributes: aarch64
+              name: nix-config
+              signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+        - name: Build x86_64
+          uses: cachix/cachix-action@v4
+          with:
+              attributes: x86_64
+              name: nix-config
+              signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+        # FIXME: We sould now commit the changes `niv` made to `sources.json`
