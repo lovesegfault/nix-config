@@ -126,7 +126,6 @@ function main() {
     check_sudo
     build
     [ $SWITCH == 1 ] && switch
-    nix optimise-store
     exit 0
 }
 
