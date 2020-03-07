@@ -1,0 +1,1 @@
+{ programs.gpg.enable = true; }
