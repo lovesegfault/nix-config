@@ -2,7 +2,7 @@
 
 This repository holds both my NixOS configuration. It is fully reproducible
 (through [niv]) and position-independent, meaning there is no moving around of
-`configuration.nix` (see [sync]).
+`configuration.nix` (see [switch]).
 
 (`system/`) as well as my Home
 Manager configuration (`home/`), both work together to generate fully
@@ -34,4 +34,4 @@ misc/
 
 
 [niv]: https://github.com/nmattia/niv
-[sync]: https://github.com/lovesegfault/nix-config/blob/master/sync
+[switch]: https://github.com/lovesegfault/nix-config/blob/master/switch
