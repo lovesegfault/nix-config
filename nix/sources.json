@@ -1,14 +1,14 @@
 {
     "home-manager": {
-        "branch": "master",
+        "branch": "improve-nixos-module",
         "description": "Manage a user environment using Nix",
         "homepage": "",
-        "owner": "rycee",
+        "owner": "erikarvstedt",
         "repo": "home-manager",
-        "rev": "faa2945606213619dac773b9264c29fa748ad935",
-        "sha256": "10yp23vy46ny6j9swypqc18zvwm6w7pdxl62ggig32dp0wgm71p8",
+        "rev": "248dbaea0a092c4ff5f5918454892c20987e7f4e",
+        "sha256": "1sxp45f1g9lqm25apamv793ng340mr5i2m6zv0a547zl9a5b839w",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/faa2945606213619dac773b9264c29fa748ad935.tar.gz",
+        "url": "https://github.com/erikarvstedt/home-manager/archive/248dbaea0a092c4ff5f5918454892c20987e7f4e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
