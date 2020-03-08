@@ -1,1 +1,0 @@
-{ programs.fzf.enable = true; }
