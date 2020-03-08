@@ -36,22 +36,26 @@
     "nixpkgs-overlays=/run/current-system/overlays"
   ];
 
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = with builtins; let
-    files = attrNames (readDir ../overlays);
-    mkOverlay = f: import (../overlays + "/${f}");
-  in map (f: mkOverlay f) files;
+  nixpkgs = {
+    config.allowUnfree = true;
 
-  system.extraSystemBuilderCmds = let
-    commitId = (lib.commitIdFromGitRepo ../.git);
-  in ''
-    echo "${commitId}" > $out/nix-config-commit
-    ln -sv ${pkgs.path} $out/nixpkgs
-    ln -sv ${../overlays} $out/overlays
-  '';
-
-
-  system.stateVersion = "19.09";
+    overlays = with builtins; let
+      files = attrNames (readDir ../overlays);
+      mkOverlay = f: import (../overlays + "/${f}");
+    in map (f: mkOverlay f) files;
+  };
 
   services.dbus.socketActivated = true;
+
+  system = {
+    extraSystemBuilderCmds = let
+      commitId = (lib.commitIdFromGitRepo ../.git);
+    in ''
+      echo "${commitId}" > $out/nix-config-commit
+      ln -sv ${pkgs.path} $out/nixpkgs
+      ln -sv ${../overlays} $out/overlays
+    '';
+
+    stateVersion = "19.09";
+  };
 }
