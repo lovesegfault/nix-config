@@ -12,7 +12,7 @@ For the configurations' entry points see the individual [systems], as well as
 ```
 .
 ├── core         # Base-line configurations applicable to all machines
-├── default.nix  # Attr set of all machines plus arch-groups
+├── default.nix  # Attr set of all machines, with groups based on architecture
 ├── dev          # Developer tooling configuration
 ├── hardware     # Hardware-specific configuration
 ├── hostnames    # List of hostnames to use
