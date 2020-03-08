@@ -10,7 +10,7 @@
   };
   home-manager.users.bemeurer = lib.mkMerge (
     [
-      (import ./core { inherit pkgs; })
+      (import ./core)
       (import ./dev)
     ] ++ lib.optionals config.programs.sway.enable [
       (import ./gpg)
