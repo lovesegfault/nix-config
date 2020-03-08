@@ -1,8 +1,8 @@
 let
-  sources = import ./nix/sources.nix {};
+  pkgs = import ./nix/nixpkgs.nix {};
   mkSystem = configuration: system:
     let
-      nixos = import (sources.nixpkgs + "/nixos");
+      nixos = import ./nix/nixos.nix;
       eval = (nixos { inherit configuration system; });
     in eval.system;
 
@@ -15,15 +15,16 @@ let
     peano = mkSystem ./systems/peano.nix "x86_64-linux";
   };
 in
-rec {
+{
+  inherit pkgs;
   x86_64 = with systems; [ abel cantor foucault peano ];
   aarch64 = with systems; [ bohr camus ];
 
-  pkgs = import sources.nixpkgs {};
   shellBuildInputs = with pkgs; [
     cachix
     niv
     nixpkgs-fmt
+    morph
     shfmt
     shellcheck
     ctags
