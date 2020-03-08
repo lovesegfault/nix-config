@@ -11,7 +11,8 @@ let
   alacritty = "${super.alacritty}/bin/alacritty";
   fzf = "${super.fzf}/bin/fzf";
   notify-send = "${super.libnotify}/bin/notify-send";
-in super.writeScriptBin "emojimenu" ''
+in
+super.writeScriptBin "emojimenu" ''
   #!${super.stdenv.shell}
   emojimenu_path="$(readlink -f "$0")"
   emojimenu_fifo="/tmp/emojimenu_fifo"
