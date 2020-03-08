@@ -1,17 +1,21 @@
 { pkgs, ... }: {
   imports = [
-    ../modules/boot-silent.nix
-    ../modules/fonts.nix
-    ../modules/gnome-keyring.nix
-    ../modules/location.nix
-    ../modules/printing.nix
-    ../modules/sound.nix
+    ./boot-silent.nix
+    ./fonts.nix
+    ./gnome-keyring.nix
+    ./location.nix
+    ./printing.nix
+    ./sound.nix
+    ./sway.nix
   ];
 
   environment.systemPackages = with pkgs; [
+    adwaita-qt
     gnome3.adwaita-icon-theme
     hicolor-icon-theme
-  ] ++ [ adwaita-qt qgnomeplatform ];
+    qgnomeplatform
+    qt5.qtwayland
+  ];
 
   qt5 = {
     enable = true;
