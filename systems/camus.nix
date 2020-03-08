@@ -1,6 +1,6 @@
 { lib, pkgs, ... }:
 let
-  secretPath = ../../secrets/system/stcg-wifi-password.nix;
+  secretPath = ../secrets/modules/stcg-wifi-password.nix;
   secretCondition = (builtins.pathExists secretPath);
   secret = lib.optionalString secretCondition (import secretPath);
 in
