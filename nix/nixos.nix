@@ -1,3 +1,4 @@
 let
   sources = import ./sources.nix {};
-in import (sources.nixpkgs + "/nixos")
+in
+import (sources.nixpkgs + "/nixos")

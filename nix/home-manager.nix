@@ -1,3 +1,4 @@
 let
   sources = import ./sources.nix {};
-in import (sources.home-manager + "/nixos")
+in
+import (sources.home-manager + "/nixos")
