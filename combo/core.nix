@@ -39,11 +39,10 @@
   ];
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = let
-    files = builtins.attrNames (builtins.readDir ../overlays);
+  nixpkgs.overlays = with builtins; let
+    files = attrNames (readDir ../overlays);
     mkOverlay = f: import (../overlays + "/${f}");
-    overlays = builtins.map (f: mkOverlay f) files;
-  in overlays;
+  in map (f: mkOverlay f) files;
 
   system.extraSystemBuilderCmds = let
     commitId = (lib.commitIdFromGitRepo ../.git);
