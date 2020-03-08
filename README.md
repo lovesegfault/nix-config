@@ -11,7 +11,7 @@ For the configurations' entry points see the individual [systems], as well as
 ## structure
 ```
 .
-├── core         # Base-line configurations applicable to all machines
+├── core         # Baseline configurations applicable to all machines
 ├── default.nix  # Attr set of all machines, with groups based on architecture
 ├── dev          # Developer tooling configuration
 ├── hardware     # Hardware-specific configuration
