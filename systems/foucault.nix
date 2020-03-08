@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }: {
   imports = [
-    (import ../users).bemeurer
     ../combo/core.nix
     ../combo/dev.nix
     ../combo/graphical.nix
@@ -9,6 +8,7 @@
     ../modules/aarch64-build-box.nix
     ../modules/stcg-cachix.nix
     ../modules/stcg-cameras.nix
+    ../users/bemeurer
   ];
 
   boot.initrd.luks.devices."nixos".device =

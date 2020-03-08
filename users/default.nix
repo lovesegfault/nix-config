@@ -1,11 +1,11 @@
+{ lib, pkgs, ... }: with builtins;
 let
-  # I don't want to have to bring in lib just for this
-  nameValuePair = name: value: { inherit name value; };
-  genAttrs = names: f: builtins.listToAttrs (map (n: nameValuePair n (f n)) names);
-  userDirs = builtins.attrNames (builtins.readDir ./.);
-  users = genAttrs userDirs (path: ./. + "/${path}");
-in
-{
-  ops = with users; [ bemeurer ];
-  all = builtins.attrNames users;
-} // users
+  userDirs = attrNames (lib.filterAttrs (_: v: v == "directory") (readDir ./.));
+  mkUser = u: let
+      mod = import (./. + "/${u}") { inherit lib pkgs; };
+  in {
+    "users.users.${u}" = mod.system;
+    "home-manager.users.${u}" = mod.home;
+  };
+  users = (lib.genAttrs userDirs mkUser);
+in users
