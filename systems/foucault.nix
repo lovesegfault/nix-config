@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
   imports = [
     ../core
-    ../combo/dev.nix
+    ../dev
     ../combo/graphical.nix
     ../combo/wayland.nix
     ../hardware/thinkpad-p1.nix

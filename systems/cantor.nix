@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   imports = [
     ../core
-    ../combo/dev.nix
+    ../dev
 
     ../hardware/stcg-dc.nix
 

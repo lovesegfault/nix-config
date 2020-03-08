@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
   imports = [
     ../core
-    ../combo/dev.nix
+    ../dev
 
     ../modules/intel.nix
     ../modules/nvidia.nix
