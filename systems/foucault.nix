@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [
-    ../combo/core.nix
+    ../core
     ../combo/dev.nix
     ../combo/graphical.nix
     ../combo/wayland.nix

@@ -6,7 +6,7 @@ let
 in
 {
   imports = [
-    ../combo/core.nix
+    ../core
     ../hardware/rpi4.nix
     ../modules/stcg-cachix.nix
   ] ++ (import ../users).bemeurer;

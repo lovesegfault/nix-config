@@ -4,14 +4,14 @@
   in [
     (import "${sources.home-manager + "/nixos"}")
 
-    ../modules/aspell.nix
-    ../modules/gpg.nix
-    ../modules/networkmanager.nix
-    ../modules/nix.nix
-    ../modules/resolved.nix
-    ../modules/sudo.nix
-    ../modules/tmux.nix
-    ../modules/zsh.nix
+    ./aspell.nix
+    ./gpg.nix
+    ./networkmanager.nix
+    ./nix.nix
+    ./resolved.nix
+    ./sudo.nix
+    ./tmux.nix
+    ./zsh.nix
   ];
 
   home-manager.useGlobalPkgs = true;

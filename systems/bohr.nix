@@ -6,7 +6,7 @@ let
 in
 {
   imports = [
-    ../combo/core.nix
+    ../core
     ../hardware/rpi3.nix
     ../modules/sshguard.nix
   ] ++ (import ../users).bemeurer;
