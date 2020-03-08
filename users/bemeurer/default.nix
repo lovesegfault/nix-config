@@ -13,6 +13,6 @@
     (import ./dev)
     (import ./gpg)
     # (import ./music)
-    # (import ./sway)
+    (import ./sway)
   ];
 }
