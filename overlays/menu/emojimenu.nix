@@ -11,54 +11,51 @@ let
   alacritty = "${super.alacritty}/bin/alacritty";
   fzf = "${super.fzf}/bin/fzf";
   notify-send = "${super.libnotify}/bin/notify-send";
-in
-{
-  emojimenu = super.writeScriptBin "emojimenu" ''
-    #!${super.stdenv.shell}
-    emojimenu_path="$(readlink -f "$0")"
-    emojimenu_fifo="/tmp/emojimenu_fifo"
-    emojimenu_lock="/tmp/emojimenu_lock"
+in super.writeScriptBin "emojimenu" ''
+  #!${super.stdenv.shell}
+  emojimenu_path="$(readlink -f "$0")"
+  emojimenu_fifo="/tmp/emojimenu_fifo"
+  emojimenu_lock="/tmp/emojimenu_lock"
 
-    function emojimenu_lock() {
-      if [[ -f "$emojimenu_lock" ]]; then
-        ${notify-send} "✖️ emojimenu already running"
-        exit 1
-      else
-        touch "$emojimenu_lock"
-      fi
-    }
-
-    function emojimenu_unlock() {
-      if [[ -f "$emojimenu_lock" ]]; then
-        rm -f "$emojimenu_lock"
-      fi
-    }
-
-    function emojimenu_window() {
-      emoji="$(${fzf} < ${emojis} | cut -f 1 | tr -d '\n')"
-      echo "$emoji" > "$emojimenu_fifo"
-    }
-
-    function emojimenu_backend() {
-      emojimenu_lock
-      export EMOJIMENU_BEHAVE_AS_WINDOW=1
-      ${alacritty} -d 55 18 -t emojimenu -e "$emojimenu_path"
-
-      emoji="$(cat "$emojimenu_fifo")"
-      rm -f "$emojimenu_fifo"
-      if [ "$emoji" == "" ]; then
-        emojimenu_unlock
-        exit 1
-      fi
-
-      echo "$emoji" | wl-copy -n
-      emojimenu_unlock
-    }
-
-    if [[ -v EMOJIMENU_BEHAVE_AS_WINDOW ]]; then
-      emojimenu_window
+  function emojimenu_lock() {
+    if [[ -f "$emojimenu_lock" ]]; then
+      ${notify-send} "✖️ emojimenu already running"
+      exit 1
     else
-      emojimenu_backend
+      touch "$emojimenu_lock"
     fi
-  '';
-}
+  }
+
+  function emojimenu_unlock() {
+    if [[ -f "$emojimenu_lock" ]]; then
+      rm -f "$emojimenu_lock"
+    fi
+  }
+
+  function emojimenu_window() {
+    emoji="$(${fzf} < ${emojis} | cut -f 1 | tr -d '\n')"
+    echo "$emoji" > "$emojimenu_fifo"
+  }
+
+  function emojimenu_backend() {
+    emojimenu_lock
+    export EMOJIMENU_BEHAVE_AS_WINDOW=1
+    ${alacritty} -d 55 18 -t emojimenu -e "$emojimenu_path"
+
+    emoji="$(cat "$emojimenu_fifo")"
+    rm -f "$emojimenu_fifo"
+    if [ "$emoji" == "" ]; then
+      emojimenu_unlock
+      exit 1
+    fi
+
+    echo "$emoji" | wl-copy -n
+    emojimenu_unlock
+  }
+
+  if [[ -v EMOJIMENU_BEHAVE_AS_WINDOW ]]; then
+    emojimenu_window
+  else
+    emojimenu_backend
+  fi
+''
