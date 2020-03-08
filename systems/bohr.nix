@@ -9,7 +9,7 @@ in
     ../combo/core.nix
     ../hardware/rpi3.nix
     ../modules/sshguard.nix
-  ];
+  ] ++ (import ../users).bemeurer;
 
   networking.hostName = "bohr";
 
