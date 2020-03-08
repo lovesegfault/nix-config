@@ -12,7 +12,7 @@
     (import ./core { inherit pkgs; })
     (import ./dev)
     (import ./gpg)
-    # (import ./music)
+    (import ./music)
     (import ./sway)
   ];
 }
