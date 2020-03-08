@@ -33,7 +33,7 @@
     maxJobs = 2;
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.system = "aarch64-linux";
 
   services.fstrim.enable = true;
 

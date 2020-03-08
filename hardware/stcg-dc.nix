@@ -25,7 +25,7 @@
 
   nix.maxJobs = 64;
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.system = "x86_64-linux";
 
   services.fstrim.enable = true;
 }
