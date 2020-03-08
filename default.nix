@@ -1,5 +1,5 @@
-{ sources ? import ./nix/sources.nix {} }:
 let
+  sources = import ./nix/sources.nix {};
   mkSystem = configuration: system:
     let
       nixos = import (sources.nixpkgs + "/nixos");
