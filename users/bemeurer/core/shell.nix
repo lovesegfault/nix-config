@@ -24,5 +24,5 @@
     export CARGO_HOME="${config.xdg.cacheHome}/cargo"
   '';
 
-  historySize = 30000;
+  historySize = 10000;
 }
