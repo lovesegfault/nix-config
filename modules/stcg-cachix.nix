@@ -1,6 +1,6 @@
 { lib, ... }:
 let
-  secretPath = ../../secrets/system/stcg-cachix.nix;
+  secretPath = ../secrets/modules/stcg-cachix.nix;
   secretCondition = (builtins.pathExists secretPath);
   secret = lib.optionalString secretCondition (import secretPath);
 in
