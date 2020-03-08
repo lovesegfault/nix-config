@@ -73,6 +73,9 @@ function switch() {
 
     local switch="$WORK_DIR/bin/switch-to-configuration"
     [ $DRY_RUN == 1 ] && return
+    sudo nix-env --set \
+        --profile "/nix/var/nix/profiles/system" \
+        "$WORK_DIR"
     sudo "$switch" "$op" ||
         error "Failed to activate system"
 }
