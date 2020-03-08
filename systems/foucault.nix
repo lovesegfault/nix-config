@@ -8,7 +8,7 @@
     ../modules/aarch64-build-box.nix
     ../modules/stcg-cachix.nix
     ../modules/stcg-cameras.nix
-  ] ++ (import ../users {inherit lib pkgs;}).bemeurer;
+  ] ++ (import ../users).bemeurer;
 
   boot.initrd.luks.devices."nixos".device =
     "/dev/disk/by-uuid/2d6ff3d0-cdfd-4b6e-a689-c43d21627279";

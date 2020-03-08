@@ -1,5 +1,8 @@
-{ lib, pkgs, ... }: with builtins;
+with builtins;
 let
+  sources = import ../nix/sources.nix;
+  lib = import (sources.nixpkgs + "/lib");
+
   userDirs = attrNames (lib.filterAttrs (_: v: v == "directory") (readDir ./.));
   mkUserPath = u: (./. + "/${u}");
   userAttrs = lib.genAttrs userDirs mkUserPath;
