@@ -1,7 +1,11 @@
-{ lib, pkgs, ... }: {
-  imports = let
-    sources = (import ../nix/sources.nix {});
-  in [
+{ lib, pkgs, ... }: let
+  sources = (import ../nix/sources.nix {});
+  dummyConfig = pkgs.writeText "configuration.nix" ''
+    assert builtins.trace "This is a dummy config, use nix-config!" false;
+    {}
+  '';
+in {
+  imports = [
     (import "${sources.home-manager + "/nixos"}")
 
     ./aspell.nix
@@ -14,6 +18,8 @@
     ./zsh.nix
   ];
 
+  environment.etc."nixos/configuration.nix".source = dummyConfig;
+
   home-manager.useGlobalPkgs = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -25,12 +31,7 @@
     ];
   };
 
-  nix.nixPath = let
-    dummyConfig = pkgs.writeText "configuration.nix" ''
-      assert builtins.trace "This is a dummy config, use nix-config!" false;
-      {}
-    '';
-  in [
+  nix.nixPath = [
     "nixos-config=${dummyConfig}"
     "nixpkgs=/run/current-system/nixpkgs"
     "nixpkgs-overlays=/run/current-system/overlays"
