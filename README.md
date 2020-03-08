@@ -1,6 +1,6 @@
 # nix-config ![CI](https://github.com/lovesegfault/nix-config/workflows/CI/badge.svg)
 
-This repository holds both my NixOS configuration. It is fully reproducible
+This repository holds my NixOS configuration. It is fully reproducible
 (through [niv]) and position-independent, meaning there is no moving around of
 `configuration.nix` (see [switch]).
 
