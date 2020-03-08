@@ -11,7 +11,7 @@
   home-manager.users.bemeurer = lib.mkMerge [
     (import ./core { inherit pkgs; })
     (import ./dev)
-    # (import ./gpg)
+    (import ./gpg)
     # (import ./music)
     # (import ./sway)
   ];
