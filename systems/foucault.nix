@@ -26,6 +26,8 @@
     };
   };
 
+  hardware.u2f.enable = true;
+
   networking = {
     hostName = "foucault";
     interfaces.enp0s31f6.mtu = 9000;
