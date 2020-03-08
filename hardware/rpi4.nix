@@ -1,8 +1,8 @@
 { lib, pkgs, ... }: {
   imports = [
-    ../modules/aarch64-build-box.nix
-    ../modules/bluetooth.nix
-    ../modules/openssh.nix
+    ../misc/aarch64-build-box.nix
+    ../misc/bluetooth.nix
+    ../misc/openssh.nix
   ];
 
   boot = {

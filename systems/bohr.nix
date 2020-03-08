@@ -8,7 +8,7 @@ in
   imports = [
     ../core
     ../hardware/rpi3.nix
-    ../modules/sshguard.nix
+    ../misc/sshguard.nix
   ] ++ (import ../users).bemeurer;
 
   networking.hostName = "bohr";

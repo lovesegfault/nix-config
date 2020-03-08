@@ -5,7 +5,7 @@
 
     ../hardware/stcg-dc.nix
 
-    ../modules/stcg-cachix.nix
+    ../misc/stcg-cachix.nix
   ];
 
   fileSystems = {

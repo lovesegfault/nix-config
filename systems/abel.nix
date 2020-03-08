@@ -3,14 +3,14 @@
     ../core
     ../dev
 
-    ../modules/intel.nix
-    ../modules/nvidia.nix
-    ../modules/zfs.nix
+    ../misc/intel.nix
+    ../misc/nvidia.nix
+    ../misc/zfs.nix
 
-    ../modules/gdm.nix
-    ../modules/openssh.nix
-    ../modules/stcg-cachix.nix
-    ../modules/stcg-cameras.nix
+    ../misc/gdm.nix
+    ../misc/openssh.nix
+    ../misc/stcg-cachix.nix
+    ../misc/stcg-cameras.nix
   ];
 
   boot = rec {

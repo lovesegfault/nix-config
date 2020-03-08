@@ -5,9 +5,9 @@
     ../sway
 
     ../hardware/thinkpad-p1.nix
-    ../modules/aarch64-build-box.nix
-    ../modules/stcg-cachix.nix
-    ../modules/stcg-cameras.nix
+    ../misc/aarch64-build-box.nix
+    ../misc/stcg-cachix.nix
+    ../misc/stcg-cameras.nix
   ] ++ (import ../users).bemeurer;
 
   boot.initrd.luks.devices."nixos".device =

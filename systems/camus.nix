@@ -8,7 +8,7 @@ in
   imports = [
     ../core
     ../hardware/rpi4.nix
-    ../modules/stcg-cachix.nix
+    ../misc/stcg-cachix.nix
   ] ++ (import ../users).bemeurer;
 
   boot.kernelParams = [ "fbcon=rotate:3" ];

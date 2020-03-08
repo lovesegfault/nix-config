@@ -1,10 +1,10 @@
 { pkgs, ... }: {
   imports = [
-    ../modules/efi.nix
-    ../modules/bluetooth.nix
-    ../modules/fwupd.nix
-    ../modules/intel.nix
-    ../modules/tlp.nix
+    ../misc/efi.nix
+    ../misc/bluetooth.nix
+    ../misc/fwupd.nix
+    ../misc/intel.nix
+    ../misc/tlp.nix
   ];
 
   boot = rec {
