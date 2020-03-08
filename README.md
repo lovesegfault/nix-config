@@ -1,7 +1,7 @@
 # nix-config ![CI](https://github.com/lovesegfault/nix-config/workflows/CI/badge.svg)
 
 This repository holds my NixOS configuration. It is fully reproducible
-(through [niv]) and position-independent, meaning there is no moving around of
+(utilizing [niv]) and position-independent, meaning there is no moving around of
 `configuration.nix` (see [switch]).
 
 For the configurations' entry points see the individual [systems], as well as
