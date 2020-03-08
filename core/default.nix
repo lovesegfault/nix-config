@@ -1,10 +1,12 @@
-{ lib, pkgs, ... }: let
+{ lib, pkgs, ... }:
+let
   sources = (import ../nix/sources.nix {});
   dummyConfig = pkgs.writeText "configuration.nix" ''
     assert builtins.trace "This is a dummy config, use nix-config!" false;
     {}
   '';
-in {
+in
+{
   imports = [
     (import "${sources.home-manager + "/nixos"}")
 
