@@ -1,6 +1,6 @@
 { lib, ... }:
 let
-  secretPath = ../secrets/modules/ddclient-home-lovesegfault-com.nix;
+  secretPath = ../secrets/ddclient-home-lovesegfault-com.nix;
   secretCondition = (builtins.pathExists secretPath);
   secret = lib.optionalAttrs secretCondition (import secretPath);
 in

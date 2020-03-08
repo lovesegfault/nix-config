@@ -1,6 +1,6 @@
 { lib, pkgs, ... }:
 let
-  secretPath = ../../../secrets/modules/arcanist.nix;
+  secretPath = ../../../secrets/arcanist.nix;
   secretCondition = (builtins.pathExists secretPath);
   secret = lib.optionalString secretCondition (import secretPath);
   arcrc = {
