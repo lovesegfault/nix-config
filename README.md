@@ -10,16 +10,19 @@ For the configurations' entry points see the individual [systems], as well as
 
 ## structure
 ```
-combo/            # Meta-configurations (e.g. core, desktop, development)
-hardware/         # Hardware-specific configuration (e.g. kernel modules, peripherals)
-misc/
-├── config.nix    # Example NixOS user configuration (FIXME: NUKE)
-├── home/         # Deprecated home-manager files (FIXME: NUKE)
-└── hostnames     # List of hostnames to use
-modules/          # Composable modules (e.g. bumblebee, sudo, sway, xserver)
-pkgs/             # Personal packages (e.g. kernel patches)
-secrets/          # Secrets (API keys)
-systems/          # Configuration for actual hosts (selectively imports combos)
+.
+├── core         # Base-line configurations applicable to all machines
+├── default.nix  # Attr set of all machines plus arch-groups
+├── dev          # Developer tooling configuration
+├── hardware     # Hardware-specific configuration
+├── hostnames    # List of hostnames to use
+├── misc         # Assorted configuration modules
+├── nix          # Nix sources (nixpkgs and home-manager)
+├── overlays     # Nixpkgs overlays
+├── secrets      # Secrets (API keys, etc)
+├── sway         # Sway configuration for the desktop
+├── systems      # Machine (host) definition that actually gets built
+└── users        # Per-user configurations
 ```
 
 ## usage
