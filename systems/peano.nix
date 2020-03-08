@@ -7,7 +7,6 @@
     ../misc/nvidia.nix
     ../misc/zfs.nix
 
-    ../misc/openssh.nix
     ../misc/stcg-cachix.nix
     ../misc/stcg-cameras.nix
   ];

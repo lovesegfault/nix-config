@@ -8,11 +8,11 @@ in
 {
   imports = [
     (import ../nix/home-manager.nix)
-
     ./aspell.nix
     ./gpg.nix
     ./networkmanager.nix
     ./nix.nix
+    ./openssh.nix
     ./resolved.nix
     ./sudo.nix
     ./tmux.nix

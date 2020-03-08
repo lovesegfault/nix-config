@@ -2,7 +2,6 @@
   imports = [
     ../misc/aarch64-build-box.nix
     ../misc/bluetooth.nix
-    ../misc/openssh.nix
   ];
 
   boot = {

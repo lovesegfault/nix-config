@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
 
-  imports = [ ../misc/openssh.nix ../misc/efi.nix ../misc/nvidia.nix ];
+  imports = [ ../misc/efi.nix ../misc/nvidia.nix ];
 
   boot = rec {
     initrd.availableKernelModules =

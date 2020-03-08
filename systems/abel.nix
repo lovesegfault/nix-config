@@ -8,7 +8,6 @@
     ../misc/zfs.nix
 
     ../misc/gdm.nix
-    ../misc/openssh.nix
     ../misc/stcg-cachix.nix
     ../misc/stcg-cameras.nix
   ];
