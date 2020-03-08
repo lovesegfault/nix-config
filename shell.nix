@@ -1,5 +1,5 @@
 let
-  nix-config = import ./. {};
+  nix-config = import ./.;
   buildInputs = nix-config.shellBuildInputs;
   pkgs = nix-config.pkgs;
 in
