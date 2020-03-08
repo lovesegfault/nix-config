@@ -19,4 +19,6 @@
     stateVersion = "20.03";
     packages = with pkgs; [ exa gist gopass mosh neofetch nix-index ripgrep tealdeer weechat ];
   };
+
+  xdg.configFile."nixpkgs/config.nix".text = "{ allowUnfree = true; }";
 }
