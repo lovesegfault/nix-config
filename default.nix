@@ -1,5 +1,11 @@
 let
   pkgs = import ./nix/nixpkgs.nix {};
+
+  mkGceImage = configuration: system:
+    let
+      nixos = import ./nix/nixos.nix;
+      eval = (nixos { inherit configuration system; });
+    in eval.config.system.build.googleComputeImage;
   mkSystem = configuration: system:
     let
       nixos = import ./nix/nixos.nix;
@@ -15,18 +21,12 @@ let
     peano = mkSystem ./systems/peano.nix "x86_64-linux";
   };
 
-  mkGceImage = configuration: system:
-    let
-      nixos = import ./nix/nixos.nix;
-      eval = (nixos { inherit configuration system; });
-    in eval.config.system.build.googleComputeImage;
-
   gceImages = {
     sartre = mkGceImage ./systems/sartre.nix "x86_64-linux";
   };
 in
 {
-  inherit pkgs gceImages;
+  inherit pkgs;
   x86_64 = with systems; [ abel cantor foucault peano ];
   aarch64 = with systems; [ bohr camus ];
 
@@ -39,4 +39,4 @@ in
     shellcheck
     ctags
   ];
-} // systems
+} // systems // gceImages
