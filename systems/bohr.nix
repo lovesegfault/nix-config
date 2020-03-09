@@ -6,10 +6,11 @@ let
 in
 {
   imports = [
+    (import ../users).bemeurer
     ../core
     ../hardware/rpi3.nix
     ../misc/sshguard.nix
-  ] ++ (import ../users).bemeurer;
+  ];
 
   networking.hostName = "bohr";
 

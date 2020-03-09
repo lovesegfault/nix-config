@@ -1,10 +1,11 @@
 { ... }: {
   imports = [
+    (import ../users).bemeurer
     ../core
     ../dev
 
     ../hardware/gce.nix
-  ] ++ (import ../users).bemeurer;
+  ];
 
   networking = {
     hostName = "sartre";

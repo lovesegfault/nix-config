@@ -6,10 +6,11 @@ let
 in
 {
   imports = [
+    (import ../users).bemeurer
     ../core
     ../hardware/rpi4.nix
     ../misc/stcg-cachix.nix
-  ] ++ (import ../users).bemeurer;
+  ];
 
   boot.kernelParams = [ "fbcon=rotate:3" ];
 

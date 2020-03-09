@@ -1,11 +1,12 @@
 { config, pkgs, ... }: {
   imports = [
+    (import ../users).bemeurer
     ../core
     ../dev
 
     ../hardware/stcg-dc.nix
     ../misc/stcg-cachix.nix
-  ] ++ (import ../users).bemeurer;
+  ];
 
   fileSystems = {
     "/" = {

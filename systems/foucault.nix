@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [
+    (import ../users).bemeurer
     ../core
     ../dev
     ../sway
@@ -8,7 +9,7 @@
     ../misc/aarch64-build-box.nix
     ../misc/stcg-cachix.nix
     ../misc/stcg-cameras.nix
-  ] ++ (import ../users).bemeurer;
+  ];
 
   boot.initrd.luks.devices."nixos".device =
     "/dev/disk/by-uuid/2d6ff3d0-cdfd-4b6e-a689-c43d21627279";
