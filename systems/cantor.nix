@@ -1,12 +1,11 @@
-{ config, pkgs, ... }: {
+{ ... }: {
   imports = [
-    (import ../users).stream
     ../core
     ../dev
 
     ../hardware/stcg-dc.nix
     ../misc/stcg-cachix.nix
-  ];
+  ] ++ (import ../users).stream;
 
   fileSystems = {
     "/" = {

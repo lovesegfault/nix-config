@@ -1,6 +1,5 @@
 { lib, pkgs, ... }: {
   imports = [
-    (import ../users).stream
     ../core
     ../dev
 
@@ -10,7 +9,7 @@
 
     ../misc/stcg-cachix.nix
     ../misc/stcg-cameras.nix
-  ];
+  ] ++ (import ../users).stream;
 
   boot = rec {
     extraModulePackages = [ kernelPackages.broadcom_sta ];
