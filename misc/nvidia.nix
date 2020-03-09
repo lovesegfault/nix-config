@@ -10,7 +10,7 @@ in
     extraModulePackages = [ nvidia_x11 ];
   };
 
-  environment.systemPackages = [ pkgs.cudatoolkit nvidia_x11 ];
+  environment.systemPackages = [ nvidia_x11 ];
 
   hardware = {
     nvidia.modesetting.enable = lib.mkForce false;
