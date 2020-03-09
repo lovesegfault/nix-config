@@ -1,6 +1,6 @@
 { lib, ... }:
 let
-  secretPath = ../secrets/ddclient-home-lovesegfault-com.nix;
+  secretPath = ../secrets/ddclient-home.nix;
   secretCondition = (builtins.pathExists secretPath);
   secret = lib.optionalAttrs secretCondition (import secretPath);
 in
@@ -18,7 +18,7 @@ in
       enable = true;
       ssl = true;
       protocol = "googledomains";
-      domains = [ "home.lovesegfault.com" ];
+      domains = [ "home.meurer.org" ];
     } secret
   );
 
