@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   users.users.ekleog = {
     createHome = true;
-    description = "Leo gaspard";
+    description = "Leo Gaspard";
     extraGroups = [ "wheel" ];
     isNormalUser = true;
     openssh.authorizedKeys.keys = [
