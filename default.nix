@@ -18,12 +18,8 @@ let
   mkGceImage = configuration: system:
     let
       nixos = import ./nix/nixos.nix;
-      gceImageModule = pkgs.path + "/nixos/modules/virtualisation/google-compute-image.nix";
-      gceCfg = {
-        imports = [ configuration gceImageModule ];
-        virtualisation.googleComputeImage.diskSize = 10 * 1024;
-      };
-    in (nixos { inherit system; configuration = gceCfg; });
+      eval = (nixos { inherit configuration system; });
+    in eval.config.system.build.googleComputeImage;
 
   gceImages = {
     sartre = mkGceImage ./systems/sartre.nix "x86_64-linux";

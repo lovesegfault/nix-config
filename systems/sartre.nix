@@ -1,10 +1,10 @@
-{ config, pkgs, ... }: {
+{ ... }: {
   imports = [
     ../core
     ../dev
 
-    ../misc/efi.nix
-  ];
+    ../hardware/gce.nix
+  ] ++ (import ../users).bemeurer;
 
   networking = {
     hostName = "sartre";
