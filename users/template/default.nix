@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ pkgs, ... }: {
   users.users.template = {
     createHome = true;
     description = "I am a template";
@@ -8,7 +8,7 @@
       "ssh-ed25519 00000000000000000000000000000000000000000000000000000000000000000000 yo soy un template"
     ];
   };
-  home-manager.users.bemeurer = {
+  home-manager.users.template = {
     home.packages = with pkgs; [ hello ];
   };
 }

@@ -3,9 +3,9 @@ let
   lib = import ../nix/lib.nix;
   userDirs = attrNames (lib.filterAttrs (_: v: v == "directory") (readDir ./.));
   mkUserPath = u: (./. + "/${u}");
-  userAttrs = lib.genAttrs userDirs mkUserPath;
+  mkUser = u: import (./. + "/${u}");
+  users = lib.genAttrs userDirs mkUser;
 in
 {
-  ops = with userAttrs; [ bemeurer ];
-  dev = with userAttrs; [ bemeurer ];
-} // userAttrs
+  stream = with users; [ bemeurer cloud ekleog ogle ];
+} // users
