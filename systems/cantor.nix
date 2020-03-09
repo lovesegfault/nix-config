@@ -4,9 +4,8 @@
     ../dev
 
     ../hardware/stcg-dc.nix
-
     ../misc/stcg-cachix.nix
-  ];
+  ] ++ (import ../users).bemeurer;
 
   fileSystems = {
     "/" = {
@@ -31,7 +30,6 @@
   time.timeZone = "America/Los_Angeles";
 
   users.users = {
-    bemeurer.extraGroups = [ "docker" ];
     ogle = {
       createHome = true;
       extraGroups = [ "docker" "wheel" ];
