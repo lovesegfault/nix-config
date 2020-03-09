@@ -90,6 +90,8 @@
         MAX_LOST_WORK_SECS_ON_AC=15
         MAX_LOST_WORK_SECS_ON_BAT=15
 
+        RUNTIME_PM_ON_AC=auto
+        RUNTIME_PM_ON_BAT=auto
         RUNTIME_PM_DRIVER_BLACKLIST="amdgpu nouveau nvidia radeon"
 
         SOUND_POWER_SAVE_ON_AC=1
