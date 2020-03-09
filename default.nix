@@ -14,9 +14,19 @@ let
     foucault = mkSystem ./systems/foucault.nix "x86_64-linux";
     peano = mkSystem ./systems/peano.nix "x86_64-linux";
   };
+
+  mkGceImage = configuration: system:
+    let
+      nixos = import ./nix/nixos.nix;
+      eval = (nixos { inherit configuration system; });
+    in eval.config.system.build.googleComputeImage;
+
+  gceImages = {
+    sartre = mkGceImage ./systems/sartre.nix "x86_64-linux";
+  };
 in
 {
-  inherit pkgs;
+  inherit pkgs gceImages;
   x86_64 = with systems; [ abel cantor foucault peano ];
   aarch64 = with systems; [ bohr camus ];
 
