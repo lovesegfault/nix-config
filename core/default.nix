@@ -50,10 +50,7 @@ in
   services.dbus.socketActivated = true;
 
   system = {
-    extraSystemBuilderCmds = let
-      commitId = (lib.commitIdFromGitRepo ../.git);
-    in ''
-      echo "${commitId}" > $out/nix-config-commit
+    extraSystemBuilderCmds = ''
       ln -sv ${pkgs.path} $out/nixpkgs
       ln -sv ${../overlays} $out/overlays
     '';
