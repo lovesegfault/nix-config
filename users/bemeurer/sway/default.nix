@@ -48,12 +48,6 @@
     fi
   '';
 
-  services.redshift = {
-    enable = true;
-    package = pkgs.redshift-wlr;
-    provider = "geoclue2";
-  };
-
   # FIXME: UGH why do these have a different syntax the the system
   # systemd.user.services?!
   systemd.user.services = {
@@ -96,6 +90,22 @@
       Service = {
         Type = "simple";
         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        RestartSec = 3;
+        Restart = "always";
+      };
+      Install = {
+        WantedBy = [ "sway-session.target" ];
+      };
+    };
+    redshift = {
+      Unit = {
+        Description = "redshift";
+        Documentation = [ "man:redshift(1)" ];
+        PartOf = [ "graphical-session.target" ];
+      };
+      Service = {
+        Type = "simple";
+        ExecStart = "${pkgs.redshift-wlr}/bin/redshift -l geoclue2";
         RestartSec = 3;
         Restart = "always";
       };
