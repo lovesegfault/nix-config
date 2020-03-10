@@ -96,7 +96,7 @@
       };
 
       keybindings = let
-        light = "${pkgs.light}/bin/light";
+        ponymix = "${pkgs.ponymix}/bin/ponymix";
         playerctl = "${pkgs.playerctl}/bin/playerctl";
       in
         lib.mkOptionDefault {
@@ -133,16 +133,16 @@
           "Mod4+comma" = " workspace prev";
           "Mod4+period" = " workspace next";
           "Print" = "exec ${pkgs.prtsc}/bin/prtsc";
-          "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -1%";
-          "XF86AudioMicMute" = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
-          "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
+          "XF86AudioLowerVolume" = "exec ${ponymix} decrease 1";
+          "XF86AudioMicMute" = "exec ${ponymix} -t source mute";
+          "XF86AudioMute" = "exec ${ponymix} -t sink mute";
           "XF86AudioNext" = "exec ${playerctl} next";
           "XF86AudioPause" = "exec ${playerctl} pause";
           "XF86AudioPlay" = "exec ${playerctl} play";
           "XF86AudioPrev" = "exec ${playerctl} previous";
-          "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +1%";
-          "XF86MonBrightnessDown" = "exec ${light} -U 1";
-          "XF86MonBrightnessUp" = "exec ${light} -A 1";
+          "XF86AudioRaiseVolume" = "exec ${ponymix} increase 1";
+          "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 1";
+          "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 1";
         };
 
       menu = "${terminal} -d 55 18 -t swaymenu -e ${pkgs.swaymenu}/bin/swaymenu";
