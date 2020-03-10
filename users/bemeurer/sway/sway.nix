@@ -166,6 +166,11 @@
         };
       };
 
+      startup = [
+        { command = "swaymsg focus output \"Unknown 0x32EB 0x00000000\""; }
+        { command = "swaymsg workspace 0:α"; }
+      ];
+
       terminal = "${pkgs.alacritty}/bin/alacritty";
 
       window = {
