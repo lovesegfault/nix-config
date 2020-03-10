@@ -112,7 +112,7 @@
       };
       Service = {
         Type = "simple";
-        ExecStart = "${pkgs.sway}/bin/sway --debug";
+        ExecStart = "${pkgs.sway}/bin/sway";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;
