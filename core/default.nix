@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 let
   dummyConfig = pkgs.writeText "configuration.nix" ''
-    assert builtins.trace "This is a dummy config, use nix-config!" false;
+    assert builtins.trace "This is a dummy config, use morph!" false;
     {}
   '';
 in
