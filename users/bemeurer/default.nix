@@ -1,8 +1,12 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }:
+with lib;
+let
+  swayEnable = config.programs.sway.enable;
+in {
   users.users.bemeurer = {
     createHome = true;
     description = "Bernardo Meurer";
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" ] ++ optionals swayEnable [ "input" "video" ];
     isNormalUser = true;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQgTWfmR/Z4Szahx/uahdPqvEP/e/KQ1dKUYLenLuY2 bemeurer.personal"
