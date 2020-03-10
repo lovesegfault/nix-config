@@ -11,7 +11,8 @@
       font=Hack 10
       icon-path=${homeIcons}:${systemIcons}
       icons=1
-      max-visible=-1
+      max-icon-size=32
+      max-visible=3
       sort=-time
       text-color=#b3b1ad
       width=500
