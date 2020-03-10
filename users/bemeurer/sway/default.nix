@@ -66,7 +66,7 @@
       Service = {
         Type = "simple";
         ExecStart = "${pkgs.mako}/bin/mako";
-        RestartSec = 1;
+        RestartSec = 3;
         Restart = "always";
       };
       Install = {
@@ -96,7 +96,7 @@
       Service = {
         Type = "simple";
         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        RestartSec = 1;
+        RestartSec = 3;
         Restart = "always";
       };
       Install = {
@@ -134,7 +134,7 @@
               resume 'swaymsg "output * dpms on"' \
             before-sleep '${pkgs.swaylock}/bin/swaylock'
         '';
-        RestartSec = 1;
+        RestartSec = 3;
         Restart = "always";
       };
       Install = {
@@ -150,7 +150,7 @@
       Service = {
         Type = "simple";
         ExecStart = "${(pkgs.waybar.override { pulseSupport = true; })}/bin/waybar";
-        RestartSec = 1;
+        RestartSec = 3;
         Restart = "always";
       };
       Install = {
