@@ -2,7 +2,8 @@
 with lib;
 let
   swayEnable = config.programs.sway.enable;
-in {
+in
+{
   users.users.bemeurer = {
     createHome = true;
     description = "Bernardo Meurer";
