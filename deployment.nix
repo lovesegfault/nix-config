@@ -3,9 +3,9 @@ let
     let
       pkgs = import ./nix/nixpkgs.nix { inherit system; config.allowUnfree = true; };
     in
-    {
+    { lib, ... }: {
       imports = [ cfg ];
-      nixpkgs.pkgs = pkgs;
+      nixpkgs.pkgs = lib.mkForce pkgs;
     };
 in {
   network = {
