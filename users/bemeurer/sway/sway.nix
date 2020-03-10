@@ -134,8 +134,8 @@
           "Mod4+period" = " workspace next";
           "Print" = "exec ${pkgs.prtsc}/bin/prtsc";
           "XF86AudioLowerVolume" = "exec ${ponymix} decrease 1";
-          "XF86AudioMicMute" = "exec ${ponymix} -t source mute";
-          "XF86AudioMute" = "exec ${ponymix} -t sink mute";
+          "XF86AudioMicMute" = "exec ${ponymix} -t source toggle";
+          "XF86AudioMute" = "exec ${ponymix} -t sink toggle";
           "XF86AudioNext" = "exec ${playerctl} next";
           "XF86AudioPause" = "exec ${playerctl} pause";
           "XF86AudioPlay" = "exec ${playerctl} play";
