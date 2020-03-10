@@ -18,6 +18,7 @@ self: super: {
     find "$mus" -name "*.flac" | ${parallel} --will-cite ${id3v2} --delete-all {}
     find "$mus" -name "*.flac" | ${parallel} --will-cite ${flac} --best -f {}
 
+    export PATH="${super.imagemagick}/bin:$PATH"
     ${beet} import "$mus" || true
 
     rm -rf "$path"
