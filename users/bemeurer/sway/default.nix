@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ./alacritty.nix
     ./firefox.nix
@@ -113,7 +113,7 @@
       };
       Service = {
         Type = "simple";
-        ExecStart = "${pkgs.sway}/bin/sway";
+        ExecStart = "${config.wayland.windowManager.sway.package}/bin/sway";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;
