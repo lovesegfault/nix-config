@@ -5,6 +5,4 @@
     enable = true;
     enableGlobalCompInit = false;
   };
-
-  users.users.bemeurer.shell = pkgs.zsh;
 }
