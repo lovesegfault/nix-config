@@ -23,6 +23,7 @@
     speedcrunch
     spotify
     thunderbird
+    wl-clipboard
     zoom-us
   ];
 
