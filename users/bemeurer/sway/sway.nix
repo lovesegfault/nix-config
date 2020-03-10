@@ -1,23 +1,8 @@
-{ config, lib, pkgs, ... }: {
-  programs.zsh.profileExtra = ''
-    # If running from tty1 start sway
-    if [ "$(tty)" = "/dev/tty1" ]; then
-        exec sway > /tmp/sway.log 2>&1
-    fi
-  '';
+{ lib, pkgs, ... }: {
   wayland.windowManager.sway = {
     enable = true;
     config = rec {
-      bars = [
-        {
-          command = let
-            waybar = (pkgs.waybar.override { pulseSupport = true; });
-          in
-            "${waybar}/bin/waybar";
-          fonts = [ "FontAwesome 10" "Hack 10" ];
-          workspaceNumbers = false;
-        }
-      ];
+      bars = [];
       colors = {
         focused = {
           border = "#30535F";
@@ -180,29 +165,6 @@
           transform = "90";
         };
       };
-
-      startup = [
-        {
-          command = let
-            swaylock = "${pkgs.swaylock}/bin/swaylock -f";
-          in
-            ''
-              ${pkgs.swayidle}/bin/swayidle -w \
-                timeout 300 '${swaylock}' \
-                timeout 600 'swaymsg "output * dpms off"' \
-                resume 'swaymsg "output * dpms on"' \
-                before-sleep '${swaylock}'
-            '';
-        }
-        # FIXME { command = "${pkgs.xorg.xrdb}/bin/xrdb -load ~/.Xresources"; }
-        { command = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY"; }
-        { command = "pactl set-sink-mute @DEFAULT_SINK@ true"; }
-        { command = "pactl set-source-mute @DEFAULT_SINK@ true"; }
-        { command = "systemctl --user start gnome-keyring"; }
-        { command = "${pkgs.mako}/bin/mako"; }
-        { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
-        { command = "${pkgs.redshift-wlr}/bin/redshift"; }
-      ];
 
       terminal = "${pkgs.alacritty}/bin/alacritty";
 
