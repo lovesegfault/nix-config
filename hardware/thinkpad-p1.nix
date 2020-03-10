@@ -126,6 +126,4 @@
     "w /sys/devices/virtual/powercap/intel-rapl-mmio/intel-rapl-mmio:0/constraint_1_power_limit_uw - - - - 44000000"
     "w /sys/devices/virtual/powercap/intel-rapl-mmio/intel-rapl-mmio:0/constraint_1_time_window_us - - - - 2440"
   ];
-
-  users.users.bemeurer.extraGroups = [ "camera" ];
 }
