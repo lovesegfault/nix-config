@@ -1,8 +1,5 @@
 { config, lib, pkgs, ... }:
 with lib;
-let
-  swayEnable = config.programs.sway.enable;
-in
 {
   users.users.bemeurer = {
     createHome = true;
@@ -20,7 +17,7 @@ in
     [
       (import ./core)
       (import ./dev)
-    ] ++ optionals swayEnable [
+    ] ++ optionals config.programs.sway.enable [
       (import ./gpg)
       (import ./sway)
       (import ./music)
