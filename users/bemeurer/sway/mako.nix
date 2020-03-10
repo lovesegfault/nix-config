@@ -1,12 +1,15 @@
-{ config, pkgs, ... }: {
+{ config, ... }: {
   xdg.configFile.mako = {
     target = "mako/config";
-    text = ''
+    text = let
+      systemIcons = "/run/current-system/sw/share/icons/hicolor";
+      homeIcons = "${config.home.homeDirectory}/.nix-profile/share/icons/hicolor";
+    in ''
       background-color=#0a0e14
       border-color=#53bdfa
       default-timeout=30000
       font=Hack 10
-      icon-path="~/.nix-profile/share/icons/hicolor/64x64"
+      icon-path=${homeIcons}:${systemIcons}
       icons=1
       max-visible=-1
       sort=-time
