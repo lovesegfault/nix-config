@@ -7,6 +7,4 @@
       # wifi.backend = "iwd";
     };
   };
-
-  users.users.bemeurer.extraGroups = [ "networkmanager" ];
 }
