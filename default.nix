@@ -20,7 +20,7 @@ let
 
   mkSystem = name: arch: (mkNixOS name arch).toplevel;
   systems = mapAttrs mkSystem hosts;
-  filterSystems = arch: mapAttrs mkSystem (filterAttrs (_:v: v==arch) hosts);
+  filterSystems = arch: mapAttrs mkSystem (filterAttrs (_:v: v == arch) hosts);
 
   mkGceImage = name: arch: (mkNixOS name arch).googleComputeImage;
   gceImages = mapAttrs mkGceImage { inherit (hosts.sartre); };
