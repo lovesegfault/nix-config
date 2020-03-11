@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [
     ../core
 
@@ -7,6 +7,9 @@
 
     ../hardware/stcg-dc.nix
   ] ++ (import ../users).stream;
+
+  environment.systemPackages = with pkgs; [ fahviewer fahcontrol ];
+  services.foldingathome.enable = true;
 
   fileSystems = {
     "/" = {
