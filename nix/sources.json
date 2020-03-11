@@ -12,15 +12,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
-        "branch": "nixpkgs-lovesegfault",
+        "branch": "nixos-unstable-small",
         "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
         "homepage": "https://github.com/NixOS/nixpkgs",
-        "owner": "lovesegfault",
-        "repo": "nixpkgs",
-        "rev": "f2f3b05166d8caeeb1cded08dce32024d7939980",
-        "sha256": "1wvc6l9d44r5w831y90myjpr4lzkwd2ra6vlmamxj9a4xg1m3vvq",
+        "owner": "nixos",
+        "repo": "nixpkgs-channels",
+        "rev": "ce961fad160d02fdbd78d95b7cd1985a622d110f",
+        "sha256": "1bqakqa07f4l1h536n0k69il93d57qymacpzwv9760qq7i8xhhlj",
         "type": "tarball",
-        "url": "https://github.com/lovesegfault/nixpkgs/archive/f2f3b05166d8caeeb1cded08dce32024d7939980.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs-channels/archive/ce961fad160d02fdbd78d95b7cd1985a622d110f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
