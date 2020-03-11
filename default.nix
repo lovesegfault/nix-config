@@ -1,17 +1,7 @@
 { lib ? import ./nix/lib.nix }:
 with builtins; with lib;
 let
-  mkNixOS = name: arch:
-    let
-      configuration = ./systems + "/${name}.nix";
-      system = arch;
-      nixos = import ./nix/nixos.nix { inherit configuration system; };
-    in nixos.config.system.build;
-
-  mkSystem = name: arch: (mkNixOS name arch).toplevel;
-  mkGceImage = name: arch: (mkNixOS name arch).googleComputeImage;
-
-  systems = mapAttrs mkSystem {
+  hosts = {
     abel = "x86_64-linux";
     bohr = "aarch64-linux";
     camus = "aarch64-linux";
@@ -21,12 +11,22 @@ let
     sartre = "x86_64-linux";
   };
 
-  gceImages = mapAttrs mkGceImage {
-    sartre = "x86_64-linux";
-  };
+  mkNixOS = name: arch:
+    let
+      configuration = ./systems + "/${name}.nix";
+      system = arch;
+      nixos = import ./nix/nixos.nix { inherit configuration system; };
+    in nixos.config.system.build;
+
+  mkSystem = name: arch: (mkNixOS name arch).toplevel;
+  systems = mapAttrs mkSystem hosts;
+  filterSystems = arch: mapAttrs mkSystem (filterAttrs (_:v: v==arch) hosts);
+
+  mkGceImage = name: arch: (mkNixOS name arch).googleComputeImage;
+  gceImages = mapAttrs mkGceImage { inherit (hosts.sartre); };
 in
 {
-  inherit gceImages;
-  x86_64 = with systems; [ abel cantor foucault peano ];
-  aarch64 = with systems; [ bohr camus ];
+  inherit hosts gceImages;
+  aarch64 = filterSystems "aarch64-linux";
+  x86_64-linux = filterSystems "aarch64-linux";
 } // systems
