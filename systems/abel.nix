@@ -7,7 +7,6 @@
     ../misc/nvidia.nix
     ../misc/zfs.nix
 
-    ../misc/gdm.nix
     ../misc/stcg-cachix.nix
     ../misc/stcg-cameras.nix
   ] ++ (import ../users).stream;
@@ -65,14 +64,18 @@
 
   nix.maxJobs = 12;
 
-  services.xserver.displayManager.gdm = {
-    autoLogin = {
+  services.xserver = {
+    desktopManager.gnome3.enable = true;
+    displayManager.gdm = {
       enable = true;
-      user = "clock";
+      autoSuspend = false;
+      autoLogin = {
+        enable = true;
+        user = "clock";
+      };
+      wayland = false;
     };
-    wayland = false;
   };
-  services.xserver.desktopManager.gnome3.enable = true;
 
   time.timeZone = "America/Los_Angeles";
 
