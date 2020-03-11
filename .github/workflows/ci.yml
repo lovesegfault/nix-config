@@ -31,7 +31,7 @@ jobs:
         - name: Formatting tests
           run: nix-shell --run 'find . -iname "*.nix" -not -path ./nix/sources.nix -exec nixpkgs-fmt --check {} +'
 ###############################################################################
-    build_bohr:
+    bohr:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
@@ -69,7 +69,7 @@ jobs:
               attributes: bohr
               name: nix-config
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-    build_camus:
+    camus:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
@@ -108,7 +108,7 @@ jobs:
               name: nix-config
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
 ###############################################################################
-    build_abel:
+    abel:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
@@ -121,7 +121,7 @@ jobs:
               attributes: abel
               name: nix-config
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-    build_cantor:
+    cantor:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
@@ -134,7 +134,7 @@ jobs:
               attributes: cantor
               name: nix-config
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-    build_foucault:
+    foucault:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
@@ -147,7 +147,7 @@ jobs:
               attributes: foucault
               name: nix-config
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-    build_peano:
+    peano:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
@@ -160,7 +160,7 @@ jobs:
               attributes: peano
               name: nix-config
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-    build_sartre:
+    sartre:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
