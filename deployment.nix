@@ -19,7 +19,7 @@ in
   "localhost" = mkSystem ./systems/foucault.nix "x86_64-linux";
 
   # Sc
+  "10.0.5.51" = mkSystem ./systems/cantor.nix "x86_64-linux";
   "10.1.16.11" = mkSystem ./systems/peano.nix "x86_64-linux";
   "10.1.16.12" = mkSystem ./systems/abel.nix "x86_64-linux";
-  "srv0003.s0005.sjc.stcg.nonstandard.ai" = mkSystem ./systems/cantor.nix "x86_64-linux";
 }
