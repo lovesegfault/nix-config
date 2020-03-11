@@ -11,6 +11,8 @@
   environment.systemPackages = with pkgs; [ fahviewer fahcontrol ];
   services.foldingathome.enable = true;
   networking.firewall.allowedTCPPorts = [ 36330 ];
+  systemd.services.foldingathome.wantedBy = lib.mkForce [];
+
 
   fileSystems = {
     "/" = {
