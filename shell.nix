@@ -1,9 +1,15 @@
 let
-  nix-config = import ./.;
-  buildInputs = nix-config.shellBuildInputs;
-  pkgs = nix-config.pkgs;
+  pkgs = import ./nix/nixpkgs.nix {};
 in
 pkgs.mkShell {
-  inherit buildInputs;
   name = "nix-config";
+  buildInputs = with pkgs; [
+    cachix
+    niv
+    nixpkgs-fmt
+    morph
+    shfmt
+    shellcheck
+    ctags
+  ];
 }

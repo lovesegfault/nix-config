@@ -29,14 +29,4 @@ in
   inherit pkgs;
   x86_64 = with systems; [ abel cantor foucault peano ];
   aarch64 = with systems; [ bohr camus ];
-
-  shellBuildInputs = with pkgs; [
-    cachix
-    niv
-    nixpkgs-fmt
-    morph
-    shfmt
-    shellcheck
-    ctags
-  ];
 } // systems // gceImages
