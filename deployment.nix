@@ -6,6 +6,7 @@ let
       { lib, ... }: {
         imports = [ cfg ];
         nixpkgs.pkgs = lib.mkForce pkgs;
+        deployment.substituteOnDestination = true;
       };
 in
 {
