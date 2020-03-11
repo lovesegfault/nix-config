@@ -5,6 +5,7 @@ on:
 name: CI
 
 jobs:
+###############################################################################
     parsing:
       runs-on: ubuntu-latest
       steps:
@@ -29,18 +30,14 @@ jobs:
               skipNixBuild: true
         - name: Formatting tests
           run: nix-shell --run 'find . -iname "*.nix" -not -path ./nix/sources.nix -exec nixpkgs-fmt --check {} +'
-    build_aarch64:
+###############################################################################
+    build_bohr:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
           uses: actions/checkout@v2
         - name: Nix
           uses: cachix/install-nix-action@v7
-        - name: Allow Unfree
-          run: |
-            mkdir -p ~/.config/nixpkgs
-            echo "{ allowUnfree = true; }" |
-                tee ~/.config/nixpkgs/config.nix
         - name: AArch64 Build Box
           run: |
             # first create the ssh config dir for root
@@ -69,28 +66,49 @@ jobs:
         - name: Cachix
           uses: cachix/cachix-action@v4
           with:
-              attributes: aarch64
+              attributes: bohr
               name: nix-config
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-    build_x86_64:
+    build_camus:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
           uses: actions/checkout@v2
         - name: Nix
           uses: cachix/install-nix-action@v7
-        - name: Allow Unfree
+        - name: AArch64 Build Box
           run: |
-            mkdir -p ~/.config/nixpkgs
-            echo "{ allowUnfree = true; }" |
-                tee ~/.config/nixpkgs/config.nix
+            # first create the ssh config dir for root
+            sudo mkdir -p /root/.ssh
+
+            # now add the key for the build slave
+            echo "${{ secrets.AARCH64_BOX_KEY }}" |
+                sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
+            sudo chmod 0600 /root/.ssh/aarch64.community.nixos
+
+            # and make it a known host
+            echo "${{ secrets.KNOWN_HOSTS }}" |
+                sudo tee -a /root/.ssh/known_hosts > /dev/null
+
+            # lastly register the build slave with nix
+            slave_cfg=(
+              lovesegfault@aarch64.nixos.community # user/addr
+              aarch64-linux                        # arch
+              /root/.ssh/aarch64.community.nixos   # key
+              64                                   # maxJobs
+              8                                    # speed factor
+              big-parallel                         # features
+            )
+            echo "${slave_cfg[*]}" |
+                sudo tee /etc/nix/machines > /dev/null
         - name: Cachix
           uses: cachix/cachix-action@v4
           with:
-              attributes: x86_64
+              attributes: camus
               name: nix-config
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-    build_shell:
+###############################################################################
+    build_abel:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
@@ -100,6 +118,58 @@ jobs:
         - name: Cachix
           uses: cachix/cachix-action@v4
           with:
-              attributes: shellBuildInputs
+              attributes: abel
+              name: nix-config
+              signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+    build_cantor:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Nix
+          uses: cachix/install-nix-action@v7
+        - name: Cachix
+          uses: cachix/cachix-action@v4
+          with:
+              attributes: cantor
+              name: nix-config
+              signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+    build_foucault:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Nix
+          uses: cachix/install-nix-action@v7
+        - name: Cachix
+          uses: cachix/cachix-action@v4
+          with:
+              attributes: foucault
+              name: nix-config
+              signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+    build_peano:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Nix
+          uses: cachix/install-nix-action@v7
+        - name: Cachix
+          uses: cachix/cachix-action@v4
+          with:
+              attributes: peano
+              name: nix-config
+              signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+    build_sartre:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Nix
+          uses: cachix/install-nix-action@v7
+        - name: Cachix
+          uses: cachix/cachix-action@v4
+          with:
+              attributes: sartre
               name: nix-config
               signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
