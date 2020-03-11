@@ -429,6 +429,38 @@
                 let @" = l:saved_reg
             endfunction
           '';
+          aleConfig = ''
+            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+            " => ALE
+            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+            " Always apply ALEFix on save
+            let g:ale_fix_on_save = 1
+            noremap <leader>f :ALEFix <CR>
+            nmap <silent> <C-j> <Plug>(ale_next_wrap)
+            let g:ale_linters = {
+                \ 'c':['clangd', 'cppcheck', 'flawfinder'],
+                \ 'cpp':['clangd', 'cppcheck', 'flawfinder'],
+                \ 'python': ['bandit', 'pylama', 'vulture'],
+                \ 'text':['mdl', 'proselint', 'languagetool'],
+                \ 'markdown':['mdl', 'proselint', 'languagetool'],
+            \ }
+            let g:ale_fixers = {
+                \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+                \ 'c':['clang-format'],
+                \ 'cpp':['clang-format'],
+                \ 'json':['fixjson'],
+                \ 'python':['isort', 'autopep8'],
+                \ 'rust':['rustfmt'],
+                \ 'sh':['shfmt'],
+            \ }
+          '';
+          ayuConfig = ''
+            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+            " => ayu-vim
+            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+            let g:ayucolor="dark"
+            colorscheme ayu
+          '';
           echodocConfig = ''
             """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
             " => echodot
@@ -471,6 +503,33 @@
             call deoplete#custom#source('_', 'max_abbr_width', 20)
             call deoplete#custom#source('_', 'max_menu_width', 80)
           '';
+          fzfConfig = ''
+            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+            " => fzf
+            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+            " FZF selection window size
+            let g:fzf_layout = { 'window': '60split enew' }
+            " Different ways to open a new file/buffer
+            let g:fzf_action = {
+                \ 'ctrl-t': 'tab split',
+                \ 'ctrl-x': 'split',
+                \ 'ctrl-v': 'vsplit' }
+            autocmd! FileType fzf
+            autocmd  FileType fzf set laststatus=0 noshowmode noruler
+                \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+            " Map ctrp-p/b to search files/buffers
+            nnoremap <C-p> :Files<CR>
+            nnoremap <C-b> :Buffers<CR>
+            set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+            command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
+          '';
+          indentGuidesConfig = ''
+            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+            " => vim-indent-guides
+            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+            " Always show indent guides
+            let g:indent_guides_enable_on_vim_startup = 1
+          '';
           languageClientConfig = ''
             """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
             " => LanguageClient-neovim
@@ -479,8 +538,9 @@
             set hidden
 
             let g:LanguageClient_serverCommands = {
-                \ 'rust': ['rls'],
+                \ 'nix': ['rnix-lsp'],
                 \ 'python': ['pyls'],
+                \ 'rust': ['rls'],
                 \ 'tex': ['texlab'],
             \ }
 
@@ -505,92 +565,6 @@
             " Rename - ru => rename UPPERCASE
             noremap <leader>ru :call LanguageClient#textDocument_rename(
                 \ {'newName': Abolish.uppercase(expand('<cword>'))})<CR>
-          '';
-          fzfConfig = ''
-            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            " => fzf
-            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            " FZF selection window size
-            let g:fzf_layout = { 'window': '60split enew' }
-            " Different ways to open a new file/buffer
-            let g:fzf_action = {
-                \ 'ctrl-t': 'tab split',
-                \ 'ctrl-x': 'split',
-                \ 'ctrl-v': 'vsplit' }
-            autocmd! FileType fzf
-            autocmd  FileType fzf set laststatus=0 noshowmode noruler
-                \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-            " Map ctrp-p/b to search files/buffers
-            nnoremap <C-p> :Files<CR>
-            nnoremap <C-b> :Buffers<CR>
-            set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
-            command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
-          '';
-          vimtexConfig = ''
-            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            " => vimtex
-            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            " Enable shellescape for the LaTeX compiler
-            " NB: needed for syntax highlighting pkgs.
-            let g:vimtex_compiler_latexmk = {
-                \ 'options' : [
-                \   '-pdf',
-                \   '-shell-escape',
-                \   '-verbose',
-                \   '-file-line-error',
-                \   '-synctex=1',
-                \   '-interaction=nonstopmode',
-                \ ],
-            \ }
-            if has('nvim')
-              let g:vimtex_compiler_progname = 'nvr'
-            endif
-            let g:vimtex_view_general_viewer = 'evince'
-          '';
-          indentGuidesConfig = ''
-            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            " => vim-indent-guides
-            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            " Always show indent guides
-            let g:indent_guides_enable_on_vim_startup = 1
-          '';
-          ayuConfig = ''
-            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            " => ayu-vim
-            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            let g:ayucolor="dark"
-            colorscheme ayu
-          '';
-          tagbarConfig = ''
-            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            " => tagbar
-            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            noremap <leader>t :TagbarToggle<CR>
-          '';
-          aleConfig = ''
-            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            " => ALE
-            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            " Always apply ALEFix on save
-            let g:ale_fix_on_save = 1
-            noremap <leader>f :ALEFix <CR>
-            nmap <silent> <C-j> <Plug>(ale_next_wrap)
-            let g:ale_linters = {
-                \ 'c':['clangd', 'cppcheck', 'flawfinder'],
-                \ 'cpp':['clangd', 'cppcheck', 'flawfinder'],
-                \ 'python': ['bandit', 'pylama', 'vulture'],
-                \ 'text':['mdl', 'proselint', 'languagetool'],
-                \ 'markdown':['mdl', 'proselint', 'languagetool'],
-            \ }
-            let g:ale_fixers = {
-                \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-                \ 'c':['clang-format'],
-                \ 'cpp':['clang-format'],
-                \ 'json':['fixjson'],
-                \ 'python':['isort', 'autopep8'],
-                \ 'rust':['rustfmt'],
-                \ 'sh':['shfmt'],
-            \ }
           '';
           lightlineConfig = ''
             """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -623,6 +597,33 @@
                 \   'linter_ok': 'left',
                 \ }
             \ }
+          '';
+          tagbarConfig = ''
+            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+            " => tagbar
+            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+            noremap <leader>t :TagbarToggle<CR>
+          '';
+          vimtexConfig = ''
+            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+            " => vimtex
+            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+            " Enable shellescape for the LaTeX compiler
+            " NB: needed for syntax highlighting pkgs.
+            let g:vimtex_compiler_latexmk = {
+                \ 'options' : [
+                \   '-pdf',
+                \   '-shell-escape',
+                \   '-verbose',
+                \   '-file-line-error',
+                \   '-synctex=1',
+                \   '-interaction=nonstopmode',
+                \ ],
+            \ }
+            if has('nvim')
+              let g:vimtex_compiler_progname = 'nvr'
+            endif
+            let g:vimtex_view_general_viewer = 'evince'
           '';
         in
           ''
