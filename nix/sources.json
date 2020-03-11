@@ -22,17 +22,5 @@
         "type": "tarball",
         "url": "https://github.com/lovesegfault/nixpkgs/archive/f2f3b05166d8caeeb1cded08dce32024d7939980.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "pre-commit-hooks": {
-        "branch": "master",
-        "description": "Seamless integration of https://pre-commit.com git hooks with Nix.",
-        "homepage": "",
-        "owner": "cachix",
-        "repo": "pre-commit-hooks.nix",
-        "rev": "c367b2eb12d88881a390e74b22a7fb3d5f57e020",
-        "sha256": "0vwbblgk6fkal14dga68m9xww7jd92prcak7ljigjbwbp3wxlm06",
-        "type": "tarball",
-        "url": "https://github.com/cachix/pre-commit-hooks.nix/archive/c367b2eb12d88881a390e74b22a7fb3d5f57e020.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
