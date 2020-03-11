@@ -78,5 +78,5 @@ let
   generated = pkgs.writeText "ci.yml" (builtins.toJSON ci);
 in
 pkgs.writeShellScript "gen_ci" ''
-  cp --dereference ${generated} ./.github/workflows/ci.yml
+  cat ${generated} > ./.github/workflows/ci.yml
 ''
