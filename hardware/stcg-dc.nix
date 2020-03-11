@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ lib, pkgs, ... }: {
 
   imports = [ ./efi.nix ./nvidia.nix ];
 
@@ -28,4 +28,5 @@
   nixpkgs.system = "x86_64-linux";
 
   services.fstrim.enable = true;
+  services.sshguard.enable = lib.mkForce false;
 }
