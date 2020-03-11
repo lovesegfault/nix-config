@@ -1,13 +1,12 @@
-{ lib ? import ./nix/lib.nix }:
-with lib;
+with (import ./nix/lib.nix);
 let
-  hosts = (import ./.).hosts;
-  mkSystem = name: arch: { ... }:
+  hosts = (import ./. {}).hosts;
+  mkSystem = name: arch:
     let
       system = arch;
       pkgs = import ./nix/nixpkgs.nix { inherit system; config.allowUnfree = true; };
     in { ... }: {
-      imports = [ (./systems + "/${name}") ];
+      imports = [ (./systems + "/${name}.nix") ];
       nixpkgs.pkgs = pkgs;
       deployment.substituteOnDestination = true;
     };
