@@ -18,7 +18,7 @@
   ];
 
   qt5 = {
-    enable = true;
+    enable = false;
     platformTheme = "gnome";
     style = "adwaita";
   };
