@@ -19,8 +19,8 @@
       Unit = {
         Description = "sshuttle";
         PartOf = [ "default.target" ];
-        Wants = [ "gnome-keyring.service" "gpg-agent.service"];
-        After = [ "gnome-keyring.service" "gpg-agent.service"];
+        Wants = [ "gnome-keyring.service" "gpg-agent.service" ];
+        After = [ "gnome-keyring.service" "gpg-agent.service" ];
       };
       Service = {
         Type = "simple";
