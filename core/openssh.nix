@@ -11,4 +11,12 @@
       StreamLocalBindUnlink yes
     '';
   };
+
+  services.sshguard = {
+    enable = true;
+    attack_threshold = 10;
+    blacklist_threshold = 50;
+    blocktime = 120;
+    detection_time = 28800;
+  };
 }

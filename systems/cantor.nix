@@ -1,10 +1,11 @@
 { ... }: {
   imports = [
     ../core
+
     ../dev
+    ../dev/stcg-cachix.nix
 
     ../hardware/stcg-dc.nix
-    ../misc/stcg-cachix.nix
   ] ++ (import ../users).stream;
 
   fileSystems = {

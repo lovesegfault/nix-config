@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [
-    ../misc/aarch64-build-box.nix
-    ../misc/bluetooth.nix
+    ./aarch64-build-box.nix
+    ./bluetooth.nix
   ];
 
   boot = {

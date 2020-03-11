@@ -1,15 +1,10 @@
 { lib, pkgs, ... }:
-let
-  secretPath = ../secrets/stcg-wifi-password.nix;
-  secretCondition = (builtins.pathExists secretPath);
-  secret = lib.optionalString secretCondition (import secretPath);
-in
 {
   imports = [
     (import ../users).bemeurer
     ../core
+
     ../hardware/rpi4.nix
-    ../misc/stcg-cachix.nix
   ];
 
   boot.kernelParams = [ "fbcon=rotate:3" ];
@@ -30,13 +25,16 @@ in
       ];
       useDHCP = lib.mkForce false;
     };
-    wireless.networks."StandardCognition".psk = secret;
+    wireless.networks."StandardCognition".psk = let
+      secretPath = ../secrets/stcg-wifi-password.nix;
+      secretCondition = (builtins.pathExists secretPath);
+      secret = lib.optionalString secretCondition (import secretPath);
+    in secret;
   };
 
   services.dhcpd4 = {
     enable = true;
     extraConfig = ''
-
       subnet 192.168.2.0 netmask 255.255.255.0 {
         authoritative;
         option routers 192.168.0.1;
@@ -52,7 +50,6 @@ in
           fixed-address 192.168.2.2;
         }
       }
-
     '';
     interfaces = [ "eth0" ];
   };

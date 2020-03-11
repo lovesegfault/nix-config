@@ -1,9 +1,8 @@
 { pkgs, ... }: {
   imports = [
-    ../misc/efi.nix
-    ../misc/bluetooth.nix
-    ../misc/fwupd.nix
-    ../misc/intel.nix
+    ./bluetooth.nix
+    ./efi.nix
+    ./intel.nix
   ];
 
   boot = rec {
@@ -68,6 +67,7 @@
 
   services = {
     fstrim.enable = true;
+    fwupd.enable = true;
     hardware.bolt.enable = true;
     tlp = {
       enable = true;

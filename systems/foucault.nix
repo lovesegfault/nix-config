@@ -2,13 +2,15 @@
   imports = [
     (import ../users).bemeurer
     ../core
+
     ../dev
-    ../sway
+    ../dev/stcg-cachix.nix
+    ../dev/stcg-cameras.nix
 
     ../hardware/thinkpad-p1.nix
-    ../misc/aarch64-build-box.nix
-    ../misc/stcg-cachix.nix
-    ../misc/stcg-cameras.nix
+    ../hardware/aarch64-build-box.nix
+
+    ../sway
   ];
 
   boot.initrd.luks.devices."nixos".device =

@@ -1,14 +1,14 @@
 { lib, pkgs, ... }: {
   imports = [
     ../core
+
+    ../hardware/intel.nix
+    ../hardware/nvidia.nix
+    ../hardware/zfs.nix
+
     ../dev
-
-    ../misc/intel.nix
-    ../misc/nvidia.nix
-    ../misc/zfs.nix
-
-    ../misc/stcg-cachix.nix
-    ../misc/stcg-cameras.nix
+    ../dev/stcg-cachix.nix
+    ../dev/stcg-cameras.nix
   ] ++ (import ../users).stream;
 
   boot = rec {
