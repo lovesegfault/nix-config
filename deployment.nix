@@ -2,14 +2,15 @@
 with lib;
 let
   hosts = (import ./.).hosts;
-  mkSystem = name: arch: { ... }: let
+  mkSystem = name: arch: { ... }:
+    let
       system = arch;
       pkgs = import ./nix/nixpkgs.nix { inherit system; config.allowUnfree = true; };
-  in { ... }: {
-    imports = [ (./systems + "/${name}") ];
-    nixpkgs.pkgs = pkgs;
-    deployment.substituteOnDestination = true;
-  };
+    in { ... }: {
+      imports = [ (./systems + "/${name}") ];
+      nixpkgs.pkgs = pkgs;
+      deployment.substituteOnDestination = true;
+    };
   systems = mapAttrs mkSystem hosts;
 in
 {
