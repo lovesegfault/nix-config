@@ -10,7 +10,7 @@
 
   environment.systemPackages = with pkgs; [ fahviewer fahcontrol ];
   services.foldingathome.enable = true;
-  firewall.allowedTCPPorts = [ 36330 ];
+  networking.firewall.allowedTCPPorts = [ 36330 ];
 
   fileSystems = {
     "/" = {
