@@ -4,7 +4,8 @@ self: super: {
     id3v2 = "${super.id3v2}/bin/id3v2";
     flac = "${super.flac}/bin/flac";
     beet = "${super.beets}/bin/beet";
-  in super.writeShellScript "bimp" ''
+  in super.writeScriptBin "bimp" ''
+    #!${super.stdenv.shell}
     set -o errexit
     set -o nounset
     set -o pipefail
