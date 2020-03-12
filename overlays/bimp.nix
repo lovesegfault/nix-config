@@ -48,7 +48,7 @@ self: super: {
     function importMus() {
       [ "$#" -eq 1 ] || error "no path to import"
       local mus="$1"
-      export PATH="${super.imagemagick}/bin:$PATH"
+      export PATH="${super.imagemagick7}/bin:$PATH"
       ${beet} -v import "$mus"
     }
 
