@@ -11,6 +11,18 @@
         "url": "https://github.com/rycee/home-manager/archive/5c1e7349bbd9b51fe41ea96b67c380feef996b90.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "lorri": {
+        "branch": "master",
+        "description": "Your project's nix-env",
+        "homepage": "",
+        "owner": "target",
+        "repo": "lorri",
+        "rev": "74f36eae976425ecf51e451c222d75aca8a3e65c",
+        "sha256": "0qd4chxgkfcyhnc9535k657s2cfw793xzh98dzmy8gh5ww79wnny",
+        "type": "tarball",
+        "url": "https://github.com/target/lorri/archive/74f36eae976425ecf51e451c222d75aca8a3e65c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixpkgs": {
         "branch": "nixos-foldingathome",
         "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
