@@ -29,5 +29,5 @@ in
 {
   inherit hosts gceImages;
   aarch64 = filterSystems "aarch64-linux";
-  x86_64-linux = filterSystems "aarch64-linux";
+  x86_64-linux = filterSystems "x86_64-linux";
 } // systems
