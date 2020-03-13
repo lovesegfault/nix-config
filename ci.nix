@@ -1,13 +1,18 @@
 { lib ? (import ./nix).lib, pkgs ? (import ./nix).pkgs {} }:
 with builtins; with lib;
 let
-  checkout = {
-    name = "Checkout";
-    uses = "actions/checkout@v2";
-  };
-  nix = {
-    name = "Nix";
-    uses = "cachix/install-nix-action@v7";
+  mkJob = extraSteps: {
+    runs-on = "ubuntu-latest";
+    steps = [
+      {
+        name = "Checkout";
+        uses = "actions/checkout@v2";
+      }
+      {
+        name = "Nix";
+        uses = "cachix/install-nix-action@v7";
+      }
+    ] ++ extraSteps;
   };
   cachix = { skipNixBuild ? false, attributes ? null }: {
     name = "Cachix";
@@ -46,16 +51,16 @@ let
           sudo tee /etc/nix/machines > /dev/null
     '';
   };
-  hosts = (import ./. {}).hosts;
-  mkJob = extraSteps: {
-    runs-on = "ubuntu-latest";
-    steps = [ checkout nix ] ++ extraSteps;
-  };
   mkBuildStep = h: a: mkJob (
     optional (a == "aarch64-linux") aarch64
     ++ [ (cachix { attributes = h; }) ]
   );
-  systemJobs = mapAttrs mkBuildStep hosts;
+
+  hosts = (import ./. {}).hosts;
+  # FIXME: figure out what's wrong with the aarch64 build box
+  x86_64Hosts = filterAttrs (_:v: v == "x86_64-linux") hosts;
+  systemJobs = mapAttrs mkBuildStep x86_64Hosts;
+
   ci = {
     on.push.branches = [ "*" ];
     name = "CI";
