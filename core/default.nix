@@ -7,7 +7,7 @@ let
 in
 {
   imports = [
-    (import ../nix/home-manager.nix)
+    (import ../nix).home-manager
     ./aspell.nix
     ./gpg.nix
     ./networkmanager.nix

@@ -1,4 +1,4 @@
-{ lib ? import ./nix/lib.nix }:
+{ lib ? (import ./nix).lib }:
 with builtins; with lib;
 let
   hosts = {
@@ -16,7 +16,7 @@ let
     let
       configuration = ./systems + "/${name}.nix";
       system = arch;
-      nixos = import ./nix/nixos.nix { inherit configuration system; };
+      nixos = (import ./nix).nixos { inherit configuration system; };
     in nixos.config.system.build;
 
   mkSystem = name: arch: (mkNixOS name arch).toplevel;

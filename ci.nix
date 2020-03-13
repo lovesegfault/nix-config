@@ -1,4 +1,4 @@
-{ lib ? import ./nix/lib.nix, pkgs ? import ./nix/nixpkgs.nix {} }:
+{ lib ? (import ./nix).lib, pkgs ? (import ./nix).pkgs {} }:
 with builtins; with lib;
 let
   checkout = {
