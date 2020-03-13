@@ -10,13 +10,13 @@ let
       }
       {
         name = "Nix";
-        uses = "cachix/install-nix-action@v7";
+        uses = "cachix/install-nix-action@v8";
       }
     ] ++ extraSteps;
   };
   cachix = { skipNixBuild ? false, attributes ? null }: {
     name = "Cachix";
-    uses = "cachix/cachix-action@v4";
+    uses = "cachix/cachix-action@v5";
     "with" = {
       inherit attributes skipNixBuild;
       name = "nix-config";
