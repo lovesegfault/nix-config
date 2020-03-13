@@ -5,8 +5,7 @@
     cpu.intel.updateMicrocode = true;
     opengl = {
       extraPackages = with pkgs; [
-        vaapiIntel
-        libva
+        libva-full
         intel-media-driver
         intel-compute-runtime
       ];
