@@ -18,12 +18,7 @@ let
     "sway/mode" = { format = ''<span style="italic">{}</span>''; };
     "sway/workspaces" = {
       all-outputs = true;
-      format = "{name}:{icon}";
-      format-icons = {
-        urgent = "";
-        focused = "";
-        default = "";
-      };
+      format = "{name}";
     };
     idle_inhibitor = {
       format = "{icon}";
