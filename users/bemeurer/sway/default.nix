@@ -25,7 +25,7 @@
     thunderbird
     wl-clipboard
     zoom-us
-  ] ++ [ fahcontrol fahviewer ];
+  ];
 
   gtk = {
     enable = true;

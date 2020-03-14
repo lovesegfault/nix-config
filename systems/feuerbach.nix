@@ -8,12 +8,6 @@
     ../hardware/stcg-dc.nix
   ] ++ (import ../users).stream;
 
-  environment.systemPackages = with pkgs; [ fahclient ];
-  services.foldingathome.enable = true;
-  networking.firewall.allowedTCPPorts = [ 36330 7396 ];
-  systemd.services.foldingathome.wantedBy = lib.mkForce [];
-
-
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/9f013ec7-5f6f-49a6-9deb-4b58b5a486b7";
