@@ -24,15 +24,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
-        "branch": "nixos-foldingathome",
+        "branch": "nixos-unstable-small",
         "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
         "homepage": "https://github.com/NixOS/nixpkgs",
-        "owner": "lovesegfault",
-        "repo": "nixpkgs",
-        "rev": "225d4b56845a69faa13d86229a76428539b01783",
-        "sha256": "0hild9yh2f2vbn203cdaymi0n850ng7a1ynvqc99np9jn9myi81d",
+        "owner": "nixos",
+        "repo": "nixpkgs-channels",
+        "rev": "c9f216d5d5854e8dcd8178be55cfe06558dfef2f",
+        "sha256": "0bjjijvqn6b8hay7bh0rijrp5299wjldc0gc5izpbn00z6cgd1wr",
         "type": "tarball",
-        "url": "https://github.com/lovesegfault/nixpkgs/archive/225d4b56845a69faa13d86229a76428539b01783.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs-channels/archive/c9f216d5d5854e8dcd8178be55cfe06558dfef2f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
