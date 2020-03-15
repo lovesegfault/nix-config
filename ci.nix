@@ -57,9 +57,7 @@ let
   );
 
   hosts = (import ./. {}).hosts;
-  # FIXME: figure out what's wrong with the aarch64 build box
-  x86_64Hosts = filterAttrs (_:v: v == "x86_64-linux") hosts;
-  systemJobs = mapAttrs mkBuildStep x86_64Hosts;
+  systemJobs = mapAttrs mkBuildStep hosts;
 
   ci = {
     on.push.branches = [ "*" ];
