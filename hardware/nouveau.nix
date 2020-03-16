@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 {
   boot = {
     kernelPatches = [
@@ -26,7 +26,7 @@
   hardware = {
     opengl = {
       enable = true;
-      extraPackages = [ libva-full libvdpau-va-gl vaapiVdpau ];
+      extraPackages = with pkgs; [ libva-full libvdpau-va-gl vaapiVdpau ];
     };
   };
 }
