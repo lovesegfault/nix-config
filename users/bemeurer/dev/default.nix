@@ -1,10 +1,7 @@
 { pkgs, ... }: {
   imports = [ ./arcanist.nix ];
 
-  home = {
-    extraOutputsToInstall = [ "doc" "info" "devdoc" ];
-    packages = with pkgs; [ lorri ];
-  };
+  home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
 
   home.file.gdbinit = {
     target = ".gdbinit";
@@ -14,4 +11,6 @@
   };
 
   programs.direnv.enable = true;
+
+  services.lorri.enable = true;
 }
