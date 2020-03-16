@@ -22,7 +22,7 @@
     slurp
     speedcrunch
     spotify
-    thunderbird
+    thunderbird-bin
     wl-clipboard
     zoom-us
   ];
