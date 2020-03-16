@@ -5,7 +5,7 @@
       profile = "gpu-hq";
       gpu-context = "wayland";
       vo = "gpu";
-      hwdev = "auto";
+      hwdec = "auto";
     };
   };
 }
