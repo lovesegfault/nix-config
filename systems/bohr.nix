@@ -23,10 +23,7 @@
         } secret
       );
 
-  system.autoUpgrade = {
-    enable = true;
-    allowReboot = true;
-  };
+  services.openssh.ports = [ 55889 ];
 
   time.timeZone = "America/Los_Angeles";
 }

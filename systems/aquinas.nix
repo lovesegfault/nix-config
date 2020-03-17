@@ -41,6 +41,8 @@
         } secret
       );
 
+  services.openssh.ports = [ 55888 ];
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/57cf59f5-7ad6-49bc-b5b0-21796be1e617"; } ];
 
