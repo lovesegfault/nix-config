@@ -48,6 +48,7 @@ in
   };
 
   services.dbus.socketActivated = true;
+  services.smartd.enable = true;
 
   system = {
     extraSystemBuilderCmds = ''
