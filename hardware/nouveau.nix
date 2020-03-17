@@ -6,8 +6,8 @@
         name = "nouveau-gr-fix";
         patch = (
           pkgs.fetchpatch {
-            url = "https://github.com/karolherbst/linux/commit/0a4d0a9f2ab29b4765ee819753fbbcbc2aa7da97.patch";
-            sha256 = "1k4lf1cnydckjn2fqdqiizba3rzjg27xa97xjaif4ss5m7mh4ckn";
+            url = "https://github.com/karolherbst/linux/commit/b681472f15f5e5c61653edd00ee4c297620a026b.patch";
+            sha256 = "0cqg6yc22aqflzjf5xijy4rc78hxi9bhdnbhm671xm4bksp4ad34";
           }
         );
       }
@@ -15,8 +15,8 @@
         name = "nouveau-runpm-fix";
         patch = (
           pkgs.fetchpatch {
-            url = "https://github.com/karolherbst/linux/commit/1e6cef9e6c4d17f6d893dae3cd7d442d8574b4b5.patch";
-            sha256 = "103myhwmi55f7vaxk9yqrl4diql6z32am5mzd6kvk89j9m02h528";
+            url = "https://github.com/karolherbst/linux/commit/a2bc9baeba679da6a3fa284b97ce99e672f354bc.patch";
+            sha256 = "0gnrk1hksxjz8a59z94vj6bhcd4f0mv3jzyvyv9p3j0jk521klm7";
           }
         );
       }
