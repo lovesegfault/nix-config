@@ -19,7 +19,7 @@
           enable = true;
           ssl = true;
           protocol = "googledomains";
-          domains = [ "home.meurer.org" ];
+          domains = [ "bohr.meurer.org" ];
         } secret
       );
 
