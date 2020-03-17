@@ -18,9 +18,9 @@ in
   };
 
   # Personal
-  "home.meurer.org" = systems.bohr;
   "aquinas.meurer.org" = systems.aquinas;
-  "irc.meurer.org" = systems.sartre;
+  "bohr.meurer.org" = systems.bohr;
+  "sartre.meurer.org" = systems.sartre;
   "localhost" = systems.foucault;
 
   # Sc
