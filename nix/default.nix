@@ -6,5 +6,4 @@ rec {
   lib = import (sources.nixpkgs + "/lib");
   nixos = import (sources.nixpkgs + "/nixos");
   pkgs = import sources.nixpkgs;
-  lorri = import sources.lorri;
 }
