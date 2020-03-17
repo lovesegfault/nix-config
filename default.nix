@@ -3,6 +3,7 @@ with builtins; with lib;
 let
   hosts = {
     abel = "x86_64-linux";
+    aquinas = "x86_64-linux";
     bohr = "aarch64-linux";
     camus = "aarch64-linux";
     cantor = "x86_64-linux";
