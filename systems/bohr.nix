@@ -10,7 +10,7 @@
 
   services.ddclient =
     let
-      secretPath = ../secrets/ddclient-home.nix;
+      secretPath = ../secrets/ddclient-bohr.nix;
       secretCondition = (builtins.pathExists secretPath);
       secret = lib.optionalAttrs secretCondition (import secretPath);
     in
