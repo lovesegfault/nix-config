@@ -1,4 +1,4 @@
-{ ... }: {
+{ lib, ... }: {
   imports = [
     (import ../users).bemeurer
     ../core
