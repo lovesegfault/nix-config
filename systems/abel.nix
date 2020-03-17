@@ -9,7 +9,7 @@
     ../dev
     ../dev/stcg-cachix.nix
     ../dev/stcg-cameras.nix
-  ] ++ (import ../users).stream;
+  ] ++ (import ../users).stream ++ (import ../users).hardware;
 
   boot = rec {
     initrd.availableKernelModules =

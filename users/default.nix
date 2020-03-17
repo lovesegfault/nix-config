@@ -7,4 +7,5 @@ let
 in
 {
   stream = with users; [ bemeurer cloud ekleog ogle ];
+  hardware = with users; [ allister ];
 } // users
