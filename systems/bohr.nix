@@ -23,7 +23,7 @@
         } secret
       );
 
-  services.openssh.ports = [ 55889 ];
+  services.openssh.ports = [ 22 55889 ];
 
   time.timeZone = "America/Los_Angeles";
 }
