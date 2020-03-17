@@ -41,6 +41,8 @@
         } secret
       );
 
+  services.logind.lidSwitchExternalPower = "ignore";
+
   services.openssh.ports = [ 22 55888 ];
 
   swapDevices =
