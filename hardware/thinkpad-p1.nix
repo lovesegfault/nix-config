@@ -26,6 +26,8 @@
     kernelParams = [
       "log_buf_len=5M"
       "psmouse.synaptics_intertouch=1"
+      "iwlwifi.power_save=Y"
+      "iwldvm.force_cam=N"
       # "nouveau.runpm=0"
       # "nouveau.noaccel=1"
       # "nouveau.nofbaccel=1"
