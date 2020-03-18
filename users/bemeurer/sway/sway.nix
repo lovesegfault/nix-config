@@ -141,8 +141,8 @@
           "XF86AudioPlay" = "exec ${playerctl} play";
           "XF86AudioPrev" = "exec ${playerctl} previous";
           "XF86AudioRaiseVolume" = "exec ${ponymix} increase 1";
-          "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 1";
-          "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 1";
+          "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 0.5";
+          "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 0.5";
         };
 
       menu = "${terminal} -d 55 18 -t swaymenu -e ${pkgs.swaymenu}/bin/swaymenu";
