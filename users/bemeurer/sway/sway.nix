@@ -95,11 +95,7 @@
         };
       };
 
-      keybindings = let
-        ponymix = "${pkgs.ponymix}/bin/ponymix";
-        playerctl = "${pkgs.playerctl}/bin/playerctl";
-      in
-        lib.mkOptionDefault {
+      keybindings = lib.mkOptionDefault {
           # fancy workspace names
           "${modifier}+1" = "workspace 0:α";
           "${modifier}+2" = "workspace 1:β";
@@ -133,14 +129,14 @@
           "Mod4+comma" = " workspace prev";
           "Mod4+period" = " workspace next";
           "Print" = "exec ${pkgs.prtsc}/bin/prtsc";
-          "XF86AudioLowerVolume" = "exec ${ponymix} decrease 1";
-          "XF86AudioMicMute" = "exec ${ponymix} -t source toggle";
-          "XF86AudioMute" = "exec ${ponymix} -t sink toggle";
-          "XF86AudioNext" = "exec ${playerctl} next";
-          "XF86AudioPause" = "exec ${playerctl} pause";
-          "XF86AudioPlay" = "exec ${playerctl} play";
-          "XF86AudioPrev" = "exec ${playerctl} previous";
-          "XF86AudioRaiseVolume" = "exec ${ponymix} increase 1";
+          "XF86AudioLowerVolume" = "exec ${pkgs.ponymix}/bin/ponymix decrease 1";
+          "XF86AudioMicMute" = "exec ${pkgs.ponymix}/bin/ponymix -t source toggle";
+          "XF86AudioMute" = "exec ${pkgs.ponymix}/bin/ponymix -t sink toggle";
+          "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
+          "XF86AudioPause" = "exec ${pkgs.playerctl}/bin/playerctl pause";
+          "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl play";
+          "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
+          "XF86AudioRaiseVolume" = "exec ${pkgs.ponymix}/bin/ponymix increase 1";
           "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 0.5";
           "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 0.5";
         };
