@@ -49,8 +49,8 @@ let
     backlight = {
       format = "{percent}% {icon}";
       format-icons = [ "" "" ];
-      on-scroll-up = "light -A 1";
-      on-scroll-down = "light -U 1";
+      on-scroll-up = "${pkgs.light}/bin/light -a 0.5";
+      on-scroll-down = "${pkgs.light}/bin/light -a 0.5";
     };
     battery = {
       bat = "BAT0";
@@ -88,9 +88,9 @@ let
         car = "";
         default = [ "" "" "" ];
       };
-      on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-      on-scroll-up = "pactl set-sink-volume @DEFAULT_SINK@ +1%";
-      on-scroll-down = "pactl set-sink-volume @DEFAULT_SINK@ -1%";
+      on-click = "${pkgs.ponymix}/bin/ponymix -t sink toggle";
+      on-scroll-up = "${pkgs.ponymix}/bin/ponymix increase 1";
+      on-scroll-down = "${pkgs.ponymix}/bin/ponymix decrease 1";
     };
   };
 in
