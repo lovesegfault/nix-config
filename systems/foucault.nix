@@ -4,7 +4,7 @@
     ../core
 
     ../dev
-    ../dev/stcg-cachix.nix
+    ../dev/stcg-gcs.nix
     ../dev/stcg-cameras.nix
 
     ../hardware/thinkpad-p1.nix
