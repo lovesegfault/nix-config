@@ -6,6 +6,9 @@
     text = ''
       add_newline = false
 
+      [aws]
+      disabled = true
+
       [nix_shell]
       use_name = true
     '';
