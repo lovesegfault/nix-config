@@ -32,8 +32,8 @@ let
       spacing = 5;
     };
     clock = {
-      tooltip-format = "{:%Z}";
-      format = "{:%F | %H:%M}";
+      tooltip-format = "{calendar}";
+      format = "{:%F | %H:%M | %Z}";
     };
     cpu = {
       format = "{usage}% ";
