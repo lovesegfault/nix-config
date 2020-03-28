@@ -41,7 +41,7 @@
           editorconfig-vim # EditorConfig support
           fugitive # Git
           fzf-vim # Search
-          gist-vim # Gist integration
+          vim-gist # Gist integration
           webapi-vim # Gist dependency
           lightline-ale # Linter integration
           lightline-vim # Statusbar
