@@ -75,7 +75,7 @@ let
         (cachix { skipNixBuild = true; })
         {
           name = "Formatting";
-          run = "nix-shell --run 'find . -iname \"*.nix\" -not -path ./nix/sources.nix -exec nixpkgs-fmt --check {} +'";
+          run = "nix-shell --run 'nixpkgs-fmt --check .'";
         }
       ];
     };
