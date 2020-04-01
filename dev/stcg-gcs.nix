@@ -1,4 +1,10 @@
 { lib, ... }: {
+  environment.sessionVariables = let
+    secretPath = ../secrets/stcg-s3-credentials.nix;
+    secretCondition = if builtins.pathExists secretPath then true else builtins.trace "stcg-gcs secrets not found!" false;
+    secret = lib.optionalAttrs secretCondition (import secretPath);
+  in secret;
+
   nix = {
     binaryCaches = [ "s3://sc-nix-store?endpoint=storage.googleapis.com&scheme=https" ];
     binaryCachePublicKeys = [
