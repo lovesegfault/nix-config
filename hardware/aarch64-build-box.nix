@@ -1,4 +1,15 @@
-{
+{ lib, ... }: {
+  environment.etc.aarch64-build-box-key = let
+    secretPath = ../secrets/aarch64-build-box-key.nix;
+    secretCondition = (builtins.pathExists secretPath);
+    secret = lib.optionalString secretCondition (import secretPath);
+  in {
+    enable = true;
+    mode = "0400";
+    target = "ssh/aarch64_build_box_key";
+    text = secret;
+  };
+
   nix = {
     distributedBuilds = true;
     buildMachines = [
@@ -6,7 +17,7 @@
         hostName = "aarch64.nixos.community";
         maxJobs = 64;
         speedFactor = 8;
-        sshKey = "/root/aarch64.community.nixos";
+        sshKey = "/etc/ssh/aarch64_build_box_key";
         sshUser = "lovesegfault";
         system = "aarch64-linux";
         supportedFeatures = [ "big-parallel" ];
