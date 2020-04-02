@@ -10,7 +10,7 @@
     initrd.availableKernelModules =
       [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_5_5;
     kernelPatches = [
       {
         name = "xfs-2038-fix";
