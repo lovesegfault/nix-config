@@ -5,6 +5,7 @@
     ../dev
     ../dev/stcg-gcs.nix
 
+    ../hardware/aarch64-build-box.nix
     ../hardware/stcg-dc.nix
   ] ++ (import ../users).stream;
 
