@@ -3,7 +3,7 @@
     ../core
 
     ../dev
-    ../dev/stcg-cachix.nix
+    ../dev/stcg-gcs.nix
 
     ../hardware/stcg-dc.nix
   ] ++ (import ../users).stream;
