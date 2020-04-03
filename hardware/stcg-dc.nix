@@ -21,6 +21,8 @@
     ];
   };
 
+  environment.noXlibs = true;
+
   hardware.enableRedistributableFirmware = true;
 
   nix.maxJobs = 64;

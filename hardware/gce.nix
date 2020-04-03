@@ -1,6 +1,8 @@
 { config, modulesPath, pkgs, ... }: {
   imports = [ (modulesPath + "/virtualisation/google-compute-image.nix") ];
 
+  environment.noXlibs = true;
+
   hardware.enableRedistributableFirmware = true;
 
   nix.maxJobs = 64;
