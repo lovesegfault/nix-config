@@ -10,7 +10,7 @@
     initrd.availableKernelModules =
       [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     extraModulePackages = with kernelPackages; [ ddcci-driver ];
-    kernelModules = [ "ddcci" "kvm-intel" ];
+    kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_5_5;
     kernelPatches = [
       {
