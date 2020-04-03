@@ -11,7 +11,7 @@
       [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     extraModulePackages = with kernelPackages; [ ddcci-driver ];
     kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_5_5;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelPatches = [
       {
         name = "xfs-2038-fix";
