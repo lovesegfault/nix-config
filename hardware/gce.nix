@@ -5,6 +5,12 @@
 
   hardware.enableRedistributableFirmware = true;
 
+  networking = {
+    interfaces.eth0.useDHCP = false;
+    networkmanager.enable = lib.mkForce false;
+    useDHCP = false;
+  };
+
   nix.maxJobs = 64;
 
   nixpkgs.system = "x86_64-linux";
