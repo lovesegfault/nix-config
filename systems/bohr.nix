@@ -5,7 +5,9 @@
     ../core
     ../hardware/rpi3.nix
   ];
-  environment.noXlibs = true;
+
+  # TODO
+  # environment.noXlibs = true;
 
   networking.hostName = "bohr";
 

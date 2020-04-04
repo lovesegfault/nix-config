@@ -14,7 +14,8 @@
     packages = with pkgs; [ terminus_font ];
   };
 
-  environment.noXlibs = true;
+  # TODO
+  # environment.noXlibs = true;
 
   networking = {
     hostName = "camus";
