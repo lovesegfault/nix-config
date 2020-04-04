@@ -1,4 +1,4 @@
-{ lib ? (import ./nix).lib, pkgs ? (import ./nix).pkgs {} }:
+{ sources ? import ./nix, lib ? sources.lib, pkgs ? sources.pkgs {} }:
 with builtins; with lib;
 let
   mkJob = extraSteps: {
@@ -56,10 +56,9 @@ let
     ++ [ (cachix { attributes = h; }) ]
   );
 
-  hosts = (import ./. {}).hosts;
   # FIXME: figure out what's wrong with the aarch64 build box
-  x86_64Hosts = filterAttrs (_:v: v == "x86_64-linux") hosts;
-  systemJobs = mapAttrs mkBuildStep x86_64Hosts;
+  hosts = filterAttrs (_:v: v != "aarch64-linux") (import ./hosts.nix);
+  systemJobs = mapAttrs mkBuildStep hosts;
 
   ci = {
     on.push.branches = [ "*" ];
