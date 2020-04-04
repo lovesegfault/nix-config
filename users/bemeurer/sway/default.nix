@@ -41,10 +41,8 @@
   programs.zsh.profileExtra = ''
     # If running from tty1 start sway
     if [ "$(tty)" = "/dev/tty1" ]; then
-      if [ "$(systemctl --user is-active sway.service)" != "active" ]; then
         systemctl --user import-environment
-        exec systemctl --user --wait start sway.service
-      fi
+        exec sway -d 2> /tmp/sway.log
     fi
   '';
 
@@ -113,22 +111,22 @@
         WantedBy = [ "sway-session.target" ];
       };
     };
-    sway = {
-      Unit = {
-        Description = "sway";
-        Documentation = [ "man:sway(5)" ];
-        BindsTo = [ "graphical-session.target" ];
-        Wants = [ "graphical-session-pre.target" ];
-        After = [ "graphical-session-pre.target" ];
-      };
-      Service = {
-        Type = "simple";
-        ExecStart = "${config.wayland.windowManager.sway.package}/bin/sway";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
+    # sway = {
+    #   Unit = {
+    #     Description = "sway";
+    #     Documentation = [ "man:sway(5)" ];
+    #     BindsTo = [ "graphical-session.target" ];
+    #     Wants = [ "graphical-session-pre.target" ];
+    #     After = [ "graphical-session-pre.target" ];
+    #   };
+    #   Service = {
+    #     Type = "simple";
+    #     ExecStart = "${config.wayland.windowManager.sway.package}/bin/sway -d";
+    #     Restart = "on-failure";
+    #     RestartSec = 1;
+    #     TimeoutStopSec = 10;
+    #   };
+    # };
     swayidle = {
       Unit = {
         Description = "swayidle";
