@@ -1,4 +1,4 @@
-{ config, modulesPath, pkgs, ... }: {
+{ config, lib, modulesPath, pkgs, ... }: {
   imports = [ (modulesPath + "/virtualisation/google-compute-image.nix") ];
 
   environment.noXlibs = true;
