@@ -15,7 +15,7 @@
     initrd.availableKernelModules =
       [ "ahci" "xhci_pci" "ehci_pci" "usbhid" "sd_mod" ];
     kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_5_5;
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {

@@ -6,7 +6,7 @@
     initrd.availableKernelModules =
       [ "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
     kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_5_5;
     kernelParams = [
       "l1tf=off"
       "mds=off"
