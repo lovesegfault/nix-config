@@ -21,7 +21,11 @@
     ];
   };
 
-  environment.noXlibs = true;
+  # TODO: The network manager module adds a bunch of garbage that refuses to
+  # build with noXlibs.
+  # We should either jettison NetworkManager and move to a declarative network
+  # config or fix things upstream.
+  # environment.noXlibs = true;
 
   hardware.enableRedistributableFirmware = true;
 
