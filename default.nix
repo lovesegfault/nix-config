@@ -20,4 +20,4 @@ in
   systems = pkgs.linkFarmFromDrvs "systems" allSystems;
   aarch64 = pkgs.linkFarmFromDrvs "aarch64" aarch64Systems;
   x86_64-linux = pkgs.linkFarmFromDrvs "x86_64-linux" x86_64Systems;
-}  // systemAttrs
+} // systemAttrs
