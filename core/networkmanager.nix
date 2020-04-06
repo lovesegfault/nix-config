@@ -4,7 +4,11 @@
     networkmanager = {
       enable = true;
       dhcp = "dhclient";
-      wifi.backend = "iwd";
+      wifi = {
+        backend = "iwd";
+        powersave = true;
+        macAddress = "random";
+      };
     };
   };
 }
