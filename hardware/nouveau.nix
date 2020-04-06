@@ -20,6 +20,15 @@
           }
         );
       }
+      {
+        name = "nouveau-hdmi2-fix";
+        patch = (
+          pkgs.fetchpatch {
+            url = "https://gist.githubusercontent.com/lovesegfault/52b60b9a1be8bcca3a70651da24b61e7/raw/72d884457c91718475876dc57e3821bb93d11a26/gistfile1.txt";
+            sha256 = "0mvawd4m7w1jqh13aidb3xqfgrbgd1z2cybhgdggkn7dg2m9g7bi";
+          }
+        );
+      }
     ];
   };
 

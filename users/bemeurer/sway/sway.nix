@@ -149,19 +149,19 @@
         "*" = { bg = "~/.wall fill"; };
         "Unknown 0x32EB 0x00000000" = {
           position = "0,0";
-          resolution = "3840x2160";
+          mode = "3840x2160@60Hz";
           scale = "2";
           subpixel = "rgb";
         };
         "Goldstar Company Ltd LG Ultra HD 0x00000B08" = {
           position = "1920,0";
-          resolution = "3840x2160";
+          mode = "3840x2160@30Hz";
           scale = "2";
           subpixel = "rgb";
         };
         "Dell Inc. DELL U2518D 0WG2J7C4A2AL" = {
           position = "1920,0";
-          resolution = "3840x2160";
+          mode = "3840x2160@60Hz";
           scale = "2";
           subpixel = "rgb";
           transform = "90";
