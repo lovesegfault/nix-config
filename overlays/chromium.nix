@@ -1,7 +1,7 @@
 self: super: {
   chromium = super.chromium.override {
     enableWideVine = true;
-    useVaapi = true;
+    # useVaapi = true;
     useOzone = true;
   };
 }
