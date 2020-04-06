@@ -7,5 +7,5 @@
     components = [ "pkcs11" "secrets" "ssh" ];
   };
 
-  home.sessionVariables."SSH_AUTH_SOCK" = "/run/user/1000/keyring/ssh";
+  home.sessionVariables."SSH_AUTH_SOCK" = "/run/user/8888/keyring/ssh";
 }
