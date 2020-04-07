@@ -5,6 +5,7 @@
     target = "starship.toml";
     text = ''
       add_newline = false
+
       prompt_order = [
         "username",
         "hostname",
@@ -23,7 +24,7 @@
         "line_break",
         "jobs",
         "character",
-      ];
+      ]
 
       [nix_shell]
       use_name = true
