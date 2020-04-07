@@ -21,7 +21,7 @@ rec {
 
   programs.zsh.shellAliases = {
     af = "arc feature";
-    al = "arc land --remote upstream --onto master";
+    al = "arc land";
     ad = "arc diff";
   };
 }
