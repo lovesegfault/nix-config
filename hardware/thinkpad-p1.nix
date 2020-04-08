@@ -70,7 +70,7 @@
         DISK_APM_LEVEL_ON_AC="255 254"
         DISK_APM_LEVEL_ON_BAT="128 1"
         DISK_DEVICES="nvme0n1 sda"
-        DISK_IOSCHED="mq-deadline bfq"
+        DISK_IOSCHED="none bfq"
 
         MAX_LOST_WORK_SECS_ON_AC=15
         MAX_LOST_WORK_SECS_ON_BAT=15
