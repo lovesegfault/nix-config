@@ -42,7 +42,7 @@
     # If running from tty1 start sway
     if [ "$(tty)" = "/dev/tty1" ]; then
         systemctl --user import-environment
-        exec sway -d 2> /tmp/sway.log
+        exec sway -d >& /tmp/sway.log
     fi
   '';
 
