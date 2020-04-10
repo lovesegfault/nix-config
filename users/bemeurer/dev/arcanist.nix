@@ -4,11 +4,7 @@ let
   secretCondition = (builtins.pathExists secretPath);
   secret = lib.optionalString secretCondition (import secretPath);
   arcrc = {
-    hosts = { "https://phab.nonstandard.ai/api/" = { token = secret; }; };
-    config = {
-      base = "git:upstream/master";
-      "arc.land.onto.default" = "master";
-    };
+    hosts."https://phab.nonstandard.ai/api/".token = secret;
   };
 in
 rec {
