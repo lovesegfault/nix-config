@@ -5,6 +5,11 @@
     aggressiveResize = true;
     clock24 = true;
     escapeTime = 0;
+    newSession = true;
+    plugins = with pkgs.tmuxPlugins; [ prefix-highlight ];
+    secureSocket = false;
+    terminal = "tmux-256color";
+    historyLimit = 30000;
     extraConfig = ''
       unbind C-b
       set-option -g prefix C-a
@@ -42,9 +47,5 @@
       set -g default-terminal "tmux-256color"
       set -ga terminal-overrides ",*256col*:Tc"
     '';
-    newSession = true;
-    plugins = with pkgs.tmuxPlugins; [ prefix-highlight ];
-    secureSocket = false;
-    terminal = "tmux-256color";
   };
 }
