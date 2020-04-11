@@ -3,7 +3,7 @@
     enable = true;
     enableExtraSocket = true;
     enableScDaemon = false;
-    enableSshSupport = false;
+    enableSshSupport = true;
     defaultCacheTtl = 604800;
   };
 }
