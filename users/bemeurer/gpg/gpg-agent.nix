@@ -1,7 +1,7 @@
 {
   services.gpg-agent = {
     enable = true;
-    enableExtraSocket = false;
+    enableExtraSocket = true;
     enableScDaemon = false;
     enableSshSupport = false;
     defaultCacheTtl = 604800;
