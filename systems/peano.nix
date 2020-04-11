@@ -12,10 +12,9 @@
   ] ++ (import ../users).stream ++ (import ../users).hardware;
 
   boot = rec {
-    extraModulePackages = [ kernelPackages.broadcom_sta ];
     initrd.availableKernelModules =
-      [ "ahci" "xhci_pci" "ehci_pci" "usbhid" "sd_mod" ];
-    kernelModules = [ "kvm-intel" "wl" ];
+      [ "ahci" "xhci_pci" "ehci_pci" "sd_mod" ];
+    kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       efi.canTouchEfiVariables = true;
