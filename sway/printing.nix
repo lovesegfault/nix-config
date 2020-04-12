@@ -1,6 +1,8 @@
 { pkgs, ... }: {
   services.printing = {
     enable = true;
-    drivers = with pkgs; [ gutenprint cups-googlecloudprint canon-cups-ufr2 ];
+    drivers = with pkgs; [ gutenprint gutenprintBin brlaser canon-cups-ufr2 ];
   };
+  services.avahi.enable = true;
+  services.avahi.nssmdns = true;
 }
