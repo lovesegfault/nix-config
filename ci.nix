@@ -61,7 +61,10 @@ let
   systemJobs = mapAttrs mkBuildStep hosts;
 
   ci = {
-    on.push.branches = [ "*" ];
+    on =  {
+      pull_request.branches = [ "**" ];
+      push.branches = [ "master" ];
+    };
     name = "CI";
     jobs = systemJobs // {
       parsing = mkJob [
