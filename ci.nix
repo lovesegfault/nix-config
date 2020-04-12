@@ -61,7 +61,7 @@ let
   systemJobs = mapAttrs mkBuildStep hosts;
 
   ci = {
-    on =  {
+    on = {
       pull_request.branches = [ "**" ];
       push.branches = [ "master" ];
     };
