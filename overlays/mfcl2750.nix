@@ -19,37 +19,41 @@ with self;
     dontWrap = true;
 
     installPhase = ''
-    dir=$out/opt/brother/Printers/MFCL2750DW
-    # first we place the bin garbage in the correct place
-    mv $dir/lpd/x86_64/* $dir/lpd/
-    # then we remove the other arches (and the now empty x86_64)
-    rm -r $dir/lpd/armv7l $dir/lpd/i686 $dir/lpd/x86_64
+      dir=$out/opt/brother/Printers/MFCL2750DW
+      # first we place the bin garbage in the correct place
+      mv $dir/lpd/x86_64/* $dir/lpd/
+      # then we remove the other arches (and the now empty x86_64)
+      rm -r $dir/lpd/armv7l $dir/lpd/i686 $dir/lpd/x86_64
 
-    substituteInPlace $dir/lpd/lpdfilter \
-      --replace /usr/bin/perl ${perl}/bin/perl \
-      --replace "BR_PRT_PATH =~" "BR_PRT_PATH = \"$dir\"; #" \
-      --replace "PRINTER =~" "PRINTER = \"MFCL2750DW\"; #"
+      substituteInPlace $dir/lpd/lpdfilter \
+        --replace /usr/bin/perl ${perl}/bin/perl \
+        --replace "BR_PRT_PATH =~" "BR_PRT_PATH = \"$dir\"; #" \
+        --replace "PRINTER =~" "PRINTER = \"MFCL2750DW\"; #"
 
-    substituteInPlace $dir/cupswrapper/lpdwrapper \
-      --replace /usr/bin/perl ${perl}/bin/perl \
-      --replace "PRINTER =~" "PRINTER = \"MFCL2750DW\"; #"
+      substituteInPlace $dir/cupswrapper/lpdwrapper \
+        --replace /usr/bin/perl ${perl}/bin/perl \
+        --replace "PRINTER =~" "PRINTER = \"MFCL2750DW\"; #"
 
-    substituteInPlace $dir/cupswrapper/paperconfigml2 \
-      --replace /usr/bin/perl ${perl}/bin/perl
+      substituteInPlace $dir/cupswrapper/paperconfigml2 \
+        --replace /usr/bin/perl ${perl}/bin/perl
 
-    wrapProgram $dir/lpd/lpdfilter \
-      --prefix PATH : ${stdenv.lib.makeBinPath [
-        coreutils ghostscript gnugrep gnused which
-      ]}
+      wrapProgram $dir/lpd/lpdfilter \
+        --prefix PATH : ${stdenv.lib.makeBinPath [
+      coreutils
+      ghostscript
+      gnugrep
+      gnused
+      which
+    ]}
 
-    wrapProgram $dir/cupswrapper/lpdwrapper \
-      --prefix PATH : ${stdenv.lib.makeBinPath [ coreutils gnugrep gnused ]}
+      wrapProgram $dir/cupswrapper/lpdwrapper \
+        --prefix PATH : ${stdenv.lib.makeBinPath [ coreutils gnugrep gnused ]}
 
-    mkdir -p $out/lib/cups/filter
-    mkdir -p $out/share/cups/model
+      mkdir -p $out/lib/cups/filter
+      mkdir -p $out/share/cups/model
 
-    ln $dir/cupswrapper/lpdwrapper $out/lib/cups/filter/brother_lpdwrapper_MFCL2750DW
-    ln $dir/cupswrapper/brother-MFCL2750DW-cups-en.ppd $out/share/cups/model
+      ln $dir/cupswrapper/lpdwrapper $out/lib/cups/filter/brother_lpdwrapper_MFCL2750DW
+      ln $dir/cupswrapper/brother-MFCL2750DW-cups-en.ppd $out/share/cups/model
     '';
 
     meta = {
@@ -59,5 +63,5 @@ with self;
       platforms = [ "x86_64-linux" ];
       maintainers = [ stdenv.lib.maintainers.lovesegfault ];
     };
-    };
+  };
 }
