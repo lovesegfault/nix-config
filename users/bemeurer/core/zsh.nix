@@ -52,8 +52,8 @@ in
         src = pkgs.fetchFromGitHub {
           owner = "zdharma";
           repo = "fast-syntax-highlighting";
-          rev = "94b6b5b8e58aeecd7587a973dbe110a352d7314d";
-          sha256 = "1lvq9qk0jz65swbghg4j08353z27v7nhd1r5i454y91s6w6n4b46";
+          rev = "c4c419edb98c54e442f743708f3f1159d6735241";
+          sha256 = "197qmbc35byqcs4rjf3vin2mbwsc3m4i6q9zd50q5jpk8bij2gd8";
         };
       }
       {
@@ -74,8 +74,8 @@ in
         src = pkgs.fetchFromGitHub {
           owner = "zdharma";
           repo = "history-search-multi-word";
-          rev = "71e00938a72393f09ebab9d87be27dc5d06b701e";
-          sha256 = "02aw432fp64drvn13fj1h4jflfn6ys59sx135hqmzyax667vmibw";
+          rev = "5c884b6d2cf7f33d1b3672e1de641155a548b844";
+          sha256 = "1qsn6spa1anm80463g07pvh3ql29v9iyb30if5sav5iyp8bv3qcv";
         };
       }
       {
