@@ -12,7 +12,7 @@ in
     ./networkmanager.nix
     ./nix.nix
     ./openssh.nix
-    ./resolved.nix
+    ./unbound.nix
     ./sudo.nix
     ./tmux.nix
     ./zsh.nix
