@@ -61,10 +61,7 @@ let
   systemJobs = mapAttrs mkBuildStep hosts;
 
   ci = {
-    on = {
-      pull_request.branches = [ "**" ];
-      push.branches = [ "master" ];
-    };
+    on = [ "pull_request" "push" ];
     name = "CI";
     jobs = systemJobs // {
       parsing = mkJob [
@@ -85,5 +82,5 @@ let
   generated = pkgs.writeText "ci.yml" (builtins.toJSON ci);
 in
 pkgs.writeShellScript "gen_ci" ''
-  cat ${generated} > ./.github/workflows/ci.yml
+  cat ${generated} | ${pkgs.jq}/bin/jq > ./.github/workflows/ci.yml
 ''
