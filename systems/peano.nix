@@ -7,7 +7,7 @@
     ../hardware/zfs.nix
 
     ../dev
-    ../dev/stcg-cachix.nix
+    ../dev/stcg-gcs.nix
     ../dev/stcg-cameras.nix
   ] ++ (import ../users).stream ++ (import ../users).hardware;
 
