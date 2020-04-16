@@ -5,10 +5,10 @@
         "homepage": "",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "f6afd95ef8dd587ca15c7090eb12d3cd3d08b08a",
-        "sha256": "1r386mapkimkxjkvvxvx26za2rh1ra7gyfflnliym12vj605gqri",
+        "rev": "86ccd8fecb248b61041878a7bbe90f74fb7e9ec8",
+        "sha256": "1f056f1rv4fhzi8k0fn875kp8pdbdg3x04fdlbinxyv91fhihx7i",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/f6afd95ef8dd587ca15c7090eb12d3cd3d08b08a.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/86ccd8fecb248b61041878a7bbe90f74fb7e9ec8.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
