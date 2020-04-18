@@ -37,7 +37,6 @@
     interfaces.enp0s31f6.mtu = 9000;
   };
 
-  services.kbfs.enable = true;
   services.keybase.enable = true;
 
   swapDevices =
