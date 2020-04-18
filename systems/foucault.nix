@@ -37,6 +37,9 @@
     interfaces.enp0s31f6.mtu = 9000;
   };
 
+  services.kbfs.enable = true;
+  services.keybase.enable = true;
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/ec8c101f-65fd-47c4-8e17-f1b5395b68c7"; } ];
 
