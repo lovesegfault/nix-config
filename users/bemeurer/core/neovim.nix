@@ -540,7 +540,7 @@
             let g:LanguageClient_serverCommands = {
                 \ 'nix': ['rnix-lsp'],
                 \ 'python': ['pyls'],
-                \ 'rust': ['rls'],
+                \ 'rust': ['rust-analyzer'],
                 \ 'tex': ['texlab'],
             \ }
 
