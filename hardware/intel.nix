@@ -9,7 +9,6 @@
         intel-media-driver
         intel-compute-runtime
       ];
-      s3tcSupport = true;
     };
   };
 
