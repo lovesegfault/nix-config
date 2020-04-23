@@ -15,6 +15,7 @@ in
     ./unbound.nix
     ./sudo.nix
     ./tmux.nix
+    ./xdg.nix
     ./zsh.nix
   ];
 
