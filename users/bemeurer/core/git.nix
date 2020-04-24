@@ -1,11 +1,11 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
     lfs.enable = false;
     signing = {
       key = "589412CE19DF582AE10A3320E421C74191EA186C";
-      signByDefault = true;
+      signByDefault = config.services.gnome-keyring.enable;
     };
     userEmail = "meurerbernardo@gmail.com";
     userName = "Bernardo Meurer";
