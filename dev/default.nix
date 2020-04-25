@@ -3,6 +3,6 @@
 
   environment = {
     enableDebugInfo = true;
-    systemPackages = with pkgs; [ git neovim ];
+    systemPackages = with pkgs; [ cntr git neovim ];
   };
 }
