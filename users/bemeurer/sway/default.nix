@@ -17,6 +17,7 @@
     grim
     imv
     libnotify
+    mumble
     pavucontrol
     slack
     slurp
