@@ -5,7 +5,8 @@
     clock24 = true;
     escapeTime = 0;
     historyLimit = 10000;
-    newSession = true;
+    # breaks tmate
+    newSession = false;
     secureSocket = false;
     shortcut = "a";
     terminal = "tmux-256color";
