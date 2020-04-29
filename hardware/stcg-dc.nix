@@ -23,13 +23,17 @@
 
   environment.systemPackages = with pkgs; [ fahclient ];
 
-  # TODO: The network manager module adds a bunch of garbage that refuses to
-  # build with noXlibs.
-  # We should either jettison NetworkManager and move to a declarative network
-  # config or fix things upstream.
-  # environment.noXlibs = true;
+  environment.noXlibs = true;
 
   hardware.enableRedistributableFirmware = true;
+
+  networking = {
+    interfaces.enp1s0f0.useDHCP = true;
+    interfaces.enp24s0f0.useDHCP = true;
+    networkmanager.enable = lib.mkForce false;
+    useDHCP = false;
+  };
+
 
   nix.maxJobs = 64;
 
