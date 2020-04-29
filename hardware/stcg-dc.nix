@@ -21,6 +21,8 @@
     ];
   };
 
+  environment.systemPackages = with pkgs; [ fahclient ];
+
   # TODO: The network manager module adds a bunch of garbage that refuses to
   # build with noXlibs.
   # We should either jettison NetworkManager and move to a declarative network
