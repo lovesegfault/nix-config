@@ -1,5 +1,5 @@
 let
-  pkgs = (import ./nix).pkgs {};
+  pkgs = (import ./nix).pkgs { };
 in
 pkgs.mkShell {
   name = "nix-config";

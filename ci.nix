@@ -1,4 +1,4 @@
-{ sources ? import ./nix, lib ? sources.lib, pkgs ? sources.pkgs {} }:
+{ sources ? import ./nix, lib ? sources.lib, pkgs ? sources.pkgs { } }:
 with builtins; with lib;
 let
   mkJob = extraSteps: {
@@ -51,15 +51,15 @@ let
           sudo tee /etc/nix/machines > /dev/null
     '';
   };
-  mkBuildStep = h: a: mkJob (
-    optional (a == "aarch64-linux") aarch64
-    ++ [ (cachix { attributes = h; }) ]
-  );
+  mkBuildStep = h: a: mkJob
+    (
+      optional (a == "aarch64-linux") aarch64
+      ++ [ (cachix { attributes = h; }) ]
+    );
 
   # FIXME: figure out what's wrong with the aarch64 build box
   hosts = filterAttrs (_:v: v != "aarch64-linux") (import ./hosts.nix);
   systemJobs = mapAttrs mkBuildStep hosts;
-
   ci = {
     on = [ "pull_request" "push" ];
     name = "CI";

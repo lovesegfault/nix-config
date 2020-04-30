@@ -18,14 +18,14 @@
       secretCondition = (builtins.pathExists secretPath);
       secret = lib.optionalAttrs secretCondition (import secretPath);
     in
-      (
-        lib.recursiveUpdate {
-          enable = true;
-          ssl = true;
-          protocol = "googledomains";
-          domains = [ "sartre.meurer.org" ];
-        } secret
-      );
+    (
+      lib.recursiveUpdate {
+        enable = true;
+        ssl = true;
+        protocol = "googledomains";
+        domains = [ "sartre.meurer.org" ];
+      } secret
+    );
 
   time.timeZone = "America/Los_Angeles";
 }

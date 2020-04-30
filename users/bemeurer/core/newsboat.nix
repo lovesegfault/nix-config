@@ -28,7 +28,7 @@
       { url = ''"query:Releases:tags # \"releases\""''; }
       {
         url = "---";
-        tags = [];
+        tags = [ ];
       }
       {
         url = "https://news.ycombinator.com/rss";
@@ -67,7 +67,7 @@
       }
       {
         url = "---";
-        tags = [];
+        tags = [ ];
       }
       {
         url = "https://drewdevault.com/feed.xml";
@@ -91,7 +91,7 @@
       }
       {
         url = "---";
-        tags = [];
+        tags = [ ];
       }
       {
         url = "https://www.smbc-comics.com/rss.php";
@@ -105,7 +105,7 @@
       }
       {
         url = "---";
-        tags = [];
+        tags = [ ];
       }
       {
         url =
@@ -121,7 +121,7 @@
       }
       {
         url = "---";
-        tags = [];
+        tags = [ ];
       }
       {
         url = "https://lkml.org/rss.php";
@@ -130,7 +130,7 @@
       }
       {
         url = "---";
-        tags = [];
+        tags = [ ];
       }
       {
         url = "https://github.com/neovim/neovim/releases.atom";

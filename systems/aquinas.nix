@@ -32,21 +32,21 @@
       secretCondition = (builtins.pathExists secretPath);
       secret = lib.optionalAttrs secretCondition (import secretPath);
     in
-      (
-        lib.recursiveUpdate {
-          enable = true;
-          ssl = true;
-          protocol = "googledomains";
-          domains = [ "aquinas.meurer.org" ];
-        } secret
-      );
+    (
+      lib.recursiveUpdate {
+        enable = true;
+        ssl = true;
+        protocol = "googledomains";
+        domains = [ "aquinas.meurer.org" ];
+      } secret
+    );
 
   services.logind.lidSwitchExternalPower = "ignore";
 
   services.openssh.ports = [ 22 55888 ];
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/57cf59f5-7ad6-49bc-b5b0-21796be1e617"; } ];
+    [{ device = "/dev/disk/by-uuid/57cf59f5-7ad6-49bc-b5b0-21796be1e617"; }];
 
   time.timeZone = "America/Los_Angeles";
 }

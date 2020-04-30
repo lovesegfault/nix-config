@@ -17,9 +17,10 @@
   # not a nixos option, you cant use things like mkForce on it. If you set it to
   # one. The empty one is a signal to systemd, to ignore the original copy
   # will cause it to have 3 entries, the original, an empty, and the new
-  systemd.services.bluetooth.serviceConfig.ExecStart = let
-    bluez = "${hardware.bluetooth.package}/libexec/bluetooth/bluetoothd";
-  in
+  systemd.services.bluetooth.serviceConfig.ExecStart =
+    let
+      bluez = "${hardware.bluetooth.package}/libexec/bluetooth/bluetoothd";
+    in
     [ "" "${bluez} --noplugin=sap" ];
 
   hardware.pulseaudio = {

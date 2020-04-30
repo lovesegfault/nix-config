@@ -22,7 +22,7 @@
   };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/841350f8-099e-4b46-9530-443912b92d48"; } ];
+    [{ device = "/dev/disk/by-uuid/841350f8-099e-4b46-9530-443912b92d48"; }];
 
   networking = {
     hostName = "feuerbach";

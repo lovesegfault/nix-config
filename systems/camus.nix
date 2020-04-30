@@ -28,11 +28,13 @@
       ];
       useDHCP = lib.mkForce false;
     };
-    wireless.networks."StandardCognition".psk = let
-      secretPath = ../secrets/stcg-wifi-password.nix;
-      secretCondition = (builtins.pathExists secretPath);
-      secret = lib.optionalString secretCondition (import secretPath);
-    in secret;
+    wireless.networks."StandardCognition".psk =
+      let
+        secretPath = ../secrets/stcg-wifi-password.nix;
+        secretCondition = (builtins.pathExists secretPath);
+        secret = lib.optionalString secretCondition (import secretPath);
+      in
+      secret;
   };
 
   services.dhcpd4 = {

@@ -15,7 +15,8 @@
       -r bemeurer@bastion0001.us-west2.monitoring.nonstandard.ai 0/0 \
       --user bemeurer
     '';
-  in [
+  in
+  [
     gnome3.seahorse
     sshuttleHack
   ];

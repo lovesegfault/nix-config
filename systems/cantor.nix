@@ -22,7 +22,7 @@
   };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/e4cdc2fd-eda2-45dd-a250-ea08a5250b9e"; } ];
+    [{ device = "/dev/disk/by-uuid/e4cdc2fd-eda2-45dd-a250-ea08a5250b9e"; }];
 
   networking = {
     hostName = "cantor";

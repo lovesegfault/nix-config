@@ -4,7 +4,8 @@ let
     let
       system = arch;
       pkgs = sources.pkgs { inherit system; config.allowUnfree = true; };
-    in { ... }: {
+    in
+    { ... }: {
       imports = [ (./systems + "/${name}.nix") ];
       nixpkgs.pkgs = pkgs;
       deployment.substituteOnDestination = true;

@@ -17,14 +17,14 @@
       secretCondition = (builtins.pathExists secretPath);
       secret = lib.optionalAttrs secretCondition (import secretPath);
     in
-      (
-        lib.recursiveUpdate {
-          enable = true;
-          ssl = true;
-          protocol = "googledomains";
-          domains = [ "bohr.meurer.org" ];
-        } secret
-      );
+    (
+      lib.recursiveUpdate {
+        enable = true;
+        ssl = true;
+        protocol = "googledomains";
+        domains = [ "bohr.meurer.org" ];
+      } secret
+    );
 
   services.openssh.ports = [ 22 55889 ];
 

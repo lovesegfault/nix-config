@@ -2,7 +2,7 @@
   wayland.windowManager.sway = {
     enable = true;
     config = rec {
-      bars = [];
+      bars = [ ];
       colors = {
         focused = {
           border = "#30535F";
@@ -177,9 +177,10 @@
 
       window = {
         border = 0;
-        commands = let
-          makeMenuWindow = "floating enable, border pixel 5, sticky enable";
-        in
+        commands =
+          let
+            makeMenuWindow = "floating enable, border pixel 5, sticky enable";
+          in
           [
             { command = makeMenuWindow; criteria = { app_id = "Alacritty"; title = "swaymenu"; }; }
             { command = makeMenuWindow; criteria = { app_id = "Alacritty"; title = "gopassmenu"; }; }

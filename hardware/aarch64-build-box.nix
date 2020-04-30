@@ -1,14 +1,16 @@
 { lib, ... }: {
-  environment.etc.aarch64-build-box-key = let
-    secretPath = ../secrets/aarch64-build-box-key.nix;
-    secretCondition = (builtins.pathExists secretPath);
-    secret = lib.optionalString secretCondition (import secretPath);
-  in {
-    enable = true;
-    mode = "0400";
-    target = "ssh/aarch64_build_box_key";
-    text = secret;
-  };
+  environment.etc.aarch64-build-box-key =
+    let
+      secretPath = ../secrets/aarch64-build-box-key.nix;
+      secretCondition = (builtins.pathExists secretPath);
+      secret = lib.optionalString secretCondition (import secretPath);
+    in
+    {
+      enable = true;
+      mode = "0400";
+      target = "ssh/aarch64_build_box_key";
+      text = secret;
+    };
 
   nix = {
     distributedBuilds = true;

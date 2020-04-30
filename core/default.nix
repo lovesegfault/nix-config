@@ -44,7 +44,8 @@ in
     overlays = with builtins; let
       files = attrNames (readDir ../overlays);
       mkOverlay = f: import (../overlays + "/${f}");
-    in map (f: mkOverlay f) files;
+    in
+    map (f: mkOverlay f) files;
   };
 
   services.dbus.socketActivated = true;
