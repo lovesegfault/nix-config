@@ -10,17 +10,6 @@
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelPatches = [
-      {
-        name = "xfs-2038-fix";
-        patch = (
-          pkgs.fetchpatch {
-            url = "https://lkml.org/lkml/diff/2019/12/26/349/1";
-            sha256 = "1jzxncv97w3ns60nk91b9b0a11bp1axng370qhv4fs7ik01yfsa4";
-          }
-        );
-      }
-    ];
     kernelParams = [
       "log_buf_len=5M"
       "psmouse.synaptics_intertouch=1"
