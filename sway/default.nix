@@ -22,4 +22,11 @@
     platformTheme = "gnome";
     style = "adwaita";
   };
+
+  nixpkgs.overlays = [
+    ../overlays/bimp.nix
+    ../overlays/menu
+    ../overlays/passh.nix
+    ../overlays/prtsc.nix
+  ];
 }

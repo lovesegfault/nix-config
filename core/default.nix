@@ -41,11 +41,11 @@ in
   nixpkgs = {
     config.allowUnfree = true;
 
-    overlays = with builtins; let
-      files = attrNames (readDir ../overlays);
-      mkOverlay = f: import (../overlays + "/${f}");
-    in
-    map (f: mkOverlay f) files;
+    overlays = [
+      ../overlays/ffmpeg.nix
+      ../overlays/mosh.nix
+      ../overlays/weechat.nix
+    ];
   };
 
   services.dbus.socketActivated = true;
