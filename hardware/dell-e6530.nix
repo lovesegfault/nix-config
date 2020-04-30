@@ -10,17 +10,6 @@
       [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "sdhci_pci" ];
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelPatches = [
-      {
-        name = "xfs-2038-fix";
-        patch = (
-          pkgs.fetchpatch {
-            url = "https://lkml.org/lkml/diff/2019/12/26/349/1";
-            sha256 = "1jzxncv97w3ns60nk91b9b0a11bp1axng370qhv4fs7ik01yfsa4";
-          }
-        );
-      }
-    ];
   };
 
   hardware.enableRedistributableFirmware = true;
