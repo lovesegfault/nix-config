@@ -42,9 +42,9 @@ in
     config.allowUnfree = true;
 
     overlays = [
-      ../overlays/ffmpeg.nix
-      ../overlays/mosh.nix
-      ../overlays/weechat.nix
+      (import ../overlays/ffmpeg.nix)
+      (import ../overlays/mosh.nix)
+      (import ../overlays/weechat.nix)
     ];
   };
 

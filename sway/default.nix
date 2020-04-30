@@ -24,9 +24,9 @@
   };
 
   nixpkgs.overlays = [
-    ../overlays/bimp.nix
-    ../overlays/menu
-    ../overlays/passh.nix
-    ../overlays/prtsc.nix
+    (import ../overlays/bimp.nix)
+    (import ../overlays/menu)
+    (import ../overlays/passh.nix)
+    (import ../overlays/prtsc.nix)
   ];
 }
