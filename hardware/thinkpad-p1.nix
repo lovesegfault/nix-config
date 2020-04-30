@@ -7,11 +7,9 @@
   ];
 
   boot = rec {
-    initrd.availableKernelModules =
-      [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-    extraModulePackages = with kernelPackages; [ ddcci-driver ];
+    initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelPatches = [
       {
         name = "xfs-2038-fix";
