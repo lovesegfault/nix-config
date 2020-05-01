@@ -25,7 +25,7 @@ in
 
   # Sc
   "10.0.5.155" = systems.feuerbach;
-  "10.0.5.158" = systems.cantor;
+  "10.0.5.217" = systems.cantor;
   "10.1.16.11" = systems.peano;
   "10.1.16.12" = systems.abel;
 }
