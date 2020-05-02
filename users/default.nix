@@ -6,6 +6,6 @@ let
   users = lib.genAttrs userDirs mkUser;
 in
 {
-  stream = with users; [ bemeurer cloud ekleog ogle ];
+  stream = with users; [ andi bemeurer cloud ekleog ogle ];
   hardware = with users; [ allister ];
 } // users
