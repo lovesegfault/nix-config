@@ -6,5 +6,5 @@
     systemPackages = with pkgs; [ cntr git neovim tmate ];
   };
 
-  nixpkgs.overlays = [(import ../overlays/arcanist.nix)];
+  nixpkgs.overlays = [ (import ../overlays/arcanist.nix) ];
 }
