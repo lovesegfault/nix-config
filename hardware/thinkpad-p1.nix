@@ -137,6 +137,8 @@
         USB_WHITELIST="0bda:0328 1050:0407 056a:5193"
       '';
     };
+
+    # block my dumb sd-card reader that chugs power from coming on
     udev.extraRules = ''
       SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="0328", ATTR{authorized}="0"
     '';
