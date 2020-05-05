@@ -26,13 +26,13 @@
       }
     ];
     kernelParams = [
+      # more dmesg
       "log_buf_len=5M"
+      # i don't know, the kernle complains
       "psmouse.synaptics_intertouch=1"
+      # force iwlwifi power saving on
       "iwlwifi.power_save=Y"
       "iwldvm.force_cam=N"
-      # "nouveau.runpm=0"
-      # "nouveau.noaccel=1"
-      # "nouveau.nofbaccel=1"
     ];
   };
 
