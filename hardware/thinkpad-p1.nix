@@ -142,12 +142,6 @@
     udev.extraRules = ''
       SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="0328", ATTR{authorized}="0"
     '';
-    xserver = {
-      dpi = 96;
-      libinput = {
-        accelProfile = "adaptive";
-        accelSpeed = "0.7";
-      };
-    };
+    xserver.dpi = 96;
   };
 }
