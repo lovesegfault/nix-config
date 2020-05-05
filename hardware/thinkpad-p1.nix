@@ -56,6 +56,10 @@
     fstrim.enable = true;
     fwupd.enable = true;
     hardware.bolt.enable = true;
+    thinkfan = {
+      enable = true;
+      smartSupport = true;
+    };
     tlp = {
       enable = true;
       extraConfig = ''
