@@ -6,6 +6,7 @@
   cantor = "x86_64-linux";
   feuerbach = "x86_64-linux";
   foucault = "x86_64-linux";
+  hegel = "aarch64-linux";
   peano = "x86_64-linux";
   sartre = "x86_64-linux";
 }
