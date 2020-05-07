@@ -3,7 +3,7 @@
 
   environment = {
     enableDebugInfo = true;
-    systemPackages = with pkgs; [ cntr git neovim tmate ];
+    systemPackages = with pkgs; [ git neovim ];
   };
 
   nixpkgs.overlays = [ (import ../overlays/arcanist.nix) ];
