@@ -74,6 +74,9 @@
         "eth2"
       ];
     };
+    interfaces.bond0.macAddress = "98:03:9b:67:e6:de";
+    interfaces.eth1.macAddress = "98:03:9b:67:e6:de";
+    interfaces.eth2.macAddress = "98:03:9b:67:e6:de";
     interfaces.bond0 = {
       useDHCP = false;
       ipv4 = {
