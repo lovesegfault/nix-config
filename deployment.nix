@@ -21,7 +21,7 @@ in
   "aquinas.meurer.org" = systems.aquinas;
   "bohr.meurer.org" = systems.bohr;
   "sartre.meurer.org" = systems.sartre;
-  "139.178.68.54" = systems.hegel;
+  "hegel.meurer.org" = systems.hegel;
   "localhost" = systems.foucault;
 
   # Sc
