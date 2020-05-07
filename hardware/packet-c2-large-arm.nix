@@ -2,7 +2,7 @@
 
   imports = [ ./no-mitigations.nix ];
 
-  boot = rec {
+  boot = {
     initrd.availableKernelModules = [ "ahci" "pci_thunder_ecam" ];
     kernelModules = [
       "dm_multipath"
@@ -44,10 +44,11 @@
   hardware.enableAllFirmware = true;
 
   networking = {
-    networkmanager.enable = lib.mkForce false;
     useDHCP = false;
+    dhcpcd.enable = false;
+    networkmanager.enable = lib.mkForce false;
     defaultGateway = {
-      address =  "139.178.68.53";
+      address = "139.178.68.53";
       interface = "bond0";
     };
     defaultGateway6 = {
@@ -69,12 +70,12 @@
       };
 
       interfaces = [
-        "eth1" "eth2"
+        "eth1"
+        "eth2"
       ];
     };
     interfaces.bond0 = {
       useDHCP = false;
-
       ipv4 = {
         routes = [
           {
@@ -95,18 +96,12 @@
         ];
       };
 
-      ipv6 = {
-        addresses = [
-          {
-            address = "2604:1380:1001:6900::3";
-            prefixLength = 127;
-          }
-        ];
-      };
+      ipv6.addresses = [{
+          address = "2604:1380:1001:6900::3";
+          prefixLength = 127;
+      }];
     };
   };
-
-
 
   nix.maxJobs = 32;
 
