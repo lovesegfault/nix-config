@@ -5,7 +5,6 @@
     ../dev
     ../dev/stcg-gcs.nix
 
-    ../hardware/aarch64-build-box.nix
     ../hardware/packet-c2-large-arm.nix
   ] ++ (import ../users).stream;
 
