@@ -100,8 +100,8 @@
       };
 
       ipv6.addresses = [{
-          address = "2604:1380:1001:6900::3";
-          prefixLength = 127;
+        address = "2604:1380:1001:6900::3";
+        prefixLength = 127;
       }];
     };
   };

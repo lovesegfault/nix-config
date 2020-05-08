@@ -25,19 +25,19 @@
   };
 
   services.ddclient =
-  let
-    secretPath = ../secrets/ddclient-hegel.nix;
-    secretCondition = (builtins.pathExists secretPath);
-    secret = lib.optionalAttrs secretCondition (import secretPath);
-  in
-  (
-    lib.recursiveUpdate {
-      enable = true;
-      ssl = true;
-      protocol = "googledomains";
-      domains = [ "hegel.meurer.org" ];
-    } secret
-  );
+    let
+      secretPath = ../secrets/ddclient-hegel.nix;
+      secretCondition = (builtins.pathExists secretPath);
+      secret = lib.optionalAttrs secretCondition (import secretPath);
+    in
+    (
+      lib.recursiveUpdate {
+        enable = true;
+        ssl = true;
+        protocol = "googledomains";
+        domains = [ "hegel.meurer.org" ];
+      } secret
+    );
 
 
   time.timeZone = "America/Los_Angeles";
