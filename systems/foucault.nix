@@ -31,6 +31,7 @@
   };
 
   hardware.u2f.enable = true;
+  hardware.logitech.enable = true;
 
   networking = {
     hostName = "foucault";
