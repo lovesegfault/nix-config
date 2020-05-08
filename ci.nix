@@ -57,8 +57,7 @@ let
       ++ [ (cachix { attributes = h; }) ]
     );
 
-  # FIXME: figure out what's wrong with the aarch64 build box
-  hosts = filterAttrs (_:v: v != "aarch64-linux") (import ./hosts.nix);
+  hosts = import ./hosts.nix;
   systemJobs = mapAttrs mkBuildStep hosts;
   ci = {
     on = [ "pull_request" "push" ];
