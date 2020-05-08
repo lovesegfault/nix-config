@@ -56,7 +56,6 @@ let
       optional (a == "aarch64-linux") aarch64
       ++ [ (cachix { attributes = h; }) ]
     );
-
   hosts = import ./hosts.nix;
   systemJobs = mapAttrs mkBuildStep hosts;
   ci = {
