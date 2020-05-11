@@ -51,11 +51,10 @@ let
           sudo tee /etc/nix/machines > /dev/null
     '';
   };
-  mkBuildStep = h: a: mkJob
-    (
-      optional (a == "aarch64-linux") aarch64
-      ++ [ (cachix { attributes = h; }) ]
-    );
+  mkBuildStep = h: a: mkJob (
+    optional (a == "aarch64-linux") aarch64
+    ++ [ (cachix { attributes = h; }) ]
+  );
   hosts = import ./hosts.nix;
   systemJobs = mapAttrs mkBuildStep hosts;
   ci = {

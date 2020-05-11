@@ -15,8 +15,8 @@ with lib;
     uid = 8888;
   };
 
-  home-manager.users.bemeurer = lib.mkMerge
-    (
+  home-manager.users.bemeurer =
+    lib.mkMerge (
       [
         (import ./core)
         (import ./dev)

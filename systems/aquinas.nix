@@ -33,12 +33,14 @@
       secret = lib.optionalAttrs secretCondition (import secretPath);
     in
     (
-      lib.recursiveUpdate {
-        enable = true;
-        ssl = true;
-        protocol = "googledomains";
-        domains = [ "aquinas.meurer.org" ];
-      } secret
+      lib.recursiveUpdate
+        {
+          enable = true;
+          ssl = true;
+          protocol = "googledomains";
+          domains = [ "aquinas.meurer.org" ];
+        }
+        secret
     );
 
   services.logind.lidSwitchExternalPower = "ignore";

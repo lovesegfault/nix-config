@@ -31,12 +31,14 @@
       secret = lib.optionalAttrs secretCondition (import secretPath);
     in
     (
-      lib.recursiveUpdate {
-        enable = true;
-        ssl = true;
-        protocol = "googledomains";
-        domains = [ "hegel.meurer.org" ];
-      } secret
+      lib.recursiveUpdate
+        {
+          enable = true;
+          ssl = true;
+          protocol = "googledomains";
+          domains = [ "hegel.meurer.org" ];
+        }
+        secret
     );
 
 

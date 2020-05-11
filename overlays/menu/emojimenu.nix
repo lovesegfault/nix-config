@@ -5,7 +5,8 @@ let
     url = "https://raw.githubusercontent.com/github/gemoji/d98617abf23cee2594381045440ad3cce490d12c/db/emoji.json";
     sha256 = "0dd1mlhw2cfpr4l06f12xmapypvmg3299nxkqs0af8l8whq97jnz";
   };
-  emojis = super.runCommand "emojis.txt" { nativeBuildInputs = [ super.jq ]; } ''
+  emojis = super.runCommand "emojis.txt"
+    { nativeBuildInputs = [ super.jq ]; } ''
     cat ${emoji_json} | jq -r '.[] | "\(.emoji) \t   \(.description)"' | sed -e 's,\\t,\t,g' > $out
   '';
   alacritty = "${super.alacritty}/bin/alacritty";
