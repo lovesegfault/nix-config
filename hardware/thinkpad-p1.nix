@@ -10,8 +10,9 @@
     extraModprobeConfig = ''
       options thinkpad_acpi experimental=1
     '';
+    extraModulePackages = with kernelPackages; [ ddcci-driver ];
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-    kernelModules = [ "kvm-intel" ];
+    kernelModules = [ "kvm-intel" "ddcci" "ddcci-backlight" ];
     kernelPackages = pkgs.linuxPackages;
     kernelPatches = [
       {
