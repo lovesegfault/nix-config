@@ -12,7 +12,7 @@
     '';
     extraModulePackages = with kernelPackages; [ ddcci-driver ];
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-    kernelModules = [ "kvm-intel" "ddcci" "ddcci-backlight" ];
+    kernelModules = [ "kvm-intel" "i2c_dev" "ddcci-backlight" ];
     kernelPackages = pkgs.linuxPackages;
     kernelPatches = [
       {
