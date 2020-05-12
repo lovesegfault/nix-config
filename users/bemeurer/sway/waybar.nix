@@ -47,6 +47,7 @@ let
       format-icons = [ "" "" "" ];
     };
     backlight = {
+      device = "intel_backlight";
       format = "{percent}% {icon}";
       format-icons = [ "" "" ];
       on-scroll-up = "${pkgs.brillo}/bin/brillo -e -A 0.5";
