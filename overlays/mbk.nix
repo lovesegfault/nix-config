@@ -11,7 +11,7 @@ self: super: {
         local src="$1"
         local dst="$2"
 
-        if [ -z ${DEBUG+x} ]; then
+        if [ -z ''${DEBUG+x} ]; then
             gsutil -m rsync -d -r "$src" "$dst"
         else
             gsutil -m rsync -d -r -n "$src" "$dst"
