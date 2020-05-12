@@ -1,5 +1,7 @@
 self: super: {
-  mbk = self.writeScriptBin "mbk" ''
+  mbk = let
+    gsutil = "${self.google-cloud-sdk}/bin/gsutil";
+  in self.writeScriptBin "mbk" ''
     #!${self.stdenv.shell}
 
     DOCUMENTS_BUCKET="gs://documents.meurer.org"
@@ -12,9 +14,9 @@ self: super: {
         local dst="$2"
 
         if [ -z ''${DEBUG+x} ]; then
-            gsutil -m rsync -d -r "$src" "$dst"
+            ${gsutil} -m rsync -d -r "$src" "$dst"
         else
-            gsutil -m rsync -d -r -n "$src" "$dst"
+            ${gsutil} -m rsync -d -r -n "$src" "$dst"
         fi
     }
 
