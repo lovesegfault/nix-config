@@ -28,7 +28,7 @@ self: super: {
         # weirder state dirs
         backup "$HOME/.local/share/shotwell" "$MISC_BUCKET/shotwell"
         backup "$HOME/.local/share/lollypop" "$MISC_BUCKET/lollypop"
-        backup "$HOME/.local/share/zsh_history" "$MISC_BUCKET/zsh_history"
+        backup "$HOME/.local/share/zsh_history" "$MISC_BUCKET"
     }
 
     main
