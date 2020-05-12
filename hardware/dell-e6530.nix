@@ -12,19 +12,18 @@
     kernelPackages = pkgs.linuxPackages_latest;
   };
 
-  hardware.enableRedistributableFirmware = true;
-
   console = {
     font = "ter-v14n";
     keyMap = "uk";
     packages = with pkgs; [ terminus_font ];
   };
 
+  hardware.brillo.enable = true;
+  hardware.enableRedistributableFirmware = true;
+
   nix.maxJobs = 8;
 
   nixpkgs.system = "x86_64-linux";
-
-  programs.light.enable = true;
 
   services = {
     fstrim.enable = true;

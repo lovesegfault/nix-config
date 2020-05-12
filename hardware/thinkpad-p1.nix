@@ -37,21 +37,20 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [ powertop ];
-
-  hardware.enableRedistributableFirmware = true;
-
   console = {
     font = "ter-v28n";
     keyMap = "us";
     packages = with pkgs; [ terminus_font ];
   };
 
+  environment.systemPackages = with pkgs; [ powertop ];
+
+  hardware.brillo.enable = true;
+  hardware.enableRedistributableFirmware = true;
+
   nix.maxJobs = 12;
 
   nixpkgs.system = "x86_64-linux";
-
-  programs.light.enable = true;
 
   services = {
     fstrim.enable = true;

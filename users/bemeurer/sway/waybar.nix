@@ -49,8 +49,8 @@ let
     backlight = {
       format = "{percent}% {icon}";
       format-icons = [ "" "" ];
-      on-scroll-up = "${pkgs.light}/bin/light -A 0.5";
-      on-scroll-down = "${pkgs.light}/bin/light -U 0.5";
+      on-scroll-up = "${pkgs.brillo}/bin/brillo -A 0.2";
+      on-scroll-down = "${pkgs.brillo}/bin/brillo -U 0.2";
     };
     battery = {
       bat = "BAT0";
