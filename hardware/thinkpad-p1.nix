@@ -7,9 +7,6 @@
   ];
 
   boot = rec {
-    extraModprobeConfig = ''
-      options thinkpad_acpi experimental=1
-    '';
     extraModulePackages = with kernelPackages; [ ddcci-driver ];
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     kernelModules = [ "kvm-intel" "i2c_dev" "ddcci-backlight" ];
@@ -56,10 +53,6 @@
     fstrim.enable = true;
     fwupd.enable = true;
     hardware.bolt.enable = true;
-    thinkfan = {
-      enable = true;
-      smartSupport = true;
-    };
     throttled = {
       enable = true;
       extraConfig = ''
