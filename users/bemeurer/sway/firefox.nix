@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-beta-bin;
+    package = pkgs.firefox;
   };
   programs.newsboat.browser = "${config.programs.firefox.package}/bin/firefox";
 }
