@@ -9,25 +9,28 @@
     ./waybar.nix
   ];
 
-  home.packages = with pkgs; [
-    discord
-    gimp
-    gnome3.evince
-    gnome3.shotwell
-    grim
-    imv
-    libnotify
-    mbk
-    mumble
-    pavucontrol
-    slack
-    slurp
-    speedcrunch
-    spotify
-    thunderbird-bin
-    wl-clipboard
-    zoom-us
-  ];
+  home = {
+    file.".icons/default".source = "${pkgs.gnome3.adwaita-icon-theme}/share/icons/Adwaita";
+    packages = with pkgs; [
+      discord
+      gimp
+      gnome3.evince
+      gnome3.shotwell
+      grim
+      imv
+      libnotify
+      mbk
+      mumble
+      pavucontrol
+      slack
+      slurp
+      speedcrunch
+      spotify
+      thunderbird-bin
+      wl-clipboard
+      zoom-us
+    ];
+  };
 
   gtk = {
     enable = true;
@@ -47,6 +50,12 @@
         exec sway -d >& /tmp/sway.log
     fi
   '';
+
+  xsession.pointerCursor = {
+    package = pkgs.gnome3.adwaita-icon-theme;
+    name = "Adwaita";
+    size = 24;
+  };
 
   # FIXME: UGH why do these have a different syntax the the system
   # systemd.user.services?!
