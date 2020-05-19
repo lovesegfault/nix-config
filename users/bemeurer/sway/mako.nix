@@ -12,7 +12,7 @@
         background-color=#0a0e14
         border-color=#53bdfa
         default-timeout=30000
-        font=Hack 10
+        font=Iosevka 10
         icon-path=${homeIcons}:${systemIcons}:${homePixmaps}:${systemPixmaps}
         icons=1
         max-icon-size=96

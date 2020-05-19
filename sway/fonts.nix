@@ -2,7 +2,7 @@
   fonts = {
     fontconfig = {
       defaultFonts = {
-        monospace = [ "Hack" ];
+        monospace = [ "Iosevka" ];
         emoji = [ "Noto Color Emoji" ];
       };
       localConf = ''
@@ -69,8 +69,9 @@
       '';
     };
     fonts = with pkgs; [
-      hack-font
       font-awesome
+      hack-font
+      iosevka
       noto-fonts-cjk
       noto-fonts-emoji
       unifont

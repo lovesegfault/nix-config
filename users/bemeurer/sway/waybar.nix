@@ -107,7 +107,7 @@ in
       * {
           border: none;
           border-radius: 0;
-          font-family: Hack, FontAwesome5Free;
+          font-family: Iosevka, FontAwesome5Free;
           font-size: 13px;
           min-height: 0;
       }
