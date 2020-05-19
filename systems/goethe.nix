@@ -23,14 +23,11 @@
       }];
       useDHCP = lib.mkForce false;
     };
-    wireless = {
-      iwd.enable = true;
-      networks."Tabachnik".psk = let
+    wireless.networks."Tabachnik".psk = let
           secretPath = ../secrets/wifi-tabachnik.nix;
           secretCondition = (builtins.pathExists secretPath);
           secret = lib.optionalString secretCondition (import secretPath);
         in secret;
-    };
   };
 
   services.dhcpd4 = {
