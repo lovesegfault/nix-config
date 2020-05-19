@@ -18,16 +18,18 @@
     hostName = "goethe";
     interfaces.eth0 = {
       ipv4.addresses = [{
-          address = "192.168.2.1";
-          prefixLength = 24;
+        address = "192.168.2.1";
+        prefixLength = 24;
       }];
       useDHCP = lib.mkForce false;
     };
-    wireless.networks."Tabachnik".psk = let
-          secretPath = ../secrets/wifi-tabachnik.nix;
-          secretCondition = (builtins.pathExists secretPath);
-          secret = lib.optionalString secretCondition (import secretPath);
-        in secret;
+    wireless.networks."Tabachnik".psk =
+      let
+        secretPath = ../secrets/wifi-tabachnik.nix;
+        secretCondition = (builtins.pathExists secretPath);
+        secret = lib.optionalString secretCondition (import secretPath);
+      in
+      secret;
   };
 
   services.dhcpd4 = {
