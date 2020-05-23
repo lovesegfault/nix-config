@@ -33,7 +33,7 @@
     maxJobs = 2;
   };
 
-  nixpkgs.system = "aarch64-linux";
+  nixpkgs.localSystem.system = "aarch64-linux";
 
   services.fstrim.enable = true;
 
