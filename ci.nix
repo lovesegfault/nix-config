@@ -71,12 +71,12 @@ let
     name = "CI";
     jobs = systemJobs // {
       parsing = mkGenericJob [{
-          name = "Parsing";
-          run = "find . -name \"*.nix\" -exec nix-instantiate --parse --quiet {} >/dev/null +";
+        name = "Parsing";
+        run = "find . -name \"*.nix\" -exec nix-instantiate --parse --quiet {} >/dev/null +";
       }];
       formatting = mkGenericJob [{
-          name = "Formatting";
-          run = "nix-shell --run 'nixpkgs-fmt --check .'";
+        name = "Formatting";
+        run = "nix-shell --run 'nixpkgs-fmt --check .'";
       }];
     };
   };

@@ -14,6 +14,6 @@ let
   # attrset of form { hostname = systemDrv; ... }
   systemAttrs = genAttrs systems (n: mkSystem (./systems + "/${n}.nix"));
 in
-  systemAttrs // {
-    systems = pkgs.linkFarmFromDrvs "systems" (attrValues systemAttrs);
-  }
+systemAttrs // {
+  systems = pkgs.linkFarmFromDrvs "systems" (attrValues systemAttrs);
+}
