@@ -29,6 +29,8 @@
     hostId = "e387c8da";
   };
 
+  nix.systemFeatures = ["benchmark" "nixos-test" "big-parallel" "kvm" "gccarch-skylake"];
+
   time.timeZone = "America/Los_Angeles";
   virtualisation.docker.enable = true;
 }
