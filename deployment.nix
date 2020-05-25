@@ -23,6 +23,7 @@ in
   "sartre.meurer.org" = systems.sartre;
   "hegel.meurer.org" = systems.hegel;
   "localhost" = systems.foucault;
+  "192.168.1.18" = systems.goethe;
 
   # Sc
   "10.0.5.211" = systems.feuerbach;
