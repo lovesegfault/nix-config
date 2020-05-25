@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   imports = [
     ./bluetooth.nix
     ./efi.nix
@@ -47,7 +47,14 @@
 
   nix.maxJobs = 12;
 
-  nixpkgs.localSystem.system = "x86_64-linux";
+  nixpkgs.overlays = [(import ../overlays/march-skylake.nix)];
+  nixpkgs.localSystem = {
+    system = "x86_64-linux";
+    platform = lib.systems.platforms.pc64 // {
+      gcc.arch = "skylake";
+      gcc.tune = "skylake";
+    };
+  };
 
   services = {
     fstrim.enable = true;
