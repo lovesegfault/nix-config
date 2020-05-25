@@ -2,7 +2,7 @@ name: niv update
 on:
   schedule:
     # run this every day at 4:00am
-    - cron:  '0 4 * * *'
+    - cron:  '0 0 * * mon,wed,fri'
 jobs:
   niv-updater:
     name: 'Create PRs for niv-managed dependencies'
