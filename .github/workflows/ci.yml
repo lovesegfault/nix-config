@@ -246,42 +246,6 @@
         }
       ]
     },
-    "foucault": {
-      "runs-on": "ubuntu-latest",
-      "steps": [
-        {
-          "name": "Checkout",
-          "uses": "actions/checkout@v2"
-        },
-        {
-          "name": "Nix",
-          "uses": "cachix/install-nix-action@v8"
-        },
-        {
-          "name": "AArch64",
-          "run": "# first create the ssh config dir for root\nsudo mkdir -p /root/.ssh\n\n# now add the key for the build slave\necho \"${{ secrets.AARCH64_BOX_KEY }}\" |\n    sudo tee /root/.ssh/aarch64.community.nixos > /dev/null\nsudo chmod 0600 /root/.ssh/aarch64.community.nixos\n\n# and make it a known host\necho \"${{ secrets.KNOWN_HOSTS }}\" |\n    sudo tee -a /root/.ssh/known_hosts > /dev/null\n\n# lastly register the build slave with nix\nslave_cfg=(\n  lovesegfault@aarch64.nixos.community # user/addr\n  aarch64-linux                        # arch\n  /root/.ssh/aarch64.community.nixos   # key\n  64                                   # maxJobs\n  8                                    # speed factor\n  big-parallel                         # features\n)\necho \"${slave_cfg[*]}\" |\n    sudo tee /etc/nix/machines > /dev/null\n"
-        },
-        {
-          "name": "Cachix Setup",
-          "uses": "cachix/cachix-action@v5",
-          "with": {
-            "name": "nix-config",
-            "signingKey": "'${{ secrets.CACHIX_SIGNING_KEY }}'",
-            "skipNixBuild": true
-          }
-        },
-        {
-          "name": "Cachix Build",
-          "uses": "cachix/cachix-action@v5",
-          "with": {
-            "attributes": "foucault",
-            "name": "nix-config",
-            "signingKey": "'${{ secrets.CACHIX_SIGNING_KEY }}'",
-            "skipNixBuild": false
-          }
-        }
-      ]
-    },
     "goethe": {
       "runs-on": "ubuntu-latest",
       "steps": [

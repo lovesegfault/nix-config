@@ -64,7 +64,7 @@ let
   }];
 
   systems = map (n: removeSuffix ".nix" n) (attrNames (readDir ./systems));
-  systemJobs = genAttrs systems (s: mkSystemJob s);
+  systemJobs = filterAttrs (n: _: n != "foucault") (genAttrs systems (s: mkSystemJob s));
 
   ci = {
     on = [ "pull_request" "push" ];
