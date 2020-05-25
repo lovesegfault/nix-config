@@ -47,7 +47,7 @@
 
   nix.maxJobs = 12;
 
-  nixpkgs.overlays = [(import ../overlays/march-skylake.nix)];
+  nixpkgs.overlays = [ (import ../overlays/march-skylake.nix) ];
   nixpkgs.localSystem = {
     system = "x86_64-linux";
     platform = lib.systems.platforms.pc64 // {
