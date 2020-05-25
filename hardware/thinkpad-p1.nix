@@ -42,17 +42,24 @@
 
   environment.systemPackages = with pkgs; [ powertop ];
 
-  hardware.brillo.enable = true;
-  hardware.enableRedistributableFirmware = true;
+  hardware = {
+    brillo.enable = true;
+    enableRedistributableFirmware = true;
+  };
 
-  nix.maxJobs = 12;
+  nix = {
+    maxJobs = 12;
+    systemFeatures = [ "benchmark" "nixos-test" "big-parallel" "kvm" "gccarch-skylake" ];
+  };
 
-  nixpkgs.overlays = [ (import ../overlays/march-skylake.nix) ];
-  nixpkgs.localSystem = {
-    system = "x86_64-linux";
-    platform = lib.systems.platforms.pc64 // {
-      gcc.arch = "skylake";
-      gcc.tune = "skylake";
+  nixpkgs = {
+    overlays = [ (import ../overlays/march-skylake.nix) ];
+    localSystem = {
+      system = "x86_64-linux";
+      platform = lib.systems.platforms.pc64 // {
+        gcc.arch = "skylake";
+        gcc.tune = "skylake";
+      };
     };
   };
 
