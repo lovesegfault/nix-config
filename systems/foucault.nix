@@ -6,9 +6,9 @@
     ../dev
     ../dev/stcg-gcs.nix
     ../dev/stcg-cameras.nix
+    ../dev/stcg-aarch64-builder.nix
 
     ../hardware/thinkpad-p1.nix
-    ../hardware/aarch64-build-box.nix
 
     ../sway
   ];
