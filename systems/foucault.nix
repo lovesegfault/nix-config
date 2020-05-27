@@ -44,4 +44,9 @@
     [{ device = "/dev/disk/by-uuid/ec8c101f-65fd-47c4-8e17-f1b5395b68c7"; }];
 
   time.timeZone = "America/Los_Angeles";
+
+  virtualisation.libvirtd = {
+    enable = true;
+    qemuOvmf = true;
+  };
 }
