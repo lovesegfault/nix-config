@@ -18,6 +18,8 @@
     device = "/dev/disk/by-uuid/2d6ff3d0-cdfd-4b6e-a689-c43d21627279";
   };
 
+  environment.systemPackages = with pkgs; [ gnome3.gnome-boxes ];
+
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/4e217a4b-40ae-4bde-b771-04eabfe2369d";
