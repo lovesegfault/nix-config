@@ -23,7 +23,7 @@
     hostName = "hegel";
     hostId = "69173f27";
     defaultGateway = {
-      address =  "147.75.47.53";
+      address = "147.75.47.53";
       interface = "bond0";
     };
     defaultGateway6 = {
