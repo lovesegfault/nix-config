@@ -74,8 +74,13 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPouKApFuTmz3XSadk7mZR69bOuPJK/LO+dzFJyIbwkJ packet.net superuser"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKtbU8DG8wNNq3qLeb0g6kXT2iQEU4FDFc/bXDwqcL+s Stream Team root for remote ARM builders"
-  ];
+  users.users = {
+    bemeurer.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPl71EcWLBnBErlZiERGSVz466ole9A7RI73h5DbxMDq bemeurer@stcg-aarch64-builder"
+    ];
+
+    root.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPouKApFuTmz3XSadk7mZR69bOuPJK/LO+dzFJyIbwkJ packet.net superuser"
+    ];
+  };
 }
