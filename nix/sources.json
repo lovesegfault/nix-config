@@ -24,15 +24,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixus": {
-        "branch": "master",
+        "branch": "sudo",
         "description": null,
         "homepage": "",
         "owner": "Infinisil",
         "repo": "nixus",
-        "rev": "ea43d8e9e73089f0ca49d8bf9ae294bba97001d2",
-        "sha256": "0sxbhfpx87xsz5pjgpyyh9jnbd5k39gnhfpqa6pyi4scl4vmw2y1",
+        "rev": "89120c2716336ba0328ff0195c0aeffb558199c9",
+        "sha256": "10rbc319sg4c84ibaj7awb7nhlbbnviy9286sgvqmnppqglzh36y",
         "type": "tarball",
-        "url": "https://github.com/Infinisil/nixus/archive/ea43d8e9e73089f0ca49d8bf9ae294bba97001d2.tar.gz",
+        "url": "https://github.com/Infinisil/nixus/archive/89120c2716336ba0328ff0195c0aeffb558199c9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

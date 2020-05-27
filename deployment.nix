@@ -5,5 +5,9 @@ import (import ./nix).nixus ({ ... }: {
       host = "localhost";
       configuration = ./systems/foucault.nix;
     };
+    cantor = { ... }: {
+      host = "10.0.5.217";
+      configuration = ./systems/cantor.nix;
+    };
   };
 })
