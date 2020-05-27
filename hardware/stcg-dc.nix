@@ -22,8 +22,10 @@
     useDHCP = false;
   };
 
-
-  nix.maxJobs = 64;
+  nix = {
+    maxJobs = 64;
+    systemFeatures = [ "benchmark" "nixos-test" "big-parallel" "kvm" "gccarch-skylake" ];
+  };
 
   nixpkgs.localSystem.system = "x86_64-linux";
 
