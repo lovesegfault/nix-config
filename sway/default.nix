@@ -30,4 +30,15 @@
     (import ../overlays/passh.nix)
     (import ../overlays/prtsc.nix)
   ];
+
+  xdg = {
+    autostart.enable = false;
+    icons.enable = true;
+    menus.enable = true;
+    mime.enable = true;
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+    };
+  };
 }
