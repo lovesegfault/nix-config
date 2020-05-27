@@ -18,16 +18,16 @@ in
   };
 
   # Personal
+  "192.168.1.18" = systems.goethe;
   "aquinas.meurer.org" = systems.aquinas;
   "bohr.meurer.org" = systems.bohr;
-  "sartre.meurer.org" = systems.sartre;
-  "hegel.meurer.org" = systems.hegel;
   "localhost" = systems.foucault;
-  "192.168.1.18" = systems.goethe;
+  "sartre.meurer.org" = systems.sartre;
 
   # Sc
   "10.0.5.211" = systems.feuerbach;
   "10.0.5.217" = systems.cantor;
   "10.1.16.11" = systems.peano;
   "10.1.16.12" = systems.abel;
+  "147.75.47.54" = systems.hegel;
 }
