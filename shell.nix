@@ -1,6 +1,6 @@
 let
   sources = import ./nix;
-  pkgs = sources.pkgs { };
+  pkgs = import sources.nixpkgs { };
 in
 pkgs.mkShell {
   name = "nix-config";

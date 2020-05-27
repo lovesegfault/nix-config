@@ -1,4 +1,4 @@
-{ sources ? import ./nix, lib ? sources.lib, pkgs ? sources.pkgs { } }:
+{ sources ? import ./nix, lib ? import sources.lib, pkgs ? import sources.nixpkgs { } }:
 with builtins; with lib;
 let
   mkGenericJob = extraSteps: {

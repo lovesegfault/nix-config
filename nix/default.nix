@@ -1,8 +1,8 @@
 let
   sources = import ./sources.nix;
 in
-rec {
-  home-manager = import (sources.home-manager + "/nixos");
-  lib = import (sources.nixpkgs + "/lib");
-  pkgs = import sources.nixpkgs;
+{
+  inherit (sources) nixpkgs nixus;
+  home-manager = sources.home-manager + "/nixos";
+  lib = sources.nixpkgs + "/lib";
 }
