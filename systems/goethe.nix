@@ -1,6 +1,7 @@
 { lib, pkgs, ... }:
 {
   imports = [
+    (import ../users).andi
     (import ../users).bemeurer
     ../core
 
