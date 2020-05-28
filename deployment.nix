@@ -18,7 +18,7 @@ in
   };
 
   # Personal
-  "192.168.1.18" = systems.goethe;
+  "192.168.2.1" = systems.goethe;
   "aquinas.meurer.org" = systems.aquinas;
   "bohr.meurer.org" = systems.bohr;
   "localhost" = systems.foucault;
