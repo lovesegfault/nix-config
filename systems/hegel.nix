@@ -78,7 +78,12 @@
     bemeurer.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPl71EcWLBnBErlZiERGSVz466ole9A7RI73h5DbxMDq bemeurer@stcg-aarch64-builder"
     ];
-
+    cloud.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAzcKDwJmpQb0icJW025OJzOT1CFAsXPLFPeGwSIgc5O cloud@stcg-aarch64-builder"
+    ];
+    nagisa.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ2AbFIHV+041/Qg4rbdkcF7hTx2yNPOIaM+Wmx21kU5 nagisa@stcg-aarch64-builder"
+    ];
     root.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPouKApFuTmz3XSadk7mZR69bOuPJK/LO+dzFJyIbwkJ packet.net superuser"
     ];
