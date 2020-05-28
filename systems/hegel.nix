@@ -80,6 +80,7 @@
     ];
     cloud.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAzcKDwJmpQb0icJW025OJzOT1CFAsXPLFPeGwSIgc5O cloud@stcg-aarch64-builder"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMG2cf/uKaDfGCXxqhLnFBJHPLWFZz27JBktd10fUtY7 cloud@stcg-aarch64-builder"
     ];
     nagisa.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ2AbFIHV+041/Qg4rbdkcF7hTx2yNPOIaM+Wmx21kU5 nagisa@stcg-aarch64-builder"
