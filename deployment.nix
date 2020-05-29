@@ -8,10 +8,12 @@ nixus ({ ... }: {
   nodes = {
     # Personal
     aquinas = { ... }: {
+      enabled = false;
       host = "aquinas.meurer.org";
       configuration = ./systems/aquinas.nix;
     };
     bohr = { ... }: {
+      enabled = false;
       host = "bohr.meurer.org";
       configuration = ./systems/bohr.nix;
     };
