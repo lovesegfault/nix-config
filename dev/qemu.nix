@@ -6,10 +6,6 @@
 
   virtualisation = {
     kvmgt.enable = true;
-    libvirtd = {
-      enable = true;
-      onBoot = "ignore";
-      onShutdown = "suspend";
-    };
+    libvirtd.enable = true;
   };
 }

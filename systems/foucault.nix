@@ -7,6 +7,7 @@
     ../dev/stcg-gcs.nix
     ../dev/stcg-cameras.nix
     ../dev/stcg-aarch64-builder.nix
+    ../dev/qemu.nix
 
     ../hardware/thinkpad-p1.nix
 
@@ -40,6 +41,8 @@
     interfaces.enp0s31f6.mtu = 9000;
   };
 
+  security.polkit.enable = true;
+
   services.keybase.enable = false;
 
   swapDevices =
@@ -47,8 +50,5 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  virtualisation.libvirtd = {
-    enable = true;
-    qemuOvmf = true;
-  };
+  users.users.bemeurer.extraGroups = [ "kvm" "libvirtd" ];
 }
