@@ -19,7 +19,7 @@
     device = "/dev/disk/by-uuid/2d6ff3d0-cdfd-4b6e-a689-c43d21627279";
   };
 
-  environment.systemPackages = with pkgs; [ gnome3.gnome-boxes ];
+  environment.systemPackages = with pkgs; [ virt-manager spice-gtk ];
 
   fileSystems = {
     "/" = {
@@ -42,6 +42,7 @@
   };
 
   security.polkit.enable = true;
+  security.wrappers.spice-client-glib-usb-acl-helper.source = "${pkgs.spice-gtk}/bin/spice-client-glib-usb-acl-helper";
 
   services.keybase.enable = false;
 
