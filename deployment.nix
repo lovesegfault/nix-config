@@ -1,4 +1,5 @@
-{ pkgs ? null }: let
+{ pkgs ? null }:
+let
   sources = import ./nix;
   nixus = import sources.nixus;
   nixpkgs = if pkgs == null then sources.nixpkgs else pkgs;
