@@ -22,6 +22,7 @@ nixus ({ ... }: {
       configuration = ./systems/foucault.nix;
     };
     goethe = { ... }: {
+      enabled = false;
       host = "goethe.meurer.org";
       configuration = ./systems/goethe.nix;
     };
@@ -48,6 +49,7 @@ nixus ({ ... }: {
       configuration = ./systems/feuerbach.nix;
     };
     hegel = { ... }: {
+      enabled = false;
       host = "147.75.47.54";
       configuration = ./systems/hegel.nix;
     };
