@@ -9,7 +9,4 @@ pkgs.mkShell {
     niv
     nixpkgs-fmt
   ];
-  shellHook = ''
-    export NIX_PATH="nixpkgs=${pkgs.path}"
-  '';
 }
