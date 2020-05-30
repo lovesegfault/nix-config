@@ -72,6 +72,9 @@
     };
   };
 
+  # Causes issues with remote builders
+  services.sshguard.enable = lib.mkForce false;
+
   time.timeZone = "America/Los_Angeles";
 
   users.users = {
