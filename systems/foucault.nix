@@ -8,6 +8,7 @@
     ../dev/stcg-cameras.nix
     ../dev/stcg-aarch64-builder.nix
     ../dev/qemu.nix
+    ../dev/virt-manager.nix
 
     ../hardware/thinkpad-p1.nix
 
@@ -18,8 +19,6 @@
     allowDiscards = true;
     device = "/dev/disk/by-uuid/2d6ff3d0-cdfd-4b6e-a689-c43d21627279";
   };
-
-  environment.systemPackages = with pkgs; [ virt-manager spice-gtk ];
 
   fileSystems = {
     "/" = {
@@ -41,13 +40,11 @@
     interfaces.enp0s31f6.mtu = 9000;
   };
 
-  security.polkit.enable = true;
-  security.wrappers.spice-client-glib-usb-acl-helper.source = "${pkgs.spice-gtk}/bin/spice-client-glib-usb-acl-helper";
-
   services.keybase.enable = false;
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/ec8c101f-65fd-47c4-8e17-f1b5395b68c7"; }];
+  swapDevices = [{
+    device = "/dev/disk/by-uuid/ec8c101f-65fd-47c4-8e17-f1b5395b68c7";
+  }];
 
   time.timeZone = "America/Los_Angeles";
 

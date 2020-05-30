@@ -4,8 +4,5 @@
     kernelModules = [ "kvm_intel" ];
   };
 
-  virtualisation = {
-    kvmgt.enable = true;
-    libvirtd.enable = true;
-  };
+  virtualisation.libvirtd.enable = true;
 }
