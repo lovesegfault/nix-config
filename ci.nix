@@ -44,7 +44,7 @@ let
         '';
       }
       {
-        name = "Cachix Setup";
+        name = "Cachix";
         uses = "cachix/cachix-action@v6";
         "with" = {
           name = "nix-config";
@@ -55,7 +55,7 @@ let
   };
 
   mkSystemJob = attrToBuild: mkGenericJob [{
-    name = "Nix Build";
+    name = "Build";
     run = "nix-build -A ${attrToBuild}";
   }];
 
