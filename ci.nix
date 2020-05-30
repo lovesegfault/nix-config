@@ -10,7 +10,10 @@ let
       }
       {
         name = "Nix";
-        uses = "cachix/install-nix-action@v8";
+        uses = "cachix/install-nix-action@v9";
+        "with" = {
+          skip_adding_nixpkgs_channel = true;
+        };
       }
       {
         name = "AArch64";
@@ -33,7 +36,7 @@ let
             aarch64-linux                        # arch
             /root/.ssh/aarch64.community.nixos   # key
             64                                   # maxJobs
-            8                                    # speed factor
+            1                                    # speed factor
             big-parallel                         # features
           )
           echo "''${slave_cfg[*]}" |
@@ -42,9 +45,8 @@ let
       }
       {
         name = "Cachix Setup";
-        uses = "cachix/cachix-action@v5";
+        uses = "cachix/cachix-action@v6";
         "with" = {
-          skipNixBuild = true;
           name = "nix-config";
           signingKey = "'\${{ secrets.CACHIX_SIGNING_KEY }}'";
         };
@@ -53,14 +55,8 @@ let
   };
 
   mkSystemJob = attrToBuild: mkGenericJob [{
-    name = "Cachix Build";
-    uses = "cachix/cachix-action@v5";
-    "with" = {
-      attributes = attrToBuild;
-      skipNixBuild = false;
-      name = "nix-config";
-      signingKey = "'\${{ secrets.CACHIX_SIGNING_KEY }}'";
-    };
+    name = "Nix Build";
+    run = "nix-build -A ${attrToBuild}";
   }];
 
   systems = filter (e: e != "foucault") (attrNames (import ./default.nix { }).config.nodes);
