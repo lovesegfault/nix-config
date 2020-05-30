@@ -63,13 +63,12 @@ let
     };
   }];
 
-  systems = map (n: removeSuffix ".nix" n) (attrNames (readDir ./systems));
-  systemJobs = filterAttrs (n: _: n != "foucault") (genAttrs systems (s: mkSystemJob s));
+  systems = filter (e: e != "foucault") (attrNames (import ./default.nix {}).config.nodes);
 
   ci = {
     on = [ "pull_request" "push" ];
     name = "CI";
-    jobs = systemJobs // {
+    jobs = (genAttrs systems mkSystemJob) // {
       parsing = mkGenericJob [{
         name = "Parsing";
         run = "find . -name \"*.nix\" -exec nix-instantiate --parse --quiet {} >/dev/null +";
