@@ -14,7 +14,7 @@ nixus ({ ... }: {
       configuration = ./systems/aquinas.nix;
     };
     bohr = { ... }: {
-      enabled = false;
+      hasFastConnection = true;
       host = "bohr.meurer.org";
       configuration = ./systems/bohr.nix;
     };
