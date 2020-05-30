@@ -63,7 +63,7 @@ let
     };
   }];
 
-  systems = filter (e: e != "foucault") (attrNames (import ./default.nix {}).config.nodes);
+  systems = filter (e: e != "foucault") (attrNames (import ./default.nix { }).config.nodes);
 
   ci = {
     on = [ "pull_request" "push" ];
