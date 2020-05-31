@@ -45,6 +45,7 @@ in
       (import ../overlays/ffmpeg.nix)
       (import ../overlays/mosh.nix)
       (import ../overlays/weechat.nix)
+      (import ../overlays/mkSecret.nix)
     ];
   };
 
