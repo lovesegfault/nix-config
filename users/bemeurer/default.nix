@@ -1,6 +1,15 @@
 { config, lib, pkgs, ... }:
 with lib;
 {
+  secrets.stcg-arcanist-config = {
+    file =
+      let
+        path = ../../secrets/stcg-arcanist-config;
+      in
+      if builtins.pathExists path then path else builtins.toFile "stcg-arcanist-config" "";
+    user = "bemeurer";
+  };
+
   users.users.bemeurer = {
     createHome = true;
     description = "Bernardo Meurer";
@@ -16,10 +25,11 @@ with lib;
   };
 
   home-manager.users.bemeurer =
-    lib.mkMerge (
+    mkMerge (
       [
         (import ./core)
         (import ./dev)
+        ({ ... }: { home.file.arcrc = { source = config.secrets.stcg-arcanist-config.file; target = ".arcrc"; }; })
       ] ++ optionals config.programs.sway.enable [
         (import ./gpg)
         (import ./sway)

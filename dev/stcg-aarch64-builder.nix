@@ -12,7 +12,7 @@
         hostName = "147.75.47.54";
         maxJobs = 32;
         speedFactor = 1;
-        sshKey = config.secrets.stcg-aarch64-builder-key;
+        sshKey = config.secrets.stcg-aarch64-builder-key.file;
         sshUser = "bemeurer";
         system = "aarch64-linux";
         supportedFeatures = [ "big-parallel" ];

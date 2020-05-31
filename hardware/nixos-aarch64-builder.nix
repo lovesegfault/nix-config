@@ -12,7 +12,7 @@
         hostName = "aarch64.nixos.community";
         maxJobs = 64;
         speedFactor = 8;
-        sshKey = config.secrets.nixos-aarch64-builder-key;
+        sshKey = config.secrets.nixos-aarch64-builder-key.file;
         sshUser = "lovesegfault";
         system = "aarch64-linux";
         supportedFeatures = [ "big-parallel" ];
