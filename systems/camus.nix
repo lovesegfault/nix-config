@@ -17,6 +17,7 @@
   # TODO
   # environment.noXlibs = true;
 
+  secrets.wifi-stcg.file = pkgs.mkSecret ../secrets/wifi-stcg.conf;
   networking = {
     hostName = "camus";
     interfaces.eth0 = {
@@ -27,6 +28,10 @@
         }
       ];
       useDHCP = lib.mkForce false;
+    };
+    wireless.enable = lib.mkForce false;
+    supplicant.wlan0 = {
+      configFile.path = config.secrets.wifi-stcg.file;
     };
   };
 

@@ -15,6 +15,7 @@
 
   environment.noXlibs = true;
 
+  secrets.wifi-tabachnik.file = pkgs.mkSecret ../secrets/wifi-tabachnik.conf;
   networking = {
     hostName = "goethe";
     interfaces.eth0 = {
@@ -23,6 +24,10 @@
         prefixLength = 24;
       }];
       useDHCP = lib.mkForce false;
+    };
+    wireless.enable = lib.mkForce false;
+    supplicant.wlan0 = {
+      configFile.path = config.secrets.wifi-tabachnik.file;
     };
   };
 

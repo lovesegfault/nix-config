@@ -51,7 +51,7 @@
     };
     networkmanager.enable = lib.mkForce false;
     wireless = {
-      iwd.enable = true;
+      enable = true;
       interfaces = [ "wlan0" ];
     };
   };
