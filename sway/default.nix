@@ -15,6 +15,7 @@
     hicolor-icon-theme
     qgnomeplatform
     qt5.qtwayland
+    mon
   ];
 
   qt5 = {
