@@ -16,7 +16,7 @@
     let
       path = ../secrets/ddclient-sartre.conf;
     in
-    if builtins.pathExists path then path else builtins.toFile "ddclient-sartre.conf" "";
+    if builtins.pathExists path then path else lib.warn "Building without secrets" builtins.toFile "ddclient-sartre.conf" "";
 
   services.ddclient.configFile = config.secrets.ddclient-sartre;
 

@@ -6,7 +6,7 @@ with lib;
       let
         path = ../../secrets/stcg-arcanist-config;
       in
-      if builtins.pathExists path then path else builtins.toFile "stcg-arcanist-config" "";
+      if builtins.pathExists path then path else lib.warn "Building without secrets" builtins.toFile "stcg-arcanist-config" "";
     user = "bemeurer";
   };
 

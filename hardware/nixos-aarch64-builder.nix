@@ -1,9 +1,9 @@
 { config, lib, ... }: {
   secrets.nixos-aarch64-builder-key.file =
     let
-      path = ../secrets/nixos-aarch64-builder-key;
+      path = ../secrets/nixos-aarch64-builder.key;
     in
-    if builtins.pathExists path then path else builtins.toFile "nixos-aarch64-builder-key" "";
+    if builtins.pathExists path then path else lib.warn "Building without secrets" builtins.toFile "nixos-aarch64-builder-key" "";
 
   nix = {
     distributedBuilds = true;

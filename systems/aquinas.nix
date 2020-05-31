@@ -30,7 +30,7 @@
     let
       path = ../secrets/ddclient-aquinas.conf;
     in
-    if builtins.pathExists path then path else builtins.toFile "ddclient-aquinas.conf" "";
+    if builtins.pathExists path then path else lib.warn "Building without secrets" builtins.toFile "ddclient-aquinas.conf" "";
 
   services.ddclient.configFile = config.secrets.ddclient-aquinas;
 

@@ -30,7 +30,7 @@
     let
       path = ../secrets/ddclient-goethe.conf;
     in
-    if builtins.pathExists path then path else builtins.toFile "ddclient-goethe.conf" "";
+    if builtins.pathExists path then path else lib.warn "Building without secrets" builtins.toFile "ddclient-goethe.conf" "";
 
   services.ddclient.configFile = config.secrets.ddclient-goethe;
 

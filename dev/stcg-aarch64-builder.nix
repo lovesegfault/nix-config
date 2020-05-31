@@ -3,7 +3,7 @@
     let
       path = ../secrets/stcg-aarch64-builder.key;
     in
-    if builtins.pathExists path then path else builtins.toFile "stcg-aarch64-builder.key" "";
+    if builtins.pathExists path then path else lib.warn "Building without secrets" builtins.toFile "stcg-aarch64-builder.key" "";
 
   nix = {
     distributedBuilds = true;
