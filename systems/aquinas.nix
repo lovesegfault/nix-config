@@ -1,4 +1,4 @@
-{ config, lib, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     (import ../users).bemeurer
     ../core
@@ -26,12 +26,7 @@
     hostName = "aquinas";
   };
 
-  secrets.ddclient-aquinas.file =
-    let
-      path = ../secrets/ddclient-aquinas.conf;
-    in
-    if builtins.pathExists path then path else lib.warn "Building without secrets" builtins.toFile "ddclient-aquinas.conf" "";
-
+  secrets.ddclient-aquinas.file = pkgs.mkSecret ../secrets/ddclient-aquinas.conf;
   services.ddclient.configFile = config.secrets.ddclient-aquinas;
 
   services.logind.lidSwitchExternalPower = "ignore";

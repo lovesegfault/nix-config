@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
-  secrets.nixos-aarch64-builder-key.file = pkgs.mkSecret ../secrets/nixos-aarch64-builder.key;
 
+  secrets.nixos-aarch64-builder-key.file = pkgs.mkSecret ../secrets/nixos-aarch64-builder.key;
   nix = {
     distributedBuilds = true;
     buildMachines = [

@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 {
   imports = [
     (import ../users).bemeurer
@@ -11,12 +11,7 @@
 
   networking.hostName = "bohr";
 
-  secrets.ddclient-bohr.file =
-    let
-      path = ../secrets/ddclient-bohr.conf;
-    in
-    if builtins.pathExists path then path else lib.warn "Building without secrets" builtins.toFile "ddclient-bohr.conf" "";
-
+  secrets.ddclient-bohr.file = mkSecret ../secrets/ddclient-bohr.conf;
   services.ddclient.configFile = config.secrets.ddclient-bohr;
 
   services.openssh.ports = [ 22 55889 ];

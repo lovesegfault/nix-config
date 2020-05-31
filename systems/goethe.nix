@@ -26,12 +26,7 @@
     };
   };
 
-  secrets.ddclient-goethe.file =
-    let
-      path = ../secrets/ddclient-goethe.conf;
-    in
-    if builtins.pathExists path then path else lib.warn "Building without secrets" builtins.toFile "ddclient-goethe.conf" "";
-
+  secrets.ddclient-goethe.file = pkgs.mkSecret ../secrets/ddclient-goethe.conf;
   services.ddclient.configFile = config.secrets.ddclient-goethe;
 
   services.dhcpd4 = {

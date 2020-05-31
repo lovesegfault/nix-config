@@ -1,10 +1,6 @@
-{ config, lib, ... }: {
-  secrets.stcg-aarch64-builder-key.file =
-    let
-      path = ../secrets/stcg-aarch64-builder.key;
-    in
-    if builtins.pathExists path then path else lib.warn "Building without secrets" builtins.toFile "stcg-aarch64-builder.key" "";
+{ config, lib, pkgs, ... }: {
 
+  secrets.stcg-aarch64-builder-key.file = pkgs.mkSecret ../secrets/stcg-aarch64-builder.key;
   nix = {
     distributedBuilds = true;
     buildMachines = [

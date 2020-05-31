@@ -1,15 +1,6 @@
 { config, lib, pkgs, ... }:
 with lib;
 {
-  secrets.stcg-arcanist-config = {
-    file =
-      let
-        path = ../../secrets/stcg-arcanist-config;
-      in
-      if builtins.pathExists path then path else lib.warn "Building without secrets" builtins.toFile "stcg-arcanist-config" "";
-    user = "bemeurer";
-  };
-
   users.users.bemeurer = {
     createHome = true;
     description = "Bernardo Meurer";
@@ -24,6 +15,7 @@ with lib;
     uid = 8888;
   };
 
+  secrets.stcg-arcanist-config = pkgs.mkSecret ../../secrets/stcg-arcanist-config;
   home-manager.users.bemeurer =
     mkMerge (
       [
