@@ -1,6 +1,6 @@
 { lib, pkgs, ... }: {
   imports = [
-    ./aarch64-build-box.nix
+    ./nixos-aarch64-builder.nix
     ./bluetooth.nix
   ];
 
@@ -51,7 +51,7 @@
     };
     networkmanager.enable = lib.mkForce false;
     wireless = {
-      enable = true;
+      iwd.enable = true;
       interfaces = [ "wlan0" ];
     };
   };

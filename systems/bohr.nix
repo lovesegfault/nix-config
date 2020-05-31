@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, lib, ... }:
 {
   imports = [
     (import ../users).bemeurer
@@ -11,22 +11,13 @@
 
   networking.hostName = "bohr";
 
-  services.ddclient =
+  secrets.ddclient-bohr.file =
     let
-      secretPath = ../secrets/ddclient-bohr.nix;
-      secretCondition = (builtins.pathExists secretPath);
-      secret = lib.optionalAttrs secretCondition (import secretPath);
+      path = ../secrets/ddclient-bohr.conf;
     in
-    (
-      lib.recursiveUpdate
-        {
-          enable = true;
-          ssl = true;
-          protocol = "googledomains";
-          domains = [ "bohr.meurer.org" ];
-        }
-        secret
-    );
+    if builtins.pathExists path then path else builtins.toFile "ddclient-bohr.conf" "";
+
+  services.ddclient.configFile = config.secrets.ddclient-bohr;
 
   services.openssh.ports = [ 22 55889 ];
 

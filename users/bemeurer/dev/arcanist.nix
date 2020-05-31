@@ -1,17 +1,17 @@
-{ lib, pkgs, ... }:
-let
-  secretPath = ../../../secrets/arcanist.nix;
-  secretCondition = (builtins.pathExists secretPath);
-  secret = lib.optionalString secretCondition (import secretPath);
-  arcrc = {
-    hosts."https://phab.nonstandard.ai/api/".token = secret;
-  };
-in
-rec {
+{ config, lib, pkgs, ... }: {
   home.packages = with pkgs; [ arcanist ];
 
+  secrets.stcg-arcanist-config = {
+    file =
+      let
+        path = ../../../secrets/stcg-arcanist-config;
+      in
+      if builtins.pathExists path then path else builtins.toFile "stcg-arcanist-config" "";
+    user = "bemeurer";
+  };
+
   home.file.arcrc = {
-    text = (builtins.toJSON arcrc);
+    source = config.secrets.stcg-arcanist-config;
     target = ".arcrc";
   };
 

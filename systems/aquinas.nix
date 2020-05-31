@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ config, lib, ... }: {
   imports = [
     (import ../users).bemeurer
     ../core
@@ -26,22 +26,13 @@
     hostName = "aquinas";
   };
 
-  services.ddclient =
+  secrets.ddclient-aquinas.file =
     let
-      secretPath = ../secrets/ddclient-aquinas.nix;
-      secretCondition = (builtins.pathExists secretPath);
-      secret = lib.optionalAttrs secretCondition (import secretPath);
+      path = ../secrets/ddclient-aquinas.conf;
     in
-    (
-      lib.recursiveUpdate
-        {
-          enable = true;
-          ssl = true;
-          protocol = "googledomains";
-          domains = [ "aquinas.meurer.org" ];
-        }
-        secret
-    );
+    if builtins.pathExists path then path else builtins.toFile "ddclient-aquinas.conf" "";
+
+  services.ddclient.configFile = config.secrets.ddclient-aquinas;
 
   services.logind.lidSwitchExternalPower = "ignore";
 

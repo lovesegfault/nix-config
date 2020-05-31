@@ -1,16 +1,9 @@
-{ lib, ... }: {
-  environment.etc.aarch64-build-box-key =
+{ config, lib, ... }: {
+  secrets.stcg-aarch64-builder-key.file =
     let
-      secretPath = ../secrets/stcg-aarch64-builder-key.nix;
-      secretCondition = (builtins.pathExists secretPath);
-      secret = lib.optionalString secretCondition (import secretPath);
+      path = ../secrets/stcg-aarch64-builder.key;
     in
-    {
-      enable = true;
-      mode = "0400";
-      target = "ssh/stcg-aarch64-builder";
-      text = secret;
-    };
+    if builtins.pathExists path then path else builtins.toFile "stcg-aarch64-builder.key" "";
 
   nix = {
     distributedBuilds = true;
@@ -19,7 +12,7 @@
         hostName = "147.75.47.54";
         maxJobs = 32;
         speedFactor = 1;
-        sshKey = "/etc/ssh/stcg-aarch64-builder";
+        sshKey = config.secrets.stcg-aarch64-builder-key;
         sshUser = "bemeurer";
         system = "aarch64-linux";
         supportedFeatures = [ "big-parallel" ];

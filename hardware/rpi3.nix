@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    ./aarch64-build-box.nix
+    ./nixos-aarch64-builder.nix
     ./bluetooth.nix
   ];
 

@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   imports = [
     (import ../users).andi
@@ -24,31 +24,15 @@
       }];
       useDHCP = lib.mkForce false;
     };
-    wireless.networks."Tabachnik".psk =
-      let
-        secretPath = ../secrets/wifi-tabachnik.nix;
-        secretCondition = (builtins.pathExists secretPath);
-        secret = lib.optionalString secretCondition (import secretPath);
-      in
-      secret;
   };
 
-  services.ddclient =
+  secrets.ddclient-goethe.file =
     let
-      secretPath = ../secrets/ddclient-goethe.nix;
-      secretCondition = (builtins.pathExists secretPath);
-      secret = lib.optionalAttrs secretCondition (import secretPath);
+      path = ../secrets/ddclient-goethe.conf;
     in
-    (
-      lib.recursiveUpdate
-        {
-          enable = true;
-          ssl = true;
-          protocol = "googledomains";
-          domains = [ "goethe.meurer.org" ];
-        }
-        secret
-    );
+    if builtins.pathExists path then path else builtins.toFile "ddclient-goethe.conf" "";
+
+  services.ddclient.configFile = config.secrets.ddclient-goethe;
 
   services.dhcpd4 = {
     enable = true;
