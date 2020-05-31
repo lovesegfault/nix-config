@@ -15,7 +15,7 @@ with lib;
     uid = 8888;
   };
 
-  secrets.stcg-arcanist-config = pkgs.mkSecret ../../secrets/stcg-arcanist-config;
+  secrets.stcg-arcanist-config.file = pkgs.mkSecret ../../secrets/stcg-arcanist-config;
   home-manager.users.bemeurer =
     mkMerge (
       [
