@@ -32,7 +32,9 @@ For the configurations' entry points see the individual [systems], as well as
 
 ### syncing sources
 
-`$ niv update`
+```shell
+niv update
+```
 
 ### deploying
 
