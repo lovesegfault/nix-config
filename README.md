@@ -4,7 +4,8 @@ This repository holds my NixOS configuration. It is fully reproducible
 (utilizing [niv]) and position-independent, meaning there is no moving around of
 `configuration.nix`.
 
-Deployment is done using `nixus`, see [usage](#usage).
+Deployment is done using [`nixus`](https://github.com/Infinisil/nixus), see
+[usage](#usage).
 
 For the configurations' entry points see the individual [systems], as well as
 [default.nix]. For adding users or overlays see [users](#users),
@@ -15,16 +16,15 @@ For the configurations' entry points see the individual [systems], as well as
 ```
 .
 ├── core         # Baseline configurations applicable to all machines
-├── default.nix  # Attr set of all machines, with groups based on architecture
+├── default.nix  # Nixus deployment configuration
 ├── dev          # Developer tooling configuration
 ├── hardware     # Hardware-specific configuration
 ├── hostnames    # List of hostnames to use
-├── misc         # Assorted configuration modules
-├── nix          # Nix sources (nixpkgs and home-manager)
+├── nix          # Nix sources managed with niv
 ├── overlays     # Nixpkgs overlays
 ├── secrets      # Secrets (API keys, etc)
 ├── sway         # Sway configuration for the desktop
-├── systems      # Machine (host) definition that actually gets built
+├── systems      # Machine (host) definitions
 └── users        # Per-user configurations
 ```
 
