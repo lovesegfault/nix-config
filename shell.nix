@@ -19,7 +19,8 @@ pkgs.mkShell {
       }
 
       deploy "$@"
-    '')
+    ''
+    )
     (cachix.overrideAttrs (oldAttrs: { doCheck = false; }))
     niv
     nixpkgs-fmt
