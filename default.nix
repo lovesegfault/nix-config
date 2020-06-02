@@ -45,7 +45,7 @@ nixus ({ ... }: {
       configuration = ./systems/peano.nix;
     };
     feuerbach = { ... }: {
-      host = "10.1.5.211";
+      host = "10.0.5.211";
       configuration = ./systems/feuerbach.nix;
     };
     hegel = { ... }: {
