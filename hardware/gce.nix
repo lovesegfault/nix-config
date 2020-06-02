@@ -5,10 +5,7 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  networking = {
-    interfaces.eth0.useDHCP = true;
-    useDHCP = false;
-  };
+  networking.interfaces.eth0.useDHCP = true;
 
   nix.maxJobs = 64;
 

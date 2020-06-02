@@ -45,7 +45,6 @@
       eth0.macAddress = "98:03:9b:68:aa:50";
       eth1.macAddress = eth0.macAddress;
       bond0 = {
-        useDHCP = false;
         macAddress = eth0.macAddress;
         ipv4 = {
           routes = [{

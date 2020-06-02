@@ -28,10 +28,7 @@
       ];
       useDHCP = lib.mkForce false;
     };
-    wireless.enable = lib.mkForce false;
-    supplicant.wlan0 = {
-      configFile.path = config.secrets.wifi-stcg.file;
-    };
+    supplicant.wlan0.configFile.path = config.secrets.wifi-stcg.file;
   };
 
   services.dhcpd4 = {

@@ -64,11 +64,7 @@
         useDHCP = true;
         mtu = 9000;
       };
-      enp3s0f1.useDHCP = false;
-      enp3s0f2.useDHCP = false;
-      enp3s0f3.useDHCP = false;
     };
-    useDHCP = false;
   };
 
   nix.maxJobs = 12;

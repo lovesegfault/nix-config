@@ -25,10 +25,7 @@
       }];
       useDHCP = lib.mkForce false;
     };
-    wireless.enable = lib.mkForce false;
-    supplicant.wlan0 = {
-      configFile.path = config.secrets.wifi-tabachnik.file;
-    };
+    supplicant.wlan0.configFile.path = config.secrets.wifi-tabachnik.file;
   };
 
   secrets.ddclient-goethe.file = pkgs.mkSecret ../secrets/ddclient-goethe.conf;

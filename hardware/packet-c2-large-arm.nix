@@ -43,7 +43,6 @@
   hardware.enableAllFirmware = true;
 
   networking = {
-    useDHCP = false;
     dhcpcd.enable = false;
     nameservers = [
       "147.75.207.207"

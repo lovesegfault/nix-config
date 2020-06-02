@@ -16,7 +16,6 @@
   networking = {
     interfaces.enp1s0f0.useDHCP = true;
     interfaces.enp24s0f0.useDHCP = true;
-    useDHCP = false;
   };
 
   nix = {

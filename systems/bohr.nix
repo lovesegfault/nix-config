@@ -10,7 +10,6 @@
 
   networking = {
     hostName = "bohr";
-    useDHCP = false;
     interfaces.eth0.useDHCP = true;
   };
 

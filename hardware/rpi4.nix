@@ -44,15 +44,11 @@
   };
 
   networking = {
-    useDHCP = false;
     interfaces = {
       eth0.useDHCP = true;
       wlan0.useDHCP = true;
     };
-    wireless = {
-      enable = true;
-      interfaces = [ "wlan0" ];
-    };
+    supplicant.wlan0 = {};
   };
 
   nix.maxJobs = 4;
