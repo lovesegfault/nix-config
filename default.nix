@@ -18,6 +18,11 @@ nixus ({ ... }: {
       host = "bohr.meurer.org";
       configuration = ./systems/bohr.nix;
     };
+    camus = { ... }: {
+      enabled = false;
+      host = "10.1.8.159";
+      configuration = ./systems/camus.nix;
+    };
     foucault = { ... }: {
       host = "localhost";
       configuration = ./systems/foucault.nix;

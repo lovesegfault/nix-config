@@ -14,8 +14,7 @@
     packages = with pkgs; [ terminus_font ];
   };
 
-  # TODO
-  # environment.noXlibs = true;
+  environment.noXlibs = true;
 
   secrets.wifi-stcg.file = pkgs.mkSecret ../secrets/wifi-stcg.conf;
   networking = {
