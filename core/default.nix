@@ -29,17 +29,15 @@ in
     binaryCachePublicKeys = [
       "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
     ];
+    nixPath = [
+      "nixos-config=${dummyConfig}"
+      "nixpkgs=/run/current-system/nixpkgs"
+      "nixpkgs-overlays=/run/current-system/overlays"
+    ];
   };
-
-  nix.nixPath = [
-    "nixos-config=${dummyConfig}"
-    "nixpkgs=/run/current-system/nixpkgs"
-    "nixpkgs-overlays=/run/current-system/overlays"
-  ];
 
   nixpkgs = {
     config.allowUnfree = true;
-
     overlays = [
       (import ../overlays/ffmpeg.nix)
       (import ../overlays/mosh.nix)
