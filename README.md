@@ -39,10 +39,10 @@ niv update
 ### deploying
 
 To deploy all hosts you can use either `nix-build | bash` or, if within
-nix-shell there is a `deploy` script added to your path.
+`nix-shell`, the `deploy` script.
 
 Similarly, to deploy a specific host `nix-build -A myHost | bash` or `deploy
-myHost` from within `nix-shell` both work.
+myHost` both work.
 
 ### adding users
 
