@@ -6,7 +6,7 @@ let
     set -o xtrace
 
     function deploy() {
-      local cmd=("nix-build")
+      local cmd=("nix-build" "--no-out-link")
       if [ $# -gt 0 ]; then
         cmd+=("-A" "$1")
       fi
@@ -20,7 +20,7 @@ let
     set -o pipefail
     set -o xtrace
 
-    nix-build ci.nix | ${pkgs.stdenv.shell}
+    nix-build --no-out-link ci.nix | ${pkgs.stdenv.shell}
   '';
 in
 pkgs.mkShell {
