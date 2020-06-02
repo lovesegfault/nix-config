@@ -73,6 +73,14 @@ let
         name = "Formatting";
         run = "nix-shell --run 'nixpkgs-fmt --check .'";
       }];
+      checkCI = mkGenericJob [{
+        name = "Check CI";
+        run = ''
+          cp ./.github/workflows/ci.yml /tmp/ci.yml.old
+          nix-shell --run 'genci'
+          diff ./.github/workflows/ci.yml /tmp/ci.yml.old || exit 1
+        '';
+      }];
     };
   };
   generated = pkgs.writeText "ci.yml" (builtins.toJSON ci);
