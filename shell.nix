@@ -5,7 +5,7 @@ in
 pkgs.mkShell {
   name = "nix-config";
   buildInputs = with pkgs; [
-    cachix
+    (cachix.overrideAttrs (oldAttrs: { doCheck = false; }))
     niv
     nixpkgs-fmt
   ];
