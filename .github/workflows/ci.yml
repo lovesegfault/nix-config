@@ -9,7 +9,7 @@
         },
         {
           "name": "Nix",
-          "uses": "cachix/install-nix-action@v9",
+          "uses": "cachix/install-nix-action@master",
           "with": {
             "nix_path": "nixpkgs=/nix/store/0cr95jay8mgy2m1w377dg2v6jcg7j2g4-source",
             "skip_adding_nixpkgs_channel": true
@@ -42,7 +42,7 @@
         },
         {
           "name": "Nix",
-          "uses": "cachix/install-nix-action@v9",
+          "uses": "cachix/install-nix-action@master",
           "with": {
             "nix_path": "nixpkgs=/nix/store/0cr95jay8mgy2m1w377dg2v6jcg7j2g4-source",
             "skip_adding_nixpkgs_channel": true
@@ -75,7 +75,7 @@
         },
         {
           "name": "Nix",
-          "uses": "cachix/install-nix-action@v9",
+          "uses": "cachix/install-nix-action@master",
           "with": {
             "nix_path": "nixpkgs=/nix/store/0cr95jay8mgy2m1w377dg2v6jcg7j2g4-source",
             "skip_adding_nixpkgs_channel": true
@@ -108,7 +108,7 @@
         },
         {
           "name": "Nix",
-          "uses": "cachix/install-nix-action@v9",
+          "uses": "cachix/install-nix-action@master",
           "with": {
             "nix_path": "nixpkgs=/nix/store/0cr95jay8mgy2m1w377dg2v6jcg7j2g4-source",
             "skip_adding_nixpkgs_channel": true
@@ -141,7 +141,7 @@
         },
         {
           "name": "Nix",
-          "uses": "cachix/install-nix-action@v9",
+          "uses": "cachix/install-nix-action@master",
           "with": {
             "nix_path": "nixpkgs=/nix/store/0cr95jay8mgy2m1w377dg2v6jcg7j2g4-source",
             "skip_adding_nixpkgs_channel": true
@@ -174,7 +174,7 @@
         },
         {
           "name": "Nix",
-          "uses": "cachix/install-nix-action@v9",
+          "uses": "cachix/install-nix-action@master",
           "with": {
             "nix_path": "nixpkgs=/nix/store/0cr95jay8mgy2m1w377dg2v6jcg7j2g4-source",
             "skip_adding_nixpkgs_channel": true
@@ -207,7 +207,7 @@
         },
         {
           "name": "Nix",
-          "uses": "cachix/install-nix-action@v9",
+          "uses": "cachix/install-nix-action@master",
           "with": {
             "nix_path": "nixpkgs=/nix/store/0cr95jay8mgy2m1w377dg2v6jcg7j2g4-source",
             "skip_adding_nixpkgs_channel": true
@@ -240,7 +240,7 @@
         },
         {
           "name": "Nix",
-          "uses": "cachix/install-nix-action@v9",
+          "uses": "cachix/install-nix-action@master",
           "with": {
             "nix_path": "nixpkgs=/nix/store/0cr95jay8mgy2m1w377dg2v6jcg7j2g4-source",
             "skip_adding_nixpkgs_channel": true
@@ -273,7 +273,7 @@
         },
         {
           "name": "Nix",
-          "uses": "cachix/install-nix-action@v9",
+          "uses": "cachix/install-nix-action@master",
           "with": {
             "nix_path": "nixpkgs=/nix/store/0cr95jay8mgy2m1w377dg2v6jcg7j2g4-source",
             "skip_adding_nixpkgs_channel": true
@@ -306,7 +306,7 @@
         },
         {
           "name": "Nix",
-          "uses": "cachix/install-nix-action@v9",
+          "uses": "cachix/install-nix-action@master",
           "with": {
             "nix_path": "nixpkgs=/nix/store/0cr95jay8mgy2m1w377dg2v6jcg7j2g4-source",
             "skip_adding_nixpkgs_channel": true
@@ -339,7 +339,7 @@
         },
         {
           "name": "Nix",
-          "uses": "cachix/install-nix-action@v9",
+          "uses": "cachix/install-nix-action@master",
           "with": {
             "nix_path": "nixpkgs=/nix/store/0cr95jay8mgy2m1w377dg2v6jcg7j2g4-source",
             "skip_adding_nixpkgs_channel": true
@@ -372,7 +372,7 @@
         },
         {
           "name": "Nix",
-          "uses": "cachix/install-nix-action@v9",
+          "uses": "cachix/install-nix-action@master",
           "with": {
             "nix_path": "nixpkgs=/nix/store/0cr95jay8mgy2m1w377dg2v6jcg7j2g4-source",
             "skip_adding_nixpkgs_channel": true
@@ -405,7 +405,7 @@
         },
         {
           "name": "Nix",
-          "uses": "cachix/install-nix-action@v9",
+          "uses": "cachix/install-nix-action@master",
           "with": {
             "nix_path": "nixpkgs=/nix/store/0cr95jay8mgy2m1w377dg2v6jcg7j2g4-source",
             "skip_adding_nixpkgs_channel": true
