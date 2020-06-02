@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
     ./nixos-aarch64-builder.nix
     ./bluetooth.nix
@@ -49,7 +49,6 @@
       eth0.useDHCP = true;
       wlan0.useDHCP = true;
     };
-    networkmanager.enable = lib.mkForce false;
     wireless = {
       enable = true;
       interfaces = [ "wlan0" ];

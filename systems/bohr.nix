@@ -12,7 +12,6 @@
     hostName = "bohr";
     useDHCP = false;
     interfaces.eth0.useDHCP = true;
-    networkmanager.enable = lib.mkForce false;
   };
 
   secrets.ddclient-bohr.file = pkgs.mkSecret ../secrets/ddclient-bohr.conf;

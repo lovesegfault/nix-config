@@ -1,7 +1,5 @@
 {
-  networking = {
-    useDHCP = false;
-    networkmanager = {
+  networking.networkmanager = {
       enable = true;
       dhcp = "dhclient";
       wifi = {
@@ -10,5 +8,4 @@
         macAddress = "random";
       };
     };
-  };
 }

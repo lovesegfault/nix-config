@@ -2,8 +2,11 @@
   imports = [
     (import ../users).bemeurer
     ../core
+    ../core/networkmanager.nix
 
     ../dev
+    ../dev/stcg-cameras.nix
+    ../dev/stcg-aarch64-builder.nix
 
     ../hardware/dell-e6530.nix
 

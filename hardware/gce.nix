@@ -7,7 +7,6 @@
 
   networking = {
     interfaces.eth0.useDHCP = true;
-    networkmanager.enable = lib.mkForce false;
     useDHCP = false;
   };
 

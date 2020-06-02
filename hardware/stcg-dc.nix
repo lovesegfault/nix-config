@@ -9,8 +9,6 @@
     kernelPackages = pkgs.linuxPackages_latest;
   };
 
-  environment.systemPackages = with pkgs; [ fahclient ];
-
   environment.noXlibs = true;
 
   hardware.enableRedistributableFirmware = true;
@@ -18,7 +16,6 @@
   networking = {
     interfaces.enp1s0f0.useDHCP = true;
     interfaces.enp24s0f0.useDHCP = true;
-    networkmanager.enable = lib.mkForce false;
     useDHCP = false;
   };
 

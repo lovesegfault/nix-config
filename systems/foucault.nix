@@ -2,6 +2,7 @@
   imports = [
     (import ../users).bemeurer
     ../core
+    ../core/networkmanager.nix
 
     ../dev
     ../dev/stcg-gcs.nix

@@ -68,7 +68,6 @@
       enp3s0f2.useDHCP = false;
       enp3s0f3.useDHCP = false;
     };
-    networkmanager.enable = lib.mkForce false;
     useDHCP = false;
   };
 

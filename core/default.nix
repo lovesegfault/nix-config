@@ -9,7 +9,6 @@ in
   imports = [
     (import (import ../nix).home-manager)
     ./aspell.nix
-    ./networkmanager.nix
     ./nix.nix
     ./openssh.nix
     ./unbound.nix

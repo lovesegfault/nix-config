@@ -45,7 +45,6 @@
   networking = {
     useDHCP = false;
     dhcpcd.enable = false;
-    networkmanager.enable = lib.mkForce false;
     nameservers = [
       "147.75.207.207"
       "147.75.207.208"
