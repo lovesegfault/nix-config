@@ -43,6 +43,7 @@
   hardware.enableAllFirmware = true;
 
   networking = {
+    useNetworkd = lib.mkForce false;
     dhcpcd.enable = false;
     nameservers = [
       "147.75.207.207"

@@ -26,6 +26,7 @@ in
 
   networking = {
     useDHCP = false;
+    useNetworkd = true;
   };
 
   nix = {
@@ -50,7 +51,10 @@ in
     ];
   };
 
-  services.dbus.socketActivated = true;
+  services = {
+    resolved.enable = lib.mkForce false;
+    dbus.socketActivated = true;
+  };
 
   system = {
     extraSystemBuilderCmds = ''
