@@ -10,11 +10,7 @@ let
       }
       {
         name = "Nix";
-        uses = "cachix/install-nix-action@master";
-        "with" = {
-          skip_adding_nixpkgs_channel = true;
-          nix_path = "nixpkgs=${sources.nixpkgs}";
-        };
+        uses = "cachix/install-nix-action@v9";
       }
       {
         name = "AArch64";
