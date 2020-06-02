@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     (import ../users).bemeurer
@@ -6,10 +6,14 @@
     ../hardware/rpi3.nix
   ];
 
-  # TODO
-  # environment.noXlibs = true;
+  environment.noXlibs = true;
 
-  networking.hostName = "bohr";
+  networking = {
+    hostName = "bohr";
+    useDHCP = false;
+    interfaces.eth0.useDHCP = true;
+    networkmanager.enable = lib.mkForce false;
+  };
 
   secrets.ddclient-bohr.file = pkgs.mkSecret ../secrets/ddclient-bohr.conf;
   services.ddclient.configFile = config.secrets.ddclient-bohr;
