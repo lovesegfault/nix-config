@@ -2,13 +2,16 @@
 
 This repository holds my NixOS configuration. It is fully reproducible
 (utilizing [niv]) and position-independent, meaning there is no moving around of
-`configuration.nix` (see [switch]).
+`configuration.nix`.
+
+Deployment is done using `nixus`, see [usage](#usage).
 
 For the configurations' entry points see the individual [systems], as well as
 [default.nix]. For adding users or overlays see [users](#users),
 [overlays](#overlays), respectively.
 
 ## structure
+
 ```
 .
 ├── core         # Baseline configurations applicable to all machines
@@ -26,29 +29,55 @@ For the configurations' entry points see the individual [systems], as well as
 ```
 
 ## usage
-### set up
-FIXME
-### everyday
-#### syncing sources
+
+### syncing sources
+
 `$ niv update`
-#### testing configs
-`$ nix-build -A $machine`
-#### switching configs
-[`$ ./switch`][switch]
 
-## users
-FIXME
+### deploying
 
-## overlays
-FIXME
+To deploy all hosts you can use either `nix-build | bash` or, if within
+nix-shell there is a `deploy` script added to your path.
+
+Similarly, to deploy a specific host `nix-build -A myHost | bash` or `deploy
+myHost` from within `nix-shell` both work.
+
+### adding users
+
+**PSA:** I am not at all happy with the way users are currently handled and
+fully intend to refactor it in the future. Suggestions are welcome.
+
+Users are handled as drop-in units living in ./users. To add a user follow this
+process:
+
+```shell
+cp users/template users/myUser
+find users/myUser -name "*.nix" -exec sed -i s/template/myUser/g {} +
+vim users/myUser/default.nix # You may want to add your openssh key
+vim users/default.nix # add yourself to the relevant groups
+```
+
+### adding overlays
+
+Overlays should be added as individual nix files to ./overlays with format
+
+```nix
+self: super: {
+    hello = (super.hello.overrideAttrs (oldAttrs: { doCheck = false; }));
+}
+```
+
+For more examples see ./overlays.
+
+Overlays **are not** automatically discovered and applied, and must be manually
+added to the relevant configuration file.
 
 ## issues
+
 * my wallpapers are maintained ad-hoc
 * no ssh configuration (`.ssh/config`)
 * zsh plugins must be manually updated
 
-
 [niv]: https://github.com/nmattia/niv
-[switch]: https://github.com/lovesegfault/nix-config/blob/master/switch
 [systems]: https://github.com/lovesegfault/nix-config/blob/master/systems
 [default.nix]: https://github.com/lovesegfault/nix-config/blob/master/default.nix
