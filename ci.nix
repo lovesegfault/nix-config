@@ -13,7 +13,7 @@ let
         uses = "cachix/install-nix-action@v9";
         "with" = {
           skip_adding_nixpkgs_channel = true;
-          nix_path = sources.nixpkgs;
+          nix_path = "nixpkgs=${sources.nixpkgs}";
         };
       }
       {
