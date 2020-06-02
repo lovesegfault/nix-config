@@ -13,7 +13,10 @@ in
   environment.systemPackages = [ nvidia_x11 ];
 
   hardware = {
-    nvidia.modesetting.enable = lib.mkForce false;
+    nvidia = {
+      modesetting.enable = lib.mkForce false;
+      nvidiaPersistenced = true;
+    };
     opengl = {
       enable = true;
       driSupport32Bit = true;
@@ -23,11 +26,6 @@ in
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
-
-  systemd.services.nvidia-control-devices = {
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig.ExecStart = "${nvidia_x11.bin}/bin/nvidia-smi";
-  };
 
   virtualisation.docker.enableNvidia = true;
 }
