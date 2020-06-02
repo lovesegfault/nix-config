@@ -24,6 +24,10 @@ in
 
   i18n.defaultLocale = "en_US.UTF-8";
 
+  networking = {
+    useDHCP = false;
+  };
+
   nix = {
     binaryCaches = [ "https://nix-config.cachix.org" ];
     binaryCachePublicKeys = [
