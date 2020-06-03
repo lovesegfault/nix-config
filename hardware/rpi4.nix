@@ -48,7 +48,7 @@
       eth0.useDHCP = true;
       wlan0.useDHCP = true;
     };
-    supplicant.wlan0 = {};
+    supplicant.wlan0 = { };
   };
 
   nix.maxJobs = 4;
