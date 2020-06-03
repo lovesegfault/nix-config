@@ -44,8 +44,8 @@ pkgs.mkShell {
     (cachix.overrideAttrs (oldAttrs: { doCheck = false; }))
     niv
     nixpkgs-fmt
+
     deploy
     genci
-    sshuttleHack
   ];
 }
