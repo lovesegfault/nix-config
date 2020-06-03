@@ -1,5 +1,14 @@
 let
   pkgs = import <nixpkgs> { };
+  sshuttleHack = pkgs.writeScriptBin "sshuttleHack" ''
+    #!${pkgs.stdenv.shell}
+    ${pkgs.passh}/bin/passh -c1 \
+    -P "Verification code:.*" \
+    -p "$(${pkgs.gopass}/bin/gopass otp otp/google.com/bernardo@standard.ai | ${pkgs.coreutils}/bin/cut -f1 -d' ')" \
+    ${pkgs.sshuttle}/bin/sshuttle \
+    -r bemeurer@bastion0001.us-west2.monitoring.nonstandard.ai 10.0.5.0/24 10.1.16.0/24 \
+    --user bemeurer
+  '';
   deploy = pkgs.writeScriptBin "deploy" ''
     #!${pkgs.stdenv.shell}
     set -o pipefail
@@ -31,5 +40,6 @@ pkgs.mkShell {
     nixpkgs-fmt
     deploy
     genci
+    sshuttleHack
   ];
 }
