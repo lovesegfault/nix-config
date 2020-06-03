@@ -2,7 +2,6 @@
   imports = [
     (import ../users).bemeurer
     ../core
-    ../core/networkmanager.nix
 
     ../dev
     ../dev/stcg-cameras.nix
@@ -27,6 +26,7 @@
 
   networking = {
     hostName = "aquinas";
+    wireless.iwd.enable = true;
   };
 
   secrets.ddclient-aquinas.file = pkgs.mkSecret ../secrets/ddclient-aquinas.conf;
