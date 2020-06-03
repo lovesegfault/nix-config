@@ -2,11 +2,14 @@ let
   pkgs = import <nixpkgs> { };
   sshuttleHack = pkgs.writeScriptBin "sshuttleHack" ''
     #!${pkgs.stdenv.shell}
+    set -o pipefail
+    set -o xtrace
+
     ${pkgs.passh}/bin/passh -c1 \
     -P "Verification code:.*" \
     -p "$(${pkgs.gopass}/bin/gopass otp otp/google.com/bernardo@standard.ai | ${pkgs.coreutils}/bin/cut -f1 -d' ')" \
     ${pkgs.sshuttle}/bin/sshuttle \
-    -r bemeurer@bastion0001.us-west2.monitoring.nonstandard.ai 10.0.5.0/24 10.1.16.0/24 \
+    -r bemeurer@bastion0001.us-west2.monitoring.nonstandard.ai 10.0.0.0/8 \
     --user bemeurer
   '';
   deploy = pkgs.writeScriptBin "deploy" ''
