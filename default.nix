@@ -38,7 +38,7 @@ nixus ({ ... }: {
 
     # Work
     cantor = { ... }: {
-      host = "10.0.5.217";
+      host = "10.0.5.222";
       configuration = ./systems/cantor.nix;
     };
     abel = { ... }: {
@@ -50,7 +50,7 @@ nixus ({ ... }: {
       configuration = ./systems/peano.nix;
     };
     feuerbach = { ... }: {
-      host = "10.0.5.211";
+      host = "10.0.5.223";
       configuration = ./systems/feuerbach.nix;
     };
     hegel = { ... }: {
