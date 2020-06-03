@@ -11,9 +11,8 @@
     ../dev/stcg-cameras.nix
   ] ++ (import ../users).stream ++ (import ../users).hardware;
 
-  boot = rec {
-    initrd.availableKernelModules =
-      [ "ahci" "xhci_pci" "ehci_pci" "sd_mod" ];
+  boot = {
+    initrd.availableKernelModules = [ "ahci" "xhci_pci" "ehci_pci" ];
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
     loader = {
@@ -58,12 +57,10 @@
   networking = {
     hostName = "peano";
     hostId = "05e167d5";
-    interfaces = {
-      eno1.useDHCP = false;
-      enp3s0f0 = {
-        useDHCP = true;
-        mtu = 9000;
-      };
+    useNetworkd = lib.mkForce false;
+    interfaces.enp3s0f0 = {
+      useDHCP = true;
+      mtu = 9000;
     };
   };
 

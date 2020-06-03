@@ -10,6 +10,7 @@
 
   networking = {
     hostName = "bohr";
+    useNetworkd = lib.mkForce false;
     interfaces.eth0.useDHCP = true;
   };
 

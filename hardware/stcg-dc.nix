@@ -13,10 +13,8 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  networking = {
-    interfaces.enp1s0f0.useDHCP = true;
-    interfaces.enp24s0f0.useDHCP = true;
-  };
+  networking.interfaces.enp24s0f0.useDHCP = true;
+  networking.useNetworkd = lib.mkForce false;
 
   nix = {
     maxJobs = 64;

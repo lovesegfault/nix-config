@@ -48,12 +48,10 @@
   networking = {
     hostName = "abel";
     hostId = "9fc799ef";
-    interfaces = {
-      eno1.useDHCP = false;
-      enp4s0f0 = {
-        useDHCP = true;
-        mtu = 9000;
-      };
+    useNetworkd = lib.mkForce false;
+    interfaces.enp4s0f0 = {
+      useDHCP = true;
+      mtu = 9000;
     };
   };
 
