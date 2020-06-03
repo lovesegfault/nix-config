@@ -67,50 +67,6 @@
     fstrim.enable = true;
     fwupd.enable = true;
     hardware.bolt.enable = true;
-    throttled = {
-      enable = true;
-      extraConfig = ''
-        [GENERAL]
-        Enabled: True
-        Sysfs_Power_Path: /sys/class/power_supply/AC/online
-
-        [BATTERY]
-        Update_Rate_s: 120
-        # Max package power for time window #1
-        PL1_Tdp_W: 29
-        # Time window #1 duration
-        PL1_Duration_s: 28
-        # Max package power for time window #2
-        PL2_Tdp_W: 44
-        # Time window #2 duration
-        PL2_Duration_S: 0.002
-        # Max allowed temperature before throttling
-        Trip_Temp_C: 90
-        # Set cTDP to normal=0, down=1 or up=2 (EXPERIMENTAL)
-        cTDP: 0
-        # Disable BDPROCHOT (EXPERIMENTAL)
-        Disable_BDPROCHOT: False
-
-        [AC]
-        Update_Rate_s: 120
-        # Max package power for time window #1
-        PL1_Tdp_W: 44
-        # Time window #1 duration
-        PL1_Duration_s: 28
-        # Max package power for time window #2
-        PL2_Tdp_W: 44
-        # Time window #2 duration
-        PL2_Duration_S: 0.002
-        # Max allowed temperature before throttling
-        Trip_Temp_C: 95
-        # Set HWP energy performance hints to 'performance' on high load (EXPERIMENTAL)
-        HWP_Mode: False
-        # Set cTDP to normal=0, down=1 or up=2 (EXPERIMENTAL)
-        cTDP: 0
-        # Disable BDPROCHOT (EXPERIMENTAL)
-        Disable_BDPROCHOT: False
-      '';
-    };
     tlp = {
       enable = true;
       extraConfig = ''
