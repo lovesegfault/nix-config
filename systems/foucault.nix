@@ -37,14 +37,22 @@
 
   networking = {
     hostName = "foucault";
-    interfaces.enp0s31f6 = {
-      useDHCP = true;
-      mtu = 9000;
-    };
     wireless.iwd.enable = true;
   };
 
   services.keybase.enable = false;
+
+  systemd.network = {
+    links.enp0s31f6 = {
+      linkConfig.MTUBytes = "8192";
+      matchConfig.MACAddress = "48:2a:e3:61:39:66";
+    };
+    networks.worknet = {
+      DHCP = "ipv4";
+      linkConfig.RequiredForOnline = "no";
+      matchConfig.MACAddress = "48:2a:e3:61:39:66";
+    };
+  };
 
   swapDevices = [{
     device = "/dev/disk/by-uuid/ec8c101f-65fd-47c4-8e17-f1b5395b68c7";
