@@ -1,10 +1,11 @@
-{ config, lib, modulesPath, pkgs, ... }: {
+{ lib, modulesPath, ... }: {
   imports = [ (modulesPath + "/virtualisation/google-compute-image.nix") ];
 
   environment.noXlibs = true;
 
   hardware.enableRedistributableFirmware = true;
 
+  networking.useNetworkd = lib.mkForce false;
   networking.interfaces.eth0.useDHCP = true;
 
   nix.maxJobs = 64;
