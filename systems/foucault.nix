@@ -38,6 +38,7 @@
 
   networking = {
     hostName = "foucault";
+    useNetworkd = lib.mkForce false;
     interfaces.enp0s31f6.mtu = 9000;
   };
 
