@@ -13,9 +13,6 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  networking.interfaces.enp24s0f0.useDHCP = true;
-  networking.useNetworkd = lib.mkForce false;
-
   nix = {
     maxJobs = 64;
     systemFeatures = [ "benchmark" "nixos-test" "big-parallel" "kvm" "gccarch-skylake" ];

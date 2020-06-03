@@ -29,6 +29,12 @@
     hostId = "791cadf8";
   };
 
+  systemd.network.networks.datacenter = {
+    DHCP = "yes";
+    matchConfig.MACAddress = "ac:1f:6b:a4:79:34";
+  };
+
   time.timeZone = "America/Los_Angeles";
+
   virtualisation.docker.enable = true;
 }
