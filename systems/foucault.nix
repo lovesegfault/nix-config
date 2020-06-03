@@ -2,7 +2,6 @@
   imports = [
     (import ../users).bemeurer
     ../core
-    ../core/networkmanager.nix
 
     ../dev
     ../dev/stcg-gcs.nix
@@ -39,7 +38,11 @@
   networking = {
     hostName = "foucault";
     useNetworkd = lib.mkForce false;
-    interfaces.enp0s31f6.mtu = 9000;
+    interfaces.enp0s31f6 = {
+      useDHCP = true;
+      mtu = 9000;
+    };
+    wireless.iwd.enable = true;
   };
 
   services.keybase.enable = false;
