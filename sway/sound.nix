@@ -21,5 +21,10 @@
 
   security.rtkit.enable = true;
 
-  sound.enable = true;
+  sound = {
+    enable = true;
+    extraConfig = ''
+      options snd-hda-intel model=generic
+    '';
+  };
 }
