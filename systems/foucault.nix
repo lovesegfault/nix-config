@@ -66,6 +66,4 @@
   }];
 
   time.timeZone = "America/Los_Angeles";
-
-  users.users.bemeurer.extraGroups = [ "kvm" "libvirtd" ];
 }

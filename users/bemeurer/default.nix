@@ -6,7 +6,9 @@ with lib;
     description = "Bernardo Meurer";
     extraGroups = [ "wheel" ]
       ++ optionals config.programs.sway.enable [ "input" "video" ]
-      ++ optionals config.networking.networkmanager.enable [ "networkmanager" ];
+      ++ optionals config.networking.networkmanager.enable [ "networkmanager" ]
+      ++ optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
+      ++ optionals config.virtualisation.kvmgt.enable [ "kvm" ];
     isNormalUser = true;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQgTWfmR/Z4Szahx/uahdPqvEP/e/KQ1dKUYLenLuY2 bemeurer.personal"
