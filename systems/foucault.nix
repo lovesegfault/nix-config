@@ -61,7 +61,7 @@
     wireless.iwd.enable = true;
   };
 
-  nixpkgs.overlays = [(import ../overlays/iwdWrapper.nix)];
+  nixpkgs.overlays = [ (import ../overlays/iwdWrapper.nix) ];
 
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
