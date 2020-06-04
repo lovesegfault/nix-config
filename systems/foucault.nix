@@ -92,7 +92,9 @@
   };
 
   systemd.tmpfiles.rules = [
-    "L /var/keys - - - - /state/var/keys"
+    "L /var/keys          - - - - /state/var/keys"
+    "L /var/lib/iwd       - - - - /state/var/lib/iwd"
+    "L /var/lib/bluetooth - - - - /state/var/lib/bluetooth"
   ];
 
   swapDevices = [{ device = "/dev/disk/by-uuid/840591d3-ac66-4137-bc39-4d9f9109c19a"; }];
