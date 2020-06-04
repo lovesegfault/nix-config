@@ -41,7 +41,7 @@ in
 pkgs.mkShell {
   name = "nix-config";
   buildInputs = with pkgs; [
-    (cachix.overrideAttrs (oldAttrs: { doCheck = false; }))
+    cachix
     niv
     nixpkgs-fmt
 
