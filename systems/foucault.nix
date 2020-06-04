@@ -15,19 +15,39 @@
     ../sway
   ];
 
-  boot.initrd.luks.devices.nixos = {
-    allowDiscards = true;
-    device = "/dev/disk/by-uuid/2d6ff3d0-cdfd-4b6e-a689-c43d21627279";
-  };
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    zfs rollback -r rpool/local/root@blank
+  '';
+
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/4e217a4b-40ae-4bde-b771-04eabfe2369d";
-      fsType = "xfs";
-      options = [ "defaults" "noatime" ];
+      device = "rpool/local/root";
+      fsType = "zfs";
+    };
+    "/nix" = {
+      device = "rpool/local/nix";
+      fsType = "zfs";
+    };
+    "/nix/store" = {
+      device = "/nix/store";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+    "/srv/music" = {
+      device = "rpool/safe/music";
+      fsType = "zfs";
+     };
+    "/home" = {
+      device = "rpool/safe/home";
+      fsType = "zfs";
+    };
+    "/state" = {
+      device = "rpool/safe/state";
+      fsType = "zfs";
     };
     "/boot" = {
-      device = "/dev/disk/by-uuid/AD39-03D0";
+      device = "/dev/disk/by-uuid/17FB-AAD0";
       fsType = "vfat";
     };
   };
@@ -37,6 +57,7 @@
 
   networking = {
     hostName = "foucault";
+    hostId = "872516b8";
     wireless.iwd.enable = true;
   };
 
@@ -70,9 +91,7 @@
     };
   };
 
-  swapDevices = [{
-    device = "/dev/disk/by-uuid/ec8c101f-65fd-47c4-8e17-f1b5395b68c7";
-  }];
+  swapDevices = [ { device = "/dev/disk/by-uuid/840591d3-ac66-4137-bc39-4d9f9109c19a"; }];
 
   time.timeZone = "America/Los_Angeles";
 }
