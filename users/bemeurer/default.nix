@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 with lib;
 {
+  secrets.bemeurer-password.file = pkgs.mkSecret ../../secrets/bemeurer-password;
   users.users.bemeurer = {
     createHome = true;
     description = "Bernardo Meurer";
@@ -15,6 +16,7 @@ with lib;
     ];
     shell = mkIf config.programs.zsh.enable pkgs.zsh;
     uid = 8888;
+    passwordFile = config.secrets.bemeurer-password.file.outPath;
   };
 
   secrets.stcg-arcanist-config = {

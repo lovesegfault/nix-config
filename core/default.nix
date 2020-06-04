@@ -64,4 +64,6 @@ in
 
     stateVersion = "20.03";
   };
+
+  users.mutableUsers = false;
 }
