@@ -14,6 +14,7 @@
     };
     extraConfig = ''
       unload-module module-esound-protocol-unix
+      load-module module-udev-detect tsched=0
     '';
     zeroconf.discovery.enable = false;
     zeroconf.publish.enable = false;
