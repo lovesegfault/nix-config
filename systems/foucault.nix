@@ -61,6 +61,8 @@
     wireless.iwd.enable = true;
   };
 
+  nixpkgs.overlays = [(import ../overlays/iwdWrapper.nix)];
+
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
     { domain = "*"; type = "-"; item = "nofile"; value = "1048576"; }
@@ -98,7 +100,6 @@
 
   systemd.tmpfiles.rules = [
     "L /var/keys          - - - - /state/var/keys"
-    "L /var/lib/iwd       - - - - /state/var/lib/iwd"
     "L /var/lib/bluetooth - - - - /state/var/lib/bluetooth"
   ];
 
