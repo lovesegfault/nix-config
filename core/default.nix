@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   dummyConfig = pkgs.writeText "configuration.nix" ''
     assert builtins.trace "This is a dummy config, use nixus!" false;
@@ -65,5 +65,9 @@ in
     stateVersion = "20.03";
   };
 
-  users.mutableUsers = false;
+  secrets.root-password.file = pkgs.mkSecret ../secrets/root-password;
+  users = {
+    mutableUsers = false;
+    users.root.passwordFile = config.secrets.root-password.file.outPath;
+  };
 }
