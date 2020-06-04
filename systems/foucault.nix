@@ -42,7 +42,7 @@
 
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
-    { domain = "*"; type = "-"; item = "nofile"; value = "unlimited"; }
+    { domain = "*"; type = "-"; item = "nofile"; value = "1048576"; }
     { domain = "*"; type = "-"; item = "nproc"; value = "unlimited"; }
     { domain = "*"; type = "-"; item = "stack"; value = "unlimited"; }
   ];
