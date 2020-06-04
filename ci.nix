@@ -56,7 +56,8 @@ let
     run = "nix-build -A ${attrToBuild}";
   }];
 
-  systems = filter (e: e != "foucault") (attrNames (import ./default.nix { }).config.nodes);
+  systemFilter = e: (e != "foucault") && (e != "abel");
+  systems = filter systemFilter (attrNames (import ./default.nix { }).config.nodes);
 
   ci = {
     on = [ "pull_request" "push" ];
