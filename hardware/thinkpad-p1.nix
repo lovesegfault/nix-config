@@ -9,6 +9,13 @@
   boot = rec {
     extraModulePackages = with kernelPackages; [ ddcci-driver ];
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
+    kernel.sysctl = {
+      "fs.file-max" = 1048576;
+      "vm.dirty_background_bytes" = 4194304;
+      "vm.dirty_bytes" = 4194304;
+      "vm.max_map_count" = 1048576;
+      "vm.swappiness" = 1;
+    };
     kernelModules = [ "kvm-intel" "i2c_dev" "ddcci-backlight" ];
     kernelPackages = pkgs.linuxPackages;
     kernelPatches = [

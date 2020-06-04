@@ -40,6 +40,13 @@
     wireless.iwd.enable = true;
   };
 
+  security.pam.loginLimits = [
+    { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
+    { domain = "*"; type = "-"; item = "nofile"; value = "unlimited"; }
+    { domain = "*"; type = "-"; item = "nproc"; value = "unlimited"; }
+    { domain = "*"; type = "-"; item = "stack"; value = "unlimited"; }
+  ];
+
   services.keybase.enable = false;
 
   systemd.network = {
