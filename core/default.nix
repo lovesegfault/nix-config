@@ -65,9 +65,8 @@ in
     stateVersion = "20.03";
   };
 
-  secrets.files.root-password = pkgs.mkSecret { file = ../secrets/root-password; };
   users = {
     mutableUsers = false;
-    users.root.passwordFile = config.secrets.files.root-password.file.outPath;
+    users.root.hashedPassword = "$6$rounds=65536$zcuDkE8oM6Rlm6j$yFNZyO5q0lMGdB.Qds15H2A/1rGUd36xtwfHYev8iiLAplUTcT6PKgi8OVJkpF6o5thLSAzdFJU6poh1eu.Dh.";
   };
 }
