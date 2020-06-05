@@ -14,11 +14,7 @@
       "net.core.default_qdisc" = "cake";
       "net.core.netdev_max_backlog" = 65536;
       "net.core.optmem_max" = 25165824;
-      "net.core.rmem_default" = 31457280;
-      "net.core.rmem_max" = 2147483647;
       "net.core.somaxconn" = 4096;
-      "net.core.wmem_default" = 31457280;
-      "net.core.wmem_max" = 2147483647;
       "net.ipv4.tcp_congestion_control" = "bbr";
       "net.ipv4.tcp_fastopen" = 3;
       "net.ipv4.tcp_fin_timeout" = 15;
