@@ -2,7 +2,7 @@ self: super:
 with builtins; with self.lib;
 {
   mkSecret = { file, ... }@args:
-  let
+    let
       fileName = baseNameOf (toString file);
       stub = toFile fileName "This is a stub!";
       file =
