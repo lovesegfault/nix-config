@@ -15,7 +15,7 @@
 
   environment.noXlibs = true;
 
-  secrets.wifi-tabachnik.file = pkgs.mkSecret ../secrets/wifi-tabachnik.conf;
+  secrets.files.wifi-tabachnik = pkgs.mkSecret { file = ../secrets/wifi-tabachnik.conf; };
   networking = {
     hostName = "goethe";
     interfaces.eth0 = {
@@ -25,11 +25,11 @@
       }];
       useDHCP = lib.mkForce false;
     };
-    supplicant.wlan0.configFile.path = config.secrets.wifi-tabachnik.file;
+    supplicant.wlan0.configFile.path = config.secrets.files.wifi-tabachnik.file;
   };
 
-  secrets.ddclient-goethe.file = pkgs.mkSecret ../secrets/ddclient-goethe.conf;
-  services.ddclient.configFile = config.secrets.ddclient-goethe;
+  secrets.files.ddclient-goethe = pkgs.mkSecret { file = ../secrets/ddclient-goethe.conf; };
+  services.ddclient.configFile = config.files.secrets.ddclient-goethe.file;
 
   services.dhcpd4 = {
     enable = true;

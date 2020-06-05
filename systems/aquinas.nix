@@ -29,8 +29,8 @@
     wireless.iwd.enable = true;
   };
 
-  secrets.ddclient-aquinas.file = pkgs.mkSecret ../secrets/ddclient-aquinas.conf;
-  services.ddclient.configFile = config.secrets.ddclient-aquinas;
+  secrets.files.ddclient-aquinas = pkgs.mkSecret { file = ../secrets/ddclient-aquinas.config; };
+  services.ddclient.configFile = config.secrets.files.ddclient-aquinas.file;
 
   services.logind.lidSwitchExternalPower = "ignore";
 

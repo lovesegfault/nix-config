@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }: {
 
-  secrets.nixos-aarch64-builder-key.file = pkgs.mkSecret ../secrets/nixos-aarch64-builder.key;
+  secrets.files.nixos-aarch64-builder-key = pkgs.mkSecret { file = ../secrets/nixos-aarch64-builder.key; };
   environment.etc.nixos-aarch64-builder-key = {
     mode = "0400";
-    source = config.secrets.nixos-aarch64-builder-key.file;
+    source = config.secrets.files.nixos-aarch64-builder-key.file;
     target = "ssh/nixos-aarch64-builder-key";
   };
   nix = {

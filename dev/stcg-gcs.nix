@@ -7,6 +7,6 @@
     ];
   };
 
-  secrets.stcg-aws-credentials.file = pkgs.mkSecret ../secrets/stcg-aws-credentials;
-  home-manager.users.root.home.file.".aws/credentials".source = config.secrets.stcg-aws-credentials.file;
+  secrets.files.stcg-aws-credentials = pkgs.mkSecret { file = ../secrets/stcg-aws-credentials; };
+  home-manager.users.root.home.file.".aws/credentials".source = config.secrets.files.stcg-aws-credentials.file;
 }

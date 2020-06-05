@@ -24,15 +24,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixus": {
-        "branch": "master",
+        "branch": "improved-secrets",
         "description": null,
         "homepage": "",
         "owner": "Infinisil",
         "repo": "nixus",
-        "rev": "bbf5f6062dea40fb13d3c302e0fe7ccb2f0b936d",
-        "sha256": "06x20cag1592y3lc7wka4s99n8y326bh8asf1zyl8zv8m2w0ax8k",
+        "rev": "5cc857d908019e7b131ea92562af1fb33d8b9973",
+        "sha256": "0fzhyszg0gnfvhacy3gqmcdd9ygp9xq0vc67b6rkczg2qlky6rii",
         "type": "tarball",
-        "url": "https://github.com/Infinisil/nixus/archive/bbf5f6062dea40fb13d3c302e0fe7ccb2f0b936d.tar.gz",
+        "url": "https://github.com/Infinisil/nixus/archive/5cc857d908019e7b131ea92562af1fb33d8b9973.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

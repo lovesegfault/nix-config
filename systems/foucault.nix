@@ -19,7 +19,6 @@
     zfs rollback -r rpool/local/root@blank
   '';
 
-
   fileSystems = {
     "/" = {
       device = "rpool/local/root";
@@ -63,11 +62,12 @@
 
   nixpkgs.overlays = [ (import ../overlays/iwdWrapper.nix) ];
 
+  # secrets.baseDirectory = "/state/var/secrets";
+
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
     { domain = "*"; type = "-"; item = "nofile"; value = "1048576"; }
     { domain = "*"; type = "-"; item = "nproc"; value = "unlimited"; }
-    # { domain = "*"; type = "-"; item = "stack"; value = "unlimited"; }
   ];
 
   services.keybase.enable = false;
