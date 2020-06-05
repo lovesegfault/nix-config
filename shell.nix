@@ -26,7 +26,7 @@ let
       "''${cmd[@]}" | ${pkgs.stdenv.shell}
     }
 
-    vpn
+    # vpn
     deploy "$@"
     exit
   '';
