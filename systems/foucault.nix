@@ -51,6 +51,35 @@
     };
   };
 
+  fileSystems = {
+    "/var/lib/iwd" = {
+      device = "/state/var/lib/iwd";
+      options = [ "bind" ];
+      noCheck = true;
+    };
+    "/var/lib/bluetooth" = {
+      device = "/state/var/lib/bluetooth";
+      options = [ "bind" ];
+      noCheck = true;
+    };
+    "/var/lib/nixus-secrets" = {
+      device = "/state/var/lib/nixus-secrets";
+      options = [ "bind" ];
+      noCheck = true;
+    };
+  };
+  system.activationScripts = {
+    iwdState = lib.noDepEntry ''
+      mkdir -p /var/lib/iwd
+    '';
+    bluetoothState = lib.noDepEntry ''
+      mkdir -p /var/lib/bluetooth
+    '';
+    nixusState = lib.noDepEntry ''
+      mkdir -p /var/lib/nixus-secrets
+    '';
+  };
+
   hardware.u2f.enable = true;
   hardware.logitech.enable = true;
 
@@ -59,10 +88,6 @@
     hostId = "872516b8";
     wireless.iwd.enable = true;
   };
-
-  nixpkgs.overlays = [ (import ../overlays/iwdWrapper.nix) ];
-
-  # secrets.baseDirectory = "/state/var/secrets";
 
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
@@ -97,11 +122,6 @@
       };
     };
   };
-
-  systemd.tmpfiles.rules = [
-    "L /var/keys          - - - - /state/var/keys"
-    "L /var/lib/bluetooth - - - - /state/var/lib/bluetooth"
-  ];
 
   swapDevices = [{ device = "/dev/disk/by-uuid/840591d3-ac66-4137-bc39-4d9f9109c19a"; }];
 
