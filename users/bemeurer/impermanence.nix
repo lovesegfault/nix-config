@@ -21,6 +21,7 @@
       ".local/share/keyrings"
       ".local/share/lollypop"
       ".local/share/nix"
+      ".local/share/nvim"
       ".local/share/shotwell"
       ".mozilla"
       ".password-store"
@@ -33,6 +34,7 @@
       "tmp"
     ];
     files = [
+      ".arcrc"
       ".cache/swaymenu-history.txt"
       ".config/zoomus.conf"
       ".gist"
