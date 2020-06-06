@@ -20,7 +20,7 @@
     "/" = {
       device = "tmpfs";
       fsType = "tmpfs";
-      options = [ "defaults" "size=20%" ];
+      options = [ "defaults" "noatime" "size=20%" "mode=755" ];
     };
     "/nix" = {
       device = "rpool/local/nix";
