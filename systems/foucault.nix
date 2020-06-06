@@ -1,6 +1,7 @@
 { lib, pkgs, ... }: {
   imports = [
     (import ../users).bemeurer
+    (import ../nix).nixos-impermanence
     ../core
 
     ../dev
@@ -17,11 +18,16 @@
 
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     zfs rollback -r rpool/local/root@blank
+    zfs rollback -r rpool/local/home@blank
   '';
 
   fileSystems = {
     "/" = {
       device = "rpool/local/root";
+      fsType = "zfs";
+    };
+    "/home" = {
+      device = "rpool/local/home";
       fsType = "zfs";
     };
     "/nix" = {
@@ -37,8 +43,8 @@
       device = "rpool/safe/music";
       fsType = "zfs";
     };
-    "/home" = {
-      device = "rpool/safe/home";
+    "/srv/pictures" = {
+      device = "rpool/safe/pictures";
       fsType = "zfs";
     };
     "/state" = {
@@ -51,34 +57,11 @@
     };
   };
 
-  fileSystems = {
-    "/var/lib/iwd" = {
-      device = "/state/var/lib/iwd";
-      options = [ "bind" ];
-      noCheck = true;
-    };
-    "/var/lib/bluetooth" = {
-      device = "/state/var/lib/bluetooth";
-      options = [ "bind" ];
-      noCheck = true;
-    };
-    "/var/lib/nixus-secrets" = {
-      device = "/state/var/lib/nixus-secrets";
-      options = [ "bind" ];
-      noCheck = true;
-    };
-  };
-  system.activationScripts = {
-    iwdState = lib.noDepEntry ''
-      mkdir -p /var/lib/iwd
-    '';
-    bluetoothState = lib.noDepEntry ''
-      mkdir -p /var/lib/bluetooth
-    '';
-    nixusState = lib.noDepEntry ''
-      mkdir -p /var/lib/nixus-secrets
-    '';
-  };
+  environment.persistence."/state".directories = [
+    "/var/lib/bluetooth"
+    "/var/lib/iwd"
+    "/var/lib/nixus-secrets"
+  ];
 
   hardware.u2f.enable = true;
   hardware.logitech.enable = true;
@@ -96,7 +79,6 @@
   ];
 
   services.keybase.enable = false;
-
   services.openssh.hostKeys = [
     { path = "/state/etc/ssh/ssh_host_ed25519_key"; type = "ed25519"; }
     { path = "/state/etc/ssh/ssh_host_rsa_key"; type = "rsa"; bits = 4096; }

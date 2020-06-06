@@ -32,6 +32,7 @@ with lib;
         (import ./gpg)
         (import ./sway)
         (import ./music)
+        (import ./impermanence.nix)
       ]
     );
 }
