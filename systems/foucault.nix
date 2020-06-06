@@ -18,16 +18,11 @@
 
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     zfs rollback -r rpool/local/root@blank
-    zfs rollback -r rpool/local/home@blank
   '';
 
   fileSystems = {
     "/" = {
       device = "rpool/local/root";
-      fsType = "zfs";
-    };
-    "/home" = {
-      device = "rpool/local/home";
       fsType = "zfs";
     };
     "/nix" = {
