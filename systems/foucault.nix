@@ -16,14 +16,11 @@
     ../sway
   ];
 
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r rpool/local/root@blank
-  '';
-
   fileSystems = {
     "/" = {
-      device = "rpool/local/root";
-      fsType = "zfs";
+      device = "none";
+      fsType = "tmpfs";
+      options = [ "defaults" "size=20%" ];
     };
     "/nix" = {
       device = "rpool/local/nix";
