@@ -37,15 +37,15 @@
       ".config/zoomus.conf"
       ".gist"
       ".gist-vim"
+      ".gnupg/pubring.kbx"
+      ".gnupg/random_seed"
+      ".gnupg/sshcontrol"
+      ".gnupg/trustdb.gpg"
       ".local/share/bash_history"
       ".local/share/zsh_history"
-      ".wall"
       ".newsboat/cache.db"
       ".newsboat/history.search"
-      ".gnupg/pubring.kbx"
-      ".gnupg/trustdb.gpg"
-      ".gnupg/sshcontrol"
-      ".gnupg/random_seed"
+      ".wall"
     ];
   };
 }
