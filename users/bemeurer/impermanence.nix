@@ -1,6 +1,6 @@
 { ... }: {
-  imports = [(import ../../nix).home-impermanence];
-   
+  imports = [ (import ../../nix).home-impermanence ];
+
   home.persistence."/state/home/bemeurer" = {
     directories = [
       ".cache/lollypop"
@@ -14,7 +14,6 @@
       ".config/discord"
       ".config/gcloud"
       ".config/gopass"
-      ".config/pulse"
       ".config/shotwell"
       ".gnupg/private-keys-v1.d"
       ".gsutil"
