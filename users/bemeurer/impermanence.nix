@@ -11,6 +11,7 @@
       ".cache/thunderbird"
       ".cache/zoom"
       ".config/Slack"
+      ".config/dconf"
       ".config/discord"
       ".config/gcloud"
       ".config/gopass"
