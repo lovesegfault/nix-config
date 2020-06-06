@@ -29,11 +29,6 @@
       device = "rpool/local/nix";
       fsType = "zfs";
     };
-    "/nix/store" = {
-      device = "/nix/store";
-      fsType = "none";
-      options = [ "bind" ];
-    };
     "/srv/music" = {
       device = "rpool/safe/music";
       fsType = "zfs";
