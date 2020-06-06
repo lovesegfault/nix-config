@@ -1,7 +1,7 @@
 { lib, pkgs, ... }: {
   imports = [
     (import ../users).bemeurer
-    (import ../nix).nixos-impermanence
+    (import ../nix).impermanence
     ../core
 
     ../dev
@@ -22,6 +22,10 @@
       fsType = "tmpfs";
       options = [ "defaults" "noatime" "size=20%" "mode=755" ];
     };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/17FB-AAD0";
+      fsType = "vfat";
+    };
     "/nix" = {
       device = "rpool/local/nix";
       fsType = "zfs";
@@ -37,18 +41,24 @@
     "/state" = {
       device = "rpool/safe/state";
       fsType = "zfs";
-    };
-    "/boot" = {
-      device = "/dev/disk/by-uuid/17FB-AAD0";
-      fsType = "vfat";
+      neededForBoot = true;
     };
   };
 
-  environment.persistence."/state".directories = [
-    "/var/lib/bluetooth"
-    "/var/lib/iwd"
-    "/var/lib/nixus-secrets"
-  ];
+  environment.impermanence."/state" = {
+    directories = [
+      "/var/lib/bluetooth"
+      "/var/lib/iwd"
+      "/var/lib/nixus-secrets"
+    ];
+    files = [
+      "/etc/machine-id"
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
+      "/etc/ssh/ssh_host_rsa_key"
+      "/etc/ssh/ssh_host_rsa_key.pub"
+    ];
+  };
 
   hardware.u2f.enable = true;
   hardware.logitech.enable = true;
