@@ -20,6 +20,10 @@
 
   nixpkgs.localSystem.system = "x86_64-linux";
 
+  security.pam.loginLimits = [
+    { domain = "*"; type = "-"; item = "nofile"; value = "1048576"; }
+  ];
+
   services.fstrim.enable = true;
   services.sshguard.enable = lib.mkForce false;
 }

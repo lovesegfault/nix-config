@@ -13,10 +13,13 @@ in
     ./openssh.nix
     ./unbound.nix
     ./sudo.nix
+    ./sysctl.nix
     ./tmux.nix
     ./xdg.nix
     ./zsh.nix
   ];
+
+  boot.kernelParams = [ "log_buf_len=10M" ];
 
   environment.etc."nixos/configuration.nix".source = dummyConfig;
 

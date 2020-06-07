@@ -9,37 +9,10 @@
   boot = rec {
     extraModulePackages = with kernelPackages; [ ddcci-driver ];
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-    kernel.sysctl = {
-      "fs.file-max" = 1048576;
-      "net.core.default_qdisc" = "cake";
-      "net.core.netdev_max_backlog" = 65536;
-      "net.core.optmem_max" = 25165824;
-      "net.core.somaxconn" = 4096;
-      "net.ipv4.tcp_congestion_control" = "bbr";
-      "net.ipv4.tcp_fastopen" = 3;
-      "net.ipv4.tcp_fin_timeout" = 15;
-      "net.ipv4.tcp_max_tw_buckets" = 1440000;
-      "net.ipv4.tcp_mem" = "65536 131072 262144";
-      "net.ipv4.tcp_mtu_probing" = 1;
-      "net.ipv4.tcp_rfc1337" = 1;
-      "net.ipv4.tcp_rmem" = "8192 87380 16777216";
-      "net.ipv4.tcp_slow_start_after_idle" = 0;
-      "net.ipv4.tcp_synack_retries" = 2;
-      "net.ipv4.tcp_tw_recycle" = 1;
-      "net.ipv4.tcp_tw_reuse" = 1;
-      "net.ipv4.tcp_wmem" = "8192 65536 16777216";
-      "net.ipv4.udp_mem" = "65536 131072 262144";
-      "net.ipv4.udp_rmem_min" = 16384;
-      "net.ipv4.udp_wmem_min" = "16384";
-      "vm.dirty_background_bytes" = 4194304;
-      "vm.dirty_bytes" = 4194304;
-      "vm.max_map_count" = 1048576;
-      "vm.swappiness" = 1;
-    };
+    kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "kvm-intel" "i2c_dev" "ddcci-backlight" "tcp_bbr" ];
     kernelPackages = pkgs.linuxPackages;
-    kernelPatches = [
-      {
+    kernelPatches = [{
         # FIXME: Remove this when kernel 5.8 is out
         name = "thinkpad-dual-fan-ctrl";
         patch = (
@@ -48,17 +21,8 @@
             sha256 = "1bp7hg4ppwiyp0bvhijhqr2gcz79g1lv22fyq3bb8rbcwziszxa6";
           }
         );
-      }
-    ];
-    kernelParams = [
-      # more dmesg
-      "log_buf_len=5M"
-      # i don't know, the kernle complains
-      "psmouse.synaptics_intertouch=1"
-      # force iwlwifi power saving on
-      "iwlwifi.power_save=Y"
-      "iwldvm.force_cam=N"
-    ];
+    }];
+    kernelParams = [ "psmouse.synaptics_intertouch=1" ];
   };
 
   console = {
