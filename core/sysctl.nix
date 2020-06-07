@@ -1,5 +1,5 @@
 { ... }: {
-  boot.sysctl = {
+  boot.kernel.sysctl = {
     "fs.file-max" = 1048576;
     "net.core.default_qdisc" = "cake";
     "net.core.netdev_max_backlog" = 65536;
