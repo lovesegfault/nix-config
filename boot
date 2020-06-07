@@ -11,4 +11,13 @@ function boot() {
         error "Failed to activate system"
 }
 
-boot "$1"
+function build() {
+    [ "$#" -eq 1 ] || exit 1
+    nix-build -A "$1" --no-out-link
+}
+
+echo "building foucault"
+scriptPath="$(build "$1")"
+systemPath="$(rg -o --pcre2 "(?<=start\ \")\/nix\/store\/.*?-git" "${scriptPath}")"
+echo "booting ${systemPath}"
+boot "${systemPath}"
