@@ -9,7 +9,14 @@
     autoSnapshot = {
       enable = true;
       flags = "-k -p --utc";
+      frequent = 0;
+      hourly = 0;
+      monthly = 0;
+      weekly = 1;
     };
-    trim.enable = true;
+    trim = {
+      enable = true;
+      interval = "weekly";
+    };
   };
 }
