@@ -57,6 +57,7 @@
 
   nix.maxJobs = 12;
 
+  services.sshguard.enable = lib.mkForce false;
   services.xserver = {
     desktopManager.gnome3.enable = true;
     displayManager.gdm = {
