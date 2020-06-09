@@ -121,6 +121,7 @@
   ];
 
   services.keybase.enable = false;
+  services.pcscd.enable = true;
 
   systemd.network = {
     links.enp0s31f6 = {
