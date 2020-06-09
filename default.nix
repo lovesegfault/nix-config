@@ -42,12 +42,10 @@ nixus ({ ... }: {
       configuration = ./systems/cantor.nix;
     };
     abel = { ... }: {
-      enabled = false;
       host = "10.1.16.12";
       configuration = ./systems/abel.nix;
     };
     peano = { ... }: {
-      enabled = false;
       host = "10.1.16.11";
       configuration = ./systems/peano.nix;
     };
