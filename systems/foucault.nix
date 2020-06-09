@@ -12,6 +12,7 @@
     ../dev/virt-manager.nix
 
     ../hardware/thinkpad-p1.nix
+    ../hardware/yubikey.nix
 
     ../sway
   ];
@@ -105,7 +106,6 @@
     ];
   };
 
-  hardware.u2f.enable = true;
   hardware.logitech.enable = true;
 
   networking = {
@@ -121,7 +121,6 @@
   ];
 
   services.keybase.enable = false;
-  services.pcscd.enable = true;
 
   systemd.network = {
     links.enp0s31f6 = {
