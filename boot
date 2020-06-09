@@ -11,6 +11,6 @@ function boot() {
         error "Failed to activate system"
 }
 
-systemPath="$1"
+systemPath="$(realpath "$1")"
 echo "booting ${systemPath}"
 boot "${systemPath}"
