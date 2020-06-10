@@ -6,7 +6,14 @@
     ../dev/stcg-gcs.nix
 
     ../hardware/packet-c2-large-arm.nix
-  ] ++ (import ../users).stream;
+
+    ../users/andi.nix
+    ../users/bemeurer
+    ../users/cloud.nix
+    ../users/ekleog.nix
+    ../users/nagisa.nix
+    ../users/ogle.nix
+  ];
 
   fileSystems = {
     "/" = {

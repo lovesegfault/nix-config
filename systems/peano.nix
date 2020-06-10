@@ -9,7 +9,14 @@
     ../dev
     ../dev/stcg-gcs.nix
     ../dev/stcg-cameras.nix
-  ] ++ (import ../users).stream ++ (import ../users).hardware;
+
+    ../users/andi.nix
+    ../users/bemeurer
+    ../users/cloud.nix
+    ../users/ekleog.nix
+    ../users/nagisa.nix
+    ../users/ogle.nix
+  ];
 
   boot = {
     initrd.availableKernelModules = [ "ahci" "xhci_pci" "ehci_pci" ];

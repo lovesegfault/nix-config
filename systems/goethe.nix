@@ -1,11 +1,12 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    (import ../users).andi
-    (import ../users).bemeurer
     ../core
 
     ../hardware/rpi4.nix
+
+    ../users/andi.nix
+    ../users/bemeurer
   ];
 
   console = {

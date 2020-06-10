@@ -1,6 +1,5 @@
 { lib, pkgs, ... }: {
   imports = [
-    (import ../users).bemeurer
     (import ../nix).impermanence
     ../core
 
@@ -16,6 +15,8 @@
     ../hardware/zfs.nix
 
     ../sway
+
+    ../users/bemeurer
   ];
 
   fileSystems = {

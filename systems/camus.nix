@@ -1,10 +1,11 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    (import ../users).bemeurer
     ../core
 
     ../hardware/rpi4.nix
+
+    ../users/bemeurer
   ];
 
   boot.kernelParams = [ "fbcon=rotate:3" ];

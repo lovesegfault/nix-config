@@ -1,10 +1,11 @@
 { config, lib, pkgs, ... }: {
   imports = [
-    (import ../users).bemeurer
     ../core
     ../dev
 
     ../hardware/gce.nix
+
+    ../users/bemeurer
   ];
 
   networking = {

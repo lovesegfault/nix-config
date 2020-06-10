@@ -46,17 +46,13 @@ myHost` both work.
 
 ### adding users
 
-**PSA:** I am not at all happy with the way users are currently handled and
-fully intend to refactor it in the future. Suggestions are welcome.
-
-Users are handled as drop-in units living in ./users. To add a user follow this
-process:
-
 ```shell
-cp users/template users/myUser
-find users/myUser -name "*.nix" -exec sed -i s/template/myUser/g {} +
-vim users/myUser/default.nix # You may want to add your openssh key
-vim users/default.nix # add yourself to the relevant groups
+cp users/template.nix users/myUser.nix
+sed -i s/template/myUser/g users/myUser.nix
+# You may want to add your openssh key
+vim users/myUser.nix
+# You may want to add youself to a system
+vim systems/mySystem.nix
 ```
 
 ### adding overlays

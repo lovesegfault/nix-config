@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }: {
   imports = [
-    (import ../users).bemeurer
     ../core
 
     ../dev
@@ -10,6 +9,8 @@
     ../hardware/dell-e6530.nix
 
     ../sway
+
+    ../users/bemeurer
   ];
 
   fileSystems = {

@@ -1,9 +1,11 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    (import ../users).bemeurer
     ../core
+
     ../hardware/rpi3.nix
+
+    ../users/bemeurer
   ];
 
   environment.noXlibs = true;

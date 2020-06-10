@@ -7,7 +7,14 @@
     ../dev/stcg-aarch64-builder.nix
 
     ../hardware/stcg-dc.nix
-  ] ++ (import ../users).stream;
+
+    ../users/andi.nix
+    ../users/bemeurer
+    ../users/cloud.nix
+    ../users/ekleog.nix
+    ../users/nagisa.nix
+    ../users/ogle.nix
+  ];
 
   fileSystems = {
     "/" = {
