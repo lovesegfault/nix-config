@@ -2,7 +2,6 @@
   imports = [
     ./boot-silent.nix
     ./fonts.nix
-    ./gnome-keyring.nix
     ./location.nix
     ./printing.nix
     ./sound.nix
