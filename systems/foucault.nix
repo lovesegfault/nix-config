@@ -118,6 +118,7 @@
   };
 
   programs.geary.enable = true;
+  services.gnome3.core-os-services.enable = true;
 
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
