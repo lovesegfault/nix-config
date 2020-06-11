@@ -24,6 +24,7 @@
       pavucontrol
       slack
       slurp
+      solaar
       speedcrunch
       spotify
       thunderbird-bin
