@@ -110,12 +110,6 @@
   };
 
   services.udev.packages = with pkgs; [ logitech-udev-rules ];
-  services.udev.extraHwdb = ''
-    mouse:usb:v046dpb01d:name:MX Ergo Mouse:
-    mouse:bluetooth:v046dpb01d:name:MX Ergo Mouse:
-      MOUSE_WHEEL_CLICK_ANGLE=1
-      MOUSE_WHEEL_CLICK_COUNT=360
-  '';
 
   networking = {
     hostName = "foucault";
