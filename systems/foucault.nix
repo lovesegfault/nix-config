@@ -117,9 +117,6 @@
     wireless.iwd.enable = true;
   };
 
-  programs.geary.enable = true;
-  services.gnome3.core-os-services.enable = true;
-
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
     { domain = "*"; type = "-"; item = "nofile"; value = "1048576"; }
