@@ -21,7 +21,7 @@
   boot = {
     initrd.availableKernelModules = [ "ahci" "xhci_pci" "ehci_pci" ];
     kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages;
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {
