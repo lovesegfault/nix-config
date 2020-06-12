@@ -24,9 +24,6 @@ in
     };
     envExtra = shellConfig.env;
     initExtra = ''
-      # c.f. https://wiki.gnupg.org/AgentForwarding
-      gpgconf --create-socketdir &!
-
       bindkey "$${terminfo[khome]}" beginning-of-line
       bindkey "$${terminfo[kend]}" end-of-line
       bindkey "$${terminfo[kdch1]}" delete-char

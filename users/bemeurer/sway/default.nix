@@ -52,6 +52,8 @@
     fi
   '';
 
+  services.gpg-agent.pinentryFlavor = "gnome3";
+
   xsession.pointerCursor = {
     package = pkgs.gnome3.adwaita-icon-theme;
     name = "Adwaita";
