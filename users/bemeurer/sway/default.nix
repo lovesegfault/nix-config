@@ -22,6 +22,7 @@
       mbk
       mumble
       pavucontrol
+      pinentry-gnome
       slack
       slurp
       solaar
