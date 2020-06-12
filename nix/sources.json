@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "4df177ff96fe71a0933966ab789ee480f1b553b9",
-        "sha256": "0x4m0cmc7ivpbklrfa14gcwi66x2r7jwhicivf9w399cflrhvf82",
+        "rev": "2c2c6721f9b8d5c60cc45ed99eea0237628702ad",
+        "sha256": "1wsnlpgvc3ylyqhvq6avb2g4dr1x5rcq4f303hzdw1v37cr33a58",
         "type": "tarball",
-        "url": "https://github.com/nix-community/impermanence/archive/4df177ff96fe71a0933966ab789ee480f1b553b9.tar.gz",
+        "url": "https://github.com/nix-community/impermanence/archive/2c2c6721f9b8d5c60cc45ed99eea0237628702ad.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
