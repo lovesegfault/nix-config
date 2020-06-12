@@ -7,5 +7,7 @@
     components = [ "pkcs11" "secrets" "ssh" ];
   };
 
+  services.gpg-agent.pinentryFlavor = "gnome3";
+
   home.sessionVariables."SSH_AUTH_SOCK" = "/run/user/8888/keyring/ssh";
 }

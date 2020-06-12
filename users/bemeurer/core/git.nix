@@ -3,11 +3,7 @@
     enable = true;
     package = pkgs.gitFull;
     lfs.enable = false;
-    signing = {
-      key = "589412CE19DF582AE10A3320E421C74191EA186C";
-      signByDefault = config.services.gnome-keyring.enable;
-    };
-    userEmail = "meurerbernardo@gmail.com";
+    userEmail = "bernardo@meurer.org";
     userName = "Bernardo Meurer";
     extraConfig = {
       core.pager = "${pkgs.gitAndTools.delta}/bin/delta --dark";

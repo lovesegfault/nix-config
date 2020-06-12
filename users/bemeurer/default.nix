@@ -29,7 +29,7 @@ with lib;
         (import ./dev)
         # ({ ... }: { home.file.arcrc = { source = config.secrets.files.stcg-arcanist-config.file; target = ".arcrc"; }; })
       ] ++ optionals config.programs.sway.enable [
-        (import ./gpg)
+        (import ./trusted)
         (import ./sway)
         (import ./music)
       ]
