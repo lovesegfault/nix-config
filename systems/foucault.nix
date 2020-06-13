@@ -95,7 +95,9 @@
       "/etc/ssh/ssh_host_rsa_key.pub"
     ] ++ [
       "/home/bemeurer/.arcrc"
+      "/home/bemeurer/.cache/cargo/credentials"
       "/home/bemeurer/.cache/swaymenu-history.txt"
+      "/home/bemeurer/.config/cachix/cachix.dhall"
       "/home/bemeurer/.config/zoomus.conf"
       "/home/bemeurer/.gist"
       "/home/bemeurer/.gist-vim"
