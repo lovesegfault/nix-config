@@ -27,8 +27,7 @@
       slurp
       solaar
       speedcrunch
-      spotify
-      thunderbird-bin
+      thunderbird
       wl-clipboard
       zoom-us
     ];
@@ -37,7 +36,7 @@
   gtk = {
     enable = true;
     gtk2.extraConfig = "gtk-application-prefer-dark-theme = true";
-    gtk3.extraConfig = { gtk-application-prefer-dark-theme = true; };
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
   };
 
   qt = {
