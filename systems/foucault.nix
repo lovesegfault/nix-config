@@ -107,7 +107,7 @@
     ];
   };
 
-  services.udev.packages = with pkgs; [ logitech-udev-rules ];
+  home-manager.verbose = true;
 
   networking = {
     hostName = "foucault";
@@ -121,6 +121,7 @@
     { domain = "*"; type = "-"; item = "nproc"; value = "unlimited"; }
   ];
 
+  services.udev.packages = with pkgs; [ logitech-udev-rules ];
   services.keybase.enable = false;
 
   systemd.network = {
