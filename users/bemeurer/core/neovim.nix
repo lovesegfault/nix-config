@@ -520,7 +520,7 @@
               autocmd  FileType fzf set laststatus=0 noshowmode noruler
                   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
               " Map ctrp-p/b to search files/buffers
-              nnoremap <C-p> :Files<CR>
+              nnoremap <C-p> :GitFiles<CR>
               nnoremap <C-b> :Buffers<CR>
               set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
               command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
