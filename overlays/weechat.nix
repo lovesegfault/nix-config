@@ -32,7 +32,7 @@ self: super:
                             (self.fetchpatch {
                               name = "process_time.patch";
                               url = "https://patch-diff.githubusercontent.com/raw/pycrypto/pycrypto/pull/307.patch";
-                              sha256 = "0000000000000000000000000000000000000000000000000000";
+                              sha256 = "0jsb6smlfpfjyingq4kmrf226zmsv2yz4a8yvffryg1w0j4yh2xm";
                             })
                           ];
 
