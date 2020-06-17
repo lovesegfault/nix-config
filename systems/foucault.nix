@@ -1,6 +1,6 @@
 { lib, pkgs, ... }: {
   imports = [
-    (import ../nix).impermanence
+    (import ../nix).impermanence-sys
     ../core
 
     ../dev
@@ -49,7 +49,7 @@
     };
   };
 
-  environment.impermanence."/state" = {
+  environment.persistence."/state" = {
     directories = [
       "/var/lib/bluetooth"
       "/var/lib/iwd"
@@ -93,21 +93,27 @@
       "/etc/ssh/ssh_host_ed25519_key.pub"
       "/etc/ssh/ssh_host_rsa_key"
       "/etc/ssh/ssh_host_rsa_key.pub"
-    ] ++ [
-      "/home/bemeurer/.arcrc"
-      "/home/bemeurer/.cache/cargo/credentials"
-      "/home/bemeurer/.cache/swaymenu-history.txt"
-      "/home/bemeurer/.config/cachix/cachix.dhall"
-      "/home/bemeurer/.config/zoomus.conf"
-      "/home/bemeurer/.gist"
-      "/home/bemeurer/.gist-vim"
-      "/home/bemeurer/.newsboat/cache.db"
-      "/home/bemeurer/.newsboat/history.search"
-      "/home/bemeurer/.wall"
     ];
   };
 
   home-manager.verbose = true;
+  home-manager.users.bemeurer = { ... }: {
+    imports = [ (import ../nix).impermanence-home ];
+    home.persistence."/state/home/bemeurer" = {
+      files = [
+        ".arcrc"
+        ".cache/cargo/credentials"
+        ".cache/swaymenu-history.txt"
+        ".config/cachix/cachix.dhall"
+        ".config/zoomus.conf"
+        ".gist"
+        ".gist-vim"
+        ".newsboat/cache.db"
+        ".newsboat/history.search"
+        ".wall"
+      ];
+    };
+  };
 
   networking = {
     hostName = "foucault";

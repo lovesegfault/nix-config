@@ -12,15 +12,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "impermanence": {
-        "branch": "fix-perms",
+        "branch": "master",
         "description": "Modules to help you handle persistent state on systems with ephemeral root storage [maintainer=@talyz]",
         "homepage": "",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "4df177ff96fe71a0933966ab789ee480f1b553b9",
-        "sha256": "0x4m0cmc7ivpbklrfa14gcwi66x2r7jwhicivf9w399cflrhvf82",
+        "rev": "a45918b80cf845b18cdfc1a1ac0807652a137f55",
+        "sha256": "1s1s5qga21zj5mbf9n3d49kzd9cb6jmj8pssqqj4x3c1bbm2hics",
         "type": "tarball",
-        "url": "https://github.com/nix-community/impermanence/archive/4df177ff96fe71a0933966ab789ee480f1b553b9.tar.gz",
+        "url": "https://github.com/nix-community/impermanence/archive/a45918b80cf845b18cdfc1a1ac0807652a137f55.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
