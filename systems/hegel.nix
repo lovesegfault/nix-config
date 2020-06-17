@@ -12,6 +12,7 @@
     ../users/cloud.nix
     ../users/ekleog.nix
     ../users/nagisa.nix
+    ../users/naser.nix
     ../users/ogle.nix
   ];
 
@@ -93,6 +94,9 @@
     ];
     nagisa.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ2AbFIHV+041/Qg4rbdkcF7hTx2yNPOIaM+Wmx21kU5 nagisa@stcg-aarch64-builder"
+    ];
+    naser.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL9nlQHpA7gO7SET33u6ww9wfsVHY+UbXnLHnVZrGUX0 naser@stcg-aarch64-builder"
     ];
     root.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPouKApFuTmz3XSadk7mZR69bOuPJK/LO+dzFJyIbwkJ packet.net superuser"
