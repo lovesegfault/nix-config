@@ -96,6 +96,7 @@
     ];
     jenkins = {
       description = "Jenkins";
+      isNormalUser = true;
       openssh.authorizedKeys.keys = [
         "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBKIzdwOY15S91dJtY//IYRhBQk/mPMrOzSDDbxVj6X3R0GC5RnDSNV9U46SK1x3MoFmkZzLgO0Qv0mpyMvKyqdY="
       ];
