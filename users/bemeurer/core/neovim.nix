@@ -542,7 +542,7 @@
               let g:LanguageClient_serverCommands = {
                   \ 'c': ['ccls'],
                   \ 'cpp': ['ccls'],
-                  \ 'haskell': ['ghcide', '--lsp']
+                  \ 'haskell': ['ghcide', '--lsp'],
                   \ 'nix': ['rnix-lsp'],
                   \ 'python': ['pyls'],
                   \ 'rust': ['rust-analyzer'],
