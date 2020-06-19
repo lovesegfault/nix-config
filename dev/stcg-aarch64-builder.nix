@@ -4,17 +4,15 @@
     distributedBuilds = true;
     binaryCaches = [ "ssh://nix-ssh@147.75.47.54" ];
     binaryCachePublicKeys = [ "stcg-aarch64-builder:0YU8Ce67UXPmSfZ6kDuNlnSPtf49fkmawYc0E3Qc/oY=" ];
-    buildMachines = [
-      {
-        hostName = "147.75.47.54";
-        maxJobs = 32;
-        speedFactor = 1;
-        sshKey = config.secrets.files.stcg-aarch64-builder-key.file;
-        sshUser = "bemeurer";
-        system = "aarch64-linux";
-        supportedFeatures = [ "big-parallel" ];
-      }
-    ];
+    buildMachines = [{
+      hostName = "147.75.47.54";
+      maxJobs = 32;
+      speedFactor = 1;
+      sshKey = config.secrets.files.stcg-aarch64-builder-key.file;
+      sshUser = "bemeurer";
+      system = "aarch64-linux";
+      supportedFeatures = [ "big-parallel" ];
+    }];
     extraOptions = ''
       builders-use-substitutes = true
     '';
