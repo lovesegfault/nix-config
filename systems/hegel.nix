@@ -89,7 +89,7 @@
     trustedUsers = [ "jenkins" ];
     sshServe = {
       enable = true;
-      keys = []
+      keys = [ ]
         ++ config.users.users.andi.openssh.authorizedKeys.keys
         ++ config.users.users.bemeurer.openssh.authorizedKeys.keys
         ++ config.users.users.cloud.openssh.authorizedKeys.keys
