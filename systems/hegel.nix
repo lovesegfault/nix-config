@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ../core
 
@@ -79,7 +79,28 @@
     };
   };
 
-  nix.trustedUsers = [ "jenkins" ];
+  secrets.files.stcg-aarch64-builder-private = pkgs.mkSecret { file = ../secrets/stcg-aarch64-builder-nix.private; };
+  environment.etc."nix/key.private".source = config.secrets.files.stcg-aarch64-builder-private.file;
+  nix = {
+    binaryCachePublicKeys = [ "stcg-aarch64-builder:0YU8Ce67UXPmSfZ6kDuNlnSPtf49fkmawYc0E3Qc/oY=" ];
+    extraOptions = ''
+      secret-key-files = /etc/nix/key.private
+    '';
+    trustedUsers = [ "jenkins" ];
+    sshServe = {
+      enable = true;
+      keys = []
+        ++ config.users.users.andi.openssh.authorizedKeys.keys
+        ++ config.users.users.bemeurer.openssh.authorizedKeys.keys
+        ++ config.users.users.cloud.openssh.authorizedKeys.keys
+        ++ config.users.users.ekleog.openssh.authorizedKeys.keys
+        ++ config.users.users.jenkins.openssh.authorizedKeys.keys
+        ++ config.users.users.nagisa.openssh.authorizedKeys.keys
+        ++ config.users.users.naser.openssh.authorizedKeys.keys
+        ++ config.users.users.ogle.openssh.authorizedKeys.keys
+      ;
+    };
+  };
 
   # Causes issues with remote builders
   services.sshguard.enable = lib.mkForce false;

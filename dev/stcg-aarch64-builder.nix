@@ -2,6 +2,8 @@
   secrets.files.stcg-aarch64-builder-key = pkgs.mkSecret { file = ../secrets/stcg-aarch64-builder.key; };
   nix = {
     distributedBuilds = true;
+    binaryCaches = [ "ssh://nix-ssh@147.75.47.54" ];
+    binaryCachePublicKeys = [ "stcg-aarch64-builder:0YU8Ce67UXPmSfZ6kDuNlnSPtf49fkmawYc0E3Qc/oY=" ];
     buildMachines = [
       {
         hostName = "147.75.47.54";
