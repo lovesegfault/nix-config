@@ -13,7 +13,7 @@
   networking.hostName = "bohr";
 
   secrets.files.ddclient-bohr = pkgs.mkSecret { file = ../secrets/ddclient-bohr.conf; };
-  services.ddclient.configFile = config.files.secrets.ddclient-bohr.file;
+  services.ddclient.configFile = config.secrets.files.ddclient-bohr.file;
 
   services.openssh.ports = [ 22 55889 ];
 
