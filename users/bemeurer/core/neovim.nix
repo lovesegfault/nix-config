@@ -540,12 +540,13 @@
               set hidden
 
               let g:LanguageClient_serverCommands = {
+                  \ 'c': ['ccls'],
+                  \ 'cpp': ['ccls'],
+                  \ 'haskell': ['ghcide', '--lsp']
                   \ 'nix': ['rnix-lsp'],
                   \ 'python': ['pyls'],
                   \ 'rust': ['rust-analyzer'],
                   \ 'tex': ['texlab'],
-                  \ 'c': ['ccls'],
-                  \ 'cpp': ['ccls'],
               \ }
 
               nnoremap <space> :call LanguageClient_contextMenu()<CR>
