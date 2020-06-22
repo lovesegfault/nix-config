@@ -87,19 +87,6 @@
       secret-key-files = /etc/nix/key.private
     '';
     trustedUsers = [ "jenkins" ];
-    sshServe = {
-      enable = true;
-      keys = [ ]
-        ++ config.users.users.andi.openssh.authorizedKeys.keys
-        ++ config.users.users.bemeurer.openssh.authorizedKeys.keys
-        ++ config.users.users.cloud.openssh.authorizedKeys.keys
-        ++ config.users.users.ekleog.openssh.authorizedKeys.keys
-        ++ config.users.users.jenkins.openssh.authorizedKeys.keys
-        ++ config.users.users.nagisa.openssh.authorizedKeys.keys
-        ++ config.users.users.naser.openssh.authorizedKeys.keys
-        ++ config.users.users.ogle.openssh.authorizedKeys.keys
-      ;
-    };
   };
 
   # Causes issues with remote builders
