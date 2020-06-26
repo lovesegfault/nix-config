@@ -50,6 +50,7 @@
           tagbar # Code navigation
           vim-indent-guides # Indentation highlighting
           vim-multiple-cursors # Sublime-like multipel cursors
+          vim-surround
           vim-trailing-whitespace # Highlight trailing whitespaces
           # vimtex # LaTeX integration
 
