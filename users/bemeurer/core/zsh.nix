@@ -43,7 +43,10 @@ in
       bindkey -rpM viins '^[^['
       KEYTIMEOUT=1
     '';
-    sessionVariables = { RPROMPT = ""; };
+    sessionVariables = {
+      RPROMPT = "";
+      FAST_WORK_DIR = "${config.xdg.cacheHome}/zsh/";
+    };
     plugins = [
       {
         # https://github.com/softmoth/zsh-vim-mode
@@ -63,8 +66,8 @@ in
         src = pkgs.fetchFromGitHub {
           owner = "zdharma";
           repo = "fast-syntax-highlighting";
-          rev = "c4c419edb98c54e442f743708f3f1159d6735241";
-          sha256 = "197qmbc35byqcs4rjf3vin2mbwsc3m4i6q9zd50q5jpk8bij2gd8";
+          rev = "3636ce9abdb50560179663c9de3b8f93524fb0cd";
+          sha256 = "15biviz181k8z0qh48rdl2q3b7j919ck5nvjrcimbvwvs09v22n8";
         };
       }
       {
@@ -109,17 +112,6 @@ in
           repo = "zsh-nix-shell";
           rev = "69e90b9bccecd84734948fb03087c2454a8522f6";
           sha256 = "0snhch9hfy83d4amkyxx33izvkhbwmindy0zjjk28hih1a9l2jmx";
-        };
-      }
-      {
-        # https://github.com/hcgraf/zsh-sudo
-        name = "zsh-sudo";
-        file = "sudo.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "hcgraf";
-          repo = "zsh-sudo";
-          rev = "d8084def6bb1bde2482e7aa636743f40c69d9b32";
-          sha256 = "1dpm51w3wjxil8sxqw4qxim5kmf6afmkwz1yfhldpdlqm7rfwpi3";
         };
       }
       {
