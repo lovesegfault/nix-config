@@ -42,11 +42,14 @@ in
 
       bindkey -rpM viins '^[^['
       KEYTIMEOUT=1
+
+      mkdir -p "${config.programs.zsh.sessionVariables.FAST_WORK_DIR}"
     '';
     sessionVariables = {
       RPROMPT = "";
       FAST_WORK_DIR = "${config.xdg.cacheHome}/zsh/";
     };
+    shellAliases = shellConfig.aliases;
     plugins = [
       {
         # https://github.com/softmoth/zsh-vim-mode
@@ -68,17 +71,6 @@ in
           repo = "fast-syntax-highlighting";
           rev = "3636ce9abdb50560179663c9de3b8f93524fb0cd";
           sha256 = "15biviz181k8z0qh48rdl2q3b7j919ck5nvjrcimbvwvs09v22n8";
-        };
-      }
-      {
-        # https://github.com/endaaman/lxd-completion-zsh
-        name = "lxd-completion-zsh";
-        file = "_lxc";
-        src = pkgs.fetchFromGitHub {
-          owner = "endaaman";
-          repo = "lxd-completion-zsh";
-          rev = "87d20cb0c5d5261cdc469a2d16a679f577038204";
-          sha256 = "1s2l8w4hr8v0r26dqqflqgmqsl3yadq2gddlicpg9vkgwdhrf1lh";
         };
       }
       {
@@ -126,6 +118,5 @@ in
         };
       }
     ];
-    shellAliases = shellConfig.aliases;
   };
 }
