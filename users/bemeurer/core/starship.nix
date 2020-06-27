@@ -30,7 +30,6 @@
 
       [env_var]
       variable = "VIM_MODE_KEYMAP"
-      default = "?"
       style = "bold green"
     '';
   };
