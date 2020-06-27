@@ -9,6 +9,11 @@
     kernelPackages = pkgs.linuxPackages;
   };
 
+  environment.etc."ssh/trusted-user-ca-keys.pem".text = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIp2RJ3NO56nVsgMmaCTGCLCizqa6d8VrQxTAOYoYBAP Development";
+  services.openssh.extraConfig = ''
+    TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem
+  '';
+
   environment.noXlibs = true;
 
   hardware.enableRedistributableFirmware = true;
