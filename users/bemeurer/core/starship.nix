@@ -19,9 +19,9 @@
         "python",
         "rust",
         "nix_shell",
-        "env_var",
         "line_break",
         "jobs",
+        "env_var",
         "character",
       ]
 

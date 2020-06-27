@@ -52,8 +52,8 @@ in
         src = pkgs.fetchFromGitHub {
           owner = "softmoth";
           repo = "zsh-vim-mode";
-          rev = "1fb4fec7c38815e55bc1b33e7c2136069278c798";
-          sha256 = "1dxi18cpvbc96jl6w6j8r6zwpz8brjrnkl4kp8x1lzzariwm25sd";
+          rev = "abef0c0c03506009b56bb94260f846163c4f287a";
+          sha256 = "0cnjazclz1kyi13m078ca2v6l8pg4y8jjrry6mkvszd383dx1wib";
         };
       }
       {
