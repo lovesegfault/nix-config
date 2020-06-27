@@ -14,13 +14,12 @@
         "git_commit",
         "git_state",
         "git_status",
-        "hg_branch",
         "package",
         "haskell",
-        "julia",
         "python",
         "rust",
         "nix_shell",
+        "env_var",
         "line_break",
         "jobs",
         "character",
@@ -28,6 +27,11 @@
 
       [nix_shell]
       use_name = true
+
+      [env_var]
+      variable = "VIM_MODE_KEYMAP"
+      default = "?"
+      style = "bold green"
     '';
   };
 }

@@ -39,9 +39,23 @@ in
       bindkey "^[[1;3D" backward-word
 
       bindkey -s "^O" '${config.home.sessionVariables.EDITOR} $(fzf)^M'
+
+      bindkey -rpM viins '^[^['
+      KEYTIMEOUT=1
     '';
     sessionVariables = { RPROMPT = ""; };
     plugins = [
+      {
+        # https://github.com/softmoth/zsh-vim-mode
+        name = "zsh-vim-mode";
+        file = "zsh-vim-mode.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "softmoth";
+          repo = "zsh-vim-mode";
+          rev = "1fb4fec7c38815e55bc1b33e7c2136069278c798";
+          sha256 = "1dxi18cpvbc96jl6w6j8r6zwpz8brjrnkl4kp8x1lzzariwm25sd";
+        };
+      }
       {
         # https://github.com/zdharma/fast-syntax-highlighting
         name = "fast-syntax-highlighting";
