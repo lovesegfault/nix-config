@@ -28,6 +28,7 @@ nixus ({ ... }: {
       configuration = ./systems/foucault.nix;
     };
     goethe = { ... }: {
+      enabled = false;
       host = "goethe.meurer.org";
       configuration = ./systems/goethe.nix;
     };
