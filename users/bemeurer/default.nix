@@ -29,13 +29,15 @@ rec {
     user = "bemeurer";
   };
 
-  home-manager.users.bemeurer = mkMerge [{
-    imports = [ ./core ./dev ];
-    home.file.".arcrc".source = secrets.files.stcg-arcanist-config.file;
-  }
+  home-manager.users.bemeurer = mkMerge [
+    {
+      imports = [ ./core ./dev ];
+      home.file.".arcrc".source = secrets.files.stcg-arcanist-config.file;
+    }
     (mkIf config.programs.sway.enable {
       imports = [ ./trusted ./sway ./music ];
       xdg.configFile."beets/config.yaml".source = secrets.files.beets-config.file;
     }
-    )];
+    )
+  ];
 }
