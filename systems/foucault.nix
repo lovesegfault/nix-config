@@ -101,7 +101,7 @@
     imports = [ (import ../nix).impermanence-home ];
     home.persistence."/state/home/bemeurer" = {
       files = [
-        ".arcrc"
+        # ".arcrc"
         ".cache/cargo/credentials"
         ".cache/swaymenu-history.txt"
         ".config/cachix/cachix.dhall"

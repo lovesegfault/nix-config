@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 with lib;
-{
+rec {
   users.users.bemeurer = {
     createHome = true;
     description = "Bernardo Meurer";
@@ -23,16 +23,18 @@ with lib;
     file = ../../secrets/stcg-arcanist-config;
     user = "bemeurer";
   };
-  home-manager.users.bemeurer =
-    mkMerge (
-      [
-        (import ./core)
-        (import ./dev)
-        # ({ ... }: { home.file.arcrc = { source = config.secrets.files.stcg-arcanist-config.file; target = ".arcrc"; }; })
-      ] ++ optionals config.programs.sway.enable [
-        (import ./trusted)
-        (import ./sway)
-        (import ./music)
-      ]
-    );
+
+  secrets.files.beets-config = pkgs.mkSecret {
+    file = ../../secrets/beets-config.yaml;
+    user = "bemeurer";
+  };
+
+  home-manager.users.bemeurer = mkMerge [{
+      imports = [ ./core ./dev ];
+      home.file.".arcrc".source = secrets.files.stcg-arcanist-config.file;
+    }
+    (mkIf config.programs.sway.enable {
+      imports = [ ./trusted ./sway ./music ];
+      xdg.configFile."beets/config.yaml".source = secrets.files.beets-config.file;
+  })];
 }
