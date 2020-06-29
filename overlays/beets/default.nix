@@ -5,6 +5,9 @@ self: super: rec {
     packageOverrides = self: super: {
       confuse = super.callPackage ./confuse.nix { };
       mediafile = super.callPackage ./mediafile.nix { };
+      mutagen = super.mutagen.overrideAttrs (oldAttrs: {
+        patches = (oldAttrs.patches or [ ]) ++ [ ./mutagen-no-mmap.patch ];
+      });
     };
   };
 
