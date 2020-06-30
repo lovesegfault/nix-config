@@ -3,6 +3,19 @@
     enable = true;
     autoReload = true;
     extraConfig = ''
+      bind-key J next-feed articlelist
+      bind-key K prev-feed articlelist
+      bind-key j down article
+      bind-key j down feedlist
+      bind-key j next articlelist
+      bind-key k prev articlelist
+      bind-key k up article
+      bind-key k up feedlist
+      confirm-exit no
+      download-retries 4
+      prepopulate-query-feeds yes
+      text-width 80
+
       color background          color236   default
       color listnormal          color248   default
       color listnormal_unread   color6     default
@@ -10,6 +23,7 @@
       color listfocus_unread    color15    color12
       color info                color248   color236
       color article             color248   default
+
       highlight article "^(Feed|Link):.*$" color6 default bold
       highlight article "^(Title|Date|Author):.*$" color6 default bold
       highlight article "https?://[^ ]+" color10 default underline
@@ -18,7 +32,7 @@
       highlight feedlist "^─.*$" color6 color236 bold
     '';
     reloadThreads = 12;
-    reloadTime = 15;
+    reloadTime = 120;
     urls = [
       { url = ''"query:News:tags # \"news\""''; }
       { url = ''"query:Blogs:tags # \"blogs\""''; }
