@@ -5,10 +5,10 @@
         "homepage": "",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "5f189acce44dc39ea4055bfd8064adaf90d7fb5a",
-        "sha256": "0ibmvg3k9m9yzh8ln3jlh47nrvgg81iy8gpl112wjimlp6gagxw6",
+        "rev": "a49ce0e9edcd717ce6e66041aabd656c02903904",
+        "sha256": "1h9rmyg62ksn127fg0k4yzyifjy4ffvanhs18ibvhsfr9biadi0j",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/5f189acce44dc39ea4055bfd8064adaf90d7fb5a.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/a49ce0e9edcd717ce6e66041aabd656c02903904.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "impermanence": {
@@ -28,23 +28,23 @@
         "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
         "homepage": "https://github.com/NixOS/nixpkgs",
         "owner": "nixos",
-        "repo": "nixpkgs-channels",
-        "rev": "e072276cf2d85802143c3e187f7f7debd8c8cbca",
-        "sha256": "0jdyf8g7rjfpwxabr4s2dcac0qjafd1355ip9y6rv857padb8zbq",
+        "repo": "nixpkgs",
+        "rev": "dc1c3f3203b455f1abb62880ca925f1ccd1e9e2c",
+        "sha256": "11yshv94qjw6nffd2w369sp37ay1xb9x8is2d8mpm2vyb2k80jwm",
         "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs-channels/archive/e072276cf2d85802143c3e187f7f7debd8c8cbca.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/dc1c3f3203b455f1abb62880ca925f1ccd1e9e2c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixus": {
-        "branch": "improved-secrets",
+        "branch": "master",
         "description": null,
         "homepage": "",
         "owner": "Infinisil",
         "repo": "nixus",
-        "rev": "7ea1a7806ebf3c98eab282a94a0f2bd337932f11",
-        "sha256": "0s6ykikdgk5z65xg4yksifin06vp6pkwr8b48rfj37n6cgfhqbsz",
+        "rev": "0a5c95553dc0f19f5daa9cebc016f4e3235992d7",
+        "sha256": "1liqpab0dx71y8rx5j4pqi8a3fy464ms800nkbpmim2f6kz02z8c",
         "type": "tarball",
-        "url": "https://github.com/Infinisil/nixus/archive/7ea1a7806ebf3c98eab282a94a0f2bd337932f11.tar.gz",
+        "url": "https://github.com/Infinisil/nixus/archive/0a5c95553dc0f19f5daa9cebc016f4e3235992d7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
