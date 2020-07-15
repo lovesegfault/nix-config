@@ -67,14 +67,16 @@
   services.sshguard.enable = lib.mkForce false;
   services.xserver = {
     desktopManager.gnome3.enable = true;
-    displayManager.gdm = {
-      enable = true;
-      autoSuspend = false;
+    displayManager = {
       autoLogin = {
         enable = true;
         user = "clock";
       };
-      wayland = false;
+      gdm = {
+        enable = true;
+        autoSuspend = false;
+        wayland = false;
+      };
     };
   };
 
