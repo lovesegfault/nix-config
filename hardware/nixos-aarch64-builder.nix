@@ -1,11 +1,5 @@
 { config, lib, pkgs, ... }: {
-
   secrets.files.nixos-aarch64-builder-key = pkgs.mkSecret { file = ../secrets/nixos-aarch64-builder.key; };
-  environment.etc.nixos-aarch64-builder-key = {
-    mode = "0400";
-    source = config.secrets.files.nixos-aarch64-builder-key.file;
-    target = "ssh/nixos-aarch64-builder-key";
-  };
   nix = {
     distributedBuilds = true;
     buildMachines = [
@@ -13,7 +7,7 @@
         hostName = "aarch64.nixos.community";
         maxJobs = 64;
         speedFactor = 8;
-        sshKey = "/etc/ssh/nixos-aarch64-builder-key";
+        sshKey = config.secrets.files.nixos-aarch64-builder-key.file.outPath;
         sshUser = "lovesegfault";
         system = "aarch64-linux";
         supportedFeatures = [ "big-parallel" ];
