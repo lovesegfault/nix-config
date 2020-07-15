@@ -14,6 +14,7 @@ nixus ({ ... }: {
       configuration = ./systems/aquinas.nix;
     };
     bohr = { ... }: {
+      enabled = false;
       hasFastConnection = true;
       host = "bohr.meurer.org";
       configuration = ./systems/bohr.nix;
@@ -39,19 +40,21 @@ nixus ({ ... }: {
 
     # Work
     cantor = { ... }: {
-      host = "10.0.5.217";
+      host = "stcg-us-0005-03";
       configuration = ./systems/cantor.nix;
     };
     abel = { ... }: {
+      enabled = false;
       host = "10.1.16.12";
       configuration = ./systems/abel.nix;
     };
     peano = { ... }: {
+      enabled = false;
       host = "10.1.16.11";
       configuration = ./systems/peano.nix;
     };
     feuerbach = { ... }: {
-      host = "10.0.5.211";
+      host = "stcg-us-0005-11";
       configuration = ./systems/feuerbach.nix;
     };
     hegel = { ... }: {
