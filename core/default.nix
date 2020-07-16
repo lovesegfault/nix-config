@@ -37,6 +37,7 @@ in
     binaryCachePublicKeys = [
       "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
     ];
+    distributedBuilds = true;
     nixPath = [
       "nixos-config=${dummyConfig}"
       "nixpkgs=/run/current-system/nixpkgs"
