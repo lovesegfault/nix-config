@@ -37,6 +37,11 @@ nixus ({ ... }: {
       host = "sartre.meurer.org";
       configuration = ./systems/sartre.nix;
     };
+    spinoza = { ... }: {
+      enabled = false;
+      host = "FIXME";
+      configuration = ./systems/spinoza.nix;
+    };
 
     # Work
     cantor = { ... }: {
