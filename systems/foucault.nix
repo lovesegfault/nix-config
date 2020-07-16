@@ -20,35 +20,6 @@
     ../users/bemeurer
   ];
 
-  fileSystems = {
-    "/" = {
-      device = "tmpfs";
-      fsType = "tmpfs";
-      options = [ "defaults" "noatime" "size=20%" "mode=755" ];
-    };
-    "/boot" = {
-      device = "/dev/disk/by-uuid/17FB-AAD0";
-      fsType = "vfat";
-    };
-    "/nix" = {
-      device = "rpool/local/nix";
-      fsType = "zfs";
-    };
-    "/srv/music" = {
-      device = "rpool/safe/music";
-      fsType = "zfs";
-    };
-    "/srv/pictures" = {
-      device = "rpool/safe/pictures";
-      fsType = "zfs";
-    };
-    "/state" = {
-      device = "rpool/safe/state";
-      fsType = "zfs";
-      neededForBoot = true;
-    };
-  };
-
   environment.persistence."/state" = {
     directories = [
       "/var/lib/bluetooth"
@@ -97,7 +68,35 @@
     ];
   };
 
-  home-manager.verbose = true;
+  fileSystems = {
+    "/" = {
+      device = "tmpfs";
+      fsType = "tmpfs";
+      options = [ "defaults" "noatime" "size=20%" "mode=755" ];
+    };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/17FB-AAD0";
+      fsType = "vfat";
+    };
+    "/nix" = {
+      device = "rpool/local/nix";
+      fsType = "zfs";
+    };
+    "/srv/music" = {
+      device = "rpool/safe/music";
+      fsType = "zfs";
+    };
+    "/srv/pictures" = {
+      device = "rpool/safe/pictures";
+      fsType = "zfs";
+    };
+    "/state" = {
+      device = "rpool/safe/state";
+      fsType = "zfs";
+      neededForBoot = true;
+    };
+  };
+
   home-manager.users.bemeurer = { ... }: {
     imports = [ (import ../nix).impermanence-home ];
     home.persistence."/state/home/bemeurer" = {
@@ -129,7 +128,6 @@
   ];
 
   services.udev.packages = with pkgs; [ logitech-udev-rules ];
-  services.keybase.enable = false;
 
   systemd.network = {
     links.enp0s31f6 = {
