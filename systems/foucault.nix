@@ -20,6 +20,8 @@
     ../users/bemeurer
   ];
 
+  boot.zfs.enableUnstable = true;
+
   environment.persistence."/state" = {
     directories = [
       "/var/lib/bluetooth"
