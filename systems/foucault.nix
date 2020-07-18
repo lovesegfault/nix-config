@@ -145,7 +145,7 @@
       };
       wifi = {
         DHCP = "yes";
-        matchConfig.MACAddress = "98:3b:8f:cf:62:82";
+        matchConfig.MACAddress = "34:cf:f6:fb:1e:31";
       };
     };
   };

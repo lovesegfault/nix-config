@@ -11,7 +11,7 @@
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "kvm-intel" "i2c_dev" "ddcci-backlight" "tcp_bbr" ];
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_5_7;
     kernelPatches = [{
       # FIXME: Remove this when kernel 5.8 is out
       name = "thinkpad-dual-fan-ctrl";
