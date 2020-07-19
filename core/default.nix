@@ -49,6 +49,7 @@ in
     config.allowUnfree = true;
     overlays = [
       (import ../overlays/ffmpeg.nix)
+      (import ../overlays/firmware-linux-nonfree.nix)
       (import ../overlays/mosh.nix)
       (import ../overlays/weechat.nix)
       (import ../overlays/mkSecret.nix)
