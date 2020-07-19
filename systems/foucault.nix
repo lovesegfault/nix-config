@@ -20,8 +20,6 @@
     ../users/bemeurer
   ];
 
-  boot.zfs.enableUnstable = true;
-
   environment.persistence."/state" = {
     directories = [
       "/var/lib/bluetooth"
@@ -147,7 +145,7 @@
       };
       wifi = {
         DHCP = "yes";
-        matchConfig.MACAddress = "34:cf:f6:fb:1e:31";
+        matchConfig.MACAddress = "98:3b:8f:cf:62:82";
       };
     };
   };
