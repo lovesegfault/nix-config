@@ -12,15 +12,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "impermanence": {
-        "branch": "master",
+        "branch": "home-manager-bind-mount",
         "description": "Modules to help you handle persistent state on systems with ephemeral root storage [maintainer=@talyz]",
         "homepage": "",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "a45918b80cf845b18cdfc1a1ac0807652a137f55",
-        "sha256": "1s1s5qga21zj5mbf9n3d49kzd9cb6jmj8pssqqj4x3c1bbm2hics",
+        "rev": "0c1fdc88baad8b6f573ad7080f41165a34d03898",
+        "sha256": "0vaa7lbfzfyzjcq23ian1m0ka8xcckza7wm64dxj2g743grqwrh2",
         "type": "tarball",
-        "url": "https://github.com/nix-community/impermanence/archive/a45918b80cf845b18cdfc1a1ac0807652a137f55.tar.gz",
+        "url": "https://github.com/nix-community/impermanence/archive/0c1fdc88baad8b6f573ad7080f41165a34d03898.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
