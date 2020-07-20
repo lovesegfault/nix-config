@@ -76,6 +76,4 @@
   services.sshguard.enable = lib.mkForce false;
 
   time.timeZone = "America/Los_Angeles";
-
-  virtualisation.docker.enable = true;
 }

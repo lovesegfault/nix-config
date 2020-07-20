@@ -89,6 +89,4 @@
       "$6$O3fiKzeie2Woy$DsVuPscv2q838lCt.NP9J0bWo0FrxGtHsJtVr5qp/EpbLvnD7B6ixbosWer2pf5YPao1yyf29ICbKTF8PrBe./";
     packages = [ pkgs.chromium ];
   };
-
-  virtualisation.docker.enable = true;
 }
