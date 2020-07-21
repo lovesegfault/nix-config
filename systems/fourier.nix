@@ -13,7 +13,7 @@
   ];
 
   boot = rec {
-    initrd.availableKernelModules = [ "FIXME" ];
+    initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages;
@@ -25,12 +25,11 @@
     packages = with pkgs; [ terminus_font ];
   };
 
-  environment.persistence."/state" = {
+  environment.persistence."/nix/state" = {
     directories = [
       "/var/lib/iwd"
       "/var/lib/nixus-secrets"
     ] ++ [
-      "/home/bemeurer/.gnupg"
       "/home/bemeurer/.local/share/bash"
       "/home/bemeurer/.local/share/nvim"
       "/home/bemeurer/.local/share/zsh"
@@ -54,24 +53,12 @@
       options = [ "defaults" "noatime" "size=20%" "mode=755" ];
     };
     "/boot" = {
-      device = "/dev/disk/by-uuid/FIXME";
+      device = "/dev/disk/by-uuid/E954-11BC";
       fsType = "vfat";
     };
     "/nix" = {
-      device = "rpool/local/nix";
-      fsType = "zfs";
-    };
-    "/srv/music" = {
-      device = "rpool/safe/music";
-      fsType = "zfs";
-    };
-    "/srv/pictures" = {
-      device = "rpool/safe/pictures";
-      fsType = "zfs";
-    };
-    "/state" = {
-      device = "rpool/safe/state";
-      fsType = "zfs";
+      device = "/dev/disk/by-uuid/b192a21f-08ae-4ce9-ac41-053854fc52c9";
+      fsType = "xfs";
       neededForBoot = true;
     };
   };
@@ -95,8 +82,8 @@
   };
 
   networking = {
-    hostName = "spinoza";
-    hostId = "FIXME";
+    hostName = "fourier";
+    hostId = "80f4ef89";
     wireless.iwd.enable = true;
   };
 
@@ -121,27 +108,23 @@
   };
 
   systemd.network = {
-    links.FIXME = {
-      linkConfig.MTUBytes = "9000";
-      matchConfig.MACAddress = "FIXME";
-    };
     networks = {
-      lan = {
-        DHCP = "ipv4";
-        linkConfig = {
-          MTUBytes = "9000";
-          RequiredForOnline = "no";
-        };
-        matchConfig.MACAddress = "FIXME";
-      };
+      # lan = {
+      #   DHCP = "ipv4";
+      #   linkConfig = {
+      #     MTUBytes = "9000";
+      #     RequiredForOnline = "no";
+      #   };
+      #   matchConfig.MACAddress = "FIXME";
+      # };
       wifi = {
         DHCP = "yes";
-        matchConfig.MACAddress = "FIXME";
+        matchConfig.MACAddress = "a8:7e:ea:cb:96:cf";
       };
     };
   };
 
-  swapDevices = [{ device = "/dev/disk/by-uuid/FIXME"; }];
+  swapDevices = [{ device = "/dev/disk/by-uuid/6075a47d-006a-4dbb-9f86-671955132e2f"; }];
 
   time.timeZone = "America/Los_Angeles";
 }

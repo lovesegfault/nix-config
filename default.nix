@@ -37,10 +37,9 @@ nixus ({ ... }: {
       host = "sartre.meurer.org";
       configuration = ./systems/sartre.nix;
     };
-    spinoza = { ... }: {
-      enabled = false;
-      host = "FIXME";
-      configuration = ./systems/spinoza.nix;
+    fourier = { ... }: {
+      host = "10.0.0.9";
+      configuration = ./systems/fourier.nix;
     };
 
     # Work
