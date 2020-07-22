@@ -70,7 +70,7 @@
 
   home-manager.users.bemeurer = { ... }: {
     imports = [ (import ../nix).impermanence-home ];
-    home.persistence."/state/home/bemeurer" = {
+    home.persistence."/nix/state/home/bemeurer" = {
       files = [
         ".config/cachix/cachix.dhall"
         ".gist"
