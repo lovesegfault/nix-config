@@ -39,7 +39,7 @@ nixus ({ ... }: {
     };
     fourier = { ... }: {
       hasFastConnection = true;
-      host = "10.0.0.9";
+      host = "10.0.0.10";
       configuration = ./systems/fourier.nix;
     };
 
