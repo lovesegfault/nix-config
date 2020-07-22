@@ -6,7 +6,6 @@
 
     ../dev
 
-    ../hardware/bluetooth.nix
     ../hardware/efi.nix
     ../hardware/nouveau.nix
     ../hardware/sound.nix
@@ -67,6 +66,7 @@
   hardware = {
     cpu.amd.updateMicrocode = true;
     enableRedistributableFirmware = true;
+    pulseaudio.enable = lib.mkForce false;
   };
 
   home-manager.users.bemeurer = { ... }: {

@@ -5,6 +5,7 @@ rec {
     createHome = true;
     description = "Bernardo Meurer";
     extraGroups = [ "wheel" ]
+      ++ optionals config.sound.enable [ "audio" ]
       ++ optionals config.programs.sway.enable [ "input" "video" ]
       ++ optionals config.networking.networkmanager.enable [ "networkmanager" ]
       ++ optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
