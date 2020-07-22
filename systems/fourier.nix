@@ -36,6 +36,14 @@
       "/var/lib/nixus-secrets"
       "/var/lib/roon-server"
       "/var/log"
+    ] ++ [
+      "/home/bemeurer/.cache/zsh"
+      "/home/bemeurer/.local/share/bash"
+      "/home/bemeurer/.local/share/nvim"
+      "/home/bemeurer/.local/share/zsh"
+      "/home/bemeurer/.ssh"
+      "/home/bemeurer/src"
+      "/home/bemeurer/tmp"
     ];
     files = [
       "/etc/machine-id"
@@ -71,23 +79,12 @@
 
   home-manager.users.bemeurer = { ... }: {
     imports = [ (import ../nix).impermanence-home ];
-    home.persistence."/nix/state/home/bemeurer" = {
-      directories = [
-        ".cache/zsh"
-        ".local/share/bash"
-        ".local/share/nvim"
-        ".local/share/zsh"
-        ".ssh"
-        "src"
-        "tmp"
-      ];
-      files = [
-        ".gist"
-        ".gist-vim"
-        ".newsboat/cache.db"
-        ".newsboat/history.search"
-      ];
-    };
+    home.persistence."/nix/state/home/bemeurer".files = [
+      ".gist"
+      ".gist-vim"
+      ".newsboat/cache.db"
+      ".newsboat/history.search"
+    ];
   };
 
   musnix = {
