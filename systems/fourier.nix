@@ -13,9 +13,11 @@
   ];
 
   boot = rec {
+    blacklistedKernelModules = [ "r8169" ];
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
-    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = with kernelPackages; [ r8125 ];
+    kernelModules = [ "kvm-amd" "r8125" ];
     kernelPackages = pkgs.linuxPackages;
   };
 
@@ -29,6 +31,7 @@
     directories = [
       "/var/lib/iwd"
       "/var/lib/nixus-secrets"
+      "/var/log"
     ];
     files = [
       "/etc/machine-id"
@@ -109,14 +112,10 @@
 
   systemd.network = {
     networks = {
-      # lan = {
-      #   DHCP = "ipv4";
-      #   linkConfig = {
-      #     MTUBytes = "9000";
-      #     RequiredForOnline = "no";
-      #   };
-      #   matchConfig.MACAddress = "FIXME";
-      # };
+      lan = {
+        DHCP = "yes";
+        matchConfig.MACAddress = "18:c0:4d:31:0c:5f";
+      };
       wifi = {
         DHCP = "yes";
         matchConfig.MACAddress = "a8:7e:ea:cb:96:cf";
