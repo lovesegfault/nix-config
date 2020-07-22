@@ -1,6 +1,7 @@
-{ lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     (import ../nix).impermanence-sys
+    (import ../nix).musnix
     ../core
 
     ../dev
@@ -14,13 +15,12 @@
     ../users/bemeurer
   ];
 
-  boot = rec {
+  boot = {
     blacklistedKernelModules = [ "r8169" ];
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" ];
-    kernel.sysctl = { "vm.swappiness" = 1; };
-    extraModulePackages = with kernelPackages; [ r8125 ];
+    kernel.sysctl."vm.swappiness" = lib.mkForce 1;
+    extraModulePackages = with config.boot.kernelPackages; [ r8125 ];
     kernelModules = [ "kvm-amd" "r8125" ];
-    kernelPackages = pkgs.linuxPackages;
   };
 
   console = {
@@ -87,6 +87,14 @@
         ".newsboat/cache.db"
         ".newsboat/history.search"
       ];
+    };
+  };
+
+  musnix = {
+    enable = true;
+    kernel = {
+      optimize = true;
+      realtime = true;
     };
   };
 

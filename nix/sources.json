@@ -23,6 +23,18 @@
         "url": "https://github.com/nix-community/impermanence/archive/5dcdd268808720402ca535011479aaa84e9d9362.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "musnix": {
+        "branch": "master",
+        "description": "Real-time audio in NixOS",
+        "homepage": "",
+        "owner": "musnix",
+        "repo": "musnix",
+        "rev": "3d8f3f0be927f465837fb5f212cc7d671adbadf5",
+        "sha256": "015i2dd92pj3n15k0incm49nrx2z4dy7c08irhxg8skarhlj8rvr",
+        "type": "tarball",
+        "url": "https://github.com/musnix/musnix/archive/3d8f3f0be927f465837fb5f212cc7d671adbadf5.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixpkgs": {
         "branch": "nixos-unstable",
         "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
