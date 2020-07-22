@@ -1,10 +1,10 @@
-{ config, ... }: {
+{ config, pkgs, ... }: {
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [ zfs ];
     kernelModules = [ "zfs" ];
   };
 
-  environment.systemPackages = with config.boot.kernelPackages; [ zfs ];
+  environment.systemPackages = with pkgs; [ zfs ];
 
   services.zfs = {
     autoScrub = {
