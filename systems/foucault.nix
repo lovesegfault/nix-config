@@ -130,17 +130,17 @@
   services.udev.packages = with pkgs; [ logitech-udev-rules ];
 
   systemd.network = {
-    links.enp0s31f6 = {
-      linkConfig.MTUBytes = "9000";
-      matchConfig.MACAddress = "48:2a:e3:61:39:66";
-    };
+    # links.enp0s31f6 = {
+    #   linkConfig.MTUBytes = "9000";
+    #   matchConfig.MACAddress = "48:2a:e3:61:39:66";
+    # };
     networks = {
       lan = {
-        DHCP = "ipv4";
-        linkConfig = {
-          MTUBytes = "9000";
-          RequiredForOnline = "no";
-        };
+        DHCP = "yes";
+        # linkConfig = {
+        #   MTUBytes = "9000";
+        #   RequiredForOnline = "no";
+        # };
         matchConfig.MACAddress = "48:2a:e3:61:39:66";
       };
       wifi = {
