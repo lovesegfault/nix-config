@@ -4,6 +4,7 @@
     ./efi.nix
     ./intel.nix
     ./nouveau.nix
+    ./sound.nix
   ];
 
   boot = rec {
@@ -99,4 +100,8 @@
     '';
     xserver.dpi = 96;
   };
+
+  sound.extraConfig = ''
+    options snd-hda-intel model=generic
+  '';
 }

@@ -5,8 +5,10 @@
 
     ../dev
 
+    ../hardware/bluetooth.nix
     ../hardware/efi.nix
     ../hardware/nouveau.nix
+    ../hardware/sound.nix
     ../hardware/zfs.nix
 
     ../users/bemeurer
@@ -27,10 +29,13 @@
     packages = with pkgs; [ terminus_font ];
   };
 
+  environment.noXlibs = true;
+
   environment.persistence."/nix/state" = {
     directories = [
       "/var/lib/iwd"
       "/var/lib/nixus-secrets"
+      "/var/lib/roon-server"
       "/var/log"
     ];
     files = [
