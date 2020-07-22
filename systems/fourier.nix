@@ -124,10 +124,16 @@
     };
   };
 
+  sound.extraConfig = ''
+    defaults.pcm.!card "Modius";
+    defaults.ctl.!card "Modius";
+  '';
+
   systemd.network = {
     networks = {
       lan = {
         DHCP = "yes";
+        linkConfig.RequiredForOnline = "no";
         matchConfig.MACAddress = "18:c0:4d:31:0c:5f";
       };
       wifi = {
