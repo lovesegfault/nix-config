@@ -38,6 +38,7 @@ nixus ({ ... }: {
       configuration = ./systems/sartre.nix;
     };
     fourier = { ... }: {
+      hasFastConnection = true;
       host = "10.0.0.9";
       configuration = ./systems/fourier.nix;
     };

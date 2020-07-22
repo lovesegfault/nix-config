@@ -29,13 +29,6 @@
     directories = [
       "/var/lib/iwd"
       "/var/lib/nixus-secrets"
-    ] ++ [
-      "/home/bemeurer/.local/share/bash"
-      "/home/bemeurer/.local/share/nvim"
-      "/home/bemeurer/.local/share/zsh"
-      "/home/bemeurer/.ssh"
-      "/home/bemeurer/src"
-      "/home/bemeurer/tmp"
     ];
     files = [
       "/etc/machine-id"
@@ -71,8 +64,15 @@
   home-manager.users.bemeurer = { ... }: {
     imports = [ (import ../nix).impermanence-home ];
     home.persistence."/nix/state/home/bemeurer" = {
+      directories = [
+        ".local/share/bash"
+        ".local/share/nvim"
+        ".local/share/zsh"
+        ".ssh"
+        "src"
+        "tmp"
+      ];
       files = [
-        ".config/cachix/cachix.dhall"
         ".gist"
         ".gist-vim"
         ".newsboat/cache.db"
