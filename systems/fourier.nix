@@ -73,6 +73,7 @@
     imports = [ (import ../nix).impermanence-home ];
     home.persistence."/nix/state/home/bemeurer" = {
       directories = [
+        ".cache/zsh"
         ".local/share/bash"
         ".local/share/nvim"
         ".local/share/zsh"
