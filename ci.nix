@@ -56,9 +56,11 @@ let
     run = "nix-build -A ${attrToBuild}";
   }];
 
-  systemFilter = n: s: let
-    banned = [ "abel" "foucault" ];
-  in (! any (b: b == n) banned) && (s.enabled == true);
+  systemFilter = n: s:
+    let
+      banned = [ "abel" "foucault" ];
+    in
+    (! any (b: b == n) banned) && (s.enabled == true);
   systems = attrNames (filterAttrs systemFilter (import ./default.nix { }).config.nodes);
 
   ci = {
