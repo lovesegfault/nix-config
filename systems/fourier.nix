@@ -121,6 +121,7 @@
       openFirewall = true;
     };
   };
+  systemd.services.roon-server.serviceConfig.ExecStart = lib.mkForce "${pkgs.roon-server}/start.sh";
 
   sound.extraConfig = ''
     defaults.pcm.!card "Modius";
