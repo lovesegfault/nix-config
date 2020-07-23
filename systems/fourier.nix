@@ -77,6 +77,7 @@
     pulseaudio.enable = lib.mkForce false;
   };
 
+  home-manager.verbose = true;
   home-manager.users.bemeurer = { ... }: {
     imports = [ (import ../nix).impermanence-home ];
     home.persistence."/nix/state/home/bemeurer".files = [
