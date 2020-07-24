@@ -128,6 +128,13 @@
     defaults.ctl.!card "Modius";
   '';
 
+  system.activationScripts.setIOScheduler = ''
+    disks=(sda sdb sdc sdd nvme0n1)
+    for disk in "''${disks[@]}"; do
+      echo "none" > /sys/block/$disk/queue/scheduler
+    done
+  '';
+
   systemd.network = {
     networks = {
       lan = {
