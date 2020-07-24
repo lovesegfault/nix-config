@@ -20,6 +20,10 @@
     kernel.sysctl."vm.swappiness" = lib.mkForce 1;
     extraModulePackages = with config.boot.kernelPackages; [ r8125 ];
     kernelModules = [ "kvm-amd" "r8125" ];
+    zfs = {
+      extraPools = [ "tank" ];
+      requestEncryptionCredentials = false;
+    };
   };
 
   console = {
