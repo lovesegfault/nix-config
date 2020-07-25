@@ -124,6 +124,8 @@
     { domain = "*"; type = "-"; item = "nproc"; value = "unlimited"; }
   ];
 
+  services.logind.lidSwitchExternalPower = "ignore";
+
   services.udev.packages = with pkgs; [ logitech-udev-rules ];
 
   systemd.network = {
