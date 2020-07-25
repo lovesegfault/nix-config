@@ -12,24 +12,17 @@
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "kvm-intel" "i2c_dev" "ddcci-backlight" "tcp_bbr" ];
-    kernelPackages = pkgs.linuxPackages_latest;
-    kernelPatches = [
-      {
-        name = "runpm-fixes";
-        patch = (pkgs.fetchpatch {
-          url = "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/patch/?id=23ee3e4e5bd27bdbc0f1785eef7209ce872794c7";
-          sha256 = "048l3rk59wbw165280h6zcjjdd7ckmhimcbszjk10c6sg55bxzmx";
-        });
-      }
+    kernelPackages = pkgs.linuxPackages;
+    kernelPatches = [{
       # FIXME: Remove this when kernel 5.8 is out
-      {
-        name = "thinkpad-dual-fan-ctrl";
-        patch = (pkgs.fetchpatch {
+      name = "thinkpad-dual-fan-ctrl";
+      patch = (
+        pkgs.fetchpatch {
           url = "http://git.infradead.org/users/dvhart/linux-platform-drivers-x86.git/patch/14232c6e788cb1f7b96dbd08b077f90923324b24?hp=4a65ed6562bcfa58fe0c2ca5855c45268f40d365";
           sha256 = "1bp7hg4ppwiyp0bvhijhqr2gcz79g1lv22fyq3bb8rbcwziszxa6";
-        });
-      }
-    ];
+        }
+      );
+    }];
     kernelParams = [ "psmouse.synaptics_intertouch=1" ];
   };
 
