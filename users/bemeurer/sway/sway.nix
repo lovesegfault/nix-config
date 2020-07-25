@@ -152,7 +152,6 @@
           mode = "3840x2160@60Hz";
           scale = "2";
           subpixel = "rgb";
-          disable = "";
         };
         "Goldstar Company Ltd LG Ultra HD 0x00000B08" = {
           position = "0,-1080";
@@ -163,7 +162,6 @@
           position = "1920,-1080";
           mode = "3840x2160@60Hz";
           subpixel = "rgb";
-          transform = "90";
         };
       };
 
@@ -198,7 +196,7 @@
       export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
       export QT_WAYLAND_FORCE_DPI=physical
       export SDL_VIDEODRIVER=wayland
-      export WLR_DRM_DEVICES=/dev/dri/card1:/dev/dri/card0 sway
+      export WLR_DRM_DEVICES=/dev/dri/card0:/dev/dri/card1 sway
       export WLR_DRM_NO_MODIFIERS=1
       export _JAVA_AWT_WM_NONREPARENTING=1
       export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dsun.java2d.xrender=true"

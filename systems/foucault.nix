@@ -23,6 +23,7 @@
   environment.persistence."/state" = {
     directories = [
       "/var/lib/bluetooth"
+      "/var/lib/boltd"
       "/var/lib/iwd"
       "/var/lib/nixus-secrets"
     ] ++ [
