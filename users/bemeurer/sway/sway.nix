@@ -3,6 +3,7 @@
     enable = true;
     config = rec {
       bars = [ ];
+
       colors = {
         focused = {
           border = "#30535F";
@@ -165,11 +166,6 @@
         };
       };
 
-      startup = [
-        { command = "swaymsg focus output \"Unknown 0x32EB 0x00000000\""; }
-        { command = "swaymsg workspace 0:α"; }
-      ];
-
       terminal = "${pkgs.alacritty}/bin/alacritty";
 
       window = {
@@ -187,6 +183,13 @@
           ];
       };
     };
+
+    extraConfig = ''
+      bindswitch --locked lid:on output eDP-1 disable
+      bindswitch --locked lid:off output eDP-1 enable
+      focus output eDP-1
+      workspace 0:α
+    '';
 
     extraSessionCommands = ''
       export ECORE_EVAS_ENGINE=wayland_egl
