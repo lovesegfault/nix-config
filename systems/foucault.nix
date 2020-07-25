@@ -133,10 +133,10 @@
     networks = {
       lan = {
         DHCP = "yes";
-        # linkConfig = {
-        #   MTUBytes = "9000";
-        #   RequiredForOnline = "no";
-        # };
+        linkConfig = {
+          # MTUBytes = "9000";
+          RequiredForOnline = "no";
+        };
         matchConfig.MACAddress = "48:2a:e3:61:39:66";
       };
       wifi = {
