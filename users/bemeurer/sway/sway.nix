@@ -154,7 +154,7 @@
           subpixel = "rgb";
         };
         "Goldstar Company Ltd LG Ultra HD 0x00000B08" = {
-          position = "0,-1080";
+          position = "-3840,0";
           mode = "3840x2160@60Hz";
           subpixel = "rgb";
         };
