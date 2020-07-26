@@ -9,15 +9,6 @@ let
     trap "exit" INT TERM
     trap "kill 0" EXIT
 
-    function vpn() {
-      ${pkgs.passh}/bin/passh -c1 \
-      -P "Verification code:.*" \
-      -p "$(${pkgs.gopass}/bin/gopass otp otp/google.com/bernardo@standard.ai | ${pkgs.coreutils}/bin/cut -f1 -d' ')" \
-      ${pkgs.sshuttle}/bin/sshuttle \
-      -r bemeurer@bastion0001.us-west2.monitoring.nonstandard.ai 10.0.0.0/8 \
-      --user bemeurer &
-    }
-
     function deploy() {
       local cmd=("nix-build" "--no-out-link")
       if [ $# -gt 0 ]; then
@@ -26,7 +17,7 @@ let
       "''${cmd[@]}" | ${pkgs.stdenv.shell}
     }
 
-    # vpn
+    eval "$(ssh-agent)"
     deploy "$@"
     exit
   '';

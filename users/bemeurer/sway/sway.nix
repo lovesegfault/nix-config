@@ -149,20 +149,23 @@
       output = {
         "*" = { bg = "~/.wall fill"; };
         "Unknown 0x32EB 0x00000000" = {
-          position = "0,0";
           mode = "3840x2160@60Hz";
+          position = "0,0";
           scale = "2";
           subpixel = "rgb";
         };
         "Goldstar Company Ltd LG Ultra HD 0x00000B08" = {
-          position = "-3840,0";
+          adaptive_sync = "on";
           mode = "3840x2160@60Hz";
+          position = "0,-2160";
           subpixel = "rgb";
         };
         "Goldstar Company Ltd LG Ultra HD 0x00009791" = {
-          position = "1920,-1080";
+          adaptive_sync = "on";
           mode = "3840x2160@60Hz";
+          position = "3840,-1280";
           subpixel = "rgb";
+          transform = "90";
         };
       };
 
@@ -200,7 +203,6 @@
       export QT_WAYLAND_FORCE_DPI=physical
       export SDL_VIDEODRIVER=wayland
       export WLR_DRM_DEVICES=/dev/dri/card0:/dev/dri/card1 sway
-      export WLR_DRM_NO_MODIFIERS=1
       export _JAVA_AWT_WM_NONREPARENTING=1
       export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dsun.java2d.xrender=true"
     '';
