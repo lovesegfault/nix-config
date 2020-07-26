@@ -20,9 +20,11 @@
     ../users/bemeurer
   ];
 
-  boot.blacklistedKernelModules = [ "nouveau" ];
-  boot.initrd.availableKernelModules = [ "thunderbolt"  "amdgpu" ];
-  boot.kernelParams = [ "fbcon=map:1" ];
+  boot = {
+    blacklistedKernelModules = [ "nouveau" ];
+    initrd.availableKernelModules = [ "thunderbolt" "amdgpu" ];
+    kernelParams = [ "fbcon=map:1" ];
+  };
 
   environment.persistence."/state" = {
     directories = [
