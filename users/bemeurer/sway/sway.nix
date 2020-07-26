@@ -163,7 +163,7 @@
         "Goldstar Company Ltd LG Ultra HD 0x00009791" = {
           adaptive_sync = "on";
           mode = "3840x2160@60Hz";
-          position = "3840,-1280";
+          position = "3840,-2560";
           subpixel = "rgb";
           transform = "90";
         };
