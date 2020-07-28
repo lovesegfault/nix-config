@@ -188,8 +188,8 @@
     };
 
     extraConfig = ''
-      bindswitch --locked lid:on output eDP-1 disable
-      bindswitch --locked lid:off output eDP-1 enable
+      bindswitch --locked --reload lid:on output eDP-1 disable
+      bindswitch --locked --reload lid:off output eDP-1 enable
       focus output eDP-1
       workspace 0:α
     '';
