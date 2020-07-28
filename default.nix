@@ -29,8 +29,8 @@ nixus ({ ... }: {
       configuration = ./systems/foucault.nix;
     };
     goethe = { ... }: {
-      enabled = false;
-      host = "goethe.meurer.org";
+      hasFastConnection = true;
+      host = "192.168.2.1";
       configuration = ./systems/goethe.nix;
     };
     sartre = { ... }: {
