@@ -124,6 +124,8 @@
     wireless.iwd.enable = true;
   };
 
+  programs.gphoto2.enable = true;
+
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
     { domain = "*"; type = "-"; item = "nofile"; value = "1048576"; }
