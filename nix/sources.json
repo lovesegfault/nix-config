@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "musnix",
         "repo": "musnix",
-        "rev": "d4a489598fbc57941e7ff8be1f10e588dfe079c6",
-        "sha256": "002pqf7rhw7mygldsvf289al07i5cnljbrrj19wdgsdqfiw85qdm",
+        "rev": "6722d313004dc91ab84fbe87d51440091addd340",
+        "sha256": "0szn4bwi8i0xi286d2pxfnfs226a2k7dc2kpzw9rv6828226yi4a",
         "type": "tarball",
-        "url": "https://github.com/musnix/musnix/archive/d4a489598fbc57941e7ff8be1f10e588dfe079c6.tar.gz",
+        "url": "https://github.com/musnix/musnix/archive/6722d313004dc91ab84fbe87d51440091addd340.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
