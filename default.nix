@@ -59,6 +59,7 @@ nixus ({ ... }: {
       configuration = ./systems/peano.nix;
     };
     feuerbach = { ... }: {
+      enabled = false;
       host = "stcg-us-0005-11";
       configuration = ./systems/feuerbach.nix;
     };
