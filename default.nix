@@ -4,7 +4,7 @@ let
   nixus = import sources.nixus;
   nixpkgs = if pkgs == null then sources.nixpkgs else pkgs;
 in
-nixus ({ ... }: {
+nixus { } {
   defaults = { ... }: { inherit nixpkgs; };
   nodes = {
     # Personal
@@ -68,4 +68,4 @@ nixus ({ ... }: {
       configuration = ./systems/hegel.nix;
     };
   };
-})
+}
