@@ -115,6 +115,9 @@
     naser.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL9nlQHpA7gO7SET33u6ww9wfsVHY+UbXnLHnVZrGUX0 naser@stcg-aarch64-builder"
     ];
+    ogle.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAjlp78GL3B48FxvcNK/woMMe+3WfKXt7EId3N0siUZi ogle@stcg-aarch64-builder"
+    ];
     root.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPouKApFuTmz3XSadk7mZR69bOuPJK/LO+dzFJyIbwkJ packet.net superuser"
     ];
