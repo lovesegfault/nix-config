@@ -8,7 +8,6 @@
 
     ../hardware/stcg-dc.nix
 
-    ../users/andi.nix
     ../users/bemeurer
     ../users/cloud.nix
     ../users/ekleog.nix

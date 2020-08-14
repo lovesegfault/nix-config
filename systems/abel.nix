@@ -10,7 +10,6 @@
     ../dev/stcg-gcs.nix
     ../dev/stcg-cameras.nix
 
-    ../users/andi.nix
     ../users/bemeurer
     ../users/cloud.nix
     ../users/ekleog.nix

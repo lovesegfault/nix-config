@@ -5,7 +5,6 @@
 
     ../hardware/rpi4.nix
 
-    ../users/andi.nix
     ../users/bemeurer
   ];
 
