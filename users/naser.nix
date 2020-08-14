@@ -9,6 +9,6 @@
     ];
   };
   home-manager.users.naser = {
-    home.packages = with pkgs; [ hello ];
+    home.packages = with pkgs; [ ];
   };
 }
