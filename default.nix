@@ -1,11 +1,10 @@
 { pkgs ? null }:
 let
   sources = import ./nix;
-  nixus = import sources.nixus;
-  nixpkgs = if pkgs == null then sources.nixpkgs else pkgs;
+  nixus = import sources.nixus { };
 in
-nixus { } {
-  defaults = { ... }: { inherit nixpkgs; };
+nixus {
+  defaults = { ... }: { nixpkgs = if pkgs == null then sources.nixpkgs else pkgs; };
   nodes = {
     # Personal
     aquinas = { ... }: {
