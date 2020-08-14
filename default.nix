@@ -27,6 +27,11 @@ nixus {
       host = "localhost";
       configuration = ./systems/foucault.nix;
     };
+    fourier = { ... }: {
+      hasFastConnection = true;
+      host = "10.0.0.10";
+      configuration = ./systems/fourier.nix;
+    };
     goethe = { ... }: {
       hasFastConnection = true;
       host = "192.168.2.1";
@@ -36,26 +41,15 @@ nixus {
       host = "sartre.meurer.org";
       configuration = ./systems/sartre.nix;
     };
-    fourier = { ... }: {
-      hasFastConnection = true;
-      host = "10.0.0.9";
-      configuration = ./systems/fourier.nix;
-    };
 
     # Work
-    cantor = { ... }: {
-      host = "stcg-us-0005-03";
-      configuration = ./systems/cantor.nix;
-    };
     abel = { ... }: {
-      enabled = false;
       host = "10.1.16.12";
       configuration = ./systems/abel.nix;
     };
-    peano = { ... }: {
-      enabled = false;
-      host = "10.1.16.11";
-      configuration = ./systems/peano.nix;
+    cantor = { ... }: {
+      host = "stcg-us-0005-03";
+      configuration = ./systems/cantor.nix;
     };
     feuerbach = { ... }: {
       enabled = false;
@@ -65,6 +59,10 @@ nixus {
     hegel = { ... }: {
       host = "147.75.47.54";
       configuration = ./systems/hegel.nix;
+    };
+    peano = { ... }: {
+      host = "10.1.16.11";
+      configuration = ./systems/peano.nix;
     };
   };
 }
