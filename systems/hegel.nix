@@ -7,6 +7,7 @@
 
     ../hardware/packet-c2-large-arm.nix
 
+    ../users/alessandro.nix
     ../users/bemeurer
     ../users/cloud.nix
     ../users/ekleog.nix
