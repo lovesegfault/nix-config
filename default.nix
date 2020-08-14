@@ -7,22 +7,6 @@ nixus {
   defaults = { ... }: { nixpkgs = if pkgs == null then sources.nixpkgs else pkgs; };
   nodes = {
     # Personal
-    aquinas = { ... }: {
-      enabled = false;
-      host = "aquinas.meurer.org";
-      configuration = ./systems/aquinas.nix;
-    };
-    bohr = { ... }: {
-      enabled = false;
-      hasFastConnection = true;
-      host = "bohr.meurer.org";
-      configuration = ./systems/bohr.nix;
-    };
-    camus = { ... }: {
-      enabled = false;
-      host = "10.1.8.159";
-      configuration = ./systems/camus.nix;
-    };
     foucault = { ... }: {
       host = "localhost";
       configuration = ./systems/foucault.nix;
