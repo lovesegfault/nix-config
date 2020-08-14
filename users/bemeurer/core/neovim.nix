@@ -616,6 +616,7 @@
               """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
               " Enable shellescape for the LaTeX compiler
               " NB: needed for syntax highlighting pkgs.
+              let g:tex_flavor = 'latex'
               let g:vimtex_compiler_latexmk = {
                   \ 'options' : [
                   \   '-pdf',
