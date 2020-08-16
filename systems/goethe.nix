@@ -15,6 +15,8 @@
 
   environment.noXlibs = true;
 
+  networking.wireless.iwd.enable = true;
+
   secrets.files.wifi-home = pkgs.mkSecret { file = ../secrets/wifi-home.conf; };
   networking = {
     hostName = "goethe";
@@ -25,7 +27,6 @@
       }];
       useDHCP = lib.mkForce false;
     };
-    supplicant.wlan0.configFile.path = config.secrets.files.wifi-home.file;
   };
 
   secrets.files.ddclient-goethe = pkgs.mkSecret { file = ../secrets/ddclient-goethe.conf; };
