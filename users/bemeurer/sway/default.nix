@@ -164,21 +164,5 @@
         WantedBy = [ "sway-session.target" ];
       };
     };
-    waybar = {
-      Unit = {
-        Description = "waybar";
-        Documentation = [ "https://github.com/Alexays/Waybar/wiki" ];
-        PartOf = [ "graphical-session.target" ];
-      };
-      Service = {
-        Type = "simple";
-        ExecStart = "${(pkgs.waybar.override { pulseSupport = true; })}/bin/waybar";
-        RestartSec = 3;
-        Restart = "always";
-      };
-      Install = {
-        WantedBy = [ "sway-session.target" ];
-      };
-    };
   };
 }
