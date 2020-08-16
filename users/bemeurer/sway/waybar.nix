@@ -6,7 +6,7 @@
       gtk-layer-shell = true;
       layer = "top";
       modules-left = [ "sway/workspaces" "sway/mode" ];
-      modules-center = [];
+      modules-center = [ "clock" ];
       modules-right = [
         "pulseaudio"
         "idle_inhibitor"
@@ -14,7 +14,6 @@
         "temperature"
         "backlight"
         "battery"
-        "clock"
         "tray"
       ];
       modules = {
