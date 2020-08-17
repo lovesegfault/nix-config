@@ -20,21 +20,13 @@ rec {
     hashedPassword = "$6$rounds=65536$iIIt7MZ7K0ghK$HMPPLFtp7SpvpLAajlgZp.sH2rCNsOq41E1CDCGCaxyz/tXSqWngalatM0V5zsMbj/4klKdAzeoOw1rZj7fp6/";
   };
 
-  secrets.files.stcg-arcanist-config = pkgs.mkSecret {
-    file = ../../secrets/stcg-arcanist-config;
-    user = "bemeurer";
-  };
-
   secrets.files.beets-config = pkgs.mkSecret {
     file = ../../secrets/beets-config.yaml;
     user = "bemeurer";
   };
 
   home-manager.users.bemeurer = mkMerge [
-    {
-      imports = [ ./core ./dev ];
-      home.file.".arcrc".source = secrets.files.stcg-arcanist-config.file;
-    }
+    { imports = [ ./core ./dev ]; }
     (mkIf config.programs.sway.enable {
       imports = [ ./trusted ./sway ./music ];
       xdg.configFile."beets/config.yaml".source = secrets.files.beets-config.file;

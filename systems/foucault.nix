@@ -33,6 +33,7 @@
       "/var/lib/iwd"
       "/var/lib/nixus-secrets"
     ] ++ [
+      "/home/bemeurer/.arcrc"
       "/home/bemeurer/.cache/lollypop"
       "/home/bemeurer/.cache/mozilla"
       "/home/bemeurer/.cache/nvim"
