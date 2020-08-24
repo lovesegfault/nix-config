@@ -14,8 +14,6 @@
     TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem
   '';
 
-  environment.noXlibs = true;
-
   hardware.enableRedistributableFirmware = true;
 
   nix = {

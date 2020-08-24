@@ -32,8 +32,6 @@
     packages = with pkgs; [ terminus_font ];
   };
 
-  environment.noXlibs = true;
-
   environment.persistence."/nix/state" = {
     directories = [
       "/var/lib/iwd"
