@@ -17,7 +17,6 @@
 
   networking.wireless.iwd.enable = true;
 
-  secrets.files.wifi-home = pkgs.mkSecret { file = ../secrets/wifi-home.conf; };
   networking = {
     hostName = "goethe";
     interfaces.eth0 = {
