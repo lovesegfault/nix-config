@@ -33,7 +33,6 @@
       "/var/lib/iwd"
       "/var/lib/nixus-secrets"
     ] ++ [
-      "/home/bemeurer/.arcrc"
       "/home/bemeurer/.cache/lollypop"
       "/home/bemeurer/.cache/mozilla"
       "/home/bemeurer/.cache/nvim"
@@ -107,6 +106,7 @@
   home-manager.users.bemeurer = { ... }: {
     imports = [ (import ../nix).impermanence-home ];
     home.persistence."/state/home/bemeurer".files = [
+      ".arcrc"
       ".cache/cargo/credentials"
       ".cache/swaymenu-history.txt"
       ".config/cachix/cachix.dhall"
