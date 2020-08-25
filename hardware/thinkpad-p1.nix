@@ -45,16 +45,7 @@
     systemFeatures = [ "benchmark" "nixos-test" "big-parallel" "kvm" "gccarch-skylake" ];
   };
 
-  nixpkgs = {
-    overlays = [ (import ../overlays/march-skylake.nix) ];
-    localSystem = {
-      system = "x86_64-linux";
-      platform = lib.systems.platforms.pc64 // {
-        gcc.arch = "skylake";
-        gcc.tune = "skylake";
-      };
-    };
-  };
+  nixpkgs.localSystem.system = "x86_64-linux";
 
   services = {
     fstrim.enable = true;
