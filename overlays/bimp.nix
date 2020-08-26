@@ -23,7 +23,7 @@ self: super: {
 
       function mkWorkDir() {
         if [[ ! -v WORK_DIR ]]; then
-          WORK_DIR="$(mktemp -d --tmpdir bimp.XXXXXX)"
+          WORK_DIR="$(mktemp -d --tmpdir=/tmp bimp.XXXXXX)"
           trap 'rm -rf $WORK_DIR' EXIT
         fi
       }
