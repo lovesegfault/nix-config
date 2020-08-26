@@ -22,6 +22,7 @@ in
   boot.kernelParams = [ "log_buf_len=10M" ];
 
   environment.etc."nixos/configuration.nix".source = dummyConfig;
+  environment.systemPackages = with pkgs; [ rsync ];
 
   home-manager.useGlobalPkgs = true;
 
