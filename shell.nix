@@ -1,5 +1,5 @@
 let
-  pkgs = import <nixpkgs> { };
+  pkgs = import (import ./nix).nixpkgs { };
   deploy = pkgs.writeScriptBin "deploy" ''
     #!${pkgs.stdenv.shell}
     set -o pipefail
