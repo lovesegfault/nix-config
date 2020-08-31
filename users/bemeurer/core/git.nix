@@ -27,7 +27,7 @@
     gdfs = "git diff --staged";
     gdt = "git difftool";
     gdts = "git difftool --staged";
-    gf = "git fetch --prune --all";
+    gf = "git fetch --all --prune --tags";
     gl = "git log --graph --abbrev-commit --decorate";
     gm = "git merge";
     gma = "git merge --abort";
