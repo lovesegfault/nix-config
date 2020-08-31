@@ -150,22 +150,22 @@
         "*" = { bg = "~/.wall fill"; };
         "Unknown 0x32EB 0x00000000" = {
           mode = "3840x2160@60Hz";
-          position = "0,0";
+          position = "960,2880";
           scale = "2";
           subpixel = "rgb";
         };
         "Goldstar Company Ltd LG Ultra HD 0x00000B08" = {
           adaptive_sync = "on";
           mode = "3840x2160@60Hz";
-          position = "0,-2160";
+          position = "0,720";
           subpixel = "rgb";
         };
         "Goldstar Company Ltd LG Ultra HD 0x00009791" = {
           adaptive_sync = "on";
           mode = "3840x2160@60Hz";
-          position = "3840,-2560";
+          position = "3840,0";
           subpixel = "rgb";
-          transform = "90";
+          transform = "270";
         };
       };
 
