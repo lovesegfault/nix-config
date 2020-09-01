@@ -10,7 +10,8 @@ let
       }
       {
         name = "Nix";
-        uses = "cachix/install-nix-action@v9";
+        uses = "cachix/install-nix-action@v10";
+        "with".skip_adding_nixpkgs_channel = true;
       }
       {
         name = "AArch64";
