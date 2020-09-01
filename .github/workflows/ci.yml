@@ -28,7 +28,7 @@
         },
         {
           "name": "Build",
-          "run": "nix-build -A cantor"
+          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A cantor"
         }
       ]
     },
@@ -124,7 +124,7 @@
         },
         {
           "name": "Build",
-          "run": "nix-build -A fourier"
+          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A fourier"
         }
       ]
     },
@@ -156,7 +156,7 @@
         },
         {
           "name": "Build",
-          "run": "nix-build -A goethe"
+          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A goethe"
         }
       ]
     },
@@ -188,7 +188,7 @@
         },
         {
           "name": "Build",
-          "run": "nix-build -A hegel"
+          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A hegel"
         }
       ]
     },
@@ -252,7 +252,7 @@
         },
         {
           "name": "Build",
-          "run": "nix-build -A peano"
+          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A peano"
         }
       ]
     },
@@ -284,7 +284,7 @@
         },
         {
           "name": "Build",
-          "run": "nix-build -A sartre"
+          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A sartre"
         }
       ]
     }

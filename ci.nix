@@ -54,7 +54,7 @@ let
 
   mkSystemJob = attrToBuild: mkGenericJob [{
     name = "Build";
-    run = "nix-build -A ${attrToBuild}";
+    run = "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A ${attrToBuild}";
   }];
 
   systemFilter = n: s:
