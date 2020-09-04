@@ -31,6 +31,7 @@
       "/var/lib/bluetooth"
       "/var/lib/boltd"
       "/var/lib/iwd"
+      "/var/lib/libvirt"
       "/var/lib/nixus-secrets"
     ] ++ [
       "/home/bemeurer/.cache/lollypop"
@@ -50,6 +51,7 @@
       "/home/bemeurer/.gnupg"
       "/home/bemeurer/.gsutil"
       "/home/bemeurer/.local/share/bash"
+      "/home/bemeurer/.local/share/gnome-boxes"
       "/home/bemeurer/.local/share/keyrings"
       "/home/bemeurer/.local/share/lollypop"
       "/home/bemeurer/.local/share/nvim"
