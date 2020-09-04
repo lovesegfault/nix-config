@@ -36,6 +36,7 @@
     directories = [
       "/var/lib/iwd"
       "/var/lib/nixus-secrets"
+      "/var/lib/plex"
       "/var/lib/roon-server"
       "/var/log"
     ] ++ [
@@ -118,6 +119,10 @@
   services = {
     fstrim.enable = true;
     fwupd.enable = true;
+    plex = {
+      enable = true;
+      openFirewall = true;
+    };
     roon-server = {
       enable = true;
       openFirewall = true;
@@ -153,4 +158,6 @@
   swapDevices = [{ device = "/dev/disk/by-uuid/6075a47d-006a-4dbb-9f86-671955132e2f"; }];
 
   time.timeZone = "America/Los_Angeles";
+
+  users.groups.media.members = [ "bemeurer" "roon-server" "plex" ];
 }
