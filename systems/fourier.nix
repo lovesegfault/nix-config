@@ -134,7 +134,7 @@
       extraFlags = [ "--storage.tsdb.retention.time=1y" ];
       scrapeConfigs = [{
         job_name = "node";
-        scrape_interval = "5s";
+        scrape_interval = "1s";
         static_configs = [{ targets = [ "127.0.0.1:9091" ]; }];
       }
         {
