@@ -34,6 +34,7 @@
 
   environment.persistence."/nix/state" = {
     directories = [
+      "/var/lib/grafana"
       "/var/lib/iwd"
       "/var/lib/nixus-secrets"
       "/var/lib/plex"
@@ -100,6 +101,7 @@
   };
 
   networking = {
+    firewall.allowedTCPPorts = [ 3000 9090 9091 ];
     hostName = "fourier";
     hostId = "80f4ef89";
     wireless.iwd.enable = true;
@@ -119,9 +121,33 @@
   services = {
     fstrim.enable = true;
     fwupd.enable = true;
+    grafana = {
+      enable = true;
+      addr = "0.0.0.0";
+    };
     plex = {
       enable = true;
       openFirewall = true;
+    };
+    prometheus = {
+      enable = true;
+      extraFlags = [ "--storage.tsdb.retention.time=1y" ];
+      scrapeConfigs = [{
+        job_name = "node";
+        scrape_interval = "5s";
+        static_configs = [{ targets = [ "127.0.0.1:9091" ]; }];
+      }
+      {
+        job_name = "prometheus";
+        scrape_interval = "30s";
+        static_configs = [{ targets = [ "127.0.0.1:9090" ]; }];
+      }];
+      exporters.node = {
+        enable = true;
+        listenAddress = "127.0.0.1";
+        enabledCollectors = [ "systemd" "pressure" ];
+        port = 9091;
+      };
     };
     roon-server = {
       enable = true;
