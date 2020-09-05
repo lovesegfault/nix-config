@@ -38,6 +38,7 @@
       "/var/lib/iwd"
       "/var/lib/nixus-secrets"
       "/var/lib/plex"
+      "/var/lib/prometheus2"
       "/var/lib/roon-server"
       "/var/log"
     ] ++ [
@@ -124,6 +125,7 @@
     grafana = {
       enable = true;
       addr = "0.0.0.0";
+      extraOptions.DASHBOARDS_MIN_REFRESH_INTERVAL = "1s";
     };
     plex = {
       enable = true;
