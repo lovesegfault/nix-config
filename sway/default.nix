@@ -27,7 +27,6 @@
     (import ../overlays/mbk.nix)
     (import ../overlays/menu)
     (import ../overlays/mon.nix)
-    (import ../overlays/mutagen.nix)
     (import ../overlays/passh.nix)
     (import ../overlays/prtsc.nix)
   ];
