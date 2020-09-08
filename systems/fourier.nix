@@ -20,6 +20,7 @@
     kernel.sysctl."vm.swappiness" = lib.mkForce 1;
     extraModulePackages = with config.boot.kernelPackages; [ r8125 ];
     kernelModules = [ "kvm-amd" "r8125" ];
+    kernelPackages = pkgs.linuxPackages_latest;
     zfs = {
       extraPools = [ "tank" ];
       requestEncryptionCredentials = false;
@@ -95,10 +96,10 @@
 
   musnix = {
     enable = true;
-    kernel = {
-      optimize = true;
-      realtime = true;
-    };
+    # kernel = {
+    #   optimize = true;
+    #   realtime = true;
+    # };
   };
 
   networking = {
