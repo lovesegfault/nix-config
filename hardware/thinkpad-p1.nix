@@ -13,16 +13,6 @@
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "kvm-intel" "i2c_dev" "ddcci-backlight" "tcp_bbr" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelPatches = [{
-      # FIXME: Remove this when kernel 5.8 is out
-      name = "thinkpad-dual-fan-ctrl";
-      patch = (
-        pkgs.fetchpatch {
-          url = "http://git.infradead.org/users/dvhart/linux-platform-drivers-x86.git/patch/14232c6e788cb1f7b96dbd08b077f90923324b24?hp=4a65ed6562bcfa58fe0c2ca5855c45268f40d365";
-          sha256 = "1bp7hg4ppwiyp0bvhijhqr2gcz79g1lv22fyq3bb8rbcwziszxa6";
-        }
-      );
-    }];
     kernelParams = [ "psmouse.synaptics_intertouch=1" ];
   };
 
