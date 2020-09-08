@@ -59,7 +59,7 @@ let
 
   systemFilter = n: s:
     let
-      banned = [ "abel" "foucault" ];
+      banned = [ "abel" ];
     in
     (! any (b: b == n) banned) && (s.enabled == true);
   systems = attrNames (filterAttrs systemFilter (import ./default.nix { }).config.nodes);
