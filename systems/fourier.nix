@@ -106,6 +106,9 @@
     hostName = "fourier";
     hostId = "80f4ef89";
     wireless.iwd.enable = true;
+    useNetworkd = lib.mkForce false;
+    interfaces.eno1.useDHCP = true;
+    interfaces.wlan0.useDHCP = true;
   };
 
   nix = {
@@ -168,20 +171,6 @@
       echo "none" > /sys/block/$disk/queue/scheduler
     done
   '';
-
-  systemd.network = {
-    networks = {
-      lan = {
-        DHCP = "yes";
-        linkConfig.RequiredForOnline = "no";
-        matchConfig.MACAddress = "18:c0:4d:31:0c:5f";
-      };
-      wifi = {
-        DHCP = "yes";
-        matchConfig.MACAddress = "a8:7e:ea:cb:96:cf";
-      };
-    };
-  };
 
   swapDevices = [{ device = "/dev/disk/by-uuid/6075a47d-006a-4dbb-9f86-671955132e2f"; }];
 
