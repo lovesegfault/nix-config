@@ -32,7 +32,7 @@
   ];
 
   xdg = {
-    autostart.enable = false;
+    autostart.enable = true;
     icons.enable = true;
     menus.enable = true;
     mime.enable = true;

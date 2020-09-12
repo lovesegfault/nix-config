@@ -138,6 +138,11 @@
 
   services.logind.lidSwitchExternalPower = "ignore";
 
+  services.xserver = {
+    enable = true;
+    desktopManager.xfce.enable = true;
+  };
+
   services.udev.packages = with pkgs; [ logitech-udev-rules ];
 
   systemd.network = {
