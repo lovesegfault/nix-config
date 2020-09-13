@@ -13,7 +13,7 @@
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "kvm-intel" "i2c_dev" "ddcci-backlight" "tcp_bbr" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "psmouse.synaptics_intertouch=1" ];
+    # kernelParams = [ "psmouse.synaptics_intertouch=1" ];
   };
 
   console = {
