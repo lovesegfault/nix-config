@@ -13,7 +13,7 @@ nixus {
     };
     fourier = { ... }: {
       hasFastConnection = true;
-      host = "10.0.0.15";
+      host = "10.0.0.3";
       configuration = ./systems/fourier.nix;
     };
     goethe = { ... }: {
