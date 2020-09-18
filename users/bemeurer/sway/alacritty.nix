@@ -16,7 +16,7 @@
           family = "Iosevka";
           style = "Italic";
         };
-        size = 10;
+        size = 12;
       };
       colors = {
         primary = {

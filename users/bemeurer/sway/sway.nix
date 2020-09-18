@@ -35,7 +35,7 @@
 
       focus.followMouse = false;
 
-      fonts = [ "FontAwesome 8" "Iosevka 8" ];
+      fonts = [ "FontAwesome 10" "Iosevka 10" ];
 
       gaps = {
         inner = 10;
