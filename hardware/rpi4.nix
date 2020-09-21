@@ -37,11 +37,13 @@
       setLdLibraryPath = true;
       package = pkgs.mesa_drivers;
     };
-    # FIXME: This changed and I don't know how it's supposed to look like now.
-    # deviceTree = {
-    #   base = pkgs.device-tree_rpi;
-    #   overlays = [ "${pkgs.device-tree_rpi.overlays}/vc4-fkms-v3d.dtbo" ];
-    # };
+    deviceTree = {
+      enable = true;
+      overlays = [{
+        name = "vc4-fkms-v3d-foo";
+        dtboFile = "${pkgs.device-tree_rpi.overlays}/vc4-fkms-v3d.dtbo";
+      }];
+    };
   };
 
   networking = {
