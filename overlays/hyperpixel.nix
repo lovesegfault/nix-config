@@ -1,6 +1,30 @@
 self: super: {
+  hyperpixel4-init = self.stdenv.mkDerivation {
+    pname = "hyperpixel4-init";
+    version = "2020-08-11";
+
+    src = self.fetchFromGitHub {
+      owner = "pimoroni";
+      repo = "hyperpixel4";
+      rev = "6633ee6b63dc6cf8ae5463852b4a24527b8c52f9";
+      sha256 = "02qizyp01kfxc7759hcy02b14b489bayfpp5pir97341cwj1l59p";
+    };
+
+    buildInputs = [ self.libgpiod ];
+
+    buildPhase = ''
+      gcc -o hyperpixel4-init src/hyperpixel4-init.c -lgpiod
+    '';
+
+    installPhase = ''
+      mkdir -p $out/bin
+
+      install -m 0755 hyperpixel4-init -t $out/bin
+    '';
+  };
+
   hyperpixel4 = self.stdenv.mkDerivation {
-    pname = "hyperpixel";
+    pname = "hyperpixel4";
     version = "2020-08-11";
 
     src = self.fetchFromGitHub {
@@ -10,23 +34,21 @@ self: super: {
       sha256 = "1lnqvhn2zsril332ngj2sib0qsqlcjnir1xkrw7xq5wwsrwvpypv";
     };
 
-    buildInputs = [ self.dtc (self.python3.withPackages (p: [ p.rpi-gpio ])) ];
+    buildInputs = [ self.dtc ];
 
     buildPhase = ''
-      dtc -@ -I dts -O dtb -o hyperpixel4.dtbo src/hyperpixel4-common-overlay.dts
+      dtc -@ -I dts -O dtb -o hyperpixel4-common.dtbo src/hyperpixel4-common-overlay.dts
+      dtc -@ -I dts -O dtb -o hyperpixel4-0x14.dtbo src/hyperpixel4-0x14-overlay.dts
+      dtc -@ -I dts -O dtb -o hyperpixel4-0x5d.dtbo src/hyperpixel4-0x5d-overlay.dts
     '';
 
     installPhase = ''
-      mkdir -p $out/bin
       mkdir -p $out/share/overlays
 
-      cp hyperpixel4.dtbo $out/share/overlays
-      cp dist/hyperpixel4-init $out/bin
+      install hyperpixel4-common.dtbo -t $out/share/overlays
+      install hyperpixel4-0x14.dtbo -t $out/share/overlays
+      install hyperpixel4-0x5d.dtbo -t $out/share/overlays
     '';
-
-    passthru = {
-      overlays = "${placeholder "out"}/share/overlays";
-    };
   };
 
   python3 = super.python3.override {
