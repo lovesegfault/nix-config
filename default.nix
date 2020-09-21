@@ -21,6 +21,12 @@ nixus {
       host = "192.168.2.1";
       configuration = ./systems/goethe.nix;
     };
+    aurelius = { ... }: {
+      ignoreFailingSystemdUnits = true;
+      hasFastConnection = true;
+      host = "192.168.2.5";
+      configuration = ./systems/aurelius.nix;
+    };
     sartre = { ... }: {
       host = "sartre.meurer.org";
       configuration = ./systems/sartre.nix;

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../core
@@ -25,10 +25,10 @@
 
   environment.noXlibs = true;
 
-  hardware.deviceTree.overlays = [{
-    name = "hyperpixel4";
-    dtboFile = "${pkgs.hyperpixel4}/share/overlays/hyperpixel4.dtbo";
-  }];
+  # hardware.deviceTree.overlays = [{
+  #   name = "hyperpixel4";
+  #   dtboFile = "${pkgs.hyperpixel4}/share/overlays/hyperpixel4.dtbo";
+  # }];
 
   networking.wireless.iwd.enable = true;
 
