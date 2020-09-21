@@ -57,7 +57,7 @@
         }
 
         host aurelius {
-          hardware ethernet dc:a6:32:c1:37:1b;
+          hardware ethernet dc:a6:32:63:ac:71;
           fixed-address 192.168.2.5;
         }
       }
