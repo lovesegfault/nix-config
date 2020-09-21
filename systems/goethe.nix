@@ -8,8 +8,6 @@
     ../users/bemeurer
   ];
 
-  boot.kernelParams = [ "fbcon=rotate:1" ];
-
   console = {
     font = "ter-v28n";
     packages = with pkgs; [ terminus_font ];

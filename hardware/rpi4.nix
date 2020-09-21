@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ./nixos-aarch64-builder.nix
     ./bluetooth.nix
@@ -7,13 +7,7 @@
   boot = {
     loader = {
       grub.enable = false;
-      raspberryPi = {
-        enable = true;
-        version = 4;
-        firmwareConfig = ''
-          gpu_mem=192
-        '';
-      };
+      generic-extlinux-compatible.enable = true;
     };
     kernelPackages = pkgs.linuxPackages_rpi4;
   };
@@ -21,7 +15,7 @@
   console.keyMap = "us";
 
   fileSystems = {
-    "/boot" = {
+    "/boot/firmware" = {
       device = "/dev/disk/by-label/FIRMWARE";
       fsType = "vfat";
     };
@@ -39,10 +33,10 @@
     };
     deviceTree = {
       enable = true;
-      overlays = [{
-        name = "vc4-fkms-v3d-foo";
-        dtboFile = "${pkgs.device-tree_rpi.overlays}/vc4-fkms-v3d.dtbo";
-      }];
+      # overlays = [{
+      #   name = "vc4-fkms-v3d-foo";
+      #   dtboFile = "${pkgs.device-tree_rpi.overlays}/vc4-fkms-v3d.dtbo";
+      # }];
     };
   };
 
@@ -60,6 +54,7 @@
   services = {
     fstrim.enable = true;
     xserver.videoDrivers = [ "modesetting" ];
+    unbound.enableRootTrustAnchor = lib.mkForce false;
   };
 
   swapDevices = [
