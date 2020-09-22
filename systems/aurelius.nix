@@ -18,7 +18,10 @@
         version = 4;
         firmwareConfig = ''
           gpu_mem=192
+
           dtoverlay=hyperpixel4-common
+          dtoverlay=hyperpixel4-0x14
+          dtoverlay=hyperpixel4-0x5d
           enable_dpi_lcd=1
           dpi_group=2
           dpi_mode=87
