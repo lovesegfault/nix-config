@@ -95,17 +95,17 @@ in
           sha256 = "1h0vm2dgrmb8i2pvsgis3lshc5b0ad846836m62y8h3rdb3zmpy1";
         };
       }
-      {
-        # https://github.com/chisui/zsh-nix-shell
-        name = "zsh-nix-shell";
-        file = "nix-shell.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "chisui";
-          repo = "zsh-nix-shell";
-          rev = "69e90b9bccecd84734948fb03087c2454a8522f6";
-          sha256 = "0snhch9hfy83d4amkyxx33izvkhbwmindy0zjjk28hih1a9l2jmx";
-        };
-      }
+      # {
+      #   # https://github.com/chisui/zsh-nix-shell
+      #   name = "zsh-nix-shell";
+      #   file = "nix-shell.plugin.zsh";
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "chisui";
+      #     repo = "zsh-nix-shell";
+      #     rev = "69e90b9bccecd84734948fb03087c2454a8522f6";
+      #     sha256 = "0snhch9hfy83d4amkyxx33izvkhbwmindy0zjjk28hih1a9l2jmx";
+      #   };
+      # }
       {
         # https://github.com/zsh-users/zsh-history-substring-search
         name = "zsh-history-substring-search";
