@@ -30,7 +30,7 @@ self: super: {
     src = self.fetchFromGitHub {
       owner = "pimoroni";
       repo = "hyperpixel4";
-      rev = "c5e12814a3e3da520a16c4c1433ca767b0cdbc00";
+      rev = "2bc76aa85dc1c6bd3363762fb8861989900d4704";
       sha256 = "1lnqvhn2zsril332ngj2sib0qsqlcjnir1xkrw7xq5wwsrwvpypv";
     };
 
