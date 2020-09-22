@@ -1,4 +1,27 @@
 self: super: {
+  hyperpixel4-hack = self.stdenv.mkDerivation {
+    pname = "hyperpixel4-hack";
+    version = "unstable";
+
+    src = self.fetchurl {
+      url = "https://gist.githubusercontent.com/cleverca22/8f3616319fda4d122b218b2c4fb53c0f/raw/21148db88b4ccf2c3f8b082eb3b8e453f77bd94a/main.c";
+      sha256 = "1i2w9djq8v21hhsizqf0wcijgbf0wa0m4gfgycj5j6inbxymx6l1";
+    };
+
+    unpackPhase = "cp $src main.c ; sourceRoot=.";
+
+    buildInputs = [ self.raspberrypi-tools ];
+
+    buildPhase = ''
+        gcc main.c -lbcm_host -o hyperpixel4-hack
+    '';
+
+    installPhase = ''
+      mkdir -p $out/bin
+      install -m 0755 hyperpixel4-hack -t $out/bin/
+    '';
+  };
+
   hyperpixel4-init = self.stdenv.mkDerivation {
     pname = "hyperpixel4-init";
     version = "2020-08-11";
@@ -30,7 +53,7 @@ self: super: {
     src = self.fetchFromGitHub {
       owner = "pimoroni";
       repo = "hyperpixel4";
-      rev = "2bc76aa85dc1c6bd3363762fb8861989900d4704";
+      rev = "c5e12814a3e3da520a16c4c1433ca767b0cdbc00";
       sha256 = "1lnqvhn2zsril332ngj2sib0qsqlcjnir1xkrw7xq5wwsrwvpypv";
     };
 
@@ -44,10 +67,10 @@ self: super: {
 
     installPhase = ''
       mkdir -p $out/share/overlays
+      mkdir -p $out/share/sources
 
-      install hyperpixel4-common.dtbo -t $out/share/overlays
-      install hyperpixel4-0x14.dtbo -t $out/share/overlays
-      install hyperpixel4-0x5d.dtbo -t $out/share/overlays
+      install *.dtbo -t $out/share/overlays
+      install src/*.dts -t $out/share/sources
     '';
   };
 
