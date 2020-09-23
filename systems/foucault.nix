@@ -21,6 +21,7 @@
   ];
 
   boot = {
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
     blacklistedKernelModules = [ "nouveau" ];
     initrd.availableKernelModules = [ "thunderbolt" "amdgpu" ];
     kernelParams = [ "fbcon=map:1" ];
