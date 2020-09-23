@@ -53,6 +53,7 @@ in
       (import ../overlays/firmware-linux-nonfree.nix)
       (import ../overlays/mosh.nix)
       (import ../overlays/roon-server.nix)
+      (import ../overlays/stcg-build.nix)
       (import ../overlays/weechat.nix)
       (import ../overlays/mkSecret.nix)
     ];
