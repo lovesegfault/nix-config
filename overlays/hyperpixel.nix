@@ -13,7 +13,7 @@ self: super: {
     buildInputs = [ self.raspberrypi-tools ];
 
     buildPhase = ''
-        gcc main.c -lbcm_host -o hyperpixel4-hack
+      gcc main.c -lbcm_host -o hyperpixel4-hack
     '';
 
     installPhase = ''
