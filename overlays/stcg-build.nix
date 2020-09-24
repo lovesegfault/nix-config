@@ -1,5 +1,5 @@
 self: super: {
-  stcg-build = super.writeScriptBin "stcg-buildc" ''
+  stcg-build = super.writeScriptBin "stcg-build" ''
     #!${super.stdenv.shell}
     set -o errexit
     set -o nounset
