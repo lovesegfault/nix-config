@@ -1,5 +1,9 @@
 {
-  programs.starship.enable = true;
+  programs.starship = {
+    enable = true;
+    enableBashIntegration = false;
+    enableFishIntegration = false;
+  };
 
   xdg.configFile.starship = {
     target = "starship.toml";
