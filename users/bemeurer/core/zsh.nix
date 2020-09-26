@@ -1,8 +1,4 @@
-{ config, lib, pkgs, ... }:
-let
-  shellConfig = import ./shell.nix { inherit config lib pkgs; };
-in
-{
+{ config, lib, pkgs, ... }: {
   programs = {
     direnv.enableZshIntegration = true;
     starship.enableZshIntegration = true;
@@ -19,10 +15,13 @@ in
       extended = true;
       ignoreDups = true;
       path = "${config.xdg.dataHome}/zsh/history";
-      save = shellConfig.historySize;
+      save = 10000;
       share = true;
     };
-    envExtra = shellConfig.env;
+    envExtra = ''
+      export LESSHISTFILE="${config.xdg.dataHome}/less_history"
+      export CARGO_HOME="${config.xdg.cacheHome}/cargo"
+    '';
     initExtra = ''
       bindkey "$${terminfo[khome]}" beginning-of-line
       bindkey "$${terminfo[kend]}" end-of-line
@@ -49,7 +48,25 @@ in
       RPROMPT = "";
       FAST_WORK_DIR = "${config.xdg.cacheHome}/zsh/";
     };
-    shellAliases = shellConfig.aliases;
+    shellAliases = {
+      cat = "bat";
+      # rust
+      c = "cargo";
+      cb = "cargo build";
+      cbr = "cargo build --release";
+      cch = "cargo check";
+      cce = "cargo clean";
+      cdo = "cargo doc";
+      ccp = "cargo clippy";
+      cr = "cargo run";
+      crr = "cargo run --release";
+      ct = "cargo test";
+      ctr = "cargo test --release";
+      # exa
+      l = "exa --binary --header --long --classify --git";
+      la = "l --all";
+      ls = "l";
+    };
     plugins = [
       {
         # https://github.com/softmoth/zsh-vim-mode

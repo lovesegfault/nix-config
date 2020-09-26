@@ -1,14 +1,9 @@
-{ config, lib, pkgs, ... }:
-let
-  shellConfig = import ./shell.nix { inherit config lib pkgs; };
-in
-{
-  programs.bash = rec {
+{ config, ... }: {
+  programs.bash = {
     enable = true;
     historyControl = [ "erasedups" "ignorespace" ];
     historyFile = "${config.xdg.dataHome}/bash/history";
-    historyFileSize = shellConfig.historySize;
-    historySize = shellConfig.historySize;
-    shellAliases = shellConfig.aliases;
+    historyFileSize = 30000;
+    historySize = 10000;
   };
 }
