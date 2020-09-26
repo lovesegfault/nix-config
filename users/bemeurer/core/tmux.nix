@@ -12,11 +12,11 @@
     historyLimit = 30000;
     extraConfig = ''
       unbind C-b
-      set-option -g prefix C-a
-      bind-key C-a last-window
+      set-option -g prefix C-g
+      bind-key C-g last-window
       bind-key v split-window -h -c "#{pane_current_path}"
       bind-key b split-window -c "#{pane_current_path}"
-      bind-key a send-prefix
+      bind-key g send-prefix
       bind-key -n S-Left swap-window -t -1
       bind-key -n S-Right swap-window -t +1
       bind-key -n M-h select-pane -L
