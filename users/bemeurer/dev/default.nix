@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
   imports = [ ./arcanist.nix ];
 
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
