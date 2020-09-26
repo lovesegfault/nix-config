@@ -9,9 +9,4 @@
       set auto-load safe-path /
     '';
   };
-
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs-nox;
-  };
 }
