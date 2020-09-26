@@ -126,6 +126,12 @@
   networking = {
     hostName = "foucault";
     hostId = "872516b8";
+    useNetworkd = lib.mkForce false;
+    interfaces = {
+      enp0s31f6.useDHCP = true;
+      ens1u2u1u2.useDHCP = true;
+      wlan0.useDHCP = true;
+    };
     wireless.iwd.enable = true;
   };
 
@@ -153,27 +159,6 @@
   };
 
   services.udev.packages = with pkgs; [ logitech-udev-rules ];
-
-  systemd.network = {
-    # links.enp0s31f6 = {
-    #   linkConfig.MTUBytes = "9000";
-    #   matchConfig.MACAddress = "48:2a:e3:61:39:66";
-    # };
-    networks = {
-      lan = {
-        DHCP = "yes";
-        linkConfig = {
-          # MTUBytes = "9000";
-          RequiredForOnline = "no";
-        };
-        matchConfig.MACAddress = "48:2a:e3:61:39:66";
-      };
-      wifi = {
-        DHCP = "yes";
-        matchConfig.MACAddress = "98:3b:8f:cf:62:82";
-      };
-    };
-  };
 
   swapDevices = [{ device = "/dev/disk/by-uuid/840591d3-ac66-4137-bc39-4d9f9109c19a"; }];
 
