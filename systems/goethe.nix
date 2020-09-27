@@ -17,17 +17,7 @@
 
   networking.wireless.iwd.enable = true;
 
-  networking = {
-    useNetworkd = lib.mkForce false;
-    hostName = "goethe";
-    interfaces.eth0 = {
-      ipv4.addresses = [{
-        address = "192.168.2.1";
-        prefixLength = 24;
-      }];
-      useDHCP = lib.mkForce false;
-    };
-  };
+  networking.hostName = "goethe";
 
   secrets.files.ddclient-goethe = pkgs.mkSecret { file = ../secrets/ddclient-goethe.conf; };
   services.ddclient.configFile = config.files.secrets.ddclient-goethe.file;
@@ -62,6 +52,19 @@
       }
     '';
     interfaces = [ "eth0" ];
+  };
+
+  systemd.network.networks = {
+    lan = {
+      DHCP = "no";
+      address = [ "192.168.2.1/24" ];
+      linkConfig.RequiredForOnline = "no";
+      matchConfig.MACAddress = "dc:a6:32:c1:37:1b";
+    };
+    wlan = {
+      DHCP = "yes";
+      matchConfig.MACAddress = "dc:a6:32:c1:37:1c";
+    };
   };
 
   time.timeZone = "America/Los_Angeles";

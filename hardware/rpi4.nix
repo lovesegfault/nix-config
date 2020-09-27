@@ -34,13 +34,6 @@
     deviceTree.enable = true;
   };
 
-  networking = {
-    interfaces = {
-      eth0.useDHCP = true;
-      wlan0.useDHCP = true;
-    };
-  };
-
   nix.maxJobs = 4;
 
   nixpkgs.localSystem.system = "aarch64-linux";
@@ -48,7 +41,6 @@
   services = {
     fstrim.enable = true;
     xserver.videoDrivers = [ "modesetting" ];
-    unbound.enableRootTrustAnchor = lib.mkForce false;
   };
 
   swapDevices = [
