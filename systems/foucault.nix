@@ -171,8 +171,4 @@
   time.timeZone = "America/Los_Angeles";
 
   virtualisation.docker.enable = true;
-  virtualisation.virtualbox.host = {
-    enable = true;
-    enableExtensionPack = true;
-  };
 }
