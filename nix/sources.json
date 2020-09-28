@@ -53,10 +53,10 @@
         "homepage": "",
         "owner": "Infinisil",
         "repo": "nixus",
-        "rev": "1dad8659cd09e8b9aca047406b308c31992c76ce",
-        "sha256": "1qymwiky0i0ln797sjd145yr5lxkk2jnydc767p7ibxzbc4hxk65",
+        "rev": "2127516f68ce6f900b38289985377559e69aab88",
+        "sha256": "1y709s5h3mvf7ksr0ibk2kcrkmsvpzzgvmgdjvni249sh4vbiw33",
         "type": "tarball",
-        "url": "https://github.com/Infinisil/nixus/archive/1dad8659cd09e8b9aca047406b308c31992c76ce.tar.gz",
+        "url": "https://github.com/Infinisil/nixus/archive/2127516f68ce6f900b38289985377559e69aab88.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
