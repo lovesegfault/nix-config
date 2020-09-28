@@ -9,6 +9,7 @@ rec {
       ++ optionals config.programs.sway.enable [ "input" "video" ]
       ++ optionals config.networking.networkmanager.enable [ "networkmanager" ]
       ++ optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
+      ++ optionals config.virtualisation.virtualbox.host.enable [ "vboxusers" ]
       ++ optionals config.virtualisation.kvmgt.enable [ "kvm" ];
     isNormalUser = true;
     openssh.authorizedKeys.keys = [
