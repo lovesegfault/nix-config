@@ -4,7 +4,7 @@ rec {
   users.users.bemeurer = {
     createHome = true;
     description = "Bernardo Meurer";
-    extraGroups = [ "wheel" ]
+    extraGroups = [ "wheel" "dialout" ]
       ++ optionals config.sound.enable [ "audio" ]
       ++ optionals config.programs.sway.enable [ "input" "video" ]
       ++ optionals config.networking.networkmanager.enable [ "networkmanager" ]
