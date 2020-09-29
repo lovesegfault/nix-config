@@ -1,10 +1,9 @@
-{ pkgs ? null }:
 let
   sources = import ./nix;
   nixus = import sources.nixus { };
 in
 nixus {
-  defaults = { ... }: { nixpkgs = if pkgs == null then sources.nixpkgs else pkgs; };
+  defaults = { ... }: { nixpkgs = sources.nixpkgs;};
   nodes = {
     # Personal
     foucault = { ... }: {
