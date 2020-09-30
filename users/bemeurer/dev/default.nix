@@ -9,4 +9,9 @@
       set auto-load safe-path /
     '';
   };
+
+  programs.direnv = {
+    enable = true;
+    enableNixDirenvIntegration = true;
+  };
 }
