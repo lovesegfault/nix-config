@@ -6,3 +6,5 @@ result
 result-*
 
 .DS_Store
+
+.direnv
