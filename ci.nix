@@ -62,7 +62,7 @@ let
       banned = [ "abel" ];
     in
     (! any (b: b == n) banned) && (s.enabled == true);
-  systems = attrNames (filterAttrs systemFilter (import ./default.nix { }).config.nodes);
+  systems = attrNames (filterAttrs systemFilter (import ./default.nix).config.nodes);
 
   ci = {
     on = [ "pull_request" "push" ];
