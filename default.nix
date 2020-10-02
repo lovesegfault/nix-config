@@ -3,7 +3,7 @@ let
   nixus = import sources.nixus { };
 in
 nixus {
-  defaults = { ... }: { nixpkgs = sources.nixpkgs;};
+  defaults = { ... }: { nixpkgs = sources.nixpkgs; };
   nodes = {
     # Personal
     foucault = { ... }: {
