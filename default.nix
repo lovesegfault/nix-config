@@ -45,10 +45,6 @@ nixus {
       host = "stcg-us-0005-11";
       configuration = ./systems/feuerbach.nix;
     };
-    hegel = { ... }: {
-      host = "147.75.47.54";
-      configuration = ./systems/hegel.nix;
-    };
     peano = { ... }: {
       host = "10.1.16.11";
       configuration = ./systems/peano.nix;

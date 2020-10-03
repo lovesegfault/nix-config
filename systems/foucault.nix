@@ -6,10 +6,10 @@
     ../dev
     ../dev/stcg-gcs.nix
     ../dev/stcg-cameras.nix
-    ../dev/stcg-aarch64-builder.nix
     ../dev/qemu.nix
     ../dev/virt-manager.nix
 
+    ../hardware/nixos-aarch64-builder.nix
     ../hardware/thinkpad-p1.nix
     ../hardware/yubikey.nix
     ../hardware/zfs.nix

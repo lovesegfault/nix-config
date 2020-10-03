@@ -4,7 +4,6 @@
 
     ../dev
     ../dev/stcg-gcs.nix
-    ../dev/stcg-aarch64-builder.nix
 
     ../hardware/stcg-dc.nix
 
