@@ -12,7 +12,6 @@
     hicolor-icon-theme
     qgnomeplatform
     qt5.qtwayland
-    mon
   ];
 
   qt5 = {
@@ -25,7 +24,6 @@
     (import ../overlays/bimp.nix)
     (import ../overlays/mbk.nix)
     (import ../overlays/menu)
-    (import ../overlays/mon.nix)
     (import ../overlays/passh.nix)
     (import ../overlays/prtsc.nix)
   ];
