@@ -49,7 +49,6 @@ in
   nixpkgs = {
     config.allowUnfree = true;
     overlays = [
-      (import ../overlays/ffmpeg.nix)
       (import ../overlays/firmware-linux-nonfree.nix)
       (import ../overlays/mosh.nix)
       (import ../overlays/roon-server.nix)
