@@ -24,7 +24,6 @@
     (import ../overlays/bimp.nix)
     (import ../overlays/mbk.nix)
     (import ../overlays/menu)
-    (import ../overlays/prtsc.nix)
   ];
 
   xdg = {

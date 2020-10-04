@@ -129,7 +129,7 @@
         "Mod4+Tab" = " workspace prev";
         "Mod4+comma" = " workspace prev";
         "Mod4+period" = " workspace next";
-        "Print" = "exec ${pkgs.prtsc}/bin/prtsc";
+        "Print" = "exec ${pkgs.grim}/bin/grim -t png -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy -t image/png";
         "XF86AudioLowerVolume" = "exec ${pkgs.ponymix}/bin/ponymix decrease 1";
         "XF86AudioMicMute" = "exec ${pkgs.ponymix}/bin/ponymix -t source toggle";
         "XF86AudioMute" = "exec ${pkgs.ponymix}/bin/ponymix -t sink toggle";
