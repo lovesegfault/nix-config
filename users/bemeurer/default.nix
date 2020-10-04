@@ -25,12 +25,12 @@ rec {
     user = "bemeurer";
   };
 
-  home-manager.users.bemeurer = mkMerge [
-    { imports = [ ./core ./dev ]; }
-    (mkIf config.programs.sway.enable {
-      imports = [ ./trusted ./sway ./music ];
-      xdg.configFile."beets/config.yaml".source = secrets.files.beets-config.file;
-    }
-    )
-  ];
+  home-manager.users.bemeurer = {
+    imports = [ ./core ./dev]
+      ++ optionals config.programs.sway.enable [ ./sway ]
+      ++ optionals config.programs.ssh.startAgent [ ./trusted ]
+      ++ optionals (config.nixpkgs.localSystem == "x86_64-linux") [./music];
+
+    xdg.configFile."beets/config.yaml".source = secrets.files.beets-config.file;
+  };
 }
