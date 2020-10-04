@@ -23,7 +23,7 @@ nixus {
     aurelius = { ... }: {
       ignoreFailingSystemdUnits = true;
       hasFastConnection = true;
-      host = "192.168.2.5";
+      host = "10.0.0.13";
       configuration = ./systems/aurelius.nix;
     };
     sartre = { ... }: {
