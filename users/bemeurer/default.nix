@@ -26,10 +26,10 @@ rec {
   };
 
   home-manager.users.bemeurer = {
-    imports = [ ./core ./dev]
+    imports = [ ./core ./dev ]
       ++ optionals config.programs.sway.enable [ ./sway ]
       ++ optionals config.programs.ssh.startAgent [ ./trusted ]
-      ++ optionals (config.nixpkgs.localSystem == "x86_64-linux") [./music];
+      ++ optionals (config.nixpkgs.localSystem == "x86_64-linux") [ ./music ];
 
     xdg.configFile."beets/config.yaml".source = secrets.files.beets-config.file;
   };
