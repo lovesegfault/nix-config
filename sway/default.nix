@@ -3,7 +3,6 @@
     ./boot-silent.nix
     ./fonts.nix
     ./location.nix
-    ./printing.nix
     ./sway.nix
   ];
 
