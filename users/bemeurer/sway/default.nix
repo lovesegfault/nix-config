@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ./alacritty.nix
     ./firefox.nix
@@ -12,24 +12,23 @@
   home = {
     file.".icons/default".source = "${pkgs.gnome3.adwaita-icon-theme}/share/icons/Adwaita";
     packages = with pkgs; [
+      grim
+      libnotify
+      pavucontrol
+      pinentry-gnome
+      slurp
+      speedcrunch
+      wl-clipboard
+    ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
       discord
       gimp
       gnome3.evince
       gnome3.shotwell
-      grim
       imv
-      libnotify
       mbk
-      mumble
-      pavucontrol
-      pinentry-gnome
       slack
-      slurp
-      solaar
-      speedcrunch
       spotify
       thunderbird
-      wl-clipboard
       zoom-us
     ];
   };
