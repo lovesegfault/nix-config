@@ -4,6 +4,7 @@
     ./firefox.nix
     ./mako.nix
     ./mpv.nix
+    ./termite.nix
     ./sway.nix
     ./swaylock.nix
     ./waybar.nix
@@ -109,7 +110,7 @@
         WantedBy = [ "sway-session.target" ];
       };
     };
-    redshift = {
+    redshift = lib.mkIf (pkgs.hostPlatform.system == "x86_64-linux") {
       Unit = {
         Description = "redshift";
         Documentation = [ "man:redshift(1)" ];

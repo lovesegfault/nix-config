@@ -37,7 +37,7 @@
 
       fonts = [ "FontAwesome 10" "Iosevka 10" ];
 
-      gaps = {
+      gaps = lib.mkIf (pkgs.hostPlatform.system == "x86_64-linux") {
         inner = 10;
         outer = 5;
         smartBorders = "on";
@@ -142,9 +142,9 @@
         "XF86MonBrightnessUp" = "exec ${pkgs.brillo}/bin/brillo -e -A 0.5";
       };
 
-      menu = "${terminal} -d 55 18 -t swaymenu -e ${pkgs.swaymenu}/bin/swaymenu";
+      menu = "${terminal} -t swaymenu -e ${pkgs.swaymenu}/bin/swaymenu";
 
-      modifier = "Mod4";
+      modifier = if pkgs.hostPlatform.system == "aarch64-linux" then "Mod1" else "Mod4";
 
       output = {
         "*" = { bg = "~/.wall fill"; };
@@ -167,9 +167,18 @@
           subpixel = "rgb";
           transform = "270";
         };
+        "DSI-1" = {
+          mode = "480x800@60Hz";
+          position = "0,0";
+          subpixel = "rgb";
+          transform = "90";
+        };
       };
 
-      terminal = "${pkgs.alacritty}/bin/alacritty";
+      terminal = if pkgs.hostPlatform.system == "aarch64-linux" then
+                  "${pkgs.termite}/bin/termite"
+                else
+                  "${pkgs.alacritty}/bin/alacritty";
 
       window = {
         border = 0;
@@ -178,9 +187,10 @@
             makeMenuWindow = "floating enable, border pixel 5, sticky enable";
           in
           [
-            { command = makeMenuWindow; criteria = { app_id = "Alacritty"; title = "swaymenu"; }; }
-            { command = makeMenuWindow; criteria = { app_id = "Alacritty"; title = "gopassmenu"; }; }
-            { command = makeMenuWindow; criteria = { app_id = "Alacritty"; title = "emojimenu"; }; }
+            { command = makeMenuWindow; criteria.title = "emojimenu"; }
+            { command = makeMenuWindow; criteria.title = "otpmenu"; }
+            { command = makeMenuWindow; criteria.title = "passmenu"; }
+            { command = makeMenuWindow; criteria.title = "swaymenu"; }
             { command = "floating enable"; criteria.app_id = "imv"; }
             { command = "floating enable, sticky enable"; criteria = { app_id = "firefox"; title = "Picture-in-Picture"; }; }
           ];

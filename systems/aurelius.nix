@@ -4,6 +4,10 @@
     ../core
 
     ../hardware/rpi4.nix
+    ../hardware/sound.nix
+    ../hardware/bluetooth.nix
+
+    ../sway
 
     ../users/bemeurer
   ];
@@ -14,10 +18,12 @@
       raspberryPi = {
         enable = true;
         firmwareConfig = ''
+          dtparam=audio=on
           dtoverlay=vc4-fkms-v3d
+
           dtoverlay=hyperpixel4-common
-          dtoverlay=hyperpixel4-0x14
-          dtoverlay=hyperpixel4-0x5d
+          dtoverlay=hyperpixel4-0x14,touchscreen-swapped-x-y,touchscreen-inverted-y
+          dtoverlay=hyperpixel4-0x5d,touchscreen-swapped-x-y,touchscreen-inverted-y
           enable_dpi_lcd=1
           dpi_group=2
           dpi_mode=87
@@ -63,7 +69,6 @@
       matchConfig.MACAddress = "dc:a6:32:63:ac:72";
     };
   };
-
 
   time.timeZone = "America/Los_Angeles";
 }
