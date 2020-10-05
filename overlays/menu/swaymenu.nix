@@ -1,9 +1,7 @@
-{ super }:
-let
-  alacritty = "${super.alacritty}/bin/alacritty";
-  fzf = "${super.fzf}/bin/fzf";
-in
-''
+{ pkgs, terminal }:
+pkgs.writeScriptBin "swaymenu" ''
+  #!${pkgs.stdenv.shell}
+
   shopt -s nullglob globstar
   set -o pipefail
   # shellcheck disable=SC2154
@@ -14,7 +12,7 @@ in
   # Defaulting terminal to urxvt, but feel free to either change
   # this or override with an environment variable in your sway config
   # It would be good to move this to a config file eventually
-  TERMINAL_COMMAND="''${TERMINAL_COMMAND:="${alacritty} -e"}"
+  TERMINAL_COMMAND="''${TERMINAL_COMMAND:="${terminal} -e"}"
   GLYPH_COMMAND="  "
   GLYPH_DESKTOP="  "
   CONFIG_DIR="''${XDG_CONFIG_HOME:-$HOME/.config}/sway-launcher-desktop"
@@ -200,7 +198,7 @@ in
   done
 
   COMMAND_STR=$(
-    ${fzf} +s -x -d '\034' --nth ..3 --with-nth 3 \
+    ${pkgs.fzf}/bin/fzf +s -x -d '\034' --nth ..3 --with-nth 3 \
       --preview "$0 describe {2} {1}" \
       --preview-window=up:3:wrap --ansi \
       <"$FZFPIPE"
@@ -230,4 +228,6 @@ in
   # Substitute {1}, {2} etc with the correct values
   COMMAND=''${PROVIDER_ARGS[2]//\{1\}/''${PARAMS[0]}}
   COMMAND=''${COMMAND//\{2\}/''${PARAMS[3]}}
+
+  (exec swaymsg -t command "exec $COMMAND")
 ''

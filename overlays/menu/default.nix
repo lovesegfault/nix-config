@@ -1,48 +1,28 @@
 self: super:
 let
-  menu = import ./execmenu.nix { inherit super; };
-  gopassmenu = import ./gopassmenu.nix { inherit super; };
-  gopass = "${super.gopass}/bin/gopass";
+  terminal = if self.hostPlatform.system == "x86_64-linux" then
+      "${self.alacritty}/bin/alacritty"
+    else
+      "${self.termite}/bin/termite";
 in
 {
+  swaymenu = import ./swaymenu.nix { inherit terminal; pkgs = self; };
 
-  i3menu = super.writeScriptBin "i3menu" ''
-    #!${super.stdenv.shell}
-    ${menu}
-    (exec i3-msg -t command "exec $COMMAND")
-  '';
+  emojimenu = import ./emojimenu.nix { inherit terminal; pkgs = self; };
 
-  swaymenu = super.writeScriptBin "swaymenu" ''
-    #!${super.stdenv.shell}
-    ${menu}
-    (exec swaymsg -t command "exec $COMMAND")
-  '';
+  otpmenu = import ./gopassmenu.nix {
+    inherit terminal;
+    pkgs = self;
+    name = "otpmenu";
+    filter = "^(otp)/.*$";
+    getter = "${self.gopass}/bin/gopass otp $name | cut -f 1 -d ' '";
+  };
 
-  emojimenu = ((import ./emojimenu.nix) self super);
-
-  otpmenu = super.writeScriptBin "otpmenu" ''
-    #!${super.stdenv.shell}
-
-    GOPASS_FILTER="^(otp)/.*$"
-
-    function gopass_get() {
-      local name="$1"
-      ${gopass} otp $name | cut -f 1 -d ' '
-    }
-
-    ${gopassmenu}
-  '';
-
-  passmenu = super.writeScriptBin "passmenu" ''
-    #!${super.stdenv.shell}
-
-    GOPASS_FILTER="^(misc|ssh|websites)/.*$"
-
-    function gopass_get() {
-      local name="$1"
-      ${gopass} show --password "$name"
-    }
-
-    ${gopassmenu}
-  '';
+  passmenu = import ./gopassmenu.nix {
+    inherit terminal;
+    pkgs = self;
+    name = "passmenu";
+    filter = "^(misc|ssh|websites)/.*$";
+    getter = "${self.gopass}/bin/gopass show --password \"$name\"";
+  };
 }
