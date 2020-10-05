@@ -1,6 +1,7 @@
 self: super:
 let
-  terminal = if self.hostPlatform.system == "x86_64-linux" then
+  terminal =
+    if self.hostPlatform.system == "x86_64-linux" then
       "${self.alacritty}/bin/alacritty"
     else
       "${self.termite}/bin/termite";

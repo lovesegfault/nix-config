@@ -175,10 +175,11 @@
         };
       };
 
-      terminal = if pkgs.hostPlatform.system == "aarch64-linux" then
-                  "${pkgs.termite}/bin/termite"
-                else
-                  "${pkgs.alacritty}/bin/alacritty";
+      terminal =
+        if pkgs.hostPlatform.system == "aarch64-linux" then
+          "${pkgs.termite}/bin/termite"
+        else
+          "${pkgs.alacritty}/bin/alacritty";
 
       window = {
         border = 0;

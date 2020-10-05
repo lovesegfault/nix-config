@@ -2,7 +2,7 @@
   programs.termite = {
     enable = true;
     allowBold = true;
-    audibleBell=  false;
+    audibleBell = false;
     backgroundColor = "rgba(10, 14, 20, 1)";
     clickableUrl = true;
     colorsExtra = ''
