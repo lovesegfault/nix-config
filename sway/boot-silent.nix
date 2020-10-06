@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
   boot = {
     consoleLogLevel = 1;
     kernelParams = [

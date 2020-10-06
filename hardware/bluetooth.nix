@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: rec {
+{ config, pkgs, ... }: {
   hardware.bluetooth = {
     enable = true;
     package = pkgs.bluezFull;
@@ -18,10 +18,7 @@
   # one. The empty one is a signal to systemd, to ignore the original copy
   # will cause it to have 3 entries, the original, an empty, and the new
   systemd.services.bluetooth.serviceConfig.ExecStart =
-    let
-      bluez = "${hardware.bluetooth.package}/libexec/bluetooth/bluetoothd";
-    in
-    [ "" "${bluez} --noplugin=sap" ];
+    [ "" "${config.hardware.bluetooth.package}/libexec/bluetooth/bluetoothd --noplugin=sap" ];
 
   hardware.pulseaudio = {
     package = pkgs.pulseaudio.override { bluetoothSupport = true; };

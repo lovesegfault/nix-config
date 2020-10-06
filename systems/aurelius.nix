@@ -56,8 +56,6 @@
     wireless.iwd.enable = true;
   };
 
-  nixpkgs.overlays = [ (import ../overlays/hyperpixel.nix) ];
-
   systemd.network.networks = {
     lan = {
       DHCP = "yes";

@@ -42,7 +42,7 @@
       "/var/lib/prometheus2"
       "/var/lib/roon-server"
       "/var/log"
-    ] ++ [
+
       "/home/bemeurer/.cache/zsh"
       "/home/bemeurer/.local/share/bash"
       "/home/bemeurer/.local/share/nvim"

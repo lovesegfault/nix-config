@@ -1,6 +1,6 @@
-self: super: {
+_: super: {
   mosh = super.mosh.overrideAttrs (
-    old: {
+    _: {
       src = super.fetchFromGitHub {
         owner = "mobile-shell";
         repo = "mosh";

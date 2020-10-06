@@ -35,7 +35,7 @@
       "/var/lib/iwd"
       "/var/lib/libvirt"
       "/var/lib/nixus-secrets"
-    ] ++ [
+
       "/home/bemeurer/.cache/lollypop"
       "/home/bemeurer/.cache/mozilla"
       "/home/bemeurer/.cache/nvim"
@@ -108,7 +108,11 @@
   };
 
   home-manager.users.bemeurer = { ... }: {
-    imports = [ (import ../nix).impermanence-home ];
+    imports = [
+      (import ../nix).impermanence-home
+      ../users/bemeurer/music
+      ../users/bemeurer/trusted
+    ];
     home.persistence."/state/home/bemeurer".files = [
       ".arcrc"
       ".cache/cargo/credentials"
@@ -129,8 +133,6 @@
     hostId = "872516b8";
     wireless.iwd.enable = true;
   };
-
-  programs.gphoto2.enable = true;
 
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }

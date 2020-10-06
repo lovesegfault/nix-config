@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
     ./nixos-aarch64-builder.nix
     ./bluetooth.nix

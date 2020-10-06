@@ -52,7 +52,7 @@ self: super: {
   };
 
   python3 = super.python3.override {
-    packageOverrides = pySelf: pySuper: {
+    packageOverrides = pySelf: _: {
       rpi-gpio = pySelf.buildPythonPackage rec {
         pname = "RPi.GPIO";
         version = "0.7.0";

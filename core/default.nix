@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   dummyConfig = pkgs.writeText "configuration.nix" ''
     assert builtins.trace "This is a dummy config, use nixus!" false;
@@ -49,12 +49,16 @@ in
   nixpkgs = {
     config.allowUnfree = true;
     overlays = [
+      (import ../overlays/bimp.nix)
       (import ../overlays/firmware-linux-nonfree.nix)
+      (import ../overlays/hyperpixel.nix)
+      (import ../overlays/mbk.nix)
+      (import ../overlays/menu)
+      (import ../overlays/mkSecret.nix)
       (import ../overlays/mosh.nix)
       (import ../overlays/roon-server.nix)
       (import ../overlays/stcg-build.nix)
       (import ../overlays/weechat.nix)
-      (import ../overlays/mkSecret.nix)
     ];
   };
 

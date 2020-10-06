@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 with lib;
-rec {
+{
   users.users.bemeurer = {
     createHome = true;
     description = "Bernardo Meurer";
@@ -26,10 +26,8 @@ rec {
   };
 
   home-manager.users.bemeurer = {
-    imports = [ ./core ./dev ]
-      ++ optionals config.programs.sway.enable [ ./sway ]
-      ++ optionals (config.nixpkgs.localSystem.system == "x86_64-linux") [ ./music ./trusted ];
+    imports = [ ./core ./dev ] ++ optionals config.programs.sway.enable [ ./sway ];
 
-    xdg.configFile."beets/config.yaml".source = secrets.files.beets-config.file;
+    xdg.configFile."beets/config.yaml".source = config.secrets.files.beets-config.file;
   };
 }

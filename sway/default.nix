@@ -20,12 +20,6 @@
     style = "adwaita";
   };
 
-  nixpkgs.overlays = [
-    (import ../overlays/bimp.nix)
-    (import ../overlays/mbk.nix)
-    (import ../overlays/menu)
-  ];
-
   xdg = {
     autostart.enable = true;
     icons.enable = true;

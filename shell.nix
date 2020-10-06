@@ -39,4 +39,5 @@ pkgs.mkShell {
     deploy
     genci
   ];
+  shellHook = "${(import ./.).preCommitChecks.shellHook}";
 }

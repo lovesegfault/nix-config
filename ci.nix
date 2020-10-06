@@ -1,4 +1,8 @@
-{ sources ? import ./nix, lib ? import sources.lib, pkgs ? import sources.nixpkgs { } }:
+let
+  sources = import ./nix;
+  lib = import sources.lib;
+  pkgs = import sources.nixpkgs { };
+in
 with builtins; with lib;
 let
   mkGenericJob = extraSteps: {
@@ -54,30 +58,26 @@ let
 
   mkSystemJob = attrToBuild: mkGenericJob [{
     name = "Build";
-    run = "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A ${attrToBuild}";
+    run = "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A deploy.${attrToBuild}";
   }];
 
-  systemFilter = n: s:
+  systemFilter =
     let
       banned = [ "abel" ];
     in
-    (! any (b: b == n) banned) && (s.enabled == true);
-  systems = attrNames (filterAttrs systemFilter (import ./default.nix).config.nodes);
+    n: s: (! any (b: b == n) banned) && (s.enabled == true);
+  systems = attrNames (filterAttrs systemFilter (import ./default.nix).deploy.config.nodes);
 
   ci = {
     on = [ "pull_request" "push" ];
     name = "CI";
     jobs = (genAttrs systems mkSystemJob) // {
-      parsing = mkGenericJob [{
-        name = "Parsing";
-        run = "find . -name \"*.nix\" -exec nix-instantiate --parse --quiet {} >/dev/null +";
-      }];
-      formatting = mkGenericJob [{
-        name = "Formatting";
-        run = "nix-shell --run 'nixpkgs-fmt --check .'";
+      preCommitChecks = mkGenericJob [{
+        name = "pre-commit checks";
+        run = "nix-build -A preCommitChecks";
       }];
       checkCI = mkGenericJob [{
-        name = "Check CI";
+        name = "ci up-to-date check";
         run = ''
           cp ./.github/workflows/ci.yml /tmp/ci.yml.old
           nix-shell --run 'genci'

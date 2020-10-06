@@ -1,6 +1,6 @@
-self: super: {
-  stcg-build = super.writeScriptBin "stcg-build" ''
-    #!${super.stdenv.shell}
+self: _: {
+  stcg-build = self.writeScriptBin "stcg-build" ''
+    #!${self.stdenv.shell}
     set -o errexit
     set -o nounset
     set -o pipefail

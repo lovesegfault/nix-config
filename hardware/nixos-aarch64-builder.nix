@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, pkgs, ... }: {
   secrets.files.nixos-aarch64-builder-key = pkgs.mkSecret { file = ../secrets/nixos-aarch64-builder.key; };
   nix = {
     distributedBuilds = true;

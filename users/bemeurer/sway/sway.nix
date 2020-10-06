@@ -29,8 +29,8 @@
       };
 
       floating = {
+        inherit modifier;
         border = 0;
-        modifier = modifier;
       };
 
       focus.followMouse = false;

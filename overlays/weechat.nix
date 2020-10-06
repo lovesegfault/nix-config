@@ -9,7 +9,7 @@ self: super:
             ps: [
               (
                 ps.potr.overridePythonAttrs (
-                  oldAttrs:
+                  _:
                   {
                     propagatedBuildInputs = [
                       (

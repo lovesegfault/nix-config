@@ -1,5 +1,5 @@
-self: super: {
-  firmwareLinuxNonfree = super.firmwareLinuxNonfree.overrideAttrs (oldAttrs: {
+_: super: {
+  firmwareLinuxNonfree = super.firmwareLinuxNonfree.overrideAttrs (_: {
     version = "2020-07-16";
     src = super.fetchgit {
       url = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";

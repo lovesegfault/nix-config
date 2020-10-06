@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, pkgs, ... }: {
   programs = {
     direnv.enableZshIntegration = true;
     starship.enableZshIntegration = true;

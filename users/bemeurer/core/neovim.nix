@@ -9,10 +9,10 @@
   };
 
   programs = {
-    git.extraConfig = rec {
+    git.extraConfig = {
       core.editor = "nvim";
       merge.tool = "nvimdiff";
-      "mergetool \"nvimdiff\"".cmd = "${core.editor} -d $LOCAL $REMOTE";
+      "mergetool \"nvimdiff\"".cmd = "nvim -d $LOCAL $REMOTE";
       diff.tool = "nvimdiff";
     };
     zsh.shellAliases = { v = "nvim"; };

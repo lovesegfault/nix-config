@@ -1,4 +1,4 @@
-self: super: {
+self: _: {
   mbk =
     let
       gsutil = "${self.google-cloud-sdk}/bin/gsutil";
