@@ -150,22 +150,23 @@
       };
       Service = {
         Type = "simple";
-        ExecStart = if pkgs.hostPlatform.system == "x86_64-linux" then
-          ''
-            ${pkgs.swayidle}/bin/swayidle -w \
-              timeout 300 '${pkgs.swaylock}/bin/swaylock' \
-              timeout 600 'swaymsg "output * dpms off"' \
-                resume 'swaymsg "output * dpms on"' \
-              before-sleep '${pkgs.swaylock}/bin/swaylock'
-          ''
-        else
-          ''
-            ${pkgs.swayidle}/bin/swayidle -w \
-              timeout 300 '${pkgs.swaylock}/bin/swaylock' \
-              timeout 600 'sudo bash -c "echo 0 > /sys/class/backlight/rpi_backlight/brightness"' \
-                resume 'sudo bash -c "echo 1 > /sys/class/backlight/rpi_backlight/brightness"' \
-              before-sleep '${pkgs.swaylock}/bin/swaylock'
-          ''
+        ExecStart =
+          if pkgs.hostPlatform.system == "x86_64-linux" then
+            ''
+              ${pkgs.swayidle}/bin/swayidle -w \
+                timeout 300 '${pkgs.swaylock}/bin/swaylock' \
+                timeout 600 'swaymsg "output * dpms off"' \
+                  resume 'swaymsg "output * dpms on"' \
+                before-sleep '${pkgs.swaylock}/bin/swaylock'
+            ''
+          else
+            ''
+              ${pkgs.swayidle}/bin/swayidle -w \
+                timeout 300 '${pkgs.swaylock}/bin/swaylock' \
+                timeout 600 'sudo bash -c "echo 0 > /sys/class/backlight/rpi_backlight/brightness"' \
+                  resume 'sudo bash -c "echo 1 > /sys/class/backlight/rpi_backlight/brightness"' \
+                before-sleep '${pkgs.swaylock}/bin/swaylock'
+            ''
         ;
         RestartSec = 3;
         Restart = "always";
