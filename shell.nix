@@ -32,7 +32,6 @@ in
 pkgs.mkShell {
   name = "nix-config";
   buildInputs = with pkgs; [
-    act
     cachix
     niv
     nixpkgs-fmt
