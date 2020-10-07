@@ -17,7 +17,6 @@
   boot = {
     blacklistedKernelModules = [ "r8169" "snd_hda_intel" "amd64_edac_mod" "sp5100_tco" ];
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" ];
-    kernel.sysctl."vm.swappiness" = lib.mkForce 1;
     extraModulePackages = with config.boot.kernelPackages; [ r8125 ];
     kernelModules = [ "kvm-amd" "r8125" ];
     kernelPackages = pkgs.linuxPackages_latest;
