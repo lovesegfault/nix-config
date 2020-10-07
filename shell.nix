@@ -12,7 +12,7 @@ let
     function deploy() {
       local cmd=("nix-build" "--no-out-link")
       if [ $# -gt 0 ]; then
-        cmd+=("-A" "$1")
+        cmd+=("-A" "deploy.$1")
       fi
       "''${cmd[@]}" | ${pkgs.stdenv.shell}
     }
