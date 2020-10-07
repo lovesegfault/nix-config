@@ -1,9 +1,8 @@
 let
   sources = import ./nix;
-  lib = import sources.lib;
   pkgs = import sources.nixpkgs { };
 in
-with builtins; with lib;
+with builtins; with sources.lib;
 let
   mkGenericJob = extraSteps: {
     runs-on = "ubuntu-latest";

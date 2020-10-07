@@ -3,7 +3,7 @@ let
 in
 {
   preCommitChecks = sources.nix-pre-commit-hooks.run {
-    src = ./.;
+    src = sources.gitignoreSource ./.;
     hooks = {
       nix-linter = {
         enable = true;
