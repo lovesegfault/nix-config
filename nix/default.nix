@@ -3,11 +3,11 @@ let
 in
 rec {
   inherit (sources) nixpkgs;
-  home-manager = sources.home-manager + "/nixos";
   impermanence-home = sources.impermanence + "/home-manager.nix";
   impermanence-sys = sources.impermanence + "/nixos.nix";
 
   gitignoreSource = (import sources.gitignore { inherit lib; }).gitignoreSource;
+  home-manager = import ../../home-manager/nixos;
   lib = import (nixpkgs + "/lib");
   musnix = import sources.musnix;
   nix-pre-commit-hooks = import sources.nix-pre-commit-hooks;

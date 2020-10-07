@@ -108,7 +108,7 @@
     };
   };
 
-  home-manager.users.bemeurer = {
+  home-manager.users.bemeurer = { ... }: {
     imports = [
       (import ../nix).impermanence-home
       ../users/bemeurer/music
@@ -118,7 +118,6 @@
       ".arcrc"
       ".cache/cargo/credentials"
       ".cache/swaymenu-history.txt"
-      ".config/beets/config.yaml"
       ".config/cachix/cachix.dhall"
       ".config/zoomus.conf"
       ".gist"

@@ -7,7 +7,7 @@ let
 in
 {
   imports = [
-    (import (import ../nix).home-manager)
+    (import ../nix).home-manager
     ./aspell.nix
     ./nix.nix
     ./openssh.nix
@@ -24,7 +24,10 @@ in
   environment.etc."nixos/configuration.nix".source = dummyConfig;
   environment.systemPackages = with pkgs; [ rsync ];
 
-  home-manager.useGlobalPkgs = true;
+  home-manager = {
+    useGlobalPkgs = true;
+    verbose = true;
+  };
 
   i18n.defaultLocale = "en_US.UTF-8";
 
