@@ -21,14 +21,7 @@ with lib;
     hashedPassword = "$6$rounds=65536$iIIt7MZ7K0ghK$HMPPLFtp7SpvpLAajlgZp.sH2rCNsOq41E1CDCGCaxyz/tXSqWngalatM0V5zsMbj/4klKdAzeoOw1rZj7fp6/";
   };
 
-  secrets.files.beets-config = pkgs.mkSecret {
-    file = ../../secrets/beets-config.yaml;
-    user = "bemeurer";
-  };
-
   home-manager.users.bemeurer = {
     imports = [ ./core ./dev ] ++ optionals config.programs.sway.enable [ ./sway ];
-
-    xdg.configFile."beets/config.yaml".source = config.secrets.files.beets-config.file;
   };
 }
