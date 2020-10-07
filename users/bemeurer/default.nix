@@ -8,6 +8,7 @@ with lib;
       ++ optionals config.sound.enable [ "audio" ]
       ++ optionals config.programs.sway.enable [ "input" "video" ]
       ++ optionals config.networking.networkmanager.enable [ "networkmanager" ]
+      ++ optionals config.virtualisation.docker.enable [ "docker" ]
       ++ optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
       ++ optionals config.virtualisation.kvmgt.enable [ "kvm" ];
     isNormalUser = true;
