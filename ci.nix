@@ -1,28 +1,20 @@
 let
   sources = import ./nix;
   pkgs = import sources.nixpkgs { };
-in
-with builtins; with sources.lib;
-let
+  lib = pkgs.lib;
+
   mkGenericJob = extraSteps: {
     runs-on = "ubuntu-latest";
     steps = [
-      {
-        name = "Checkout";
-        uses = "actions/checkout@v2";
-      }
-      {
-        name = "Nix";
-        uses = "cachix/install-nix-action@v10";
-        "with".skip_adding_nixpkgs_channel = true;
-      }
+      { uses = "actions/checkout@v2"; }
+      { uses = "cachix/install-nix-action@v10"; }
       {
         name = "AArch64";
         run = ''
           # first create the ssh config dir for root
           sudo mkdir -p /root/.ssh
 
-          # now add the key for the build slave
+          # now add the key for the builder
           echo "''${{ secrets.AARCH64_BOX_KEY }}" |
               sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
           sudo chmod 0600 /root/.ssh/aarch64.community.nixos
@@ -31,8 +23,8 @@ let
           echo "''${{ secrets.KNOWN_HOSTS }}" |
               sudo tee -a /root/.ssh/known_hosts > /dev/null
 
-          # lastly register the build slave with nix
-          slave_cfg=(
+          # lastly register the builder with nix
+          builder_cfg=(
             lovesegfault@aarch64.nixos.community # user/addr
             aarch64-linux                        # arch
             /root/.ssh/aarch64.community.nixos   # key
@@ -40,12 +32,11 @@ let
             1                                    # speed factor
             big-parallel                         # features
           )
-          echo "''${slave_cfg[*]}" |
+          echo "''${builder_cfg[*]}" |
               sudo tee /etc/nix/machines > /dev/null
         '';
       }
       {
-        name = "Cachix";
         uses = "cachix/cachix-action@v6";
         "with" = {
           name = "nix-config";
@@ -60,17 +51,12 @@ let
     run = "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A deploy.${attrToBuild}";
   }];
 
-  systemFilter =
-    let
-      banned = [ "abel" ];
-    in
-    n: s: (! any (b: b == n) banned) && (s.enabled == true);
-  systems = attrNames (filterAttrs systemFilter (import ./default.nix).deploy.config.nodes);
+  systems = lib.attrNames (import ./default.nix).deploy.config.nodes;
 
   ci = {
     on = [ "pull_request" "push" ];
     name = "CI";
-    jobs = (genAttrs systems mkSystemJob) // {
+    jobs = (lib.genAttrs systems mkSystemJob) // {
       preCommitChecks = mkGenericJob [{
         name = "pre-commit checks";
         run = "nix-build -A preCommitChecks";

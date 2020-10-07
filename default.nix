@@ -44,10 +44,6 @@ in
       };
 
       # Work
-      abel = { ... }: {
-        host = "10.1.16.12";
-        configuration = ./systems/abel.nix;
-      };
       cantor = { ... }: {
         host = "stcg-us-0005-03";
         configuration = ./systems/cantor.nix;
@@ -56,10 +52,6 @@ in
         enabled = false;
         host = "stcg-us-0005-11";
         configuration = ./systems/feuerbach.nix;
-      };
-      peano = { ... }: {
-        host = "10.1.16.11";
-        configuration = ./systems/peano.nix;
       };
     };
   };
