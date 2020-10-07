@@ -21,8 +21,8 @@ with lib;
     hashedPassword = "$6$rounds=65536$iIIt7MZ7K0ghK$HMPPLFtp7SpvpLAajlgZp.sH2rCNsOq41E1CDCGCaxyz/tXSqWngalatM0V5zsMbj/4klKdAzeoOw1rZj7fp6/";
   };
 
-  home-manager.users.bemeurer = mkMerge [
-    { imports = [ ./core ./dev ]; }
-    (mkIf config.programs.sway.enable { imports = [ ./sway ]; })
-  ];
+  home-manager.users.bemeurer = { ... }: {
+    imports = [ ./core ./dev ]
+      ++ optionals config.programs.sway.enable [ ./sway ];
+  };
 }
