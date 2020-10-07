@@ -32,6 +32,7 @@
     directories = [
       "/var/lib/bluetooth"
       "/var/lib/boltd"
+      "/var/lib/docker"
       "/var/lib/iwd"
       "/var/lib/libvirt"
       "/var/lib/nixus-secrets"
@@ -173,5 +174,8 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    storageDriver = "zfs";
+  };
 }
