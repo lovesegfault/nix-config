@@ -28,6 +28,8 @@
     kernelParams = [ "fbcon=map:1" ];
   };
 
+  environment.systemPackages = with pkgs; [ cntr ];
+
   environment.persistence."/state" = {
     directories = [
       "/var/lib/bluetooth"
