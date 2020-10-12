@@ -17,4 +17,8 @@
   services.ddclient.configFile = config.secrets.files.ddclient-sartre.file;
 
   time.timeZone = "America/Los_Angeles";
+
+  home-manager.users.bemeurer = { ... }: {
+    home.packages = with pkgs; [ weechat ];
+  };
 }

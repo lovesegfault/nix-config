@@ -13,7 +13,7 @@
 
   home = {
     stateVersion = "20.03";
-    packages = with pkgs; [ exa gist gopass mosh neofetch nix-index ripgrep stcg-build weechat ];
+    packages = with pkgs; [ exa gist gopass mosh neofetch nix-index ripgrep stcg-build ];
   };
 
   programs.bat.enable = true;
