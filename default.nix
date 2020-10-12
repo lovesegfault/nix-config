@@ -38,6 +38,11 @@ in
         configuration = ./systems/goethe.nix;
       };
 
+      riemann = { ... }: {
+        host = "10.0.0.16";
+        configuration = ./systems/riemann.nix;
+      };
+
       sartre = { ... }: {
         host = "sartre.meurer.org";
         configuration = ./systems/sartre.nix;
