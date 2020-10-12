@@ -63,9 +63,9 @@
       ct = "cargo test";
       ctr = "cargo test --release";
       # exa
-      l = "exa --binary --header --long --classify";
-      la = "l --all";
-      ls = "l";
+      ls = "exa --binary --header --long --classify";
+      la = "ls --all";
+      l = "ls";
     };
     plugins = [
       {
