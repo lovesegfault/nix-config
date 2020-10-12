@@ -17,6 +17,11 @@ in
   deploy = sources.nixus {
     defaults = { ... }: { nixpkgs = sources.nixpkgs; };
     nodes = {
+      aurelius = { ... }: {
+        host = "10.0.0.13";
+        configuration = ./systems/aurelius.nix;
+      };
+
       foucault = { ... }: {
         host = "localhost";
         configuration = ./systems/foucault.nix;
@@ -31,11 +36,6 @@ in
         hasFastConnection = true;
         host = "192.168.2.1";
         configuration = ./systems/goethe.nix;
-      };
-
-      aurelius = { ... }: {
-        host = "10.0.0.13";
-        configuration = ./systems/aurelius.nix;
       };
 
       sartre = { ... }: {
