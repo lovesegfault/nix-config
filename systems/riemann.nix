@@ -12,9 +12,9 @@
     generic-extlinux-compatible.enable = lib.mkForce false;
     raspberryPi = {
       enable = true;
-      # firmwareConfig = ''
-      #   dtoverlay=vc4-fkms-v3d
-      # '';
+      firmwareConfig = ''
+        dtoverlay=vc4-fkms-v3d
+      '';
       version = 4;
     };
   };
