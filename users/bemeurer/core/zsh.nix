@@ -63,7 +63,7 @@
       ct = "cargo test";
       ctr = "cargo test --release";
       # exa
-      l = "exa --binary --header --long --classify --git";
+      l = "exa --binary --header --long --classify";
       la = "l --all";
       ls = "l";
     };

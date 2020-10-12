@@ -20,6 +20,5 @@
   programs.fzf.enable = true;
   programs.gpg.enable = true;
 
-
   xdg.configFile."nixpkgs/config.nix".text = "{ allowUnfree = true; }";
 }
