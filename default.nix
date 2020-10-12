@@ -34,7 +34,7 @@ in
 
       goethe = { ... }: {
         hasFastConnection = true;
-        host = "192.168.2.1";
+        host = "10.0.0.4";
         configuration = ./systems/goethe.nix;
       };
 
