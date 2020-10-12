@@ -86,8 +86,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "zdharma";
           repo = "fast-syntax-highlighting";
-          rev = "3636ce9abdb50560179663c9de3b8f93524fb0cd";
-          sha256 = "15biviz181k8z0qh48rdl2q3b7j919ck5nvjrcimbvwvs09v22n8";
+          rev = "a47b5088636c3678c7baa22710d10b0c45bc9265";
+          sha256 = "00d6nssh73k26w69fdp8iff1xghyr8ziy5w5a2li0z9lvm6j0nik";
         };
       }
       {
@@ -97,8 +97,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "zdharma";
           repo = "history-search-multi-word";
-          rev = "5c884b6d2cf7f33d1b3672e1de641155a548b844";
-          sha256 = "1qsn6spa1anm80463g07pvh3ql29v9iyb30if5sav5iyp8bv3qcv";
+          rev = "f4efe71dbfae5f027c08f8ff8e8dca9bc946601c";
+          sha256 = "0v0jiv9wbf6dyxzsqai2j87nlbhy8l097v3pmss9ayr8h2faxkpx";
         };
       }
       {
@@ -112,17 +112,6 @@
           sha256 = "1h0vm2dgrmb8i2pvsgis3lshc5b0ad846836m62y8h3rdb3zmpy1";
         };
       }
-      # {
-      #   # https://github.com/chisui/zsh-nix-shell
-      #   name = "zsh-nix-shell";
-      #   file = "nix-shell.plugin.zsh";
-      #   src = pkgs.fetchFromGitHub {
-      #     owner = "chisui";
-      #     repo = "zsh-nix-shell";
-      #     rev = "69e90b9bccecd84734948fb03087c2454a8522f6";
-      #     sha256 = "0snhch9hfy83d4amkyxx33izvkhbwmindy0zjjk28hih1a9l2jmx";
-      #   };
-      # }
       {
         # https://github.com/zsh-users/zsh-history-substring-search
         name = "zsh-history-substring-search";
