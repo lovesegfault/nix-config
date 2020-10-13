@@ -5,7 +5,7 @@
     ./htop.nix
     ./neovim.nix
     ./newsboat.nix
-    ./powerlevel10k.nix
+    ./starship.nix
     ./tmux.nix
     ./xdg.nix
     ./zsh.nix
