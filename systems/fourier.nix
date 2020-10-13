@@ -158,6 +158,11 @@
       enable = true;
       openFirewall = true;
     };
+    zfs.autoScrub.pools = [ "tank" ];
+    zfs.autoSnapshot = {
+      enable = true;
+      flags = "-k -p --utc";
+    };
   };
 
   sound.extraConfig = ''
