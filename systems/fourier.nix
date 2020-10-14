@@ -150,6 +150,7 @@
     };
     roon-server = {
       enable = true;
+      group = "media";
       openFirewall = true;
     };
     smartd.enable = true;
