@@ -1,8 +1,5 @@
-{ config, pkgs, ... }: {
-  boot = {
-    extraModulePackages = with config.boot.kernelPackages; [ zfs ];
-    kernelModules = [ "zfs" ];
-  };
+{ pkgs, ... }: {
+  boot.supportedFilesystems = [ "zfs" ];
 
   environment.systemPackages = with pkgs; [ zfs ];
 
