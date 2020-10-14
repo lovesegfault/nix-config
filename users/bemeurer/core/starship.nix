@@ -25,7 +25,6 @@
         $nix_shell\
         $line_break\
         $jobs\
-        $env_var\
         $character\
       """
 
@@ -34,10 +33,6 @@
 
       [nix_shell]
       use_name = true
-
-      [env_var]
-      variable = "VIM_MODE_KEYMAP"
-      style = "bold green"
     '';
   };
 }
