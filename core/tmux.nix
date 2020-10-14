@@ -8,7 +8,7 @@
     # breaks tmate
     newSession = false;
     secureSocket = false;
-    shortcut = "a";
+    shortcut = "g";
     terminal = "tmux-256color";
   };
 }
