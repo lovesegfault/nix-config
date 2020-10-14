@@ -23,12 +23,13 @@
     gco = "git commit";
     gcom = "git commit --message";
     gcoa = "git commit --amend";
+    gcoan = "git commit --ammend --no-edit";
     gdf = "git diff";
     gdfs = "git diff --staged";
     gdt = "git difftool";
     gdts = "git difftool --staged";
     gf = "git fetch --all --prune --tags";
-    gl = "git log --graph --abbrev-commit --decorate";
+    gl = "git log --graph --decorate";
     gm = "git merge";
     gma = "git merge --abort";
     gmc = "git merge --continue";
