@@ -15,7 +15,7 @@
   ];
 
   boot = {
-    blacklistedKernelModules = [ "r8169" "snd_hda_intel" "amd64_edac_mod" "sp5100_tco" ];
+    blacklistedKernelModules = [ "r8169" "snd_hda_intel" "amd64_edac_mod" "sp5100_tco" "iwlwifi" ];
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" ];
     extraModulePackages = with config.boot.kernelPackages; [ r8125 ];
     kernelModules = [ "kvm-amd" "r8125" ];
@@ -98,10 +98,10 @@
     firewall.allowedTCPPorts = [ 3000 9090 9091 ];
     hostName = "fourier";
     hostId = "80f4ef89";
-    wireless.iwd.enable = true;
+    # wireless.iwd.enable = true;
     useNetworkd = lib.mkForce false;
     interfaces.eno1.useDHCP = true;
-    interfaces.wlan0.useDHCP = true;
+    # interfaces.wlan0.useDHCP = true;
   };
 
   nix = {
