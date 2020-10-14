@@ -23,7 +23,7 @@
     gco = "git commit";
     gcom = "git commit --message";
     gcoa = "git commit --amend";
-    gcoan = "git commit --ammend --no-edit";
+    gcoan = "git commit --amend --no-edit";
     gdf = "git diff";
     gdfs = "git diff --staged";
     gdt = "git difftool";
