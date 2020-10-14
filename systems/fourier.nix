@@ -158,6 +158,7 @@
       enable = true;
       openFirewall = true;
     };
+    smartd.enable = true;
     zfs.autoScrub.pools = [ "tank" ];
     zfs.autoSnapshot = {
       enable = true;
