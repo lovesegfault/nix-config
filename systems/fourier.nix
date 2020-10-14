@@ -19,7 +19,6 @@
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" ];
     extraModulePackages = with config.boot.kernelPackages; [ r8125 ];
     kernelModules = [ "kvm-amd" "r8125" ];
-    kernelPackages = pkgs.linuxPackages_latest;
     zfs = {
       extraPools = [ "tank" ];
       requestEncryptionCredentials = false;
@@ -93,13 +92,7 @@
     ];
   };
 
-  musnix = {
-    enable = true;
-    # kernel = {
-    #   optimize = true;
-    #   realtime = true;
-    # };
-  };
+  musnix.enable = true;
 
   networking = {
     firewall.allowedTCPPorts = [ 3000 9090 9091 ];
