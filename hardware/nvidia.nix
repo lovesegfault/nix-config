@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, ... }:
 let
   nvidia_x11 = config.boot.kernelPackages.nvidia_x11;
   nvidia_gl = nvidia_x11.out;
@@ -13,10 +13,7 @@ in
   environment.systemPackages = [ nvidia_x11 ];
 
   hardware = {
-    nvidia = {
-      modesetting.enable = lib.mkForce false;
-      nvidiaPersistenced = true;
-    };
+    nvidia.modesetting.enable = true;
     opengl = {
       enable = true;
       driSupport32Bit = true;
