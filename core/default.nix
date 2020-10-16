@@ -8,6 +8,8 @@ in
 {
   imports = [
     (import ../nix).home-manager
+    (import ../nix).impermanence-sys
+    (import ../nix).musnix
     ./aspell.nix
     ./nix.nix
     ./openssh.nix

@@ -22,7 +22,10 @@ with lib;
   };
 
   home-manager.users.bemeurer = { ... }: {
-    imports = [ ./core ./dev ]
-      ++ optionals config.programs.sway.enable [ ./sway ];
+    imports = [
+      (import ../../nix).impermanence-home
+      ./core
+      ./dev
+    ] ++ optionals config.programs.sway.enable [ ./sway ];
   };
 }

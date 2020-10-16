@@ -1,6 +1,5 @@
 { lib, pkgs, ... }: {
   imports = [
-    (import ../nix).impermanence-sys
     ../core
     ../core/unbound.nix
 
@@ -113,7 +112,6 @@
 
   home-manager.users.bemeurer = { ... }: {
     imports = [
-      (import ../nix).impermanence-home
       ../users/bemeurer/music
       ../users/bemeurer/trusted
     ];

@@ -1,7 +1,5 @@
 { config, lib, pkgs, ... }: {
   imports = [
-    (import ../nix).impermanence-sys
-    (import ../nix).musnix
     ../core
     ../core/unbound.nix
 
@@ -83,16 +81,12 @@
     pulseaudio.enable = lib.mkForce false;
   };
 
-  home-manager.verbose = true;
-  home-manager.users.bemeurer = { ... }: {
-    imports = [ (import ../nix).impermanence-home ];
-    home.persistence."/nix/state/home/bemeurer".files = [
-      ".gist"
-      ".gist-vim"
-      ".newsboat/cache.db"
-      ".newsboat/history.search"
-    ];
-  };
+  home-manager.users.bemeurer.home.persistence."/nix/state/home/bemeurer".files = [
+    ".gist"
+    ".gist-vim"
+    ".newsboat/cache.db"
+    ".newsboat/history.search"
+  ];
 
   musnix.enable = true;
 
