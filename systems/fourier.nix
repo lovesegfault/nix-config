@@ -3,6 +3,7 @@
     (import ../nix).impermanence-sys
     (import ../nix).musnix
     ../core
+    ../core/unbound.nix
 
     ../dev
 

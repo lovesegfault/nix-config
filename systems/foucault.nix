@@ -2,6 +2,7 @@
   imports = [
     (import ../nix).impermanence-sys
     ../core
+    ../core/unbound.nix
 
     ../dev
     ../dev/stcg-gcs.nix

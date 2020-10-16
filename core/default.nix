@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 let
   dummyConfig = pkgs.writeText "configuration.nix" ''
     assert builtins.trace "This is a dummy config, use nixus!" false;
@@ -11,7 +11,6 @@ in
     ./aspell.nix
     ./nix.nix
     ./openssh.nix
-    ./unbound.nix
     ./sudo.nix
     ./sysctl.nix
     ./tmux.nix
@@ -65,10 +64,7 @@ in
     ];
   };
 
-  services = {
-    resolved.enable = lib.mkForce false;
-    dbus.socketActivated = true;
-  };
+  services.dbus.socketActivated = true;
 
   system = {
     extraSystemBuilderCmds = ''

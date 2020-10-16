@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   imports = [
     ../core
-    ../dev
+    ../core/unbound.nix
 
     ../hardware/gce.nix
 
