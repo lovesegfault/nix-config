@@ -2,6 +2,7 @@ name: niv update
 on:
   schedule:
     - cron:  '* 10 * * *'
+  workflow_dispatch:
 jobs:
   niv-updater:
     name: 'Create PRs for niv-managed dependencies'
