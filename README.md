@@ -8,8 +8,7 @@ Deployment is done using [`nixus`](https://github.com/Infinisil/nixus), see
 [usage](#usage).
 
 For the configurations' entry points see the individual [systems], as well as
-[default.nix]. For adding users or overlays see [users](#users),
-[overlays](#overlays), respectively.
+[default.nix]. For adding overlays see [overlays](#overlays).
 
 ## structure
 
@@ -43,17 +42,6 @@ To deploy all hosts you can use either `nix-build | bash` or, if within
 
 Similarly, to deploy a specific host `nix-build -A myHost | bash` or `deploy
 myHost` both work.
-
-### adding users
-
-```shell
-cp users/template.nix users/myUser.nix
-sed -i s/template/myUser/g users/myUser.nix
-# You may want to add your openssh key
-vim users/myUser.nix
-# You may want to add youself to a system
-vim systems/mySystem.nix
-```
 
 ### adding overlays
 
