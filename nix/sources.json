@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "ecb89af129e6254fece65e448681b88835ee7b00",
-        "sha256": "14j6ni3n8ywmv64i1xw97s2kn0v9v1vrgx9c9kjrpbm402n5g1rr",
+        "rev": "4b3000b9bec3a3ce4d5bb7d79abfdd267b5f42ea",
+        "sha256": "0gwx6ggg5gw9w9xnd5k7pq8viknjb88zxn711bqmfcnvnx74hav1",
         "type": "tarball",
-        "url": "https://github.com/nix-community/impermanence/archive/ecb89af129e6254fece65e448681b88835ee7b00.tar.gz",
+        "url": "https://github.com/nix-community/impermanence/archive/4b3000b9bec3a3ce4d5bb7d79abfdd267b5f42ea.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "musnix": {
