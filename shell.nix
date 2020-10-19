@@ -13,11 +13,12 @@ let
       local cmd=("nix-build" "--no-out-link")
       if [ $# -gt 0 ]; then
         cmd+=("-A" "deploy.$1")
+      else
+        cmd+=("-A" "deploy")
       fi
       "''${cmd[@]}" | ${pkgs.stdenv.shell}
     }
 
-    eval "$(ssh-agent)"
     deploy "$@"
     exit
   '';
