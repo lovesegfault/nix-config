@@ -6,7 +6,7 @@
     ../dev
 
     ../hardware/efi.nix
-    ../hardware/nvidia.nix
+    ../hardware/nouveau.nix
     ../hardware/sound.nix
     ../hardware/zfs.nix
 
