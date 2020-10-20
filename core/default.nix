@@ -55,7 +55,6 @@ in
     overlays = [
       (import ../overlays/bimp.nix)
       (import ../overlays/hyperpixel.nix)
-      (import ../overlays/libplacebo.nix)
       (import ../overlays/mbk.nix)
       (import ../overlays/menu)
       (import ../overlays/mkSecret.nix)

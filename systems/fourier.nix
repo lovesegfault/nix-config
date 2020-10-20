@@ -18,7 +18,7 @@
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" ];
     extraModulePackages = with config.boot.kernelPackages; [ r8125 ];
     kernelModules = [ "kvm-amd" "r8125" ];
-    kernelPackages = pkgs.linuxPackages_5_8; # FIXME
+    kernelPackages = pkgs.linuxPackages_latest;
     zfs = {
       extraPools = [ "tank" ];
       requestEncryptionCredentials = false;
