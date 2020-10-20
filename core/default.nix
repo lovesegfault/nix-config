@@ -54,7 +54,6 @@ in
     config.allowUnfree = true;
     overlays = [
       (import ../overlays/bimp.nix)
-      (import ../overlays/firmware-linux-nonfree.nix)
       (import ../overlays/hyperpixel.nix)
       (import ../overlays/mbk.nix)
       (import ../overlays/menu)
