@@ -66,8 +66,6 @@ in
     ];
   };
 
-  services.dbus.socketActivated = true;
-
   system = {
     extraSystemBuilderCmds = ''
       ln -sv ${pkgs.path} $out/nixpkgs
