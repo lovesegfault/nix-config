@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ../core
     ../core/unbound.nix
@@ -14,10 +14,9 @@
   ];
 
   boot = {
-    blacklistedKernelModules = [ "r8169" "snd_hda_intel" "amd64_edac_mod" "sp5100_tco" "iwlwifi" ];
+    blacklistedKernelModules = [ "snd_hda_intel" "amd64_edac_mod" "sp5100_tco" "iwlwifi" ];
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" ];
-    extraModulePackages = with config.boot.kernelPackages; [ r8125 ];
-    kernelModules = [ "kvm-amd" "r8125" ];
+    kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest;
     zfs = {
       extraPools = [ "tank" ];
