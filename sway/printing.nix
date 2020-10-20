@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   services.printing = {
     enable = true;
-    drivers = with pkgs; [ gutenprint gutenprintBin brlaser canon-cups-ufr2 ];
+    drivers = with pkgs; [ gutenprint gutenprintBin ];
   };
 }
