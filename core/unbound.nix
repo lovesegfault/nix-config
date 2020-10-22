@@ -1,6 +1,7 @@
-{
+{ lib, ... }: {
   networking.networkmanager.dns = "unbound";
 
+  services.resolved.enable = lib.mkForce false;
   services.unbound = {
     enable = true;
     enableRootTrustAnchor = true;
