@@ -55,7 +55,14 @@
 
   services.octoprint = {
     enable = true;
-    plugins = plugins: with plugins; [ displaylayerprogress octoprint-dashboard octoklipper ];
+    plugins = plugins: with plugins; [
+      bedlevelvisualizer
+      displaylayerprogress
+      printtimegenius
+      themeify
+      octoklipper
+      octoprint-dashboard
+    ];
     extraConfig = {
       accessControl.enabled = false;
       appearance.name = "Voron 0";
