@@ -265,7 +265,7 @@
         heater_temp = "50.0";
         kick_start_time = "0.5";
         max_power = "1.0";
-        pin = "PA8";
+        pin = "PC6";
         fan_speed = "1.0";
       };
 
