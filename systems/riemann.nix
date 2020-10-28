@@ -207,9 +207,9 @@
 
         control = "pid";
         heater_pin = "PC8";
-        pid_Kd = 114;
-        pid_Ki = "1.08";
-        pid_Kp = "22.2";
+        pid_Kd = "100.894";
+        pid_Ki = "1.014";
+        pid_Kp = "20.229";
         sensor_pin = "PA0";
         sensor_type = "SliceEngineering 450";
 
@@ -245,9 +245,9 @@
         sensor_type = "NTC 100K beta 3950";
 
         control = "pid";
-        pid_kd = "363.769";
-        pid_ki = "2.347";
-        pid_kp = "58.437";
+        pid_kd = "277.091";
+        pid_ki = "3.054";
+        pid_kp = "58.182";
         smooth_time = "3.0";
       };
 
