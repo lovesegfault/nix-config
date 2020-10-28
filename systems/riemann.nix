@@ -109,7 +109,7 @@
       };
 
       stepper_x = {
-        dir_pin = "!PB12";
+        dir_pin = "PB12";
         enable_pin = "!PB14";
         step_pin = "PB13";
 
@@ -138,7 +138,7 @@
       };
 
       stepper_y = {
-        dir_pin = "!PB2";
+        dir_pin = "PB2";
         enable_pin = "!PB11";
         step_distance = "0.0125";
         step_pin = "PB10";
