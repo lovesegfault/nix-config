@@ -121,7 +121,7 @@
         homing_retract_dist = 5;
         homing_speed = 70;
         second_homing_speed = 5;
-        step_distance = "0.0125";
+        step_distance = "0.00625";
       };
 
       "tmc2209 stepper_x" = {
@@ -140,7 +140,7 @@
       stepper_y = {
         dir_pin = "PB2";
         enable_pin = "!PB11";
-        step_distance = "0.0125";
+        step_distance = "0.00625";
         step_pin = "PB10";
 
         endstop_pin = "PC1";
@@ -169,7 +169,7 @@
       stepper_z = {
         dir_pin = "PC5";
         enable_pin = "!PB1";
-        step_distance = "0.000625";
+        step_distance = "0.00125";
         step_pin = "PB0";
 
         endstop_pin = "PC2";
