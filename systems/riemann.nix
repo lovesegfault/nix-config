@@ -236,8 +236,8 @@
       };
 
       heater_bed = {
-        heater_pin = "PC9";
-        max_power = "1.0";
+        heater_pin = "PC15";
+        max_power = "0.8";
         max_temp = 120;
         min_temp = 0;
 
