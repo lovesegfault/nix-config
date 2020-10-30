@@ -63,7 +63,6 @@ in
       (import ../overlays/roon-server.nix)
       (import ../overlays/stcg-build.nix)
       (import ../overlays/weechat.nix)
-      (import ../overlays/x265.nix)
     ];
   };
 
