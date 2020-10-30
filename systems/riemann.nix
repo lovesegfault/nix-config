@@ -197,9 +197,9 @@
       };
 
       extruder = {
-        dir_pin = "!PB4";
+        dir_pin = "PB4";
         enable_pin = "!PD2";
-        step_distance = "0.0024";
+        step_distance = "0.002412854092803528";
         step_pin = "PB3";
 
         filament_diameter = "1.750";
@@ -207,9 +207,9 @@
 
         control = "pid";
         heater_pin = "PC8";
-        pid_Kd = "100.894";
-        pid_Ki = "1.014";
-        pid_Kp = "20.229";
+        pid_Kd = "100.215";
+        pid_Ki = "1.038";
+        pid_Kp = "20.400";
         sensor_pin = "PA0";
         sensor_type = "SliceEngineering 450";
 
@@ -245,9 +245,9 @@
         sensor_type = "NTC 100K beta 3950";
 
         control = "pid";
-        pid_kd = "277.091";
-        pid_ki = "3.054";
-        pid_kp = "58.182";
+        pid_kd = "261.522";
+        pid_ki = "2.306";
+        pid_kp = "49.112";
         smooth_time = "3.0";
       };
 
@@ -273,7 +273,7 @@
         cycle_time = "0.010";
         kick_start_time = "0.5";
         off_below = "0.13";
-        pin = "PA8";
+        pin = "PC9";
       };
 
       idle_timeout.timeout = 1800;
@@ -282,14 +282,14 @@
         axes = "z";
         set_position_z = 0;
         gcode = "
-          G90
-          G0 Z5 F600
-          G28 X Y
-          G0 X30 Y0 F3600
+    G90
+    G0 Z5 F600
+    G28 X Y
+    G0 X60 Y60 F3600
 
-          G28 Z
-          G0 Z10 F1800
-          G0 X60 Y60 Z20 F3600
+    G28 Z
+    G0 Z10 F1800
+    G0 X60 Y60 Z20 F3600
         ";
       };
 
@@ -303,99 +303,41 @@
       };
 
       "gcode_macro PRINT_START".gcode = "
-        G28                            ; home all axes
-        G1 Z20 F3000                   ; move nozzle away from bed
+    G28                            ; home all axes
+    G1 Z20 F3000                   ; move nozzle away from bed
       ";
 
       "gcode_macro PRINT_END".gcode = "
-        M400                           ; wait for buffer to clear
-        G92 E0                         ; zero the extruder
-        G1 E-4.0 F3600                 ; retract filament
-        G91                            ; relative positioning
-        G0 Z1.00 X20.0 Y20.0 F20000    ; move nozzle to remove stringing
-        TURN_OFF_HEATERS
-        M107                           ; turn off fan
-        G1 Z2 F3000                    ; move nozzle up 2mm
-        G90                            ; absolute positioning
-        G0  X60 Y120 F3600            ; park nozzle at rear
+    M400                           ; wait for buffer to clear
+    G92 E0                         ; zero the extruder
+    G1 E-4.0 F3600                 ; retract filament
+    G91                            ; relative positioning
+    G0 Z1.00 X20.0 Y20.0 F20000    ; move nozzle to remove stringing
+    TURN_OFF_HEATERS
+    M107                           ; turn off fan
+    G1 Z2 F3000                    ; move nozzle up 2mm
+    G90                            ; absolute positioning
+    G0  X60 Y120 F3600            ; park nozzle at rear
       ";
 
       "gcode_macro LOAD_FILAMENT".gcode = "
-        M83                            ; set extruder to relative
-        G1 E280 F1800                  ; quickly load filament to down bowden
-        G1 E30 F300                    ; slower extrusion for hotend path
-        G1 E15 F150                    ; prime nozzle with filament
-        M82                            ; set extruder to absolute
+    M83                            ; set extruder to relative
+    G1 E280 F1800                  ; quickly load filament to down bowden
+    G1 E30 F300                    ; slower extrusion for hotend path
+    G1 E15 F150                    ; prime nozzle with filament
+    M82                            ; set extruder to absolute
       ";
 
       "gcode_macro UNLOAD_FILAMENT".gcode = "
-        M83                            ; set extruder to relative
-        G1 E10 F300                    ; extrude a little to soften tip
-        G1 E-380 F1800                 ; retract filament completely
-        M82                            ; set extruder to absolute
+    M83                            ; set extruder to relative
+    G1 E10 F300                    ; extrude a little to soften tip
+    G1 E-380 F1800                 ; retract filament completely
+    M82                            ; set extruder to absolute
       ";
 
       "static_digital_output usb_pullup_enable".pins = "!PA14";
 
       board_pins.aliases = "EXP1_1=PB5, EXP1_3=PA9, EXP1_5=PA10, EXP1_7=PB8, EXP1_9=<GND>, EXP1_2=PA15, EXP1_4=<RST>, EXP1_6=PB9, EXP1_8=PB15, EXP1_10=<5V>";
-
-      "menu __prepare" = {
-        type = "list";
-        enable = "!toolhead.is_printing";
-        name = "Prepare";
-        items = "
-            .__bedScrew
-            .__hotend_pid_tuning
-            .__hotbed_pid_tuning
-            .__host_restart
-            .__firmware_restart
-        ";
-      };
-
-      "menu __prepare __bedScrew" = {
-        type = "list";
-        name = "Bed Screw Tune";
-        items = "
-          .__Start
-          .__Accept
-          .__Adjusted
-          .__Abort
-        ";
-      };
-
-      "menu __prepare __bedScrew __Start" = {
-        type = "command";
-        name = "Start Screw Adjust";
-        gcode = "
-          G28 X0 Y0
-          G28 Z0
-          BED_SCREWS_ADJUST
-        ";
-      };
-
-      "menu __prepare __bedScrew __Accept" = {
-        type = "command";
-        name = "Accept";
-        gcode = "
-          ACCEPT
-        ";
-      };
-
-      "menu __prepare __bedScrew __Adjusted" = {
-        type = "command";
-        name = "Adjust";
-        gcode = "
-          ADJUSTED
-        ";
-      };
-
-      "menu __prepare __bedScrew __Abort" = {
-        type = "command";
-        name = "Abort";
-        gcode = "
-          ABORT
-        ";
-      };
     };
   };
 }
