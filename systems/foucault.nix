@@ -121,6 +121,7 @@
       ".cache/swaymenu-history.txt"
       ".config/beets/config.yaml"
       ".config/cachix/cachix.dhall"
+      ".config/gh/hosts.yml"
       ".config/zoomus.conf"
       ".gist"
       ".gist-vim"
