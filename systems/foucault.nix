@@ -39,6 +39,7 @@
       "/var/lib/libvirt"
       "/var/lib/nixus-secrets"
 
+      "/home/bemeurer/.SuperSlicer"
       "/home/bemeurer/.cache/lollypop"
       "/home/bemeurer/.cache/mozilla"
       "/home/bemeurer/.cache/nvim"
