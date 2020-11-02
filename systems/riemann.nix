@@ -231,7 +231,7 @@
         microsteps = 16;
         run_current = "0.35";
         sense_resistor = "0.110";
-        stealthchop_threshold = 500;
+        stealthchop_threshold = 0;
       };
 
       heater_bed = {
@@ -284,11 +284,11 @@
     G90
     G0 Z5 F600
     G28 X Y
-    G0 X60 Y60 F3600
+    G0 X60 Y0 F3600
 
     G28 Z
     G0 Z10 F1800
-    G0 X60 Y60 Z20 F3600
+    G0 X60 Y0 Z20 F3600
         ";
       };
 
