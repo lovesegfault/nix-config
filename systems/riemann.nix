@@ -102,7 +102,7 @@
       "neopixel displayStatus" = {
         pin = "displayEncoder:PA0";
         chain_count = 1;
-        color_order_GRB = true;
+        color_order = "GRB";
         initial_RED = 0.2;
         initial_GREEN = 0.05;
         initial_BLUE = 0;
