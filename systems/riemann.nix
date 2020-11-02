@@ -121,7 +121,7 @@
         homing_retract_dist = 5;
         homing_speed = 70;
         second_homing_speed = 5;
-        step_distance = "0.00625";
+        step_distance = "0.0125";
       };
 
       "tmc2209 stepper_x" = {
@@ -129,10 +129,10 @@
         uart_address = 0;
         uart_pin = "PC11";
 
-        hold_current = ".25";
+        hold_current = ".30";
         interpolate = true;
-        microsteps = 16;
-        run_current = ".25";
+        microsteps = 8;
+        run_current = ".30";
         sense_resistor = 0.110;
         stealthchop_threshold = 500;
       };
@@ -140,7 +140,7 @@
       stepper_y = {
         dir_pin = "PB2";
         enable_pin = "!PB11";
-        step_distance = "0.00625";
+        step_distance = "0.0125";
         step_pin = "PB10";
 
         endstop_pin = "PC1";
@@ -158,10 +158,10 @@
         uart_address = 2;
         uart_pin = "PC11";
 
-        hold_current = ".25";
+        hold_current = ".30";
         interpolate = true;
-        microsteps = 16;
-        run_current = ".25";
+        microsteps = 8;
+        run_current = ".30";
         sense_resistor = 0.110;
         stealthchop_threshold = 500;
       };
@@ -169,11 +169,11 @@
       stepper_z = {
         dir_pin = "PC5";
         enable_pin = "!PB1";
-        step_distance = "0.00125";
+        step_distance = "0.0025";
         step_pin = "PB0";
 
         endstop_pin = "PC2";
-        position_endstop = 0;
+        position_endstop = "0.200";
         position_max = 120;
         position_min = -1;
 
@@ -188,10 +188,10 @@
         uart_address = 1;
         uart_pin = "PC11";
 
-        hold_current = ".25";
+        hold_current = ".30";
         interpolate = true;
-        microsteps = 16;
-        run_current = ".25";
+        microsteps = 8;
+        run_current = ".30";
         sense_resistor = 0.110;
         stealthchop_threshold = 500;
       };
@@ -227,10 +227,10 @@
         uart_address = 3;
         uart_pin = "PC11";
 
-        hold_current = "0.2";
+        hold_current = "0.35";
         interpolate = true;
         microsteps = 16;
-        run_current = "0.2";
+        run_current = "0.35";
         sense_resistor = "0.110";
         stealthchop_threshold = 500;
       };
