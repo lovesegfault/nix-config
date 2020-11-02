@@ -15,7 +15,7 @@
       "mergetool \"nvimdiff\"".cmd = "nvim -d $LOCAL $REMOTE";
       diff.tool = "nvimdiff";
     };
-    zsh.shellAliases = { v = "nvim"; };
+    zsh.shellAliases = { vi = "nvim"; vim = "nvim"; };
     neovim =
       let
         loadPlugin = plugin: ''
@@ -26,8 +26,6 @@
       in
       {
         enable = true;
-        viAlias = true;
-        vimAlias = true;
         plugins = with pkgs.vimPlugins; [
           # Completion/IDE
           ale # Linting
