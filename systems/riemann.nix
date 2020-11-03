@@ -102,9 +102,9 @@
         pin = "displayEncoder:PA0";
         chain_count = 1;
         color_order = "GRB";
-        initial_RED = 0.2;
-        initial_GREEN = 0.05;
-        initial_BLUE = 0;
+        initial_RED = 0;
+        initial_GREEN = 0.0298;
+        initial_BLUE = 0.02706;
       };
 
       stepper_x = {
