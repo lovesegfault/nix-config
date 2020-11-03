@@ -217,7 +217,7 @@
         max_temp = 270;
         min_extrude_temp = 230;
         min_temp = 0;
-        pressure_advance = "0.0";
+        pressure_advance = "0.3224";
         pressure_advance_smooth_time = 0.040;
       };
 
@@ -226,12 +226,12 @@
         uart_address = 3;
         uart_pin = "PC11";
 
-        hold_current = "0.30";
+        hold_current = "0.39";
         interpolate = true;
         microsteps = 16;
-        run_current = "0.35";
+        run_current = "0.39";
         sense_resistor = "0.110";
-        stealthchop_threshold = 500;
+        stealthchop_threshold = 0;
       };
 
       heater_bed = {
