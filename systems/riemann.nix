@@ -226,12 +226,12 @@
         uart_address = 3;
         uart_pin = "PC11";
 
-        hold_current = "0.35";
+        hold_current = "0.30";
         interpolate = true;
         microsteps = 16;
         run_current = "0.35";
         sense_resistor = "0.110";
-        stealthchop_threshold = 0;
+        stealthchop_threshold = 500;
       };
 
       heater_bed = {
