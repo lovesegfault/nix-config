@@ -215,7 +215,7 @@
         max_extrude_cross_section = ".8";
         max_extrude_only_distance = 780;
         max_temp = 270;
-        min_extrude_temp = 170;
+        min_extrude_temp = 230;
         min_temp = 0;
         pressure_advance = "0.0";
         pressure_advance_smooth_time = 0.040;
