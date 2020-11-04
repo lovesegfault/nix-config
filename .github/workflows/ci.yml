@@ -7,7 +7,7 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "cachix/install-nix-action@v10"
+          "uses": "cachix/install-nix-action@v11"
         },
         {
           "name": "AArch64",
@@ -33,7 +33,7 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "cachix/install-nix-action@v10"
+          "uses": "cachix/install-nix-action@v11"
         },
         {
           "name": "AArch64",
@@ -59,7 +59,7 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "cachix/install-nix-action@v10"
+          "uses": "cachix/install-nix-action@v11"
         },
         {
           "name": "AArch64",
@@ -85,7 +85,7 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "cachix/install-nix-action@v10"
+          "uses": "cachix/install-nix-action@v11"
         },
         {
           "name": "AArch64",
@@ -111,7 +111,7 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "cachix/install-nix-action@v10"
+          "uses": "cachix/install-nix-action@v11"
         },
         {
           "name": "AArch64",
@@ -137,7 +137,7 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "cachix/install-nix-action@v10"
+          "uses": "cachix/install-nix-action@v11"
         },
         {
           "name": "AArch64",
@@ -163,7 +163,7 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "cachix/install-nix-action@v10"
+          "uses": "cachix/install-nix-action@v11"
         },
         {
           "name": "AArch64",
@@ -189,7 +189,7 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "cachix/install-nix-action@v10"
+          "uses": "cachix/install-nix-action@v11"
         },
         {
           "name": "AArch64",

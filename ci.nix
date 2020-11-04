@@ -7,7 +7,7 @@ let
     runs-on = "ubuntu-latest";
     steps = [
       { uses = "actions/checkout@v2"; }
-      { uses = "cachix/install-nix-action@v10"; }
+      { uses = "cachix/install-nix-action@v11"; }
       {
         name = "AArch64";
         run = ''
