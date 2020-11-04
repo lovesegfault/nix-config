@@ -283,13 +283,12 @@
         set_position_z = 0;
         gcode = "
     G90
-    G0 Z5 F600
+    G0 Z1 F600
     G28 X Y
-    G0 X60 Y0 F3600
+    G0 X60 Y60 F3600
 
     G28 Z
-    G0 Z10 F1800
-    G0 X60 Y0 Z20 F3600
+    G0 X10 Y10 Z5 F3600
         ";
       };
 
@@ -303,8 +302,14 @@
       };
 
       "gcode_macro PRINT_START".gcode = "
-    G28                            ; home all axes
-    G1 Z20 F3000                   ; move nozzle away from bed
+    M140 S{BED_TEMP}
+    G90
+    G28
+    G1 Z5 F5000
+    M104 S{EXTRUDER_TEMP}
+    G1 Z0.15 F300
+    M190 S{BED_TEMP}
+    M109 S{EXTRUDER_TEMP}
       ";
 
       "gcode_macro PRINT_END".gcode = "
@@ -312,12 +317,12 @@
     G92 E0                         ; zero the extruder
     G1 E-4.0 F3600                 ; retract filament
     G91                            ; relative positioning
-    G0 Z1.00 X20.0 Y20.0 F20000    ; move nozzle to remove stringing
+    G0 Z1.00 X20.0 Y20.0 F7000    ; move nozzle to remove stringing
     TURN_OFF_HEATERS
     M107                           ; turn off fan
     G1 Z2 F3000                    ; move nozzle up 2mm
     G90                            ; absolute positioning
-    G0  X60 Y120 F3600            ; park nozzle at rear
+    G0 X60 Y120 F3600              ; park nozzle at rear
       ";
 
       "gcode_macro LOAD_FILAMENT".gcode = "
