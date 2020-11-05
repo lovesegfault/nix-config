@@ -315,14 +315,13 @@
       "gcode_macro PRINT_END".gcode = "
     M400                           ; wait for buffer to clear
     G92 E0                         ; zero the extruder
-    G1 E-4.0 F3600                 ; retract filament
+    G1 E-4.0 F3000                 ; retract filament
     G91                            ; relative positioning
-    G0 Z1.00 X20.0 Y20.0 F6000     ; move nozzle to remove stringing
+    G0 Z1.00 F10000
+    G90
+    G0 X120 Y120 F5000             ; move nozzle to remove stringing
     TURN_OFF_HEATERS
     M107                           ; turn off fan
-    G1 Z2 F3000                    ; move nozzle up 2mm
-    G90                            ; absolute positioning
-    G0 X60 Y120 F3600              ; park nozzle at rear
     G0 Z120 F10000                 ; move bed all the way down
       ";
 
