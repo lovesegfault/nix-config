@@ -237,7 +237,7 @@
       heater_bed = {
         heater_pin = "PC15";
         max_power = "0.8";
-        max_temp = 120;
+        max_temp = 125;
         min_temp = 0;
 
         sensor_pin = "PC3";
