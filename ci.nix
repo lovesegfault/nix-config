@@ -7,7 +7,7 @@ let
     runs-on = "ubuntu-latest";
     steps = [
       { uses = "actions/checkout@v2"; }
-      { uses = "cachix/install-nix-action@v11"; }
+      { uses = "cachix/install-nix-action@v12"; }
       {
         name = "AArch64";
         run = ''
@@ -37,7 +37,7 @@ let
         '';
       }
       {
-        uses = "cachix/cachix-action@v6";
+        uses = "cachix/cachix-action@v7";
         "with" = {
           name = "nix-config";
           signingKey = "'\${{ secrets.CACHIX_SIGNING_KEY }}'";
