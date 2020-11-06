@@ -276,7 +276,7 @@
         pin = "PC9";
       };
 
-      idle_timeout.timeout = 1800;
+      idle_timeout.timeout = 7200;
 
       homing_override = {
         axes = "z";
