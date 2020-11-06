@@ -27,6 +27,7 @@
       gnome3.shotwell
       imv
       mbk
+      plater
       slack
       spotify
       super-slicer

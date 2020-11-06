@@ -60,6 +60,7 @@ in
       (import ../overlays/menu)
       (import ../overlays/mkSecret.nix)
       (import ../overlays/mosh.nix)
+      (import ../overlays/plater.nix)
       (import ../overlays/roon-server.nix)
       (import ../overlays/stcg-build.nix)
       (import ../overlays/weechat.nix)
