@@ -306,6 +306,7 @@
     G90
     G28
     G1 Z5 F5000
+    M107
     M104 S{EXTRUDER_TEMP}
     G1 Z0.15 F300
     M190 S{BED_TEMP}
