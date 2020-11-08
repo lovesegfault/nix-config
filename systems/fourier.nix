@@ -100,6 +100,7 @@
   };
 
   nix = {
+    gc.automatic = true;
     maxJobs = 16;
     systemFeatures = [ "benchmark" "nixos-test" "big-parallel" "kvm" ];
   };
