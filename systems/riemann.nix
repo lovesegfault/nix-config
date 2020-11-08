@@ -53,6 +53,8 @@
 
   networking.firewall.allowedTCPPorts = [ 5000 ];
 
+  nix.gc.automatic = true;
+
   services.octoprint = {
     enable = true;
     plugins = plugins: with plugins; [
