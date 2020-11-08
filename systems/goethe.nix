@@ -16,9 +16,12 @@
 
   environment.noXlibs = true;
 
-  networking.wireless.iwd.enable = true;
+  networking = {
+    wireless.iwd.enable = true;
+    hostName = "goethe";
+  };
 
-  networking.hostName = "goethe";
+  nix.gc.automatic = true;
 
   secrets.files.ddclient-goethe = pkgs.mkSecret { file = ../secrets/ddclient-goethe.conf; };
   services.ddclient.configFile = config.files.secrets.ddclient-goethe.file;
