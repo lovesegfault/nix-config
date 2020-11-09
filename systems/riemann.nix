@@ -304,15 +304,14 @@
       };
 
       "gcode_macro PRINT_START".gcode = "
-    M140 S{BED_TEMP}
-    G90
-    G28
-    G1 Z5 F5000
-    M107
-    M104 S{EXTRUDER_TEMP}
-    G1 Z0.15 F300
-    M190 S{BED_TEMP}
-    M109 S{EXTRUDER_TEMP}
+    M140 S{BED_TEMP}      ; start heating bed
+    G90                   ; absolute positioning
+    G28                   ; zero axis
+    M107                  ; turn off fans
+    M104 S{EXTRUDER_TEMP} ; start heating hotend
+    G1 X0 Y0 Z0.1 F5000   ; move to bottom left corner
+    M190 S{BED_TEMP}      ; wait on bed temp
+    M109 S{EXTRUDER_TEMP} ; wait on hotend temp
       ";
 
       "gcode_macro PRINT_END".gcode = "
@@ -320,12 +319,13 @@
     G92 E0                         ; zero the extruder
     G1 E-4.0 F3000                 ; retract filament
     G91                            ; relative positioning
-    G0 Z1.00 F10000
-    G90
+    G0 Z1.00 F10000                ; move nozzle up
+    G90                            ; absolute positioning
     G0 X120 Y120 F5000             ; move nozzle to remove stringing
     TURN_OFF_HEATERS
     M107                           ; turn off fan
     G0 Z120 F10000                 ; move bed all the way down
+    M18                            ; turn off motors
       ";
 
       "gcode_macro LOAD_FILAMENT".gcode = "
