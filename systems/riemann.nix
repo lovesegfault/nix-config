@@ -305,11 +305,11 @@
 
       "gcode_macro PRINT_START".gcode = "
     M140 S{BED_TEMP}      ; start heating bed
+    M104 S{EXTRUDER_TEMP} ; start heating hotend
     G90                   ; absolute positioning
     G28                   ; zero axis
     M107                  ; turn off fans
-    M104 S{EXTRUDER_TEMP} ; start heating hotend
-    G1 X0 Y0 Z0.1 F5000   ; move to bottom left corner
+    G1 X1 Y4 Z0.1 F5000   ; move to bottom left corner
     M190 S{BED_TEMP}      ; wait on bed temp
     M109 S{EXTRUDER_TEMP} ; wait on hotend temp
       ";
