@@ -174,7 +174,7 @@
         step_pin = "PB0";
 
         endstop_pin = "PC2";
-        position_endstop = "0.300";
+        position_endstop = "-0.055";
         position_max = 120;
         position_min = -1;
 
