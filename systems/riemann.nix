@@ -267,8 +267,8 @@
         kick_start_time = "0.5";
         max_power = "1.0";
         pin = "PC6";
-        fan_speed = "0.8";
-        cycle_time = "0.2";
+        fan_speed = "1.0";
+        # cycle_time = "0.2";
       };
 
       fan = {
