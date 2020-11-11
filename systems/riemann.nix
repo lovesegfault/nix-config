@@ -59,6 +59,7 @@
     enable = true;
     plugins = plugins: with plugins; [
       displaylayerprogress
+      marlingcodedocumentation
       printtimegenius
       themeify
       octoklipper
