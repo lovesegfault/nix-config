@@ -220,7 +220,7 @@
         max_temp = 300;
         min_extrude_temp = 220;
         min_temp = 0;
-        pressure_advance = "0.3194";
+        pressure_advance = "0.2846";
         pressure_advance_smooth_time = 0.040;
       };
 
