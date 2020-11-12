@@ -267,8 +267,8 @@
         heater_temp = "50.0";
         max_power = "1.0";
         pin = "PC6";
-        fan_speed = "0.9";
-        cycle_time = "0.2";
+        fan_speed = "0.8";
+        cycle_time = "0.25";
       };
 
       fan = {
