@@ -319,12 +319,13 @@
     M400                           ; wait for buffer to clear
     G92 E0                         ; zero the extruder
     G1 E-4.0 F3000                 ; retract filament
+    G90                            ; absolute positioning
+    G0 X119 Y119 F20000            ; move nozzle to remove stringing
     G91                            ; relative positioning
     G0 Z1.00 F10000                ; move nozzle up
-    G90                            ; absolute positioning
-    G0 X120 Y120 F5000             ; move nozzle to remove stringing
     TURN_OFF_HEATERS
     M107                           ; turn off fan
+    G90                            ; absolute positioning
     G0 Z120 F10000                 ; move bed all the way down
     M18                            ; turn off motors
       ";
