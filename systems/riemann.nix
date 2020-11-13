@@ -92,13 +92,15 @@
       };
 
       display = {
-        lcd_type = "sh1106";
-        i2c_mcu = "displayEncoder";
-        i2c_bus = "i2c1a";
-        encoder_pins = "^displayEncoder:PA4, ^displayEncoder:PA3";
         click_pin = "^!displayEncoder:PA1";
+        display_group = "__voron_display";
+        encoder_pins = "^displayEncoder:PA4, ^displayEncoder:PA3";
+        i2c_bus = "i2c1a";
+        i2c_mcu = "displayEncoder";
         kill_pin = "^!displayEncoder:PA5";
+        lcd_type = "sh1106";
         vcomh = 31;
+        x_offset = 2;
       };
 
       "neopixel displayStatus" = {
@@ -348,6 +350,124 @@
       "static_digital_output usb_pullup_enable".pins = "!PA14";
 
       board_pins.aliases = "EXP1_1=PB5, EXP1_3=PA9, EXP1_5=PA10, EXP1_7=PB8, EXP1_9=<GND>, EXP1_2=PA15, EXP1_4=<RST>, EXP1_6=PB9, EXP1_8=PB15, EXP1_10=<5V>";
+
+      "display_glyph voron".data = "
+ ......***.......
+ ....*******.....
+ ...*********....
+ .*************..
+ *****..***..***.
+ ****..***..****.
+ ***..***..*****.
+ **..***..******.
+ ******..***..**.
+ *****..***..***.
+ ****..***..****.
+ ***..***..*****.
+ .*************..
+ ...*********....
+ ....*******.....
+ ......***.......
+      ";
+
+      "display_template _vheater_temperature" = {
+        param_heater_name = "\"extruder\"";
+        text = "
+  {% if param_heater_name in printer %}
+    {% set heater = printer[param_heater_name] %}
+    # Show glyph
+    {% if param_heater_name == \"heater_bed\" %}
+      {% if heater.target %}
+        {% set frame = (printer.toolhead.estimated_print_time|int % 2) + 1 %}
+        ~bed_heat{frame}~
+      {% else %}
+        ~bed~
+      {% endif %}
+    {% else %}
+      ~extruder~
+    {% endif %}
+    # Show temperature
+    { \"%3.0f\" % (heater.temperature,) }
+    # Optionally show target
+    {% if heater.target and (heater.temperature - heater.target)|abs > 2 %}
+      ~right_arrow~
+      { \"%0.0f\" % (heater.target,) }
+    {% endif %}
+    ~degrees~
+    {% endif %}
+  ";
+      };
+
+      "display_data __voron_display extruder" = {
+        position = "1, 0";
+        text = "{ render(\"_vheater_temperature\", param_heater_name=\"extruder\") }";
+      };
+
+      "display_data __voron_display fan" = {
+        position = "0, 10";
+        text = "
+  {% if 'fan' in printer %}
+    {% set speed = printer.fan.speed %}
+    {% if speed %}
+      {% set frame = (printer.toolhead.estimated_print_time|int % 2) + 1 %}
+      ~fan{frame}~
+    {% else %}
+      ~fan1~
+    {% endif %}
+    { \"{:>4.0%}\".format(speed) }
+  {% endif %}
+        ";
+      };
+
+      "display_data __voron_display bed" = {
+        position = "2, 0";
+        text = "{ render(\"_vheater_temperature\", param_heater_name=\"heater_bed\") }";
+      };
+
+      "display_data __voron_display print_serial" = {
+        position = "0, 0";
+        text = "
+  { \"V0.156 \" }
+    ~voron~
+        ";
+      };
+
+
+      "display_data __voron_display progress_text" = {
+        position = "2, 10";
+        text = "
+  {% set progress = printer.display_status.progress %}
+  { \"{:^6.0%}\".format(progress) }
+        ";
+      };
+
+      "display_data __voron_display progress_text2" = {
+        position = "1, 10";
+        text = "
+  {% set progress = printer.display_status.progress %}
+  { draw_progress_bar(1, 10, 6, progress) }
+        ";
+      };
+
+      "display_data __voron_display printing_time" = {
+        position = "2, 10";
+        text = "
+  {% set ptime = printer.idle_timeout.printing_time %}
+  { \"%02d:%02d\" % (ptime // (60 * 60), (ptime // 60) % 60) }
+        ";
+      };
+
+      "display_data __voron_display print_status" = {
+        position = "3, 0";
+        text = "
+  {% if printer.display_status.message %}
+    { printer.display_status.message }
+  {% elif printer.idle_timeout.printing_time %}
+    {% set pos = printer.toolhead.position %}
+    { \"X%-4.0fY%-4.0fZ%-5.2f\" % (pos.x, pos.y, pos.z) }
+  {% endif %}
+        ";
+      };
     };
   };
 }
