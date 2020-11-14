@@ -4,7 +4,6 @@
     ./firefox.nix
     ./mako.nix
     ./mpv.nix
-    ./termite.nix
     ./sway.nix
     ./swaylock.nix
     ./waybar.nix
@@ -13,6 +12,7 @@
   home = {
     file.".icons/default".source = "${pkgs.gnome3.adwaita-icon-theme}/share/icons/Adwaita";
     packages = with pkgs; [
+      gnome3.gnome-terminal
       grim
       libnotify
       pavucontrol

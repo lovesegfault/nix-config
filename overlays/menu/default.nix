@@ -4,7 +4,7 @@ let
     if pkgs.hostPlatform.system == "x86_64-linux" then
       "${pkgs.alacritty}/bin/alacritty"
     else
-      "${pkgs.termite}/bin/termite";
+      "${pkgs.gnome3.gnome-terminal}/bin/gnome-terminal";
 in
 {
   swaymenu = import ./swaymenu.nix { inherit pkgs terminal; };

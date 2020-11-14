@@ -177,7 +177,7 @@
 
       terminal =
         if pkgs.hostPlatform.system == "aarch64-linux" then
-          "${pkgs.termite}/bin/termite"
+          "${pkgs.gnome3.gnome-terminal}/bin/gnome-terminal"
         else
           "${pkgs.alacritty}/bin/alacritty";
 
