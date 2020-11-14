@@ -8,7 +8,7 @@ function boot() {
         --profile "/nix/var/nix/profiles/system" \
         "$systemPath"
     sudo "$switch" "boot" ||
-        error "Failed to activate system"
+        echo "Failed to activate system"
 }
 
 systemPath="$(realpath "$1")"
