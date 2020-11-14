@@ -3,8 +3,8 @@ self: super: {
     src = self.fetchFromGitHub {
       repo = "klipper";
       owner = "KevinOConnor";
-      rev = "e0842e0e03b29dce260bf9e519d08f48f7e5ace7";
-      sha256 = "0fkglg24xh8hlrygvanvh5q56fz1ay06kqs1lq7782dsl9kd1vfx";
+      rev = "bdaca327072598452c14aa6716fa292446cc8086";
+      sha256 = "0jvwi859r5w0ri8rp8277ffgdxx4yja786q69hm55jrpn5flyccg";
     };
   });
 }
