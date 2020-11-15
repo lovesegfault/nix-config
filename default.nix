@@ -38,7 +38,7 @@ in
       };
 
       riemann = { ... }: {
-        host = "10.0.0.16";
+        host = "10.0.0.12";
         configuration = ./systems/riemann.nix;
       };
 
