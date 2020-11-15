@@ -34,6 +34,13 @@
 
   networking = {
     hostName = "riemann";
+    firewall = {
+      allowedTCPPorts = [ 5000 ];
+      extraCommands = ''
+        iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 5000
+        iptables -t nat -I OUTPUT -p tcp -d 127.0.0.1 --dport 80 -j REDIRECT --to-ports 5000
+      '';
+    };
     wireless.iwd.enable = true;
   };
 
@@ -51,7 +58,6 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  networking.firewall.allowedTCPPorts = [ 5000 ];
 
   nix.gc.automatic = true;
 
