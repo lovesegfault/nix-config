@@ -209,7 +209,7 @@
       extruder = {
         dir_pin = "PB4";
         enable_pin = "!PD2";
-        step_distance = "0.002412854092803528";
+        step_distance = "0.00214858341";
         step_pin = "PB3";
 
         filament_diameter = "1.750";
@@ -225,10 +225,10 @@
 
         max_extrude_cross_section = ".8";
         max_extrude_only_distance = 780;
-        max_temp = 300;
+        max_temp = 350;
         min_extrude_temp = 220;
         min_temp = 0;
-        pressure_advance = "0.2846";
+        pressure_advance = "0";
         pressure_advance_smooth_time = 0.040;
       };
 
@@ -237,12 +237,12 @@
         uart_address = 3;
         uart_pin = "PC11";
 
-        hold_current = "0.39";
+        hold_current = "0.8";
         interpolate = true;
         microsteps = 16;
-        run_current = "0.39";
+        run_current = "0.8";
         sense_resistor = "0.110";
-        stealthchop_threshold = 0;
+        stealthchop_threshold = 500;
       };
 
       heater_bed = {
@@ -275,7 +275,7 @@
         heater_temp = "50.0";
         max_power = "1.0";
         pin = "PC6";
-        fan_speed = "0.8";
+        fan_speed = "0.9";
         cycle_time = "0.25";
       };
 
