@@ -24,6 +24,7 @@ in
 
       foucault = { ... }: {
         host = "localhost";
+        ignoreFailingSystemdUnits = true;
         configuration = ./systems/foucault.nix;
       };
 
