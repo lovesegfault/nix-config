@@ -237,10 +237,10 @@
         uart_address = 3;
         uart_pin = "PC11";
 
-        hold_current = "0.8";
+        hold_current = "0.84";
         interpolate = true;
         microsteps = 16;
-        run_current = "0.8";
+        run_current = "0.84";
         sense_resistor = "0.110";
         stealthchop_threshold = 500;
       };
