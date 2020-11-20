@@ -140,10 +140,10 @@
         uart_address = 0;
         uart_pin = "PC11";
 
-        hold_current = ".80";
+        hold_current = ".90";
         interpolate = true;
         microsteps = 8;
-        run_current = ".80";
+        run_current = ".90";
         sense_resistor = 0.110;
         stealthchop_threshold = 500;
       };
@@ -169,10 +169,10 @@
         uart_address = 2;
         uart_pin = "PC11";
 
-        hold_current = ".80";
+        hold_current = ".90";
         interpolate = true;
         microsteps = 8;
-        run_current = ".80";
+        run_current = ".90";
         sense_resistor = 0.110;
         stealthchop_threshold = 500;
       };
