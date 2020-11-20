@@ -265,7 +265,7 @@
       printer = {
         kinematics = "corexy";
         max_accel = 3000;
-        max_velocity = 350;
+        max_velocity = 300;
         max_z_accel = 30;
         max_z_velocity = 30;
         square_corner_velocity = "5.0";
