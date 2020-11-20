@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ../core
@@ -20,6 +20,8 @@
       version = 4;
     };
   };
+
+  environment.systemPackages = with pkgs; [ raspberrypi-tools ];
 
   fileSystems = lib.mkForce {
     "/boot" = {
@@ -44,6 +46,8 @@
     wireless.iwd.enable = true;
   };
 
+  nix.gc.automatic = true;
+
   systemd.network.networks = {
     lan = {
       DHCP = "yes";
@@ -57,9 +61,6 @@
   };
 
   time.timeZone = "America/Los_Angeles";
-
-
-  nix.gc.automatic = true;
 
   services.octoprint = {
     enable = true;
