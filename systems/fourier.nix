@@ -148,6 +148,7 @@
       group = "media";
       openFirewall = true;
     };
+    rsyncd.enable = true;
     smartd.enable = true;
     zfs.autoScrub.pools = [ "tank" ];
     zfs.autoSnapshot = {
