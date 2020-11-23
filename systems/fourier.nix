@@ -18,6 +18,12 @@
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" ];
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest;
+    kernel.sysctl = {
+      "net.core.rmem_default" = 31457280;
+      "net.core.wmem_default" = 31457280;
+      "net.core.rmem_max" = 2147483647;
+      "net.core.wmem_max" = 2147483647;
+    };
     zfs = {
       extraPools = [ "tank" ];
       requestEncryptionCredentials = false;
@@ -148,7 +154,6 @@
       group = "media";
       openFirewall = true;
     };
-    rsyncd.enable = true;
     smartd.enable = true;
     zfs.autoScrub.pools = [ "tank" ];
     zfs.autoSnapshot = {
