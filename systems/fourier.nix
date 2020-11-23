@@ -125,6 +125,10 @@
       addr = "0.0.0.0";
       extraOptions.DASHBOARDS_MIN_REFRESH_INTERVAL = "1s";
     };
+    iperf3 = {
+      enable = true;
+      openFirewall = true;
+    };
     plex = {
       enable = true;
       openFirewall = true;
