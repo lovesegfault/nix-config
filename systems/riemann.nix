@@ -218,9 +218,9 @@
 
         control = "pid";
         heater_pin = "PC8";
-        pid_Kd = "100.215";
-        pid_Ki = "1.038";
-        pid_Kp = "20.400";
+        pid_Kd = "93.257";
+        pid_Ki = "0.846";
+        pid_Kp = "17.763";
         sensor_pin = "PA0";
         sensor_type = "SliceEngineering 450";
 
