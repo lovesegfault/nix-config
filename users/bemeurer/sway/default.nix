@@ -28,6 +28,7 @@
       imv
       mbk
       plater
+      prusa-slicer
       slack
       spotify
       super-slicer
