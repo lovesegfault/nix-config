@@ -47,6 +47,7 @@
       "/home/bemeurer/.cache/thunderbird"
       "/home/bemeurer/.cache/zoom"
       "/home/bemeurer/.cache/zsh"
+      "/home/bemeurer/.config/PrusaSlicer-alpha"
       "/home/bemeurer/.config/Slack"
       "/home/bemeurer/.config/cog"
       "/home/bemeurer/.config/dconf"
