@@ -214,7 +214,7 @@
         step_pin = "PB3";
 
         filament_diameter = "1.750";
-        nozzle_diameter = "0.600";
+        nozzle_diameter = "0.400";
 
         control = "pid";
         heater_pin = "PC8";
