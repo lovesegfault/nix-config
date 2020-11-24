@@ -328,7 +328,7 @@
     G92 E0                         ; zero the extruder
     G1 E-4.0 F3000                 ; retract filament
     G90                            ; absolute positioning
-    G0 X119 Y119 F20000            ; move nozzle to remove stringing
+    G0 X118 Y120 F20000            ; move nozzle to remove stringing
     G91                            ; relative positioning
     G0 Z1.00 F10000                ; move nozzle up
     TURN_OFF_HEATERS
