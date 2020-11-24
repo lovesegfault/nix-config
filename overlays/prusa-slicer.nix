@@ -11,4 +11,15 @@ self: super: {
 
     buildInputs = oldAttrs.buildInputs ++ [ self.dbus ];
   });
+
+  super-slicer = super.super-slicer.overrideAttrs (_: rec {
+    version = "2.3.55.2";
+
+    src = self.fetchFromGitHub {
+      owner = "supermerill";
+      repo = "SuperSlicer";
+      sha256 = "0q3af3n78732v8bdqfs7crfl1y4wphbd7pli5pqj5y129chsvzwl";
+      rev = version;
+    };
+  });
 }
