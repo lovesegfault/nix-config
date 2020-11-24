@@ -1,5 +1,5 @@
-{ ... }: {
-  programs.newsboat = {
+{ lib, pkgs, ... }: {
+  programs.newsboat = lib.mkIf (pkgs.hostPlatform.system == "x86_64-linux") {
     enable = true;
     autoReload = true;
     extraConfig = ''
