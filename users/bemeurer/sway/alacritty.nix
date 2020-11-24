@@ -46,53 +46,6 @@
       };
       mouse.url.modifiers = "Control";
       shell.program = "${pkgs.zsh}/bin/zsh";
-      key_bindings = [
-        {
-          key = "V";
-          mods = "Control|Shift";
-          action = "Paste";
-        }
-        {
-          key = "C";
-          mods = "Control|Shift";
-          action = "Copy";
-        }
-        {
-          key = "Insert";
-          mods = "Shift";
-          action = "PasteSelection";
-        }
-        {
-          key = "Key0";
-          mods = "Control";
-          action = "ResetFontSize";
-        }
-        {
-          key = "Equals";
-          mods = "Control";
-          action = "IncreaseFontSize";
-        }
-        {
-          key = "Add";
-          mods = "Control";
-          action = "IncreaseFontSize";
-        }
-        {
-          key = "Subtract";
-          mods = "Control";
-          action = "DecreaseFontSize";
-        }
-        {
-          key = "Minus";
-          mods = "Control";
-          action = "DecreaseFontSize";
-        }
-        {
-          key = "Return";
-          mods = "Alt";
-          action = "ToggleFullscreen";
-        }
-      ];
     };
   };
 }
