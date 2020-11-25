@@ -1,8 +1,6 @@
 { lib, modulesPath, ... }: {
   imports = [ (modulesPath + "/virtualisation/google-compute-image.nix") ];
 
-  environment.noXlibs = true;
-
   hardware.enableRedistributableFirmware = true;
 
   networking.useNetworkd = lib.mkForce false;

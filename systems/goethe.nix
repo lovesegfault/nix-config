@@ -14,8 +14,6 @@
     packages = with pkgs; [ terminus_font ];
   };
 
-  environment.noXlibs = true;
-
   networking = {
     wireless.iwd.enable = true;
     hostName = "goethe";
