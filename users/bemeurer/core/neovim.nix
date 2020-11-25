@@ -36,21 +36,22 @@
           ayu-vim
 
           # Tools
+          LanguageTool-nvim
           echodoc # Print documents in echo area.
           editorconfig-vim # EditorConfig support
           fugitive # Git
           fzf-vim # Search
-          vim-gist # Gist integration
-          webapi-vim # Gist dependency
+          goyo # Distraction-free writing
           lightline-ale # Linter integration
           lightline-vim # Statusbar
-          goyo # Distraction-free writing
           tagbar # Code navigation
+          vim-gist # Gist integration
           vim-indent-guides # Indentation highlighting
           vim-multiple-cursors # Sublime-like multipel cursors
           vim-surround
           vim-trailing-whitespace # Highlight trailing whitespaces
           # vimtex # LaTeX integration
+          webapi-vim # Gist dependency
 
           # Syntax
           polyglot # Shitload of syntaxes
@@ -570,6 +571,9 @@
               noremap <leader>ru :call LanguageClient#textDocument_rename(
                   \ {'newName': Abolish.uppercase(expand('<cword>'))})<CR>
             '';
+            languageToolConfig = ''
+              let g:languagetool_server_command = "${pkgs.languagetool}/bin/languagetool-http-server"
+            '';
             lightlineConfig = ''
               """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
               " => lightline
@@ -643,6 +647,7 @@
             ${fzfConfig}
             ${indentGuidesConfig}
             ${languageClientConfig}
+            ${languageToolConfig}
             ${lightlineConfig}
             ${tagbarConfig}
             ${vimtexConfig}
