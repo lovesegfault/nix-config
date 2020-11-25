@@ -210,7 +210,7 @@
       extruder = {
         dir_pin = "PB4";
         enable_pin = "!PD2";
-        step_distance = "0.00214858341";
+        step_distance = "0.00215282464109938";
         step_pin = "PB3";
 
         filament_diameter = "1.750";
