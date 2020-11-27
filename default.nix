@@ -13,40 +13,38 @@ in
     };
     excludes = [ "nix/sources.json" "nix/sources.nix" ];
   };
+} // (sources.nixus {
+  defaults = { ... }: { nixpkgs = sources.nixpkgs; };
+  nodes = {
+    aurelius = { ... }: {
+      host = "10.0.0.13";
+      configuration = ./systems/aurelius.nix;
+    };
 
-  deploy = sources.nixus {
-    defaults = { ... }: { nixpkgs = sources.nixpkgs; };
-    nodes = {
-      aurelius = { ... }: {
-        host = "10.0.0.13";
-        configuration = ./systems/aurelius.nix;
-      };
+    foucault = { ... }: {
+      host = "localhost";
+      ignoreFailingSystemdUnits = true;
+      configuration = ./systems/foucault.nix;
+    };
 
-      foucault = { ... }: {
-        host = "localhost";
-        ignoreFailingSystemdUnits = true;
-        configuration = ./systems/foucault.nix;
-      };
+    fourier = { ... }: {
+      host = "10.0.0.3";
+      configuration = ./systems/fourier.nix;
+    };
 
-      fourier = { ... }: {
-        host = "10.0.0.3";
-        configuration = ./systems/fourier.nix;
-      };
+    goethe = { ... }: {
+      host = "10.0.0.4";
+      configuration = ./systems/goethe.nix;
+    };
 
-      goethe = { ... }: {
-        host = "10.0.0.4";
-        configuration = ./systems/goethe.nix;
-      };
+    riemann = { ... }: {
+      host = "10.0.0.12";
+      configuration = ./systems/riemann.nix;
+    };
 
-      riemann = { ... }: {
-        host = "10.0.0.12";
-        configuration = ./systems/riemann.nix;
-      };
-
-      sartre = { ... }: {
-        host = "sartre.meurer.org";
-        configuration = ./systems/sartre.nix;
-      };
+    sartre = { ... }: {
+      host = "sartre.meurer.org";
+      configuration = ./systems/sartre.nix;
     };
   };
-}
+})

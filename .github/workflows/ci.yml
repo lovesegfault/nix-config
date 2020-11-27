@@ -22,7 +22,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A deploy.aurelius"
+          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A aurelius"
         }
       ]
     },
@@ -74,7 +74,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A deploy.foucault"
+          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A foucault"
         }
       ]
     },
@@ -100,7 +100,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A deploy.fourier"
+          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A fourier"
         }
       ]
     },
@@ -126,7 +126,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A deploy.goethe"
+          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A goethe"
         }
       ]
     },
@@ -178,7 +178,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A deploy.riemann"
+          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A riemann"
         }
       ]
     },
@@ -204,7 +204,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A deploy.sartre"
+          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A sartre"
         }
       ]
     }

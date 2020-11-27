@@ -10,13 +10,11 @@ let
     trap "kill 0" EXIT
 
     function deploy() {
-      local cmd=("nix-build" "--no-out-link")
       if [ $# -gt 0 ]; then
-        cmd+=("-A" "deploy.$1")
+        nix-build --no-out-link -A "$1" | ${pkgs.stdenv.shell}
       else
-        cmd+=("-A" "deploy")
+        echo "Please specify a host"
       fi
-      "''${cmd[@]}" | ${pkgs.stdenv.shell}
     }
 
     deploy "$@"

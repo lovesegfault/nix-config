@@ -48,10 +48,10 @@ let
 
   mkSystemJob = attrToBuild: mkGenericJob [{
     name = "Build";
-    run = "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A deploy.${attrToBuild}";
+    run = "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A ${attrToBuild}";
   }];
 
-  systems = lib.attrNames (import ./default.nix).deploy.config.nodes;
+  systems = lib.attrNames (import ./default.nix).config.nodes;
 
   ci = {
     on = { pull_request = { }; push = { }; };
