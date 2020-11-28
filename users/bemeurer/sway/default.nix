@@ -25,6 +25,7 @@
       gimp
       gnome3.evince
       gnome3.shotwell
+      ideamaker
       imv
       mbk
       plater
