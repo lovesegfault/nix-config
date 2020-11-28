@@ -125,8 +125,8 @@
         step_pin = "PB13";
 
         endstop_pin = "PC0";
-        position_endstop = 118.5;
-        position_max = 119;
+        position_endstop = 118;
+        position_max = 118.5;
 
         homing_positive_dir = true;
         homing_retract_dist = 5;
