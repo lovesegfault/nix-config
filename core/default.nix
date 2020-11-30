@@ -61,6 +61,8 @@ in
     ];
   };
 
+  services.tailscale.enable = true;
+
   system = {
     extraSystemBuilderCmds = ''
       ln -sv ${pkgs.path} $out/nixpkgs
