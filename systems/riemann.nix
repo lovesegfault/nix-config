@@ -46,7 +46,10 @@
     wireless.iwd.enable = true;
   };
 
-  nix.gc.automatic = true;
+  nix.gc = {
+    automatic = true;
+    options = "-d";
+  };
 
   systemd.network.networks = {
     lan = {
