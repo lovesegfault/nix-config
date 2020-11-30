@@ -37,18 +37,11 @@ in
     useNetworkd = true;
   };
 
-  nix = {
-    binaryCaches = [ "https://nix-config.cachix.org" ];
-    binaryCachePublicKeys = [
-      "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
-    ];
-    distributedBuilds = true;
-    nixPath = [
-      "nixos-config=${dummyConfig}"
-      "nixpkgs=/run/current-system/nixpkgs"
-      "nixpkgs-overlays=/run/current-system/overlays"
-    ];
-  };
+  nix.nixPath = [
+    "nixos-config=${dummyConfig}"
+    "nixpkgs=/run/current-system/nixpkgs"
+    "nixpkgs-overlays=/run/current-system/overlays"
+  ];
 
   nixpkgs = {
     config.allowUnfree = true;
