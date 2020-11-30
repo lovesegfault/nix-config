@@ -13,13 +13,13 @@ self: super: {
   });
 
   super-slicer = super.super-slicer.overrideAttrs (_: rec {
-    version = "2.3.55.2";
+    version = "2.3.55.2-unstable";
 
     src = self.fetchFromGitHub {
       owner = "supermerill";
       repo = "SuperSlicer";
-      sha256 = "0q3af3n78732v8bdqfs7crfl1y4wphbd7pli5pqj5y129chsvzwl";
-      rev = version;
+      sha256 = "0s297jwa8pndbg67nxrfjvmjb2fcy7xvqykbsxhmdyybldslplpl";
+      rev = "fa4aab027bf39570e2b0b55f2f88780ebcc00f83";
     };
   });
 }
