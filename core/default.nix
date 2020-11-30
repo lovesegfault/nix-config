@@ -69,7 +69,7 @@ in
       ln -sv ${../overlays} $out/overlays
     '';
 
-    stateVersion = "20.03";
+    stateVersion = "20.09";
   };
 
   users = {

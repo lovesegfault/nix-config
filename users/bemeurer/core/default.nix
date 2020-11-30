@@ -12,7 +12,7 @@
   ];
 
   home = {
-    stateVersion = "20.03";
+    stateVersion = "20.09";
     packages = with pkgs; [ exa gist mosh neofetch nix-index ripgrep stcg-build ];
   };
 
