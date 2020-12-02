@@ -7,6 +7,13 @@
           "uses": "actions/checkout@v2"
         },
         {
+          "uses": "actions/cache@v2",
+          "with": {
+            "key": "${{ hashFiles('nix/sources.json') }}",
+            "path": "/nix/store"
+          }
+        },
+        {
           "uses": "cachix/install-nix-action@v12"
         },
         {
@@ -31,6 +38,13 @@
       "steps": [
         {
           "uses": "actions/checkout@v2"
+        },
+        {
+          "uses": "actions/cache@v2",
+          "with": {
+            "key": "${{ hashFiles('nix/sources.json') }}",
+            "path": "/nix/store"
+          }
         },
         {
           "uses": "cachix/install-nix-action@v12"
@@ -59,6 +73,13 @@
           "uses": "actions/checkout@v2"
         },
         {
+          "uses": "actions/cache@v2",
+          "with": {
+            "key": "${{ hashFiles('nix/sources.json') }}",
+            "path": "/nix/store"
+          }
+        },
+        {
           "uses": "cachix/install-nix-action@v12"
         },
         {
@@ -83,6 +104,13 @@
       "steps": [
         {
           "uses": "actions/checkout@v2"
+        },
+        {
+          "uses": "actions/cache@v2",
+          "with": {
+            "key": "${{ hashFiles('nix/sources.json') }}",
+            "path": "/nix/store"
+          }
         },
         {
           "uses": "cachix/install-nix-action@v12"
@@ -111,6 +139,13 @@
           "uses": "actions/checkout@v2"
         },
         {
+          "uses": "actions/cache@v2",
+          "with": {
+            "key": "${{ hashFiles('nix/sources.json') }}",
+            "path": "/nix/store"
+          }
+        },
+        {
           "uses": "cachix/install-nix-action@v12"
         },
         {
@@ -135,6 +170,13 @@
       "steps": [
         {
           "uses": "actions/checkout@v2"
+        },
+        {
+          "uses": "actions/cache@v2",
+          "with": {
+            "key": "${{ hashFiles('nix/sources.json') }}",
+            "path": "/nix/store"
+          }
         },
         {
           "uses": "cachix/install-nix-action@v12"
@@ -163,6 +205,13 @@
           "uses": "actions/checkout@v2"
         },
         {
+          "uses": "actions/cache@v2",
+          "with": {
+            "key": "${{ hashFiles('nix/sources.json') }}",
+            "path": "/nix/store"
+          }
+        },
+        {
           "uses": "cachix/install-nix-action@v12"
         },
         {
@@ -187,6 +236,13 @@
       "steps": [
         {
           "uses": "actions/checkout@v2"
+        },
+        {
+          "uses": "actions/cache@v2",
+          "with": {
+            "key": "${{ hashFiles('nix/sources.json') }}",
+            "path": "/nix/store"
+          }
         },
         {
           "uses": "cachix/install-nix-action@v12"
