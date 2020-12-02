@@ -50,7 +50,12 @@ let
           signingKey = "'\${{ secrets.CACHIX_SIGNING_KEY }}'";
         };
       }
-    ] ++ extraSteps;
+    ] ++ extraSteps ++ [
+      {
+        name = "Optimize";
+        run = "nix optimise-store";
+      }
+    ];
   };
 
   mkSystemJob = attrToBuild: mkGenericJob [{
