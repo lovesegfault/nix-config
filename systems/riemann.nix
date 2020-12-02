@@ -341,9 +341,9 @@
 
       "gcode_macro LOAD_FILAMENT".gcode = "
     M83                            ; set extruder to relative
-    G1 E280 F1800                  ; quickly load filament to down bowden
-    G1 E30 F300                    ; slower extrusion for hotend path
-    G1 E15 F150                    ; prime nozzle with filament
+    G1 E300 F1800                  ; quickly load filament to down bowden
+    G1 E50 F300                    ; slower extrusion for hotend path
+    G1 E30 F150                    ; prime nozzle with filament
     M82                            ; set extruder to absolute
       ";
 
