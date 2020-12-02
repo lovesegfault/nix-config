@@ -44,6 +44,7 @@
       "/var/lib/plex"
       "/var/lib/prometheus2"
       "/var/lib/roon-server"
+      "/var/lib/tailscale"
       "/var/log"
 
       "/home/bemeurer/.cache/zsh"
