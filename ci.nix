@@ -11,7 +11,7 @@ let
         uses = "actions/cache@v2";
         "with" = {
           path = "/nix/store";
-          key = "\${{ hashFiles('nix/sources.json') }}";
+          key = "\${{ github.job }}-\${{ hashFiles('nix/sources.json') }}";
         };
       }
       { uses = "cachix/install-nix-action@v12"; }

@@ -9,7 +9,7 @@
         {
           "uses": "actions/cache@v2",
           "with": {
-            "key": "${{ hashFiles('nix/sources.json') }}",
+            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
             "path": "/nix/store"
           }
         },
@@ -46,7 +46,7 @@
         {
           "uses": "actions/cache@v2",
           "with": {
-            "key": "${{ hashFiles('nix/sources.json') }}",
+            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
             "path": "/nix/store"
           }
         },
@@ -83,7 +83,7 @@
         {
           "uses": "actions/cache@v2",
           "with": {
-            "key": "${{ hashFiles('nix/sources.json') }}",
+            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
             "path": "/nix/store"
           }
         },
@@ -120,7 +120,7 @@
         {
           "uses": "actions/cache@v2",
           "with": {
-            "key": "${{ hashFiles('nix/sources.json') }}",
+            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
             "path": "/nix/store"
           }
         },
@@ -157,7 +157,7 @@
         {
           "uses": "actions/cache@v2",
           "with": {
-            "key": "${{ hashFiles('nix/sources.json') }}",
+            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
             "path": "/nix/store"
           }
         },
@@ -194,7 +194,7 @@
         {
           "uses": "actions/cache@v2",
           "with": {
-            "key": "${{ hashFiles('nix/sources.json') }}",
+            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
             "path": "/nix/store"
           }
         },
@@ -231,7 +231,7 @@
         {
           "uses": "actions/cache@v2",
           "with": {
-            "key": "${{ hashFiles('nix/sources.json') }}",
+            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
             "path": "/nix/store"
           }
         },
@@ -268,7 +268,7 @@
         {
           "uses": "actions/cache@v2",
           "with": {
-            "key": "${{ hashFiles('nix/sources.json') }}",
+            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
             "path": "/nix/store"
           }
         },
