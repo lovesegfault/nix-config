@@ -217,13 +217,13 @@
         step_pin = "PB3";
 
         filament_diameter = "1.750";
-        nozzle_diameter = "0.400";
+        nozzle_diameter = "0.250";
 
         control = "pid";
         heater_pin = "PC8";
-        pid_Kd = "93.257";
-        pid_Ki = "0.846";
-        pid_Kp = "17.763";
+        pid_Kd = "92.402";
+        pid_Ki = "0.901";
+        pid_Kp = "18.252";
         sensor_pin = "PA0";
         sensor_type = "SliceEngineering 450";
 
