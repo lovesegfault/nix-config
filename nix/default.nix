@@ -10,6 +10,6 @@ rec {
   home-manager = import (sources.home-manager + "/nixos");
   lib = import (nixpkgs + "/lib");
   musnix = import sources.musnix;
-  nix-pre-commit-hooks = import sources.nix-pre-commit-hooks;
+  nix-pre-commit-hooks = (import (sources.nix-pre-commit-hooks + "/nix") { inherit nixpkgs; }).packages;
   nixus = import sources.nixus { };
 }
