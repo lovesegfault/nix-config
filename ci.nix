@@ -7,13 +7,6 @@ let
     runs-on = "ubuntu-latest";
     steps = [
       { uses = "actions/checkout@v2"; }
-      {
-        uses = "actions/cache@v2";
-        "with" = {
-          path = "/nix/store";
-          key = "\${{ github.job }}-\${{ hashFiles('nix/sources.json') }}";
-        };
-      }
       { uses = "cachix/install-nix-action@v12"; }
       {
         name = "AArch64";
@@ -50,12 +43,7 @@ let
           signingKey = "'\${{ secrets.CACHIX_SIGNING_KEY }}'";
         };
       }
-    ] ++ extraSteps ++ [
-      {
-        name = "Optimize";
-        run = "nix optimise-store";
-      }
-    ];
+    ] ++ extraSteps;
   };
 
   mkSystemJob = attrToBuild: mkGenericJob [{

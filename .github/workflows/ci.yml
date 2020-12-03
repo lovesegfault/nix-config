@@ -7,13 +7,6 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "actions/cache@v2",
-          "with": {
-            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
-            "path": "/nix/store"
-          }
-        },
-        {
           "uses": "cachix/install-nix-action@v12"
         },
         {
@@ -30,10 +23,6 @@
         {
           "name": "Build",
           "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A aurelius"
-        },
-        {
-          "name": "Optimize",
-          "run": "nix optimise-store"
         }
       ]
     },
@@ -42,13 +31,6 @@
       "steps": [
         {
           "uses": "actions/checkout@v2"
-        },
-        {
-          "uses": "actions/cache@v2",
-          "with": {
-            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
-            "path": "/nix/store"
-          }
         },
         {
           "uses": "cachix/install-nix-action@v12"
@@ -67,10 +49,6 @@
         {
           "name": "ci up-to-date check",
           "run": "cp ./.github/workflows/ci.yml /tmp/ci.yml.old\nnix-shell --run 'genci'\ndiff ./.github/workflows/ci.yml /tmp/ci.yml.old || exit 1\n"
-        },
-        {
-          "name": "Optimize",
-          "run": "nix optimise-store"
         }
       ]
     },
@@ -79,13 +57,6 @@
       "steps": [
         {
           "uses": "actions/checkout@v2"
-        },
-        {
-          "uses": "actions/cache@v2",
-          "with": {
-            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
-            "path": "/nix/store"
-          }
         },
         {
           "uses": "cachix/install-nix-action@v12"
@@ -104,10 +75,6 @@
         {
           "name": "Build",
           "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A foucault"
-        },
-        {
-          "name": "Optimize",
-          "run": "nix optimise-store"
         }
       ]
     },
@@ -116,13 +83,6 @@
       "steps": [
         {
           "uses": "actions/checkout@v2"
-        },
-        {
-          "uses": "actions/cache@v2",
-          "with": {
-            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
-            "path": "/nix/store"
-          }
         },
         {
           "uses": "cachix/install-nix-action@v12"
@@ -141,10 +101,6 @@
         {
           "name": "Build",
           "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A fourier"
-        },
-        {
-          "name": "Optimize",
-          "run": "nix optimise-store"
         }
       ]
     },
@@ -153,13 +109,6 @@
       "steps": [
         {
           "uses": "actions/checkout@v2"
-        },
-        {
-          "uses": "actions/cache@v2",
-          "with": {
-            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
-            "path": "/nix/store"
-          }
         },
         {
           "uses": "cachix/install-nix-action@v12"
@@ -178,10 +127,6 @@
         {
           "name": "Build",
           "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A goethe"
-        },
-        {
-          "name": "Optimize",
-          "run": "nix optimise-store"
         }
       ]
     },
@@ -190,13 +135,6 @@
       "steps": [
         {
           "uses": "actions/checkout@v2"
-        },
-        {
-          "uses": "actions/cache@v2",
-          "with": {
-            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
-            "path": "/nix/store"
-          }
         },
         {
           "uses": "cachix/install-nix-action@v12"
@@ -215,10 +153,6 @@
         {
           "name": "pre-commit checks",
           "run": "nix-build -A preCommitChecks"
-        },
-        {
-          "name": "Optimize",
-          "run": "nix optimise-store"
         }
       ]
     },
@@ -227,13 +161,6 @@
       "steps": [
         {
           "uses": "actions/checkout@v2"
-        },
-        {
-          "uses": "actions/cache@v2",
-          "with": {
-            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
-            "path": "/nix/store"
-          }
         },
         {
           "uses": "cachix/install-nix-action@v12"
@@ -252,10 +179,6 @@
         {
           "name": "Build",
           "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A riemann"
-        },
-        {
-          "name": "Optimize",
-          "run": "nix optimise-store"
         }
       ]
     },
@@ -264,13 +187,6 @@
       "steps": [
         {
           "uses": "actions/checkout@v2"
-        },
-        {
-          "uses": "actions/cache@v2",
-          "with": {
-            "key": "${{ github.job }}-${{ hashFiles('nix/sources.json') }}",
-            "path": "/nix/store"
-          }
         },
         {
           "uses": "cachix/install-nix-action@v12"
@@ -289,10 +205,6 @@
         {
           "name": "Build",
           "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A sartre"
-        },
-        {
-          "name": "Optimize",
-          "run": "nix optimise-store"
         }
       ]
     }
