@@ -270,7 +270,7 @@
         max_accel = 2500;
         max_velocity = 300;
         max_z_accel = 30;
-        max_z_velocity = 30;
+        max_z_velocity = 20;
         square_corner_velocity = "5.0";
       };
 
