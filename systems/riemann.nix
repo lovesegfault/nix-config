@@ -217,7 +217,7 @@
         step_pin = "PB3";
 
         filament_diameter = "1.750";
-        nozzle_diameter = "0.250";
+        nozzle_diameter = "0.400";
 
         control = "pid";
         heater_pin = "PC8";
@@ -232,7 +232,7 @@
         max_temp = 350;
         min_extrude_temp = 220;
         min_temp = 0;
-        pressure_advance = "0";
+        pressure_advance = "0.300";
         pressure_advance_smooth_time = 0.040;
       };
 
