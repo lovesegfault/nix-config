@@ -14,7 +14,6 @@ in
     ./nix.nix
     ./openssh.nix
     ./sudo.nix
-    ./sysctl.nix
     ./tmux.nix
     ./xdg.nix
     ./zsh.nix
