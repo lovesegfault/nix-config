@@ -47,7 +47,6 @@ in
     overlays = [
       (import ../overlays/bimp.nix)
       (import ../overlays/hyperpixel.nix)
-      (import ../overlays/ideamaker.nix)
       (import ../overlays/klipper.nix)
       (import ../overlays/mbk.nix)
       (import ../overlays/menu)
