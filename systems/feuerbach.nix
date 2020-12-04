@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [
     ../core
 
@@ -9,6 +9,8 @@
 
     ../users/bemeurer
   ];
+
+  environment.systemPackages = with pkgs; [ plater ];
 
   fileSystems = {
     "/" = {
