@@ -17,7 +17,7 @@
   qt5 = {
     enable = true;
     platformTheme = "gnome";
-    style = "adwaita";
+    style = "adwaita-dark";
   };
 
   xdg = {
