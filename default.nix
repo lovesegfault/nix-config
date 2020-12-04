@@ -27,6 +27,12 @@ in
       configuration = ./systems/foucault.nix;
     };
 
+    feuerbach = { ... }: {
+      enabled = false;
+      host = "stcg-us-0005-11";
+      configuration = ./systems/feuerbach.nix;
+    };
+
     fourier = { ... }: {
       host = "10.0.0.3";
       configuration = ./systems/fourier.nix;
