@@ -358,6 +358,51 @@
 
       board_pins.aliases = "EXP1_1=PB5, EXP1_3=PA9, EXP1_5=PA10, EXP1_7=PB8, EXP1_9=<GND>, EXP1_2=PA15, EXP1_4=<RST>, EXP1_6=PB9, EXP1_8=PB15, EXP1_10=<5V>";
 
+      "menu __main __prepare" = {
+        type = "list";
+        enable = "{not printer.idle_timeout.state == \"Printing\"}";
+        name = "Prepare";
+      };
+
+      "menu __main __prepare __bedScrew" = {
+        type = "list";
+        name = "Bed Screw Tune";
+      };
+
+      "menu __main __prepare __bedScrew __Start" = {
+        type = "command";
+        name = "Start Screw Adjust";
+        gcode = "
+    G28 X0 Y0
+    G28 Z0
+    BED_SCREWS_ADJUST
+        ";
+      };
+
+      "menu __main __prepare __bedScrew __Accept" = {
+        type = "command";
+        name = "Accept";
+        gcode = "
+    ACCEPT
+        ";
+      };
+
+      "menu __main __prepare __bedScrew __Adjusted" = {
+        type = "command";
+        name = "Adjusted";
+        gcode = "
+    ADJUSTED
+        ";
+      };
+
+      "menu __main __prepare __bedScrew __Abort" = {
+        type = "command";
+        name = "Abort";
+        gcode = "
+    ABORT
+        ";
+      };
+
       "display_glyph voron".data = "
  ......***.......
  ....*******.....
