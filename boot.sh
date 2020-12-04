@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
-set -o pipefail -o noclobber -o nounset
+set -o pipefail -o noclobber -o nounset -o errexit
 function boot() {
     [ "$#" -eq 1 ] || exit 1
     local systemPath="$1"
