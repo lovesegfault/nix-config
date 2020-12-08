@@ -202,7 +202,7 @@
         uart_address = 1;
         uart_pin = "PC11";
 
-        hold_current = ".30";
+        hold_current = ".20";
         interpolate = true;
         microsteps = 8;
         run_current = ".30";
