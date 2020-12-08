@@ -1,11 +1,11 @@
 self: super: {
   prusa-slicer = super.prusa-slicer.overrideAttrs (oldAttrs: rec {
-    version = "2.3.0-beta1";
+    version = "2.3.0-beta2";
 
     src = self.fetchFromGitHub {
       owner = "prusa3d";
       repo = "PrusaSlicer";
-      sha256 = "06r7zy9zxxz1hkmib67v5ay492w6d12flj0jqkr4xs5fg151v8g7";
+      sha256 = "1msjhghvwdmca57vy3l5mcycb2qy8p0sxm4vnnndjqg65h0d11w2";
       rev = "version_${version}";
     };
 
