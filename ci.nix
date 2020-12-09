@@ -54,7 +54,7 @@ let
   systems = lib.attrNames (import ./default.nix).config.nodes;
 
   ci = {
-    on = { pull_request = { }; push = { }; };
+    on = [ "pull_request" "push" ];
     name = "CI";
     jobs = (lib.genAttrs systems mkSystemJob) // {
       preCommitChecks = mkGenericJob [{
