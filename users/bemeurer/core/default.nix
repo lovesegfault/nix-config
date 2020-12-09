@@ -5,6 +5,7 @@
     ./htop.nix
     ./neovim.nix
     ./newsboat.nix
+    ./ssh.nix
     ./starship.nix
     ./tmux.nix
     ./xdg.nix

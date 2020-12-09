@@ -61,7 +61,6 @@ added to the relevant configuration file.
 ## issues
 
 * my wallpapers are maintained ad-hoc
-* no ssh configuration (`.ssh/config`)
 * zsh plugins must be manually updated
 
 [niv]: https://github.com/nmattia/niv
