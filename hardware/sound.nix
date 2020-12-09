@@ -1,4 +1,4 @@
-{
+{ config, pkgs, ... }: {
   hardware.pulseaudio = {
     enable = true;
     daemon.config = {
@@ -17,9 +17,14 @@
       resample-method = "soxr-vhq";
       rlimit-rtprio = 5;
     };
-    extraConfig = ''
-      unload-module module-esound-protocol-unix
-      load-module module-udev-detect tsched=0
+    configFile = pkgs.runCommand "default.pa" { } ''
+      cp ${config.hardware.pulseaudio.package}/etc/pulse/default.pa $out
+      # esound creates garbage in $HOME
+      sed -i "/load-module module-esound/d" $out
+      # we load these manually in hardware/bluetooth.nix
+      sed -i "/load-module module-bluetooth/d" $out
+
+      sed -i "s/load-module module-udev-detect/load-module module-udev-detect tsched=0/" $out
     '';
     zeroconf.discovery.enable = false;
     zeroconf.publish.enable = false;
