@@ -36,7 +36,6 @@
           ayu-vim
 
           # Tools
-          LanguageTool-nvim
           echodoc # Print documents in echo area.
           editorconfig-vim # EditorConfig support
           fugitive # Git
@@ -571,9 +570,6 @@
               noremap <leader>ru :call LanguageClient#textDocument_rename(
                   \ {'newName': Abolish.uppercase(expand('<cword>'))})<CR>
             '';
-            languageToolConfig = ''
-              let g:languagetool_server_command = "${pkgs.languagetool}/bin/languagetool-http-server"
-            '';
             lightlineConfig = ''
               """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
               " => lightline
@@ -647,7 +643,6 @@
             ${fzfConfig}
             ${indentGuidesConfig}
             ${languageClientConfig}
-            ${languageToolConfig}
             ${lightlineConfig}
             ${tagbarConfig}
             ${vimtexConfig}
