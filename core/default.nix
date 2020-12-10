@@ -57,14 +57,6 @@ in
       (import ../overlays/roon-server.nix)
       (import ../overlays/stcg-build.nix)
       (import ../overlays/weechat.nix)
-      # FIXME: remove on next nixpkgs bump
-      (_: super: {
-        python3 = super.python3.override {
-          packageOverrides = _: pySuper: {
-            soco = pySuper.soco.overridePythonAttrs (_: { doCheck = false; });
-          };
-        };
-      })
     ];
   };
 
