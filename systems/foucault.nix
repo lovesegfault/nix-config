@@ -60,6 +60,8 @@
       "/home/bemeurer/.config/shotwell"
       "/home/bemeurer/.gnupg"
       "/home/bemeurer/.gsutil"
+      "/home/bemeurer/.local/share/Steam"
+      "/home/bemeurer/.local/share/lutris"
       "/home/bemeurer/.local/share/bash"
       "/home/bemeurer/.local/share/gnome-boxes"
       "/home/bemeurer/.local/share/keyrings"
