@@ -36,7 +36,6 @@
           ayu-vim
 
           # Tools
-          echodoc # Print documents in echo area.
           editorconfig-vim # EditorConfig support
           fugitive # Git
           fzf-vim # Search
@@ -462,16 +461,6 @@
               let g:ayucolor="dark"
               colorscheme ayu
             '';
-            echodocConfig = ''
-              """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-              " => echodot
-              """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-              let g:echodoc#enable_at_startup = 1
-              let g:echodoc#type = 'floating'
-              " To use a custom highlight for the float window,
-              " change Pmenu to your highlight group
-              highlight link EchoDocFloat Pmenu
-            '';
             editorConfigConfig = ''
               """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
               " => editorconfig
@@ -638,7 +627,6 @@
             ${aleConfig}
             ${ayuConfig}
             ${deopleteConfig}
-            ${echodocConfig}
             ${editorConfigConfig}
             ${fzfConfig}
             ${indentGuidesConfig}
