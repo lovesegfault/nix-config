@@ -20,10 +20,10 @@
       enable = true;
       plugins = with pkgs.vimPlugins; [
         # Completion/IDE
+        ale
         coc-nvim
-        coc-rust-analyzer
         coc-json
-        { plugin = ale; config = "let g:ale_disable_lsp = 1"; }
+        coc-rust-analyzer
 
         # Colorscheme
         ayu-vim
@@ -35,17 +35,17 @@
         goyo # Distraction-free writing
         lightline-vim # Statusbar
         tagbar # Code navigation
+        vim-better-whitespace # Highlight trailing whitespaces
         vim-gist # Gist integration
         vim-indent-guides # Indentation highlighting
         vim-multiple-cursors # Sublime-like multipel cursors
         vim-surround
-        vim-better-whitespace # Highlight trailing whitespaces
         webapi-vim # Gist dependency
 
         # Syntax
-        polyglot # Shitload of syntaxes
         gentoo-syntax # Ebuild and metadata syntax
         lalrpop-vim # LALRPOP syntax
+        polyglot # Shitload of syntaxes
         rust-vim # Rust 2018 syntax
         vim-nix # Nix syntax highlighting
       ];
@@ -416,6 +416,7 @@
             """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
             " => ALE
             """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+            let g:ale_disable_lsp = 1
             " Only run linters named in ale_linters settings.
             let g:ale_linters_explicit = 1
             " Always apply ALEFix on save
