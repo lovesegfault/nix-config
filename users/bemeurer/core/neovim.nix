@@ -680,4 +680,8 @@
         '';
     };
   };
+
+  xdg.configFile."nvim/coc-settings.json".text = builtins.toJSON {
+    "rust-analyzer.serverPath" = "rust-analyzer";
+  };
 }
