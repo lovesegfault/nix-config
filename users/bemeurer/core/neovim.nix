@@ -24,6 +24,7 @@
         coc-nvim
         coc-json
         coc-rust-analyzer
+        coc-tabnine
 
         # Colorscheme
         ayu-vim
