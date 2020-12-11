@@ -438,11 +438,12 @@
               noremap <leader>f :ALEFix <CR>
               nmap <silent> <C-j> <Plug>(ale_next_wrap)
               let g:ale_linters = {
-                  \ 'c':['cppcheck', 'flawfinder'],
-                  \ 'cpp':['cppcheck', 'flawfinder'],
+                  \ 'c': ['cppcheck', 'flawfinder'],
+                  \ 'cpp': ['cppcheck', 'flawfinder'],
+                  \ 'markdown': ['mdl', 'proselint', 'languagetool'],
                   \ 'python': ['bandit', 'pylama', 'vulture'],
-                  \ 'text':['proselint', 'languagetool'],
-                  \ 'markdown':['mdl', 'proselint', 'languagetool'],
+                  \ 'rust': [],
+                  \ 'text': ['proselint', 'languagetool'],
               \ }
               let g:ale_fixers = {
                   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
