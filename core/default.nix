@@ -8,7 +8,7 @@ in
 {
   imports = [
     (import ../nix).home-manager
-    (import ../nix).impermanence-sys
+    (import ../nix).impermanence-nixos
     (import ../nix).musnix
     ./aspell.nix
     ./nix.nix
