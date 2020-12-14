@@ -35,18 +35,6 @@
         "url": "https://github.com/nix-community/impermanence/archive/4c7871a86a41824b65054e04e201bf8008148814.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "musnix": {
-        "branch": "master",
-        "description": "Real-time audio in NixOS",
-        "homepage": "",
-        "owner": "musnix",
-        "repo": "musnix",
-        "rev": "6c3f31772c639f50f893c25fb4ee75bb0cd92c98",
-        "sha256": "07wwaxcilj2xi0j0a0kra1q65vb3ynddhxk72rvvnr9x144vqzvr",
-        "type": "tarball",
-        "url": "https://github.com/musnix/musnix/archive/6c3f31772c639f50f893c25fb4ee75bb0cd92c98.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "nix-pre-commit-hooks": {
         "branch": "master",
         "description": "Seamless integration of https://pre-commit.com git hooks with Nix.",

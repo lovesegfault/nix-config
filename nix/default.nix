@@ -8,7 +8,6 @@ rec {
   impermanence-home = sources.impermanence + "/home-manager.nix";
   impermanence-nixos = sources.impermanence + "/nixos.nix";
   lib = import (nixpkgs + "/lib");
-  musnix = import sources.musnix;
   nix-pre-commit-hooks = (import (sources.nix-pre-commit-hooks + "/nix") { inherit nixpkgs; }).packages;
   nixus = import sources.nixus { };
 }

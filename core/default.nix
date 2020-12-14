@@ -9,7 +9,6 @@ in
   imports = [
     (import ../nix).home-manager
     (import ../nix).impermanence-nixos
-    (import ../nix).musnix
     ./aspell.nix
     ./nix.nix
     ./openssh.nix

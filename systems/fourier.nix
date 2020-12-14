@@ -94,8 +94,6 @@
     ".newsboat/history.search"
   ];
 
-  musnix.enable = true;
-
   networking = {
     firewall.allowedTCPPorts = [ 3000 9090 9091 ];
     hostName = "fourier";
