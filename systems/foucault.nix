@@ -177,9 +177,4 @@
   swapDevices = [{ device = "/dev/disk/by-uuid/840591d3-ac66-4137-bc39-4d9f9109c19a"; }];
 
   time.timeZone = "America/Los_Angeles";
-
-  virtualisation.docker = {
-    enable = true;
-    storageDriver = "zfs";
-  };
 }
