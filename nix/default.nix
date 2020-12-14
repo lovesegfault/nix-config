@@ -9,4 +9,6 @@ rec {
   impermanence-nixos = sources.impermanence + "/nixos.nix";
   nix-pre-commit-hooks = (import (sources.nix-pre-commit-hooks + "/nix") { }).packages;
   nixus = import sources.nixus { };
+  sops-nixos = import (sources.sops-nix + "/modules/sops");
+  sops-nix = import sources.sops-nix;
 }

@@ -70,5 +70,17 @@
         "type": "tarball",
         "url": "https://github.com/Infinisil/nixus/archive/2127516f68ce6f900b38289985377559e69aab88.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "sops-nix": {
+        "branch": "master",
+        "description": "Atomic secret provisioning for NixOS based on sops",
+        "homepage": "",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "21333cfb81cf2e679be5d10cb08585564384aff8",
+        "sha256": "0s55kjy4smqnn6v97jz6gvqh0vcny5lvqzknn0r9rsrrcwn3zw6p",
+        "type": "tarball",
+        "url": "https://github.com/Mic92/sops-nix/archive/21333cfb81cf2e679be5d10cb08585564384aff8.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
