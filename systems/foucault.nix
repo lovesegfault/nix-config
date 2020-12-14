@@ -159,17 +159,6 @@
   services.logind.lidSwitchExternalPower = "ignore";
 
   networking.networkmanager.enable = lib.mkForce false;
-  services.xserver = {
-    enable = true;
-    desktopManager.gnome3.enable = true;
-    displayManager.gdm = {
-      enable = true;
-      autoSuspend = false;
-      wayland = true;
-    };
-    useGlamor = true;
-    videoDrivers = [ "amdgpu" "modesetting" ];
-  };
 
   services.udev.packages = with pkgs; [ logitech-udev-rules ];
 
