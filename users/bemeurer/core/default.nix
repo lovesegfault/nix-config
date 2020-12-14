@@ -21,5 +21,7 @@
   programs.fzf.enable = true;
   programs.gpg.enable = true;
 
+  systemd.user.startServices = "sd-switch";
+
   xdg.configFile."nixpkgs/config.nix".text = "{ allowUnfree = true; }";
 }
