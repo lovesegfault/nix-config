@@ -8,18 +8,22 @@ keys:
   - &sartre ACD46795FB2EC5499F10DD01624900F51815907C
 
 creation_rules:
-  - path_regex: hardware/nixos-aarch64-builder/nixos-aarch64-builder_key.yaml
+  - path_regex: hardware/nixos-aarch64-builder/nixos-aarch64-builder-key.yaml
     key_groups:
       - pgp:
+        - *bemeurer
+        - *feuerbach
         - *foucault
         - *goethe
         - *riemann
   - path_regex: dev/stcg-gcs/stcg-aws-credentials.yaml
     key_groups:
       - pgp:
-        - *foucault
+        - *bemeurer
         - *feuerbach
+        - *foucault
   - path_regex: systems/sartre/ddclient-sartre.yaml
     key_groups:
       - pgp:
+        - *bemeurer
         - *sartre

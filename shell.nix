@@ -33,6 +33,7 @@ in
 pkgs.mkShell {
   name = "nix-config";
 
+  SOPS_GPG_EXEC = "gpg2";
   sopsPGPKeyDirs = [
     "./keys/systems"
     "./keys/users"
