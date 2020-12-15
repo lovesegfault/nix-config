@@ -42,6 +42,7 @@ pkgs.mkShell {
     cachix
     niv
     nixpkgs-fmt
+    sops
     sops-nix.ssh-to-pgp
 
     deploy
