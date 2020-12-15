@@ -3,7 +3,7 @@ let
 in
 rec {
   inherit (sources) nixpkgs;
-  gitignoreSource = (import sources.gitignore { }).gitignoreSource;
+  gitignoreSource = (import sources.gitignore { lib = nixpkgs + "/lib"; }).gitignoreSource;
   home-manager = import (sources.home-manager + "/nixos");
   impermanence-home = sources.impermanence + "/home-manager.nix";
   impermanence-nixos = sources.impermanence + "/nixos.nix";
