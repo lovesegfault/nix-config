@@ -3,7 +3,7 @@
     ../core
 
     ../dev
-    ../dev/stcg-gcs.nix
+    ../dev/stcg-gcs
 
     ../hardware/stcg-dc.nix
 

@@ -21,16 +21,16 @@ in
       configuration = ./systems/aurelius.nix;
     };
 
-    foucault = { ... }: {
-      host = "localhost";
-      ignoreFailingSystemdUnits = true;
-      configuration = ./systems/foucault.nix;
-    };
-
     feuerbach = { ... }: {
       enabled = false;
       host = "stcg-us-0005-11";
       configuration = ./systems/feuerbach.nix;
+    };
+
+    foucault = { ... }: {
+      host = "localhost";
+      ignoreFailingSystemdUnits = true;
+      configuration = ./systems/foucault.nix;
     };
 
     fourier = { ... }: {
@@ -50,7 +50,7 @@ in
 
     sartre = { ... }: {
       host = "sartre.meurer.org";
-      configuration = ./systems/sartre.nix;
+      configuration = ./systems/sartre;
     };
   };
 })

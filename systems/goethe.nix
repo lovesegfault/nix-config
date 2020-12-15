@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../core
@@ -23,9 +23,6 @@
     automatic = true;
     options = "-d";
   };
-
-  secrets.files.ddclient-goethe = pkgs.mkSecret { file = ../secrets/ddclient-goethe.conf; };
-  services.ddclient.configFile = config.files.secrets.ddclient-goethe.file;
 
   services.dhcpd4 = {
     enable = true;

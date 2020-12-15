@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{
   nix = {
     binaryCaches = [ "s3://sc-nix-store?endpoint=storage.googleapis.com&scheme=https" ];
     binaryCachePublicKeys = [
@@ -7,6 +7,8 @@
     ];
   };
 
-  secrets.files.stcg-aws-credentials = pkgs.mkSecret { file = ../secrets/stcg-aws-credentials; };
-  home-manager.users.root.home.file.".aws/credentials".source = config.secrets.files.stcg-aws-credentials.file;
+  sops.secrets.stcg-aws-credentials = {
+    sopsFile = ./stcg-aws-credentials.yml;
+    path = "/root/.aws/credentials";
+  };
 }

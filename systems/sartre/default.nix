@@ -1,11 +1,11 @@
 { config, pkgs, ... }: {
   imports = [
-    ../core
-    ../core/unbound.nix
+    ../../core
+    ../../core/unbound.nix
 
-    ../hardware/gce.nix
+    ../../hardware/gce.nix
 
-    ../users/bemeurer
+    ../../users/bemeurer
   ];
 
   networking = {
@@ -18,8 +18,8 @@
     options = "-d";
   };
 
-  secrets.files.ddclient-sartre = pkgs.mkSecret { file = ../secrets/ddclient-sartre.conf; };
-  services.ddclient.configFile = config.secrets.files.ddclient-sartre.file;
+  sops.secrets.ddclient-sartre.sopsFile = ./ddclient-sartre.yml;
+  services.ddclient.configFile = config.sops.secrets.ddclient-sartre.path;
 
   time.timeZone = "America/Los_Angeles";
 

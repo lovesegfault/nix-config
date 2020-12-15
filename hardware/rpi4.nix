@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    ./nixos-aarch64-builder.nix
+    ./nixos-aarch64-builder
   ];
 
   boot = {

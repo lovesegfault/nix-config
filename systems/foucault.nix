@@ -4,12 +4,12 @@
     ../core/unbound.nix
 
     ../dev
-    ../dev/stcg-gcs.nix
+    ../dev/stcg-gcs
     ../dev/stcg-cameras.nix
     ../dev/qemu.nix
     ../dev/virt-manager.nix
 
-    ../hardware/nixos-aarch64-builder.nix
+    ../hardware/nixos-aarch64-builder
     ../hardware/thinkpad-p1.nix
     ../hardware/yubikey.nix
     ../hardware/zfs.nix

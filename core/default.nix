@@ -50,7 +50,6 @@ in
       (import ../overlays/klipper.nix)
       (import ../overlays/mbk.nix)
       (import ../overlays/menu)
-      (import ../overlays/mkSecret.nix)
       (import ../overlays/mosh.nix)
       (import ../overlays/plater.nix)
       (import ../overlays/prusa-slicer.nix)
