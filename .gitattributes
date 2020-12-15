@@ -1,1 +1,1 @@
-*.yml diff=sopsdiffer
+*.yaml diff=sopsdiffer
