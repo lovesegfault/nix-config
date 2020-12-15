@@ -21,7 +21,7 @@ For the configurations' entry points see the individual [systems], as well as
 ├── hostnames    # List of hostnames to use
 ├── nix          # Nix sources managed with niv
 ├── overlays     # Nixpkgs overlays
-├── secrets      # Secrets (API keys, etc)
+├── keys         # PGP keys for SOPS
 ├── sway         # Sway configuration for the desktop
 ├── systems      # Machine (host) definitions
 └── users        # Per-user configurations
