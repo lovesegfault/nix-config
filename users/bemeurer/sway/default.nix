@@ -20,6 +20,7 @@
       slurp
       speedcrunch
       wl-clipboard
+      xdg_utils
     ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
       discord
       gimp
