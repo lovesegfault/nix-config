@@ -8,7 +8,7 @@
   };
 
   sops.secrets.stcg-aws-credentials = {
-    sopsFile = ./stcg-aws-credentials.yml;
+    sopsFile = ./stcg-aws-credentials.yaml;
     path = "/root/.aws/credentials";
   };
 }

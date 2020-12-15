@@ -18,7 +18,7 @@
     options = "-d";
   };
 
-  sops.secrets.ddclient-sartre.sopsFile = ./ddclient-sartre.yml;
+  sops.secrets.ddclient-sartre.sopsFile = ./ddclient-sartre.yaml;
   services.ddclient.configFile = config.sops.secrets.ddclient-sartre.path;
 
   time.timeZone = "America/Los_Angeles";
