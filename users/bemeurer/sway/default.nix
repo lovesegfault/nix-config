@@ -65,7 +65,7 @@
     size = 24;
   };
 
-  # NB: UGH why do these have a different syntax the the system
+  # FIXME: UGH why do these have a different syntax the the system
   # systemd.user.services?!
   systemd.user.services = {
     mako = {
@@ -154,6 +154,7 @@
       };
       Service = {
         Type = "simple";
+        Environment = "WAYLAND_DEBUG=1";
         ExecStart = ''
           ${pkgs.swayidle}/bin/swayidle -w \
             timeout 300 '${pkgs.swaylock}/bin/swaylock' \

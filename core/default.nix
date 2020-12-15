@@ -54,7 +54,6 @@ in
       (import ../overlays/plater.nix)
       (import ../overlays/prusa-slicer.nix)
       (import ../overlays/roon-server.nix)
-      (import ../overlays/spawn.nix)
       (import ../overlays/stcg-build.nix)
       (import ../overlays/weechat.nix)
     ];

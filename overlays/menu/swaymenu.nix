@@ -138,7 +138,7 @@ pkgs.writeScriptBin "swaymenu" ''
     # the empty stdin is needed in case no *.desktop files
   }
   function run-desktop() {
-    ${pkgs.spawn}/bin/spawn "$("$0" generate-command "$@")"
+    bash -c "$("$0" generate-command "$@")"
   }
   function generate-command() {
     # Define the search pattern that specifies the block to search for within the .desktop file
