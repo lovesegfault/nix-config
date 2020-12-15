@@ -27,28 +27,28 @@ in
     };
 
     foucault = { ... }: {
-      host = "localhost";
+      host = "foucault";
       ignoreFailingSystemdUnits = true;
       configuration = ./systems/foucault.nix;
     };
 
     fourier = { ... }: {
-      host = "10.0.0.3";
+      host = "fourier";
       configuration = ./systems/fourier.nix;
     };
 
     goethe = { ... }: {
-      host = "10.0.0.4";
+      host = "goethe";
       configuration = ./systems/goethe.nix;
     };
 
     riemann = { ... }: {
-      host = "10.0.0.12";
+      host = "riemann";
       configuration = ./systems/riemann.nix;
     };
 
     sartre = { ... }: {
-      host = "sartre.meurer.org";
+      host = "sartre";
       configuration = ./systems/sartre;
     };
   };
