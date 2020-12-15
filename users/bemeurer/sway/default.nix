@@ -52,8 +52,7 @@
   programs.zsh.profileExtra = ''
     # If running from tty1 start sway
     if [ "$(tty)" = "/dev/tty1" ]; then
-        systemctl --user import-environment
-        exec sway -d >& /tmp/sway.log
+        exec sway
     fi
   '';
 
