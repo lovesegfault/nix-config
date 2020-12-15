@@ -56,6 +56,17 @@ in
       (import ../overlays/roon-server.nix)
       (import ../overlays/stcg-build.nix)
       (import ../overlays/weechat.nix)
+      (self: super: {
+        systemd = super.systemd.overrideAttrs (_: rec {
+          version = "247.1";
+          src = self.fetchFromGitHub {
+            owner = "systemd";
+            repo = "systemd-stable";
+            rev = "v${version}";
+            sha256 = "0nj362m2zwvszmpywirym0jbkhz07m71hpqj4fw1zzlq4zi23c6n";
+          };
+        });
+      })
     ];
   };
 
