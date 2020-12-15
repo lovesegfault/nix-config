@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "4c7871a86a41824b65054e04e201bf8008148814",
-        "sha256": "0cspyn63s4wanbk19s78s6ykm5whjjymk0j1kg0y3gn9snb6jkmx",
+        "rev": "2cda5cd30bc7c56240a1a91ec8d44c6d5222ee17",
+        "sha256": "0vwvc14qzwf65alsgmfx0bc2rkwzc2imzmq8imp1yzjqv4ay3d0r",
         "type": "tarball",
-        "url": "https://github.com/nix-community/impermanence/archive/4c7871a86a41824b65054e04e201bf8008148814.tar.gz",
+        "url": "https://github.com/nix-community/impermanence/archive/2cda5cd30bc7c56240a1a91ec8d44c6d5222ee17.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-pre-commit-hooks": {
