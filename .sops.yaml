@@ -1,0 +1,24 @@
+keys:
+  - &feuerbach AD5F47941C5378175E46D11A2BB43FA44085673C
+  - &foucault 5C8B2ACA031733D4C59A8AF19DE06FED73F48056
+  - &fourier A4EABC2BEEE48CFF55287E855FABEC432FE0176B
+  - &goethe 3B157FCDEF12BDE6994DA95CA4C02ABF06E9D7E2
+  - &riemann 41D56E398857FB3FDF920A2ED3D48D2FCB75EDC3
+  - &sartre ACD46795FB2EC5499F10DD01624900F51815907C
+
+creation_rules:
+  - path_regex: hardware/nixos-aarch64-builder/nixos-aarch64-builder_key.yml
+    key_groups:
+      - pgp:
+        - *foucault
+        - *goethe
+        - *riemann
+  - path_regex: dev/stcg-gcs/stcg-aws-credentials.yml
+    key_groups:
+      - pgp:
+        - *foucault
+        - *feuerbach
+  - path_regex: systems/sartre/ddclient-sartre.yml
+    key_groups:
+      - pgp:
+        - *sartre
