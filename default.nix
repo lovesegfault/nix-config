@@ -33,7 +33,7 @@ in
     };
 
     fourier = { ... }: {
-      host = "fourier";
+      host = "10.0.0.3";
       configuration = ./systems/fourier.nix;
     };
 

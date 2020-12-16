@@ -1,15 +1,11 @@
 { lib, ... }: {
   networking.networkmanager.dns = "unbound";
-  networking.search = [ "meurer.org.beta.tailscale.net" ];
-  networking.resolvconf.extraConfig = ''
-    search_domains='meurer.org.beta.tailscale.net'
-  '';
 
   services.resolved.enable = lib.mkForce false;
   services.unbound = {
     enable = true;
-    enableRootTrustAnchor = false;
-    forwardAddresses = [ "100.100.100.100" ];
+    enableRootTrustAnchor = true;
+    forwardAddresses = [ "1.1.1.1" "2606:4700:4700::1111" "8.8.8.8" "2001:4860:4860::8844" ];
     extraConfig = ''
       # This is part of the server clause
       infra-cache-slabs: 16

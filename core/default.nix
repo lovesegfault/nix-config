@@ -11,6 +11,7 @@ in
     (import ../nix).impermanence-nixos
     (import ../nix).sops-nixos
     ./aspell.nix
+    ./magicdns.nix
     ./nix.nix
     ./openssh.nix
     ./sudo.nix
