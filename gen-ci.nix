@@ -52,7 +52,7 @@ let
   mkHostJob = host: mkGenericJob [{
     name = "Build";
     run = ''
-      nix run nixpkgs#nix-build-uncached \
+      nix run nixpkgs#nix-build-uncached -- \
         -E "(builtins.getFlake (toString ./.)).deploy.nodes.${host}.profiles.system.path"
     '';
   }];
