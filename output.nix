@@ -8,7 +8,7 @@
 , ...
 }@inputs:
 let
-  inherit (builtins) attrNames attrValues elemAt listToAttrs mapAttrs readDir;
+  inherit (builtins) attrNames mapAttrs readDir;
 
   overlays = map (f: import (./overlays + "/${f}")) (attrNames (readDir ./overlays));
 
@@ -26,39 +26,43 @@ let
       specialArgs.inputs = inputs;
     };
 
-  genHosts = hosts:
-    listToAttrs
-      (map
-        (p: {
-          name = elemAt p 0;
-          value = mkHost (elemAt p 0) (elemAt p 1);
-        })
-        hosts
-      );
+  mkPath = name: system: deploy-rs.lib.x86_64-linux.activate.nixos (mkHost name system);
 in
 {
-  nixosConfigurations = genHosts [
-    # [ "aurelius" "aarch64-linux" ]
-    [ "feuerbach" "x86_64-linux" ]
-    [ "foucault" "x86_64-linux" ]
-    [ "fourier" "x86_64-linux" ]
-    [ "goethe" "aarch64-linux" ]
-    [ "riemann" "aarch64-linux" ]
-    [ "sartre" "x86_64-linux" ]
-  ];
-
   deploy = {
     autoRollback = true;
     magicRollback = true;
-    nodes = mapAttrs
-      (_: nixosConfig: {
-        hostname = nixosConfig.config.networking.hostName;
-        profiles.system = {
-          user = "root";
-          path = deploy-rs.lib.x86_64-linux.activate.nixos nixosConfig;
-        };
-      })
-      self.nixosConfigurations;
+    user = "root";
+    nodes = {
+      # aurelius = {
+      #   hostname = "aurelius";
+      #   profiles.system.path = mkPath "aurelius" "aarch64-linux";
+      # };
+      feuerbach = {
+        hostname = "stcg-us-0005-11";
+        profiles.system.path = mkPath "feuerbach" "x86_64-linux";
+      };
+      foucault = {
+        hostname = "foucault";
+        profiles.system.path = mkPath "foucault" "x86_64-linux";
+      };
+      fourier = {
+        hostname = "fourier";
+        profiles.system.path = mkPath "fourier" "x86_64-linux";
+      };
+      goethe = {
+        hostname = "goethe";
+        profiles.system.path = mkPath "goethe" "aarch64-linux";
+      };
+      riemann = {
+        hostname = "riemann";
+        profiles.system.path = mkPath "riemann" "aarch64-linux";
+      };
+      sartre = {
+        hostname = "sartre";
+        profiles.system.path = mkPath "sartre" "x86_64-linux";
+      };
+    };
   };
 
   checks = mapAttrs (_: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
