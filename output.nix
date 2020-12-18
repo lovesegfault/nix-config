@@ -38,10 +38,10 @@ in
       #   hostname = "aurelius";
       #   profiles.system.path = mkPath "aurelius" "aarch64-linux";
       # };
-      feuerbach = {
-        hostname = "stcg-us-0005-11";
-        profiles.system.path = mkPath "feuerbach" "x86_64-linux";
-      };
+      # feuerbach = {
+      #   hostname = "stcg-us-0005-11";
+      #   profiles.system.path = mkPath "feuerbach" "x86_64-linux";
+      # };
       foucault = {
         hostname = "foucault";
         profiles.system.path = mkPath "foucault" "x86_64-linux";
