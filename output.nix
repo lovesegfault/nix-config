@@ -26,7 +26,7 @@ let
       specialArgs.inputs = inputs;
     };
 
-  mkPath = name: system: deploy-rs.lib.x86_64-linux.activate.nixos (mkHost name system);
+  mkPath = name: system: deploy-rs.lib.${system}.activate.nixos (mkHost name system);
 in
 {
   deploy = {
