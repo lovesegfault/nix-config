@@ -24,7 +24,7 @@ jobs:
       - uses: peter-evans/create-pull-request@v3
         id: cpr
         with:
-          commit-message: flake: update
+          commit-message: "flake: update"
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
