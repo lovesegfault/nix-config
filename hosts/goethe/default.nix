@@ -1,12 +1,12 @@
 { pkgs, ... }:
 {
   imports = [
-    ../core
-    ../core/resolved.nix
+    ../../core
+    ../../core/resolved.nix
 
-    ../hardware/rpi4.nix
+    ../../hardware/rpi4.nix
 
-    ../users/bemeurer
+    ../../users/bemeurer
   ];
 
   console = {

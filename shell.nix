@@ -1,60 +1,35 @@
-let
-  pkgs = import (import ./nix).nixpkgs {
-    overlays = [ (pkgs: _: { sops-nix = pkgs.callPackage (import ./nix).sops-nix { inherit pkgs; }; }) ];
-  };
-  deploy = pkgs.writeScriptBin "deploy" ''
-    #!${pkgs.stdenv.shell}
-    set -o pipefail
-    set -o xtrace
-    set -o errexit
+{ mkShell
+, cachix
+, nix-build-uncached
+, nix-linter
+, nixpkgs-fmt
+, sops
 
-    trap "exit" INT TERM
-    trap "kill 0" EXIT
-
-    function deploy() {
-      if [ $# -gt 0 ]; then
-        nix-build --no-out-link -A "$1" | ${pkgs.stdenv.shell}
-      else
-        echo "Please specify a system"
-      fi
-    }
-
-    deploy "$@"
-    exit
-  '';
-  genci = pkgs.writeScriptBin "genci" ''
-    #!${pkgs.stdenv.shell}
-    set -o pipefail
-    set -o xtrace
-
-    nix-build --no-out-link ci.nix | ${pkgs.stdenv.shell}
-  '';
-in
-pkgs.mkShell {
+, gen-ci
+, ssh-to-pgp
+, sops-pgp-hook
+, deploy-rs
+}: mkShell {
   name = "nix-config";
+  buildInputs = [
+    cachix
+    nix-build-uncached
+    nix-linter
+    nixpkgs-fmt
+    sops
 
-  SOPS_GPG_EXEC = "gpg2";
+    gen-ci
+    deploy-rs
+    ssh-to-pgp
+  ];
+
   sopsPGPKeyDirs = [
-    "./keys/systems"
+    "./keys/hosts"
     "./keys/users"
   ];
 
-  buildInputs = with pkgs; [
-    cachix
-    niv
-    nixpkgs-fmt
-    sops
-    sops-nix.ssh-to-pgp
-
-    deploy
-    genci
-  ];
-
   shellHook = ''
-    # FIXME: There must be a less stupid way of doing this
-    source ${pkgs.sops-nix.sops-pgp-hook}/nix-support/setup-hook
+    source ${sops-pgp-hook}/nix-support/setup-hook
     sopsPGPHook
-
-    ${(import ./.).preCommitChecks.shellHook}
   '';
 }

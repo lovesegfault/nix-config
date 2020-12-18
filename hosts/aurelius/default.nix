@@ -1,16 +1,16 @@
 { lib, pkgs, ... }:
 {
   imports = [
-    ../core
-    ../core/resolved.nix
+    ../../core
+    ../../core/resolved.nix
 
-    ../hardware/rpi4.nix
-    ../hardware/sound.nix
-    ../hardware/bluetooth.nix
+    ../../hardware/rpi4.nix
+    ../../hardware/sound.nix
+    ../../hardware/bluetooth.nix
 
-    ../sway
+    ../../sway
 
-    ../users/bemeurer
+    ../../users/bemeurer
   ];
 
   boot = {

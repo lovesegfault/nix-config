@@ -1,13 +1,13 @@
 { lib, pkgs, ... }:
 {
   imports = [
-    ../core
-    ../core/resolved.nix
+    ../../core
+    ../../core/resolved.nix
 
-    ../hardware/rpi4.nix
-    ../hardware/no-mitigations.nix
+    ../../hardware/rpi4.nix
+    ../../hardware/no-mitigations.nix
 
-    ../users/bemeurer
+    ../../users/bemeurer
   ];
 
   boot.loader = {

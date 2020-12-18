@@ -1,14 +1,14 @@
 { pkgs, ... }: {
   imports = [
-    ../core
+    ../../core
 
-    ../dev
-    ../dev/stcg-gcs
+    ../../dev
+    ../../dev/stcg-gcs
 
-    ../hardware/nixos-aarch64-builder
-    ../hardware/stcg-dc.nix
+    ../../hardware/nixos-aarch64-builder
+    ../../hardware/stcg-dc.nix
 
-    ../users/bemeurer
+    ../../users/bemeurer
   ];
 
   environment.systemPackages = with pkgs; [ plater ];

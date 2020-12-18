@@ -1,24 +1,24 @@
 { lib, pkgs, ... }: {
   imports = [
-    ../core
-    ../core/resolved.nix
+    ../../core
+    ../../core/resolved.nix
 
-    ../dev
-    ../dev/stcg-gcs
-    ../dev/stcg-cameras.nix
-    ../dev/qemu.nix
-    ../dev/virt-manager.nix
+    ../../dev
+    ../../dev/stcg-gcs
+    ../../dev/stcg-cameras.nix
+    ../../dev/qemu.nix
+    ../../dev/virt-manager.nix
 
-    ../hardware/nixos-aarch64-builder
-    ../hardware/thinkpad-p1.nix
-    ../hardware/yubikey.nix
-    ../hardware/zfs.nix
+    ../../hardware/nixos-aarch64-builder
+    ../../hardware/thinkpad-p1.nix
+    ../../hardware/yubikey.nix
+    ../../hardware/zfs.nix
 
-    ../sway
-    ../sway/printing.nix
-    ../sway/trusted.nix
+    ../../sway
+    ../../sway/printing.nix
+    ../../sway/trusted.nix
 
-    ../users/bemeurer
+    ../../users/bemeurer
   ];
 
   boot = {
@@ -122,8 +122,8 @@
 
   home-manager.users.bemeurer = { ... }: {
     imports = [
-      ../users/bemeurer/music
-      ../users/bemeurer/trusted
+      ../../users/bemeurer/music
+      ../../users/bemeurer/trusted
     ];
     home.persistence."/state/home/bemeurer".files = [
       ".arcrc"

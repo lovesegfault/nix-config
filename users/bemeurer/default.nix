@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 with lib;
 {
   users.users.bemeurer = {
@@ -23,7 +23,7 @@ with lib;
 
   home-manager.users.bemeurer = { ... }: {
     imports = [
-      (import ../../nix).impermanence-home
+      "${inputs.impermanence}/home-manager.nix"
       ./core
       ./dev
     ] ++ optionals config.programs.sway.enable [ ./sway ];

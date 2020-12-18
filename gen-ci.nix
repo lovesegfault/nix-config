@@ -1,8 +1,11 @@
-let
-  sources = import ./nix;
-  pkgs = import sources.nixpkgs { };
-  lib = pkgs.lib;
+{ lib
+, writeText
+, writeScriptBin
+, jq
 
+, hosts
+}:
+let
   mkGenericJob = extraSteps: {
     runs-on = "ubuntu-latest";
     steps = [
@@ -46,17 +49,21 @@ let
     ] ++ extraSteps;
   };
 
-  mkSystemJob = attrToBuild: mkGenericJob [{
+  mkHostJob = host: mkGenericJob [{
     name = "Build";
-    run = "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A ${attrToBuild}";
+    run = ''
+      nix run nixpkgs#nix-build-uncached \
+        -E "(builtins.getFlake (toString ./.)).deploy.nodes.${host}.profiles.system.path"
+    '';
   }];
 
-  systems = lib.attrNames (import ./default.nix).config.nodes;
-
   ci = {
-    on = [ "pull_request" "push" ];
+    on = {
+      push.branches = [ "master" ];
+      pull_request.branches = [ "**" ];
+    };
     name = "CI";
-    jobs = (lib.genAttrs systems mkSystemJob) // {
+    jobs = (lib.genAttrs hosts mkHostJob) // {
       preCommitChecks = mkGenericJob [{
         name = "pre-commit checks";
         run = "nix-build -A preCommitChecks";
@@ -71,8 +78,8 @@ let
       }];
     };
   };
-  generated = pkgs.writeText "ci.yml" (builtins.toJSON ci);
+  generated = writeText "ci.yml" (builtins.toJSON ci);
 in
-pkgs.writeShellScript "gen_ci" ''
-  cat ${generated} | ${pkgs.jq}/bin/jq > ./.github/workflows/ci.yml
+writeScriptBin "gen-ci" ''
+  cat ${generated} | ${jq}/bin/jq > ./.github/workflows/ci.yml
 ''

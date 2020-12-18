@@ -7,9 +7,6 @@ let
 in
 {
   imports = [
-    (import ../nix).home-manager
-    (import ../nix).impermanence-nixos
-    (import ../nix).sops-nixos
     ./aspell.nix
     ./magicdns.nix
     ./nix.nix
@@ -43,22 +40,7 @@ in
     "nixpkgs-overlays=/run/current-system/overlays"
   ];
 
-  nixpkgs = {
-    config.allowUnfree = true;
-    overlays = [
-      (import ../overlays/bimp.nix)
-      (import ../overlays/hyperpixel.nix)
-      (import ../overlays/klipper.nix)
-      (import ../overlays/mbk.nix)
-      (import ../overlays/menu)
-      (import ../overlays/mosh.nix)
-      (import ../overlays/plater.nix)
-      (import ../overlays/prusa-slicer.nix)
-      (import ../overlays/roon-server.nix)
-      (import ../overlays/stcg-build.nix)
-      (import ../overlays/weechat.nix)
-    ];
-  };
+  nixpkgs.config.allowUnfree = true;
 
   services.tailscale.enable = true;
 

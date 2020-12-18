@@ -1,16 +1,16 @@
 { lib, pkgs, ... }: {
   imports = [
-    ../core
-    ../core/resolved.nix
+    ../../core
+    ../../core/resolved.nix
 
-    ../dev
+    ../../dev
 
-    ../hardware/efi.nix
-    ../hardware/nouveau.nix
-    ../hardware/sound.nix
-    ../hardware/zfs.nix
+    ../../hardware/efi.nix
+    ../../hardware/nouveau.nix
+    ../../hardware/sound.nix
+    ../../hardware/zfs.nix
 
-    ../users/bemeurer
+    ../../users/bemeurer
   ];
 
   boot = {

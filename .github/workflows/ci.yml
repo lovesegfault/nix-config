@@ -1,31 +1,5 @@
 {
   "jobs": {
-    "aurelius": {
-      "runs-on": "ubuntu-latest",
-      "steps": [
-        {
-          "uses": "actions/checkout@v2"
-        },
-        {
-          "uses": "cachix/install-nix-action@v12"
-        },
-        {
-          "name": "AArch64",
-          "run": "# first create the ssh config dir for root\nsudo mkdir -p /root/.ssh\n\n# now add the key for the builder\necho \"${{ secrets.AARCH64_BOX_KEY }}\" |\n    sudo tee /root/.ssh/aarch64.community.nixos > /dev/null\nsudo chmod 0600 /root/.ssh/aarch64.community.nixos\n\n# and make it a known host\necho \"${{ secrets.KNOWN_HOSTS }}\" |\n    sudo tee -a /root/.ssh/known_hosts > /dev/null\n\n# lastly register the builder with nix\nbuilder_cfg=(\n  lovesegfault@aarch64.nixos.community # user/addr\n  aarch64-linux                        # arch\n  /root/.ssh/aarch64.community.nixos   # key\n  64                                   # maxJobs\n  1                                    # speed factor\n  big-parallel                         # features\n)\necho \"${builder_cfg[*]}\" |\n    sudo tee /etc/nix/machines > /dev/null\n"
-        },
-        {
-          "uses": "cachix/cachix-action@v7",
-          "with": {
-            "name": "nix-config",
-            "signingKey": "'${{ secrets.CACHIX_SIGNING_KEY }}'"
-          }
-        },
-        {
-          "name": "Build",
-          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A aurelius"
-        }
-      ]
-    },
     "checkCI": {
       "runs-on": "ubuntu-latest",
       "steps": [
@@ -52,32 +26,6 @@
         }
       ]
     },
-    "feuerbach": {
-      "runs-on": "ubuntu-latest",
-      "steps": [
-        {
-          "uses": "actions/checkout@v2"
-        },
-        {
-          "uses": "cachix/install-nix-action@v12"
-        },
-        {
-          "name": "AArch64",
-          "run": "# first create the ssh config dir for root\nsudo mkdir -p /root/.ssh\n\n# now add the key for the builder\necho \"${{ secrets.AARCH64_BOX_KEY }}\" |\n    sudo tee /root/.ssh/aarch64.community.nixos > /dev/null\nsudo chmod 0600 /root/.ssh/aarch64.community.nixos\n\n# and make it a known host\necho \"${{ secrets.KNOWN_HOSTS }}\" |\n    sudo tee -a /root/.ssh/known_hosts > /dev/null\n\n# lastly register the builder with nix\nbuilder_cfg=(\n  lovesegfault@aarch64.nixos.community # user/addr\n  aarch64-linux                        # arch\n  /root/.ssh/aarch64.community.nixos   # key\n  64                                   # maxJobs\n  1                                    # speed factor\n  big-parallel                         # features\n)\necho \"${builder_cfg[*]}\" |\n    sudo tee /etc/nix/machines > /dev/null\n"
-        },
-        {
-          "uses": "cachix/cachix-action@v7",
-          "with": {
-            "name": "nix-config",
-            "signingKey": "'${{ secrets.CACHIX_SIGNING_KEY }}'"
-          }
-        },
-        {
-          "name": "Build",
-          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A feuerbach"
-        }
-      ]
-    },
     "foucault": {
       "runs-on": "ubuntu-latest",
       "steps": [
@@ -100,59 +48,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A foucault"
-        }
-      ]
-    },
-    "fourier": {
-      "runs-on": "ubuntu-latest",
-      "steps": [
-        {
-          "uses": "actions/checkout@v2"
-        },
-        {
-          "uses": "cachix/install-nix-action@v12"
-        },
-        {
-          "name": "AArch64",
-          "run": "# first create the ssh config dir for root\nsudo mkdir -p /root/.ssh\n\n# now add the key for the builder\necho \"${{ secrets.AARCH64_BOX_KEY }}\" |\n    sudo tee /root/.ssh/aarch64.community.nixos > /dev/null\nsudo chmod 0600 /root/.ssh/aarch64.community.nixos\n\n# and make it a known host\necho \"${{ secrets.KNOWN_HOSTS }}\" |\n    sudo tee -a /root/.ssh/known_hosts > /dev/null\n\n# lastly register the builder with nix\nbuilder_cfg=(\n  lovesegfault@aarch64.nixos.community # user/addr\n  aarch64-linux                        # arch\n  /root/.ssh/aarch64.community.nixos   # key\n  64                                   # maxJobs\n  1                                    # speed factor\n  big-parallel                         # features\n)\necho \"${builder_cfg[*]}\" |\n    sudo tee /etc/nix/machines > /dev/null\n"
-        },
-        {
-          "uses": "cachix/cachix-action@v7",
-          "with": {
-            "name": "nix-config",
-            "signingKey": "'${{ secrets.CACHIX_SIGNING_KEY }}'"
-          }
-        },
-        {
-          "name": "Build",
-          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A fourier"
-        }
-      ]
-    },
-    "goethe": {
-      "runs-on": "ubuntu-latest",
-      "steps": [
-        {
-          "uses": "actions/checkout@v2"
-        },
-        {
-          "uses": "cachix/install-nix-action@v12"
-        },
-        {
-          "name": "AArch64",
-          "run": "# first create the ssh config dir for root\nsudo mkdir -p /root/.ssh\n\n# now add the key for the builder\necho \"${{ secrets.AARCH64_BOX_KEY }}\" |\n    sudo tee /root/.ssh/aarch64.community.nixos > /dev/null\nsudo chmod 0600 /root/.ssh/aarch64.community.nixos\n\n# and make it a known host\necho \"${{ secrets.KNOWN_HOSTS }}\" |\n    sudo tee -a /root/.ssh/known_hosts > /dev/null\n\n# lastly register the builder with nix\nbuilder_cfg=(\n  lovesegfault@aarch64.nixos.community # user/addr\n  aarch64-linux                        # arch\n  /root/.ssh/aarch64.community.nixos   # key\n  64                                   # maxJobs\n  1                                    # speed factor\n  big-parallel                         # features\n)\necho \"${builder_cfg[*]}\" |\n    sudo tee /etc/nix/machines > /dev/null\n"
-        },
-        {
-          "uses": "cachix/cachix-action@v7",
-          "with": {
-            "name": "nix-config",
-            "signingKey": "'${{ secrets.CACHIX_SIGNING_KEY }}'"
-          }
-        },
-        {
-          "name": "Build",
-          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A goethe"
+          "run": "nix run nixpkgs#nix-build-uncached \\\n  -E \"(builtins.getFlake (toString ./.)).deploy.nodes.foucault.profiles.system.path\"\n"
         }
       ]
     },
@@ -181,63 +77,19 @@
           "run": "nix-build -A preCommitChecks"
         }
       ]
-    },
-    "riemann": {
-      "runs-on": "ubuntu-latest",
-      "steps": [
-        {
-          "uses": "actions/checkout@v2"
-        },
-        {
-          "uses": "cachix/install-nix-action@v12"
-        },
-        {
-          "name": "AArch64",
-          "run": "# first create the ssh config dir for root\nsudo mkdir -p /root/.ssh\n\n# now add the key for the builder\necho \"${{ secrets.AARCH64_BOX_KEY }}\" |\n    sudo tee /root/.ssh/aarch64.community.nixos > /dev/null\nsudo chmod 0600 /root/.ssh/aarch64.community.nixos\n\n# and make it a known host\necho \"${{ secrets.KNOWN_HOSTS }}\" |\n    sudo tee -a /root/.ssh/known_hosts > /dev/null\n\n# lastly register the builder with nix\nbuilder_cfg=(\n  lovesegfault@aarch64.nixos.community # user/addr\n  aarch64-linux                        # arch\n  /root/.ssh/aarch64.community.nixos   # key\n  64                                   # maxJobs\n  1                                    # speed factor\n  big-parallel                         # features\n)\necho \"${builder_cfg[*]}\" |\n    sudo tee /etc/nix/machines > /dev/null\n"
-        },
-        {
-          "uses": "cachix/cachix-action@v7",
-          "with": {
-            "name": "nix-config",
-            "signingKey": "'${{ secrets.CACHIX_SIGNING_KEY }}'"
-          }
-        },
-        {
-          "name": "Build",
-          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A riemann"
-        }
-      ]
-    },
-    "sartre": {
-      "runs-on": "ubuntu-latest",
-      "steps": [
-        {
-          "uses": "actions/checkout@v2"
-        },
-        {
-          "uses": "cachix/install-nix-action@v12"
-        },
-        {
-          "name": "AArch64",
-          "run": "# first create the ssh config dir for root\nsudo mkdir -p /root/.ssh\n\n# now add the key for the builder\necho \"${{ secrets.AARCH64_BOX_KEY }}\" |\n    sudo tee /root/.ssh/aarch64.community.nixos > /dev/null\nsudo chmod 0600 /root/.ssh/aarch64.community.nixos\n\n# and make it a known host\necho \"${{ secrets.KNOWN_HOSTS }}\" |\n    sudo tee -a /root/.ssh/known_hosts > /dev/null\n\n# lastly register the builder with nix\nbuilder_cfg=(\n  lovesegfault@aarch64.nixos.community # user/addr\n  aarch64-linux                        # arch\n  /root/.ssh/aarch64.community.nixos   # key\n  64                                   # maxJobs\n  1                                    # speed factor\n  big-parallel                         # features\n)\necho \"${builder_cfg[*]}\" |\n    sudo tee /etc/nix/machines > /dev/null\n"
-        },
-        {
-          "uses": "cachix/cachix-action@v7",
-          "with": {
-            "name": "nix-config",
-            "signingKey": "'${{ secrets.CACHIX_SIGNING_KEY }}'"
-          }
-        },
-        {
-          "name": "Build",
-          "run": "nix run '(import (import ./nix).nixpkgs { }).nix-build-uncached' -c nix-build-uncached -A sartre"
-        }
-      ]
     }
   },
   "name": "CI",
-  "on": [
-    "pull_request",
-    "push"
-  ]
+  "on": {
+    "pull_request": {
+      "branches": [
+        "**"
+      ]
+    },
+    "push": {
+      "branches": [
+        "master"
+      ]
+    }
+  }
 }
