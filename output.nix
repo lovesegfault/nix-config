@@ -59,7 +59,7 @@ in
         profiles.system.path = mkPath "riemann" "aarch64-linux";
       };
       sartre = {
-        hostname = "sartre";
+        hostname = "sartre.meurer.org";
         profiles.system.path = mkPath "sartre" "x86_64-linux";
       };
     };
