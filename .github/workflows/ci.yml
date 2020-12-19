@@ -48,7 +48,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run nixpkgs#nix-build-uncached -- -E \"(builtins.getFlake (toString ./.)).deploy.nodes.foucault.profiles.system.path\""
+          "run": "nix run nixpkgs.nix-build-uncached -c \\\n  nix-build-uncached -E \\\n  \"(builtins.getFlake (toString ./.)).deploy.nodes.foucault.profiles.system.path\"\n"
         }
       ]
     },
@@ -74,7 +74,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run nixpkgs#nix-build-uncached -- -E \"(builtins.getFlake (toString ./.)).deploy.nodes.fourier.profiles.system.path\""
+          "run": "nix run nixpkgs.nix-build-uncached -c \\\n  nix-build-uncached -E \\\n  \"(builtins.getFlake (toString ./.)).deploy.nodes.fourier.profiles.system.path\"\n"
         }
       ]
     },
@@ -100,7 +100,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run nixpkgs#nix-build-uncached -- -E \"(builtins.getFlake (toString ./.)).deploy.nodes.goethe.profiles.system.path\""
+          "run": "nix run nixpkgs.nix-build-uncached -c \\\n  nix-build-uncached -E \\\n  \"(builtins.getFlake (toString ./.)).deploy.nodes.goethe.profiles.system.path\"\n"
         }
       ]
     },
@@ -152,7 +152,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run nixpkgs#nix-build-uncached -- -E \"(builtins.getFlake (toString ./.)).deploy.nodes.riemann.profiles.system.path\""
+          "run": "nix run nixpkgs.nix-build-uncached -c \\\n  nix-build-uncached -E \\\n  \"(builtins.getFlake (toString ./.)).deploy.nodes.riemann.profiles.system.path\"\n"
         }
       ]
     },
@@ -178,7 +178,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run nixpkgs#nix-build-uncached -- -E \"(builtins.getFlake (toString ./.)).deploy.nodes.sartre.profiles.system.path\""
+          "run": "nix run nixpkgs.nix-build-uncached -c \\\n  nix-build-uncached -E \\\n  \"(builtins.getFlake (toString ./.)).deploy.nodes.sartre.profiles.system.path\"\n"
         }
       ]
     }
