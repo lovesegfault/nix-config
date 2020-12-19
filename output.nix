@@ -45,19 +45,19 @@ in
       #   profiles.system.path = mkPath "feuerbach" "x86_64-linux";
       # };
       foucault = {
-        hostname = "foucault";
+        hostname = "localhost";
         profiles.system.path = mkPath "foucault" "x86_64-linux";
       };
       fourier = {
-        hostname = "fourier";
+        hostname = "10.0.0.3";
         profiles.system.path = mkPath "fourier" "x86_64-linux";
       };
       goethe = {
-        hostname = "goethe";
+        hostname = "10.0.0.4";
         profiles.system.path = mkPath "goethe" "aarch64-linux";
       };
       riemann = {
-        hostname = "riemann";
+        hostname = "10.0.0.12";
         profiles.system.path = mkPath "riemann" "aarch64-linux";
       };
       sartre = {

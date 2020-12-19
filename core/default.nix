@@ -8,7 +8,6 @@ in
 {
   imports = [
     ./aspell.nix
-    ./magicdns.nix
     ./nix.nix
     ./openssh.nix
     ./sudo.nix
