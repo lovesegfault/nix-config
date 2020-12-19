@@ -7,7 +7,7 @@
   };
 
   services.unbound = {
-    forwardAddresses = lib.mkForce [ "100.100.100.100" ];
+    forwardAddresses = [ "100.100.100.100" ];
     enableRootTrustAnchor = lib.mkForce false;
   };
 
