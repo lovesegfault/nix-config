@@ -45,23 +45,23 @@ in
         profiles.system.path = mkPath "feuerbach" "x86_64-linux";
       };
       foucault = {
-        hostname = "localhost";
+        hostname = "100.67.182.67";
         profiles.system.path = mkPath "foucault" "x86_64-linux";
       };
       fourier = {
-        hostname = "10.0.0.3";
+        hostname = "100.113.42.46";
         profiles.system.path = mkPath "fourier" "x86_64-linux";
       };
       goethe = {
-        hostname = "10.0.0.4";
+        hostname = "100.125.185.48";
         profiles.system.path = mkPath "goethe" "aarch64-linux";
       };
       riemann = {
-        hostname = "10.0.0.12";
+        hostname = "100.99.75.64";
         profiles.system.path = mkPath "riemann" "aarch64-linux";
       };
       sartre = {
-        hostname = "sartre.meurer.org";
+        hostname = "100.97.215.77";
         profiles.system.path = mkPath "sartre" "x86_64-linux";
       };
     };
