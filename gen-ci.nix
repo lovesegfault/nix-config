@@ -10,7 +10,14 @@ let
     runs-on = "ubuntu-latest";
     steps = [
       { uses = "actions/checkout@v2"; }
-      { uses = "cachix/install-nix-action@v12"; }
+      {
+        uses = "cachix/install-nix-action@v12";
+        "with" = {
+            nix_path = "nixpkgs=channel:nixos-unstable-small";
+            install_url = "https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20201007_5257a25/install";
+            extra_nix_config = "experimental-features = nix-command flakes";
+        };
+      }
       {
         name = "AArch64";
         run = ''
@@ -52,9 +59,8 @@ let
   mkHostJob = host: mkGenericJob [{
     name = "Build";
     run = ''
-      nix run nixpkgs.nix-build-uncached -c \
-        nix-build-uncached -E \
-        "(builtins.getFlake (toString ./.)).deploy.nodes.${host}.profiles.system.path"
+      nix run nixpkgs#nix-build-uncached -- \
+        -E "(builtins.getFlake (toString ./.)).deploy.nodes.${host}.profiles.system.path"
     '';
   }];
 
@@ -73,7 +79,7 @@ let
         name = "ci up-to-date check";
         run = ''
           cp ./.github/workflows/ci.yml /tmp/ci.yml.old
-          nix run nixpkgs.nixUnstable -c nix run .#gen-ci
+          nix run .#gen-ci
           diff ./.github/workflows/ci.yml /tmp/ci.yml.old || exit 1
         '';
       }];

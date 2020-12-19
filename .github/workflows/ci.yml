@@ -7,7 +7,12 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "cachix/install-nix-action@v12"
+          "uses": "cachix/install-nix-action@v12",
+          "with": {
+            "extra_nix_config": "experimental-features = nix-command flakes",
+            "install_url": "https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20201007_5257a25/install",
+            "nix_path": "nixpkgs=channel:nixos-unstable-small"
+          }
         },
         {
           "name": "AArch64",
@@ -22,7 +27,7 @@
         },
         {
           "name": "ci up-to-date check",
-          "run": "cp ./.github/workflows/ci.yml /tmp/ci.yml.old\nnix run nixpkgs.nixUnstable -c nix run .#gen-ci\ndiff ./.github/workflows/ci.yml /tmp/ci.yml.old || exit 1\n"
+          "run": "cp ./.github/workflows/ci.yml /tmp/ci.yml.old\nnix run .#gen-ci\ndiff ./.github/workflows/ci.yml /tmp/ci.yml.old || exit 1\n"
         }
       ]
     },
@@ -33,7 +38,12 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "cachix/install-nix-action@v12"
+          "uses": "cachix/install-nix-action@v12",
+          "with": {
+            "extra_nix_config": "experimental-features = nix-command flakes",
+            "install_url": "https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20201007_5257a25/install",
+            "nix_path": "nixpkgs=channel:nixos-unstable-small"
+          }
         },
         {
           "name": "AArch64",
@@ -48,7 +58,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run nixpkgs.nix-build-uncached -c \\\n  nix-build-uncached -E \\\n  \"(builtins.getFlake (toString ./.)).deploy.nodes.foucault.profiles.system.path\"\n"
+          "run": "nix run nixpkgs#nix-build-uncached -- \\\n  -E \"(builtins.getFlake (toString ./.)).deploy.nodes.foucault.profiles.system.path\"\n"
         }
       ]
     },
@@ -59,7 +69,12 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "cachix/install-nix-action@v12"
+          "uses": "cachix/install-nix-action@v12",
+          "with": {
+            "extra_nix_config": "experimental-features = nix-command flakes",
+            "install_url": "https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20201007_5257a25/install",
+            "nix_path": "nixpkgs=channel:nixos-unstable-small"
+          }
         },
         {
           "name": "AArch64",
@@ -74,7 +89,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run nixpkgs.nix-build-uncached -c \\\n  nix-build-uncached -E \\\n  \"(builtins.getFlake (toString ./.)).deploy.nodes.fourier.profiles.system.path\"\n"
+          "run": "nix run nixpkgs#nix-build-uncached -- \\\n  -E \"(builtins.getFlake (toString ./.)).deploy.nodes.fourier.profiles.system.path\"\n"
         }
       ]
     },
@@ -85,7 +100,12 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "cachix/install-nix-action@v12"
+          "uses": "cachix/install-nix-action@v12",
+          "with": {
+            "extra_nix_config": "experimental-features = nix-command flakes",
+            "install_url": "https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20201007_5257a25/install",
+            "nix_path": "nixpkgs=channel:nixos-unstable-small"
+          }
         },
         {
           "name": "AArch64",
@@ -100,7 +120,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run nixpkgs.nix-build-uncached -c \\\n  nix-build-uncached -E \\\n  \"(builtins.getFlake (toString ./.)).deploy.nodes.goethe.profiles.system.path\"\n"
+          "run": "nix run nixpkgs#nix-build-uncached -- \\\n  -E \"(builtins.getFlake (toString ./.)).deploy.nodes.goethe.profiles.system.path\"\n"
         }
       ]
     },
@@ -111,7 +131,12 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "cachix/install-nix-action@v12"
+          "uses": "cachix/install-nix-action@v12",
+          "with": {
+            "extra_nix_config": "experimental-features = nix-command flakes",
+            "install_url": "https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20201007_5257a25/install",
+            "nix_path": "nixpkgs=channel:nixos-unstable-small"
+          }
         },
         {
           "name": "AArch64",
@@ -137,7 +162,12 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "cachix/install-nix-action@v12"
+          "uses": "cachix/install-nix-action@v12",
+          "with": {
+            "extra_nix_config": "experimental-features = nix-command flakes",
+            "install_url": "https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20201007_5257a25/install",
+            "nix_path": "nixpkgs=channel:nixos-unstable-small"
+          }
         },
         {
           "name": "AArch64",
@@ -152,7 +182,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run nixpkgs.nix-build-uncached -c \\\n  nix-build-uncached -E \\\n  \"(builtins.getFlake (toString ./.)).deploy.nodes.riemann.profiles.system.path\"\n"
+          "run": "nix run nixpkgs#nix-build-uncached -- \\\n  -E \"(builtins.getFlake (toString ./.)).deploy.nodes.riemann.profiles.system.path\"\n"
         }
       ]
     },
@@ -163,7 +193,12 @@
           "uses": "actions/checkout@v2"
         },
         {
-          "uses": "cachix/install-nix-action@v12"
+          "uses": "cachix/install-nix-action@v12",
+          "with": {
+            "extra_nix_config": "experimental-features = nix-command flakes",
+            "install_url": "https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20201007_5257a25/install",
+            "nix_path": "nixpkgs=channel:nixos-unstable-small"
+          }
         },
         {
           "name": "AArch64",
@@ -178,7 +213,7 @@
         },
         {
           "name": "Build",
-          "run": "nix run nixpkgs.nix-build-uncached -c \\\n  nix-build-uncached -E \\\n  \"(builtins.getFlake (toString ./.)).deploy.nodes.sartre.profiles.system.path\"\n"
+          "run": "nix run nixpkgs#nix-build-uncached -- \\\n  -E \"(builtins.getFlake (toString ./.)).deploy.nodes.sartre.profiles.system.path\"\n"
         }
       ]
     }
