@@ -73,7 +73,7 @@ let
         name = "ci up-to-date check";
         run = ''
           cp ./.github/workflows/ci.yml /tmp/ci.yml.old
-          nix-shell --run 'genci'
+          nix run nixpkgs.nixUnstable -c nix run .#gen-ci
           diff ./.github/workflows/ci.yml /tmp/ci.yml.old || exit 1
         '';
       }];

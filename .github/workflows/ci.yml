@@ -22,7 +22,7 @@
         },
         {
           "name": "ci up-to-date check",
-          "run": "cp ./.github/workflows/ci.yml /tmp/ci.yml.old\nnix-shell --run 'genci'\ndiff ./.github/workflows/ci.yml /tmp/ci.yml.old || exit 1\n"
+          "run": "cp ./.github/workflows/ci.yml /tmp/ci.yml.old\nnix run nixpkgs.nixUnstable -c nix run .#gen-ci\ndiff ./.github/workflows/ci.yml /tmp/ci.yml.old || exit 1\n"
         }
       ]
     },
