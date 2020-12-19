@@ -71,10 +71,6 @@ let
     };
     name = "CI";
     jobs = (lib.genAttrs hosts mkHostJob) // {
-      preCommitChecks = mkGenericJob [{
-        name = "pre-commit checks";
-        run = "nix-build -A preCommitChecks";
-      }];
       checkCI = mkGenericJob [{
         name = "ci up-to-date check";
         run = ''
