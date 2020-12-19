@@ -13,9 +13,9 @@ let
       {
         uses = "cachix/install-nix-action@v12";
         "with" = {
-            nix_path = "nixpkgs=channel:nixos-unstable-small";
-            install_url = "https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20201007_5257a25/install";
-            extra_nix_config = "experimental-features = nix-command flakes";
+          nix_path = "nixpkgs=channel:nixos-unstable-small";
+          install_url = "https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20201007_5257a25/install";
+          extra_nix_config = "experimental-features = nix-command flakes";
         };
       }
       {
