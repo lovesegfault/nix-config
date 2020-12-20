@@ -36,7 +36,6 @@ in
   nix.nixPath = [
     "nixos-config=${dummyConfig}"
     "nixpkgs=/run/current-system/nixpkgs"
-    "nixpkgs-overlays=/run/current-system/overlays"
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -46,7 +45,6 @@ in
   system = {
     extraSystemBuilderCmds = ''
       ln -sv ${pkgs.path} $out/nixpkgs
-      ln -sv ${../overlays} $out/overlays
     '';
 
     stateVersion = "20.09";
