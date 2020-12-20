@@ -39,4 +39,4 @@
       inherit (sops-nix.packages.${system}) ssh-to-pgp sops-pgp-hook;
       inherit (deploy-rs.packages.${system}) deploy-rs;
     };
-})) // (import ./deploy.nix inputs)
+  })) // (import ./deploy.nix inputs)
