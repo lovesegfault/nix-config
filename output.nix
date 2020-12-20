@@ -1,11 +1,8 @@
 { self
 , deploy-rs
 , flake-utils
-, home-manager
-, impermanence
 , nixpkgs
 , sops-nix
-, staging
 , ...
 }@inputs:
 (flake-utils.lib.eachDefaultSystem (system:
