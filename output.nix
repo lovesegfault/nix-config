@@ -41,7 +41,7 @@ in
       #   profiles.system.path = mkPath "aurelius" "aarch64-linux";
       # };
       feuerbach = {
-        hostname = "100.99.22.81";
+        hostname = "stcg-us-0005-11";
         profiles.system.path = mkPath "feuerbach" "x86_64-linux";
       };
       foucault = {
