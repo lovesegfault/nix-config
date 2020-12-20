@@ -68,7 +68,6 @@ jobs:
   check-flake:
     runs-on: ubuntu-latest
     needs: build-host
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
