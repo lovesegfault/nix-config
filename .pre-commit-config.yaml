@@ -16,3 +16,11 @@ repos:
     files: "\\.nix$"
     language: system
     name: nixpkgs-fmt
+    description: "Nix code formatter"
+  - id: nix-linter
+    entry: nix-linter
+    files: "\\.nix$"
+    exclude: "flake.nix|menu/default.nix"
+    language: system
+    name: nix-linter
+    description: "Nix code linter"

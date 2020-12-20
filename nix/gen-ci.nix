@@ -54,9 +54,9 @@ let
     };
   };
 
-  mkGenericJob = dependencies: extraSteps: {
+  mkGenericJob = needs: extraSteps: {
+    inherit needs;
     runs-on = "ubuntu-latest";
-    needs = dependencies;
     steps = [
       checkoutStep
       nixStep
