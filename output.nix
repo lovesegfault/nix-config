@@ -10,6 +10,7 @@
 }@inputs:
 let
   inherit (builtins) attrNames mapAttrs readDir;
+  inherit (nixpkgs.lib) mapAttrsToList;
 
   overlays = map (f: import (./overlays + "/${f}")) (attrNames (readDir ./overlays));
 
@@ -75,6 +76,7 @@ in
   in
   {
     defaultApp = self.apps.${system}.deploy;
+    defaultPackage = self.packages.${system}.hosts;
 
     apps = {
       gen-ci = {
@@ -87,7 +89,10 @@ in
       };
     };
 
-    packages.gen-ci = pkgs.callPackage ./gen-ci.nix { hosts = attrNames self.deploy.nodes; };
+    packages = {
+      hosts = pkgs.linkFarmFromDrvs "nix-config" (mapAttrsToList (_: v: v.profiles.system.path) self.deploy.nodes);
+      gen-ci = pkgs.callPackage ./gen-ci.nix { hosts = attrNames self.deploy.nodes; };
+    };
 
     devShell = pkgs.callPackage ./shell.nix {
       inherit (self.packages.${system}) gen-ci;
