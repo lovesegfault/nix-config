@@ -1,10 +1,14 @@
 {
   "jobs": {
     "check-ci": {
+      "needs": [],
       "runs-on": "ubuntu-latest",
       "steps": [
         {
-          "uses": "actions/checkout@v2"
+          "uses": "actions/checkout@v2",
+          "with": {
+            "fetch-depth": 0
+          }
         },
         {
           "uses": "cachix/install-nix-action@v12",
@@ -31,10 +35,21 @@
       ]
     },
     "check-flake": {
+      "needs": [
+        "feuerbach",
+        "foucault",
+        "fourier",
+        "goethe",
+        "riemann",
+        "sartre"
+      ],
       "runs-on": "ubuntu-latest",
       "steps": [
         {
-          "uses": "actions/checkout@v2"
+          "uses": "actions/checkout@v2",
+          "with": {
+            "fetch-depth": 0
+          }
         },
         {
           "uses": "cachix/install-nix-action@v12",
@@ -61,10 +76,16 @@
       ]
     },
     "feuerbach": {
+      "needs": [
+        "check-ci"
+      ],
       "runs-on": "ubuntu-latest",
       "steps": [
         {
-          "uses": "actions/checkout@v2"
+          "uses": "actions/checkout@v2",
+          "with": {
+            "fetch-depth": 0
+          }
         },
         {
           "uses": "cachix/install-nix-action@v12",
@@ -92,10 +113,16 @@
       ]
     },
     "foucault": {
+      "needs": [
+        "check-ci"
+      ],
       "runs-on": "ubuntu-latest",
       "steps": [
         {
-          "uses": "actions/checkout@v2"
+          "uses": "actions/checkout@v2",
+          "with": {
+            "fetch-depth": 0
+          }
         },
         {
           "uses": "cachix/install-nix-action@v12",
@@ -123,10 +150,16 @@
       ]
     },
     "fourier": {
+      "needs": [
+        "check-ci"
+      ],
       "runs-on": "ubuntu-latest",
       "steps": [
         {
-          "uses": "actions/checkout@v2"
+          "uses": "actions/checkout@v2",
+          "with": {
+            "fetch-depth": 0
+          }
         },
         {
           "uses": "cachix/install-nix-action@v12",
@@ -154,10 +187,16 @@
       ]
     },
     "goethe": {
+      "needs": [
+        "check-ci"
+      ],
       "runs-on": "ubuntu-latest",
       "steps": [
         {
-          "uses": "actions/checkout@v2"
+          "uses": "actions/checkout@v2",
+          "with": {
+            "fetch-depth": 0
+          }
         },
         {
           "uses": "cachix/install-nix-action@v12",
@@ -185,10 +224,16 @@
       ]
     },
     "riemann": {
+      "needs": [
+        "check-ci"
+      ],
       "runs-on": "ubuntu-latest",
       "steps": [
         {
-          "uses": "actions/checkout@v2"
+          "uses": "actions/checkout@v2",
+          "with": {
+            "fetch-depth": 0
+          }
         },
         {
           "uses": "cachix/install-nix-action@v12",
@@ -216,10 +261,16 @@
       ]
     },
     "sartre": {
+      "needs": [
+        "check-ci"
+      ],
       "runs-on": "ubuntu-latest",
       "steps": [
         {
-          "uses": "actions/checkout@v2"
+          "uses": "actions/checkout@v2",
+          "with": {
+            "fetch-depth": 0
+          }
         },
         {
           "uses": "cachix/install-nix-action@v12",
