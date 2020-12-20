@@ -10,7 +10,7 @@
 let
   inherit (builtins) attrNames mapAttrs readDir;
 
-  overlays = map (f: import (./overlays + "/${f}")) (attrNames (readDir ./overlays));
+  overlays = map (f: import (../overlays + "/${f}")) (attrNames (readDir ../overlays));
 
   mkHost = name: system:
     nixpkgs.lib.nixosSystem {
@@ -22,7 +22,7 @@ let
         home-manager.nixosModules.home-manager
         sops-nix.nixosModules.sops
 
-        (./hosts + "/${name}")
+        (../hosts + "/${name}")
       ];
       specialArgs.inputs = inputs;
     };

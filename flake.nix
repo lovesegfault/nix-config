@@ -26,5 +26,5 @@
   };
 
   # FIXME: I can't η-reduce this for some reason
-  outputs = args: import ./outputs.nix args;
+  outputs = args: import ./nix/outputs.nix args;
 }
