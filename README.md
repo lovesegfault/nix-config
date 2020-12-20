@@ -19,8 +19,8 @@ Hostnames are picked from my [hostname list](hostnames)
 ├── dev          # Developer tooling configuration
 ├── hardware     # Hardware-specific configuration
 ├── hostnames    # List of hostnames to use
-├── overlays     # Nixpkgs overlays
 ├── keys         # PGP keys for SOPS
+├── nix          # Nix build support files (overlays, deployment code, ci generators)
 ├── sway         # Sway configuration for the desktop
 ├── hosts        # Machine definitions
 └── users        # Per-user configurations
@@ -40,7 +40,7 @@ To deply a specific host:
 
 ### adding overlays
 
-Overlays should be added as individual nix files to ./overlays with format
+Overlays should be added as individual nix files to ./nix/overlays with format
 
 ```nix
 self: super: {
@@ -48,7 +48,7 @@ self: super: {
 }
 ```
 
-For more examples see ./overlays.
+For more examples see [./nix/overlays][overlays].
 
 ## issues
 
@@ -59,3 +59,4 @@ For more examples see ./overlays.
 [hosts]: https://github.com/lovesegfault/nix-config/blob/master/hosts
 [flake.nix]: https://github.com/lovesegfault/nix-config/blob/master/flake.nix
 [hostnames]: https://gist.github.com/2a059213162c190f125c16a8d4463043
+[overlays]: https://github.com/lovesegfault/nix-config/blob/master/nix/overlays
