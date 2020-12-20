@@ -11,16 +11,22 @@ repos:
 
 - repo: local
   hooks:
-  - id: nixpkgs-fmt
+  - name: nixpkgs-fmt
     entry: nixpkgs-fmt
     files: "\\.nix$"
     language: system
-    name: nixpkgs-fmt
     description: "Nix code formatter"
-  - id: nix-linter
+    id: nixpkgs-fmt
+  - name: nix-linter
     entry: nix-linter
     files: "\\.nix$"
     exclude: "flake.nix|menu/default.nix"
     language: system
-    name: nix-linter
     description: "Nix code linter"
+    id: nix-linter
+  - name: gen-ci
+    entry: nix run .#gen-ci
+    files: "\\.nix$"
+    language: system
+    description: "Update CI description"
+    id: gen-ci
