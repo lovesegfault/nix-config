@@ -71,13 +71,15 @@ let
     };
     name = "CI";
     jobs = (lib.genAttrs hosts mkHostJob) // {
-      checkCI = mkGenericJob [{
-        name = "ci up-to-date check";
+      check-ci = mkGenericJob [{
         run = ''
           cp ./.github/workflows/ci.yml /tmp/ci.yml.old
           nix run .#gen-ci
           diff ./.github/workflows/ci.yml /tmp/ci.yml.old || exit 1
         '';
+      }];
+      check-flake = mkGenericJob [{
+        run = "nix flake check";
       }];
     };
   };
