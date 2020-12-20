@@ -3,6 +3,7 @@
 , nix-build-uncached
 , nix-linter
 , nixpkgs-fmt
+, pre-commit
 , sops
 
 , gen-ci
@@ -16,6 +17,7 @@
     nix-build-uncached
     nix-linter
     nixpkgs-fmt
+    pre-commit
     sops
 
     gen-ci
