@@ -20,14 +20,10 @@ jobs:
           name: nix-config
           signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
       - name: Update flakes
-        run: nix flake update --recreate-lock-file
+        run: nix flake update --recreate-lock-file --commit-lock-file
       - uses: peter-evans/create-pull-request@v3
-        id: cpr
         with:
-          commit-message: "flake: update"
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          signoff: false
           branch: flake-update
+          commit-message: "flake: update"
           delete-branch: true
-          title: 'flake: update'
+          title: "flake: update"
