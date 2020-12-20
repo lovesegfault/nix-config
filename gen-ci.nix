@@ -47,7 +47,7 @@ let
         '';
       }
       {
-        uses = "cachix/cachix-action@v7";
+        uses = "cachix/cachix-action@v8";
         "with" = {
           name = "nix-config";
           signingKey = "'\${{ secrets.CACHIX_SIGNING_KEY }}'";
