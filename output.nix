@@ -47,6 +47,7 @@ in
       foucault = {
         hostname = "100.67.182.67";
         profiles.system.path = mkPath "foucault" "x86_64-linux";
+        magicRollback = false;
       };
       fourier = {
         hostname = "100.113.42.46";
