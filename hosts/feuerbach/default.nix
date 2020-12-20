@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ../../core
+    ../../core/unbound.nix
 
     ../../dev
     ../../dev/stcg-gcs
