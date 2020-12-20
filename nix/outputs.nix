@@ -29,6 +29,7 @@
     packages = {
       hosts = pkgs.linkFarmFromDrvs "nix-config" (mapAttrsToList (_: v: v.profiles.system.path) self.deploy.nodes);
       gen-ci = pkgs.callPackage ./gen-ci.nix { hosts = attrNames self.deploy.nodes; };
+      get-hosts = pkgs.callPackage ./get-hosts.nix { hosts = attrNames self.deploy.nodes; };
     };
 
     devShell = pkgs.callPackage ./shell.nix {
