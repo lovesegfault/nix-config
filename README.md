@@ -9,6 +9,8 @@ Deployment is done using [deploy-rs], see [usage](#usage).
 For the configurations' entry points see the individual [hosts], as well as
 [flake.nix]. For adding overlays see [overlays](#overlays).
 
+Hostnames are picked from my [hostname list](hostnames)
+
 ## structure
 
 ```
@@ -56,3 +58,4 @@ For more examples see ./overlays.
 [deploy-rs]: https://github.com/serokell/deploy-rs
 [hosts]: https://github.com/lovesegfault/nix-config/blob/master/hosts
 [flake.nix]: https://github.com/lovesegfault/nix-config/blob/master/flake.nix
+[hostnames]: https://gist.github.com/2a059213162c190f125c16a8d4463043
