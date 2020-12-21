@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - master
-  pull_request:
+      - flake-update
 jobs:
   lints:
     runs-on: ubuntu-latest
