@@ -24,9 +24,3 @@ repos:
     language: system
     description: "Nix code linter"
     id: nix-linter
-  - name: gen-ci
-    entry: nix run .#gen-ci
-    files: "\\.nix$"
-    language: system
-    description: "Update CI description"
-    id: gen-ci

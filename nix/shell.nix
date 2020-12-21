@@ -6,7 +6,6 @@
 , pre-commit
 , sops
 
-, gen-ci
 , ssh-to-pgp
 , sops-pgp-hook
 , deploy-rs
@@ -20,7 +19,6 @@
     pre-commit
     sops
 
-    gen-ci
     deploy-rs
     ssh-to-pgp
   ];
