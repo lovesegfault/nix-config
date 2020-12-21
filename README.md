@@ -29,11 +29,11 @@ Hostnames are picked from my [hostname list](hostnames)
 ## usage
 
 ### deploying
-To deply all hosts:
+To deploy all hosts:
 ```
     nix run .#
 ```
-To deply a specific host:
+To deploy a specific host:
 ```
     nix run .#myHost
 ```
