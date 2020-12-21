@@ -4,7 +4,10 @@
   inputs = {
     deploy-rs = {
       url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        utils.follows = "flake-utils";
+      };
     };
 
     flake-utils.url = "github:numtide/flake-utils";
