@@ -54,7 +54,7 @@ jobs:
           sudo mkdir -p /root/.ssh
           echo "$AARCH64_BOX_KEY" | sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
           sudo chmod 0600 /root/.ssh/aarch64.community.nixos
-          echo "$KNOWN_HOSTS" | sudo tee -a /root/.ssh/known_hosts > /dev/null
+          echo "$KNOWN_HOSTS" | sudo tee -a /root/.ssh/known_hosts
           builder_cfg=(
             lovesegfault@aarch64.nixos.community
             aarch64-linux
