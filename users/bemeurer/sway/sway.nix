@@ -96,51 +96,55 @@
         };
       };
 
-      keybindings = lib.mkOptionDefault {
-        # fancy workspace names
-        "${modifier}+1" = "workspace 0:α";
-        "${modifier}+2" = "workspace 1:β";
-        "${modifier}+3" = "workspace 2:γ";
-        "${modifier}+4" = "workspace 3:δ";
-        "${modifier}+5" = "workspace 4:ε";
-        "${modifier}+6" = "workspace 5:ζ";
-        "${modifier}+7" = "workspace 6:η";
-        "${modifier}+8" = "workspace 7:θ";
-        "${modifier}+9" = "workspace 8:ι";
-        "${modifier}+0" = "workspace 9:κ";
-        "${modifier}+Shift+1" = "move container to workspace 0:α";
-        "${modifier}+Shift+2" = "move container to workspace 1:β";
-        "${modifier}+Shift+3" = "move container to workspace 2:γ";
-        "${modifier}+Shift+4" = "move container to workspace 3:δ";
-        "${modifier}+Shift+5" = "move container to workspace 4:ε";
-        "${modifier}+Shift+6" = "move container to workspace 5:ζ";
-        "${modifier}+Shift+7" = "move container to workspace 6:η";
-        "${modifier}+Shift+8" = "move container to workspace 7:θ";
-        "${modifier}+Shift+9" = "move container to workspace 8:ι";
-        "${modifier}+Shift+0" = "move container to workspace 9:κ";
-        # normal ones
-        "${modifier}+Return" = "exec ${terminal}";
-        "${modifier}+d" = "exec ${menu}";
-        "${modifier}+m" = "exec ${pkgs.emojimenu}/bin/emojimenu";
-        "${modifier}+o" = "exec ${pkgs.otpmenu}/bin/otpmenu";
-        "${modifier}+p" = "exec ${pkgs.passmenu}/bin/passmenu";
-        "${modifier}+q" = "exec ${pkgs.swaylock}/bin/swaylock -f";
-        "Mod1+Tab" = " workspace next";
-        "Mod4+Tab" = " workspace prev";
-        "Mod4+comma" = " workspace prev";
-        "Mod4+period" = " workspace next";
-        "Print" = "exec ${pkgs.grim}/bin/grim -t png -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy -t image/png";
-        "XF86AudioLowerVolume" = "exec ${pkgs.ponymix}/bin/ponymix decrease 1";
-        "XF86AudioMicMute" = "exec ${pkgs.ponymix}/bin/ponymix -t source toggle";
-        "XF86AudioMute" = "exec ${pkgs.ponymix}/bin/ponymix -t sink toggle";
-        "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
-        "XF86AudioPause" = "exec ${pkgs.playerctl}/bin/playerctl pause";
-        "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl play";
-        "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
-        "XF86AudioRaiseVolume" = "exec ${pkgs.ponymix}/bin/ponymix increase 1";
-        "XF86MonBrightnessDown" = "exec ${pkgs.brillo}/bin/brillo -e -U 0.5";
-        "XF86MonBrightnessUp" = "exec ${pkgs.brillo}/bin/brillo -e -A 0.5";
-      };
+      keybindings =
+        let
+          execSpawn = cmd: "exec ${pkgs.spawn}/bin/spawn ${cmd}";
+        in
+        lib.mkOptionDefault {
+          # fancy workspace names
+          "${modifier}+1" = "workspace 0:α";
+          "${modifier}+2" = "workspace 1:β";
+          "${modifier}+3" = "workspace 2:γ";
+          "${modifier}+4" = "workspace 3:δ";
+          "${modifier}+5" = "workspace 4:ε";
+          "${modifier}+6" = "workspace 5:ζ";
+          "${modifier}+7" = "workspace 6:η";
+          "${modifier}+8" = "workspace 7:θ";
+          "${modifier}+9" = "workspace 8:ι";
+          "${modifier}+0" = "workspace 9:κ";
+          "${modifier}+Shift+1" = "move container to workspace 0:α";
+          "${modifier}+Shift+2" = "move container to workspace 1:β";
+          "${modifier}+Shift+3" = "move container to workspace 2:γ";
+          "${modifier}+Shift+4" = "move container to workspace 3:δ";
+          "${modifier}+Shift+5" = "move container to workspace 4:ε";
+          "${modifier}+Shift+6" = "move container to workspace 5:ζ";
+          "${modifier}+Shift+7" = "move container to workspace 6:η";
+          "${modifier}+Shift+8" = "move container to workspace 7:θ";
+          "${modifier}+Shift+9" = "move container to workspace 8:ι";
+          "${modifier}+Shift+0" = "move container to workspace 9:κ";
+          # normal ones
+          "${modifier}+Return" = execSpawn "${terminal}";
+          "${modifier}+d" = execSpawn "${menu}";
+          "${modifier}+m" = execSpawn "${pkgs.emojimenu}/bin/emojimenu";
+          "${modifier}+o" = execSpawn "${pkgs.otpmenu}/bin/otpmenu";
+          "${modifier}+p" = execSpawn "${pkgs.passmenu}/bin/passmenu";
+          "${modifier}+q" = execSpawn "${pkgs.swaylock}/bin/swaylock -f";
+          "Mod1+Tab" = " workspace next";
+          "Mod4+Tab" = " workspace prev";
+          "Mod4+comma" = " workspace prev";
+          "Mod4+period" = " workspace next";
+          "Print" = execSpawn "${pkgs.grim}/bin/grim -t png -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy -t image/png";
+          "XF86AudioLowerVolume" = execSpawn "${pkgs.ponymix}/bin/ponymix decrease 1";
+          "XF86AudioMicMute" = execSpawn "${pkgs.ponymix}/bin/ponymix -t source toggle";
+          "XF86AudioMute" = execSpawn "${pkgs.ponymix}/bin/ponymix -t sink toggle";
+          "XF86AudioNext" = execSpawn "${pkgs.playerctl}/bin/playerctl next";
+          "XF86AudioPause" = execSpawn "${pkgs.playerctl}/bin/playerctl pause";
+          "XF86AudioPlay" = execSpawn "${pkgs.playerctl}/bin/playerctl play";
+          "XF86AudioPrev" = execSpawn "${pkgs.playerctl}/bin/playerctl previous";
+          "XF86AudioRaiseVolume" = execSpawn "${pkgs.ponymix}/bin/ponymix increase 1";
+          "XF86MonBrightnessDown" = execSpawn "${pkgs.brillo}/bin/brillo -e -U 0.5";
+          "XF86MonBrightnessUp" = execSpawn "${pkgs.brillo}/bin/brillo -e -A 0.5";
+        };
 
       menu = "${terminal} -t swaymenu -e ${pkgs.swaymenu}/bin/swaymenu";
 

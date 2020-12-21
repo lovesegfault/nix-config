@@ -12,6 +12,7 @@
     hicolor-icon-theme
     qgnomeplatform
     qt5.qtwayland
+    spawn
   ];
 
   qt5 = {
