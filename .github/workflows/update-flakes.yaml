@@ -20,8 +20,8 @@ jobs:
         with:
           name: nix-config
           signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-      - run: git config --global user.email "noreply@github.com"
-      - run: git config --global user.name "GitHub"
+      - run: git config --global user.email "bernardo@meurer.org"
+      - run: git config --global user.name "Bernardo Meurer"
       - name: Update flakes
         run: nix flake update --recreate-lock-file --commit-lock-file
       - uses: peter-evans/create-pull-request@v3
