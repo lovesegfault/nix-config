@@ -54,16 +54,20 @@ jobs:
           sudo mkdir -p /root/.ssh
           echo "$AARCH64_BOX_KEY" | sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
           sudo chmod 0600 /root/.ssh/aarch64.community.nixos
-          echo "$KNOWN_HOSTS" | sudo tee -a /root/.ssh/known_hosts
+          echo "$KNOWN_HOSTS" | sudo tee -a /root/.ssh/known_hosts > /dev/null
+          nix_cfg=(
+            "builders-use-substitutes = true"
+          )
           builder_cfg=(
             lovesegfault@aarch64.nixos.community
             aarch64-linux
             /root/.ssh/aarch64.community.nixos
             64
-            1
+            8
             big-parallel
           )
-          echo "''${builder_cfg[*]}" | sudo tee /etc/nix/machines
+          echo "${builder_cfg[*]}" | sudo tee /etc/nix/machines > /dev/null
+          echo "${nix_cfg[*]}" | sudo tee -a /etc/nix/nix.conf > /dev/null
       - uses: cachix/cachix-action@v8
         with:
           name: nix-config
@@ -93,15 +97,19 @@ jobs:
           echo "$AARCH64_BOX_KEY" | sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
           sudo chmod 0600 /root/.ssh/aarch64.community.nixos
           echo "$KNOWN_HOSTS" | sudo tee -a /root/.ssh/known_hosts > /dev/null
+          nix_cfg=(
+            "builders-use-substitutes = true"
+          )
           builder_cfg=(
             lovesegfault@aarch64.nixos.community
             aarch64-linux
             /root/.ssh/aarch64.community.nixos
             64
-            1
+            8
             big-parallel
           )
-          echo "''${builder_cfg[*]}" | sudo tee /etc/nix/machines
+          echo "${builder_cfg[*]}" | sudo tee /etc/nix/machines > /dev/null
+          echo "${nix_cfg[*]}" | sudo tee -a /etc/nix/nix.conf > /dev/null
       - uses: cachix/cachix-action@v8
         with:
           name: nix-config
