@@ -8,9 +8,12 @@
 , ...
 }@inputs:
 let
+  inherit (nixpkgs.lib) pathExists optionalAttrs;
   inherit (builtins) attrNames mapAttrs readDir;
 
-  overlays = map (f: import (./overlays + "/${f}")) (attrNames (readDir ./overlays));
+  overlays = map
+    (f: import (./overlays + "/${f}"))
+    (attrNames (optionalAttrs (pathExists ./overlays) (readDir ./overlays)));
 
   mkHost = name: system:
     nixpkgs.lib.nixosSystem {
