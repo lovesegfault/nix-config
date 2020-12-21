@@ -9,7 +9,7 @@ Deployment is done using [deploy-rs], see [usage](#usage).
 For the configurations' entry points see the individual [hosts], as well as
 [flake.nix]. For adding overlays see [overlays](#overlays).
 
-Hostnames are picked from my [hostname list](hostnames)
+Hostnames are picked from my [hostname list][hostnames]
 
 ## structure
 
