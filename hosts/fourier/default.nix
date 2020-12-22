@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ../../core
     ../../core/unbound.nix
@@ -94,6 +94,7 @@
     ".newsboat/history.search"
   ];
 
+  sops.secrets.wireguard-fourier.sopsFile = ./wireguard-fourier.yaml;
   networking = {
     firewall.allowedTCPPorts = [ 3000 9090 9091 ];
     hostName = "fourier";
@@ -102,6 +103,15 @@
     useNetworkd = lib.mkForce false;
     interfaces.eno1.useDHCP = true;
     # interfaces.wlan0.useDHCP = true;
+    wireguard.interfaces.wg0 = {
+      ips = [ "10.70.51.19/32" "fc00:bbbb:bbbb:bb01::7:3312/128" ];
+      privateKeyFile = config.sops.secrets.wireguard-fourier.path;
+      peers = [{
+        allowedIPs = [ "0.0.0.0/0" "::0/0" ];
+        endpoint = "198.54.134.130:51820";
+        publicKey = "e66QrzHRv/dFmGj8dyGEKxaZiC6Vt3MzLiiRcYJqVjQ=";
+      }];
+    };
   };
 
   nix = {
@@ -131,6 +141,7 @@
       enable = true;
       openFirewall = true;
     };
+    mullvad-vpn.enable = true;
     plex = {
       enable = true;
       openFirewall = true;
