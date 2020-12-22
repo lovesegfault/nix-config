@@ -4,7 +4,7 @@ on:
     - cron:  '* 10 * * *'
   workflow_dispatch:
 jobs:
-  upgrade-flakes:
+  update-flakes:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
