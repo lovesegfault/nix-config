@@ -22,7 +22,7 @@ creation_rules:
         - *bemeurer
         - *feuerbach
         - *foucault
-  - path_regex: systems/sartre/ddclient-sartre.yaml
+  - path_regex: hosts/sartre/ddclient-sartre.yaml
     key_groups:
       - pgp:
         - *bemeurer
