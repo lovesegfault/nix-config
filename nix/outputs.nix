@@ -8,12 +8,12 @@
 (flake-utils.lib.eachDefaultSystem (system:
   let
     inherit (builtins) attrNames;
-    inherit (nixpkgs.lib) mapAttrsToList;
+    inherit (nixpkgs.lib) mapAttrs attrValues;
     pkgs = import nixpkgs { inherit system; };
   in
   {
     defaultApp = self.apps.${system}.deploy;
-    defaultPackage = self.packages.${system}.hosts;
+    defaultPackage = self.packages.${system}.hostsCombined;
 
     apps = {
       deploy = {
@@ -22,10 +22,13 @@
       };
     };
 
-    packages = {
-      hosts = pkgs.linkFarmFromDrvs "nix-config" (mapAttrsToList (_: v: v.profiles.system.path) self.deploy.nodes);
-      get-hosts = pkgs.callPackage ./get-hosts.nix { hosts = attrNames self.deploy.nodes; };
-    };
+    packages =
+      let
+        hostDrvs = mapAttrs (_: v: v.profiles.system.path) self.deploy.nodes;
+      in
+      hostDrvs // {
+        hostsCombined = pkgs.linkFarmFromDrvs "nix-config" (attrValues hostDrvs);
+      };
 
     devShell = pkgs.callPackage ./shell.nix {
       inherit (sops-nix.packages.${system}) ssh-to-pgp sops-pgp-hook;
