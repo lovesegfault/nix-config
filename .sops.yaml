@@ -27,8 +27,3 @@ creation_rules:
       - pgp:
         - *bemeurer
         - *sartre
-  - path_regex: hosts/fourier/wireguard-fourier.yaml
-    key_groups:
-      - pgp:
-        - *bemeurer
-        - *fourier
