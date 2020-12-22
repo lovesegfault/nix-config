@@ -33,7 +33,7 @@ jobs:
           extra_nix_config: "experimental-features = nix-command flakes"
       - id: get-hosts
         run: |
-          echo "::set-output name=matrix::$(nix eval --json .#deploy.nodes | jq '{ hosts: keys }')"
+          echo "::set-output name=matrix::$(nix eval --json .#deploy.nodes | jq -c '{ host: keys }')"
 
   build-host:
     runs-on: ubuntu-latest
@@ -78,7 +78,7 @@ jobs:
       - name: nix-build
         run: |
           nix run nixpkgs#nix-build-uncached -- \
-            -E "(builtins.getFlake (toString ./.)).deploy.nodes.${{ matrix.hosts }}.profiles.system.path"
+            -E "(builtins.getFlake (toString ./.)).deploy.nodes.${{ matrix.host }}.profiles.system.path"
 
   check-flake:
     runs-on: ubuntu-latest
