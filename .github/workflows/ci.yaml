@@ -17,7 +17,7 @@ jobs:
           extra_nix_config: "experimental-features = nix-command flakes"
       - name: lints
         run: |
-          nix develop -c pre-commit run --show-diff-on-failure --color=always || exit 1
+          nix develop -c pre-commit run --all-files --show-diff-on-failure --color=always || exit 1
 
   get-hosts:
     runs-on: ubuntu-latest
