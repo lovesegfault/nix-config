@@ -31,6 +31,7 @@ in
   networking = {
     useDHCP = false;
     useNetworkd = true;
+    wireguard.enable = true;
   };
 
   nix.nixPath = [
