@@ -18,11 +18,10 @@ Hostnames are picked from my [hostname list][hostnames]
 ├── core         # Baseline configurations applicable to all machines
 ├── dev          # Developer tooling configuration
 ├── hardware     # Hardware-specific configuration
-├── hostnames    # List of hostnames to use
+├── hosts        # Machine definitions
 ├── keys         # PGP keys for SOPS
 ├── nix          # Nix build support files (overlays, deployment code, ci generators)
 ├── sway         # Sway configuration for the desktop
-├── hosts        # Machine definitions
 └── users        # Per-user configurations
 ```
 
