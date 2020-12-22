@@ -1,25 +1,22 @@
 { config, ... }: {
-  xdg.configFile.mako = {
-    target = "mako/config";
-    text =
-      let
-        homeIcons = "${config.home.homeDirectory}/.nix-profile/share/icons/hicolor";
-        homePixmaps = "${config.home.homeDirectory}/.nix-profile/share/pixmaps";
-        systemIcons = "/run/current-system/sw/share/icons/hicolor";
-        systemPixmaps = "/run/current-system/sw/share/pixmaps";
-      in
-      ''
-        background-color=#0a0e14
-        border-color=#53bdfa
-        default-timeout=30000
-        font=Iosevka 10
-        icon-path=${homeIcons}:${systemIcons}:${homePixmaps}:${systemPixmaps}
-        icons=1
-        max-icon-size=96
-        max-visible=3
-        sort=-time
-        text-color=#b3b1ad
-        width=500
-      '';
-  };
+  programs.mako =
+    let
+      homeIcons = "${config.home.homeDirectory}/.nix-profile/share/icons/hicolor";
+      homePixmaps = "${config.home.homeDirectory}/.nix-profile/share/pixmaps";
+      systemIcons = "/run/current-system/sw/share/icons/hicolor";
+      systemPixmaps = "/run/current-system/sw/share/pixmaps";
+    in
+    {
+      enable = true;
+      backgroundColor = "#0a0e14";
+      borderColor = "#53bdfa";
+      font = "Iosevka 10";
+      iconPath = "${homeIcons}:${systemIcons}:${homePixmaps}:${systemPixmaps}";
+      icons = true;
+      maxIconSize = 96;
+      maxVisible = 3;
+      sort = "-time";
+      textColor = "#b3b1ad";
+      width = 500;
+    };
 }
