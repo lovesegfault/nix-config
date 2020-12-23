@@ -11,6 +11,8 @@ let
   inherit (nixpkgs.lib) pathExists optionalAttrs;
   inherit (builtins) attrNames mapAttrs readDir;
 
+  config.allowUnfree = true;
+
   overlays = map
     (f: import (./overlays + "/${f}"))
     (attrNames (optionalAttrs (pathExists ./overlays) (readDir ./overlays)));
@@ -19,7 +21,7 @@ let
     nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [
-        ({ nixpkgs = { inherit overlays; }; })
+        ({ nixpkgs = { inherit config overlays; }; })
         ({ systemd.package = (import staging { inherit system; }).systemd; })
         impermanence.nixosModules.impermanence
         home-manager.nixosModules.home-manager
