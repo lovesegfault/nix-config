@@ -29,12 +29,12 @@ Hostnames are picked from my [hostname list][hostnames]
 
 ### deploying
 To deploy all hosts:
-```
-    nix run .#
+```shell
+nix run .#
 ```
 To deploy a specific host:
-```
-    nix run .#myHost
+```shell
+nix run .#myHost
 ```
 
 ### adding overlays
