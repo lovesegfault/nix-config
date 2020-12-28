@@ -4,7 +4,6 @@
 , impermanence
 , nixpkgs
 , sops-nix
-, staging
 , ...
 }@inputs:
 let
@@ -22,7 +21,6 @@ let
       inherit system;
       modules = [
         ({ nixpkgs = { inherit config overlays; }; })
-        ({ systemd.package = (import staging { inherit system; }).systemd; })
         impermanence.nixosModules.impermanence
         home-manager.nixosModules.home-manager
         sops-nix.nixosModules.sops

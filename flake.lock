@@ -135,8 +135,7 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nixpkgs": "nixpkgs",
-        "sops-nix": "sops-nix",
-        "staging": "staging"
+        "sops-nix": "sops-nix"
       }
     },
     "sops-nix": {
@@ -156,22 +155,6 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
-        "type": "github"
-      }
-    },
-    "staging": {
-      "locked": {
-        "lastModified": 1609056481,
-        "narHash": "sha256-eMkhC2hbHgkQ+GOV0TxndDAy6x4S5YoUBHJgQDzpDLw=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "8cc82534db38614b0b96b274a516bb800553e5ee",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "staging",
-        "repo": "nixpkgs",
         "type": "github"
       }
     }

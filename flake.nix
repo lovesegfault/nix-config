@@ -20,7 +20,6 @@
     impermanence.url = "github:nix-community/impermanence";
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-    staging.url = "github:NixOS/nixpkgs/staging";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
