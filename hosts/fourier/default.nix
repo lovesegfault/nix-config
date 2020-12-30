@@ -38,6 +38,7 @@
 
   environment.persistence."/nix/state" = {
     directories = [
+      "/var/lib/docker"
       "/var/lib/grafana"
       "/var/lib/iwd"
       "/var/lib/nixus-secrets"
@@ -185,4 +186,6 @@
   time.timeZone = "America/Los_Angeles";
 
   users.groups.media.members = [ "bemeurer" "roon-server" "plex" ];
+
+  virtualisation.docker.enable = true;
 }
