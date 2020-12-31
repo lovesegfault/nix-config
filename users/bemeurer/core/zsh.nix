@@ -42,11 +42,9 @@
       bindkey -rpM viins '^[^['
       KEYTIMEOUT=1
 
-      mkdir -p "${config.programs.zsh.sessionVariables.FAST_WORK_DIR}"
     '';
     sessionVariables = {
       RPROMPT = "";
-      FAST_WORK_DIR = "${config.xdg.cacheHome}/zsh/";
     };
     shellAliases = {
       cat = "bat";
