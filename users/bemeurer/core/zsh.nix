@@ -42,6 +42,7 @@
       bindkey -rpM viins '^[^['
       KEYTIMEOUT=1
 
+      ${pkgs.any-nix-shell}/bin/any-nix-shell zsh | source /dev/stdin
     '';
     sessionVariables = {
       RPROMPT = "";
