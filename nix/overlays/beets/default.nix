@@ -1,10 +1,11 @@
 self: super: {
-  # beets = self.callPackage ./beets.nix { };
+  beets = self.callPackage ./beets.nix { };
 
   python3 = super.python3.override {
     packageOverrides = pySelf: _: {
       confuse = pySelf.callPackage ./confuse.nix { };
       mediafile = pySelf.callPackage ./mediafile.nix { };
+      reflink = pySelf.callPackage ./reflink.nix { };
     };
   };
 

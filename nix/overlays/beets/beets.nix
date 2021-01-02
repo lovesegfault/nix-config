@@ -19,8 +19,10 @@
 , enableBadfiles ? true
 , flac ? null
 , mp3val ? null
+, enableBeatport ? true
 , enableConvert ? true
 , ffmpeg_3 ? null
+, enableDeezer ? true
 , enableDiscogs ? true
 , enableEmbyupdate ? true
 , enableFetchart ? true
@@ -33,8 +35,8 @@
 , enableMpd ? true
 , enablePlaylist ? true
 , enableReplaygain ? true
-, bs1770gain ? null
 , enableSonosUpdate ? true
+, enableSubsonicplaylist ? true
 , enableSubsonicupdate ? true
 , enableThumbnails ? true
 , enableWeb ? true
@@ -44,6 +46,7 @@
 }:
 
 assert enableAbsubmit -> essentia-extractor != null;
+assert enableBeatport -> python3Packages.requests_oauthlib != null;
 assert enableAcoustid -> python3Packages.pyacoustid != null;
 assert enableBadfiles -> flac != null && mp3val != null;
 assert enableConvert -> ffmpeg_3 != null;
@@ -53,7 +56,7 @@ assert enableGmusic -> python3Packages.gmusicapi != null;
 assert enableKeyfinder -> keyfinder-cli != null;
 assert enableLastfm -> python3Packages.pylast != null;
 assert enableMpd -> python3Packages.mpd2 != null;
-assert enableReplaygain -> bs1770gain != null;
+assert enableReplaygain -> ffmpeg_3 != null;
 assert enableSonosUpdate -> python3Packages.soco != null;
 assert enableThumbnails -> python3Packages.pyxdg != null;
 assert enableWeb -> python3Packages.flask != null;
@@ -63,9 +66,11 @@ let
   optionalPlugins = {
     absubmit = enableAbsubmit;
     acousticbrainz = enableAcousticbrainz;
+    beatport = enableBeatport;
     badfiles = enableBadfiles;
     chroma = enableAcoustid;
     convert = enableConvert;
+    deezer = enableDeezer;
     discogs = enableDiscogs;
     embyupdate = enableEmbyupdate;
     fetchart = enableFetchart;
@@ -80,16 +85,17 @@ let
     playlist = enablePlaylist;
     replaygain = enableReplaygain;
     sonosupdate = enableSonosUpdate;
+    subsonicplaylist = enableSubsonicplaylist;
     subsonicupdate = enableSubsonicupdate;
     thumbnails = enableThumbnails;
     web = enableWeb;
   };
 
   pluginsWithoutDeps = [
-    "beatport"
     "bench"
     "bpd"
     "bpm"
+    "bpsync"
     "bucket"
     "cue"
     "duplicates"
@@ -97,6 +103,7 @@ let
     "embedart"
     "export"
     "filefilter"
+    "fish"
     "freedesktop"
     "fromfilename"
     "ftintitle"
@@ -114,6 +121,7 @@ let
     "mbsync"
     "metasync"
     "missing"
+    "parentwork"
     "permissions"
     "play"
     "plexupdate"
@@ -124,6 +132,7 @@ let
     "spotify"
     "the"
     "types"
+    "unimported"
     "zero"
   ];
 
@@ -158,30 +167,34 @@ python3Packages.buildPythonApplication rec {
 
   propagatedBuildInputs = [
     python3Packages.confuse
-    python3Packages.six
     python3Packages.enum34
+    python3Packages.gst-python
     python3Packages.jellyfish
     python3Packages.mediafile
     python3Packages.munkres
     python3Packages.musicbrainzngs
     python3Packages.mutagen
-    python3Packages.pyyaml
-    python3Packages.unidecode
-    python3Packages.gst-python
     python3Packages.pygobject3
+    python3Packages.pyyaml
+    python3Packages.reflink
+    python3Packages.six
+    python3Packages.unidecode
     gobject-introspection
   ] ++ optional enableAbsubmit essentia-extractor
   ++ optional enableAcoustid python3Packages.pyacoustid
+  ++ optional enableBeatport python3Packages.requests_oauthlib
   ++ optional
     (enableFetchart
+      || enableDeezer
       || enableEmbyupdate
       || enableKodiupdate
       || enableLoadext
       || enablePlaylist
+      || enableSubsonicplaylist
       || enableSubsonicupdate
       || enableAcousticbrainz)
     python3Packages.requests
-  ++ optional enableConvert ffmpeg_3
+  ++ optional (enableConvert || enableReplaygain) ffmpeg_3
   ++ optional enableDiscogs python3Packages.discogs_client
   ++ optional enableGmusic python3Packages.gmusicapi
   ++ optional enableKeyfinder keyfinder-cli
@@ -216,7 +229,7 @@ python3Packages.buildPythonApplication rec {
   ];
 
   patches = [
-    ./replaygain-default-bs1770gain.patch
+    ./replaygain-default-ffmpeg.patch
     ./keyfinder-default-bin.patch
   ];
 
@@ -224,9 +237,12 @@ python3Packages.buildPythonApplication rec {
     sed -i -e '/assertIn.*item.*path/d' test/test_info.py
     echo echo completion tests passed > test/rsrc/test_completion.sh
 
+    sed -i -e 's/len(mf.images)/0/' test/test_zero.py
+
     sed -i -e '/^BASH_COMPLETION_PATHS *=/,/^])$/ {
       /^])$/i u"${completion}"
     }' beets/ui/commands.py
+
   '' + optionalString enableBadfiles ''
     sed -i -e '/self\.run_command(\[/ {
       s,"flac","${flac.bin}/bin/flac",
@@ -235,11 +251,7 @@ python3Packages.buildPythonApplication rec {
   '' + optionalString enableConvert ''
     sed -i -e 's,\(util\.command_output(\)\([^)]\+\)),\1[b"${ffmpeg_3.bin}/bin/ffmpeg" if args[0] == b"ffmpeg" else args[0]] + \2[1:]),' beetsplug/convert.py
   '' + optionalString enableReplaygain ''
-    sed -i -re '
-      s!^( *cmd *= *b?['\'''"])(bs1770gain['\'''"])!\1${bs1770gain}/bin/\2!
-    ' beetsplug/replaygain.py
-    sed -i -e 's/if has_program.*bs1770gain.*:/if True:/' \
-      test/test_replaygain.py
+    sed -i -e 's,"ffmpeg","${ffmpeg_3.bin}/bin/ffmpeg",' beetsplug/replaygain.py
   '';
 
   postInstall = ''

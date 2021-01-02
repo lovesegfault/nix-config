@@ -1,4 +1,4 @@
-self: super: {
+self: _: {
   hyperpixel4-init = self.stdenv.mkDerivation {
     pname = "hyperpixel4-init";
     version = "2020-08-11";
@@ -50,22 +50,4 @@ self: super: {
       install src/*.dts -t $out/share/sources
     '';
   };
-
-  python3 = super.python3.override {
-    packageOverrides = pySelf: _: {
-      rpi-gpio = pySelf.buildPythonPackage rec {
-        pname = "RPi.GPIO";
-        version = "0.7.0";
-
-        src = pySelf.fetchPypi {
-          inherit pname version;
-          sha256 = "0gvxp0nfm2ph89f2j2zjv9vl10m0hy0w2rpn617pcrjl41nbq93l";
-        };
-
-        doCheck = false;
-      };
-    };
-  };
-
-  python3Packages = self.python3.pkgs;
 }

@@ -11,7 +11,7 @@ index 9d6fa23c..9267e689 100644
              'overwrite': False,
              'auto': True,
 -            'backend': u'command',
-+            'backend': u'bs1770gain',
++            'backend': u'ffmpeg',
              'threads': cpu_count(),
              'parallel_on_import': False,
              'per_disc': False,
