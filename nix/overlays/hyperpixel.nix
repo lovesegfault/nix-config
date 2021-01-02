@@ -66,4 +66,6 @@ self: super: {
       };
     };
   };
+
+  python3Packages = self.python3.pkgs;
 }

@@ -1,0 +1,13 @@
+diff --git a/beetsplug/keyfinder.py b/beetsplug/keyfinder.py
+index 702003f0..08689cd8 100644
+--- a/beetsplug/keyfinder.py
++++ b/beetsplug/keyfinder.py
+@@ -31,7 +31,7 @@ class KeyFinderPlugin(BeetsPlugin):
+     def __init__(self):
+         super(KeyFinderPlugin, self).__init__()
+         self.config.add({
+-            u'bin': u'KeyFinder',
++            u'bin': u'keyfinder-cli',
+             u'auto': True,
+             u'overwrite': False,
+         })
