@@ -97,7 +97,7 @@
   ];
 
   networking = {
-    firewall.allowedTCPPorts = [ 3000 9090 9091 ];
+    firewall.allowedTCPPorts = [ 3000 5000 9090 9091 ];
     hostName = "fourier";
     hostId = "80f4ef89";
     # wireless.iwd.enable = true;
