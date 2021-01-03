@@ -66,8 +66,6 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [ docker-compose ];
-
   fileSystems = {
     "/" = {
       device = "tmpfs";
