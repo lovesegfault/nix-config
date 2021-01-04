@@ -3,8 +3,6 @@ self: super: {
 
   python3 = super.python3.override {
     packageOverrides = pySelf: _: {
-      confuse = pySelf.callPackage ./confuse.nix { };
-      mediafile = pySelf.callPackage ./mediafile.nix { };
       reflink = pySelf.callPackage ./reflink.nix { };
     };
   };
