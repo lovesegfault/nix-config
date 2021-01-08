@@ -35,7 +35,7 @@ in
 {
   deploy = {
     autoRollback = true;
-    magicRollback = false;
+    magicRollback = true;
     user = "root";
     nodes = {
       # aurelius = {
