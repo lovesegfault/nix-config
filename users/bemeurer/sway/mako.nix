@@ -10,6 +10,7 @@
       enable = true;
       backgroundColor = "#0a0e14";
       borderColor = "#53bdfa";
+      defaultTimeout = 30 * 1000; # millis
       font = "Iosevka 10";
       iconPath = "${homeIcons}:${systemIcons}:${homePixmaps}:${systemPixmaps}";
       icons = true;
