@@ -13,7 +13,7 @@
 
   home = {
     stateVersion = "20.09";
-    packages = with pkgs; [ exa gist mosh neofetch nix-index ripgrep stcg-build ];
+    packages = with pkgs; [ colorcheck exa gist mosh neofetch nix-index ripgrep stcg-build ];
   };
 
   programs.bat.enable = true;
