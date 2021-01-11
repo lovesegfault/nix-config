@@ -126,7 +126,8 @@
           "${modifier}+Return" = execSpawn "${terminal}";
           "${modifier}+d" = execSpawn "${menu}";
           "${modifier}+m" = execSpawn "${pkgs.emojimenu}/bin/emojimenu";
-          "${modifier}+o" = execSpawn "${pkgs.otpmenu}/bin/otpmenu";
+          "${modifier}+o" = execSpawn "${pkgs.screenocr}/bin/screenocr";
+          "${modifier}+t" = execSpawn "${pkgs.otpmenu}/bin/otpmenu";
           "${modifier}+p" = execSpawn "${pkgs.passmenu}/bin/passmenu";
           "${modifier}+q" = execSpawn "${pkgs.swaylock}/bin/swaylock -f";
           "Mod1+Tab" = " workspace next";
