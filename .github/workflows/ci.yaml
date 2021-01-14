@@ -17,6 +17,7 @@ jobs:
           extra_nix_config: "experimental-features = nix-command flakes"
       - name: lints
         run: |
+          sudo apt-get update && sudo apt-get install -y lsb-release
           nix develop -c pre-commit run --all-files --show-diff-on-failure --color=always || exit 1
 
   get-hosts:
