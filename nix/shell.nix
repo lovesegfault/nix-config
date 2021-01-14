@@ -1,5 +1,6 @@
 { mkShell
 , cachix
+, lsb-release
 , nix-build-uncached
   # , nix-linter
 , nixpkgs-fmt
@@ -13,6 +14,7 @@
   name = "nix-config";
   buildInputs = [
     cachix
+    lsb-release
     nix-build-uncached
     # nix-linter
     nixpkgs-fmt
