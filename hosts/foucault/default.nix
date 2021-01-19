@@ -146,6 +146,7 @@
     hostName = "foucault";
     hostId = "872516b8";
     wireless.iwd.enable = true;
+    networkmanager.enable = lib.mkForce false;
   };
 
   programs.steam.enable = true;
@@ -156,11 +157,11 @@
     { domain = "*"; type = "-"; item = "nproc"; value = "unlimited"; }
   ];
 
-  services.logind.lidSwitchExternalPower = "ignore";
-
-  networking.networkmanager.enable = lib.mkForce false;
-
-  services.udev.packages = with pkgs; [ logitech-udev-rules ];
+  services = {
+    logind.lidSwitchExternalPower = "ignore";
+    udev.packages = with pkgs; [ logitech-udev-rules ];
+    usbmuxd.enable = true;
+  };
 
   systemd.network.networks = {
     lan = {
