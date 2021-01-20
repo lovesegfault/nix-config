@@ -32,7 +32,6 @@
       prusa-slicer
       slack
       spotify
-      super-slicer
       thunderbird
       zoom-us
     ];
