@@ -25,7 +25,7 @@
     binfmt.emulatedSystems = [ "aarch64-linux" ];
     blacklistedKernelModules = [ "nouveau" ];
     initrd.availableKernelModules = [ "thunderbolt" "amdgpu" ];
-    kernelParams = [ "fbcon=map:01" ];
+    kernelParams = [ "fbcon=map:1" ];
   };
 
   environment.systemPackages = with pkgs; [ cntr ];
