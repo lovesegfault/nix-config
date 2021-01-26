@@ -2,7 +2,7 @@
 {
   imports = [
     ../../core
-    ../../core/unbound.nix
+    ../../core/resolved.nix
 
     ../../hardware/rpi4.nix
     ../../hardware/sound.nix
