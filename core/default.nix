@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   dummyConfig = pkgs.writeText "configuration.nix" ''
     assert builtins.trace "This is a dummy config, use deploy-rs!" false;
@@ -16,7 +16,13 @@ in
     ./zsh.nix
   ];
 
-  boot.kernelParams = [ "log_buf_len=10M" ];
+  boot = {
+    kernelParams = [ "log_buf_len=10M" ];
+    initrd = lib.mkIf (lib.versionAtLeast config.boot.kernelPackages.kernel.version "5.9") {
+      compressor = "zstd";
+      compressorArgs = [ "--threads=0" "-19" ];
+    };
+  };
 
   environment.etc."nixos/configuration.nix".source = dummyConfig;
   environment.systemPackages = with pkgs; [ rsync ];
