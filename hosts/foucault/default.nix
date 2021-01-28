@@ -36,7 +36,6 @@
       "/var/lib/docker"
       "/var/lib/iwd"
       "/var/lib/libvirt"
-      "/var/lib/nixus-secrets"
       "/var/lib/tailscale"
 
       "/home/bemeurer/.SuperSlicer"

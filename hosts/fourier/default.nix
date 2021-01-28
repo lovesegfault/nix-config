@@ -42,7 +42,6 @@
       "/var/lib/docker"
       "/var/lib/grafana"
       "/var/lib/iwd"
-      "/var/lib/nixus-secrets"
       "/var/lib/plex"
       "/var/lib/prometheus2"
       "/var/lib/roon-server"
