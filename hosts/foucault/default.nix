@@ -38,7 +38,6 @@
       "/var/lib/libvirt"
       "/var/lib/tailscale"
 
-      "/home/bemeurer/.SuperSlicer"
       "/home/bemeurer/.cache/lollypop"
       "/home/bemeurer/.cache/mozilla"
       "/home/bemeurer/.cache/nvim"
