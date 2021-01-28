@@ -7,21 +7,21 @@ let
       "${pkgs.termite}/bin/termite";
 in
 {
-  swaymenu = import ./swaymenu.nix { inherit pkgs terminal; };
+  sway-launcher-desktop = pkgs.callPackage ./sway-launcher-desktop.nix { inherit terminal; };
 
-  emojimenu = import ./emojimenu.nix { inherit pkgs terminal; };
+  emojimenu = pkgs.callPackage ./emojimenu.nix { inherit terminal; };
 
-  otpmenu = import ./gopassmenu.nix {
-    inherit pkgs terminal;
+  otpmenu = pkgs.callPackage ./gopassmenu.nix {
+    inherit terminal;
     name = "otpmenu";
     filter = "^(otp)/.*$";
-    getter = "${pkgs.gopass}/bin/gopass otp $name | cut -f 1 -d ' '";
+    getter = "otp $name | cut -f 1 -d ' '";
   };
 
-  passmenu = import ./gopassmenu.nix {
-    inherit pkgs terminal;
+  passmenu = pkgs.callPackage ./gopassmenu.nix {
+    inherit terminal;
     name = "passmenu";
     filter = "^(misc|ssh|websites)/.*$";
-    getter = "${pkgs.gopass}/bin/gopass show --password \"$name\"";
+    getter = "show --password \"$name\"";
   };
 }
