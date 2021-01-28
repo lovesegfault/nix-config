@@ -147,7 +147,7 @@
           "XF86MonBrightnessUp" = execSpawn "${pkgs.brillo}/bin/brillo -e -A 0.5";
         };
 
-      menu = "${terminal} -t sway-launcher-desktop -e ${pkgs.sway-launcher-desktop}/bin/sway-launcher-desktop";
+      menu = "${terminal} -t swaymenu -e ${pkgs.sway-launcher-desktop}/bin/sway-launcher-desktop";
 
       modifier = if pkgs.hostPlatform.system == "aarch64-linux" then "Mod1" else "Mod4";
 
@@ -196,7 +196,7 @@
             { command = makeMenuWindow; criteria.title = "emojimenu"; }
             { command = makeMenuWindow; criteria.title = "otpmenu"; }
             { command = makeMenuWindow; criteria.title = "passmenu"; }
-            { command = makeMenuWindow; criteria.title = "sway-launcher-desktop"; }
+            { command = makeMenuWindow; criteria.title = "swaymenu"; }
             { command = "floating enable"; criteria.app_id = "imv"; }
             { command = "floating enable, sticky enable"; criteria = { app_id = "firefox"; title = "Picture-in-Picture"; }; }
           ];
