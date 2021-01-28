@@ -89,7 +89,6 @@
   };
 
   home-manager.users.bemeurer.home.persistence."/nix/state/home/bemeurer".files = [
-    ".gist"
     ".gist-vim"
     ".newsboat/cache.db"
     ".newsboat/history.search"

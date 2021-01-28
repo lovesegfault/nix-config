@@ -127,7 +127,6 @@
       ".config/cachix/cachix.dhall"
       ".config/gh/hosts.yml"
       ".config/zoomus.conf"
-      ".gist"
       ".gist-vim"
       ".newsboat/cache.db"
       ".newsboat/history.search"
