@@ -20,7 +20,7 @@ in
     kernelParams = [ "log_buf_len=10M" ];
     initrd = lib.mkIf (lib.versionAtLeast config.boot.kernelPackages.kernel.version "5.9") {
       compressor = "zstd";
-      compressorArgs = [ "--threads=0" "-19" ];
+      compressorArgs = [ "-19" ];
     };
   };
 
