@@ -82,20 +82,6 @@
         WantedBy = [ "sway-session.target" ];
       };
     };
-    mute = {
-      Unit = {
-        Description = "mute";
-        PartOf = [ "graphical-session.target" ];
-      };
-      Service = {
-        Type = "oneshot";
-        ExecStartPre = "${pkgs.ponymix}/bin/ponymix --source mute";
-        ExecStart = "${pkgs.ponymix}/bin/ponymix --sink mute";
-      };
-      Install = {
-        WantedBy = [ "sway-session.target" ];
-      };
-    };
     polkit = {
       Unit = {
         Description = "polkit-gnome";
