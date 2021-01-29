@@ -4,6 +4,7 @@
 , spawn
 , fzf
 , terminal
+, util-linux
 , makeWrapper
 }: stdenv.mkDerivation rec {
   name = "sway-launcher-desktop";
@@ -17,12 +18,13 @@
   };
 
   nativeBuildInputs = [ makeWrapper ];
-  buildInputs = [ fzf spawn ];
+  buildInputs = [ fzf spawn util-linux ];
 
   postPatch = ''
     substituteInPlace sway-launcher-desktop.sh \
-      --replace 'bash -c "''${CMD}"' 'spawn "''${CMD}"' \
-      --replace '/bin/sh' '${stdenv.shell}'
+      --replace 'bash' '${stdenv.shell}' \
+      --replace '/bin/sh' '${stdenv.shell}' \
+      --replace '${stdenv.shell} -c "''${CMD}"' 'spawn ''${CMD}'
   '';
 
   installPhase = ''
@@ -32,7 +34,7 @@
     cp sway-launcher-desktop.sh $out/bin/sway-launcher-desktop
     wrapProgram $out/bin/sway-launcher-desktop \
       --set TERMINAL_COMMAND "${terminal} -e" \
-      --prefix PATH : ${lib.makeBinPath [ spawn fzf ]}
+      --prefix PATH : ${lib.makeBinPath [ spawn fzf util-linux ]}
 
     runHook postInstall
   '';

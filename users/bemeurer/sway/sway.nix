@@ -124,7 +124,7 @@
           "${modifier}+Shift+0" = "move container to workspace 9:κ";
           # normal ones
           "${modifier}+Return" = execSpawn "${terminal}";
-          "${modifier}+d" = execSpawn "${menu}";
+          "${modifier}+d" = "exec ${terminal} -t swaymenu -e ${pkgs.sway-launcher-desktop}/bin/sway-launcher-desktop";
           "${modifier}+m" = execSpawn "${pkgs.emojimenu}/bin/emojimenu";
           "${modifier}+o" = execSpawn "${pkgs.screenocr}/bin/screenocr";
           "${modifier}+t" = execSpawn "${pkgs.otpmenu}/bin/otpmenu";
@@ -146,8 +146,6 @@
           "XF86MonBrightnessDown" = execSpawn "${pkgs.brillo}/bin/brillo -e -U 0.5";
           "XF86MonBrightnessUp" = execSpawn "${pkgs.brillo}/bin/brillo -e -A 0.5";
         };
-
-      menu = "${terminal} -t swaymenu -e ${pkgs.sway-launcher-desktop}/bin/sway-launcher-desktop";
 
       modifier = if pkgs.hostPlatform.system == "aarch64-linux" then "Mod1" else "Mod4";
 

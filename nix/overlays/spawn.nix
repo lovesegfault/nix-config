@@ -7,9 +7,10 @@ self: _: {
     set -o xtrace
 
     [ "$#" -ge 1 ] || exit 1
-    program="$1"
+    read -ra cmd <<<"$*"
+    program="''${cmd[0]}"
     name="$(${self.coreutils}/bin/basename "$program")"
     uuid="$(${self.utillinux}/bin/uuidgen)"
-    exec ${self.systemd}/bin/systemd-run --user --scope --unit "run-$name-$uuid" "$@"
+    exec ${self.systemd}/bin/systemd-run --user --scope --unit "run-$name-$uuid" "''${cmd[@]}"
   '';
 }
