@@ -120,7 +120,6 @@
     ];
     home.persistence."/state/home/bemeurer".files = [
       ".arcrc"
-      ".cache/.bluetoothctl_history"
       ".cache/.sway-launcher-desktop-wrapped-history.txt"
       ".cache/cargo/credentials"
       ".config/beets/config.yaml"
