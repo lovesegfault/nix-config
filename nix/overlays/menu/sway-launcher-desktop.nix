@@ -20,9 +20,9 @@
   buildInputs = [ fzf spawn ];
 
   postPatch = ''
-    sed -i \
-      's/bash -c "''${CMD}"/spawn "''${CMD}"/' \
-      sway-launcher-desktop.sh
+    substituteInPlace sway-launcher-desktop.sh \
+      --replace 'bash -c "''${CMD}"' 'spawn "''${CMD}"' \
+      --replace '/bin/sh' '${stdenv.shell}'
   '';
 
   installPhase = ''
