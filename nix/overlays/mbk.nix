@@ -1,37 +1,43 @@
 self: _: {
-  mbk =
-    let
-      gsutil = "${self.google-cloud-sdk}/bin/gsutil";
-    in
-    self.writeScriptBin "mbk" ''
-      #!${self.stdenv.shell}
+  mbk = self.callPackage
+    (
+      { writeShellScriptBin
+      , google-cloud-sdk
+      , lib
+      }: writeShellScriptBin "mbk" ''
+        set -o errexit
+        set -o nounset
+        set -o pipefail
 
-      DOCUMENTS_BUCKET="gs://documents.meurer.org"
-      MISC_BUCKET="gs://misc.meurer.org"
-      MUSIC_BUCKET="gs://music.meurer.org"
-      PICTURES_BUCKET="gs://pictures.meurer.org"
+        export PATH="${lib.makeBinPath [ google-cloud-sdk ]}:$PATH"
 
-      function backup() {
-          local src="$1"
-          local dst="$2"
+        DOCUMENTS_BUCKET="gs://documents.meurer.org"
+        MISC_BUCKET="gs://misc.meurer.org"
+        MUSIC_BUCKET="gs://music.meurer.org"
+        PICTURES_BUCKET="gs://pictures.meurer.org"
 
-          if [ -z ''${DEBUG+x} ]; then
-              ${gsutil} -m rsync -d -r "$src" "$dst"
-          else
-              ${gsutil} -m rsync -d -r -n "$src" "$dst"
-          fi
-      }
+        function backup() {
+            local src="$1"
+            local dst="$2"
 
-      function main() {
-          # main dirs
-          backup "$HOME/documents" "$DOCUMENTS_BUCKET"
-          backup "$HOME/music" "$MUSIC_BUCKET"
-          backup "$HOME/pictures" "$PICTURES_BUCKET"
-          # weirder state dirs
-          backup "$HOME/.local/share/shotwell" "$MISC_BUCKET/shotwell"
-          backup "$HOME/.local/share/lollypop" "$MISC_BUCKET/lollypop"
-      }
+            if [ -z ''${DEBUG+x} ]; then
+                gsutil -m rsync -d -r "$src" "$dst"
+            else
+                gsutil -m rsync -d -r -n "$src" "$dst"
+            fi
+        }
 
-      main
-    '';
+        function main() {
+            # main dirs
+            backup "$HOME/documents" "$DOCUMENTS_BUCKET"
+            backup "$HOME/music" "$MUSIC_BUCKET"
+            backup "$HOME/pictures" "$PICTURES_BUCKET"
+            # weirder state dirs
+            backup "$HOME/.local/share/shotwell" "$MISC_BUCKET/shotwell"
+            backup "$HOME/.local/share/lollypop" "$MISC_BUCKET/lollypop"
+        }
+
+        main
+      '';
+    ) { };
 }
