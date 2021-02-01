@@ -23,7 +23,6 @@
       xdg_utils
     ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
       discord
-      gimp
       gnome3.evince
       gnome3.shotwell
       imv
