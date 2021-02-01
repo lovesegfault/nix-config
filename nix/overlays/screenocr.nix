@@ -1,13 +1,24 @@
 self: _: {
-  screenocr = self.writeScriptBin "screenocr" ''
-    #!${self.stdenv.shell}
-    set -o errexit
-    set -o nounset
-    set -o pipefail
+  screenocr = self.callPackage
+    (
+      { writeShellScriptBin
+      , coreutils
+      , grim
+      , lib
+      , slurp
+      , tesseract4
+      , wl-clipboard
+      }: writeShellScriptBin "screenocr" ''
+        set -o errexit
+        set -o nounset
+        set -o pipefail
 
-    ${self.grim}/bin/grim -t png -g "$(${self.slurp}/bin/slurp)" - \
-      | ${self.tesseract4}/bin/tesseract stdin stdout -l "eng+equ" \
-      | ${self.coreutils}/bin/tr -d '\f' \
-      | ${self.wl-clipboard}/bin/wl-copy
-  '';
+        export PATH="${lib.makeBinPath [ coreutils grim slurp tesseract4 wl-clipboard ]}:$PATH"
+
+        grim -t png -g "$(slurp)" - \
+          | tesseract stdin stdout -l "eng+equ" \
+          | tr -d '\f' \
+          | wl-copy
+      ''
+    ) { };
 }
