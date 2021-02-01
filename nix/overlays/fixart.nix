@@ -8,7 +8,7 @@ self: _: {
       }: writeSaneShellScriptBin {
         name = "fixart";
         buildInputs = [ beets coreutils findutils ];
-        script = ''
+        src = ''
           trap ctrl_c INT
 
           function ctrl_c() {

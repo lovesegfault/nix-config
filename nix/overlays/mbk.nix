@@ -6,7 +6,7 @@ self: _: {
 
         buildInputs = [ google-cloud-sdk ];
 
-        script = ''
+        src = ''
           DOCUMENTS_BUCKET="gs://documents.meurer.org"
           MISC_BUCKET="gs://misc.meurer.org"
           MUSIC_BUCKET="gs://music.meurer.org"

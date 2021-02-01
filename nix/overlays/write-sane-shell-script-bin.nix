@@ -9,7 +9,7 @@ self: _: {
       , runtimeShell
       }: (
         { name
-        , script
+        , src
         , buildInputs ? [ ]
         , checkPhase ? ""
         }: writeTextFile {
@@ -23,7 +23,7 @@ self: _: {
             set -o pipefail
 
             export PATH="${lib.makeBinPath buildInputs}"
-          '' + script;
+          '' + src;
 
           checkPhase = checkPhase + ''
             ${stdenv.shell} -n $out/bin/${name}

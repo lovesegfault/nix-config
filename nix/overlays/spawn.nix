@@ -10,7 +10,7 @@ self: _: {
 
         buildInputs = [ coreutils systemd util-linux ];
 
-        script = ''
+        src = ''
           [ "$#" -ge 1 ] || exit 1
           read -ra cmd <<<"$*"
           program="''${cmd[0]}"

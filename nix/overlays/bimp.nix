@@ -18,7 +18,7 @@ self: _: {
           parallel
         ];
 
-        script = ''
+        src = ''
           function error() {
               local red
               local reset

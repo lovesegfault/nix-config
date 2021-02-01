@@ -12,7 +12,7 @@ self: _: {
 
         buildInputs = [ coreutils grim slurp tesseract4 wl-clipboard ];
 
-        script = ''
+        src = ''
           grim -t png -g "$(slurp)" - \
             | tesseract stdin stdout -l "eng+equ" \
             | tr -d '\f' \
