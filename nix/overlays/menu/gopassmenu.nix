@@ -34,12 +34,7 @@ writeSaneShellScriptBin {
             exit 1
         else
             touch "$gopassmenu_lock"
-        fi
-    }
-
-    function gopassmenu_unlock() {
-        if [[ -f "$gopassmenu_lock" ]]; then
-            rm -f "$gopassmenu_lock"
+            trap 'rm -f $gopassmenu_lock' EXIT
         fi
     }
 
@@ -51,12 +46,11 @@ writeSaneShellScriptBin {
     function gopassmenu_backend() {
         gopassmenu_lock
         export GOPASSMENU_FRONTEND=1
-        ${terminal} -t ${name} -e "$gopassmenu_path"
+        ${terminal} -t ${name} -e "$gopassmenu_path" || true
 
         name="$(cat "$gopassmenu_fifo")"
         rm -f "$gopassmenu_fifo"
         if [ "$name" == "" ]; then
-            gopassmenu_unlock
             exit 1
         fi
 
@@ -64,7 +58,6 @@ writeSaneShellScriptBin {
         password="$(gopass ${getter})"
 
         wl-copy -o "$password"
-        gopassmenu_unlock
     }
 
     if [[ -v GOPASSMENU_FRONTEND ]]; then

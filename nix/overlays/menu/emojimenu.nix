@@ -37,12 +37,7 @@ writeSaneShellScriptBin {
         exit 1
       else
         touch "$emojimenu_lock"
-      fi
-    }
-
-    function emojimenu_unlock() {
-      if [[ -f "$emojimenu_lock" ]]; then
-        rm -f "$emojimenu_lock"
+        trap 'rm -f $emojimenu_lock' EXIT
       fi
     }
 
@@ -54,17 +49,15 @@ writeSaneShellScriptBin {
     function emojimenu_backend() {
       emojimenu_lock
       export EMOJIMENU_FRONTEND=1
-      ${terminal} -t emojimenu -e "$emojimenu_path"
+      ${terminal} -t emojimenu -e "$emojimenu_path" || true
 
       emoji="$(cat "$emojimenu_fifo")"
       rm -f "$emojimenu_fifo"
       if [ "$emoji" == "" ]; then
-        emojimenu_unlock
         exit 1
       fi
 
       echo "$emoji" | wl-copy -n
-      emojimenu_unlock
     }
 
     if [[ -v EMOJIMENU_FRONTEND ]]; then
