@@ -22,7 +22,7 @@ self: _: {
             set -o nounset
             set -o pipefail
 
-            export PATH="${lib.makeBinPath buildInputs}"
+            export PATH="$PATH:${lib.makeBinPath buildInputs}"
           '' + src;
 
           checkPhase = checkPhase + ''
