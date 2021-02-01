@@ -6,68 +6,71 @@
 , libnotify
 , runCommand
 , wl-clipboard
-, writeScriptBin
+, writeSaneShellScriptBin
 
 , terminal
 }:
 let
   emoji_json = fetchurl {
     name = "emojis.json";
-    url = "https://raw.githubusercontent.com/github/gemoji/d98617abf23cee2594381045440ad3cce490d12c/db/emoji.json";
-    sha256 = "0dd1mlhw2cfpr4l06f12xmapypvmg3299nxkqs0af8l8whq97jnz";
+    url = "https://raw.githubusercontent.com/github/gemoji/b1c7878afeb260d2ff6dc6655bf3aa7dee498e9c/db/emoji.json";
+    sha256 = "sha256-bL+4ft3yzVUnVxDg7cwoS2hvbeqEKvhx77QjEgR+Yhk=";
   };
   emojis = runCommand "emojis.txt"
     { nativeBuildInputs = [ jq ]; } ''
     cat ${emoji_json} | jq -r '.[] | "\(.emoji) \t   \(.description)"' | sed -e 's,\\t,\t,g' > $out
   '';
 in
-writeScriptBin "emojimenu" ''
-  #!${stdenv.shell}
-  export PATH="${lib.makeBinPath [ fzf libnotify wl-clipboard ]}:$PATH"
+writeSaneShellScriptBin {
+  name = "emojimenu";
 
-  emojimenu_path="$(readlink -f "$0")"
-  emojimenu_fifo="/tmp/emojimenu_fifo"
-  emojimenu_lock="/tmp/emojimenu_lock"
+  buildInputs = [ fzf libnotify wl-clipboard ];
 
-  function emojimenu_lock() {
-    if [[ -f "$emojimenu_lock" ]]; then
-      notify-send "✖️ emojimenu already running"
-      exit 1
-    else
-      touch "$emojimenu_lock"
-    fi
-  }
+  src = ''
+    emojimenu_path="$(readlink -f "$0")"
+    emojimenu_fifo="/tmp/emojimenu_fifo"
+    emojimenu_lock="/tmp/emojimenu_lock"
 
-  function emojimenu_unlock() {
-    if [[ -f "$emojimenu_lock" ]]; then
-      rm -f "$emojimenu_lock"
-    fi
-  }
+    function emojimenu_lock() {
+      if [[ -f "$emojimenu_lock" ]]; then
+        notify-send "✖️ emojimenu already running"
+        exit 1
+      else
+        touch "$emojimenu_lock"
+      fi
+    }
 
-  function emojimenu_frontend() {
-    emoji="$(fzf < ${emojis} | cut -f 1 | tr -d '\n')"
-    echo "$emoji" > "$emojimenu_fifo"
-  }
+    function emojimenu_unlock() {
+      if [[ -f "$emojimenu_lock" ]]; then
+        rm -f "$emojimenu_lock"
+      fi
+    }
 
-  function emojimenu_backend() {
-    emojimenu_lock
-    export EMOJIMENU_FRONTEND=1
-    ${terminal} -t emojimenu -e "$emojimenu_path"
+    function emojimenu_frontend() {
+      emoji="$(fzf < ${emojis} | cut -f 1 | tr -d '\n')"
+      echo "$emoji" > "$emojimenu_fifo"
+    }
 
-    emoji="$(cat "$emojimenu_fifo")"
-    rm -f "$emojimenu_fifo"
-    if [ "$emoji" == "" ]; then
+    function emojimenu_backend() {
+      emojimenu_lock
+      export EMOJIMENU_FRONTEND=1
+      ${terminal} -t emojimenu -e "$emojimenu_path"
+
+      emoji="$(cat "$emojimenu_fifo")"
+      rm -f "$emojimenu_fifo"
+      if [ "$emoji" == "" ]; then
+        emojimenu_unlock
+        exit 1
+      fi
+
+      echo "$emoji" | wl-copy -n
       emojimenu_unlock
-      exit 1
+    }
+
+    if [[ -v EMOJIMENU_FRONTEND ]]; then
+      emojimenu_frontend
+    else
+      emojimenu_backend
     fi
-
-    echo "$emoji" | wl-copy -n
-    emojimenu_unlock
-  }
-
-  if [[ -v EMOJIMENU_FRONTEND ]]; then
-    emojimenu_frontend
-  else
-    emojimenu_backend
-  fi
-''
+  '';
+}
