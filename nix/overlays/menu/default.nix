@@ -1,24 +1,24 @@
-pkgs: _:
+self: _:
 let
   terminal =
-    if pkgs.hostPlatform.system == "x86_64-linux" then
-      "${pkgs.alacritty}/bin/alacritty"
+    if self.hostPlatform.system == "x86_64-linux" then
+      "${self.alacritty}/bin/alacritty"
     else
-      "${pkgs.termite}/bin/termite";
+      "${self.termite}/bin/termite";
 in
 {
-  sway-launcher-desktop = pkgs.callPackage ./sway-launcher-desktop.nix { inherit terminal; };
+  sway-launcher-desktop = self.callPackage ./sway-launcher-desktop.nix { inherit terminal; };
 
-  emojimenu = pkgs.callPackage ./emojimenu.nix { inherit terminal; };
+  emojimenu = self.callPackage ./emojimenu.nix { inherit terminal; };
 
-  otpmenu = pkgs.callPackage ./gopassmenu.nix {
+  otpmenu = self.callPackage ./gopassmenu.nix {
     inherit terminal;
     name = "otpmenu";
     filter = "^(otp)/.*$";
     getter = "otp \"$name\" | cut -f 1 -d ' '";
   };
 
-  passmenu = pkgs.callPackage ./gopassmenu.nix {
+  passmenu = self.callPackage ./gopassmenu.nix {
     inherit terminal;
     name = "passmenu";
     filter = "^(misc|ssh|websites)/.*$";
