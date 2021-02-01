@@ -15,7 +15,7 @@ in
     inherit terminal;
     name = "otpmenu";
     filter = "^(otp)/.*$";
-    getter = "otp $name | cut -f 1 -d ' '";
+    getter = "otp \"$name\" | cut -f 1 -d ' '";
   };
 
   passmenu = pkgs.callPackage ./gopassmenu.nix {
