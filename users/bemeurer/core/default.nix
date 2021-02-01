@@ -16,9 +16,11 @@
     packages = with pkgs; [ colorcheck exa mosh neofetch ripgrep ];
   };
 
-  programs.bat.enable = true;
-  programs.fzf.enable = true;
-  programs.gpg.enable = true;
+  programs = {
+    bat.enable = true;
+    fzf.enable = true;
+    gpg.enable = true;
+  };
 
   systemd.user.startServices = "sd-switch";
 
