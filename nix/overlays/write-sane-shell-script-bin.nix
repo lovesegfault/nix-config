@@ -23,7 +23,9 @@ self: _: {
             set -o pipefail
 
             export PATH="$PATH:${lib.makeBinPath buildInputs}"
-          '' + src;
+
+            ${src}
+          '';
 
           checkPhase = checkPhase + ''
             ${stdenv.shell} -n $out/bin/${name}
