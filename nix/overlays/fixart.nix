@@ -1,32 +1,42 @@
 self: _: {
-  fixart = self.writeScriptBin "fixart" ''
-    #!${self.stdenv.shell}
-    set -o errexit
-    set -o nounset
-    set -o pipefail
+  fixart = self.callPackage
+    (
+      { writeShellScriptBin
+      , beets
+      , coreutils
+      , findutils
+      , lib
+      }: writeShellScriptBin "fixart" ''
+        set -o errexit
+        set -o nounset
+        set -o pipefail
 
-    trap ctrl_c INT
+        export PATH="${lib.makeBinPath [ beets coreutils findutils ]}:$PATH"
 
-    function ctrl_c() {
-        exit 1;
-    }
+        trap ctrl_c INT
 
-    newart=$1
-    [ $# -gt 1 ] || exit 1
+        function ctrl_c() {
+            exit 1;
+        }
 
-    ${self.beets}/bin/beet clearart "''${@:2}"
-    ${self.beets}/bin/beet embedart -f "$newart" "''${@:2}"
-    ${self.beets}/bin/beet extractart -a "''${@:2}"
+        newart=$1
+        [ $# -gt 1 ] || exit 1
 
-    outpath="$(${self.beets}/bin/beet ls -a -p "''${@:2}")"
+        beet clearart "''${@:2}"
+        beet embedart -f "$newart" "''${@:2}"
+        beet extractart -a "''${@:2}"
 
-    jpgs="$(${self.findutils}/bin/find "$outpath" -type f -name "*.jpg" | ${self.coreutils}/bin/wc -l)"
-    [ "$jpgs" -eq 1 ] || exit 1
-    echo "OK: cover count"
+        outpath="$(beet ls -a -p "''${@:2}")"
 
-    original="$(${self.coreutils}/bin/sha256sum "$newart" | cut -f 1 -d " ")"
-    updated="$(${self.coreutils}/bin/sha256sum "$outpath/cover.jpg" | cut -f 1 -d " ")"
-    [ "$original" == "$updated" ] || exit 1
-    echo "OK: SHA"
-  '';
+        jpgs="$(find "$outpath" -type f -name "*.jpg" | wc -l)"
+        [ "$jpgs" -eq 1 ] || exit 1
+        echo "OK: cover count"
+
+        original="$(sha256sum "$newart" | cut -f 1 -d " ")"
+        updated="$(sha256sum "$outpath/cover.jpg" | cut -f 1 -d " ")"
+        [ "$original" == "$updated" ] || exit 1
+        echo "OK: SHA"
+      ''
+    )
+    { };
 }
