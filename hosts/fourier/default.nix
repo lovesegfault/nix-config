@@ -88,11 +88,14 @@
     pulseaudio.enable = lib.mkForce false;
   };
 
-  home-manager.users.bemeurer.home.persistence."/nix/state/home/bemeurer".files = [
-    ".gist-vim"
-    ".newsboat/cache.db"
-    ".newsboat/history.search"
-  ];
+  home-manager.users.bemeurer.home.persistence."/nix/state/home/bemeurer" = {
+    allowOther = true;
+    files = [
+      ".gist-vim"
+      ".newsboat/cache.db"
+      ".newsboat/history.search"
+    ];
+  };
 
   networking = {
     firewall.allowedTCPPorts = [ 3000 5000 9090 9091 ];

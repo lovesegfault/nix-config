@@ -118,20 +118,23 @@
       ../../users/bemeurer/music
       ../../users/bemeurer/trusted
     ];
-    home.persistence."/state/home/bemeurer".files = [
-      ".arcrc"
-      ".cache/.sway-launcher-desktop-wrapped-history.txt"
-      ".cache/cargo/credentials"
-      ".config/beets/config.yaml"
-      ".config/cachix/cachix.dhall"
-      ".config/gh/hosts.yml"
-      ".config/zoomus.conf"
-      ".gist-vim"
-      ".newsboat/cache.db"
-      ".newsboat/history.search"
-      ".vault-token"
-      ".wall"
-    ];
+    home.persistence."/state/home/bemeurer" = {
+      allowOther = true;
+      files = [
+        ".arcrc"
+        ".cache/.sway-launcher-desktop-wrapped-history.txt"
+        ".cache/cargo/credentials"
+        ".config/beets/config.yaml"
+        ".config/cachix/cachix.dhall"
+        ".config/gh/hosts.yml"
+        ".config/zoomus.conf"
+        ".gist-vim"
+        ".newsboat/cache.db"
+        ".newsboat/history.search"
+        ".vault-token"
+        ".wall"
+      ];
+    };
   };
 
   networking = {
