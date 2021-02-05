@@ -134,7 +134,7 @@
           "Mod4+Tab" = " workspace prev";
           "Mod4+comma" = " workspace prev";
           "Mod4+period" = " workspace next";
-          "Print" = execSpawn "${pkgs.grim}/bin/grim -t png -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy -t image/png";
+          "Print" = execSpawn "${pkgs.screenshot}/bin/screenshot";
           "XF86AudioLowerVolume" = execSpawn "${pkgs.ponymix}/bin/ponymix decrease 1";
           "XF86AudioMicMute" = execSpawn "${pkgs.ponymix}/bin/ponymix -t source toggle";
           "XF86AudioMute" = execSpawn "${pkgs.ponymix}/bin/ponymix -t sink toggle";
