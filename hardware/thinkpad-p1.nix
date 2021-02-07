@@ -26,8 +26,8 @@
 
   hardware = {
     brillo.enable = true;
-    enableRedistributableFirmware = true;
     enableAllFirmware = true;
+    i2c.enable = true;
   };
 
   nix = {
