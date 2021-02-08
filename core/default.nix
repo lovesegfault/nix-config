@@ -16,13 +16,7 @@ in
     ./zsh.nix
   ];
 
-  boot = {
-    kernelParams = [ "log_buf_len=10M" ];
-    initrd = lib.mkIf (lib.versionAtLeast config.boot.kernelPackages.kernel.version "5.9") {
-      compressor = "zstd";
-      compressorArgs = [ "-19" ];
-    };
-  };
+  boot.kernelParams = [ "log_buf_len=10M" ];
 
   environment.etc."nixos/configuration.nix".source = dummyConfig;
   environment.systemPackages = with pkgs; [ rsync ];
