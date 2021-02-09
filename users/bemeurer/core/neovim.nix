@@ -21,8 +21,9 @@
       plugins = with pkgs.vimPlugins; [
         # Completion/IDE
         ale
-        coc-nvim
+        coc-diagnostic
         coc-json
+        coc-nvim
         coc-rust-analyzer
         coc-tabnine
 
@@ -683,6 +684,17 @@
   };
 
   xdg.configFile."nvim/coc-settings.json".text = builtins.toJSON {
-    "rust-analyzer.serverPath" = "rust-analyzer";
+    rust-analyzer = {
+      serverPath = "rust-analyzer";
+    };
+    diagnostic-languageserver = {
+      filetypes = {
+        markdown = "mdl";
+        sh = "shellcheck";
+      };
+      formatFiletypes = {
+        sh = "shfmt";
+      };
+    };
   };
 }
