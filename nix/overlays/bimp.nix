@@ -40,7 +40,7 @@ self: _: {
 
           function reencodeFlac() {
             local mus="$1"
-            find "$mus" -name "*.flac" | parallel --will-cite flac -V -e --best -f {}
+            find "$mus" -name "*.flac" | parallel --will-cite flac -p -e --best -f {}
           }
 
           function importMus() {
