@@ -39,9 +39,11 @@
 
   environment.persistence."/nix/state" = {
     directories = [
+      "/var/cache/jellyfin"
       "/var/lib/docker"
       "/var/lib/grafana"
       "/var/lib/iwd"
+      "/var/lib/jellyfin"
       "/var/lib/plex"
       "/var/lib/prometheus2"
       "/var/lib/roon-server"
@@ -98,7 +100,12 @@
   };
 
   networking = {
-    firewall.allowedTCPPorts = [ 3000 5000 9090 9091 ];
+    firewall.allowedTCPPorts = [
+      3000 # grafana
+      8096 # jellyfin
+      9090 # prometheus
+      9091 # prometheus
+    ];
     hostName = "fourier";
     hostId = "80f4ef89";
     # wireless.iwd.enable = true;
@@ -134,6 +141,7 @@
       enable = true;
       openFirewall = true;
     };
+    jellyfin.enable = true;
     plex = {
       enable = true;
       openFirewall = true;
@@ -187,7 +195,7 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  users.groups.media.members = [ "bemeurer" "roon-server" "plex" ];
+  users.groups.media.members = [ "bemeurer" "jellyfin" "roon-server" "plex" ];
 
   virtualisation.docker.enable = true;
 }
