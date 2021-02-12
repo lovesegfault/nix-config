@@ -13,8 +13,8 @@
   src = fetchFromGitHub {
     owner = "Biont";
     repo = name;
-    rev = "1ac6d768619aab8e80c63d47e69aa65f27aa47ce";
-    sha256 = "sha256-0uK00NyRTCB9V4KxjAWtjF/R5ivoot4l8amLy0t8bfE=";
+    rev = "fda862a4d5958fa4fbc9668b99339c7a1e584584";
+    sha256 = "sha256-CePiZhNQkZxXZ6bbmUgsrgwnLxlH6o2oV9W/UKb3V1c=";
   };
 
   nativeBuildInputs = [ makeWrapper ];
