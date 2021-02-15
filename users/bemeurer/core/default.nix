@@ -4,7 +4,6 @@
     ./git.nix
     ./htop.nix
     ./neovim.nix
-    ./newsboat.nix
     ./starship.nix
     ./tmux.nix
     ./xdg.nix
