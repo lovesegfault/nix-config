@@ -55,7 +55,6 @@
       "/home/bemeurer/.config/shotwell"
       "/home/bemeurer/.gnupg"
       "/home/bemeurer/.gsutil"
-      "/home/bemeurer/.local/share/Steam"
       "/home/bemeurer/.local/share/TabNine"
       "/home/bemeurer/.local/share/bash"
       "/home/bemeurer/.local/share/iwctl"
@@ -142,8 +141,6 @@
     wireless.iwd.enable = true;
     networkmanager.enable = lib.mkForce false;
   };
-
-  programs.steam.enable = true;
 
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
