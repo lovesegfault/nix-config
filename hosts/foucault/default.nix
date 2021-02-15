@@ -15,7 +15,6 @@
     ../../hardware/zfs.nix
 
     ../../sway
-    ../../sway/printing.nix
     ../../sway/trusted.nix
 
     ../../users/bemeurer
