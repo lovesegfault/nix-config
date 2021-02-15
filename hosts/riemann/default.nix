@@ -21,7 +21,7 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [ raspberrypi-tools ];
+  environment.systemPackages = with pkgs; [ libraspberrypi ];
 
   fileSystems = lib.mkForce {
     "/boot" = {
