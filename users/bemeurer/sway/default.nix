@@ -112,22 +112,6 @@
         WantedBy = [ "sway-session.target" ];
       };
     };
-    # sway = {
-    #   Unit = {
-    #     Description = "sway";
-    #     Documentation = [ "man:sway(5)" ];
-    #     BindsTo = [ "graphical-session.target" ];
-    #     Wants = [ "graphical-session-pre.target" ];
-    #     After = [ "graphical-session-pre.target" ];
-    #   };
-    #   Service = {
-    #     Type = "simple";
-    #     ExecStart = "${config.wayland.windowManager.sway.package}/bin/sway -d";
-    #     Restart = "on-failure";
-    #     RestartSec = 1;
-    #     TimeoutStopSec = 10;
-    #   };
-    # };
     swayidle = {
       Unit = {
         Description = "swayidle";
