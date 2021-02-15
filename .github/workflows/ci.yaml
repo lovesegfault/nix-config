@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - try
       - flake-update
 jobs:
   lints:
