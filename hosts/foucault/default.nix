@@ -32,7 +32,6 @@
     directories = [
       "/var/lib/bluetooth"
       "/var/lib/boltd"
-      "/var/lib/docker"
       "/var/lib/iwd"
       "/var/lib/libvirt"
       "/var/lib/tailscale"
