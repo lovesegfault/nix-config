@@ -20,7 +20,6 @@
       enable = true;
       plugins = with pkgs.vimPlugins; [
         # Completion/IDE
-        ale
         coc-diagnostic
         coc-json
         coc-nvim
@@ -414,33 +413,6 @@
                 let @" = l:saved_reg
             endfunction
           '';
-          aleConfig = ''
-            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            " => ALE
-            """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            let g:ale_disable_lsp = 1
-            " Only run linters named in ale_linters settings.
-            let g:ale_linters_explicit = 1
-            " Always apply ALEFix on save
-            let g:ale_fix_on_save = 1
-            nmap <silent> <C-e> <Plug>(ale_next_wrap)
-            let g:ale_linters = {
-                \ 'c': ['cppcheck', 'flawfinder'],
-                \ 'cpp': ['cppcheck', 'flawfinder'],
-                \ 'markdown': ['mdl', 'proselint', 'languagetool'],
-                \ 'python': ['bandit', 'pylama', 'vulture'],
-                \ 'text': ['proselint', 'languagetool'],
-            \ }
-            let g:ale_fixers = {
-                \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-                \ 'c':['clang-format'],
-                \ 'cpp':['clang-format'],
-                \ 'json':['fixjson'],
-                \ 'python':['isort', 'autopep8'],
-                \ 'rust':['rustfmt'],
-                \ 'sh':['shfmt'],
-            \ }
-          '';
           ayuConfig = ''
             """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
             " => ayu-vim
@@ -671,7 +643,6 @@
         ''
           ${baseConfig}
 
-          ${aleConfig}
           ${ayuConfig}
           ${cocConfig}
           ${editorConfigConfig}
