@@ -683,18 +683,17 @@
     };
   };
 
-  xdg.configFile."nvim/coc-settings.json".text = builtins.toJSON {
-    rust-analyzer = {
-      serverPath = "rust-analyzer";
-    };
-    diagnostic-languageserver = {
-      filetypes = {
-        markdown = "mdl";
-        sh = "shellcheck";
-      };
-      formatFiletypes = {
-        sh = "shfmt";
-      };
-    };
-  };
+  xdg.configFile."nvim/coc-settings.json".text = ''
+    {
+      "rust-analyzer.server.path": "rust-analyzer",
+      "diagnostic-languageserver.filetypes": {
+        "markdown": "mdl",
+        "sh": "shellcheck"
+      },
+      "diagnostic-languageserver.formatFiletypes": {
+        "sh": "shfmt"
+      },
+      "coc.preferences.formatOnSaveFiletypes": ["rust"]
+    }
+  '';
 }
