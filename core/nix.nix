@@ -1,9 +1,13 @@
 { config, pkgs, ... }: {
   nix = {
     allowedUsers = [ "@wheel" ];
-    binaryCaches = [ "https://nix-config.cachix.org" ];
+    binaryCaches = [
+      "https://nix-config.cachix.org"
+      "https://nix-community.cachix.org"
+    ];
     binaryCachePublicKeys = [
       "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
     daemonIONiceLevel = 5;
     daemonNiceLevel = 10;
