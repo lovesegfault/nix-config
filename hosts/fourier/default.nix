@@ -112,6 +112,7 @@
       allowedUDPPorts = [
         137 # samba
         138 # samba
+        139 # samba
       ];
     };
     hostName = "fourier";
