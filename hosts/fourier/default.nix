@@ -171,6 +171,22 @@
       group = "media";
       openFirewall = true;
     };
+    samba = {
+      enable = true;
+      extraConfig = ''
+        workgroup = MUSIC
+        hosts allow = 10.0.0.0/24 localhost
+        hosts deny = 0.0.0.0/0
+        guest account = nobody
+        map to guest = bad user
+      '';
+      shares.music = {
+        path = "/srv/music";
+        "read only" = "yes";
+        browseable = "yes";
+        "guest ok" = "yes";
+      };
+    };
     smartd.enable = true;
     zfs.autoScrub.pools = [ "tank" ];
     zfs.autoSnapshot = {
