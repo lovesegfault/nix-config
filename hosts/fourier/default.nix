@@ -187,7 +187,8 @@
         hosts deny = 0.0.0.0/0
         guest account = nobody
         map to guest = bad user
-        ntlm auth = yes
+        ntlm auth = ntlmv1-permitted
+        min protocol = NT1
       '';
       shares.music = {
         path = "/srv/music";
