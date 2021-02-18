@@ -182,7 +182,6 @@
     samba = {
       enable = true;
       extraConfig = ''
-        workgroup = MUSIC
         hosts allow = 10.0.0.0/24 localhost
         hosts deny = 0.0.0.0/0
         guest account = nobody
