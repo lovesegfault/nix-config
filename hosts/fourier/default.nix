@@ -186,6 +186,7 @@
         hosts deny = 0.0.0.0/0
         guest account = nobody
         map to guest = bad user
+        ntlm auth = yes
       '';
       shares.music = {
         path = "/srv/music";
