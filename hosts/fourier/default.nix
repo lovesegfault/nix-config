@@ -100,12 +100,20 @@
   };
 
   networking = {
-    firewall.allowedTCPPorts = [
-      3000 # grafana
-      8096 # jellyfin
-      9090 # prometheus
-      9091 # prometheus
-    ];
+    firewall = {
+      allowedTCPPorts = [
+        139 # samba
+        445 # samba
+        3000 # grafana
+        8096 # jellyfin
+        9090 # prometheus
+        9091 # prometheus
+      ];
+      allowedUDPPorts = [
+        137 # samba
+        138 # samba
+      ];
+    };
     hostName = "fourier";
     hostId = "80f4ef89";
     # wireless.iwd.enable = true;
