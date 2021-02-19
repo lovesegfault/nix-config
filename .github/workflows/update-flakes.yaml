@@ -1,7 +1,7 @@
 name: update flakes
 on:
   schedule:
-    - cron:  '* 10 * * *'
+    - cron:  '* */6 * * *'
   workflow_dispatch:
 jobs:
   update-flakes:
