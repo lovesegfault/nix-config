@@ -3,7 +3,7 @@
     enable = true;
     package = pkgs.bluezFull;
     powerOnBoot = true;
-    config = {
+    settings = {
       General = {
         FastConnectable = "true";
         JustWorksRepairing = "always";
