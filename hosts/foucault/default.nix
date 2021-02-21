@@ -15,6 +15,7 @@
     ../../hardware/zfs.nix
 
     ../../sway
+    ../../sway/pipewire.nix
     ../../sway/trusted.nix
 
     ../../users/bemeurer
