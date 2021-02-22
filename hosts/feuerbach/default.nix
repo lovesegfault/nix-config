@@ -42,5 +42,9 @@
 
   time.timeZone = "America/Los_Angeles";
 
+  users.users.bemeurer.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJJJo5svxvrZxwxd1Yu8z/vq1UlLaConnzDTy/ANLboi bemeurer.standard"
+  ];
+
   virtualisation.docker.enable = true;
 }
