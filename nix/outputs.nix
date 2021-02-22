@@ -31,7 +31,7 @@
       };
 
     devShell = pkgs.callPackage ./shell.nix {
-      inherit (sops-nix.packages.${system}) ssh-to-pgp sops-pgp-hook;
+      inherit (sops-nix.packages.${system}) sops-pgp-hook;
       inherit (deploy-rs.packages.${system}) deploy-rs;
     };
   })) // (import ./deploy.nix inputs)
