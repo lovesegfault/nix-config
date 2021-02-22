@@ -1,7 +1,6 @@
 { mkShell
 , cachix
 , nix-build-uncached
-  # , nix-linter
 , nixpkgs-fmt
 , pre-commit
 , sops
@@ -14,7 +13,6 @@
   buildInputs = [
     cachix
     nix-build-uncached
-    # nix-linter
     nixpkgs-fmt
     pre-commit
     sops
