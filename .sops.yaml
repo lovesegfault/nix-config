@@ -8,6 +8,11 @@ keys:
   - &sartre ACD46795FB2EC5499F10DD01624900F51815907C
 
 creation_rules:
+  - path_regex: dev/stcg-x86_64-builder/stcg-x86_64-builder-key.yaml
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *foucault
   - path_regex: hardware/nixos-aarch64-builder/nixos-aarch64-builder-key.yaml
     key_groups:
       - pgp:
