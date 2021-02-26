@@ -27,7 +27,7 @@
     kernelParams = [ "fbcon=map:1" ];
   };
 
-  environment.systemPackages = with pkgs; [ cntr ];
+  environment.systemPackages = with pkgs; [ cntr wireguard mullvad-vpn ];
 
   environment.persistence."/state" = {
     directories = [
@@ -136,10 +136,12 @@
   };
 
   networking = {
-    hostName = "foucault";
     hostId = "872516b8";
-    wireless.iwd.enable = true;
+    hostName = "foucault";
+    firewall.allowedUDPPorts = [ 51820 ];
     networkmanager.enable = lib.mkForce false;
+    wireguard.enable = true;
+    wireless.iwd.enable = true;
   };
 
   security.pam.loginLimits = [
@@ -150,6 +152,7 @@
 
   services = {
     logind.lidSwitchExternalPower = "ignore";
+    mullvad-vpn.enable = true;
     udev.packages = with pkgs; [ logitech-udev-rules ];
     usbmuxd.enable = true;
   };
