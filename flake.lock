@@ -12,11 +12,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1614504248,
-        "narHash": "sha256-A8GJc73xSNLCqs/cerr+YHYcC04TR51MQFnJeUYEU/E=",
+        "lastModified": 1614654775,
+        "narHash": "sha256-3mLxoxIXSWUuKE8YgIuqM5AZzXFd1aWxkTlplEDeXIA=",
         "owner": "serokell",
         "repo": "deploy-rs",
-        "rev": "4d4bdda3abd243e892d45c2ee7844414570b1823",
+        "rev": "6278b9bef5ad624676a565980417cbbef42d5227",
         "type": "github"
       },
       "original": {
@@ -114,11 +114,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1614580579,
-        "narHash": "sha256-U6BxDJYVBIX3UsMHaH6xELxIzhkL7xhPogAMflqgkxA=",
+        "lastModified": 1614636767,
+        "narHash": "sha256-yC8kKW3RENOHpYONVTuZFcM1EYGudFTZaQqVUm459f8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "77e75f1ed1db9c658cb63ca253b84b13551f9ef8",
+        "rev": "da69061d077a07ccffdf1ec10a95a5e77aff3478",
         "type": "github"
       },
       "original": {
