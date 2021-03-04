@@ -23,7 +23,7 @@
   hardware.pulseaudio = {
     package = pkgs.pulseaudio.override { bluetoothSupport = true; };
     extraConfig = ''
-      load-module module-bluetooth-discover a2dp_config="ldac_eqmid=hq ldac_fmt=f32"
+      load-module module-bluetooth-discover
       load-module module-bluetooth-policy
       load-module module-switch-on-connect
     '';
