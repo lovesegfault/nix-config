@@ -4,7 +4,7 @@
     ./efi.nix
     ./intel.nix
     ./nouveau.nix
-    ./sound.nix
+    ./sound-pipewire.nix
   ];
 
   boot = rec {

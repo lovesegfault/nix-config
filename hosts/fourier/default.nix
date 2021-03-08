@@ -8,7 +8,6 @@
 
     ../../hardware/efi.nix
     ../../hardware/nouveau.nix
-    ../../hardware/sound.nix
     ../../hardware/zfs.nix
 
     ../../users/bemeurer
@@ -87,7 +86,7 @@
   hardware = {
     cpu.amd.updateMicrocode = true;
     enableRedistributableFirmware = true;
-    pulseaudio.enable = lib.mkForce false;
+    pulseaudio.enable = false;
   };
 
   home-manager.users.bemeurer.home.persistence."/nix/state/home/bemeurer" = {
@@ -205,10 +204,13 @@
     };
   };
 
-  sound.extraConfig = ''
-    defaults.pcm.!card "Modius";
-    defaults.ctl.!card "Modius";
-  '';
+  sound = {
+    enable = true;
+    extraConfig = ''
+      defaults.pcm.!card "Modius";
+      defaults.ctl.!card "Modius";
+    '';
+  };
 
   system.activationScripts.setIOScheduler = ''
     disks=(sda sdb sdc sdd nvme0n1)
