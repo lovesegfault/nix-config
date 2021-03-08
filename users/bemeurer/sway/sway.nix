@@ -219,6 +219,7 @@
       export WLR_DRM_DEVICES=/dev/dri/card0 sway
       export _JAVA_AWT_WM_NONREPARENTING=1
       export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dsun.java2d.xrender=true"
+      export XDG_CURRENT_DESKTOP="sway"
     '';
 
     systemdIntegration = true;
