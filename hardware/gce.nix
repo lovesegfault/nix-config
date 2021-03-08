@@ -12,5 +12,8 @@
 
   services.fstrim.enable = true;
 
+  systemd.services.fetch-instance-ssh-keys.enable = lib.mkForce false;
+
+
   virtualisation.googleComputeImage.diskSize = 10 * 1024;
 }
