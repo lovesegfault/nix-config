@@ -7,6 +7,16 @@
     enable = true;
     alsa.enable = true;
     pulse.enable = true;
+    config = {
+      pipewire.context.properties.rate = "192000";
+      pipewire-pulse.stream.properties.resample.quality = 15;
+      client.stream.properties.resample.quality = 15;
+      client-rt.stream.properties.resample.quality = 15;
+    };
+    media-session.config.bluez-monitor.properties = {
+      headset-roles = [ "hsp_hs" "hsp_ag" ];
+      codecs = [ "aac" "ldac" "aptx_hd" ];
+    };
   };
 
   sound.enable = true;
