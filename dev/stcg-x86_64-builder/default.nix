@@ -5,7 +5,7 @@
       {
         hostName = "100.99.22.81";
         maxJobs = 64;
-        speedFactor = 8;
+        speedFactor = 1;
         sshKey = config.sops.secrets.stcg-x86_64-builder-key.path;
         sshUser = "bemeurer";
         system = "x86_64-linux";
