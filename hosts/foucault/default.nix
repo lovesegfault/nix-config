@@ -52,6 +52,7 @@
       "/home/bemeurer/.config/discord"
       "/home/bemeurer/.config/gcloud"
       "/home/bemeurer/.config/gopass"
+      "/home/bemeurer/.config/pipewire"
       "/home/bemeurer/.config/shotwell"
       "/home/bemeurer/.gnupg"
       "/home/bemeurer/.gsutil"
