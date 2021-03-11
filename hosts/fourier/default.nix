@@ -189,11 +189,19 @@
         ntlm auth = ntlmv1-permitted
         min protocol = NT1
       '';
-      shares.music = {
-        path = "/srv/music";
-        "read only" = "yes";
-        browseable = "yes";
-        "guest ok" = "yes";
+      shares = {
+        atabachnik = {
+          path = "/srv/documents/atabachnik";
+          "read only" = "yes";
+          browseable = "yes";
+          "guest ok" = "yes";
+        };
+        music = {
+          path = "/srv/music";
+          "read only" = "yes";
+          browseable = "yes";
+          "guest ok" = "yes";
+        };
       };
     };
     smartd.enable = true;
