@@ -36,30 +36,6 @@
     packages = with pkgs; [ terminus_font ];
   };
 
-  containers.roon = {
-    autoStart = true;
-    privateNetwork = false;
-    bindMounts = {
-      "/srv/music".hostPath = "/srv/music";
-      "/var/lib/roon-server" = {
-        hostPath = "/var/lib/roon-server";
-        isReadOnly = false;
-      };
-    };
-    config = { ... }: {
-      nixpkgs.pkgs = pkgs;
-      users.groups.media = {
-        gid = config.users.groups.media.gid;
-        members = [ "roon-server" ];
-      };
-      services.roon-server = {
-        enable = true;
-        group = "media";
-        openFirewall = true;
-      };
-    };
-  };
-
   environment.persistence."/nix/state" = {
     directories = [
       "/var/cache/jellyfin"
