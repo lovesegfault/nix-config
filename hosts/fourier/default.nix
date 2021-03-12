@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ../../core
     ../../core/unbound.nix
@@ -34,6 +34,30 @@
     font = "ter-v14n";
     keyMap = "us";
     packages = with pkgs; [ terminus_font ];
+  };
+
+  containers.roon = {
+    autoStart = true;
+    privateNetwork = false;
+    bindMounts = {
+      "/srv/music".hostPath = "/srv/music";
+      "/var/lib/roon-server" = {
+        hostPath = "/var/lib/roon-server";
+        isReadOnly = false;
+      };
+    };
+    config = { ... }: {
+      nixpkgs.pkgs = pkgs;
+      users.groups.media = {
+        gid = config.users.groups.media.gid;
+        members = [ "roon-server" ];
+      };
+      services.roon-server = {
+        enable = true;
+        group = "media";
+        openFirewall = true;
+      };
+    };
   };
 
   environment.persistence."/nix/state" = {
@@ -108,10 +132,15 @@
         9090 # prometheus
         9091 # prometheus
       ];
+      allowedTCPPortRanges = [{
+        from = 9100;
+        to = 9200;
+      }];
       allowedUDPPorts = [
         137 # samba
         138 # samba
         139 # samba
+        9003 # roon
       ];
     };
     hostName = "fourier";
@@ -174,11 +203,6 @@
         port = 9091;
       };
     };
-    roon-server = {
-      enable = true;
-      group = "media";
-      openFirewall = true;
-    };
     samba = {
       enable = true;
       extraConfig = ''
@@ -233,5 +257,8 @@
 
   users.groups.media.members = [ "bemeurer" "jellyfin" "roon-server" "plex" ];
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    autoPrune = true;
+  };
 }
