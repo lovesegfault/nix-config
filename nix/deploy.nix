@@ -59,7 +59,7 @@ in
       #   profiles.system.path = mkPath "goethe" "aarch64-linux";
       # };
       hegel = {
-        hostname = "10.0.0.17";
+        hostname = "100.102.43.14";
         profiles.system.path = mkPath "hegel" "x86_64-linux";
       };
       # riemann = {
