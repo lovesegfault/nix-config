@@ -33,6 +33,13 @@
     kernel.sysctl."vm.swappiness" = 1;
     kernelModules = [ "kvm-amd" "ddcci-backlight" ];
     kernelPackages = pkgs.linuxPackages_latest;
+    kernelPatches = [{
+      name = "openRGB";
+      patch = pkgs.fetchpatch {
+        url = "https://gitlab.com/CalcProgrammer1/OpenRGB/-/raw/master/OpenRGB.patch";
+        sha256 = "sha256-BwYYK/RQzegVwX3DYI3ExtnKtRaw7XKfwWPOcXQ0TUw=";
+      };
+    }];
   };
 
   console = {
