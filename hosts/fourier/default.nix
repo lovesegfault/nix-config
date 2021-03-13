@@ -233,8 +233,5 @@
 
   users.groups.media.members = [ "bemeurer" "jellyfin" "roon-server" "plex" ];
 
-  virtualisation.docker = {
-    enable = true;
-    autoPrune = true;
-  };
+  virtualisation.docker.enable = true;
 }
