@@ -70,6 +70,7 @@
       "/home/bemeurer/.gsutil"
       "/home/bemeurer/.local/share/TabNine"
       "/home/bemeurer/.local/share/bash"
+      "/home/bemeurer/.local/share/direnv"
       "/home/bemeurer/.local/share/iwctl"
       "/home/bemeurer/.local/share/keyrings"
       "/home/bemeurer/.local/share/lollypop"
