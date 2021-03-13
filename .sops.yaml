@@ -4,6 +4,7 @@ keys:
   - &foucault 5C8B2ACA031733D4C59A8AF19DE06FED73F48056
   - &fourier A4EABC2BEEE48CFF55287E855FABEC432FE0176B
   - &goethe 3B157FCDEF12BDE6994DA95CA4C02ABF06E9D7E2
+  - &hegel A2260154AA9528C06164F0FE0F175745C1DB0169
   - &riemann 41D56E398857FB3FDF920A2ED3D48D2FCB75EDC3
   - &sartre ACD46795FB2EC5499F10DD01624900F51815907C
 
@@ -13,6 +14,7 @@ creation_rules:
       - pgp:
         - *bemeurer
         - *foucault
+        - *hegel
   - path_regex: hardware/nixos-aarch64-builder/nixos-aarch64-builder-key.yaml
     key_groups:
       - pgp:
@@ -20,6 +22,7 @@ creation_rules:
         - *feuerbach
         - *foucault
         - *goethe
+        - *hegel
         - *riemann
   - path_regex: dev/stcg-gcs/stcg-aws-credentials.yaml
     key_groups:
@@ -28,6 +31,7 @@ creation_rules:
         - *feuerbach
         - *foucault
         - *fourier
+        - *hegel
   - path_regex: hosts/sartre/ddclient-sartre.yaml
     key_groups:
       - pgp:

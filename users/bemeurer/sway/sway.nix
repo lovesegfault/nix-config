@@ -43,59 +43,6 @@
         smartBorders = "on";
       };
 
-      input = {
-        "1:1:AT_Translated_Set_2_keyboard" = {
-          xkb_layout = "us";
-          repeat_rate = "70";
-        };
-
-        "2131:308:LEOPOLD_Mini_Keyboard" = { xkb_layout = "us"; };
-
-        "2:7:SynPS/2_Synaptics_TouchPad" = {
-          accel_profile = "adaptive";
-          click_method = "button_areas";
-          dwt = "disabled";
-          natural_scroll = "enabled";
-          scroll_method = "two_finger";
-          tap = "enabled";
-        };
-
-        "1739:0:Synaptics_TM3418-002" = {
-          accel_profile = "adaptive";
-          click_method = "button_areas";
-          dwt = "disabled";
-          natural_scroll = "enabled";
-          scroll_method = "two_finger";
-          tap = "enabled";
-        };
-
-        "2:8:AlpsPS/2_ALPS_DualPoint_TouchPad" = {
-          accel_profile = "adaptive";
-          click_method = "button_areas";
-          dwt = "enabled";
-          natural_scroll = "enabled";
-          scroll_method = "two_finger";
-          tap = "enabled";
-        };
-
-        "2:10:TPPS/2_Elan_TrackPoint" = {
-          accel_profile = "adaptive";
-          dwt = "enabled";
-        };
-
-        "1133:16495:Logitech_MX_Ergo" = {
-          accel_profile = "adaptive";
-          click_method = "button_areas";
-          natural_scroll = "enabled";
-        };
-
-        "1133:45085:MX_Ergo_Mouse" = {
-          accel_profile = "adaptive";
-          click_method = "button_areas";
-          natural_scroll = "enabled";
-        };
-      };
-
       keybindings =
         let
           execSpawn = cmd: "exec ${pkgs.spawn}/bin/spawn ${cmd}";
@@ -149,34 +96,7 @@
 
       modifier = if pkgs.hostPlatform.system == "aarch64-linux" then "Mod1" else "Mod4";
 
-      output = {
-        "*" = { bg = "~/.wall fill"; };
-        "Unknown 0x32EB 0x00000000" = {
-          mode = "3840x2160@60Hz";
-          position = "960,2880";
-          scale = "2";
-          subpixel = "rgb";
-        };
-        "Goldstar Company Ltd LG Ultra HD 0x00000B08" = {
-          adaptive_sync = "on";
-          mode = "3840x2160@60Hz";
-          position = "0,720";
-          subpixel = "rgb";
-        };
-        "Goldstar Company Ltd LG Ultra HD 0x00009791" = {
-          adaptive_sync = "on";
-          mode = "3840x2160@60Hz";
-          position = "3840,0";
-          subpixel = "rgb";
-          transform = "270";
-        };
-        "DSI-1" = {
-          mode = "480x800@60Hz";
-          position = "0,0";
-          subpixel = "rgb";
-          transform = "90";
-        };
-      };
+      output = { "*" = { bg = "~/.wall fill"; }; };
 
       terminal =
         if pkgs.hostPlatform.system == "aarch64-linux" then

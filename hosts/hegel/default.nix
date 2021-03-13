@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ../../core
     ../../core/unbound.nix
@@ -10,9 +10,10 @@
     ../../dev/stcg-x86_64-builder
     ../../dev/virt-manager.nix
 
+    ../../hardware/bluetooth.nix
+    ../../hardware/efi.nix
     ../../hardware/nixos-aarch64-builder
-    ../../hardware/nouveau.nix
-    ../../hardware/thinkpad-p1.nix
+    ../../hardware/sound-pulse.nix
     ../../hardware/yubikey.nix
     ../../hardware/zfs.nix
 
@@ -22,12 +23,28 @@
     ../../users/bemeurer
   ];
 
-  environment.systemPackages = with pkgs; [ cntr wireguard mullvad-vpn ];
+  boot = {
+    extraModulePackages = with config.boot.kernelPackages; [ ddcci-driver ];
+    initrd = {
+      availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+      postDeviceCommands = lib.mkAfter ''
+        zfs rollback -r rpool/local/root@blank
+      '';
+    };
+    kernel.sysctl."vm.swappiness" = 1;
+    kernelModules = [ "kvm-amd" "ddcci-backlight" ];
+    kernelPackages = pkgs.linuxPackages_latest;
+  };
+
+  console = {
+    font = "ter-v28n";
+    keyMap = "us";
+    packages = with pkgs; [ terminus_font ];
+  };
 
   environment.persistence."/state" = {
     directories = [
       "/var/lib/bluetooth"
-      "/var/lib/boltd"
       "/var/lib/iwd"
       "/var/lib/libvirt"
       "/var/lib/tailscale"
@@ -80,31 +97,37 @@
 
   fileSystems = {
     "/" = {
-      device = "tmpfs";
-      fsType = "tmpfs";
-      options = [ "defaults" "noatime" "size=20%" "mode=755" ];
+      device = "zroot/local/root";
+      fsType = "zfs";
     };
     "/boot" = {
-      device = "/dev/disk/by-uuid/17FB-AAD0";
+      device = "/dev/disk/by-uuid/754E-45C0";
       fsType = "vfat";
     };
     "/nix" = {
-      device = "rpool/local/nix";
+      device = "zroot/local/nix";
       fsType = "zfs";
     };
     "/srv/music" = {
-      device = "rpool/safe/music";
+      device = "zroot/safe/music";
       fsType = "zfs";
     };
     "/srv/pictures" = {
-      device = "rpool/safe/pictures";
+      device = "zroot/safe/pictures";
       fsType = "zfs";
     };
     "/state" = {
-      device = "rpool/safe/state";
+      device = "zroot/safe/state";
       fsType = "zfs";
       neededForBoot = true;
     };
+  };
+
+  hardware = {
+    cpu.amd.updateMicrocode = true;
+    brillo.enable = true;
+    i2c.enable = true;
+    enableRedistributableFirmware = true;
   };
 
   home-manager.users.bemeurer = { ... }: {
@@ -135,28 +158,6 @@
         "10730:258:Kinesis_Advantage2_Keyboard" = {
           xkb_layout = "us";
         };
-        "2:7:SynPS/2_Synaptics_TouchPad" = {
-          accel_profile = "adaptive";
-          click_method = "button_areas";
-          dwt = "disabled";
-          natural_scroll = "enabled";
-          scroll_method = "two_finger";
-          tap = "enabled";
-        };
-
-        "1739:0:Synaptics_TM3418-002" = {
-          accel_profile = "adaptive";
-          click_method = "button_areas";
-          dwt = "disabled";
-          natural_scroll = "enabled";
-          scroll_method = "two_finger";
-          tap = "enabled";
-        };
-
-        "2:10:TPPS/2_Elan_TrackPoint" = {
-          accel_profile = "adaptive";
-          dwt = "enabled";
-        };
 
         "1133:16495:Logitech_MX_Ergo" = {
           accel_profile = "adaptive";
@@ -171,11 +172,18 @@
         };
       };
       output = {
-        "Unknown 0x32EB 0x00000000" = {
+        "Goldstar Company Ltd LG Ultra HD 0x00000B08" = {
+          adaptive_sync = "on";
           mode = "3840x2160@60Hz";
-          position = "960,2880";
-          scale = "2";
+          position = "0,720";
           subpixel = "rgb";
+        };
+        "Goldstar Company Ltd LG Ultra HD 0x00009791" = {
+          adaptive_sync = "on";
+          mode = "3840x2160@60Hz";
+          position = "3840,0";
+          subpixel = "rgb";
+          transform = "270";
         };
       };
     };
@@ -183,12 +191,13 @@
 
   networking = {
     hostId = "872516b8";
-    hostName = "foucault";
-    firewall.allowedUDPPorts = [ 51820 ];
+    hostName = "hegel";
     networkmanager.enable = lib.mkForce false;
     wireguard.enable = true;
     wireless.iwd.enable = true;
   };
+
+  nix.maxJobs = 32;
 
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
@@ -197,27 +206,27 @@
   ];
 
   services = {
-    logind.lidSwitchExternalPower = "ignore";
-    mullvad-vpn.enable = true;
     udev.packages = with pkgs; [ logitech-udev-rules ];
     usbmuxd.enable = true;
+    fwupd.enable = true;
   };
 
   systemd.network.networks = {
     lan = {
       DHCP = "yes";
       linkConfig.RequiredForOnline = "no";
-      matchConfig.MACAddress = "48:2a:e3:61:39:66";
+      matchConfig.MACAddress = "3c:7c:3f:21:80:67";
     };
     wifi = {
       DHCP = "yes";
-      matchConfig.MACAddress = "98:3b:8f:cf:62:82";
+      matchConfig.MACAddress = "c8:e2:65:0a:7e:d1";
     };
   };
-  services.udev.extraRules = ''
-    ENV{DEVNAME}=="/dev/dri/card1", TAG+="mutter-device-preferred-primary"
-  '';
-  swapDevices = [{ device = "/dev/disk/by-uuid/840591d3-ac66-4137-bc39-4d9f9109c19a"; }];
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/e4103056-9ef2-47da-8403-46cf20541b15"; }
+    { device = "/dev/disk/by-uuid/4b74d5bd-3e62-4077-a126-6d73ad07267f"; }
+  ];
 
   time.timeZone = "America/Los_Angeles";
 }

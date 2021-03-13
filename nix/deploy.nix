@@ -58,6 +58,10 @@ in
       #   hostname = "100.125.185.48";
       #   profiles.system.path = mkPath "goethe" "aarch64-linux";
       # };
+      hegel = {
+        hostname = "10.0.0.17";
+        profiles.system.path = mkPath "hegel" "x86_64-linux";
+      };
       # riemann = {
       #   hostname = "100.99.75.64";
       #   profiles.system.path = mkPath "riemann" "aarch64-linux";
