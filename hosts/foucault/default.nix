@@ -214,9 +214,7 @@
       matchConfig.MACAddress = "98:3b:8f:cf:62:82";
     };
   };
-  services.udev.extraRules = ''
-    ENV{DEVNAME}=="/dev/dri/card1", TAG+="mutter-device-preferred-primary"
-  '';
+
   swapDevices = [{ device = "/dev/disk/by-uuid/840591d3-ac66-4137-bc39-4d9f9109c19a"; }];
 
   time.timeZone = "America/Los_Angeles";
