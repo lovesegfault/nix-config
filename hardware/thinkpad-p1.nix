@@ -12,7 +12,6 @@
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "kvm-intel" "i2c_dev" "ddcci-backlight" "tcp_bbr" ];
-    kernelPackages = pkgs.thinkpadLinuxPackages;
   };
 
   console = {
