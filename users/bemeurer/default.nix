@@ -5,9 +5,10 @@ with lib;
     createHome = true;
     description = "Bernardo Meurer";
     extraGroups = [ "wheel" "dialout" ]
-      ++ optionals config.sound.enable [ "audio" ]
-      ++ optionals config.programs.sway.enable [ "input" "video" ]
+      ++ optionals config.hardware.i2c.enable [ "i2c" ]
       ++ optionals config.networking.networkmanager.enable [ "networkmanager" ]
+      ++ optionals config.programs.sway.enable [ "input" "video" ]
+      ++ optionals config.sound.enable [ "audio" ]
       ++ optionals config.virtualisation.docker.enable [ "docker" ]
       ++ optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
       ++ optionals config.virtualisation.kvmgt.enable [ "kvm" ];
