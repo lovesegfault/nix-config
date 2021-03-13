@@ -31,7 +31,7 @@
       '';
     };
     kernel.sysctl."vm.swappiness" = 1;
-    kernelModules = [ "kvm-amd" "ddcci-backlight" "i2c-piix4" "i2c-dev"];
+    kernelModules = [ "kvm-amd" "ddcci-backlight" "i2c-piix4" "i2c-dev" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelPatches = [{
       name = "openRGB";
