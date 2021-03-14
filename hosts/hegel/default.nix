@@ -27,7 +27,7 @@
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
       postDeviceCommands = lib.mkAfter ''
-        zfs rollback -r rpool/local/root@blank
+        zfs rollback -r zroot/local/root@blank
       '';
     };
     kernel.sysctl."vm.swappiness" = 1;
