@@ -121,13 +121,6 @@
       };
     };
 
-    extraConfig = ''
-      bindswitch --locked --reload lid:on output eDP-1 disable
-      bindswitch --locked --reload lid:off output eDP-1 enable
-      focus output eDP-1
-      workspace 0:α
-    '';
-
     extraSessionCommands = ''
       export ECORE_EVAS_ENGINE=wayland_egl
       export ELM_ENGINE=wayland_egl
