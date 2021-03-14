@@ -166,6 +166,8 @@
       ];
     };
 
+    programs.waybar.settings.modules-right = lib.mkAfter [ "tray" ];
+
     wayland.windowManager.sway.config = {
       input = {
         "10730:258:Kinesis_Advantage2_Keyboard" = {

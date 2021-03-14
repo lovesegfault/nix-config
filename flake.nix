@@ -13,7 +13,7 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:lovesegfault/home-manager/waybar-no-settings-list";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

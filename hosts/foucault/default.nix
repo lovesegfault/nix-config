@@ -129,6 +129,37 @@
       ];
     };
 
+    programs.waybar.settings = {
+      modules-right = lib.mkAfter [
+        "backlight"
+        "battery"
+        "tray"
+      ];
+      modules = {
+        backlight = {
+          device = "intel_backlight";
+          format = "{percent}% {icon}";
+          format-icons = [ "" "" ];
+          on-scroll-up = "${pkgs.brillo}/bin/brillo -e -A 0.5";
+          on-scroll-down = "${pkgs.brillo}/bin/brillo -e -U 0.5";
+        };
+        battery = {
+          bat = "BAT0";
+          states = {
+            good = 90;
+            warning = 30;
+            critical = 15;
+          };
+          format = "{capacity}% {icon}";
+          format-charging = "{capacity}% ";
+          format-plugged = "{capacity}% ";
+          format-alt = "{time} {icon}";
+          format-icons = [ "" "" "" "" "" ];
+        };
+        temperature.thermal-zone = 1;
+      };
+    };
+
     wayland.windowManager.sway.config = {
       input = {
         "10730:258:Kinesis_Advantage2_Keyboard" = {
