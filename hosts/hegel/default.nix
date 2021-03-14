@@ -26,6 +26,7 @@
     extraModulePackages = with config.boot.kernelPackages; [ ddcci-driver ];
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+      kernelModules = [ "amdgpu" ];
       postDeviceCommands = lib.mkAfter ''
         zfs rollback -r zroot/local/root@blank
       '';
@@ -135,6 +136,11 @@
     brillo.enable = true;
     i2c.enable = true;
     enableRedistributableFirmware = true;
+    opengl = {
+      enable = true;
+      driSupport = true;
+      extraPackages = with pkgs; [ rocm-opencl-icd rocm-opencl-runtime ];
+    };
   };
 
   home-manager.users.bemeurer = { ... }: {
