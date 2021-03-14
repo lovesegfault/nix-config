@@ -4,7 +4,6 @@
     ../../core/unbound.nix
 
     ../../dev
-    ../../dev/qemu.nix
     ../../dev/stcg-cameras.nix
     ../../dev/stcg-gcs
     ../../dev/virt-manager.nix
@@ -245,4 +244,6 @@
   ];
 
   time.timeZone = "America/Los_Angeles";
+
+  virtualisation.libvirtd.enable = true;
 }
