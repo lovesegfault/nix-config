@@ -55,6 +55,7 @@
       "/var/lib/iwd"
       "/var/lib/libvirt"
       "/var/lib/tailscale"
+      "/var/log"
 
       "/home/bemeurer/.cache/lollypop"
       "/home/bemeurer/.cache/mozilla"
