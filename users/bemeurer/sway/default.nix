@@ -53,7 +53,17 @@
   programs.zsh.profileExtra = ''
     # If running from tty1 start sway
     if [ "$(tty)" = "/dev/tty1" ]; then
-        exec sway --debug -V > /tmp/sway.log 2>&1
+      systemctl --user unset-environment \
+        SWAYSOCK \
+        I3SOCK \
+        WAYLAND_DISPLAY \
+        DISPLAY \
+        IN_NIX_SHELL \
+        __HM_SESS_VARS_SOURCED \
+        GPG_TTY \
+        NIX_PATH \
+        SHLVL
+      exec env --unset=SHLVL systemd-cat -t sway -- sway --debug
     fi
   '';
 
