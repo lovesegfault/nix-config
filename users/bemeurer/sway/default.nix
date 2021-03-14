@@ -63,7 +63,7 @@
         GPG_TTY \
         NIX_PATH \
         SHLVL
-      exec env --unset=SHLVL systemd-cat -t sway -- sway --debug
+      exec env --unset=SHLVL systemd-cat -t sway -- sway
     fi
   '';
 
