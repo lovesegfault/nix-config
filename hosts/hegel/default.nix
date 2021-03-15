@@ -245,5 +245,8 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation = {
+    libvirtd.enable = true;
+    podman.enable = true;
+  };
 }
