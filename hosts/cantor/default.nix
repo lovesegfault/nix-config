@@ -14,18 +14,18 @@
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/9f013ec7-5f6f-49a6-9deb-4b58b5a486b7";
+      device = "/dev/disk/by-uuid/4d662b7c-e395-49d6-86ad-237ed28eb885";
       fsType = "xfs";
     };
 
     "/boot" = {
-      device = "/dev/disk/by-uuid/88B1-403B";
+      device = "/dev/disk/by-uuid/41D0-C874";
       fsType = "vfat";
     };
   };
 
   swapDevices =
-    [{ device = "/dev/disk/by-uuid/841350f8-099e-4b46-9530-443912b92d48"; }];
+    [{ device = "/dev/disk/by-uuid/e4cdc2fd-eda2-45dd-a250-ea08a5250b9e"; }];
 
   networking = {
     hostName = "cantor";
