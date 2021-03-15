@@ -167,15 +167,18 @@
             xkb_layout = "us";
           };
 
+          "1133:16511:Logitech_G502" = {
+            accel_profile = "adaptive";
+            natural_scroll = "enabled";
+          };
+
           "1133:16495:Logitech_MX_Ergo" = {
             accel_profile = "adaptive";
-            click_method = "button_areas";
             natural_scroll = "enabled";
           };
 
           "1133:45085:Logitech_MX_Ergo_Multi-Device_Trackball" = {
             accel_profile = "adaptive";
-            click_method = "button_areas";
             natural_scroll = "enabled";
           };
         };
