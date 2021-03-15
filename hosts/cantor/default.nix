@@ -28,14 +28,14 @@
     [{ device = "/dev/disk/by-uuid/841350f8-099e-4b46-9530-443912b92d48"; }];
 
   networking = {
-    hostName = "feuerbach";
-    hostId = "791cadf8";
+    hostName = "cantor";
+    hostId = "2677931c";
   };
 
   systemd.enableUnifiedCgroupHierarchy = false;
   systemd.network.networks.datacenter = {
     DHCP = "yes";
-    matchConfig.MACAddress = "ac:1f:6b:a4:79:34";
+    matchConfig.MACAddress = "ac:1f:6b:a4:78:6c";
   };
 
   time.timeZone = "America/Los_Angeles";

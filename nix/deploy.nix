@@ -42,6 +42,10 @@ in
       #   hostname = "aurelius";
       #   profiles.system.path = mkPath "aurelius" "aarch64-linux";
       # };
+      cantor = {
+        hostname = "10.0.5.81";
+        profiles.system.path = mkPath "cantor" "x86_64-linux";
+      };
       feuerbach = {
         hostname = "100.99.22.81";
         profiles.system.path = mkPath "feuerbach" "x86_64-linux";
