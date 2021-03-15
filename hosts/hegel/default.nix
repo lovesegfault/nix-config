@@ -160,11 +160,6 @@
       ];
     };
 
-    programs.waybar.settings = {
-      modules-right = lib.mkAfter [ "tray" ];
-      modules.temperature.hwmon-path = "/sys/class/hwmon/hwmon3/temp2_input";
-    };
-
     wayland.windowManager.sway = {
       config = {
         input = {

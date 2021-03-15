@@ -2,7 +2,7 @@
   programs.waybar = {
     enable = true;
     package = pkgs.waybar.override { pulseSupport = true; };
-    settings = {
+    settings = [{
       gtk-layer-shell = true;
       layer = "top";
       modules-left = [ "sway/workspaces" "sway/mode" ];
@@ -12,6 +12,9 @@
         "idle_inhibitor"
         "network"
         "temperature"
+        "backlight"
+        "battery"
+        "tray"
       ];
       modules = {
         "sway/workspaces" = {
@@ -55,9 +58,30 @@
           format-alt = "{ifname}: {ipaddr}/{cidr}";
         };
         temperature = {
+          thermal-zone = 1;
           critical-threshold = 80;
           format = "{temperatureC}°C {icon}";
           format-icons = [ "" "" "" ];
+        };
+        backlight = {
+          device = "intel_backlight";
+          format = "{percent}% {icon}";
+          format-icons = [ "" "" ];
+          on-scroll-up = "${pkgs.brillo}/bin/brillo -e -A 0.5";
+          on-scroll-down = "${pkgs.brillo}/bin/brillo -e -U 0.5";
+        };
+        battery = {
+          bat = "BAT0";
+          states = {
+            good = 90;
+            warning = 30;
+            critical = 15;
+          };
+          format = "{capacity}% {icon}";
+          format-charging = "{capacity}% ";
+          format-plugged = "{capacity}% ";
+          format-alt = "{time} {icon}";
+          format-icons = [ "" "" "" "" "" ];
         };
         clock = {
           tooltip-format = "{calendar}";
@@ -68,7 +92,7 @@
           spacing = 5;
         };
       };
-    };
+    }];
     style = ''
       * {
           border: none;
