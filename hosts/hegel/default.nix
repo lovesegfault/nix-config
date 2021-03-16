@@ -33,6 +33,7 @@
     kernel.sysctl."vm.swappiness" = 1;
     kernelModules = [ "kvm-amd" "ddcci-backlight" "i2c-dev" ];
     kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [ "acpi_enforce_resources=lax" ];
   };
 
   console = {
