@@ -31,7 +31,7 @@
       '';
     };
     kernel.sysctl."vm.swappiness" = 1;
-    kernelModules = [ "kvm-amd" "ddcci-backlight" "i2c-dev" ];
+    kernelModules = [ "kvm-amd" "ddcci-backlight" "i2c-dev" "nct6775" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "acpi_enforce_resources=lax" ];
   };
