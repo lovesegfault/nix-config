@@ -12,6 +12,7 @@
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "kvm-intel" "i2c_dev" "ddcci-backlight" "tcp_bbr" "kvm_intel" ];
+    kernelPackages = pkgs.linuxPackages_latest;
     extraModprobeConfig = "options kvm_intel nested=1";
   };
 
