@@ -3,11 +3,12 @@
     ./bluetooth.nix
     ./efi.nix
     ./intel.nix
-    ./nouveau.nix
+    # ./nouveau.nix
     ./sound-pipewire.nix
   ];
 
   boot = rec {
+    blacklistedKernelModules = [ "nouveau" ];
     extraModulePackages = with config.boot.kernelPackages; [ ddcci-driver ];
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
