@@ -42,10 +42,11 @@ let
     (n: v: mkAarch64SdImage n v.system)
     aarch64Hosts;
 
+  # NB: These don't work very well b/c the filesystem definitions clash
   x86_64Images = mapAttrs
     (n: v: mkX86_64IsoImage n v.system)
     x86_64Hosts;
 in
 {
-  images = aarch64Images // x86_64Images;
+  images = aarch64Images;
 }

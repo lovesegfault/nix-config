@@ -9,10 +9,11 @@
   let
     inherit (nixpkgs.lib) mapAttrs attrValues;
     pkgs = import nixpkgs { inherit system; };
+    joinDrvs = pkgs.callPackage ./join-drvs.nix { };
   in
   {
     defaultApp = self.apps.${system}.deploy;
-    defaultPackage = self.packages.${system}.hostsCombined;
+    defaultPackage = self.packages.${system}.hosts;
 
     apps = {
       deploy = {
@@ -22,9 +23,8 @@
     };
 
     packages = {
-      inherit (self) images;
-      hosts = mapAttrs (_: v: v.profiles.system.path) self.deploy.nodes;
-      hostsCombined = pkgs.linkFarmFromDrvs "nix-config" (attrValues self.packages.${system}.hosts);
+      hosts = joinDrvs "hosts" (mapAttrs (_: v: v.profiles.system.path) self.deploy.nodes);
+      images = joinDrvs "images" self.images;
     };
 
     devShell = pkgs.callPackage ./shell.nix {
