@@ -4,29 +4,36 @@
     config = rec {
       bars = [ ];
 
-      colors = {
-        focused = {
-          border = "#30535F";
-          background = "#30535F";
-          text = "#F0BC8D";
-          childBorder = "#A43C0F";
-          indicator = "#A43C0F";
+      colors =
+        let
+          foreground = "#E6B450";
+          border = "#273747";
+          foreground_inactive = "#B3B1AD";
+          border_inactive = "#0A0E14";
+        in
+        {
+          focused = {
+            border = border;
+            background = border;
+            text = foreground;
+            childBorder = border;
+            indicator = border;
+          };
+          unfocused = {
+            border = border_inactive;
+            background = border_inactive;
+            text = foreground_inactive;
+            childBorder = border_inactive;
+            indicator = border_inactive;
+          };
+          focusedInactive = {
+            border = border_inactive;
+            background = border_inactive;
+            text = foreground_inactive;
+            childBorder = border_inactive;
+            indicator = border_inactive;
+          };
         };
-        unfocused = {
-          border = "#00122A";
-          background = "#00122A";
-          text = "#F0BC8D";
-          childBorder = "#A43C0F";
-          indicator = "#A43C0F";
-        };
-        urgent = {
-          border = "#A43C0F";
-          background = "#A43C0F";
-          text = "#000000";
-          childBorder = "#A43C0F";
-          indicator = "#A43C0F";
-        };
-      };
 
       floating = {
         inherit modifier;
