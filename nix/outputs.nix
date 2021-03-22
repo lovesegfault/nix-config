@@ -7,7 +7,6 @@
 }@inputs:
 (flake-utils.lib.eachDefaultSystem (system:
   let
-    inherit (builtins) attrNames;
     inherit (nixpkgs.lib) mapAttrs attrValues;
     pkgs = import nixpkgs { inherit system; };
   in
@@ -22,17 +21,16 @@
       };
     };
 
-    packages =
-      let
-        hosts = mapAttrs (_: v: v.profiles.system.path) self.deploy.nodes;
-      in
-      {
-        inherit hosts;
-        hostsCombined = pkgs.linkFarmFromDrvs "nix-config" (attrValues hosts);
-      };
+    packages = {
+      hosts = mapAttrs (_: v: v.profiles.system.path) self.deploy.nodes;
+      hostsCombined = pkgs.linkFarmFromDrvs "nix-config" (attrValues self.packages.hosts);
+    };
 
     devShell = pkgs.callPackage ./shell.nix {
       inherit (sops-nix.packages.${system}) sops-pgp-hook;
       inherit (deploy-rs.packages.${system}) deploy-rs;
     };
-  })) // (import ./deploy.nix inputs)
+  })
+)
+// (import ./deploy.nix inputs)
+  // (import ./images.nix inputs)
