@@ -86,5 +86,4 @@ jobs:
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
       - name: nix-build
         run: |
-          nix run nixpkgs#nix-build-uncached -- \
-            -E "(builtins.getFlake (toString ./.)).deploy.nodes.${{ matrix.host }}.profiles.system.path"
+          nix build -L .#hosts.${{ matrix.host }}
