@@ -7,8 +7,8 @@
 , ...
 }@inputs:
 let
-  inherit (nixpkgs.lib) pathExists optionalAttrs;
-  inherit (builtins) attrNames mapAttrs readDir;
+  inherit (nixpkgs.lib) foldl' foldr pathExists optionalAttrs;
+  inherit (builtins) attrNames elemAt mapAttrs readDir;
 
   config.allowUnfree = true;
 
@@ -31,50 +31,36 @@ let
     };
 
   mkPath = name: system: deploy-rs.lib.${system}.activate.nixos (mkHost name system);
+
+  mkNode = name: system: hostname: {
+    ${name} = {
+      inherit hostname;
+      profiles.system.path = mkPath name system;
+    };
+  };
 in
 {
   deploy = {
     autoRollback = true;
     magicRollback = true;
     user = "root";
-    nodes = {
-      # aurelius = {
-      #   hostname = "aurelius";
-      #   profiles.system.path = mkPath "aurelius" "aarch64-linux";
-      # };
-      cantor = {
-        hostname = "100.76.151.127";
-        profiles.system.path = mkPath "cantor" "x86_64-linux";
-      };
-      feuerbach = {
-        hostname = "100.99.22.81";
-        profiles.system.path = mkPath "feuerbach" "x86_64-linux";
-      };
-      foucault = {
-        hostname = "100.67.182.67";
-        profiles.system.path = mkPath "foucault" "x86_64-linux";
-      };
-      fourier = {
-        hostname = "100.113.42.46";
-        profiles.system.path = mkPath "fourier" "x86_64-linux";
-      };
-      goethe = {
-        hostname = "100.125.185.48";
-        profiles.system.path = mkPath "goethe" "aarch64-linux";
-      };
-      hegel = {
-        hostname = "100.102.43.14";
-        profiles.system.path = mkPath "hegel" "x86_64-linux";
-      };
-      # riemann = {
-      #   hostname = "100.99.75.64";
-      #   profiles.system.path = mkPath "riemann" "aarch64-linux";
-      # };
-      sartre = {
-        hostname = "100.97.215.77";
-        profiles.system.path = mkPath "sartre" "x86_64-linux";
-      };
-    };
+    nodes = foldr
+      (a: b: a // b)
+      { }
+      (map
+        (s: foldl' (f: x: f x) mkNode s)
+        [
+          # [ "aurelius" "aarch64-linux" "aurelius" ]
+          [ "cantor" "x86_64-linux" "100.76.151.127" ]
+          [ "feuerbach" "x86_64-linux" "100.99.22.81" ]
+          [ "foucault" "x86_64-linux" "100.67.182.67" ]
+          [ "fourier" "x86_64-linux" "100.113.42.46" ]
+          [ "goethe" "aarch64-linux" "100.125.185.48" ]
+          [ "hegel" "x86_64-linux" "100.102.43.14" ]
+          # [ "riemann" "aarch64-linux" "100.99.75.64" ]
+          [ "sartre" "x86_64-linux" "100.97.215.77" ]
+        ]
+      );
   };
 
   checks = mapAttrs (_: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
