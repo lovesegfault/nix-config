@@ -95,164 +95,60 @@
     }];
     style = ''
       * {
-          border: none;
-          border-radius: 0;
-          font-family: Iosevka, FontAwesome5Free;
-          font-size: 13px;
-          min-height: 0;
+        border: none;
+        border-radius: 0;
+        font-family: Iosevka, FontAwesome5Free;
+        font-size: 13px;
+        min-height: 0;
       }
 
-      window#waybar {
-          background-color: rgba(0, 18, 42, 1);
-          border-bottom: 0px rgba(100, 114, 125, 1);
-          color: #FFFFFF;
-          transition-property: background-color;
-          transition-duration: .5s;
+      #waybar {
+        background-color: #0D1016;
+        color: #B3B1AD;
+        transition: background-color 0.2s;
       }
 
-      window#waybar.hidden {
-          opacity: 0.2;
+      #waybar.hidden {
+        opacity: 0.2;
+      }
+
+      #workspaces {
+        margin: 0 3px 0 1px;
       }
 
       #workspaces button {
-          padding: 0 5px;
-          background-color: transparent;
-          color: #F0BC8D;
-          border-bottom: 3px solid transparent;
+        background: transparent;
+        border: none;
+        padding: 0 8px;
       }
 
       #workspaces button:hover {
-          background: rgba(0, 0, 0, 0.2);
-          box-shadow: inherit;
-          border-bottom: 3px solid #ffffff;
+        box-shadow: inherit;
+        border-bottom: 3px solid #E6B450;
       }
 
       #workspaces button.focused {
-          background-color: #17374A;
-          border-bottom: 3px solid #ffffff;
+        color: #E6B450;
+        border-bottom: 3px solid #E6B450;
       }
 
       #workspaces button.urgent {
-          background-color: #A43C0F;
-          color: #000000;
+        color: #FF3333;
       }
 
-      #mode {
-          background-color: #64727D;
-          border-bottom: 3px solid #ffffff;
-      }
-
-      #clock,
       #battery,
       #cpu,
       #memory,
+      #disk,
       #temperature,
       #backlight,
       #network,
       #pulseaudio,
       #custom-media,
       #tray,
-      #mode,
-      #idle_inhibitor {
-        padding: 0 5px;
-        margin: 0 2px;
-        color: #ffffff;
-      }
-
-      #clock {
-          color: #F0BC8D;
-          background-color: #17374A;
-      }
-
-      #battery {
-          color: #F0BC8D;
-          background-color: #17374A;
-      }
-
-      #battery.charging {
-          color: #F0BC8D;
-          background-color: #17374A;
-      }
-
-      @keyframes blink {
-          to {
-              background-color: #ffffff;
-              color: #000000;
-          }
-      }
-
-      #battery.critical:not(.charging) {
-          background-color: #A43C0F;
-          color: #000000;
-          animation-name: blink;
-          animation-duration: 0.5s;
-          animation-timing-function: linear;
-          animation-iteration-count: infinite;
-          animation-direction: alternate;
-      }
-
-      label:focus {
-          background-color: #000000;
-      }
-
-      #cpu {
-          color: #F0BC8D;
-          background-color: #17374A;
-      }
-
-      #memory {
-          color: #F0BC8D;
-          background-color: #17374A;
-      }
-
-      #backlight {
-          color: #F0BC8D;
-          background-color: #17374A;
-      }
-
-      #network {
-          color: #F0BC8D;
-          background-color: #17374A;
-      }
-
-      #network.disconnected {
-          color: #F0BC8D;
-          background-color: #17374A;
-      }
-
-      #pulseaudio {
-          color: #F0BC8D;
-          background-color: #17374A;
-      }
-
-      #pulseaudio.muted {
-          color: #F0BC8D;
-          background-color: #30535F;
-      }
-
-      #temperature {
-          color: #F0BC8D;
-          background-color: #17374A;
-      }
-
-      #temperature.critical {
-          background-color: #A43C0F;
-          color: #000000;
-      }
-
-      #tray {
-          color: #F0BC8D;
-          background-color: #17374A;
-      }
-
-      #idle_inhibitor {
-          color: #F0BC8D;
-          background-color: #17374A;
-      }
-
-      #idle_inhibitor.activated {
-          color: #F0BC8D;
-          background-color: #30535F;
+      #idle_inhibitor,
+      #mode {
+        padding: 0 12px;
       }
     '';
     systemd.enable = true;
