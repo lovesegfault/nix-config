@@ -1,1 +1,1 @@
-(builtins.getFlake (toString ./.)).packages
+(builtins.getFlake (toString ./.)).packages."${builtins.currentSystem}"
