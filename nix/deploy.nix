@@ -7,7 +7,6 @@
 , ...
 }@inputs:
 let
-  inherit (nixpkgs.lib) foldl' foldr;
   inherit (builtins) elemAt mapAttrs;
 
   mkHost = name: system: import ./mk-host.nix { inherit inputs name system; };
