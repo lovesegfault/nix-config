@@ -7,28 +7,10 @@
 , ...
 }@inputs:
 let
-  inherit (nixpkgs.lib) foldl' foldr pathExists optionalAttrs;
-  inherit (builtins) attrNames elemAt mapAttrs readDir;
+  inherit (nixpkgs.lib) foldl' foldr;
+  inherit (builtins) elemAt mapAttrs;
 
-  config.allowUnfree = true;
-
-  overlays = map
-    (f: import (./overlays + "/${f}"))
-    (attrNames (optionalAttrs (pathExists ./overlays) (readDir ./overlays)));
-
-  mkHost = name: system:
-    nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [
-        ({ nixpkgs = { inherit config overlays; }; })
-        impermanence.nixosModules.impermanence
-        home-manager.nixosModules.home-manager
-        sops-nix.nixosModules.sops
-
-        (../hosts + "/${name}")
-      ];
-      specialArgs.inputs = inputs;
-    };
+  mkHost = name: system: import ./mk-host.nix { inherit inputs name system; };
 
   mkPath = name: system: deploy-rs.lib.${system}.activate.nixos (mkHost name system);
 

@@ -24,10 +24,11 @@
 
     packages =
       let
-        hostDrvs = mapAttrs (_: v: v.profiles.system.path) self.deploy.nodes;
+        hosts = mapAttrs (_: v: v.profiles.system.path) self.deploy.nodes;
       in
-      hostDrvs // {
-        hostsCombined = pkgs.linkFarmFromDrvs "nix-config" (attrValues hostDrvs);
+      {
+        inherit hosts;
+        hostsCombined = pkgs.linkFarmFromDrvs "nix-config" (attrValues hosts);
       };
 
     devShell = pkgs.callPackage ./shell.nix {
