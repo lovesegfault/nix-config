@@ -128,6 +128,7 @@
       }
 
       #workspaces button.focused {
+        background-color: #273747;
         color: #E6B450;
         border-bottom: 3px solid #E6B450;
       }
@@ -137,6 +138,7 @@
       }
 
       #battery,
+      #clock,
       #cpu,
       #memory,
       #disk,
@@ -148,7 +150,8 @@
       #tray,
       #idle_inhibitor,
       #mode {
-        padding: 0 12px;
+        padding: 0 5px;
+        margin: 0 2px;
       }
     '';
     systemd.enable = true;
