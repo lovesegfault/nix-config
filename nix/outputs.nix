@@ -23,7 +23,7 @@
 
     packages = {
       hosts = mapAttrs (_: v: v.profiles.system.path) self.deploy.nodes;
-      hostsCombined = pkgs.linkFarmFromDrvs "nix-config" (attrValues self.packages.hosts);
+      hostsCombined = pkgs.linkFarmFromDrvs "nix-config" (attrValues self.packages.${system}.hosts);
     };
 
     devShell = pkgs.callPackage ./shell.nix {
