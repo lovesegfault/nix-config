@@ -153,6 +153,11 @@
         padding: 0 5px;
         margin: 0 2px;
       }
+
+      #idle_inhibitor.activated {
+        color: #E6B450;
+        background-color: #273747;
+      }
     '';
     systemd.enable = true;
   };
