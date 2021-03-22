@@ -22,6 +22,7 @@
     };
 
     packages = {
+      inherit (self) images;
       hosts = mapAttrs (_: v: v.profiles.system.path) self.deploy.nodes;
       hostsCombined = pkgs.linkFarmFromDrvs "nix-config" (attrValues self.packages.${system}.hosts);
     };
