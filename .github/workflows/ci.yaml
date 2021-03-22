@@ -86,4 +86,4 @@ jobs:
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
       - name: nix-build
         run: |
-          nix-build -A hosts.${{ matrix.host }}
+          nix-shell -p nix-build-uncached --run "nix-build-uncached -A hosts.${{ matrix.host }}"
