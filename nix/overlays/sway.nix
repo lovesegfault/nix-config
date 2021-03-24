@@ -5,8 +5,8 @@ self: super: {
     src = self.fetchFromGitHub {
       owner = "swaywm";
       repo = "wlroots";
-      rev = "44fa2c4b49ced30a69e86a2ed78dd9bf62e0fbb3";
-      sha256 = "sha256-F3LHf0xfnqHl6h4zc2EBY41l5ssjMeaEJq9btxDb2mw=";
+      rev = "d9cae04ffc3140408f2604eeff7d4776fe8d9548";
+      sha256 = "sha256-JU3pkhjpEdgzyxj8CgsTvA5V1Jiw3VN+jHZ0CoRa98k=";
     };
 
     buildInputs = (oldAttrs.buildInputs or [ ]) ++ (with self; [
@@ -22,8 +22,8 @@ self: super: {
     src = self.fetchFromGitHub {
       owner = "swaywm";
       repo = "sway";
-      rev = "e5913f81064d4c5b89cdab0cd75d2b5ff5a47c48";
-      sha256 = "sha256-CYaGFfex9QI+j6zPn6frBeprwVtpe12O5my6q1051So=";
+      rev = "1.6-rc2";
+      sha256 = "sha256-vAWmHSXJ5nJxfu20CPlTZalNbdn/IBg2SGZdqV+GYDc=";
     };
 
     buildInputs = (oldAttrs.buildInputs or [ ]) ++ (with self; [
