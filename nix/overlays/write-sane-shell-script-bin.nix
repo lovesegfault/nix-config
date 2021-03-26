@@ -4,7 +4,6 @@ self: _: {
       { stdenv
       , writeTextFile
       , lib
-      , shfmt
       , shellcheck
       , runtimeShell
       }: (

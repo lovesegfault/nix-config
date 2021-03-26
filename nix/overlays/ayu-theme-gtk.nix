@@ -1,4 +1,4 @@
-self: super: {
+self: _: {
   ayu-theme-gtk = self.callPackage
     (
       { stdenv

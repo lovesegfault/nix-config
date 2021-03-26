@@ -1,7 +1,5 @@
-{ stdenv
-, fzf
+{ fzf
 , gopass
-, lib
 , libnotify
 , ripgrep
 , wl-clipboard

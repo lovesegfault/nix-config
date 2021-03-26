@@ -1,8 +1,6 @@
-{ stdenv
-, fetchurl
+{ fetchurl
 , fzf
 , jq
-, lib
 , libnotify
 , runCommand
 , wl-clipboard

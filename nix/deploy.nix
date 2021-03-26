@@ -1,9 +1,5 @@
 { self
 , deploy-rs
-, home-manager
-, impermanence
-, nixpkgs
-, sops-nix
 , ...
 }@inputs:
 let

@@ -4,7 +4,7 @@ let
   inherit (lib) concatMapStrings escapeShellArg mapAttrsToList;
 
   mkEntry = name: path: { inherit name path; };
-  entries = mapAttrsToList (n: v: mkEntry n v) drvAttrs;
+  entries = mapAttrsToList mkEntry drvAttrs;
   links = concatMapStrings
     (x: ''
       mkdir -p "$(dirname ${escapeShellArg x.name})"

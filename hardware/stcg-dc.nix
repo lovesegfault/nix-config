@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ lib, ... }: {
 
   imports = [ ./efi.nix ./no-mitigations.nix ./nvidia.nix ];
 
