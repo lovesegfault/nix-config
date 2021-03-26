@@ -30,11 +30,11 @@ Hostnames are picked from my [hostname list][hostnames]
 ### deploying
 To deploy all hosts:
 ```shell
-nix run .#
+deploy
 ```
 To deploy a specific host:
 ```shell
-nix run .#myHost
+deploy .#myHost
 ```
 
 ### adding overlays
