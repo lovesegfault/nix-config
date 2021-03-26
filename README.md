@@ -1,4 +1,4 @@
-# nix-config ![CI](https://github.com/lovesegfault/nix-config/workflows/CI/badge.svg)
+# nix-config [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org) ![CI](https://github.com/lovesegfault/nix-config/workflows/CI/badge.svg)
 
 This repository holds my NixOS configuration. It is fully reproducible, flakes
 based, and position-independent, meaning there is no moving around of
