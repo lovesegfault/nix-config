@@ -38,11 +38,9 @@
 
   environment.persistence."/nix/state" = {
     directories = [
-      "/var/cache/jellyfin"
       "/var/lib/docker"
       "/var/lib/grafana"
       "/var/lib/iwd"
-      "/var/lib/jellyfin"
       "/var/lib/plex"
       "/var/lib/prometheus2"
       "/var/lib/roon-server"
@@ -104,7 +102,6 @@
         139 # samba
         445 # samba
         3000 # grafana
-        8096 # jellyfin
         9090 # prometheus
         9091 # prometheus
       ];
@@ -150,11 +147,6 @@
       addr = "0.0.0.0";
       extraOptions.DASHBOARDS_MIN_REFRESH_INTERVAL = "1s";
     };
-    iperf3 = {
-      enable = true;
-      openFirewall = true;
-    };
-    jellyfin.enable = true;
     plex = {
       enable = true;
       openFirewall = true;
