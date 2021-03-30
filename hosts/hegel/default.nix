@@ -129,8 +129,9 @@
   hardware = {
     cpu.amd.updateMicrocode = true;
     brillo.enable = true;
-    i2c.enable = true;
     enableRedistributableFirmware = true;
+    i2c.enable = true;
+    ledger.enable = true;
     opengl = {
       enable = true;
       driSupport = true;
