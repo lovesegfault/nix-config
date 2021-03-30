@@ -28,6 +28,7 @@
       imv
       mbk
       prusa-slicer
+      signal-desktop
       slack
       spotify
       thunderbird
