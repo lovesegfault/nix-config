@@ -664,7 +664,11 @@
       "diagnostic-languageserver.formatFiletypes": {
         "sh": "shfmt"
       },
-      "coc.preferences.formatOnSaveFiletypes": ["rust"]
+      "coc.preferences.formatOnSaveFiletypes": ["rust"],
+      "texlab.path": "texlab",
+      "latex.build.onSave": true,
+      "latex.lint.onSave": true,
+      "latex.forwardSearch.executable": "evince"
     }
   '';
 }
