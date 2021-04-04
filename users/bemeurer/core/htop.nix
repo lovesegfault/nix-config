@@ -6,5 +6,6 @@
       left = [ "AllCPUs2" "Memory" "Swap" ];
       right = [ "Hostname" "Tasks" "LoadAverage" "Uptime" ];
     };
+    showProgramPath = false;
   };
 }
