@@ -16,7 +16,7 @@ jobs:
         with:
           install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20210126_f15f0b8/install
           extra_nix_config: "experimental-features = nix-command flakes"
-      - uses: cachix/cachix-action@v8
+      - uses: cachix/cachix-action@v10
         with:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
@@ -36,7 +36,7 @@ jobs:
         with:
           install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20210126_f15f0b8/install
           extra_nix_config: "experimental-features = nix-command flakes"
-      - uses: cachix/cachix-action@v8
+      - uses: cachix/cachix-action@v10
         with:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
@@ -80,7 +80,7 @@ jobs:
           )
           echo "${builder_cfg[*]}" | sudo tee /etc/nix/machines > /dev/null
           echo "${nix_cfg[*]}" | sudo tee -a /etc/nix/nix.conf > /dev/null
-      - uses: cachix/cachix-action@v8
+      - uses: cachix/cachix-action@v10
         with:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
