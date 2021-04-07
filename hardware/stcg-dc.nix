@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{
 
   imports = [ ./efi.nix ./no-mitigations.nix ./nvidia.nix ];
 
@@ -23,5 +23,4 @@
   ];
 
   services.fstrim.enable = true;
-  services.sshguard.enable = lib.mkForce false;
 }

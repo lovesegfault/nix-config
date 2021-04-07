@@ -6,6 +6,4 @@
     challengeResponseAuthentication = false;
     permitRootLogin = lib.mkDefault "no";
   };
-
-  services.sshguard.enable = true;
 }

@@ -21,6 +21,8 @@
   sops.secrets.ddclient-sartre.sopsFile = ./ddclient-sartre.yaml;
   services.ddclient.configFile = config.sops.secrets.ddclient-sartre.path;
 
+  services.sshguard.enable = true;
+
   time.timeZone = "America/Los_Angeles";
 
   home-manager.users.bemeurer = { ... }: {
