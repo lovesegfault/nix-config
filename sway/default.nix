@@ -21,6 +21,15 @@
     style = "adwaita-dark";
   };
 
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd sway";
+      };
+    };
+  };
+
   xdg = {
     autostart.enable = true;
     icons.enable = true;
