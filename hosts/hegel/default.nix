@@ -217,7 +217,8 @@
 
   nix.maxJobs = 32;
 
-  programs.steam.enable = true;
+  # FIXME: Re-enable later
+  # programs.steam.enable = true;
 
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
