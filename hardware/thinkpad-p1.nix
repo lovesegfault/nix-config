@@ -3,13 +3,12 @@
     ./bluetooth.nix
     ./efi.nix
     ./intel.nix
-    # ./nouveau.nix
     ./sound-pipewire.nix
   ];
 
   boot = rec {
     blacklistedKernelModules = [ "nouveau" ];
-    extraModulePackages = with config.boot.kernelPackages; [ ddcci-driver ];
+    extraModulePackages = with config.boot.kernelPackages; [ bbswitch ddcci-driver ];
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "kvm-intel" "i2c_dev" "ddcci-backlight" "tcp_bbr" "kvm_intel" ];
@@ -29,6 +28,7 @@
     brillo.enable = true;
     enableRedistributableFirmware = true;
     i2c.enable = true;
+    nvidiaOptimus.disable = true;
   };
 
   nix = {
@@ -59,13 +59,14 @@
 
         RUNTIME_PM_ON_AC = "auto";
         RUNTIME_PM_ON_BAT = "auto";
+        RUNTIME_PM_DRIVER_BLACKLIST = "\"mei_me pcieport\"";
 
         SOUND_POWER_SAVE_ON_AC = "1";
         SOUND_POWER_SAVE_ON_BAT = "1";
         SOUND_POWER_SAVE_CONTROLLER = "Y";
 
         #                sd-card   yubikey   wacom
-        USB_WHITELIST = "0bda:0328 1050:0407 056a:5193";
+        USB_WHITELIST = "\"0bda:0328 1050:0407 056a:5193\"";
       };
     };
 
