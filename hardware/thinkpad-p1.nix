@@ -59,7 +59,7 @@
 
         RUNTIME_PM_ON_AC = "auto";
         RUNTIME_PM_ON_BAT = "auto";
-        RUNTIME_PM_DRIVER_BLACKLIST = "\"mei_me pcieport\"";
+        RUNTIME_PM_DRIVER_BLACKLIST = "\"\"";
 
         SOUND_POWER_SAVE_ON_AC = "1";
         SOUND_POWER_SAVE_ON_BAT = "1";
@@ -76,4 +76,6 @@
   sound.extraConfig = ''
     options snd-hda-intel model=generic
   '';
+
+  systemd.services.auto-cpufreq.wantedBy = [ "multi-user.target" ];
 }
