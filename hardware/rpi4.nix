@@ -8,7 +8,7 @@
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
     };
-    kernelPackages = pkgs.linuxPackages_rpi4;
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   console.keyMap = "us";
