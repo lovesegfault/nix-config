@@ -136,7 +136,6 @@
       export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
       export QT_WAYLAND_FORCE_DPI=physical
       export SDL_VIDEODRIVER=wayland
-      export WLR_DRM_DEVICES=/dev/dri/card0 sway
       export _JAVA_AWT_WM_NONREPARENTING=1
       export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dsun.java2d.xrender=true"
       export XDG_CURRENT_DESKTOP="sway"
