@@ -1,7 +1,7 @@
 {
   aurelius = {
     system = "aarch64-linux";
-    hostname = "10.0.0.14";
+    hostname = "100.92.104.42";
   };
   cantor = {
     system = "x86_64-linux";
@@ -9,7 +9,7 @@
   };
   deleuze = {
     system = "aarch64-linux";
-    hostname = "192.168.2.10";
+    hostname = "100.124.135.101";
   };
   feuerbach = {
     system = "x86_64-linux";
