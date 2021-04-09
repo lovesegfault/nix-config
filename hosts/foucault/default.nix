@@ -172,7 +172,7 @@
         output = {
           "Unknown 0x32EB 0x00000000" = {
             mode = "3840x2160@60Hz";
-            position = "960,2880";
+            position = "0,0";
             scale = "2";
             subpixel = "rgb";
           };
