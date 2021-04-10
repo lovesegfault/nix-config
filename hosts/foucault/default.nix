@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
     ../../core
     ../../core/unbound.nix
@@ -194,7 +194,6 @@
     hostId = "872516b8";
     hostName = "foucault";
     firewall.allowedUDPPorts = [ 51820 ];
-    networkmanager.enable = lib.mkForce false;
     wireguard.enable = true;
     wireless.iwd.enable = true;
   };

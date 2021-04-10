@@ -214,7 +214,6 @@
   networking = {
     hostId = "872516b8";
     hostName = "hegel";
-    networkmanager.enable = lib.mkForce false;
     wireguard.enable = true;
     wireless.iwd.enable = true;
   };
