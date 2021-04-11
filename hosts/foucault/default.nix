@@ -6,7 +6,6 @@
     ../../dev
     ../../dev/stcg-cameras.nix
     ../../dev/stcg-gcs
-    ../../dev/stcg-x86_64-builder
     ../../dev/virt-manager.nix
 
     ../../hardware/nixos-aarch64-builder
