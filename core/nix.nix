@@ -19,7 +19,7 @@
     nrBuildUsers = config.nix.maxJobs * 2;
     optimise = {
       automatic = true;
-      dates = [ "01:10" "12:10" ];
+      dates = [ "03:00" ];
     };
     package = pkgs.nixUnstable;
     trustedUsers = [ "root" "@wheel" ];
