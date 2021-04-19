@@ -11,6 +11,10 @@
     ../../hardware/zfs.nix
 
     ../../users/bemeurer
+
+    ./state.nix
+    ./samba.nix
+    ./prometheus.nix
   ];
 
   boot = {
@@ -36,34 +40,6 @@
     packages = with pkgs; [ terminus_font ];
   };
 
-  environment.persistence."/nix/state" = {
-    directories = [
-      "/var/lib/docker"
-      "/var/lib/grafana"
-      "/var/lib/iwd"
-      "/var/lib/plex"
-      "/var/lib/prometheus2"
-      "/var/lib/roon-server"
-      "/var/lib/tailscale"
-      "/var/log"
-
-      "/home/bemeurer/.cache/zsh"
-      "/home/bemeurer/.local/share/bash"
-      "/home/bemeurer/.local/share/nvim"
-      "/home/bemeurer/.local/share/zsh"
-      "/home/bemeurer/.ssh"
-      "/home/bemeurer/src"
-      "/home/bemeurer/tmp"
-    ];
-    files = [
-      "/etc/machine-id"
-      "/etc/ssh/ssh_host_ed25519_key"
-      "/etc/ssh/ssh_host_ed25519_key.pub"
-      "/etc/ssh/ssh_host_rsa_key"
-      "/etc/ssh/ssh_host_rsa_key.pub"
-    ];
-  };
-
   fileSystems = {
     "/" = {
       device = "tmpfs";
@@ -87,40 +63,20 @@
     pulseaudio.enable = false;
   };
 
-  home-manager.users.bemeurer.home.persistence."/nix/state/home/bemeurer" = {
-    allowOther = true;
-    files = [
-      ".gist-vim"
-      ".newsboat/cache.db"
-      ".newsboat/history.search"
-    ];
-  };
-
   networking = {
     firewall = {
-      allowedTCPPorts = [
-        139 # samba
-        445 # samba
-        3000 # grafana
-        9090 # prometheus
-        9091 # prometheus
-      ];
+      allowedTCPPorts = [ 3000 ]; # grafana
       allowedTCPPortRanges = [{
         from = 9100;
         to = 9200;
       }];
-      allowedUDPPorts = [
-        137 # samba
-        138 # samba
-        139 # samba
-        9003 # roon
-      ];
+      allowedUDPPorts = [ 9003 ]; # roon
     };
     hostName = "fourier";
     hostId = "80f4ef89";
-    # wireless.iwd.enable = true;
     useNetworkd = lib.mkForce false;
     interfaces.eno1.useDHCP = true;
+    # wireless.iwd.enable = true;
     # interfaces.wlan0.useDHCP = true;
   };
 
@@ -150,51 +106,6 @@
     plex = {
       enable = true;
       openFirewall = true;
-    };
-    prometheus = {
-      enable = true;
-      extraFlags = [ "--storage.tsdb.retention.time=1y" ];
-      scrapeConfigs = [{
-        job_name = "node";
-        scrape_interval = "2500ms";
-        static_configs = [{ targets = [ "127.0.0.1:9091" ]; }];
-      }
-        {
-          job_name = "prometheus";
-          scrape_interval = "30s";
-          static_configs = [{ targets = [ "127.0.0.1:9090" ]; }];
-        }];
-      exporters.node = {
-        enable = true;
-        listenAddress = "127.0.0.1";
-        enabledCollectors = [ "systemd" "pressure" ];
-        port = 9091;
-      };
-    };
-    samba = {
-      enable = true;
-      extraConfig = ''
-        hosts allow = 10.0.0.0/24 localhost
-        hosts deny = 0.0.0.0/0
-        guest account = nobody
-        map to guest = bad user
-        ntlm auth = ntlmv1-permitted
-        min protocol = NT1
-      '';
-      shares = {
-        atabachnik = {
-          path = "/srv/documents/atabachnik";
-          "read only" = "yes";
-          browseable = "yes";
-          "guest ok" = "yes";
-        };
-        music = {
-          path = "/srv/music";
-          "read only" = "yes";
-          browseable = "yes";
-          "guest ok" = "yes";
-        };
-      };
     };
     smartd.enable = true;
     zfs.autoScrub.pools = [ "tank" ];
