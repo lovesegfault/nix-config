@@ -21,7 +21,7 @@ in
   passmenu = self.callPackage ./gopassmenu.nix {
     inherit terminal;
     name = "passmenu";
-    filter = "^(misc|ssh|websites)/.*$";
+    filter = "^(misc|hosts|websites)/.*$";
     getter = "show --password \"$name\"";
   };
 }
