@@ -2,7 +2,7 @@
 let
   dummyConfig = pkgs.writeText "configuration.nix" ''
     assert builtins.trace "This is a dummy config, use deploy-rs!" false;
-    {}
+    { }
   '';
 in
 {
@@ -17,8 +17,10 @@ in
 
   boot.kernelParams = [ "log_buf_len=10M" ];
 
-  environment.etc."nixos/configuration.nix".source = dummyConfig;
-  environment.systemPackages = with pkgs; [ rsync ];
+  environment = {
+    etc."nixos/configuration.nix".source = dummyConfig;
+    systemPackages = with pkgs; [ rsync ];
+  };
 
   home-manager = {
     useGlobalPkgs = true;
