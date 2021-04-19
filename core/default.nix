@@ -10,7 +10,6 @@ in
     ./aspell.nix
     ./nix.nix
     ./openssh.nix
-    ./sudo.nix
     ./tmux.nix
     ./xdg.nix
     ./zsh.nix
@@ -40,6 +39,11 @@ in
   ];
 
   nixpkgs.config.allowUnfree = true;
+
+  security.sudo = {
+    enable = true;
+    wheelNeedsPassword = false;
+  };
 
   services.tailscale.enable = true;
 
