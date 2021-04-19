@@ -7,6 +7,8 @@
     ../../hardware/rpi4.nix
 
     ../../users/bemeurer
+
+    ./dhcpd4.nix
   ];
 
   console = {
@@ -22,38 +24,6 @@
   nix.gc = {
     automatic = true;
     options = "-d";
-  };
-
-  services.dhcpd4 = {
-    enable = true;
-    extraConfig = ''
-      subnet 192.168.2.0 netmask 255.255.255.0 {
-        authoritative;
-        option subnet-mask 255.255.255.0;
-        range 192.168.2.10 192.168.2.254;
-
-        host foucault {
-          hardware ethernet 48:2a:e3:61:39:66;
-          fixed-address 192.168.2.2;
-        }
-
-        host comte {
-          hardware ethernet 00:04:4b:e5:91:42;
-          fixed-address 192.168.2.3;
-        }
-
-        host tis {
-          hardware ethernet 00:07:48:26:4d:1d;
-          fixed-address 192.168.2.4;
-        }
-
-        host aurelius {
-          hardware ethernet dc:a6:32:63:ac:71;
-          fixed-address 192.168.2.5;
-        }
-      }
-    '';
-    interfaces = [ "eth0" ];
   };
 
   systemd.network.networks = {
