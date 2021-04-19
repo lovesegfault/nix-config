@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ../../core
@@ -68,6 +68,6 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  sops.secrets.root-password.sopsFile = ./root-password.yaml;
-  users.users.root.passwordFile = config.sops.secrets.root-password.path;
+  # sops.secrets.root-password.sopsFile = ./root-password.yaml;
+  # users.users.root.passwordFile = config.sops.secrets.root-password.path;
 }

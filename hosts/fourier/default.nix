@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ../../core
     ../../core/unbound.nix
@@ -136,8 +136,8 @@
 
   users.groups.media.members = [ "bemeurer" "roon-server" "plex" ];
 
-  sops.secrets.root-password.sopsFile = ./root-password.yaml;
-  users.users.root.passwordFile = config.sops.secrets.root-password.path;
+  # sops.secrets.root-password.sopsFile = ./root-password.yaml;
+  # users.users.root.passwordFile = config.sops.secrets.root-password.path;
 
   virtualisation.docker.enable = true;
 }

@@ -57,5 +57,8 @@ in
     stateVersion = "20.09";
   };
 
-  users.mutableUsers = false;
+  users = {
+    mutableUsers = false;
+    users.root.hashedPassword = "$6$rounds=65536$zcuDkE8oM6Rlm6j$yFNZyO5q0lMGdB.Qds15H2A/1rGUd36xtwfHYev8iiLAplUTcT6PKgi8OVJkpF6o5thLSAzdFJU6poh1eu.Dh.";
+  };
 }
