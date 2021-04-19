@@ -1,6 +1,7 @@
 { config, inputs, lib, pkgs, ... }:
 with lib;
 {
+  sops.secrets.bemeurer-password.sopsFile = ./bemeurer-password.yaml;
   users.users.bemeurer = {
     createHome = true;
     description = "Bernardo Meurer";
@@ -19,7 +20,8 @@ with lib;
     ];
     shell = mkIf config.programs.zsh.enable pkgs.zsh;
     uid = 8888;
-    hashedPassword = "$6$rounds=65536$iIIt7MZ7K0ghK$HMPPLFtp7SpvpLAajlgZp.sH2rCNsOq41E1CDCGCaxyz/tXSqWngalatM0V5zsMbj/4klKdAzeoOw1rZj7fp6/";
+
+    passwordFile = config.sops.secrets.bemeurer-password.path;
   };
 
   home-manager.users.bemeurer = { ... }: {

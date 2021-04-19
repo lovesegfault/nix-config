@@ -44,6 +44,20 @@ creation_rules:
       - pgp:
         - *bemeurer
         - *sartre
+  - path_regex: users/bemeurer/bemeurer-password.yaml
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *aurelius
+        - *cantor
+        - *deleuze
+        - *feuerbach
+        - *foucault
+        - *fourier
+        - *goethe
+        - *hegel
+        - *riemann
+        - *sartre
   - path_regex: hosts/aurelius/root-password.yaml
     key_groups:
       - pgp:
