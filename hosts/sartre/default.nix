@@ -22,8 +22,8 @@
     options = "-d";
   };
 
-  sops.secrets.ddclient-sartre.sopsFile = ./ddclient-sartre.yaml;
-  services.ddclient.configFile = config.sops.secrets.ddclient-sartre.path;
+  sops.secrets.ddclient.sopsFile = ./ddclient.yaml;
+  services.ddclient.configFile = config.sops.secrets.ddclient.path;
 
   services.sshguard.enable = true;
 

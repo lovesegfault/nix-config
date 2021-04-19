@@ -1,14 +1,15 @@
-ddclient-sartre: ENC[AES256_GCM,data:bHIWAoYEcCtZQxIpZSryYE3JYaoUWJjp/RCfor6EDNsJNTJ1Yon2pXT52S4SZQDeeL+5aV26+QkvDE3xTeDaZD1P4Isc1hSSnyshY5dGEDv+e5LwIbNi4n2sKa4SbtkT5lyN3UuaxykMRqJN61zl8sbglZdnrx0wd5myZqL5YBJO5xMrKEwXfgRQ2dfBDhEC6jYGPQ460sMTomOs9L0xAdo9gxzkYij9eri7x3LdXmPqDdGh9S9dulsfl59qB00amFdmfmdGV1UgpbxkxB3q1MRbWOAHHONtm3tB8UjqOSsyGzoA7/UtLNpip7HaByhYVRMk9IInx+bH5K1lfw==,iv:FHch19NT1CRlqreY6Zq2IQPe6XhTakPn35/z4F5zOa0=,tag:nbgT6Vq9Uy1NVOPNnKnG4A==,type:str]
+ddclient: ENC[AES256_GCM,data:izSO/4I8CIRm6JG2K8zHLtVjTEF+e33U+QfPwv7c58QCUe4zi0jhkWJ5ZeV3AMIXJjCQkgwxRdzGUhAAZLQ8G1LDkHex1NXDZ3A4zj0g2AcWZVvPN3l7zSYJbilu3JRRCh55AnZwN/BCrfYQlht/nUrUuhFB1XvYzrxPwUJEFj4arvWThozOo+TfTgXmQerlWuLdEyf0Fpu9d+tOuBQdFhvZzJLfnZJZngyniuMHpvfrDFyDOJ++Qo0h8B3S0h8lpwNI4Hl4JeDzz8oruxo45o5DYOBxXikVIPkclqVy5zuD+SaQrjXhQwbwh9jFyGRQV65q92JC95JnD+UTcQ==,iv:JHod8/ALLHw8tN24fvf7NT5yALN8+zdlVsAxF5lczuI=,tag:VKCpBRzW60wVQ7GKtwwtKg==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
-    lastmodified: '2020-12-15T08:19:53Z'
-    mac: ENC[AES256_GCM,data:78UEasWofIXGjEd0SryNxbR0BkwheeV4mQvDGDX2S1kj1ZWSa9chJxep0njmPYgUOM3lY+kN9pm16bNBlh/U3OUBpB4XlJZV6ied2mdIzDVlUy/EGANbLh1sOUf5HqSmvHlnGB36Tn+2IBvjOqK95TcvMLOcXkBfWPtJeAUqB1Y=,iv:Lw4QHuGpByNbYqZwi2wor94WAT8B4nwxN9BX9CJ6Lok=,tag:56+a8pTmsq9geB6+dV+eyQ==,type:str]
+    age: []
+    lastmodified: "2021-04-19T20:48:29Z"
+    mac: ENC[AES256_GCM,data:6iViAeXHciMTLX+GFJxnm8an7KiWXFYkYf1WiUBb9LJSuf8yMiSfrUWsE+9JjaSdRwcw+yntJNf5/I/iScn6DWR4QXk/fBC6B/CAA5p2x9qpKIsuvI0kDggqyvutYVK6/qzzwojvYwnjCNpegFWq9Ljm8X6PMG1M5ewlQsuHt4s=,iv:fXMxzetc2pSGLYtITNSRPaJ41E6rrAZVCXa8YgvX/98=,tag:uglTYfZpfpTQ+UTMYPGg8A==,type:str]
     pgp:
-    -   created_at: '2020-12-15T08:20:06Z'
-        enc: |
+        - created_at: "2020-12-15T08:20:06Z"
+          enc: |
             -----BEGIN PGP MESSAGE-----
 
             hQIMAwGAiJ9LrhnKAQ//ZB2fPmQKSOKWYwixzk9ZaF08a81B4j8UtLmEqL9hGSSy
@@ -26,9 +27,9 @@ sops:
             Gci0baCf6XDyqISehYc+oBWl4g+bYHZSvsYDE72JwPznnmBF5xPDks/kmsG3I0Q=
             =3Sgr
             -----END PGP MESSAGE-----
-        fp: C057AFED6D1499196E046BCB6976C95303C20664
-    -   created_at: '2020-12-15T08:20:06Z'
-        enc: |
+          fp: C057AFED6D1499196E046BCB6976C95303C20664
+        - created_at: "2020-12-15T08:20:06Z"
+          enc: |
             -----BEGIN PGP MESSAGE-----
 
             hQIMA2JJAPUYFZB8AQ/+PSLGtkJacWr2VawKwrd9NUOlNWW+vE75iHpV9WQeAJCD
@@ -46,6 +47,6 @@ sops:
             w6w2wUi19O5rWfFzuNtiAvOgpI7GNii0NqhUyg9h6gzY
             =h5AB
             -----END PGP MESSAGE-----
-        fp: ACD46795FB2EC5499F10DD01624900F51815907C
+          fp: ACD46795FB2EC5499F10DD01624900F51815907C
     unencrypted_suffix: _unencrypted
-    version: 3.6.1
+    version: 3.7.1

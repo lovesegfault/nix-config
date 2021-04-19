@@ -39,7 +39,7 @@ creation_rules:
         - *foucault
         - *fourier
         - *hegel
-  - path_regex: hosts/sartre/ddclient-sartre.yaml
+  - path_regex: hosts/sartre/ddclient.yaml
     key_groups:
       - pgp:
         - *bemeurer
