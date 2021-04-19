@@ -17,7 +17,6 @@
     nix-linter
     nixpkgs-fmt
     pre-commit
-    mkpasswd
 
     deploy-rs
     sops
@@ -28,6 +27,8 @@
     "./keys/hosts"
     "./keys/users"
   ];
+
+  SOPS_GPG_KEYSERVER = "https://keys.openpgp.org";
 
   shellHook = ''
     source ${sops-pgp-hook}/nix-support/setup-hook
