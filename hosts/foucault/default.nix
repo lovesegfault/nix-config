@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ../../core
     ../../core/unbound.nix
@@ -225,6 +225,9 @@
   swapDevices = [{ device = "/dev/disk/by-uuid/840591d3-ac66-4137-bc39-4d9f9109c19a"; }];
 
   time.timeZone = "America/Los_Angeles";
+
+  sops.secrets.root-password.sopsFile = ./root-password.yaml;
+  users.users.root.passwordFile = config.sops.secrets.root-password.path;
 
   virtualisation.libvirtd.enable = true;
 }

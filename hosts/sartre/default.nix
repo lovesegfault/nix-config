@@ -8,6 +8,10 @@
     ../../users/bemeurer
   ];
 
+  home-manager.users.bemeurer = { ... }: {
+    home.packages = with pkgs; [ weechat ];
+  };
+
   networking = {
     hostName = "sartre";
     hostId = "7ecc3d2a";
@@ -25,7 +29,6 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  home-manager.users.bemeurer = { ... }: {
-    home.packages = with pkgs; [ weechat ];
-  };
+  sops.secrets.root-password.sopsFile = ./root-password.yaml;
+  users.users.root.passwordFile = config.sops.secrets.root-password.path;
 }

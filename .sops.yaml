@@ -44,3 +44,53 @@ creation_rules:
       - pgp:
         - *bemeurer
         - *sartre
+  - path_regex: hosts/aurelius/root-password.yaml
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *aurelius
+  - path_regex: hosts/cantor/root-password.yaml
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *cantor
+  - path_regex: hosts/deleuze/root-password.yaml
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *deleuze
+  - path_regex: hosts/feuerbach/root-password.yaml
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *feuerbach
+  - path_regex: hosts/foucault/root-password.yaml
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *foucault
+  - path_regex: hosts/fourier/root-password.yaml
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *fourier
+  - path_regex: hosts/goethe/root-password.yaml
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *goethe
+  - path_regex: hosts/hegel/root-password.yaml
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *hegel
+  - path_regex: hosts/riemann/root-password.yaml
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *riemann
+  - path_regex: hosts/sartre/root-password.yaml
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *sartre

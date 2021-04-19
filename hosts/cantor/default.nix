@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
   imports = [
     ../../core
     ../../core/unbound.nix
@@ -43,6 +43,9 @@
   users.users.bemeurer.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJJJo5svxvrZxwxd1Yu8z/vq1UlLaConnzDTy/ANLboi bemeurer.standard"
   ];
+
+  sops.secrets.root-password.sopsFile = ./root-password.yaml;
+  users.users.root.passwordFile = config.sops.secrets.root-password.path;
 
   virtualisation.docker.enable = true;
 }

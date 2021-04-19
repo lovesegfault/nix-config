@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ../../core
     ../../core/unbound.nix
@@ -223,7 +223,10 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  users.groups.media.members = [ "bemeurer" "jellyfin" "roon-server" "plex" ];
+  users.groups.media.members = [ "bemeurer" "roon-server" "plex" ];
+
+  sops.secrets.root-password.sopsFile = ./root-password.yaml;
+  users.users.root.passwordFile = config.sops.secrets.root-password.path;
 
   virtualisation.docker.enable = true;
 }

@@ -17,6 +17,7 @@
     nix-linter
     nixpkgs-fmt
     pre-commit
+    mkpasswd
 
     deploy-rs
     sops
