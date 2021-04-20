@@ -22,7 +22,7 @@
     ./sway.nix
   ];
 
-  environment.systemPackages = with pkgs; [ cntr wireguard mullvad-vpn ];
+  environment.systemPackages = with pkgs; [ cntr wireguard-tools mullvad-vpn ];
 
   fileSystems = {
     "/" = {

@@ -8,7 +8,10 @@ let
   inherit (builtins) attrNames readDir;
   inherit (inputs) nixpkgs impermanence home-manager sops-nix;
 
-  config.allowUnfree = true;
+  config = {
+    allowUnfree = true;
+    allowAliases = true;
+  };
 
   overlays = map
     (f: import (./overlays + "/${f}"))

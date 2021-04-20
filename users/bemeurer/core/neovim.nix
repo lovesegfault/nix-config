@@ -32,12 +32,12 @@
 
         # Tools
         editorconfig-vim # EditorConfig support
-        fugitive # Git
         fzf-vim # Search
-        goyo # Distraction-free writing
+        goyo-vim # Distraction-free writing
         lightline-vim # Statusbar
         tagbar # Code navigation
         vim-better-whitespace # Highlight trailing whitespaces
+        vim-fugitive # Git
         vim-gist # Gist integration
         vim-indent-guides # Indentation highlighting
         vim-multiple-cursors # Sublime-like multipel cursors
@@ -47,9 +47,9 @@
         # Syntax
         gentoo-syntax # Ebuild and metadata syntax
         lalrpop-vim # LALRPOP syntax
-        polyglot # Shitload of syntaxes
         rust-vim # Rust 2018 syntax
         vim-nix # Nix syntax highlighting
+        vim-polyglot # Shitload of syntaxes
       ];
       withRuby = false;
       extraPackages = with pkgs; [ nodejs ];

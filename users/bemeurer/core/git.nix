@@ -6,7 +6,7 @@
     userEmail = "bernardo@meurer.org";
     userName = "Bernardo Meurer";
     extraConfig = {
-      core.pager = "${pkgs.gitAndTools.delta}/bin/delta --dark";
+      core.pager = "${pkgs.delta}/bin/delta --dark";
       difftool.prompt = true;
       github.user = "lovesegfault";
       mergetool.prompt = true;
