@@ -1,3 +1,9 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [ beets bimp fixart lollypop imagemagick7 essentia-extractor ];
+  home.packages = with pkgs; [
+    (beets.override { enableAlternatives = true; })
+    bimp
+    fixart
+    imagemagick7
+    essentia-extractor
+  ];
 }

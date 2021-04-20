@@ -15,6 +15,7 @@
     packages = with pkgs; [
       grim
       libnotify
+      lollypop
       pavucontrol
       pinentry-gnome
       slurp
