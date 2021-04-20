@@ -87,10 +87,7 @@
   };
 
   home-manager.users.bemeurer = { ... }: {
-    imports = [
-      ../../users/bemeurer/music
-      ../../users/bemeurer/trusted
-    ];
+    imports = [ ../../users/bemeurer/trusted ];
   };
 
   networking = {
