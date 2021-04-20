@@ -63,6 +63,12 @@
     pulseaudio.enable = false;
   };
 
+  home-manager.users.bemeurer = { ... }: {
+    imports = [
+      ../../users/bemeurer/music
+    ];
+  };
+
   networking = {
     firewall = {
       allowedTCPPorts = [ 3000 ]; # grafana
