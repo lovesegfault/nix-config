@@ -59,7 +59,6 @@
       ".arcrc"
       ".cache/.sway-launcher-desktop-wrapped-history.txt"
       ".cache/cargo/credentials"
-      ".config/beets/config.yaml"
       ".config/cachix/cachix.dhall"
       ".config/gh/hosts.yml"
       ".config/zoomus.conf"
