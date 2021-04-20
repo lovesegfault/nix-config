@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   programs.firefox = {
     enable = true;
     package =
@@ -6,5 +6,4 @@
       then pkgs.firefox-bin
       else pkgs.firefox;
   };
-  programs.newsboat.browser = "${config.programs.firefox.package}/bin/firefox";
 }

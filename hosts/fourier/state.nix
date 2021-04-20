@@ -32,8 +32,6 @@
     allowOther = true;
     files = [
       ".gist-vim"
-      ".newsboat/cache.db"
-      ".newsboat/history.search"
     ];
   };
 }

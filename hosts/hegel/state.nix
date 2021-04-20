@@ -66,8 +66,6 @@
       ".config/gh/hosts.yml"
       ".config/zoomus.conf"
       ".gist-vim"
-      ".newsboat/cache.db"
-      ".newsboat/history.search"
       ".vault-token"
       ".wall"
     ];
