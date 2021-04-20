@@ -666,6 +666,18 @@
       },
       "coc.preferences.formatOnSaveFiletypes": ["rust"],
       "texlab.path": "texlab",
+      "languageserver": {
+        "ccls": {
+          "command": "ccls",
+          "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+          "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+          "initializationOptions": {
+              "cache": {
+                "directory": "/tmp/ccls"
+              }
+            }
+        }
+      },
       "latex.build.onSave": true,
       "latex.lint.onSave": true,
       "latex.forwardSearch.executable": "evince"
