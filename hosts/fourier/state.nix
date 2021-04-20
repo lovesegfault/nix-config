@@ -11,6 +11,7 @@
       "/var/log"
 
       "/home/bemeurer/.cache/zsh"
+      "/home/bemeurer/.config/beets"
       "/home/bemeurer/.local/share/bash"
       "/home/bemeurer/.local/share/nvim"
       "/home/bemeurer/.local/share/zsh"
