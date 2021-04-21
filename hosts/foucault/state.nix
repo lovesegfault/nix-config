@@ -14,6 +14,7 @@
       "/home/bemeurer/.cache/thunderbird"
       "/home/bemeurer/.cache/zoom"
       "/home/bemeurer/.cache/zsh"
+      "/home/bemeurer/.config/Signal"
       "/home/bemeurer/.config/Slack"
       "/home/bemeurer/.config/TabNine"
       "/home/bemeurer/.config/coc"
