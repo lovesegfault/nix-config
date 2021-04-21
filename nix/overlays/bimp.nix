@@ -5,7 +5,7 @@ self: _: {
       , beets
       , flac
       , id3v2
-      , imagemagick7
+      , imagemagick
       , parallel
       }: writeSaneShellScriptBin {
         name = "bimp";
@@ -14,7 +14,7 @@ self: _: {
           beets
           flac
           id3v2
-          imagemagick7
+          imagemagick
           parallel
         ];
 

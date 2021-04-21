@@ -21,14 +21,14 @@
       slurp
       speedcrunch
       wl-clipboard
-      xdg_utils
+      xdg-utils
     ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
       discord
       gnome3.evince
-      gnome3.shotwell
       imv
       mbk
       prusa-slicer
+      shotwell
       signal-desktop
       slack
       spotify

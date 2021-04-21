@@ -5,7 +5,7 @@
     checkart
     essentia-extractor
     fixart
-    imagemagick7
+    imagemagick
     mediainfo
   ];
 }

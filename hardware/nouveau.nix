@@ -2,7 +2,7 @@
   hardware = {
     opengl = {
       enable = true;
-      extraPackages = with pkgs; [ libva-full libvdpau-va-gl vaapiVdpau ];
+      extraPackages = with pkgs; [ libva libvdpau-va-gl vaapiVdpau ];
     };
   };
 }
