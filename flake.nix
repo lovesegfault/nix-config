@@ -20,7 +20,10 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    naersk.url = "github:nmattia/naersk";
+    naersk = {
+      url = "github:nmattia/naersk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 

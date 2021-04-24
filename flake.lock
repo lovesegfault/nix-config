@@ -95,7 +95,9 @@
     },
     "naersk": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1618844365,
@@ -112,20 +114,6 @@
       }
     },
     "nixpkgs": {
-      "locked": {
-        "lastModified": 1619442239,
-        "narHash": "sha256-rr2mHIBnLsb1dFTECWylpWCeXr7bqABPlBIh7r7vksQ=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "ecb3b74a438dbe6398db7403afdc6c38237a83d6",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs_2": {
       "locked": {
         "lastModified": 1619411734,
         "narHash": "sha256-eNaIyTZlQPzAsX+++heDL7L4Zr7O1DxpX4V5NTvptGc=",
@@ -148,7 +136,7 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "naersk": "naersk",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "sops-nix": "sops-nix"
       }
     },
