@@ -30,9 +30,6 @@
 
       [git_status]
       disabled=true
-
-      [nix_shell]
-      use_name = true
     '';
   };
 }
