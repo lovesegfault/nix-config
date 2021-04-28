@@ -6,8 +6,26 @@ on:
       - try
       - flake-update
 jobs:
+  lints:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: cachix/install-nix-action@v13
+        with:
+          install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20210126_f15f0b8/install
+          extra_nix_config: "experimental-features = nix-command flakes"
+      - uses: cachix/cachix-action@v10
+        with:
+          name: nix-config
+          signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+      - name: lints
+        run: |
+          nix develop -c nixpkgs-fmt --check . || exit 1
+
   get-hosts:
-    runs-on: [self-hosted, linux, X64]
+    runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.get-hosts.outputs.matrix }}
     steps:
@@ -27,7 +45,7 @@ jobs:
           echo "::set-output name=matrix::$(nix eval --json .#deploy.nodes | jq -c 'del(.aurelius,.deleuze,.foucault,.goethe,.hegel) | { host: keys }')"
 
   build-host:
-    runs-on: [self-hosted, linux, X64]
+    runs-on: ubuntu-latest
     needs: get-hosts
     strategy:
       fail-fast: false
@@ -70,44 +88,3 @@ jobs:
         run: |
           nix run nixpkgs#nix-build-uncached -- \
             -A hosts.${{ matrix.host }}
-
-  checks:
-    runs-on: [self-hosted, linux, X64]
-    needs: build-host
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: cachix/install-nix-action@v13
-        with:
-          install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20210126_f15f0b8/install
-          extra_nix_config: "experimental-features = nix-command flakes"
-      - name: AArch64
-        env:
-          AARCH64_BOX_KEY: ${{ secrets.AARCH64_BOX_KEY }}
-          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
-        run: |
-          sudo mkdir -p /root/.ssh
-          echo "$AARCH64_BOX_KEY" | sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
-          sudo chmod 0600 /root/.ssh/aarch64.community.nixos
-          echo "$KNOWN_HOSTS" | sudo tee -a /root/.ssh/known_hosts > /dev/null
-          nix_cfg=(
-            "builders-use-substitutes = true"
-          )
-          builder_cfg=(
-            lovesegfault@aarch64.nixos.community
-            aarch64-linux
-            /root/.ssh/aarch64.community.nixos
-            64
-            8
-            big-parallel
-          )
-          echo "${builder_cfg[*]}" | sudo tee /etc/nix/machines > /dev/null
-          echo "${nix_cfg[*]}" | sudo tee -a /etc/nix/nix.conf > /dev/null
-      - uses: cachix/cachix-action@v10
-        with:
-          name: nix-config
-          signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
-      - name: nix flake check
-        run: |
-          nix flake check
