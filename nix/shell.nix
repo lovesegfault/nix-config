@@ -12,6 +12,11 @@
 , ssh-to-pgp
 }: mkShell {
   name = "nix-config";
+
+  nativeBuildInputs = [
+    sops-pgp-hook
+  ];
+
   buildInputs = [
     cachix
     nix-build-uncached
@@ -31,8 +36,7 @@
 
   SOPS_GPG_KEYSERVER = "https://keys.openpgp.org";
 
-  shellHook = (pre-commit-check.shellHook) + ''
-    source ${sops-pgp-hook}/nix-support/setup-hook
-    sopsPGPHook
+  shellHook = ''
+    ${pre-commit-check.shellHook}
   '';
 }
