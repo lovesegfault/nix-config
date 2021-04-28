@@ -7,7 +7,7 @@ on:
       - flake-update
 jobs:
   get-hosts:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, X64]
     outputs:
       matrix: ${{ steps.get-hosts.outputs.matrix }}
     steps:
@@ -27,7 +27,7 @@ jobs:
           echo "::set-output name=matrix::$(nix eval --json .#deploy.nodes | jq -c 'del(.aurelius,.deleuze,.foucault,.goethe,.hegel) | { host: keys }')"
 
   build-host:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, X64]
     needs: get-hosts
     strategy:
       fail-fast: false
@@ -72,7 +72,7 @@ jobs:
             -A hosts.${{ matrix.host }}
 
   checks:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, X64]
     needs: build-host
     steps:
       - uses: actions/checkout@v2
