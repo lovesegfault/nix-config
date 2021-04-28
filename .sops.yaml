@@ -83,6 +83,11 @@ creation_rules:
       - pgp:
         - *bemeurer
         - *foucault
+  - path_regex: hosts/fourier/github-token.yaml
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *fourier
   - path_regex: hosts/fourier/root-password.yaml
     key_groups:
       - pgp:

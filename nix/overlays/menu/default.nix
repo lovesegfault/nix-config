@@ -1,4 +1,4 @@
-self: _:
+self:
 let
   terminal =
     if self.hostPlatform.system == "x86_64-linux" then
@@ -6,6 +6,7 @@ let
     else
       "${self.termite}/bin/termite";
 in
+_:
 {
   sway-launcher-desktop = self.callPackage ./sway-launcher-desktop.nix { inherit terminal; };
 

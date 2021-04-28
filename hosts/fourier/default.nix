@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ../../core
     ../../core/unbound.nix
@@ -104,6 +104,12 @@
   services = {
     fstrim.enable = true;
     fwupd.enable = true;
+    github-runner = {
+      enable = true;
+      name = config.networking.hostName;
+      tokenFile = config.sops.secrets.github-token.path;
+      url = "https://github.com/lovesegfault/nix-config";
+    };
     grafana = {
       enable = true;
       addr = "0.0.0.0";
@@ -120,6 +126,8 @@
       flags = "-k -p --utc";
     };
   };
+
+  sops.secrets.github-token.sopsFile = ./github-token.yaml;
 
   sound = {
     enable = true;
