@@ -2,6 +2,7 @@
 , deploy-rs
 , flake-utils
 , nixpkgs
+, pre-commit-hooks
 , sops-nix
 , ...
 }@inputs:
@@ -30,6 +31,20 @@
     devShell = pkgs.callPackage ./shell.nix {
       inherit (sops-nix.packages.${system}) sops-pgp-hook;
       inherit (deploy-rs.packages.${system}) deploy-rs;
+      inherit (self.checks.${system}) pre-commit-check;
+    };
+
+    checks = (deploy-rs.lib."${system}".deployChecks self.deploy) // {
+      pre-commit-check = pre-commit-hooks.lib."${system}".run {
+        src = ./.;
+        hooks = {
+          nixpkgs-fmt.enable = true;
+          nix-linter = {
+            enable = true;
+            excludes = [ "flake.nix" ];
+          };
+        };
+      };
     };
   })
 )

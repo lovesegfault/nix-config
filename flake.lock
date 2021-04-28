@@ -129,6 +129,29 @@
         "type": "github"
       }
     },
+    "pre-commit-hooks": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1619622390,
+        "narHash": "sha256-PucyXBzv5agLjtpHhuyhsKXo3qNFaClTnyf94sg7024=",
+        "owner": "cachix",
+        "repo": "pre-commit-hooks.nix",
+        "rev": "6363c4e3950ba528e0fbccdb7df5d43e09170d8d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cachix",
+        "repo": "pre-commit-hooks.nix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "deploy-rs": "deploy-rs",
@@ -137,6 +160,7 @@
         "impermanence": "impermanence",
         "naersk": "naersk",
         "nixpkgs": "nixpkgs",
+        "pre-commit-hooks": "pre-commit-hooks",
         "sops-nix": "sops-nix"
       }
     },

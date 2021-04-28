@@ -6,9 +6,10 @@
 , pre-commit
 , sops
 
-, ssh-to-pgp
-, sops-pgp-hook
 , deploy-rs
+, pre-commit-check
+, sops-pgp-hook
+, ssh-to-pgp
 }: mkShell {
   name = "nix-config";
   buildInputs = [
@@ -30,7 +31,7 @@
 
   SOPS_GPG_KEYSERVER = "https://keys.openpgp.org";
 
-  shellHook = ''
+  shellHook = (pre-commit-check.shellHook) + ''
     source ${sops-pgp-hook}/nix-support/setup-hook
     sopsPGPHook
   '';

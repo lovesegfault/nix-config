@@ -1,5 +1,4 @@
-{ self
-, deploy-rs
+{ deploy-rs
 , ...
 }@inputs:
 let
@@ -21,6 +20,4 @@ in
       })
       (import ./hosts.nix);
   };
-
-  checks = mapAttrs (_: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 }
