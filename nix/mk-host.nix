@@ -4,7 +4,7 @@
 , extraModules ? [ ]
 }:
 let
-  inherit (nixpkgs.lib) pathExists optionalAttrs;
+  inherit (nixpkgs.lib) pathExists optionalAttrs mapAttrs' nameValuePair;
   inherit (builtins) attrNames readDir;
   inherit (inputs) nixpkgs impermanence home-manager sops-nix;
 
@@ -25,6 +25,10 @@ nixpkgs.lib.nixosSystem {
     impermanence.nixosModules.impermanence
     home-manager.nixosModules.home-manager
     sops-nix.nixosModules.sops
+
+    ({
+      networking.hosts = mapAttrs' (n: v: nameValuePair v.hostname [ n ]) (import ./hosts.nix);
+    })
 
     (../hosts + "/${name}")
   ] ++ extraModules;
