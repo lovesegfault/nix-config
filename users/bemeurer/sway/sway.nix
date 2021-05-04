@@ -42,7 +42,10 @@
 
       focus.followMouse = false;
 
-      fonts = [ "FontAwesome 10" "Iosevka 10" ];
+      fonts = {
+        names = [ "FontAwesome" "Iosevka" ];
+        size = 10.0;
+      };
 
       gaps = lib.mkIf (pkgs.hostPlatform.system == "x86_64-linux") {
         inner = 10;
