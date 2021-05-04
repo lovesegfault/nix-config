@@ -46,7 +46,7 @@ jobs:
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
       - id: get-hosts
         run: |
-          echo "::set-output name=matrix::$(nix eval --json .#deploy.nodes | jq -c 'del(.aurelius,.deleuze,.foucault,.goethe,.hegel) | { host: keys }')"
+          echo "::set-output name=matrix::$(nix eval --json .#deploy.nodes | jq -c 'del(.aurelius,.foucault,.goethe,.hegel) | { host: keys }')"
 
   build-host:
     runs-on: ubuntu-latest
