@@ -14,8 +14,10 @@ jobs:
           token: ${{ secrets.PAT }}
       - uses: cachix/install-nix-action@v13
         with:
-          install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20210126_f15f0b8/install
-          extra_nix_config: "experimental-features = nix-command flakes"
+          install_url: https://nixos-nix-install-tests.cachix.org/serve/x5hb0mxd5brv28fs3ymaxsqd6by9dwsw/install
+          install_options: '--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve'
+          extra_nix_config: |
+            experimental-features = nix-command flakes
       - uses: cachix/cachix-action@v10
         with:
           name: nix-config
@@ -23,7 +25,7 @@ jobs:
       - run: git config --global user.email "hatesegfault@protonmail.ch"
       - run: git config --global user.name "hatesegfault"
       - name: Update flakes
-        run: nix flake update --recreate-lock-file --commit-lock-file
+        run: nix flake update --commit-lock-file
       - uses: peter-evans/create-pull-request@v3
         with:
           branch: flake-update
