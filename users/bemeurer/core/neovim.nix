@@ -81,6 +81,9 @@
             " (useful for handling the permission-denied error)
             command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
+            " Disable the Python2 plugin
+            let g:loaded_python_provider=0
+
             """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
             " => VIM user interface
             """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
