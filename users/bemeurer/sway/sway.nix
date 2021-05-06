@@ -108,11 +108,7 @@
 
       output = { "*" = { bg = "~/.wall fill"; }; };
 
-      terminal =
-        if pkgs.hostPlatform.system == "aarch64-linux" then
-          "${pkgs.termite}/bin/termite"
-        else
-          "${pkgs.foot}/bin/foot";
+      terminal = "${pkgs.foot}/bin/foot";
 
       window = {
         border = 0;

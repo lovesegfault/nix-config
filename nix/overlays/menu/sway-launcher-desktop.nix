@@ -33,7 +33,7 @@
     mkdir -p $out/bin
     cp sway-launcher-desktop.sh $out/bin/sway-launcher-desktop
     wrapProgram $out/bin/sway-launcher-desktop \
-      --set TERMINAL_COMMAND "${terminal} -e" \
+      --set TERMINAL_COMMAND "${terminal}" \
       --prefix PATH : ${lib.makeBinPath [ spawn fzf util-linux ]}
 
     runHook postInstall

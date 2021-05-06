@@ -7,7 +7,6 @@
     ./mpv.nix
     ./sway.nix
     ./swaylock.nix
-    ./termite.nix
     ./waybar.nix
   ];
 

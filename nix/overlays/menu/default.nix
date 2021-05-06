@@ -1,10 +1,6 @@
 self:
 let
-  terminal =
-    if self.hostPlatform.system == "x86_64-linux" then
-      "${self.foot}/bin/foot"
-    else
-      "${self.termite}/bin/termite";
+  terminal = "${self.foot}/bin/foot";
 in
 _:
 {

@@ -47,7 +47,7 @@ writeSaneShellScriptBin {
     function emojimenu_backend() {
       emojimenu_lock
       export EMOJIMENU_FRONTEND=1
-      ${terminal} -t emojimenu -e "$emojimenu_path" || true
+      ${terminal} -t emojimenu "$emojimenu_path" || true
 
       emoji="$(cat "$emojimenu_fifo")"
       rm -f "$emojimenu_fifo"
