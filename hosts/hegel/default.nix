@@ -46,6 +46,8 @@
     packages = with pkgs; [ terminus_font ];
   };
 
+  environment.systemPackages = with pkgs; [ lutris ];
+
   fileSystems = {
     "/" = {
       device = "zroot/local/root";
