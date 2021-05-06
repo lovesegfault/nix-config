@@ -62,6 +62,7 @@
   services.ddclient.configFile = config.sops.secrets.ddclient.path;
 
   services = {
+    do-agent.enable = true;
     sshguard.enable = true;
     udev.extraRules = ''
       ATTR{address}=="1e:8c:8e:5b:f5:a6", NAME="eth0"
