@@ -44,7 +44,7 @@ writeSaneShellScriptBin {
     function gopassmenu_backend() {
         gopassmenu_lock
         export GOPASSMENU_FRONTEND=1
-        ${terminal} -t ${name} "$gopassmenu_path" || true
+        ${terminal} -T ${name} "$gopassmenu_path" || true
 
         name="$(cat "$gopassmenu_fifo")"
         rm -f "$gopassmenu_fifo"

@@ -81,7 +81,7 @@
           "${modifier}+Shift+0" = "move container to workspace 9:κ";
           # normal ones
           "${modifier}+Return" = execSpawn "${terminal}";
-          "${modifier}+d" = "exec ${terminal} -t swaymenu ${pkgs.sway-launcher-desktop}/bin/sway-launcher-desktop";
+          "${modifier}+d" = "exec ${terminal} -T swaymenu ${pkgs.sway-launcher-desktop}/bin/sway-launcher-desktop";
           "${modifier}+m" = execSpawn "${pkgs.emojimenu}/bin/emojimenu";
           "${modifier}+o" = execSpawn "${pkgs.screenocr}/bin/screenocr";
           "${modifier}+t" = execSpawn "${pkgs.otpmenu}/bin/otpmenu";
