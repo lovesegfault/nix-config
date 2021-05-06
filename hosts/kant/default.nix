@@ -28,7 +28,6 @@
     defaultGateway = "143.198.224.1";
     defaultGateway6 = "2604:a880:4:1d0::1";
     dhcpcd.enable = false;
-    firewall.allowPing = true;
     hostId = "4a8f5793";
     hostName = "kant";
     useNetworkd = lib.mkForce false;
