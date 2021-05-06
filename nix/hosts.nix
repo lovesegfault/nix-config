@@ -39,8 +39,4 @@
   #   system = "aarch64-linux";
   #   hostname = "100.99.75.64";
   # };
-  sartre = {
-    system = "x86_64-linux";
-    hostname = "100.97.215.77";
-  };
 }

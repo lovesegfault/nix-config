@@ -10,7 +10,6 @@ keys:
   - &hegel A2260154AA9528C06164F0FE0F175745C1DB0169
   - &kant DEF7B28E34C19CAD99E99401403CB50D7047B3AF
   - &riemann 41D56E398857FB3FDF920A2ED3D48D2FCB75EDC3
-  - &sartre ACD46795FB2EC5499F10DD01624900F51815907C
 
 creation_rules:
   - path_regex: dev/stcg-x86_64-builder/stcg-x86_64-builder-key.yaml
@@ -47,7 +46,6 @@ creation_rules:
         - *hegel
         - *kant
         - *riemann
-        - *sartre
   - path_regex: hosts/aurelius/.*
     key_groups:
       - pgp:
@@ -98,8 +96,3 @@ creation_rules:
       - pgp:
         - *bemeurer
         - *riemann
-  - path_regex: hosts/sartre/.*
-    key_groups:
-      - pgp:
-        - *bemeurer
-        - *sartre
