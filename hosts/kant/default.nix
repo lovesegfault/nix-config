@@ -28,12 +28,6 @@
     defaultGateway = "143.198.224.1";
     defaultGateway6 = "2604:a880:4:1d0::1";
     dhcpcd.enable = false;
-    firewall.extraCommands = ''
-      iptables -A INPUT -m state --state INVALID -j DROP
-      iptables -A INPUT -m state --state NEW -m set ! --match-set scanned_ports src,dst -m hashlimit --hashlimit-above 1/hour --hashlimit-burst 5 --hashlimit-mode srcip --hashlimit-name portscan --hashlimit-htable-expire 10000 -j SET --add-set port_scanners src --exist
-      iptables -A INPUT -m state --state NEW -m set --match-set port_scanners src -j DROP
-      iptables -A INPUT -m state --state NEW -j SET --add-set scanned_ports src,dst
-    '';
     hostId = "4a8f5793";
     hostName = "kant";
     useNetworkd = lib.mkForce false;
