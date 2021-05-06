@@ -36,8 +36,6 @@
     systemFeatures = [ "benchmark" "nixos-test" "big-parallel" "kvm" "gccarch-skylake" ];
   };
 
-  nixpkgs.localSystem.system = "x86_64-linux";
-
   services = {
     auto-cpufreq.enable = true;
     fstrim.enable = true;

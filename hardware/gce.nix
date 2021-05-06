@@ -8,8 +8,6 @@
 
   nix.maxJobs = 64;
 
-  nixpkgs.localSystem.system = "x86_64-linux";
-
   services.fstrim.enable = true;
 
   systemd.services.fetch-instance-ssh-keys.enable = lib.mkForce false;

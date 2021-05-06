@@ -35,8 +35,6 @@
 
   nix.maxJobs = 4;
 
-  nixpkgs.localSystem.system = "aarch64-linux";
-
   services = {
     fstrim.enable = true;
     xserver.videoDrivers = [ "modesetting" ];

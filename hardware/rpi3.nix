@@ -33,8 +33,6 @@
     maxJobs = 2;
   };
 
-  nixpkgs.localSystem.system = "aarch64-linux";
-
   services.fstrim.enable = true;
 
   swapDevices = [
