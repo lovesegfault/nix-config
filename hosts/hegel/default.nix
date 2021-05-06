@@ -37,6 +37,7 @@
     kernelModules = [ "kvm-amd" "ddcci-backlight" "i2c-dev" "nct6775" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "acpi_enforce_resources=lax" ];
+    tmpOnTmpfs = true;
   };
 
   console = {

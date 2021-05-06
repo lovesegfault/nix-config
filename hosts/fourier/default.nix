@@ -27,6 +27,7 @@
       "net.core.rmem_max" = 2147483647;
       "net.core.wmem_max" = 2147483647;
     };
+    tmpOnTmpfs = true;
     zfs = {
       extraPools = [ "tank" ];
       requestEncryptionCredentials = false;
