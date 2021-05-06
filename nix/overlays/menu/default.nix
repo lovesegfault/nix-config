@@ -2,7 +2,7 @@ self:
 let
   terminal =
     if self.hostPlatform.system == "x86_64-linux" then
-      "${self.alacritty}/bin/alacritty"
+      "${self.foot}/bin/foot"
     else
       "${self.termite}/bin/termite";
 in

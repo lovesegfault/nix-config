@@ -2,11 +2,12 @@
   imports = [
     ./alacritty.nix
     ./firefox.nix
+    ./foot.nix
     ./mako.nix
     ./mpv.nix
-    ./termite.nix
     ./sway.nix
     ./swaylock.nix
+    ./termite.nix
     ./waybar.nix
   ];
 

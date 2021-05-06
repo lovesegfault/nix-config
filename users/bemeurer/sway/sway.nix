@@ -112,7 +112,7 @@
         if pkgs.hostPlatform.system == "aarch64-linux" then
           "${pkgs.termite}/bin/termite"
         else
-          "${pkgs.alacritty}/bin/alacritty";
+          "${pkgs.foot}/bin/foot";
 
       window = {
         border = 0;
