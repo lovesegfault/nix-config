@@ -8,6 +8,7 @@ keys:
   - &fourier A4EABC2BEEE48CFF55287E855FABEC432FE0176B
   - &goethe 3B157FCDEF12BDE6994DA95CA4C02ABF06E9D7E2
   - &hegel A2260154AA9528C06164F0FE0F175745C1DB0169
+  - &kant DEF7B28E34C19CAD99E99401403CB50D7047B3AF
   - &riemann 41D56E398857FB3FDF920A2ED3D48D2FCB75EDC3
   - &sartre ACD46795FB2EC5499F10DD01624900F51815907C
 
@@ -16,16 +17,12 @@ creation_rules:
     key_groups:
       - pgp:
         - *bemeurer
-        - *foucault
-        - *hegel
   - path_regex: hardware/nixos-aarch64-builder/nixos-aarch64-builder-key.yaml
     key_groups:
       - pgp:
-        - *aurelius
         - *bemeurer
-        - *cantor
+        - *aurelius
         - *deleuze
-        - *feuerbach
         - *foucault
         - *goethe
         - *hegel
@@ -34,16 +31,8 @@ creation_rules:
     key_groups:
       - pgp:
         - *bemeurer
-        - *cantor
-        - *feuerbach
         - *foucault
-        - *fourier
         - *hegel
-  - path_regex: hosts/sartre/ddclient.yaml
-    key_groups:
-      - pgp:
-        - *bemeurer
-        - *sartre
   - path_regex: users/bemeurer/bemeurer-password.yaml
     key_groups:
       - pgp:
@@ -56,59 +45,60 @@ creation_rules:
         - *fourier
         - *goethe
         - *hegel
+        - *kant
         - *riemann
         - *sartre
-  - path_regex: hosts/aurelius/root-password.yaml
+  - path_regex: hosts/aurelius/.*
     key_groups:
       - pgp:
         - *bemeurer
         - *aurelius
-  - path_regex: hosts/cantor/root-password.yaml
+  - path_regex: hosts/cantor/.*
     key_groups:
       - pgp:
         - *bemeurer
         - *cantor
-  - path_regex: hosts/deleuze/root-password.yaml
+  - path_regex: hosts/deleuze/.*
     key_groups:
       - pgp:
         - *bemeurer
         - *deleuze
-  - path_regex: hosts/feuerbach/root-password.yaml
+  - path_regex: hosts/feuerbach/.*
     key_groups:
       - pgp:
         - *bemeurer
         - *feuerbach
-  - path_regex: hosts/foucault/root-password.yaml
+  - path_regex: hosts/foucault/.*
     key_groups:
       - pgp:
         - *bemeurer
         - *foucault
-  - path_regex: hosts/fourier/github-token.yaml
+  - path_regex: hosts/fourier/.*
     key_groups:
       - pgp:
         - *bemeurer
         - *fourier
-  - path_regex: hosts/fourier/root-password.yaml
-    key_groups:
-      - pgp:
-        - *bemeurer
-        - *fourier
-  - path_regex: hosts/goethe/root-password.yaml
+  - path_regex: hosts/goethe/.*
     key_groups:
       - pgp:
         - *bemeurer
         - *goethe
-  - path_regex: hosts/hegel/root-password.yaml
+  - path_regex: hosts/hegel/.*
     key_groups:
       - pgp:
         - *bemeurer
         - *hegel
-  - path_regex: hosts/riemann/root-password.yaml
+  - path_regex: hosts/kant/.*
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *kant
+  - path_regex: hosts/riemann/.*
     key_groups:
       - pgp:
         - *bemeurer
         - *riemann
-  - path_regex: hosts/sartre/root-password.yaml
+  - path_regex: hosts/sartre/.*
     key_groups:
       - pgp:
         - *bemeurer

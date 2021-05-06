@@ -4,7 +4,6 @@
     ../../core/unbound.nix
 
     ../../dev
-    ../../dev/stcg-gcs
 
     ../../hardware/efi.nix
     ../../hardware/nouveau.nix
