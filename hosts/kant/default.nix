@@ -12,6 +12,7 @@
     cleanTmpDir = true;
     initrd.kernelModules = [ "nvme" ];
     loader.grub.device = "/dev/vda";
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   fileSystems."/" = {
