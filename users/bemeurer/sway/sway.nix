@@ -43,7 +43,7 @@
       focus.followMouse = false;
 
       fonts = {
-        names = [ "FontAwesome" "Iosevka" ];
+        names = [ "FontAwesome" "Fira Code" ];
         size = 10.0;
       };
 

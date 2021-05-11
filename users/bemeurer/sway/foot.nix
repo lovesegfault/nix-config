@@ -4,7 +4,7 @@
   # https://github.com/NixOS/nixpkgs/issues/107491
   xdg.configFile."foot/foot.ini".text = ''
     dpi-aware=yes
-    font=Iosevka:size=8
+    font=Fira Code:size=8
     notify=${pkgs.libnotify}/bin/notify-send -a foot -i foot ''${title} ''${body}
     term=xterm-256color
     url-launch=${pkgs.xdg-utils}/bin/xdg-open ''${url}

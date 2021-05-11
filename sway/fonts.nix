@@ -2,7 +2,7 @@
   fonts = {
     fontconfig = {
       defaultFonts = {
-        monospace = [ "Iosevka" ];
+        monospace = [ "Fira Code" ];
         emoji = [ "Noto Color Emoji" ];
       };
       localConf = ''
@@ -70,7 +70,7 @@
     };
     fonts = with pkgs; [
       font-awesome
-      hack-font
+      fira-code
       iosevka
       noto-fonts-cjk
       noto-fonts-emoji
