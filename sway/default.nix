@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./boot-silent.nix
+    ./clight.nix
     ./fonts.nix
     ./location.nix
     ./sway.nix
