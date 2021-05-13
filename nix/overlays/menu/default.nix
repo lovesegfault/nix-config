@@ -6,7 +6,7 @@ _:
 {
   sway-launcher-desktop = self.callPackage ./sway-launcher-desktop.nix { inherit terminal; };
 
-  emojimenu = self.callPackage ./emojimenu.nix { inherit terminal; };
+  emojimenu = self.callPackage ./emojimenu.nix { };
 
   otpmenu = self.callPackage ./gopassmenu.nix {
     inherit terminal;
