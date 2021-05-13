@@ -40,8 +40,8 @@ self: _: {
           # wait 45 seconds, or until the clipboard changes.
           counter=0
           while [ "$counter" -lt 45 ]; do
-            ((counter++))
-            if [ "$password" -ne "$(wl-paste)" ]; then
+            counter=$((counter + 1))
+            if [ "$password" != "$(wl-paste)" ]; then
               exit 0
             fi
             sleep 1
