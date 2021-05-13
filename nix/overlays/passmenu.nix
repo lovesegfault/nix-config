@@ -37,7 +37,15 @@ self: _: {
           wl-copy --trim-newline <<< "$password"
           notify-send "🔏 Copied $password_name to clipboard. Will clear in 45 seconds."
 
-          sleep 45
+          # wait 45 seconds, or until the clipboard changes.
+          counter=0
+          while [ "$counter" -lt 45 ]; do
+            ((counter++))
+            if [ "$password" -ne "$(wl-paste)" ]; then
+              exit 0
+            fi
+            sleep 1
+          done
 
           wl-copy --clear
           notify-send "🧹 Clipboard cleared."
