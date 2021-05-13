@@ -8,12 +8,7 @@ _:
 
   emojimenu = self.callPackage ./emojimenu.nix { };
 
-  otpmenu = self.callPackage ./gopassmenu.nix {
-    inherit terminal;
-    name = "otpmenu";
-    filter = "^(otp)/.*$";
-    getter = "otp \"$name\" | cut -f 1 -d ' '";
-  };
+  otpmenu = self.callPackage ./otpmenu.nix { };
 
   passmenu = self.callPackage ./passmenu.nix { };
 }
