@@ -1,7 +1,8 @@
 self: _: {
   swaymenu = self.callPackage
     (
-      { spawn
+      { gnused
+      , spawn
       , wofi
       , writeSaneShellScriptBin
       }:
@@ -9,6 +10,7 @@ self: _: {
         name = "swaymenu";
 
         buildInputs = [
+          gnused
           spawn
           wofi
         ];
@@ -27,7 +29,8 @@ self: _: {
             --define "drun-print_command=true" \
             --term=foot \
             --cache-file="$cache_file" \
-            --show=drun
+            --show=drun |
+            sed "s/%[a-zA-Z]//g"
           )"
 
           spawn "$program"
