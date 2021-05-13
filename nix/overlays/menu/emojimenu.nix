@@ -22,7 +22,20 @@ writeSaneShellScriptBin {
   buildInputs = [ wl-clipboard wofi ];
 
   src = ''
-    emoji="$(wofi --show dmenu -D "allow_markup=false" < ${emojis} | cut -f1 -d" ")"
+    if [ -z ''${XDG_CACHE_HOME+x} ]; then
+      cache_file="$HOME/.cache/emojimenu"
+    else
+      cache_file="$XDG_CACHE_HOME/emojimenu"
+    fi
+
+    emoji="$(wofi \
+      --show dmenu \
+      --cache-file="$cache_file" \
+      -D "allow_markup=false" \
+      < ${emojis} \
+      | cut -f1 -d" "\
+    )"
+
     wl-copy -n <<< "$emoji"
   '';
 }
