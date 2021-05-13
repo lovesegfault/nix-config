@@ -112,20 +112,23 @@
 
       window = {
         border = 0;
-        commands =
-          let
-            makeMenuWindow = "floating enable, border pixel 5, sticky enable";
-          in
-          [
-            { command = makeMenuWindow; criteria.title = "emojimenu"; }
-            { command = makeMenuWindow; criteria.title = "otpmenu"; }
-            { command = makeMenuWindow; criteria.title = "passmenu"; }
-            { command = makeMenuWindow; criteria.title = "swaymenu"; }
-            { command = "floating enable"; criteria.app_id = "imv"; }
-            { command = "floating enable, sticky enable"; criteria = { app_id = "firefox"; title = "Picture-in-Picture"; }; }
-          ];
+        commands = [
+          { command = "floating enable"; criteria.app_id = "imv"; }
+          { command = "floating enable, sticky enable"; criteria = { app_id = "firefox"; title = "Picture-in-Picture"; }; }
+        ];
       };
     };
+
+    extraConfig = ''
+      # Import variables needed for screen sharing to work.
+      exec ${pkgs.systemd}/bin/systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
+
+      # Import variables needed for screen sharing and gnome3 pinentry to work.
+      exec ${pkgs.dbus}/bin/dbus-update-activation-environment WAYLAND_DISPLAY
+
+      # Import variables needed for some other things to work properly.
+      exec ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY DISPLAY DBUS_SESSION_BUS_ADDRESS SWAYSOCK
+    '';
 
     extraSessionCommands = ''
       export ECORE_EVAS_ENGINE=wayland_egl
