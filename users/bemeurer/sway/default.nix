@@ -8,7 +8,6 @@
     ./sway.nix
     ./swaylock.nix
     ./waybar.nix
-    ./wofi.nix
   ];
 
   home = {
@@ -22,6 +21,7 @@
       slurp
       speedcrunch
       wl-clipboard
+      wofi
       xdg-utils
     ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
       discord
