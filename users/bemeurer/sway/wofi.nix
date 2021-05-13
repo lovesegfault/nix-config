@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   home.packages = with pkgs; [ wofi ];
 
   # https://github.com/NixOS/nixpkgs/issues/107491
@@ -8,5 +8,6 @@
     insensitive=true
     show=drun
     term=foot
+    cache_file=${config.xdg.cacheHome}/wofi
   '';
 }
