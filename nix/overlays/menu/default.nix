@@ -15,10 +15,5 @@ _:
     getter = "otp \"$name\" | cut -f 1 -d ' '";
   };
 
-  passmenu = self.callPackage ./gopassmenu.nix {
-    inherit terminal;
-    name = "passmenu";
-    filter = "^(misc|hosts|websites)/.*$";
-    getter = "show --password \"$name\"";
-  };
+  passmenu = self.callPackage ./passmenu.nix { };
 }
