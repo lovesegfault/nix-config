@@ -22,7 +22,7 @@ writeSaneShellScriptBin {
   buildInputs = [ wl-clipboard wofi ];
 
   src = ''
-    emoji="$(wofi --show dmenu -D "allow_markup=false" < ${emojis} | cut -f 1)"
+    emoji="$(wofi --show dmenu -D "allow_markup=false" < ${emojis} | cut -f1 -d" ")"
     wl-copy -n <<< "$emoji"
   '';
 }
