@@ -26,9 +26,9 @@ self: _: {
 
         src = ''
           if [ -z ''${XDG_CACHE_HOME+x} ]; then
-            cache_file="$HOME/.cache/emojimenu"
+            cache_file="$HOME/.cache/wofi/emojimenu"
           else
-            cache_file="$XDG_CACHE_HOME/emojimenu"
+            cache_file="$XDG_CACHE_HOME/wofi/emojimenu"
           fi
 
           emoji="$(wofi \

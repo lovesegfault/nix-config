@@ -8,6 +8,6 @@
     insensitive=true
     show=drun
     term=foot
-    cache_file=${config.xdg.cacheHome}/wofi
+    cache_file=${config.xdg.cacheHome}/wofi/drun
   '';
 }

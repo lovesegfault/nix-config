@@ -12,6 +12,7 @@
       "/home/bemeurer/.cache/nvim"
       "/home/bemeurer/.cache/shotwell"
       "/home/bemeurer/.cache/thunderbird"
+      "/home/bemeurer/.cache/wofi"
       "/home/bemeurer/.cache/zoom"
       "/home/bemeurer/.cache/zsh"
       "/home/bemeurer/.config/Signal"
@@ -59,9 +60,6 @@
     files = [
       ".arcrc"
       ".cache/cargo/credentials"
-      ".cache/emojimenu"
-      ".cache/otpmenu"
-      ".cache/passmenu"
       ".config/cachix/cachix.dhall"
       ".config/gh/hosts.yml"
       ".config/zoomus.conf"

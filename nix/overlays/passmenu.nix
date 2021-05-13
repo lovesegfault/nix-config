@@ -21,9 +21,9 @@ self: _: {
 
         src = ''
           if [ -z ''${XDG_CACHE_HOME+x} ]; then
-            cache_file="$HOME/.cache/passmenu"
+            cache_file="$HOME/.cache/wofi/passmenu"
           else
-            cache_file="$XDG_CACHE_HOME/passmenu"
+            cache_file="$XDG_CACHE_HOME/wofi/passmenu"
           fi
 
           password_list="$(gopass ls -f | rg "^(misc|hosts|websites)/.*$")"
