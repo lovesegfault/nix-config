@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   dummyConfig = pkgs.writeText "configuration.nix" ''
     assert builtins.trace "This is a dummy config, use deploy-rs!" false;
@@ -30,6 +30,10 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
 
   networking = {
+    firewall = {
+      trustedInterfaces = [ "tailscale0" ];
+      allowedUDPPorts = [ config.services.tailscale.port ];
+    };
     useDHCP = false;
     useNetworkd = true;
     wireguard.enable = true;
