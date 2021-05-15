@@ -3,7 +3,7 @@
     enable = true;
     exporters.node = {
       enable = true;
-      listenAddress = "127.0.0.1";
+      listenAddress = "0.0.0.0";
       enabledCollectors = [ "systemd" "pressure" ];
       port = 9091;
     };
