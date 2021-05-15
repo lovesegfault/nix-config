@@ -8,6 +8,8 @@
     ../../hardware/stcg-dc.nix
 
     ../../users/bemeurer
+
+    ./prometheus.nix
   ];
 
   fileSystems = {
