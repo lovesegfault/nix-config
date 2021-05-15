@@ -27,6 +27,19 @@ nixpkgs.lib.nixosSystem {
     sops-nix.nixosModules.sops
 
     ({
+      nix.registry = {
+        self.flake = inputs.self;
+        nixpkgs = {
+          flake = inputs.nixpkgs;
+          from = {
+            id = "nixpkgs";
+            type = "indirect";
+          };
+        };
+      };
+    })
+
+    ({
       networking.hosts = mapAttrs' (n: v: nameValuePair v.hostname [ n ]) (import ./hosts.nix);
     })
 
