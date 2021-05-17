@@ -29,7 +29,7 @@
     gdt = "git difftool";
     gdts = "git difftool --staged";
     gf = "git fetch --all --prune --tags";
-    gl = "git log --graph --decorate";
+    gl = "git log --decorate --pretty=format:'%C(auto)%h%d %C(green)(%as)%C(reset) %s'";
     gm = "git merge";
     gma = "git merge --abort";
     gmc = "git merge --continue";
