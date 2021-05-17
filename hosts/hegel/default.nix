@@ -49,7 +49,7 @@
     packages = with pkgs; [ terminus_font ];
   };
 
-  environment.systemPackages = with pkgs; [ lutris ];
+  environment.systemPackages = with pkgs; [ corectrl lutris ];
 
   fileSystems = {
     "/" = {
