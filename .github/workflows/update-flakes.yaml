@@ -14,7 +14,7 @@ jobs:
           token: ${{ secrets.PAT }}
       - uses: cachix/install-nix-action@v13
         with:
-          install_url: https://nixos-nix-install-tests.cachix.org/serve/sp832rai317zyw7ikhlzv454zh9qr3dv/install
+          install_url: https://nixos-nix-install-tests.cachix.org/serve/ipa0c64h689jb4ys6hxsky2r8xpld0hv/install
           install_options: '--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve'
           extra_nix_config: |
             experimental-features = nix-command flakes
