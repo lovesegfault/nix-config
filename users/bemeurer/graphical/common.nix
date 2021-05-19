@@ -50,7 +50,7 @@
 
   keybindings =
     let
-      execSpawn = cmd: "exec ${pkgs.spawn}/bin/spawn ${cmd}";
+      execSpawn = cmd: "exec --no-startup-id ${pkgs.spawn}/bin/spawn ${cmd}";
     in
     lib.mkOptionDefault {
       # fancy workspace names
