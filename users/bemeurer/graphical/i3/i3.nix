@@ -6,7 +6,7 @@
       (import ../common.nix { inherit pkgs lib; })
       {
         startup = [
-          { command = "${pkgs.feh}/bin/feh --bg-scale ~/.wall"; always = true; notification = false; }
+          { command = "${pkgs.feh}/bin/feh --bg-fill ~/.wall"; always = true; notification = false; }
         ];
 
         keybindings =
