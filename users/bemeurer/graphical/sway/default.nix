@@ -18,6 +18,8 @@
     ];
   };
 
+  xsession.pointerCursor.size = 24;
+
   # NB: UGH why do these have a different syntax the the system
   # systemd.user.services?!
   systemd.user.services = {
