@@ -1,58 +1,62 @@
-self: _: {
-  passmenu = self.callPackage
-    (
-      { gopass
-      , libnotify
-      , ripgrep
-      , wl-clipboard
-      , wofi
-      , writeSaneShellScriptBin
-      }:
-      writeSaneShellScriptBin {
-        name = "passmenu";
+let
+  passmenu =
+    { gopass
+    , libnotify
+    , ripgrep
+    , writeSaneShellScriptBin
 
-        buildInputs = [
-          gopass
-          libnotify
-          ripgrep
-          wl-clipboard
-          wofi
-        ];
+    , displayCmd
+    , yankCmd
+    , pasteCmd
+    , clearCmd
+    , extraInputs ? [ ]
+    }:
+    writeSaneShellScriptBin {
+      name = "passmenu";
 
-        src = ''
-          if [ -z ''${XDG_CACHE_HOME+x} ]; then
-            cache_file="$HOME/.cache/wofi/passmenu"
-          else
-            cache_file="$XDG_CACHE_HOME/wofi/passmenu"
+      buildInputs = [
+        gopass
+        libnotify
+        ripgrep
+      ] ++ extraInputs;
+
+      src = ''
+        password_list="$(gopass ls -f | rg "^(misc|hosts|websites)/.*$")"
+        password_name="$(${displayCmd} <<< "$password_list")"
+        password="$(gopass show --password "$password_name")"
+
+        ${yankCmd} <<< "$password"
+        notify-send "🔏 Copied $password_name to clipboard. Will clear in 45 seconds."
+
+        # wait 45 seconds, or until the clipboard changes.
+        counter=0
+        while [ "$counter" -lt 45 ]; do
+          counter=$((counter + 1))
+          if [ "$password" != "$(${pasteCmd})" ]; then
+            exit 0
           fi
+          sleep 1
+        done
 
-          password_list="$(gopass ls -f | rg "^(misc|hosts|websites)/.*$")"
-          password_name="$(wofi \
-            --show dmenu \
-            --cache-file="$cache_file" \
-            <<< "$password_list" \
-          )"
-          password="$(gopass show --password "$password_name")"
+        ${clearCmd}
+        notify-send "🧹 Clipboard cleared."
+      '';
+    };
+in
+self: _: {
+  passmenu-wayland = self.callPackage passmenu {
+    displayCmd = ''wofi --show dmenu --cache-file="$XDG_CACHE_HOME/wofi/passmenu"'';
+    yankCmd = "wl-copy --trim-newline";
+    pasteCmd = "wl-paste";
+    clearCmd = "wl-copy --clear";
+    extraInputs = with self; [ wl-clipboard wofi ];
+  };
 
-          wl-copy --trim-newline <<< "$password"
-          notify-send "🔏 Copied $password_name to clipboard. Will clear in 45 seconds."
-
-          # wait 45 seconds, or until the clipboard changes.
-          counter=0
-          while [ "$counter" -lt 45 ]; do
-            counter=$((counter + 1))
-            if [ "$password" != "$(wl-paste)" ]; then
-              exit 0
-            fi
-            sleep 1
-          done
-
-          wl-copy --clear
-          notify-send "🧹 Clipboard cleared."
-        '';
-      }
-    )
-    { };
+  passmenu-x11 = self.callPackage passmenu {
+    displayCmd = ''rofi -cache-dir "$XDG_CACHE_HOME/rofi/passmenu" -dmenu'';
+    yankCmd = "xclip -in -rmlastnl -selection clipboard";
+    pasteCmd = "xclip -out -selection clipboard 2>&1";
+    clearCmd = ''xclip -in -selection clipboard <<< ""'';
+    extraInputs = with self; [ rofi xclip ];
+  };
 }
-
-
