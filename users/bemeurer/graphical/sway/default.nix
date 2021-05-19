@@ -25,7 +25,7 @@
       Unit = {
         Description = "mako";
         Documentation = [ "man:mako(1)" ];
-        PartOf = [ "graphical-session.target" ];
+        PartOf = [ "sway-session.target" ];
       };
       Service = {
         Type = "simple";
@@ -41,7 +41,7 @@
       Unit = {
         Description = "polkit-gnome";
         Documentation = [ "man:polkit(8)" ];
-        PartOf = [ "graphical-session.target" ];
+        PartOf = [ "sway-session.target" ];
       };
       Service = {
         Type = "simple";
@@ -57,7 +57,7 @@
       Unit = {
         Description = "redshift";
         Documentation = [ "man:redshift(1)" ];
-        PartOf = [ "graphical-session.target" ];
+        PartOf = [ "sway-session.target" ];
       };
       Service = {
         Type = "simple";
@@ -73,7 +73,7 @@
       Unit = {
         Description = "swayidle";
         Documentation = [ "man:swayidle(1)" ];
-        PartOf = [ "graphical-session.target" ];
+        PartOf = [ "sway-session.target" ];
       };
       Service = {
         Type = "simple";
