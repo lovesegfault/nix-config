@@ -22,7 +22,7 @@
             # "Print" = execSpawn "${pkgs.screenshot}/bin/screenshot";
           };
 
-        terminal = "${config.programs.alacritty.package}";
+        terminal = "${config.programs.alacritty.package}/bin/alacritty";
 
         window.commands = [
           { command = "floating enable, sticky enable"; criteria.title = "Picture-in-Picture"; }
