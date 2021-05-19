@@ -81,11 +81,11 @@
           "${modifier}+Shift+0" = "move container to workspace 9:κ";
           # normal ones
           "${modifier}+Return" = execSpawn "${terminal}";
-          "${modifier}+d" = execSpawn "${pkgs.swaymenu}/bin/swaymenu";
+          "${modifier}+d" = execSpawn "${pkgs.drunmenu-wayland}/bin/drunmenu";
           "${modifier}+m" = execSpawn "${pkgs.emojimenu-wayland}/bin/emojimenu";
           "${modifier}+o" = execSpawn "${pkgs.screenocr}/bin/screenocr";
-          "${modifier}+t" = execSpawn "${pkgs.otpmenu}/bin/otpmenu";
-          "${modifier}+p" = execSpawn "${pkgs.passmenu}/bin/passmenu";
+          "${modifier}+t" = execSpawn "${pkgs.otpmenu-wayland}/bin/otpmenu";
+          "${modifier}+p" = execSpawn "${pkgs.passmenu-wayland}/bin/passmenu";
           "${modifier}+q" = execSpawn "${pkgs.swaylock}/bin/swaylock -f";
           "Mod1+Tab" = " workspace next";
           "Mod4+Tab" = " workspace prev";
