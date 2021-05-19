@@ -5,6 +5,10 @@
     config = lib.recursiveUpdate
       (import ../common.nix { inherit pkgs lib; })
       {
+        startup = [
+          { command = "${pkgs.feh}/bin/feh --bg-scale ~/.wall"; always = true; notification = false; }
+        ];
+
         keybindings =
           let
             execSpawn = cmd: "exec ${pkgs.spawn}/bin/spawn ${cmd}";
