@@ -19,12 +19,6 @@ let
       ] ++ extraInputs;
 
       src = ''
-        if [ -z ''${XDG_CACHE_HOME+x} ]; then
-          cache_file="$HOME/.cache/wofi/otpmenu"
-        else
-          cache_file="$XDG_CACHE_HOME/wofi/otpmenu"
-        fi
-
         otp_list="$(gopass ls -f | rg "^(otp)/.*$")"
         otp_name="$(${displayCmd} <<< "$otp_list")"
         otp_string="$(gopass otp "$otp_name")"
