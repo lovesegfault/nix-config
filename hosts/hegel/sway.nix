@@ -36,8 +36,8 @@
       transform 270
     }
 
-    workspace 0 output "Goldstar Company Ltd LG Ultra HD 0x00000B08"
-    workspace 1 output "Goldstar Company Ltd LG Ultra HD 0x00009791"
+    workspace 1 output "Goldstar Company Ltd LG Ultra HD 0x00000B08"
+    workspace 0 output "Goldstar Company Ltd LG Ultra HD 0x00009791"
     focus output "Goldstar Company Ltd LG Ultra HD 0x00000B08"
   '';
 
