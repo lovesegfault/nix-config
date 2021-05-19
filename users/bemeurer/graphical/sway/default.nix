@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ./foot.nix
     ./mako.nix
@@ -88,6 +88,24 @@
         '';
         RestartSec = 3;
         Restart = "always";
+      };
+      Install = {
+        WantedBy = [ "sway-session.target" ];
+      };
+    };
+    waybar = {
+      Unit = {
+        Description = "Highly customizable Wayland bar for Sway and Wlroots based compositors.";
+        Documentation = [ "man:waybar(5)" ];
+        PartOf = [ "sway-session.target" ];
+        After = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${config.programs.waybar.package}/bin/waybar";
+        ExecReload = "kill -SIGUSR2 $MAINPID";
+        RestartSec = 3;
+        Restart = "on-failure";
+        KillMode = "mixed";
       };
       Install = {
         WantedBy = [ "sway-session.target" ];

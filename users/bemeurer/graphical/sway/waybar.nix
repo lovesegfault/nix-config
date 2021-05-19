@@ -159,6 +159,6 @@
         background-color: #273747;
       }
     '';
-    systemd.enable = true;
+    systemd.enable = false;
   };
 }
