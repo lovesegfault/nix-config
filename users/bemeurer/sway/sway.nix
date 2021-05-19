@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   wayland.windowManager.sway = {
     enable = true;
     config = rec {
@@ -82,7 +82,7 @@
           # normal ones
           "${modifier}+Return" = execSpawn "${terminal}";
           "${modifier}+d" = execSpawn "${pkgs.swaymenu}/bin/swaymenu";
-          "${modifier}+m" = execSpawn "${pkgs.emojimenu}/bin/emojimenu";
+          "${modifier}+m" = execSpawn "${pkgs.emojimenu-wayland}/bin/emojimenu";
           "${modifier}+o" = execSpawn "${pkgs.screenocr}/bin/screenocr";
           "${modifier}+t" = execSpawn "${pkgs.otpmenu}/bin/otpmenu";
           "${modifier}+p" = execSpawn "${pkgs.passmenu}/bin/passmenu";
@@ -108,7 +108,7 @@
 
       output = { "*" = { bg = "~/.wall fill"; }; };
 
-      terminal = "${pkgs.foot}/bin/foot";
+      terminal = "${config.programs.foot.package}/bin/foot";
 
       window = {
         border = 0;

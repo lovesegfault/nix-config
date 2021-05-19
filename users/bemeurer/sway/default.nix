@@ -5,6 +5,7 @@
     ./foot.nix
     ./mako.nix
     ./mpv.nix
+    ./rofi
     ./sway.nix
     ./swaylock.nix
     ./waybar.nix
