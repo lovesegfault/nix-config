@@ -27,7 +27,7 @@ self: _: {
         --insensitive \
         --define "drun-print_command=true" \
         --term=foot \
-        --cache-file="$cache_file" \
+        --cache-file="$XDG_CACHE_HOME/wofi/drunmenu" \
         --show=drun |
         sed "s/%[a-zA-Z]//g"
     '';
