@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }: {
-  xsessions.windowManager.i3 = {
+  xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
     config = lib.recursiveUpdate
@@ -8,8 +8,8 @@
         keybindings =
           let
             execSpawn = cmd: "exec ${pkgs.spawn}/bin/spawn ${cmd}";
-            modifier = config.xsessions.windowManager.i3.config.modifier;
-            terminal = config.xsessions.windowManager.i3.config.terminal;
+            modifier = config.xsession.windowManager.i3.config.modifier;
+            terminal = config.xsession.windowManager.i3.config.terminal;
           in
           lib.mkOptionDefault {
             # normal ones
