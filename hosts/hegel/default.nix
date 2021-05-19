@@ -22,6 +22,7 @@
 
     ../../users/bemeurer
 
+    ./i3.nix
     ./state.nix
     ./sway.nix
   ];
