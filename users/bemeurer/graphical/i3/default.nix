@@ -8,6 +8,7 @@
 
   xsession = {
     enable = true;
+    profileExtra = "xrdb ~/.Xresources";
     pointerCursor.size = lib.mkForce 16;
   };
 }
