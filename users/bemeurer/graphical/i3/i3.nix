@@ -11,7 +11,7 @@
 
         keybindings =
           let
-            execSpawn = cmd: "exec ${pkgs.spawn}/bin/spawn ${cmd}";
+            execSpawn = cmd: "exec --no-startup-id ${pkgs.spawn}/bin/spawn ${cmd}";
             modifier = config.xsession.windowManager.i3.config.modifier;
             terminal = config.xsession.windowManager.i3.config.terminal;
           in
@@ -30,7 +30,7 @@
             "${modifier}+j" = "focus down";
             "${modifier}+k" = "focus up";
             "${modifier}+l" = "focus right";
-            # "${modifier}+q" = execSpawn "${pkgs.swaylock}/bin/swaylock -f";
+            "${modifier}+q" = execSpawn "${pkgs.i3lock-fancy-rapid}/bin/i3lock-fancy-rapid 10 15";
             # "Print" = execSpawn "${pkgs.screenshot}/bin/screenshot";
           };
 
