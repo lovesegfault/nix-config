@@ -35,9 +35,6 @@
       };
 
     extraConfig = ''
-      # Import variables needed for some other things to work properly.
-      exec ${pkgs.systemd}/bin/systemctl --user import-environment
-
       include /etc/sway/config.d/*
     '';
 

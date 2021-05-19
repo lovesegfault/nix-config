@@ -20,6 +20,12 @@
     style = "adwaita-dark";
   };
 
+  environment.etc."sway/config.d/gtk.conf".text = ''
+    exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+    exec hash dbus-update-activation-environment 2>/dev/null && \
+      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+  '';
+
   environment.etc."greetd/environments".text = ''
     ${lib.optionalString config.programs.sway.enable "sway"}
     ${lib.optionalString config.services.xserver.windowManager.i3.enable "startx ~/.xsession"}
