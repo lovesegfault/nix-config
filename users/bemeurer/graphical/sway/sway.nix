@@ -24,7 +24,7 @@
             "Print" = execSpawn "${pkgs.screenshot}/bin/screenshot";
           };
 
-        output = { "*" = { bg = "~/.wall fill"; }; };
+        output = { "*" = { bg = "${config.xdg.dataHome}/wall.png fill"; }; };
 
         terminal = "${config.programs.foot.package}/bin/foot";
 

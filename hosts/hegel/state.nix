@@ -66,8 +66,8 @@
       ".config/gh/hosts.yml"
       ".config/zoomus.conf"
       ".gist-vim"
+      ".local/share/wall.png"
       ".vault-token"
-      ".wall"
     ];
   };
 }
