@@ -3,10 +3,10 @@ let
     { fetchurl
     , jq
     , runCommand
-    , wl-clipboard
     , writeSaneShellScriptBin
 
-    , cmd
+    , displayCmd
+    , yankCmd
     , extraInputs ? [ ]
     }:
     let
@@ -23,23 +23,25 @@ let
     writeSaneShellScriptBin {
       name = "emojimenu";
 
-      buildInputs = [ wl-clipboard ] ++ extraInputs;
+      buildInputs = [ ] ++ extraInputs;
 
       src = ''
-        emoji="$(${cmd} < ${emojis} | cut -f1 -d" ")"
+        emoji="$(${displayCmd} < ${emojis} | cut -f1 -d" ")"
 
-        wl-copy -n <<< "$emoji"
+        ${yankCmd} <<< "$emoji"
       '';
     };
 in
 self: _: {
   emojimenu-wayland = self.callPackage emojimenu {
-    cmd = ''wofi --show dmenu --cache-file="$XDG_CACHE_HOME/wofi/emojimenu" -d "allow_markup=false"'';
-    extraInputs = [ self.wofi ];
+    displayCmd = ''wofi --show dmenu --cache-file="$XDG_CACHE_HOME/wofi/emojimenu" -d "allow_markup=false"'';
+    yankCmd = "wl-copy -n";
+    extraInputs = with self; [ wl-clipboard wofi ];
   };
 
   emojimenu-x11 = self.callPackage emojimenu {
-    cmd = ''rofi -cache-dir "$XDG_CACHE_HOME/rofi/emojimenu" -dmenu'';
-    extraInputs = [ self.rofi ];
+    displayCmd = ''rofi -cache-dir "$XDG_CACHE_HOME/rofi/emojimenu" -dmenu'';
+    yankCmd = "xclip -in -selection clipboard";
+    extraInputs = with self; [ rofi xclip ];
   };
 }
