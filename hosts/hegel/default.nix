@@ -16,8 +16,9 @@
     ../../hardware/zfs.nix
 
     ../../graphical
-    ../../graphical/trusted.nix
+    ../../graphical/i3.nix
     ../../graphical/sway.nix
+    ../../graphical/trusted.nix
 
     ../../users/bemeurer
 
