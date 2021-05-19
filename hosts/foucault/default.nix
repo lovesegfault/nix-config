@@ -13,8 +13,9 @@
     ../../hardware/yubikey.nix
     ../../hardware/zfs.nix
 
-    ../../sway
-    ../../sway/trusted.nix
+    ../../graphical
+    ../../graphical/trusted.nix
+    ../../graphical/sway.nix
 
     ../../users/bemeurer
 

@@ -3,7 +3,6 @@
     ./boot-silent.nix
     ./fonts.nix
     ./location.nix
-    ./sway.nix
   ];
 
   environment.systemPackages = with pkgs; [

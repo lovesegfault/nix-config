@@ -21,7 +21,7 @@ Hostnames are picked from my [hostname list][hostnames]
 ├── hosts        # Machine definitions
 ├── keys         # PGP keys for SOPS
 ├── nix          # Nix build support files (overlays, deployment code, ci generators)
-├── sway         # Sway configuration for the desktop
+├── graphical    # Sway/i3 configuration for the desktop
 └── users        # Per-user configurations
 ```
 
