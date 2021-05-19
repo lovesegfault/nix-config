@@ -33,8 +33,9 @@
 
   services.greetd =
     let
+      theme = "${pkgs.ayu-theme-gtk}/share/themes/Ayu-Dark/gtk-3.0/gtk.cc";
       greetdSwayCfg = pkgs.writeText "sway-config" ''
-        exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l; ${pkgs.sway}/bin/swaymsg exit"
+        exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -s ${theme} -l; ${pkgs.sway}/bin/swaymsg exit"
 
         bindsym Mod4+shift+e exec ${pkgs.sway}/bin/swaynag \
         -t warning \
