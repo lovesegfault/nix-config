@@ -55,8 +55,8 @@
     extraConfig = ''
       bindswitch --locked --reload lid:on output eDP-1 disable
       bindswitch --locked --reload lid:off output eDP-1 enable
-      focus output eDP-1
-      workspace 0:α
+      workspace 0 output "Unknown 0x32EB 0x00000000"
+      focus output "Unknown 0x32EB 0x00000000"
     '';
   };
 }
