@@ -4,10 +4,7 @@
     ./rofi.nix
   ];
 
-  home = {
-    packages = with pkgs; [
-      xclip
-      feh
-    ];
-  };
+  home.packages = with pkgs; [ xclip feh ];
+
+  xsession.enable = true;
 }
