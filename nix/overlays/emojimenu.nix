@@ -26,12 +26,6 @@ let
       buildInputs = [ wl-clipboard ] ++ extraInputs;
 
       src = ''
-        if [ -z ''${XDG_CACHE_HOME+x} ]; then
-          cache_file="$HOME/.cache/wofi/emojimenu"
-        else
-          cache_file="$XDG_CACHE_HOME/wofi/emojimenu"
-        fi
-
         emoji="$(${cmd} < ${emojis} | cut -f1 -d" ")"
 
         wl-copy -n <<< "$emoji"
@@ -40,12 +34,12 @@ let
 in
 self: _: {
   emojimenu-wayland = self.callPackage emojimenu {
-    cmd = ''wofi --show dmenu --cache-file="$cache_file" -d "allow_markup=false"'';
+    cmd = ''wofi --show dmenu --cache-file="$XDG_CACHE_HOME/wofi/emojimenu" -d "allow_markup=false"'';
     extraInputs = [ self.wofi ];
   };
 
   emojimenu-x11 = self.callPackage emojimenu {
-    cmd = ''rofi -dmenu'';
+    cmd = ''rofi -cache-dir "$XDG_CACHE_HOME/rofi/emojimenu" -dmenu'';
     extraInputs = [ self.rofi ];
   };
 }
