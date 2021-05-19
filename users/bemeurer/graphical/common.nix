@@ -65,7 +65,7 @@
       "${modifier}+7" = "workspace 7";
       "${modifier}+8" = "workspace 8";
       "${modifier}+9" = "workspace 9";
-      "${modifier}+0" = "workspace 0";
+      "${modifier}+0" = "workspace 10";
       "${modifier}+Shift+1" = "move container to workspace 1";
       "${modifier}+Shift+2" = "move container to workspace 2";
       "${modifier}+Shift+3" = "move container to workspace 3";
@@ -75,7 +75,7 @@
       "${modifier}+Shift+7" = "move container to workspace 7";
       "${modifier}+Shift+8" = "move container to workspace 8";
       "${modifier}+Shift+9" = "move container to workspace 9";
-      "${modifier}+Shift+0" = "move container to workspace 0";
+      "${modifier}+Shift+0" = "move container to workspace 10";
       # normal ones
       "Mod1+Tab" = " workspace next";
       "Mod4+Tab" = " workspace prev";
