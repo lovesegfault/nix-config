@@ -6,7 +6,6 @@
     theme = ./ayu.rasi;
     extraConfig = {
       modi = "drun";
-      markup = true;
       show-icons = true;
       case-sensitive = false;
     };
