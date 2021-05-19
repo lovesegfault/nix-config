@@ -18,6 +18,14 @@
             "${modifier}+m" = execSpawn "${pkgs.emojimenu-x11}/bin/emojimenu";
             "${modifier}+t" = execSpawn "${pkgs.otpmenu-x11}/bin/otpmenu";
             "${modifier}+p" = execSpawn "${pkgs.passmenu-x11}/bin/passmenu";
+            "${modifier}+Shift+h" = "move left";
+            "${modifier}+Shift+j" = "move down";
+            "${modifier}+Shift+k" = "move up";
+            "${modifier}+Shift+l" = "move right";
+            "${modifier}+h" = "focus left";
+            "${modifier}+j" = "focus down";
+            "${modifier}+k" = "focus up";
+            "${modifier}+l" = "focus right";
             # "${modifier}+q" = execSpawn "${pkgs.swaylock}/bin/swaylock -f";
             # "Print" = execSpawn "${pkgs.screenshot}/bin/screenshot";
           };
