@@ -16,7 +16,7 @@
           family = "Hack";
           style = "Italic";
         };
-        size = 12;
+        size = 8;
       };
       colors = {
         primary = {
