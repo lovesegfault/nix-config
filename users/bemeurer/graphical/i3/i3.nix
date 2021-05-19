@@ -5,9 +5,11 @@
     config = lib.recursiveUpdate
       (import ../common.nix { inherit pkgs lib; })
       {
-        startup = [
-          { command = "${pkgs.feh}/bin/feh --bg-fill ~/.wall"; always = true; notification = false; }
-        ];
+        startup = [{
+          command = "${pkgs.systemd}/bin/systemctl --user import-environment; systemctl --user start i3-session.target";
+          always = false;
+          notification = false;
+        }];
 
         keybindings =
           let
