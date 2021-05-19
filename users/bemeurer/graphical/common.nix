@@ -30,6 +30,8 @@
       };
     };
 
+  defaultWorkspace = "workspace number 1";
+
   floating = {
     inherit modifier;
     border = 0;
