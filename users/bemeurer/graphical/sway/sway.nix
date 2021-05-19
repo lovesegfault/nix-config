@@ -35,14 +35,10 @@
       };
 
     extraConfig = ''
-      # Import variables needed for screen sharing to work.
-      exec ${pkgs.systemd}/bin/systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
-
-      # Import variables needed for screen sharing and gnome3 pinentry to work.
-      exec ${pkgs.dbus}/bin/dbus-update-activation-environment WAYLAND_DISPLAY
-
       # Import variables needed for some other things to work properly.
-      exec ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY DISPLAY DBUS_SESSION_BUS_ADDRESS SWAYSOCK
+      exec ${pkgs.systemd}/bin/systemctl --user import-environment
+
+      include /etc/sway/config.d/*
     '';
 
     extraSessionCommands = ''

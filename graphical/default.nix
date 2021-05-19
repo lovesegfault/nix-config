@@ -28,9 +28,8 @@
   services.greetd =
     let
       sway = pkgs.sway.override { withGtkWrapper = true; };
-      gtkgreet = "${pkgs.greetd.gtkgreet}/bin/gtkgreet";
       greetdSwayCfg = pkgs.writeText "sway-config" ''
-        exec "${gtkgreet} -l; ${sway}/bin/swaymsg exit"
+        exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l; ${sway}/bin/swaymsg exit"
 
         bindsym Mod4+shift+e exec ${sway}/bin/swaynag \
         -t warning \
@@ -38,6 +37,7 @@
         -b 'Poweroff' 'systemctl poweroff' \
         -b 'Reboot' 'systemctl reboot'
 
+        exec ${pkgs.systemd}/bin/systemctl --user import-environment
         include /etc/sway/config.d/*
       '';
     in
