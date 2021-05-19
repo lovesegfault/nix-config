@@ -22,7 +22,7 @@
 
   environment.etc."greetd/environments".text = ''
     ${lib.optionalString config.programs.sway.enable "sway"}
-    ${lib.optionalString config.services.xserver.windowManager.i3.enable "xinit"}
+    ${lib.optionalString config.services.xserver.windowManager.i3.enable "startx ~/.xsession"}
   '';
 
   services.greetd =
