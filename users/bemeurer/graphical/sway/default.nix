@@ -1,86 +1,21 @@
 { lib, pkgs, ... }: {
   imports = [
-    ./alacritty.nix
-    ./firefox.nix
     ./foot.nix
     ./mako.nix
-    ./mpv.nix
-    ./rofi
     ./sway.nix
     ./swaylock.nix
     ./waybar.nix
   ];
 
   home = {
-    file.".icons/default".source = "${pkgs.gnome3.adwaita-icon-theme}/share/icons/Adwaita";
     packages = with pkgs; [
       grim
-      libnotify
-      lollypop
-      pavucontrol
-      pinentry-gnome
       slurp
-      speedcrunch
       wl-clipboard
       wofi
-      xdg-utils
     ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
-      discord
-      gnome3.evince
       imv
-      mbk
-      prusa-slicer
-      shotwell
-      signal-desktop
-      slack
-      spotify
-      thunderbird
-      zoom-us
     ];
-  };
-
-  gtk = {
-    enable = true;
-    gtk2.extraConfig = "gtk-application-prefer-dark-theme = true";
-    gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
-    theme = {
-      package = pkgs.ayu-theme-gtk;
-      name = "Ayu-Dark";
-    };
-  };
-
-  qt = {
-    enable = true;
-    platformTheme = "gnome";
-    style = {
-      name = "adwaita";
-      package = pkgs.adwaita-qt;
-    };
-  };
-
-  programs.zsh.profileExtra = ''
-    # If running from tty1 start sway
-    if [ "$(tty)" = "/dev/tty1" ]; then
-      systemctl --user unset-environment \
-        SWAYSOCK \
-        I3SOCK \
-        WAYLAND_DISPLAY \
-        DISPLAY \
-        IN_NIX_SHELL \
-        __HM_SESS_VARS_SOURCED \
-        GPG_TTY \
-        NIX_PATH \
-        SHLVL
-      exec env --unset=SHLVL systemd-cat -t sway -- sway
-    fi
-  '';
-
-  services.gpg-agent.pinentryFlavor = "gnome3";
-
-  xsession.pointerCursor = {
-    package = pkgs.gnome3.adwaita-icon-theme;
-    name = "Adwaita";
-    size = 24;
   };
 
   # NB: UGH why do these have a different syntax the the system

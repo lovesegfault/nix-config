@@ -30,6 +30,12 @@ with lib;
       "${inputs.impermanence}/home-manager.nix"
       ./core
       ./dev
-    ] ++ optionals config.programs.sway.enable [ ./sway ];
+    ] ++ optionals config.programs.sway.enable [
+      ./graphical
+      ./graphical/sway
+    ] ++ optionals config.services.xserver.windowManager.i3.enable [
+      ./graphical
+      ./graphical/i3
+    ];
   };
 }
