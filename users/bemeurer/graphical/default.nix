@@ -9,7 +9,6 @@
     file.".icons/default".source = "${pkgs.gnome3.adwaita-icon-theme}/share/icons/Adwaita";
 
     packages = with pkgs; [
-      fractal
       libnotify
       lollypop
       pavucontrol
@@ -17,6 +16,7 @@
       speedcrunch
     ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
       discord
+      element-desktop
       gnome3.evince
       imv
       mbk
