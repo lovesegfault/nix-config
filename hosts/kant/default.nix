@@ -5,8 +5,6 @@
 
     ../../users/bemeurer
 
-    ./dendrite.nix
-
     (modulesPath + "/profiles/qemu-guest.nix")
     (modulesPath + "/profiles/hardened.nix")
   ];
