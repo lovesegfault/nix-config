@@ -1,6 +1,7 @@
 { lib, pkgs, ... }: {
   imports = [
     ./alacritty.nix
+    ./common.nix
     ./firefox.nix
     ./mpv.nix
   ];

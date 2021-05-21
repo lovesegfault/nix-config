@@ -1,38 +1,36 @@
 { config, lib, pkgs, ... }: {
   wayland.windowManager.sway = {
     enable = true;
-    config = lib.recursiveUpdate
-      (import ../common.nix { inherit pkgs lib; })
-      {
-        bars = [ ];
+    config = {
+      bars = [ ];
 
-        keybindings =
-          let
-            execSpawn = cmd: "exec ${pkgs.spawn}/bin/spawn ${cmd}";
-            modifier = config.wayland.windowManager.sway.config.modifier;
-            terminal = config.wayland.windowManager.sway.config.terminal;
-          in
-          lib.mkOptionDefault {
-            # normal ones
-            "${modifier}+Return" = execSpawn "${terminal}";
-            "${modifier}+d" = execSpawn "${pkgs.drunmenu-wayland}/bin/drunmenu";
-            "${modifier}+m" = execSpawn "${pkgs.emojimenu-wayland}/bin/emojimenu";
-            "${modifier}+o" = execSpawn "${pkgs.screenocr}/bin/screenocr";
-            "${modifier}+t" = execSpawn "${pkgs.otpmenu-wayland}/bin/otpmenu";
-            "${modifier}+p" = execSpawn "${pkgs.passmenu-wayland}/bin/passmenu";
-            "${modifier}+q" = execSpawn "${pkgs.swaylock}/bin/swaylock -f";
-            "Print" = execSpawn "${pkgs.screenshot}/bin/screenshot";
-          };
+      keybindings =
+        let
+          execSpawn = cmd: "exec ${pkgs.spawn}/bin/spawn ${cmd}";
+          modifier = config.wayland.windowManager.sway.config.modifier;
+          terminal = config.wayland.windowManager.sway.config.terminal;
+        in
+        lib.mkOptionDefault {
+          # normal ones
+          "${modifier}+Return" = execSpawn "${terminal}";
+          "${modifier}+d" = execSpawn "${pkgs.drunmenu-wayland}/bin/drunmenu";
+          "${modifier}+m" = execSpawn "${pkgs.emojimenu-wayland}/bin/emojimenu";
+          "${modifier}+o" = execSpawn "${pkgs.screenocr}/bin/screenocr";
+          "${modifier}+t" = execSpawn "${pkgs.otpmenu-wayland}/bin/otpmenu";
+          "${modifier}+p" = execSpawn "${pkgs.passmenu-wayland}/bin/passmenu";
+          "${modifier}+q" = execSpawn "${pkgs.swaylock}/bin/swaylock -f";
+          "Print" = execSpawn "${pkgs.screenshot}/bin/screenshot";
+        };
 
-        output = { "*" = { bg = "${config.xdg.dataHome}/wall.png fill"; }; };
+      output = { "*" = { bg = "${config.xdg.dataHome}/wall.png fill"; }; };
 
-        terminal = "${config.programs.foot.package}/bin/foot";
+      terminal = "${config.programs.foot.package}/bin/foot";
 
-        window.commands = [
-          { command = "floating enable, sticky enable"; criteria = { app_id = "firefox"; title = "Picture-in-Picture"; }; }
-          { command = "floating enable"; criteria.app_id = "imv"; }
-        ];
-      };
+      window.commands = [
+        { command = "floating enable, sticky enable"; criteria = { app_id = "firefox"; title = "Picture-in-Picture"; }; }
+        { command = "floating enable"; criteria.app_id = "imv"; }
+      ];
+    };
 
     extraConfig = ''
       include /etc/sway/config.d/*
