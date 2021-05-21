@@ -27,7 +27,7 @@
 
           inherit background foreground;
 
-          font-size = "8";
+          font-size = "12";
 
           font-0 = "Hack:style=Regular:size=${font-size};5";
           font-1 = "Font Awesome 5 Free:style=Regular:size=${font-size};5";
