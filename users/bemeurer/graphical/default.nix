@@ -4,6 +4,7 @@
     ./common.nix
     ./firefox.nix
     ./mpv.nix
+    ./redshift.nix
   ];
 
   home = {

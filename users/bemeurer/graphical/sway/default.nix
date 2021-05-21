@@ -20,8 +20,6 @@
 
   xsession.pointerCursor.size = 24;
 
-  # NB: UGH why do these have a different syntax the the system
-  # systemd.user.services?!
   systemd.user.services = {
     mako = {
       Unit = {
@@ -32,22 +30,6 @@
       Service = {
         Type = "simple";
         ExecStart = "${pkgs.mako}/bin/mako";
-        RestartSec = 3;
-        Restart = "always";
-      };
-      Install = {
-        WantedBy = [ "sway-session.target" ];
-      };
-    };
-    redshift = lib.mkIf (pkgs.hostPlatform.system == "x86_64-linux") {
-      Unit = {
-        Description = "redshift";
-        Documentation = [ "man:redshift(1)" ];
-        PartOf = [ "sway-session.target" ];
-      };
-      Service = {
-        Type = "simple";
-        ExecStart = "${pkgs.redshift-wlr}/bin/redshift -l geoclue2";
         RestartSec = 3;
         Restart = "always";
       };
