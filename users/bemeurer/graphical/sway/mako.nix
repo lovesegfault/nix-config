@@ -8,8 +8,8 @@
     in
     {
       enable = true;
-      backgroundColor = "#0a0e14";
-      borderColor = "#53bdfa";
+      backgroundColor = "#0A0E14";
+      borderColor = "#53BDFA";
       defaultTimeout = 30 * 1000; # millis
       font = "Hack 10";
       iconPath = "${homeIcons}:${systemIcons}:${homePixmaps}:${systemPixmaps}";
@@ -17,7 +17,7 @@
       maxIconSize = 96;
       maxVisible = 3;
       sort = "-time";
-      textColor = "#b3b1ad";
+      textColor = "#B3B1AD";
       width = 500;
     };
 }
