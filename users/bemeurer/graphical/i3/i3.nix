@@ -3,11 +3,6 @@
     enable = true;
     package = pkgs.i3-gaps;
     config = {
-      startup = [{
-        command = "${pkgs.systemd}/bin/systemctl --user import-environment; systemctl --user start i3-session.target";
-        always = false;
-        notification = false;
-      }];
 
       keybindings =
         let
@@ -32,6 +27,15 @@
           "${modifier}+q" = execSpawn "${pkgs.i3lock-fancy-rapid}/bin/i3lock-fancy-rapid 10 15";
           # "Print" = execSpawn "${pkgs.screenshot}/bin/screenshot";
         };
+
+      startup = [{
+        command = ''
+          ${pkgs.systemd}/bin/systemctl --user import-environment; \
+            systemctl --user start i3-session.target
+        '';
+        always = false;
+        notification = false;
+      }];
 
       terminal = "${config.programs.alacritty.package}/bin/alacritty";
 
