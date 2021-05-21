@@ -1,18 +1,18 @@
 /* global settings and color variables */
 * {
-   blue:             #73d0ff;
+   blue:             #73D0FF;
    darkblue:         #B48EAD;
-   cyan:             #95e6cb;
+   cyan:             #95E6CB;
    lightcyan:        #B48EAD;
-   green:            #bae67e;
-   red:              #ff3333;
+   green:            #BAE67E;
+   red:              #FF3333;
 
-   dark1:            #0a0e14;
-   dark2:            #1f2430;
-   dark3:            #b3b1ad;
-   dark4:            #b3b1ad;
+   dark1:            #0A0E14;
+   dark2:            #1F2430;
+   dark3:            #B3B1AD;
+   dark4:            #B3B1AD;
 
-   light1:           #e6e1cf;
+   light1:           #E6E1CF;
 
    background-color: @dark1;
    border-color:     @dark2;
