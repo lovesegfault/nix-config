@@ -105,9 +105,9 @@
         "module/date" = {
           type = "internal/date";
           interval = 1;
-          date = "%F %Z";
-          time = "%T";
-          label = "%time% %date%";
+          date = "%H:%M | %Z";
+          time = "%F";
+          label = "%time% | %date%";
         };
 
         "module/i3" = {
