@@ -120,7 +120,6 @@
     fwupd.enable = true;
     ratbagd.enable = true;
     udev.packages = with pkgs; [ logitech-udev-rules ];
-    usbmuxd.enable = true;
   };
 
   systemd.network.networks = {
