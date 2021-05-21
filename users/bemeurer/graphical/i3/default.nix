@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
   imports = [
     ./i3.nix
-    ./i3status-rust.nix
+    ./polybar.nix
     ./rofi
   ];
 
@@ -42,6 +42,10 @@
         Install = {
           WantedBy = [ "i3-session.target" ];
         };
+      };
+      polybar = {
+        Unit.PartOf = lib.mkForce [ "i3-session.target" ];
+        Install.WantedBy = lib.mkForce [ "i3-session.target" ];
       };
     };
   };
