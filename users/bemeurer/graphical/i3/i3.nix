@@ -35,6 +35,7 @@
           size = 12.0;
         };
         position = "top";
+        statusCommand = "${config.programs.i3status-rust.package}/bin/i3status-rs ${config.xdg.configHome}/i3status-rust/config-top.toml";
       }];
 
       keybindings =

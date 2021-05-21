@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }: {
   imports = [
     ./i3.nix
+    ./i3status-rust.nix
     ./rofi
   ];
 
