@@ -97,7 +97,16 @@ let
 
     modifier = if pkgs.hostPlatform.system == "aarch64-linux" then "Mod1" else "Mod4";
 
-    window.border = 0;
+    window = {
+      border = 0;
+      commands = [{
+        command = "floating enable, sticky enable";
+        criteria = {
+          app_id = "firefox";
+          title = "Picture-in-Picture";
+        };
+      }];
+    };
   };
 in
 {

@@ -27,7 +27,6 @@
       terminal = "${config.programs.foot.package}/bin/foot";
 
       window.commands = [
-        { command = "floating enable, sticky enable"; criteria = { app_id = "firefox"; title = "Picture-in-Picture"; }; }
         { command = "floating enable"; criteria.app_id = "imv"; }
       ];
     };

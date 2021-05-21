@@ -37,7 +37,6 @@
       terminal = "${config.programs.alacritty.package}/bin/alacritty";
 
       window.commands = [
-        { command = "floating enable, sticky enable"; criteria.title = "Picture-in-Picture"; }
         { command = "floating enable"; criteria.class = "feh"; }
       ];
     };
