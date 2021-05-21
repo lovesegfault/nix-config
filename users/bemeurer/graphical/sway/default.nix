@@ -39,22 +39,6 @@
         WantedBy = [ "sway-session.target" ];
       };
     };
-    polkit = {
-      Unit = {
-        Description = "polkit-gnome";
-        Documentation = [ "man:polkit(8)" ];
-        PartOf = [ "sway-session.target" ];
-      };
-      Service = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        RestartSec = 3;
-        Restart = "always";
-      };
-      Install = {
-        WantedBy = [ "sway-session.target" ];
-      };
-    };
     redshift = lib.mkIf (pkgs.hostPlatform.system == "x86_64-linux") {
       Unit = {
         Description = "redshift";
