@@ -3,6 +3,39 @@
     enable = true;
     package = pkgs.i3-gaps;
     config = {
+      bars = [{
+        colors = {
+          activeWorkspace = {
+            background = "#1F2430";
+            border = "#1F2430";
+            text = "#B3B1AD";
+          };
+          background = "#0A0E14";
+          focusedWorkspace = {
+            background = "#1F2430";
+            border = "#1F2430";
+            text = "#B3B1AD";
+          };
+          inactiveWorkspace = {
+            background = "#0A0E14";
+            border = "#0A0E14";
+            text = "#B3B1AD";
+          };
+          separator = "#73D0FF";
+          statusline = "#B3B1AD";
+          urgentWorkspace = {
+            background = "#FF3333";
+            border = "#FF3333";
+            text = "#0A0E14";
+          };
+        };
+        fonts = {
+          names = [ "Hack" "Font Awesome 5 Free" ];
+          style = "Regular";
+          size = 12.0;
+        };
+        position = "top";
+      }];
 
       keybindings =
         let
