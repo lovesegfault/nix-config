@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [
+    ./dunst.nix
     ./i3.nix
     ./polybar.nix
     ./rofi
@@ -44,6 +45,10 @@
         };
       };
       polybar = {
+        Unit.PartOf = lib.mkForce [ "i3-session.target" ];
+        Install.WantedBy = lib.mkForce [ "i3-session.target" ];
+      };
+      dunst = {
         Unit.PartOf = lib.mkForce [ "i3-session.target" ];
         Install.WantedBy = lib.mkForce [ "i3-session.target" ];
       };
