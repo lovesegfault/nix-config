@@ -101,10 +101,7 @@ let
       border = 0;
       commands = [{
         command = "floating enable, sticky enable";
-        criteria = {
-          app_id = "firefox";
-          title = "Picture-in-Picture";
-        };
+        criteria.title = "Picture-in-Picture";
       }];
     };
   };
