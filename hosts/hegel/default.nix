@@ -99,6 +99,11 @@
     imports = [ ../../users/bemeurer/trusted ];
   };
 
+  location = {
+    latitude = 37.861;
+    longitude = -122.273;
+  };
+
   networking = {
     hostId = "872516b8";
     hostName = "hegel";

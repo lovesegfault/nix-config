@@ -3,7 +3,6 @@
     ./boot-silent.nix
     ./fonts.nix
     ./greetd.nix
-    ./location.nix
     ./gnome.nix
   ];
 
