@@ -4,6 +4,7 @@
     ./fonts.nix
     ./greetd.nix
     ./location.nix
+    ./gnome.nix
   ];
 
   environment.systemPackages = with pkgs; [
