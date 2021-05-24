@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   home = {
-    extraOutputsToInstall = [ "doc" "info" "devdoc" ];
+    extraOutputsToInstall = [ "doc" "devdoc" ];
     file.gdbinit = {
       target = ".gdbinit";
       text = ''
