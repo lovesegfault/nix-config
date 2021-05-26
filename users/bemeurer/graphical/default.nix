@@ -30,6 +30,12 @@
       thunderbird
       zoom-us
     ];
+
+    sessionVariables = {
+      MOZ_DBUS_REMOTE = 1;
+      MOZ_USE_XINPUT2 = 1;
+      _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dsun.java2d.xrender=true";
+    };
   };
 
   gtk = {
