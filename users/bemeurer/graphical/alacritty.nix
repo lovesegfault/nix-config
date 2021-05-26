@@ -44,7 +44,6 @@
           yellow = "0xFFB454";
         };
       };
-      mouse.url.modifiers = "Control";
       shell.program = "${pkgs.zsh}/bin/zsh";
     };
   };
