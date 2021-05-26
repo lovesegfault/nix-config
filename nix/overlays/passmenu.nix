@@ -45,7 +45,7 @@ let
 in
 self: _: {
   passmenu-wayland = self.callPackage passmenu {
-    displayCmd = ''wofi --show dmenu --cache-file="$XDG_CACHE_HOME/wofi/passmenu"'';
+    displayCmd = ''wofi --cache-file="$XDG_CACHE_HOME/wofi/passmenu" -p pass --show dmenu'';
     yankCmd = "wl-copy --trim-newline";
     pasteCmd = "wl-paste";
     clearCmd = "wl-copy --clear";
@@ -53,7 +53,7 @@ self: _: {
   };
 
   passmenu-x11 = self.callPackage passmenu {
-    displayCmd = ''rofi -cache-dir "$XDG_CACHE_HOME/rofi/passmenu" -dmenu'';
+    displayCmd = ''rofi -cache-dir "$XDG_CACHE_HOME/rofi/passmenu" -p pass -dmenu'';
     yankCmd = "xclip -in -rmlastnl -selection clipboard";
     pasteCmd = "xclip -out -selection clipboard 2>&1";
     clearCmd = ''xclip -in -selection clipboard <<< ""'';

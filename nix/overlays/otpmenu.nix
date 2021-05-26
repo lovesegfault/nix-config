@@ -33,13 +33,13 @@ let
 in
 self: _: {
   otpmenu-wayland = self.callPackage otpmenu {
-    displayCmd = ''wofi --show dmenu --cache-file="$XDG_CACHE_HOME/wofi/otpmenu"'';
+    displayCmd = ''wofi --cache-file="$XDG_CACHE_HOME/wofi/otpmenu" -p otp --show dmenu'';
     yankCmd = "wl-copy --trim-newline";
     extraInputs = with self; [ wl-clipboard wofi ];
   };
 
   otpmenu-x11 = self.callPackage otpmenu {
-    displayCmd = ''rofi -cache-dir "$XDG_CACHE_HOME/rofi/otpmenu" -dmenu'';
+    displayCmd = ''rofi -cache-dir "$XDG_CACHE_HOME/rofi/otpmenu" -p otp -dmenu'';
     yankCmd = "xclip -in -rmlastnl -selection clipboard";
     extraInputs = with self; [ rofi xclip ];
   };
