@@ -11,7 +11,7 @@
     ../../hardware/bluetooth.nix
     ../../hardware/efi.nix
     ../../hardware/nixos-aarch64-builder
-    ../../hardware/sound-pulse.nix
+    ../../hardware/sound-pipewire.nix
     ../../hardware/yubikey.nix
     ../../hardware/zfs.nix
 
