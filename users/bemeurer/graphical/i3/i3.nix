@@ -45,5 +45,9 @@
         { command = "floating enable"; criteria.class = "feh"; }
       ];
     };
+
+    extraConfig = ''
+      focus_wrapping no
+    '';
   };
 }
