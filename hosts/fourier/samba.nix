@@ -21,6 +21,12 @@
         browseable = "yes";
         "guest ok" = "yes";
       };
+      books = {
+        path = "/srv/documents/books";
+        "read only" = "yes";
+        browseable = "yes";
+        "guest ok" = "yes";
+      };
       music = {
         path = "/srv/music";
         "read only" = "yes";
