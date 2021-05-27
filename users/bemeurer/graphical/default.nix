@@ -19,7 +19,8 @@
     ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
       discord
       element-desktop
-      gnome3.evince
+      gnome.evince
+      gnome.gnome-calendar
       imv
       mbk
       prusa-slicer
