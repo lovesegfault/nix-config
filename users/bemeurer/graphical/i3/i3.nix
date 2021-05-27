@@ -29,15 +29,27 @@
           # "Print" = execSpawn "${pkgs.screenshot}/bin/screenshot";
         };
 
-      startup = [{
-        command = ''
-          ${pkgs.systemd}/bin/systemctl --user import-environment; \
-            ${pkgs.systemd}/bin/systemctl --user import-environment DISPLAY; \
-            ${pkgs.systemd}/bin/systemctl --user start i3-session.target
-        '';
-        always = false;
-        notification = false;
-      }];
+      startup = [
+        {
+          command = ''
+            ${pkgs.systemd}/bin/systemctl --user import-environment; \
+              ${pkgs.systemd}/bin/systemctl --user import-environment DISPLAY; \
+              ${pkgs.systemd}/bin/systemctl --user start i3-session.target
+          '';
+          always = false;
+          notification = false;
+        }
+        {
+          command = "${pkgs.systemd}/bin/systemctl --user restart polybar";
+          always = true;
+          notification = false;
+        }
+        {
+          command = "${pkgs.systemd}/bin/systemctl --user restart feh";
+          always = true;
+          notification = false;
+        }
+      ];
 
       terminal = "${config.programs.alacritty.package}/bin/alacritty";
 
