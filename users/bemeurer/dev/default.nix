@@ -7,7 +7,7 @@
         set auto-load safe-path /
       '';
     };
-    packages = with pkgs; [ arcanist ];
+    packages = with pkgs; [ arcanist commitizen ];
   };
 
   programs = {
