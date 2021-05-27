@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   home = {
     extraOutputsToInstall = [ "doc" "devdoc" ];
     file.gdbinit = {
@@ -25,6 +25,8 @@
       af = "arc feature";
       al = "arc land";
       ad = "arc diff";
+      gco = lib.mkForce "git cz";
+      gcom = lib.mkForce "git cz";
     };
   };
 }
