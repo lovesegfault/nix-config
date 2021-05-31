@@ -19,7 +19,10 @@
     pointerCursor.size = lib.mkForce 16;
   };
 
-  services.picom.enable = true;
+  services = {
+    flameshot.enable = true;
+    picom.enable = true;
+  };
 
   systemd.user = {
     targets.i3-session = {
@@ -45,6 +48,7 @@
         };
         Install.WantedBy = [ "i3-session.target" ];
       };
+      flameshot.Install.WantedBy = lib.mkForce [ "i3-session.target" ];
       picom = {
         Unit.After = [ "xrandr.service" ];
         Install.WantedBy = lib.mkForce [ "i3-session.target" ];
