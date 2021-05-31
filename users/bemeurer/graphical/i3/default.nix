@@ -42,9 +42,7 @@
           RemainAfterExit = true;
           Type = "oneshot";
         };
-        Install = {
-          WantedBy = [ "i3-session.target" ];
-        };
+        Install.WantedBy = [ "i3-session.target" ];
       };
       picom = {
         Unit.After = [ "xrandr.service" ];
