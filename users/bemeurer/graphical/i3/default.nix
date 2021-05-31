@@ -35,7 +35,7 @@
         Unit = {
           Description = "feh background";
           PartOf = [ "i3-session.target" ];
-          After = [ "i3-session.target" "xrandr.service" ];
+          After = [ "xrandr.service" "picom.service" ];
         };
         Service = {
           ExecStart = "${pkgs.feh}/bin/feh --bg-fill ${config.xdg.dataHome}/wall.png";
