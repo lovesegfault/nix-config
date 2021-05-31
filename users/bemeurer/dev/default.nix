@@ -21,6 +21,8 @@
       gitProtocol = "ssh";
     };
 
+    nix-index.enable = true;
+
     zsh.shellAliases = {
       af = "arc feature";
       al = "arc land";
