@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ config, lib, ... }: {
   services.dunst = {
     enable = true;
     settings = {
@@ -33,4 +33,6 @@
       };
     };
   };
+
+  systemd.user.services.dunst.Install.WantedBy = lib.mkForce [ "i3-session.target" ];
 }

@@ -48,9 +48,6 @@
         Unit.After = [ "xrandr.service" ];
         Install.WantedBy = lib.mkForce [ "i3-session.target" ];
       };
-      dunst = {
-        Install.WantedBy = lib.mkForce [ "i3-session.target" ];
-      };
     };
   };
 }
