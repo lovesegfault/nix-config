@@ -6,7 +6,9 @@
     ./rofi
   ];
 
-  home.packages = with pkgs; [ xclip feh ];
+  home.packages = with pkgs; [ xclip ];
+
+  programs.feh.enable = true;
 
   xsession = {
     enable = true;
