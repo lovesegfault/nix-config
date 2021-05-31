@@ -16,6 +16,7 @@
       "/home/bemeurer/.cache/wofi"
       "/home/bemeurer/.cache/zoom"
       "/home/bemeurer/.cache/zsh"
+      "/home/bemeurer/.config/Element"
       "/home/bemeurer/.config/Signal"
       "/home/bemeurer/.config/Slack"
       "/home/bemeurer/.config/TabNine"
