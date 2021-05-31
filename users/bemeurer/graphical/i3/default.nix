@@ -44,10 +44,6 @@
           WantedBy = [ "i3-session.target" ];
         };
       };
-      polybar = {
-        Unit.PartOf = lib.mkForce [ "i3-session.target" ];
-        Install.WantedBy = lib.mkForce [ "i3-session.target" ];
-      };
       dunst = {
         Install.WantedBy = lib.mkForce [ "i3-session.target" ];
       };
