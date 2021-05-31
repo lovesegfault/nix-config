@@ -6,7 +6,7 @@
     ./rofi
   ];
 
-  home.packages = with pkgs; [ xclip ];
+  home.packages = with pkgs; [ xclip xsel ];
 
   programs.feh.enable = true;
 
