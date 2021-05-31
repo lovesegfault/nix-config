@@ -18,6 +18,8 @@
     pointerCursor.size = lib.mkForce 16;
   };
 
+  services.picom.enable = true;
+
   systemd.user = {
     targets.i3-session = {
       Unit = {
@@ -43,6 +45,9 @@
         Install = {
           WantedBy = [ "i3-session.target" ];
         };
+      };
+      picom = {
+        Install.WantedBy = lib.mkForce [ "i3-session.target" ];
       };
       dunst = {
         Install.WantedBy = lib.mkForce [ "i3-session.target" ];
