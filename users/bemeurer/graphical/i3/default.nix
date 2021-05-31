@@ -4,6 +4,7 @@
     ./i3.nix
     ./polybar.nix
     ./rofi
+    ./screen-locker.nix
   ];
 
   home.packages = with pkgs; [ xclip xsel ];

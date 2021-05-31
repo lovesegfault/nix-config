@@ -25,7 +25,7 @@
           "${modifier}+j" = "focus down";
           "${modifier}+k" = "focus up";
           "${modifier}+l" = "focus right";
-          "${modifier}+q" = execSpawn "${pkgs.i3lock-fancy-rapid}/bin/i3lock-fancy-rapid 10 15";
+          "${modifier}+q" = "exec --no-startup-id ${config.services.screen-locker.lockCmd}";
           # "Print" = execSpawn "${pkgs.screenshot}/bin/screenshot";
         };
 
