@@ -26,7 +26,7 @@
           "${modifier}+k" = "focus up";
           "${modifier}+l" = "focus right";
           "${modifier}+q" = "exec --no-startup-id ${config.services.screen-locker.lockCmd}";
-          # "Print" = execSpawn "${pkgs.screenshot}/bin/screenshot";
+          "Print" = execSpawn "${pkgs.flameshot}/bin/flameshot gui";
         };
 
       startup = [
