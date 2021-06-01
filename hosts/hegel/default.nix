@@ -44,6 +44,7 @@
       "amdgpu.ppfeaturemask=0xffffffff"
     ];
     tmpOnTmpfs = true;
+    zfs.enableUnstable = true;
   };
 
   console = {

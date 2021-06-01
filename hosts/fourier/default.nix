@@ -29,6 +29,7 @@
     };
     tmpOnTmpfs = true;
     zfs = {
+      enableUnstable = true;
       extraPools = [ "tank" ];
       requestEncryptionCredentials = false;
     };

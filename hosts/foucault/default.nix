@@ -23,6 +23,8 @@
     ./sway.nix
   ];
 
+  boot.zfs.enableUnstable = true;
+
   environment.systemPackages = with pkgs; [ cntr wireguard-tools mullvad-vpn ];
 
   fileSystems = {
