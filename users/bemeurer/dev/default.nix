@@ -28,7 +28,6 @@
       al = "arc land";
       ad = "arc diff";
       gco = lib.mkForce "git cz";
-      gcom = lib.mkForce "git cz";
     };
   };
 }
