@@ -10,9 +10,13 @@
       "/var/lib/tailscale"
       "/var/log"
 
+      "/home/bemeurer/.cache/nix-index"
+      "/home/bemeurer/.cache/nvim"
       "/home/bemeurer/.cache/zsh"
       "/home/bemeurer/.config/beets"
+      "/home/bemeurer/.config/coc"
       "/home/bemeurer/.local/share/bash"
+      "/home/bemeurer/.local/share/direnv"
       "/home/bemeurer/.local/share/nvim"
       "/home/bemeurer/.local/share/zsh"
       "/home/bemeurer/.ssh"
