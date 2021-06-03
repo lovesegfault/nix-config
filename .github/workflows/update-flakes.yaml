@@ -25,11 +25,11 @@ jobs:
       - run: git config --global user.email "hatesegfault@protonmail.ch"
       - run: git config --global user.name "hatesegfault"
       - name: Update flakes
-        run: nix flake update --commit-lock-file
-      - uses: peter-evans/create-pull-request@v3.10.0
+        run: nix flake update
+      - uses: peter-evans/create-pull-request@v3
         with:
           branch: flake-update
-          commit-message: "flake: update"
+          commit-message: "chore(nix): update flake inputs"
           delete-branch: true
-          title: "flake: update"
+          title: "chore(nix): update flake inputs"
           token: ${{ secrets.PAT }}
