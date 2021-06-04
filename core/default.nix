@@ -58,7 +58,7 @@ in
       ln -sv ${pkgs.path} $out/nixpkgs
     '';
 
-    stateVersion = "20.09";
+    stateVersion = "21.05";
   };
 
   users = {

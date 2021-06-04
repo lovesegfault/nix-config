@@ -11,7 +11,7 @@
   ];
 
   home = {
-    stateVersion = "20.09";
+    stateVersion = "21.05";
     packages = with pkgs; [ colorcheck exa mosh neofetch ripgrep ];
   };
 
