@@ -25,7 +25,7 @@
 
     packages = {
       hosts = joinDrvs "hosts" (mapAttrs (_: v: v.profiles.system.path) self.deploy.nodes);
-      images = joinDrvs "images" self.images;
+      # images = joinDrvs "images" self.images;
     };
 
     devShell = pkgs.callPackage ./shell.nix {
@@ -48,5 +48,6 @@
     };
   })
 )
-// (import ./deploy.nix inputs)
-  // (import ./images.nix inputs)
+  // (import ./deploy.nix inputs)
+# FIXME: Uncomment when ZFS 2.1.0 is out with kernel 5.12 compat
+# // (import ./images.nix inputs)
