@@ -90,7 +90,49 @@ jobs:
         with:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
-      - name: nix-build
+      - name: nix build
         run: |
           nix run nixpkgs#nix-build-uncached -- \
             -A hosts.${{ matrix.host }}
+
+  check-flake:
+    runs-on: ubuntu-latest
+    needs: build-host
+    steps:
+      - uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 0
+      - uses: cachix/install-nix-action@v13
+        with:
+          install_url: https://nixos-nix-install-tests.cachix.org/serve/ipa0c64h689jb4ys6hxsky2r8xpld0hv/install
+          install_options: '--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve'
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+      - name: AArch64
+        env:
+          AARCH64_BOX_KEY: ${{ secrets.AARCH64_BOX_KEY }}
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+        run: |
+          sudo mkdir -p /root/.ssh
+          echo "$AARCH64_BOX_KEY" | sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
+          sudo chmod 0600 /root/.ssh/aarch64.community.nixos
+          echo "$KNOWN_HOSTS" | sudo tee -a /root/.ssh/known_hosts > /dev/null
+          nix_cfg=(
+            "builders-use-substitutes = true"
+          )
+          builder_cfg=(
+            lovesegfault@aarch64.nixos.community
+            aarch64-linux
+            /root/.ssh/aarch64.community.nixos
+            64
+            8
+            big-parallel
+          )
+          echo "${builder_cfg[*]}" | sudo tee /etc/nix/machines > /dev/null
+          echo "${nix_cfg[*]}" | sudo tee -a /etc/nix/nix.conf > /dev/null
+      - uses: cachix/cachix-action@v10
+        with:
+          name: nix-config
+          signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+      - name: nix flake check
+        run: nix flake check
