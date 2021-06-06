@@ -29,10 +29,12 @@
       DHCP = "yes";
       linkConfig.RequiredForOnline = "no";
       matchConfig.Name = "eth0";
+      networkConfig.IPv6PrivacyExtensions = "kernel";
     };
     wlan = {
       DHCP = "yes";
       matchConfig.Name = "wlan0";
+      networkConfig.IPv6PrivacyExtensions = "kernel";
     };
   };
 

@@ -133,10 +133,12 @@
       DHCP = "yes";
       linkConfig.RequiredForOnline = "no";
       matchConfig.MACAddress = "3c:7c:3f:21:80:67";
+      networkConfig.IPv6PrivacyExtensions = "kernel";
     };
     wifi = {
       DHCP = "yes";
       matchConfig.MACAddress = "c8:e2:65:0a:7e:d1";
+      networkConfig.IPv6PrivacyExtensions = "kernel";
     };
   };
 

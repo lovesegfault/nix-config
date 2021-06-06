@@ -32,10 +32,12 @@
       address = [ "192.168.2.1/24" ];
       linkConfig.RequiredForOnline = "no";
       matchConfig.MACAddress = "dc:a6:32:c1:37:1b";
+      networkConfig.IPv6PrivacyExtensions = "kernel";
     };
     wlan = {
       DHCP = "yes";
       matchConfig.MACAddress = "dc:a6:32:c1:37:1c";
+      networkConfig.IPv6PrivacyExtensions = "kernel";
     };
   };
 

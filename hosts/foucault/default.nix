@@ -89,10 +89,12 @@
       DHCP = "yes";
       linkConfig.RequiredForOnline = "no";
       matchConfig.MACAddress = "48:2a:e3:61:39:66";
+      networkConfig.IPv6PrivacyExtensions = "kernel";
     };
     wifi = {
       DHCP = "yes";
       matchConfig.MACAddress = "98:3b:8f:cf:62:82";
+      networkConfig.IPv6PrivacyExtensions = "kernel";
     };
   };
 
