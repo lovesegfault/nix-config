@@ -113,6 +113,7 @@
       enable = true;
       openFirewall = true;
     };
+    roon-server.enable = true;
     smartd.enable = true;
     zfs.autoScrub.pools = [ "tank" ];
     zfs.autoSnapshot = {
