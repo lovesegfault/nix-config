@@ -20,7 +20,7 @@
     blacklistedKernelModules = [ "snd_hda_intel" "amd64_edac_mod" "sp5100_tco" "iwlwifi" ];
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" ];
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages_5_11;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernel.sysctl = {
       "net.core.rmem_default" = 31457280;
       "net.core.wmem_default" = 31457280;
