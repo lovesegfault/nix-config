@@ -8,8 +8,6 @@
   ];
 
   home = {
-    file.".icons/default".source = "${pkgs.gnome3.adwaita-icon-theme}/share/icons/Adwaita";
-
     packages = with pkgs; [
       libnotify
       lollypop
