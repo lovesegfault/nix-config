@@ -17,7 +17,7 @@
   ];
 
   boot = {
-    blacklistedKernelModules = [ "snd_hda_intel" "amd64_edac_mod" "sp5100_tco" "iwlwifi" ];
+    blacklistedKernelModules = [ "snd_hda_intel" "amd64_edac_mod" "sp5100_tco" ];
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" ];
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest;
@@ -78,12 +78,12 @@
       }];
       allowedUDPPorts = [ 9003 ]; # roon
     };
-    hostName = "fourier";
     hostId = "80f4ef89";
-    useNetworkd = lib.mkForce false;
+    hostName = "fourier";
     interfaces.eno1.useDHCP = true;
-    # wireless.iwd.enable = true;
-    # interfaces.wlan0.useDHCP = true;
+    interfaces.wlan0.useDHCP = true;
+    useNetworkd = lib.mkForce false;
+    wireless.iwd.enable = true;
   };
 
   nix = {
