@@ -114,7 +114,10 @@
     wireless.iwd.enable = true;
   };
 
-  nix.maxJobs = 32;
+  nix = {
+    maxJobs = 32;
+    systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-znver3" ];
+  };
 
   programs.steam.enable = true;
 
