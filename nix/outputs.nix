@@ -48,6 +48,5 @@
     };
   })
 )
-  // (import ./deploy.nix inputs)
-# FIXME: Uncomment when ZFS 2.1.0 is out with kernel 5.12 compat
-# // (import ./images.nix inputs)
+// (import ./deploy.nix inputs)
+  // (import ./images.nix inputs)
