@@ -119,12 +119,6 @@
     systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-znver3" ];
   };
 
-  nixpkgs.localSystem = {
-    system = "x86_64-linux";
-    gcc.arch = "znver3";
-    gcc.tune = "znver3";
-  };
-
   programs.steam.enable = true;
 
   security.pam.loginLimits = [
