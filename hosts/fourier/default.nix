@@ -77,6 +77,14 @@
         to = 9200;
       }];
       allowedUDPPorts = [ 9003 ]; # roon
+      extraCommands = ''
+        ## IGMP / Broadcast - required by Roon ##
+        iptables -A INPUT -s 224.0.0.0/4 -j ACCEPT
+        iptables -A INPUT -d 224.0.0.0/4 -j ACCEPT
+        iptables -A INPUT -s 240.0.0.0/5 -j ACCEPT
+        iptables -A INPUT -m pkttype --pkt-type multicast -j ACCEPT
+        iptables -A INPUT -m pkttype --pkt-type broadcast -j ACCEPT
+      '';
     };
     hostId = "80f4ef89";
     hostName = "fourier";
