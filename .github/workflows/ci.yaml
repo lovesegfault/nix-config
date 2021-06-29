@@ -95,5 +95,6 @@ jobs:
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
       - name: nix build
         run: |
-          nix run nixpkgs#nix-build-uncached -- \
-            -A hosts.${{ matrix.host }}
+          cachix watch-exec nix-config \
+            nix run nixpkgs#nix-build-uncached -- \
+              -A hosts.${{ matrix.host }}
