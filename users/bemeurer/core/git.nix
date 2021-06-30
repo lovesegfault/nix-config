@@ -10,6 +10,7 @@
       difftool.prompt = true;
       github.user = "lovesegfault";
       mergetool.prompt = true;
+      init.defaultBranch = "main";
     };
   };
   programs.zsh.shellAliases = rec {
