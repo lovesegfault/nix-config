@@ -3,7 +3,7 @@
     distributedBuilds = true;
     buildMachines = [
       {
-        hostName = "ssh-ng://aarch64.nixos.community";
+        hostName = "aarch64.nixos.community";
         maxJobs = 64;
         speedFactor = 8;
         sshKey = config.sops.secrets.nixos-aarch64-builder-key.path;
