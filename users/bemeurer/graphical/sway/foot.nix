@@ -7,10 +7,10 @@
         font = "Hack:size=8";
         notify = "${pkgs.libnotify}/bin/notify-send -a foot -i foot \${title} \${body}";
         term = "xterm-256color";
-        url-launch = "${pkgs.xdg-utils}/bin/xdg-open \${url}";
       };
-      scrollback.lines = 32768;
       mouse.hide-when-typing = "yes";
+      scrollback.lines = 32768;
+      url.launch = "${pkgs.xdg-utils}/bin/xdg-open \${url}";
       colors = {
         foreground = "B3B1AD";
         background = "0A0E14";
