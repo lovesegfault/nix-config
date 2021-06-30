@@ -97,4 +97,4 @@ jobs:
         run: |
           cachix watch-exec nix-config -- \
             nix run nixpkgs#nix-build-uncached -- \
-              -A hosts.${{ matrix.host }}
+              -A packages.x86_64-linux.hosts.${{ matrix.host }}
