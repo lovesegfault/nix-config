@@ -1,8 +1,8 @@
 {
-  # aurelius = {
-  #   system = "aarch64-linux";
-  #   hostname = "100.92.104.42";
-  # };
+  aurelius = {
+    system = "aarch64-linux";
+    hostname = "100.92.104.42";
+  };
   cantor = {
     system = "x86_64-linux";
     hostname = "100.76.151.127";

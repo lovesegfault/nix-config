@@ -72,7 +72,6 @@
       fira-code
       font-awesome
       hack-font
-      iosevka
       noto-fonts-cjk
       noto-fonts-emoji
       unifont

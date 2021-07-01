@@ -75,20 +75,6 @@
         WantedBy = [ "graphical-session.target" ];
       };
     };
-    evolution-alarm-notify = {
-      Unit = {
-        Description = "evolution-alarm-notify";
-        PartOf = [ "graphical-session.target" ];
-      };
-      Service = {
-        ExecStart = "${pkgs.gnome.evolution-data-server}/libexec/evolution-data-server/evolution-alarm-notify";
-        RestartSec = 3;
-        Restart = "always";
-      };
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-    };
   };
 
   xsession.pointerCursor = {

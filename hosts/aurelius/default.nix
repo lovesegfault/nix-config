@@ -8,17 +8,20 @@
     ../../hardware/sound-pulse.nix
     ../../hardware/bluetooth.nix
 
-    ../../sway
+    ../../graphical
+    ../../graphical/sway.nix
 
     ../../users/bemeurer
   ];
 
   boot = {
     loader = {
+      generic-extlinux-compatible.enable = lib.mkForce false;
       raspberryPi = {
         enable = true;
         firmwareConfig = ''
           dtparam=audio=on
+          dtparam=spi=on
           dtoverlay=vc4-fkms-v3d
 
           dtoverlay=hyperpixel4-common
@@ -74,6 +77,11 @@
         };
       };
     };
+  };
+
+  location = {
+    latitude = 37.861;
+    longitude = -122.273;
   };
 
   networking = {
