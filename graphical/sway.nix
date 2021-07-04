@@ -1,4 +1,8 @@
 { pkgs, ... }: {
+  environment.sessionVariables = {
+    LIBSEAT_BACKEND = "logind";
+  };
+
   programs.sway = {
     enable = true;
     extraPackages = with pkgs; [
