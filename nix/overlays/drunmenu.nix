@@ -14,7 +14,7 @@ let
       src = ''
         program="$(${displayCmd})"
 
-        spawn "$program"
+        exec spawn "$program"
       '';
     };
 in
