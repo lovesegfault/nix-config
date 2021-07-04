@@ -23,7 +23,7 @@ in
 
   environment = {
     etc."nixos/configuration.nix".source = dummyConfig;
-    systemPackages = with pkgs; [ rsync ];
+    systemPackages = with pkgs; [ rsync foot.terminfo ];
   };
 
   home-manager = {
