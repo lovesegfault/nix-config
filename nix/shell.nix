@@ -8,13 +8,13 @@
 
 , deploy-rs
 , pre-commit-check
-, sops-pgp-hook
+, sops-import-keys-hook
 , ssh-to-pgp
 }: mkShell {
   name = "nix-config";
 
   nativeBuildInputs = [
-    sops-pgp-hook
+    sops-import-keys-hook
   ];
 
   buildInputs = [

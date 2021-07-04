@@ -29,7 +29,7 @@
     };
 
     devShell = pkgs.callPackage ./shell.nix {
-      inherit (sops-nix.packages.${system}) sops-pgp-hook;
+      inherit (sops-nix.packages.${system}) sops-import-keys-hook;
       inherit (deploy-rs.packages.${system}) deploy-rs;
       inherit (self.checks.${system}) pre-commit-check;
     };
