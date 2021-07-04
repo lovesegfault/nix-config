@@ -6,7 +6,6 @@
         dpi-aware = "yes";
         font = "Hack:size=8";
         notify = "${pkgs.libnotify}/bin/notify-send -a foot -i foot \${title} \${body}";
-        term = "xterm-256color";
       };
       mouse.hide-when-typing = "yes";
       scrollback.lines = 32768;
