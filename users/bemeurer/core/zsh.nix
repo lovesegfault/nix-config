@@ -23,6 +23,12 @@
       export CARGO_HOME="${config.xdg.cacheHome}/cargo"
     '';
     initExtra = ''
+      nix-closure-size() {
+        nix-store -q --size $(nix-store -qR $(${pkgs.coreutils}/bin/readlink -e $1) ) |
+          ${pkgs.gawk}/bin/gawk '{ a+=$1 } END { print a }' |
+          ${pkgs.coreutils}/bin/numfmt --to=iec-i
+      }
+
       bindkey "$${terminfo[khome]}" beginning-of-line
       bindkey "$${terminfo[kend]}" end-of-line
       bindkey "$${terminfo[kdch1]}" delete-char
