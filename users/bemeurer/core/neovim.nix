@@ -84,6 +84,9 @@
             " Disable the Python2 plugin
             let g:loaded_python_provider=0
 
+            " Disable the Perl plugin
+            let g:loaded_perl_provider=0
+
             """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
             " => VIM user interface
             """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
