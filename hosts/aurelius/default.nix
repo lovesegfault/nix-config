@@ -4,9 +4,9 @@
     ../../core
     ../../core/resolved.nix
 
-    ../../hardware/rpi4.nix
-    ../../hardware/sound-pulse.nix
     ../../hardware/bluetooth.nix
+    ../../hardware/rpi4.nix
+    ../../hardware/sound-pipewire.nix
 
     ../../graphical
     ../../graphical/sway.nix
