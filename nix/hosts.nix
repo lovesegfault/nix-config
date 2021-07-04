@@ -35,8 +35,8 @@
     system = "x86_64-linux";
     hostname = "100.74.129.30";
   };
-  # riemann = {
-  #   system = "aarch64-linux";
-  #   hostname = "100.99.75.64";
-  # };
+  riemann = {
+    system = "aarch64-linux";
+    hostname = "offline";
+  };
 }
