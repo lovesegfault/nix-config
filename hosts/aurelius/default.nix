@@ -12,6 +12,8 @@
     ../../graphical/sway.nix
 
     ../../users/bemeurer
+
+    ./sway.nix
   ];
 
   boot = {
@@ -88,6 +90,9 @@
     hostName = "aurelius";
     wireless.iwd.enable = true;
   };
+
+  # the hyperpixel4 doesn't support standard brightness controls
+  services.redshift.enable = lib.mkForce false;
 
   systemd.network.networks = {
     lan = {
