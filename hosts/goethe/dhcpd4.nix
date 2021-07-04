@@ -10,4 +10,10 @@
     '';
     interfaces = [ "eth0" ];
   };
+
+  systemd.services.dhcpd4 = {
+    after = [ "network.target" "network-online.target" ];
+    wants = [ "network-online.target" ];
+    serviceConfig.RestartSec = 2;
+  };
 }
