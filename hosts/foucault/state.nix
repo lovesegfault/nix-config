@@ -4,6 +4,7 @@
       "/var/lib/bluetooth"
       "/var/lib/boltd"
       "/var/lib/iwd"
+      "/var/lib/fwupd"
       "/var/lib/libvirt"
       "/var/lib/tailscale"
       "/var/log"
