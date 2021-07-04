@@ -1,4 +1,4 @@
-{
+{ lib, ... }: {
   environment.etc."sway/config.d/inputs.conf".text = ''
     input "1241:4611:HID_04d9:1203" {
       xkb_layout us
@@ -28,7 +28,13 @@
     }
   '';
 
-  home-manager.users.bemeurer.wayland.windowManager.sway.extraSessionCommands = ''
-    export WLR_DRM_DEVICES=/dev/dri/card1
-  '';
+  home-manager.users.bemeurer.wayland.windowManager.sway = {
+    config = {
+      gaps = lib.mkForce null;
+      modifier = lib.mkForce "Mod1";
+    };
+    extraSessionCommands = ''
+      export WLR_DRM_DEVICES=/dev/dri/card1
+    '';
+  };
 }

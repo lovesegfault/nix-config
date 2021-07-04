@@ -19,7 +19,6 @@
       element-desktop
       gnome.evince
       gnome.gnome-calendar
-      imv
       mbk
       prusa-slicer
       shotwell

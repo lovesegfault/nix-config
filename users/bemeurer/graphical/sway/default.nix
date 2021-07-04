@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ./foot.nix
     ./mako.nix
@@ -10,11 +10,10 @@
   home = {
     packages = with pkgs; [
       grim
+      imv
       slurp
       wl-clipboard
       wofi
-    ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
-      imv
     ];
   };
 

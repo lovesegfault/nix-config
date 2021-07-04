@@ -46,7 +46,7 @@ let
       size = 10.0;
     };
 
-    gaps = lib.mkIf (pkgs.hostPlatform.system == "x86_64-linux") {
+    gaps = {
       inner = 10;
       outer = 5;
       smartBorders = "on";
@@ -95,7 +95,7 @@ let
         "XF86MonBrightnessUp" = execSpawn "${pkgs.brillo}/bin/brillo -e -A 0.5";
       };
 
-    modifier = if pkgs.hostPlatform.system == "aarch64-linux" then "Mod1" else "Mod4";
+    modifier = "Mod4";
 
     window = {
       border = 0;
