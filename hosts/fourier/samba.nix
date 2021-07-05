@@ -40,6 +40,12 @@
           browseable = "yes";
           "guest ok" = "yes";
         };
+        movies = {
+          path = "/srv/movies";
+          "read only" = "yes";
+          browseable = "yes";
+          "guest ok" = "yes";
+        };
         music = {
           path = "/srv/music";
           "read only" = "yes";
