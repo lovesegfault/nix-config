@@ -42,6 +42,12 @@
             enable = true;
             excludes = [ "flake.nix" ];
           };
+          luacheck = {
+            enable = true;
+            name = "Luacheck";
+            entry = "${pkgs.luajitPackages.luacheck}/bin/luacheck --std luajit --globals vim -- ";
+            types = [ "file" "lua" ];
+          };
         };
       };
     };

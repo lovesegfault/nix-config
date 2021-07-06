@@ -3,7 +3,7 @@
     ./bash.nix
     ./git.nix
     ./htop.nix
-    ./neovim.nix
+    ./neovim
     ./starship.nix
     ./tmux.nix
     ./xdg.nix
