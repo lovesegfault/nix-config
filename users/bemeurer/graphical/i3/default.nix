@@ -17,6 +17,7 @@
   };
 
   services = {
+    caffeine.enable = true;
     flameshot.enable = true;
     picom.enable = true;
   };
@@ -32,6 +33,7 @@
       };
     };
     services = {
+      caffeine.Install.WantedBy = lib.mkForce [ "i3-session.target" ];
       feh = {
         Unit = {
           Description = "feh background";
