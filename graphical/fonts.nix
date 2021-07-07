@@ -72,7 +72,6 @@
       fira-code
       font-awesome
       hack-font
-      nerdfonts
       noto-fonts-cjk
       noto-fonts-emoji
       unifont
