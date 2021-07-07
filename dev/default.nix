@@ -3,7 +3,7 @@
 
   environment = {
     enableDebugInfo = true;
-    systemPackages = with pkgs; [ git neovim tmate ];
+    systemPackages = with pkgs; [ git neovim tmate upterm ];
   };
 
   services.udev.extraRules = ''
