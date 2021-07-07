@@ -11,6 +11,7 @@ let
   config = {
     allowUnfree = true;
     allowAliases = true;
+    joypixels.acceptLicense = true;
   };
 
   overlays = map

@@ -97,7 +97,7 @@
       * {
         border: none;
         border-radius: 0;
-        font-family: Hack, FontAwesome5Free;
+        font-family: monospace;
         font-size: 13px;
         min-height: 0;
       }

@@ -29,11 +29,8 @@
 
           font-size = "12";
 
-          font-0 = "Hack:style=Regular:size=${font-size};5";
-          font-1 = "Font Awesome 5 Free:style=Regular:size=${font-size};5";
-          font-2 = "Font Awesome 5 Free:style=Solid:size=${font-size};5";
-          font-3 = "Font Awesome 5 Brands:style=Regular:size=${font-size};5";
-          font-4 = "Noto Color Emoji:style=Regular:scale=10;4";
+          font-0 = "monospace:style=Regular:size=${font-size};5";
+          font-1 = "emoji:style=Regular:scale=10;4";
 
           padding = 1;
           # https://en.wikipedia.org/wiki/Thin_space

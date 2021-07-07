@@ -42,7 +42,7 @@ let
     focus.followMouse = false;
 
     fonts = {
-      names = [ "FontAwesome" "Hack" ];
+      names = [ "monospace" ];
       size = 10.0;
     };
 

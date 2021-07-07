@@ -11,7 +11,7 @@
       backgroundColor = "#0A0E14";
       borderColor = "#53BDFA";
       defaultTimeout = 30 * 1000; # millis
-      font = "Hack 10";
+      font = "monospace 10";
       iconPath = "${homeIcons}:${systemIcons}:${homePixmaps}:${systemPixmaps}";
       icons = true;
       maxIconSize = 96;
