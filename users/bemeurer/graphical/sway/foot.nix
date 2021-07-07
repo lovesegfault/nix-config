@@ -4,7 +4,7 @@
     settings = {
       main = {
         dpi-aware = "yes";
-        font = "Hack:size=8";
+        font = "Hack Nerd Font:size=8";
         notify = "${pkgs.libnotify}/bin/notify-send -a foot -i foot \${title} \${body}";
       };
       mouse.hide-when-typing = "yes";

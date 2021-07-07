@@ -5,15 +5,15 @@
       env.TERM = "xterm-256color";
       font = {
         normal = {
-          family = "Hack";
+          family = "Hack Nerd Font";
           style = "Regular";
         };
         bold = {
-          family = "Hack";
+          family = "Hack Nerd Font";
           style = "Bold";
         };
         italic = {
-          family = "Hack";
+          family = "Hack Nerd Font";
           style = "Italic";
         };
         size = 8;
