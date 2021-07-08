@@ -52,4 +52,6 @@ vim.cmd([[ command! Format execute "lua vim.lsp.buf.formatting()" ]])
 vim.cmd(
     [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
 
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+
 return {on_attach = on_attach, capabilities = capabilities}
