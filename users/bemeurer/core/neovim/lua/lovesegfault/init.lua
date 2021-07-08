@@ -148,8 +148,8 @@ opt.si = true
 
 -- clipboard related ----------------------------------------------------------
 ---- Map ,y/p to yank/paste to/from system clipboard
-map("", "<leader>y", "+y")
-map("", "<leader>p", "+p")
+map("", "<leader>y", "\"+y")
+map("", "<leader>p", "\"+p")
 
 -- moving around, tabs, windows and buffers -----------------------------------
 ---- Disable highlight when <leader><cr> is pressed
