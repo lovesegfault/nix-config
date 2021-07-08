@@ -1,4 +1,4 @@
-require("nvim-treesitter.configs").setup {
+require("nvim-treesitter.configs").setup({
     highlight = {enable = true},
     incremental_selection = {
         enable = true,
@@ -9,4 +9,4 @@ require("nvim-treesitter.configs").setup {
             node_decremental = "grm"
         }
     }
-}
+})

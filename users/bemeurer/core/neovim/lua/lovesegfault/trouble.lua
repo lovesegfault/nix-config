@@ -1,7 +1,7 @@
 local utils = require("lovesegfault.utils")
 local map = utils.map
 
-require("trouble").setup {}
+require("trouble").setup()
 
 map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", {silent = true})
 map("n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>",

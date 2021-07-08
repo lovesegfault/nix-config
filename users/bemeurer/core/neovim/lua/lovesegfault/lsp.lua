@@ -43,7 +43,7 @@ end
 -- Enable the following language servers
 local servers = {"clangd", "pyright", "texlab"}
 for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {on_attach = on_attach, capabilities = capabilities}
+    nvim_lsp[lsp].setup({on_attach = on_attach, capabilities = capabilities})
 end
 
 -- Map :Format to vim.lsp.buf.formatting()

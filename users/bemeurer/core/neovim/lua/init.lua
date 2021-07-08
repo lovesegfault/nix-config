@@ -1,15 +1,28 @@
 require("lovesegfault")
-require("lovesegfault.ayu")
-require("lovesegfault.bufferline")
 require("lovesegfault.compe")
-require("lovesegfault.editorconfig")
-require("lovesegfault.gitsigns")
 require("lovesegfault.indent-blankline")
 require("lovesegfault.lightline")
 require("lovesegfault.lsp")
 require("lovesegfault.rust-tools")
 require("lovesegfault.telescope")
-require("lovesegfault.todo-comments")
 require("lovesegfault.treesitter")
 require("lovesegfault.trouble")
-require("lovesegfault.numb")
+
+-- ayu colorscheme
+vim.g.ayucolor = "dark"
+vim.g.cmd "colorscheme ayu"
+
+-- bufferline
+require("bufferline").setup({options = {diagnostics = "nvim_lsp"}})
+
+-- editorconfig
+vim.g.EditorConfig_exclude_patterns = {"fugitive://.*", "scp://.*"}
+
+-- gitsigns
+require("gitsigns").setup()
+
+-- numb
+require('numb').setup()
+
+-- todo-comments
+require("todo-comments").setup()

@@ -1,13 +1,14 @@
 local utils = require("lovesegfault.utils")
 local map = utils.map
 
-require("telescope").setup {
+require("telescope").setup({
     defaults = {
         mappings = {i = {["<C-u>"] = false, ["<C-d>"] = false}},
         generic_sorter = require("telescope.sorters").get_fzy_sorter,
         file_sorter = require("telescope.sorters").get_fzy_sorter
     }
-}
+})
+
 -- Add leader shortcuts
 map("n", "<leader>f",
     [[<cmd>lua require("telescope.builtin").find_files()<cr>]], {silent = true})
