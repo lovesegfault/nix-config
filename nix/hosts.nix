@@ -9,7 +9,7 @@
   };
   deleuze = {
     system = "aarch64-linux";
-    hostname = "255.255.255.255";
+    hostname = "100.0.0.0";
   };
   feuerbach = {
     system = "x86_64-linux";
@@ -25,7 +25,7 @@
   };
   goethe = {
     system = "aarch64-linux";
-    hostname = "255.255.255.255";
+    hostname = "100.0.0.0";
   };
   hegel = {
     system = "x86_64-linux";
