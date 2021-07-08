@@ -61,7 +61,7 @@
           ayu-vim
           gitsigns-nvim
           indent-blankline-nvim-lua
-          lightline-vim
+          galaxyline-nvim
           lsp-colors-nvim
           lsp_signature-nvim
           # numb-nvim
