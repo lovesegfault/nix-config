@@ -2,7 +2,6 @@
 {
   imports = [
     ../../core
-    ../../core/resolved.nix
 
     ../../hardware/rpi4.nix
     ../../hardware/no-mitigations.nix

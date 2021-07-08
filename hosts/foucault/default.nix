@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   imports = [
     ../../core
-    ../../core/resolved.nix
 
     ../../dev
     ../../dev/stcg-cameras.nix

@@ -2,7 +2,6 @@
 {
   imports = [
     ../../core
-    ../../core/resolved.nix
 
     ../../hardware/bluetooth.nix
     ../../hardware/rpi4.nix

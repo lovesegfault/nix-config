@@ -10,6 +10,7 @@ in
     ./aspell.nix
     ./nix.nix
     ./openssh.nix
+    ./resolved.nix
     ./tmux.nix
     ./xdg.nix
     ./zsh.nix

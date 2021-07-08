@@ -1,7 +1,6 @@
 { config, lib, modulesPath, pkgs, ... }: {
   imports = [
     ../../core
-    ../../core/resolved.nix
 
     ../../users/bemeurer
 

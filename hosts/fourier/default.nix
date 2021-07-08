@@ -1,7 +1,6 @@
 { lib, pkgs, ... }: {
   imports = [
     ../../core
-    ../../core/resolved.nix
 
     ../../dev
 
