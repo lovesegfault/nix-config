@@ -20,9 +20,9 @@ require("compe").setup({
         buffer = true,
         path = true,
         spell = true,
-        nvim_lsp = true,
-        snippets_nvim = true,
-        tabnine = true
+        nvim_lsp = {priority = 1000},
+        vsnip = {priority = 1001},
+        tabnine = {priority = 999}
     }
 })
 
