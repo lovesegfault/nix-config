@@ -64,7 +64,7 @@
           lightline-vim
           lsp-colors-nvim
           lsp_signature-nvim
-          numb-nvim
+          # numb-nvim
           nvim-bufferline-lua
           nvim-lightbulb
           nvim-web-devicons
