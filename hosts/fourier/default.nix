@@ -158,7 +158,6 @@
         matchConfig.MACAddress = "18:c0:4d:31:0c:5f";
         bond = [ "bond0" ];
         networkConfig.PrimarySlave = true;
-
       };
       wifi-bond = {
         matchConfig.MACAddress = "a8:7e:ea:cb:96:cf";
