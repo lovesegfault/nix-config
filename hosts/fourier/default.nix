@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
     ../../core
 
@@ -87,9 +87,6 @@
     };
     hostId = "80f4ef89";
     hostName = "fourier";
-    interfaces.eno1.useDHCP = true;
-    interfaces.wlan0.useDHCP = true;
-    useNetworkd = lib.mkForce false;
     wireless.iwd.enable = true;
   };
 
@@ -143,6 +140,19 @@
       echo "none" > /sys/block/$disk/queue/scheduler
     done
   '';
+
+  systemd.network.networks = {
+    lan = {
+      DHCP = "yes";
+      matchConfig.MACAddress = "18:c0:4d:31:0c:5f";
+      networkConfig.IPv6PrivacyExtensions = "kernel";
+    };
+    wlan = {
+      DHCP = "yes";
+      matchConfig.MACAddress = "a8:7e:ea:cb:96:cf";
+      networkConfig.IPv6PrivacyExtensions = "kernel";
+    };
+  };
 
   swapDevices = [{ device = "/dev/disk/by-uuid/6075a47d-006a-4dbb-9f86-671955132e2f"; }];
 
