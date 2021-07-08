@@ -10,7 +10,7 @@ require("lovesegfault.trouble")
 
 -- ayu colorscheme
 vim.g.ayucolor = "dark"
-vim.g.cmd "colorscheme ayu"
+vim.cmd("colorscheme ayu")
 
 -- bufferline
 require("bufferline").setup({options = {diagnostics = "nvim_lsp"}})

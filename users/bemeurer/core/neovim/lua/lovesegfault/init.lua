@@ -12,12 +12,12 @@ local wo = vim.wo
 opt.history = 500
 
 ---- enable filetype plugins
-cmd "filetype plugin on"
-cmd "filetype indent on"
+cmd("filetype plugin on")
+cmd("filetype indent on")
 
 ---- set to auto read when a file is changed from the outside
 opt.autoread = true
-cmd "au FocusGained,BufEnter * checktime"
+cmd("au FocusGained,BufEnter * checktime")
 
 ---- with a map leader it's possible to do extra key combinations
 ---- like <leader>w saves the current file
@@ -28,7 +28,7 @@ map("n", "<leader>w", ":w!<cr>")
 
 ---- :W sudo saves the file
 ---- (useful for handling the permission-denied error)
-cmd "command! W execute 'w !sudo tee % > /dev/null' <bar> edit!"
+cmd("command! W execute 'w !sudo tee % > /dev/null' <bar> edit!")
 
 ---- disable unused providers
 g.loaded_node_provider = 0
@@ -104,12 +104,12 @@ opt.foldcolumn = "1"
 
 -- colors and fonts -----------------------------------------------------------
 ---- Enable syntax highlighting
-cmd "syntax enable"
+cmd("syntax enable")
 
 ---- Enable 24-bit colors
 opt.termguicolors = true
 
-cmd "try | colorscheme desert | catch | endtry"
+cmd("try | colorscheme desert | catch | endtry")
 opt.background = "dark"
 
 ---- Set utf8 as standard encoding and en_US as the standard language
@@ -124,7 +124,7 @@ opt.updatetime = 250
 opt.backup = false
 opt.wb = false
 opt.swapfile = false
-cmd "try | set undodir=~/.cache/nvim | set undofile | catch | endtry"
+cmd("try | set undodir=~/.cache/nvim | set undofile | catch | endtry")
 
 -- text, tab, and indent related ----------------------------------------------
 ---- Use spaces instead of tabs
@@ -181,7 +181,7 @@ map("", "<leader>t<leader>", ":tabnext")
 ---- Let 'tl' toggle between this and the last accessed tab
 g.lasttab = 1
 map("n", "<Leader>tl", ":exe \"tabn \".g:lasttab<CR>")
-cmd "au TabLeave * let g:lasttab = tabpagenr()"
+cmd("au TabLeave * let g:lasttab = tabpagenr()")
 
 ---- Opens a new tab with the current buffer's path
 ---- Super useful when editing files in the same directory
@@ -195,7 +195,7 @@ opt.switchbuf = "useopen,usetab,newtab"
 opt.stal = 2
 
 ---- Return to last edit position when opening files (You want this!)
-cmd [[au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]]
+cmd([[au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
 
 -- status line ----------------------------------------------------------------
 ---- Always show the status line
