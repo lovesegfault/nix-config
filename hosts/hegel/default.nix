@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
   imports = [
     ../../core
-    ../../core/unbound.nix
+    ../../core/resolved.nix
 
     ../../dev
     ../../dev/stcg-cameras.nix

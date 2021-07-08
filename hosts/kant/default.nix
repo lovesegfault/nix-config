@@ -1,7 +1,7 @@
 { config, lib, modulesPath, pkgs, ... }: {
   imports = [
     ../../core
-    ../../core/unbound.nix
+    ../../core/resolved.nix
 
     ../../users/bemeurer
 

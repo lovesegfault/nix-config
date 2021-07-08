@@ -1,7 +1,7 @@
 { ... }: {
   imports = [
     ../../core
-    ../../core/unbound.nix
+    ../../core/resolved.nix
 
     ../../dev
 
