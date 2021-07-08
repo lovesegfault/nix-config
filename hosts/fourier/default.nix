@@ -141,16 +141,40 @@
     done
   '';
 
-  systemd.network.networks = {
-    lan = {
-      DHCP = "yes";
-      matchConfig.MACAddress = "18:c0:4d:31:0c:5f";
-      networkConfig.IPv6PrivacyExtensions = "kernel";
+  systemd.network = {
+    netdevs.bond0 = {
+      netdevConfig = {
+        Kind = "bond";
+        Name = "bond0";
+      };
+      bondConfig = {
+        Mode = "active-backup";
+        PrimaryReselectPolicy = "always";
+        MIIMonitorSec = "1s";
+      };
     };
-    wlan = {
-      DHCP = "yes";
-      matchConfig.MACAddress = "a8:7e:ea:cb:96:cf";
-      networkConfig.IPv6PrivacyExtensions = "kernel";
+    networks = {
+      eth-bond = {
+        matchConfig.MACAddress = "18:c0:4d:31:0c:5f";
+        bond = [ "bond0" ];
+        networkConfig.PrimarySlave = true;
+
+      };
+      wifi-bond = {
+        matchConfig.MACAddress = "a8:7e:ea:cb:96:cf";
+        bond = [ "bond0" ];
+      };
+      bond0 = {
+        matchConfig.Name = "bond0";
+        DHCP = "ipv4";
+        routes = [{
+          routeConfig = {
+            Gateway = "_dhcp4";
+            InitialCongestionWindow = 30;
+            InitialAdvertisedReceiveWindow = 30;
+          };
+        }];
+      };
     };
   };
 
