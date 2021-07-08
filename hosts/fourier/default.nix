@@ -166,13 +166,6 @@
       bond0 = {
         matchConfig.Name = "bond0";
         DHCP = "ipv4";
-        routes = [{
-          routeConfig = {
-            Gateway = "_dhcp4";
-            InitialCongestionWindow = 30;
-            InitialAdvertisedReceiveWindow = 30;
-          };
-        }];
       };
     };
   };
