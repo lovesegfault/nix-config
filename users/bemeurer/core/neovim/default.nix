@@ -59,12 +59,12 @@
         with vimPlugins; [
           # ui
           ayu-vim
+          galaxyline-nvim
           gitsigns-nvim
           indent-blankline-nvim-lua
-          galaxyline-nvim
           lsp-colors-nvim
           lsp_signature-nvim
-          # numb-nvim
+          numb-nvim
           nvim-bufferline-lua
           nvim-lightbulb
           nvim-web-devicons

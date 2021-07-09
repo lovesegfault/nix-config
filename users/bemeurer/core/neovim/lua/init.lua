@@ -23,7 +23,7 @@ vim.g.EditorConfig_exclude_patterns = { "fugitive://.*", "scp://.*" }
 require("gitsigns").setup()
 
 -- numb
--- require('numb').setup()
+require("numb").setup()
 
 -- todo-comments
 require("todo-comments").setup()
