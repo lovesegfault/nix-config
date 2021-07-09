@@ -40,6 +40,7 @@
       ibm-plex
       noto-fonts-cjk
       noto-fonts-emoji
+      xlibs.fontalias
     ];
   };
 }
