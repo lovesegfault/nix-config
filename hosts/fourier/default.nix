@@ -142,10 +142,10 @@
   '';
 
   systemd.network = {
-    netdevs.bond0 = {
+    netdevs.wifi-eth-bond = {
       netdevConfig = {
+        Name = "wifi-eth-bond";
         Kind = "bond";
-        Name = "bond0";
       };
       bondConfig = {
         Mode = "active-backup";
@@ -156,15 +156,15 @@
     networks = {
       eth-bond = {
         matchConfig.MACAddress = "18:c0:4d:31:0c:5f";
-        bond = [ "bond0" ];
+        bond = [ "wifi-eth-bond" ];
         networkConfig.PrimarySlave = true;
       };
       wifi-bond = {
         matchConfig.MACAddress = "a8:7e:ea:cb:96:cf";
-        bond = [ "bond0" ];
+        bond = [ "wifi-eth-bond" ];
       };
-      bond0 = {
-        matchConfig.Name = "bond0";
+      wifi-eth-bond = {
+        matchConfig.Name = "wifi-eth-bond";
         DHCP = "ipv4";
       };
     };
