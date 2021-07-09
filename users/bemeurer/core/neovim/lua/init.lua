@@ -13,6 +13,9 @@ require("lovesegfault.telescope")
 require("lovesegfault.treesitter")
 require("lovesegfault.trouble")
 
+-- autopair
+require("nvim-autopairs").setup({ map_cr = true, map_complete = true })
+
 -- bufferline
 require("bufferline").setup({ options = { diagnostics = "nvim_lsp" } })
 

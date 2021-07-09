@@ -86,6 +86,7 @@
           vim-visual-multi
 
           # completion
+          nvim-autopairs
           nvim-compe
           nvim-lspconfig
           snippets-nvim
