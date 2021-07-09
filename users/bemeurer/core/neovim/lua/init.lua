@@ -14,10 +14,10 @@ require("lovesegfault.treesitter")
 require("lovesegfault.trouble")
 
 -- bufferline
-require("bufferline").setup({options = {diagnostics = "nvim_lsp"}})
+require("bufferline").setup({ options = { diagnostics = "nvim_lsp" } })
 
 -- editorconfig
-vim.g.EditorConfig_exclude_patterns = {"fugitive://.*", "scp://.*"}
+vim.g.EditorConfig_exclude_patterns = { "fugitive://.*", "scp://.*" }
 
 -- gitsigns
 require("gitsigns").setup()

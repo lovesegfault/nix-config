@@ -1,12 +1,12 @@
 { mkShell
 , cachix
-, luaformatter
 , luajit
 , nix-build-uncached
 , nix-linter
 , nixpkgs-fmt
 , pre-commit
 , sops
+, stylua
 
 , deploy-rs
 , pre-commit-check
@@ -26,7 +26,7 @@
     nixpkgs-fmt
     pre-commit
 
-    luaformatter
+    stylua
     (luajit.withPackages (p: with p; [ luacheck ]))
 
     deploy-rs

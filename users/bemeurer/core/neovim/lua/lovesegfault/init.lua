@@ -148,12 +148,12 @@ opt.si = true
 
 -- clipboard related ----------------------------------------------------------
 ---- Map ,y/p to yank/paste to/from system clipboard
-map("", "<leader>y", "\"+y")
-map("", "<leader>p", "\"+p")
+map("", "<leader>y", '"+y')
+map("", "<leader>p", '"+p')
 
 -- moving around, tabs, windows and buffers -----------------------------------
 ---- Disable highlight when <leader><cr> is pressed
-map("", "<leader><cr>", ":nohl<cr>", {silent = true})
+map("", "<leader><cr>", ":nohl<cr>", { silent = true })
 
 ---- Smart way to move between windows
 map("", "<C-j>", "<C-W>j")
@@ -180,12 +180,12 @@ map("", "<leader>t<leader>", ":tabnext")
 
 ---- Let 'tl' toggle between this and the last accessed tab
 g.lasttab = 1
-map("n", "<Leader>tl", ":exe \"tabn \".g:lasttab<CR>")
+map("n", "<Leader>tl", ':exe "tabn ".g:lasttab<CR>')
 cmd("au TabLeave * let g:lasttab = tabpagenr()")
 
 ---- Opens a new tab with the current buffer's path
 ---- Super useful when editing files in the same directory
-map("", "<leader>te", ":tabedit <C-r>=expand(\"%:p:h\")<cr>/")
+map("", "<leader>te", ':tabedit <C-r>=expand("%:p:h")<cr>/')
 
 ---- Switch CWD to the directory of the open buffer
 map("", "<leader>cd", ":cd %:p:h<cr>:pwd<cr>")

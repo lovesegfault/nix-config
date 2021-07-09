@@ -42,6 +42,12 @@
             enable = true;
             excludes = [ "flake.nix" ];
           };
+          stylua = {
+            enable = true;
+            name = "Stylua";
+            entry = "${pkgs.stylua}/bin/stylua";
+            types = [ "file" "lua" ];
+          };
           luacheck = {
             enable = true;
             name = "Luacheck";
