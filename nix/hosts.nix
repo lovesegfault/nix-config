@@ -21,7 +21,7 @@
   };
   fourier = {
     system = "x86_64-linux";
-    hostname = "10.0.0.12";
+    hostname = "100.77.106.120";
   };
   goethe = {
     system = "aarch64-linux";
