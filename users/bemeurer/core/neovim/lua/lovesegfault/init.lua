@@ -109,9 +109,6 @@ cmd("syntax enable")
 ---- Enable 24-bit colors
 opt.termguicolors = true
 
-cmd("try | colorscheme desert | catch | endtry")
-opt.background = "dark"
-
 ---- Set utf8 as standard encoding and en_US as the standard language
 opt.encoding = "utf8"
 
