@@ -2,11 +2,11 @@ local utils = require("lovesegfault.utils")
 local map = utils.map
 
 require("telescope").setup({
-	defaults = {
-		mappings = { i = { ["<C-u>"] = false, ["<C-d>"] = false } },
-		generic_sorter = require("telescope.sorters").get_fzy_sorter,
-		file_sorter = require("telescope.sorters").get_fzy_sorter,
-	},
+  defaults = {
+    mappings = { i = { ["<C-u>"] = false, ["<C-d>"] = false } },
+    generic_sorter = require("telescope.sorters").get_fzy_sorter,
+    file_sorter = require("telescope.sorters").get_fzy_sorter,
+  },
 })
 
 -- Add leader shortcuts
@@ -18,10 +18,10 @@ map("n", "<leader>?", [[<cmd>lua require("telescope.builtin").oldfiles()<cr>]], 
 map("n", "<leader>sd", [[<cmd>lua require("telescope.builtin").grep_string()<cr>]], { silent = true })
 map("n", "<leader>sp", [[<cmd>lua require("telescope.builtin").live_grep()<cr>]], { silent = true })
 map(
-	"n",
-	"<leader>o",
-	[[<cmd>lua require("telescope.builtin").tags{ only_current_buffer = true }<cr>]],
-	{ silent = true }
+  "n",
+  "<leader>o",
+  [[<cmd>lua require("telescope.builtin").tags{ only_current_buffer = true }<cr>]],
+  { silent = true }
 )
 map("n", "<leader>gc", [[<cmd>lua require("telescope.builtin").git_commits()<cr>]], { silent = true })
 map("n", "<leader>gb", [[<cmd>lua require("telescope.builtin").git_branches()<cr>]], { silent = true })
