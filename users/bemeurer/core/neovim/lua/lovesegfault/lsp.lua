@@ -1,5 +1,7 @@
 local nvim_lsp = require("lspconfig")
 
+local flags = { debounce_text_changes = 150 }
+
 -- snippet support
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -36,7 +38,7 @@ end
 -- Enable the following language servers
 local servers = { "clangd", "pyright", "texlab" }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup({ on_attach = on_attach, capabilities = capabilities })
+  nvim_lsp[lsp].setup({ on_attach = on_attach, capabilities = capabilities, flags = flags })
 end
 
 -- Map :Format to vim.lsp.buf.formatting()
@@ -46,4 +48,4 @@ vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_li
 
 vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]])
 
-return { on_attach = on_attach, capabilities = capabilities }
+return { on_attach = on_attach, capabilities = capabilities, flags = flags }
