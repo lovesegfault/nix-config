@@ -31,7 +31,7 @@
     gdts = "${gdt} --staged";
     gf = "git fetch --all --prune --tags";
     gff = "${gf} --force";
-    gl = "git log --decorate --pretty=format:'%C(auto)%h %C(green)(%as)%C(reset) %s %C(auto)%d'";
+    gl = "git log --decorate --pretty=format:'%C(auto)%h %C(green)(%as)%C(reset)%C(blue) %<(20,trunc) %an%C(reset) %s%C(auto)%d'";
     gm = "git merge";
     gma = "${gm} --abort";
     gmc = "${gm} --continue";
