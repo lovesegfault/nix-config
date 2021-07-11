@@ -37,7 +37,10 @@
       pre-commit-check = pre-commit-hooks.lib."${system}".run {
         src = ./.;
         hooks = {
-          nixpkgs-fmt.enable = true;
+          nixpkgs-fmt = {
+            enable = true;
+            excludes = [ "nix/overlays/linux-lto.nix" ];
+          };
           nix-linter = {
             enable = true;
             excludes = [ "flake.nix" ];
