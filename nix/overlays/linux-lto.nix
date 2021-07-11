@@ -52,9 +52,7 @@ let
         # XXX: This _HAS_ to be here. I do not know why. If you remove it things
         # explode. It makes absolutely no sense, but I don't make the rules.
         nativeBuildInputs = (args.nativeBuildInputs or [ ])
-        ++ (with self.buildPackages."${llvmPin}"; [
-          lld
-        ]);
+          ++ (with self.buildPackages."${llvmPin}"; [ lld llvm ]);
       });
       # set everything the kernel needs to be built with the LLVM tools
       hostPlatform = stdenv'.hostPlatform // {
@@ -270,7 +268,7 @@ _: {
   # INFO: Fixes for out-of-tree modules that got angry with the clang toolchain
   linuxPackages_xanmod_lto_zen3 = (self.linuxPackagesFor self.linux_xanmod_lto_zen3).extend (lself: lsuper: {
     ddcci-driver = lsuper.ddcci-driver.overrideAttrs (old: {
-      nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ self.which ];
+      nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ (with self; [ which ]);
       makeFlags = (old.makeFlags or [ ]) ++ [
         "CC=${lself.stdenv.cc}/bin/cc"
         "LD=${lself.stdenv.cc}/bin/ld"
