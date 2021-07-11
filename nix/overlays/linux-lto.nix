@@ -165,6 +165,45 @@ let
     ];
   };
 
+  # INFO: This will further tune the kernel, may not work for all sources.
+  forceOptimize =
+    { arch, kernel }:
+    kernel.override {
+      argsOverride = {
+        structuredExtraConfig = with self.lib.kernel; {
+          "${arch}" = yes;
+
+          # Preemptive Full Tickless Kernel at 500Hz
+          PREEMPT_VOLUNTARY = self.lib.mkForce no;
+          PREEMPT = self.lib.mkForce yes;
+          NO_HZ_FULL = yes;
+          HZ_500 = yes;
+
+          # Google's Multigenerational LRU Framework
+          LRU_GEN = yes;
+          LRU_GEN_ENABLED = yes;
+
+          # Google's BBRv2 TCP congestion Control
+          TCP_CONG_BBR2 = yes;
+          DEFAULT_BBR2 = yes;
+
+          # FQ-PIE Packet Scheduling
+          NET_SCH_DEFAULT = yes;
+          DEFAULT_FQ_PIE = yes;
+
+          # Graysky's additional CPU optimizations
+          CC_OPTIMIZE_FOR_PERFORMANCE_O3 = yes;
+
+          # Android Ashmem and Binder IPC Driver as module for Anbox
+          ASHMEM = module;
+          ANDROID = yes;
+          ANDROID_BINDER_IPC = module;
+          ANDROID_BINDERFS = module;
+          ANDROID_BINDER_DEVICES = freeform "binder,hwbinder,vndbinder";
+        };
+      };
+    };
+
   # This take any kernel package and treats its source so that it's LLVM-locked,
   # as well as replaces its stdenv with out LLVM one.
   forceLLVM = k: k.overrideAttrs (_: {
@@ -191,11 +230,16 @@ let
   # steal and patch to enable LTO.
   # We use that config to manually create a new kernel package that, god
   # willing, will be fully LTO'd. Again, message at the top.
-  makeLTO = k:
+  makeLTO =
+    { arch ? null, kernel }:
     let
-      k' = forceLLVM k;
+      k = kernel;
+      k' =
+        if (arch == null)
+        then forceLLVM k
+        else forceOptimize { inherit arch; kernel = forceLLVM k; };
       configfile = configLTO k';
-      kLto =
+      kLTO =
         self.linuxManualConfig {
           stdenv = stdenvLLVM;
           inherit (self) lib;
@@ -208,7 +252,7 @@ let
           };
         };
     in
-    kLto.overrideAttrs (old: {
+    kLTO.overrideAttrs (old: {
       nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ self.python3 ];
       postPatch = (old.postPatch or "") + ''
         patchShebangs scripts/jobserver-exec
@@ -221,10 +265,10 @@ let
 in
 _: {
   # See you next week for the next episode of "Will it boot?!"
-  linux_xanmod_lto = makeLTO self.linux_xanmod;
+  linux_xanmod_lto_zen3 = makeLTO { arch = "MZEN3"; kernel = self.linux_xanmod; };
 
   # INFO: Fixes for out-of-tree modules that got angry with the clang toolchain
-  linuxPackages_xanmod_lto = (self.linuxPackagesFor self.linux_xanmod_lto).extend (lself: lsuper: {
+  linuxPackages_xanmod_lto_zen3 = (self.linuxPackagesFor self.linux_xanmod_lto_zen3).extend (lself: lsuper: {
     ddcci-driver = lsuper.ddcci-driver.overrideAttrs (old: {
       nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ self.which ];
       makeFlags = (old.makeFlags or [ ]) ++ [
