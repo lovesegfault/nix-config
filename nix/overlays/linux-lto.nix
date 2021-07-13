@@ -85,25 +85,6 @@ let
   fixKernelSrc = k: self.applyPatches {
     inherit (k) src;
     patches = [
-      # INFO: https://github.com/NixOS/nixpkgs/pull/129879
-      (self.writeText "unmangle-build-id.patch" ''
-        diff --git a/Makefile b/Makefile
-        index 5b982a027..97e52543d 100644
-        --- a/Makefile
-        +++ b/Makefile
-        @@ -1032,8 +1032,8 @@ KBUILD_CPPFLAGS += $(KCPPFLAGS)
-         KBUILD_AFLAGS   += $(KAFLAGS)
-         KBUILD_CFLAGS   += $(KCFLAGS)
-
-        -KBUILD_LDFLAGS_MODULE += --build-id=sha1
-        -LDFLAGS_vmlinux += --build-id=sha1
-        +KBUILD_LDFLAGS_MODULE += --build-id
-        +LDFLAGS_vmlinux += --build-id
-
-         ifeq ($(CONFIG_STRIP_ASM_SYMS),y)
-         LDFLAGS_vmlinux  += $(call ld-option, -X,)
-      '')
-
       # INFO: Getting rid of this patch will require us to extend the nixpkgs
       # kernel generation mechanism to support custom flags in
       # generate-config.pl
