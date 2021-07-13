@@ -111,10 +111,10 @@
     hostName = "hegel";
     wireguard.enable = true;
     wireless.iwd.enable = true;
-    # DHCP Server
+    # DHCP, NTP
     firewall.interfaces.enp6s0 = {
       allowedTCPPorts = [ 53 67 68 647 ];
-      allowedUDPPorts = [ 67 68 ];
+      allowedUDPPorts = [ 67 68 123 ];
     };
   };
 
@@ -132,9 +132,16 @@
   ];
 
   services = {
+    chrony = {
+      enable = true;
+      extraConfig = ''
+        allow 192.168.2.0/24
+      '';
+    };
     fwupd.enable = true;
     ratbagd.enable = true;
     udev.packages = with pkgs; [ logitech-udev-rules ];
+    timesyncd.enable = false;
   };
 
   systemd.network.networks = {
@@ -146,8 +153,9 @@
         IPv6PrivacyExtensions = "kernel";
       };
       dhcpServerConfig = {
-        PoolOffset = 1;
         EmitDNS = "no";
+        EmitNTP = "yes";
+        NTP = "192.168.2.1";
       };
       linkConfig.RequiredForOnline = "no";
     };
