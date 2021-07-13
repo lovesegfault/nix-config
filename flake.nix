@@ -37,6 +37,8 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    templates.url = "github:NixOS/templates";
   };
 
   # FIXME: I can't η-reduce this for some reason

@@ -30,6 +30,13 @@ nixpkgs.lib.nixosSystem {
     ({
       nix.registry = {
         self.flake = inputs.self;
+        template = {
+          flake = inputs.templates;
+          from = {
+            id = "templates";
+            type = "indirect";
+          };
+        };
         nixpkgs = {
           flake = inputs.nixpkgs;
           from = {

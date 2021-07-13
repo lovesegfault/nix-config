@@ -161,7 +161,8 @@
         "naersk": "naersk",
         "nixpkgs": "nixpkgs",
         "pre-commit-hooks": "pre-commit-hooks",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "templates": "templates"
       }
     },
     "sops-nix": {
@@ -181,6 +182,21 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "templates": {
+      "locked": {
+        "lastModified": 1592921668,
+        "narHash": "sha256-X2WSTV7rtvyeYqBIHgcj3sqIW6ewKNdA/QDYXZFikKU=",
+        "owner": "NixOS",
+        "repo": "templates",
+        "rev": "98414b0eea82c92417fdefcec843e574c61a8cd3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "templates",
         "type": "github"
       }
     }
