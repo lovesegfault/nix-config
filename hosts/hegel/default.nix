@@ -88,6 +88,21 @@
     cpu.amd.updateMicrocode = true;
     brillo.enable = true;
     enableRedistributableFirmware = true;
+    fancontrol = {
+      enable = true;
+      config = ''
+        INTERVAL=2
+        DEVPATH=hwmon7=devices/platform/nct6775.656
+        DEVNAME=hwmon7=nct6798
+        FCTEMPS=hwmon7/pwm5=hwmon7/temp7_input hwmon7/pwm1=hwmon7/temp7_input
+        FCFANS=hwmon7/pwm5=hwmon7/fan5_input hwmon7/pwm1=hwmon7/fan1_input
+        MINTEMP=hwmon7/pwm5=30 hwmon7/pwm1=30
+        MAXTEMP=hwmon7/pwm5=40 hwmon7/pwm1=55
+        MINSTART=hwmon7/pwm5=127 hwmon7/pwm1=85
+        MINSTOP=hwmon7/pwm5=127 hwmon7/pwm1=0
+        MINPWM=hwmon7/pwm5=127
+      '';
+    };
     i2c.enable = true;
     ledger.enable = true;
     opengl = {
