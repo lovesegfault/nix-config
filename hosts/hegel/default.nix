@@ -111,6 +111,11 @@
     hostName = "hegel";
     wireguard.enable = true;
     wireless.iwd.enable = true;
+    # DHCP Server
+    firewall.interfaces.enp6s0 = {
+      allowedTCPPorts = [ 53 67 68 647 ];
+      allowedUDPPorts = [ 67 68 ];
+    };
   };
 
   nix = {
@@ -134,10 +139,17 @@
 
   systemd.network.networks = {
     lan = {
-      DHCP = "yes";
-      linkConfig.RequiredForOnline = "no";
       matchConfig.MACAddress = "3c:7c:3f:21:80:67";
-      networkConfig.IPv6PrivacyExtensions = "kernel";
+      networkConfig = {
+        Address = "192.168.2.1/24";
+        DHCPServer = "yes";
+        IPv6PrivacyExtensions = "kernel";
+      };
+      dhcpServerConfig = {
+        PoolOffset = 1;
+        EmitDNS = "no";
+      };
+      linkConfig.RequiredForOnline = "no";
     };
     wifi = {
       DHCP = "yes";
@@ -145,6 +157,8 @@
       networkConfig.IPv6PrivacyExtensions = "kernel";
     };
   };
+
+  systemd.services.systemd-networkd.environment.SYSTEMD_LOG_LEVEL = "debug";
 
   swapDevices = [
     { device = "/dev/disk/by-uuid/e4103056-9ef2-47da-8403-46cf20541b15"; }
