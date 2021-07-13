@@ -37,12 +37,6 @@
     };
   };
 
-  systemd.services.dhcpd4 = {
-    after = [ "network.target" "network-online.target" ];
-    wants = [ "network-online.target" ];
-    serviceConfig.RestartSec = 2;
-  };
-
   time.timeZone = "America/Los_Angeles";
 
   # sops.secrets.root-password.sopsFile = ./root-password.yaml;
