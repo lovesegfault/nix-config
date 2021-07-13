@@ -25,7 +25,7 @@
   };
   goethe = {
     system = "aarch64-linux";
-    hostname = "100.0.0.0";
+    hostname = "100.67.32.40";
   };
   hegel = {
     system = "x86_64-linux";

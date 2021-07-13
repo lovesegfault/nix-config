@@ -6,8 +6,6 @@
     ../../hardware/rpi4.nix
 
     ../../users/bemeurer
-
-    ./dhcpd4.nix
   ];
 
   console = {
@@ -27,8 +25,7 @@
 
   systemd.network.networks = {
     lan = {
-      DHCP = "no";
-      address = [ "192.168.2.1/24" ];
+      DHCP = "yes";
       linkConfig.RequiredForOnline = "no";
       matchConfig.Name = "eth0";
       networkConfig.IPv6PrivacyExtensions = "kernel";
