@@ -24,7 +24,7 @@ in
 
   environment = {
     etc."nixos/configuration.nix".source = dummyConfig;
-    systemPackages = with pkgs; [ rsync foot.terminfo ];
+    systemPackages = with pkgs; [ rsync foot.terminfo bpytop ];
   };
 
   home-manager = {
