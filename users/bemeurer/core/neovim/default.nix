@@ -29,80 +29,72 @@
         tree-sitter
       ];
 
-      plugins =
-        let
-          vimPlugins = pkgs.vimPlugins // {
-            tree-sitter-grammars = pkgs.vimUtils.buildVimPluginFrom2Nix rec {
-              pname = "tree-sitter-grammars";
-              version = pkgs.tree-sitter.version;
-              # INFO: These are either buggy or just entirely broken
-              banned = (map (v: "tree-sitter-${v}") [
-                "agda"
-                "fluent"
-                "svelte"
-                "swift"
-                "verilog"
-              ]);
-              src = pkgs.runCommandNoCC "tree-sitter-grammars" { } ''
-                mkdir -p $out/parser
-                ${builtins.concatStringsSep "\n" (builtins.attrValues (builtins.mapAttrs
-                  (n: v: "ln -s ${v}/parser $out/parser/${
-                      builtins.replaceStrings ["-"] ["_"] (pkgs.lib.removePrefix "tree-sitter-" n)
-                    }.so")
-                  (lib.filterAttrs (n: _: !builtins.elem n banned) pkgs.tree-sitter.builtGrammars)
-                ))}
-              '';
-              dependencies = [ ];
-            };
-          };
-        in
-        with vimPlugins; [
-          # ui
-          ayu-vim
-          galaxyline-nvim
-          gitsigns-nvim
-          indent-blankline-nvim-lua
-          lsp-colors-nvim
-          lsp_signature-nvim
-          numb-nvim
-          nvim-bufferline-lua
-          nvim-lightbulb
-          nvim-web-devicons
-          todo-comments-nvim
-          trouble-nvim
+      plugins = with pkgs.vimPlugins; [
+        # ui
+        ayu-vim
+        galaxyline-nvim
+        gitsigns-nvim
+        indent-blankline-nvim-lua
+        lsp-colors-nvim
+        lsp_signature-nvim
+        numb-nvim
+        nvim-bufferline-lua
+        nvim-lightbulb
+        nvim-web-devicons
+        todo-comments-nvim
+        trouble-nvim
 
-          # tooling
-          nvim-bufdel
-          rust-tools-nvim
-          snippets-nvim
-          telescope-nvim
-          vim-better-whitespace
-          vim-commentary
-          vim-fugitive
-          vim-gist
-          vim-rhubarb
-          vim-sleuth
-          vim-surround
-          vim-visual-multi
+        # tooling
+        nvim-bufdel
+        rust-tools-nvim
+        snippets-nvim
+        telescope-nvim
+        vim-better-whitespace
+        vim-commentary
+        vim-fugitive
+        vim-gist
+        vim-rhubarb
+        vim-sleuth
+        vim-surround
+        vim-visual-multi
 
-          # completion
-          nvim-autopairs
-          nvim-compe
-          nvim-lspconfig
-          snippets-nvim
-          vim-vsnip
+        # completion
+        nvim-autopairs
+        nvim-compe
+        nvim-lspconfig
+        snippets-nvim
+        vim-vsnip
 
-          # syntax
-          editorconfig-vim
-          gentoo-syntax
-          lalrpop-vim
-          nvim-treesitter
-          tree-sitter-grammars
-          vim-nix
-          vim-polyglot
-        ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
-          compe-tabnine
-        ];
+        # syntax
+        (nvim-treesitter.withPlugins
+          (_:
+            with builtins;
+            filter
+              (drv:
+                !elem
+                  drv.pname
+                  (map (v: "tree-sitter-${v}-grammar") [
+                    "agda"
+                    "c-sharp"
+                    "embedded-template"
+                    "fluent"
+                    "ocaml-interface"
+                    "svelte"
+                    "swift"
+                    "verilog"
+                  ])
+              )
+              pkgs.tree-sitter.allGrammars
+          )
+        )
+        editorconfig-vim
+        gentoo-syntax
+        lalrpop-vim
+        vim-nix
+        vim-polyglot
+      ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
+        compe-tabnine
+      ];
     };
   };
 
