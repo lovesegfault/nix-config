@@ -23,10 +23,6 @@
     system = "x86_64-linux";
     hostname = "100.77.106.120";
   };
-  goethe = {
-    system = "aarch64-linux";
-    hostname = "100.67.32.40";
-  };
   hegel = {
     system = "x86_64-linux";
     hostname = "100.102.43.14";
