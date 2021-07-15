@@ -3,9 +3,7 @@
     ../../core
 
     ../../dev
-    ../../dev/stcg-cameras.nix
     ../../dev/stcg-gcs
-    ../../dev/virt-manager.nix
 
     ../../hardware/nixos-aarch64-builder
     ../../hardware/thinkpad-p1.nix
