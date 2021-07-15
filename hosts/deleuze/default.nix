@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ../../core
@@ -16,6 +16,10 @@
   networking = {
     wireless.iwd.enable = true;
     hostName = "deleuze";
+    firewall = {
+      allowedTCPPorts = [ 80 53 ];
+      allowedUDPPorts = [ 53 ];
+    };
   };
 
   nix.gc = {
@@ -23,22 +27,45 @@
     options = "-d";
   };
 
-  systemd.network.networks = {
-    lan = {
-      DHCP = "yes";
-      linkConfig.RequiredForOnline = "no";
-      matchConfig.Name = "eth0";
-      networkConfig.IPv6PrivacyExtensions = "kernel";
+  systemd.network = {
+    netdevs.wifi-eth-bond = {
+      netdevConfig = {
+        Name = "wifi-eth-bond";
+        Kind = "bond";
+      };
+      bondConfig = {
+        Mode = "active-backup";
+        PrimaryReselectPolicy = "always";
+        MIIMonitorSec = "1s";
+      };
     };
-    wlan = {
-      DHCP = "yes";
-      matchConfig.Name = "wlan0";
-      networkConfig.IPv6PrivacyExtensions = "kernel";
+    networks = {
+      eth-bond = {
+        matchConfig.MACAddress = "dc:a6:32:c1:37:1b";
+        bond = [ "wifi-eth-bond" ];
+        networkConfig.PrimarySlave = true;
+      };
+      wifi-bond = {
+        matchConfig.MACAddress = "dc:a6:32:c1:37:1c";
+        bond = [ "wifi-eth-bond" ];
+      };
+      wifi-eth-bond = {
+        matchConfig.Name = "wifi-eth-bond";
+        DHCP = "ipv4";
+      };
     };
   };
+
+  services.resolved.enable = lib.mkForce false;
 
   time.timeZone = "America/Los_Angeles";
 
   # sops.secrets.root-password.sopsFile = ./root-password.yaml;
   # users.users.root.passwordFile = config.sops.secrets.root-password.path;
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    dockerSocket.enable = true;
+  };
 }
