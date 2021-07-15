@@ -12,7 +12,8 @@ with lib;
       ++ optionals config.sound.enable [ "audio" ]
       ++ optionals config.virtualisation.docker.enable [ "docker" ]
       ++ optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
-      ++ optionals config.virtualisation.kvmgt.enable [ "kvm" ];
+      ++ optionals config.virtualisation.kvmgt.enable [ "kvm" ]
+      ++ optionals config.virtualisation.podman.enable [ "podman" ];
     isNormalUser = true;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQgTWfmR/Z4Szahx/uahdPqvEP/e/KQ1dKUYLenLuY2 bemeurer.personal"
