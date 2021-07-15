@@ -9,7 +9,7 @@
   };
   deleuze = {
     system = "aarch64-linux";
-    hostname = "100.86.135.121";
+    hostname = "100.91.202.65";
   };
   feuerbach = {
     system = "x86_64-linux";
