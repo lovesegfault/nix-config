@@ -180,7 +180,11 @@
   # users.users.root.passwordFile = config.sops.secrets.root-password.path;
 
   virtualisation = {
+    docker = {
+      enable = true;
+      storageDriver = "zfs";
+      autoPrune.enable = true;
+    };
     libvirtd.enable = true;
-    podman.enable = true;
   };
 }
