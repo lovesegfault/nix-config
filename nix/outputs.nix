@@ -39,7 +39,7 @@
         hooks = {
           nixpkgs-fmt = {
             enable = true;
-            excludes = [ "nix/overlays/linux-lto.nix" ];
+            excludes = [ "linux-lto.nix" ];
           };
           nix-linter = {
             enable = true;
@@ -47,13 +47,13 @@
           };
           stylua = {
             enable = true;
-            name = "Stylua";
+            name = "stylua";
             entry = "${pkgs.stylua}/bin/stylua";
             types = [ "file" "lua" ];
           };
           luacheck = {
             enable = true;
-            name = "Luacheck";
+            name = "luacheck";
             entry = "${pkgs.luajitPackages.luacheck}/bin/luacheck --std luajit --globals vim -- ";
             types = [ "file" "lua" ];
           };
