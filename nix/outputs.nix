@@ -35,7 +35,7 @@
 
     checks = (deploy-rs.lib."${system}".deployChecks self.deploy) // {
       pre-commit-check = pre-commit-hooks.lib."${system}".run {
-        src = ./.;
+        src = ../.;
         hooks = {
           nixpkgs-fmt = {
             enable = true;
