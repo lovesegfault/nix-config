@@ -1,8 +1,8 @@
 require("lovesegfault")
 
 -- ayu colorscheme
-vim.g.ayucolor = "dark"
-vim.cmd("colorscheme ayu")
+vim.o.background = "dark"
+require("ayu").colorscheme()
 
 require("lovesegfault.compe")
 require("lovesegfault.galaxyline")

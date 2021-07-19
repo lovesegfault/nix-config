@@ -31,12 +31,12 @@
 
       plugins = with pkgs.vimPlugins; [
         # ui
-        ayu-vim
         galaxyline-nvim
         gitsigns-nvim
         indent-blankline-nvim-lua
         lsp-colors-nvim
         lsp_signature-nvim
+        neovim-ayu
         numb-nvim
         nvim-bufferline-lua
         nvim-lightbulb
