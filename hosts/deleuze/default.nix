@@ -8,6 +8,8 @@
     ../../users/bemeurer
   ];
 
+  boot.kernel.sysctl."net.core.rmem_max" = 1048576;
+
   console = {
     font = "ter-v28n";
     packages = with pkgs; [ terminus_font ];
@@ -56,7 +58,52 @@
     };
   };
 
-  services.resolved.enable = lib.mkForce false;
+  services = {
+    resolved.enable = lib.mkForce false;
+    unbound = {
+      enable = true;
+      enableRootTrustAnchor = true;
+      localControlSocketPath = "/run/unbound/unbound.ctl";
+      resolveLocalQueries = true;
+      settings = {
+        server = {
+          do-ip6 = false;
+          do-ip4 = true;
+          do-tcp = true;
+          do-udp = true;
+          edns-buffer-size = "1472";
+          harden-dnssec-stripped = true;
+          harden-glue = true;
+          interface = [ "127.0.0.1" ];
+          num-threads = "2";
+          port = 5335;
+          prefer-ip6 = false;
+          prefetch = true;
+          private-address = [
+            "10.0.0.0/8"
+            "169.254.0.0/16"
+            "172.16.0.0/12"
+            "192.168.0.0/16"
+            "fd00::/8"
+            "fe80::/10"
+          ];
+          private-domain = [ "localdomain" ];
+          domain-insecure = [ "localdomain" ];
+          tls-cert-bundle = "/etc/ssl/certs/ca-certificates.crt";
+          use-caps-for-id = "no";
+          verbosity = 1;
+        };
+        forward-zone = [{
+          name = ".";
+          forward-tls-upstream = true;
+          forward-addr = [
+            "1.1.1.1@853#cloudflare-dns.com"
+            "1.0.0.1@853#cloudflare-dns.com"
+          ];
+        }];
+      };
+    };
+  };
 
   time.timeZone = "America/Los_Angeles";
 
