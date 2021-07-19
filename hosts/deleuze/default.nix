@@ -31,11 +31,6 @@
     options = "-d";
   };
 
-  systemd.network.networks.lan = {
-    DHCP = "yes";
-    matchConfig.MACAddress = "dc:a6:32:c1:37:1b";
-  };
-
   services = {
     resolved.enable = lib.mkForce false;
     unbound = {
@@ -82,6 +77,33 @@
       };
     };
   };
+
+  systemd.network.networks.lan = {
+    DHCP = "yes";
+    matchConfig.MACAddress = "dc:a6:32:c1:37:1b";
+  };
+
+  systemd.services.podman-pihole =
+    let
+      pihole = "cc92567f15b3d707553369d8bebd0efae55593034d6a3c6f61ce7d63289c172a";
+    in
+    {
+      description = "Pi-hole Podman Container";
+      wants = [ "network.target" ];
+      after = [ "network-online.target" ];
+      environment.PODMAN_SYSTEMD_UNIT = "%n";
+      serviceConfig = {
+        ExecStart = "${pkgs.podman}/bin/podman start ${pihole}";
+        ExecStop = "${pkgs.podman}/bin/podman stop -t 10 ${pihole}";
+        ExecStopPost = "${pkgs.podman}/bin/podman stop -t 10 ${pihole}";
+        PIDFile = "/run/containers/storage/overlay-containers/${pihole}/userdata/conmon.pid";
+        Restart = "on-failure";
+        TimeoutStopSec = 70;
+        Type = "forking";
+      };
+      unitConfig.RequiresMountsFor = [ "/run/containers/storage" ];
+      wantedBy = [ "multi-user.target" ];
+    };
 
   time.timeZone = "America/Los_Angeles";
 
