@@ -19,7 +19,6 @@
   };
 
   networking = {
-    wireless.iwd.enable = true;
     hostName = "deleuze";
     firewall = {
       allowedTCPPorts = [ 80 53 ];
@@ -32,33 +31,9 @@
     options = "-d";
   };
 
-  systemd.network = {
-    netdevs.wifi-eth-bond = {
-      netdevConfig = {
-        Name = "wifi-eth-bond";
-        Kind = "bond";
-      };
-      bondConfig = {
-        Mode = "active-backup";
-        PrimaryReselectPolicy = "always";
-        MIIMonitorSec = "1s";
-      };
-    };
-    networks = {
-      eth-bond = {
-        matchConfig.MACAddress = "dc:a6:32:c1:37:1b";
-        bond = [ "wifi-eth-bond" ];
-        networkConfig.PrimarySlave = true;
-      };
-      wifi-bond = {
-        matchConfig.MACAddress = "dc:a6:32:c1:37:1c";
-        bond = [ "wifi-eth-bond" ];
-      };
-      wifi-eth-bond = {
-        matchConfig.Name = "wifi-eth-bond";
-        DHCP = "ipv4";
-      };
-    };
+  systemd.network.networks.lan = {
+    DHCP = "yes";
+    matchConfig.MACAddress = "dc:a6:32:c1:37:1b";
   };
 
   services = {
