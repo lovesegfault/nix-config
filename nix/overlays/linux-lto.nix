@@ -37,7 +37,7 @@ let
       passthru = (stdenv'.passthru or { }) // { llvmPackages = llvmPin; };
     };
 
-  optimizeKernel = { kernel, arch ? null }:
+  linuxLTOFor = { kernel, extraConfig ? { } }:
     let
       stdenv = stdenvLLVM;
       buildPackages = self.buildPackages // { inherit stdenv; };
@@ -48,30 +48,36 @@ let
         with lib.kernel; kernel.structuredExtraConfig // {
           LTO_NONE = no;
           LTO_CLANG_FULL = yes;
-        } // lib.optionalAttrs (arch != null) {
-          "${arch}" = yes;
-        };
+        } // extraConfig;
     };
+
+  linuxLTOPackagesFor = { kernel, extraConfig ? { } }:
+    (self.linuxPackagesFor (linuxLTOFor { inherit kernel extraConfig; })).extend (self: super: {
+      ddcci-driver = super.ddcci-driver.overrideAttrs (old: {
+        makeFlags = (old.makeFlags or [ ]) ++ self.kernel.makeFlags;
+      });
+
+      zfs = super.zfs.overrideAttrs (old: {
+        # XXX: This shouldn't be needed, but for some reason it is. I don't get
+        # it.
+        nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ self.stdenv.passthru.llvmPackages.lld ];
+        buildInputs = (old.buildInputs or [ ]) ++ [ self.stdenv.passthru.llvmPackages.libunwind ];
+
+        postPatch = (old.postPatch or "") + ''
+          substituteInPlace config/kernel.m4 --replace \
+            "make modules" \
+            "make CC=${self.stdenv.cc}/bin/cc modules"
+        '';
+      });
+    });
 in
 _: rec {
-  linux_xanmod_lto_zen3 = optimizeKernel { arch = "MZEN3"; kernel = self.linux_xanmod; };
+  linuxPackages_xanmod_lto_zen3 = linuxLTOPackagesFor {
+    kernel = self.linux_xanmod;
+    extraConfig = with lib.kernel; { MZEN3 = yes; };
+  };
 
-  # INFO: Fixes for out-of-tree modules that got angry with the clang toolchain
-  linuxPackages_xanmod_lto_zen3 = (self.linuxPackagesFor linux_xanmod_lto_zen3).extend (lself: lsuper: {
-    ddcci-driver = lsuper.ddcci-driver.overrideAttrs (old: {
-      makeFlags = (old.makeFlags or [ ]) ++ lself.kernel.makeFlags;
-    });
-    zfs = lsuper.zfs.overrideAttrs (old: {
-      # XXX: This shouldn't be needed, but for some reason it is. I don't get
-      # it.
-      nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ lself.stdenv.passthru.llvmPackages.lld ];
-      buildInputs = (old.buildInputs or [ ]) ++ [ lself.stdenv.passthru.llvmPackages.libunwind ];
-
-      postPatch = (old.postPatch or "") + ''
-        substituteInPlace config/kernel.m4 --replace \
-          "make modules" \
-          "make CC=${lself.stdenv.cc}/bin/cc modules"
-      '';
-    });
-  });
+  linuxPackages_rpi4_lto = linuxLTOPackagesFor {
+    kernel = self.linux_rpi4;
+  };
 }
