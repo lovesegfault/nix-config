@@ -51,8 +51,8 @@ let
         } // extraConfig;
     };
 
-  linuxLTOPackagesFor = { kernel, extraConfig ? { } }:
-    (self.linuxPackagesFor (linuxLTOFor { inherit kernel extraConfig; })).extend (self: super: {
+  linuxLTOPackagesFor = { ... }@args:
+    (self.linuxPackagesFor (linuxLTOFor args)).extend (self: super: {
       ddcci-driver = super.ddcci-driver.overrideAttrs (old: {
         makeFlags = (old.makeFlags or [ ]) ++ self.kernel.makeFlags;
       });
@@ -74,7 +74,7 @@ in
 _: rec {
   linuxPackages_xanmod_lto_zen3 = linuxLTOPackagesFor {
     kernel = self.linux_xanmod;
-    extraConfig = with lib.kernel; { MZEN3 = yes; };
+    extraConfig = { MZEN3 = lib.kernel.yes; };
   };
 
   linuxPackages_rpi4_lto = linuxLTOPackagesFor {

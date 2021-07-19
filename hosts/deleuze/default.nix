@@ -8,7 +8,10 @@
     ../../users/bemeurer
   ];
 
-  boot.kernel.sysctl."net.core.rmem_max" = 1048576;
+  boot = {
+    kernel.sysctl."net.core.rmem_max" = 1048576;
+    kernelPackages = lib.mkForce pkgs.linuxPackages_rpi4_lto;
+  };
 
   console = {
     font = "ter-v28n";
