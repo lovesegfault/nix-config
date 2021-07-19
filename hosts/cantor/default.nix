@@ -31,7 +31,6 @@
     hostId = "2677931c";
   };
 
-  systemd.enableUnifiedCgroupHierarchy = false;
   systemd.network.networks.datacenter = {
     DHCP = "yes";
     matchConfig.MACAddress = "ac:1f:6b:a4:78:6c";
