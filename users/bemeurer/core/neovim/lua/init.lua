@@ -5,9 +5,9 @@ vim.o.background = "dark"
 require("ayu").colorscheme()
 
 require("lovesegfault.compe")
-require("lovesegfault.galaxyline")
 require("lovesegfault.indent-blankline")
 require("lovesegfault.lsp")
+require("lovesegfault.lualine")
 require("lovesegfault.rust-tools")
 require("lovesegfault.telescope")
 require("lovesegfault.treesitter")
