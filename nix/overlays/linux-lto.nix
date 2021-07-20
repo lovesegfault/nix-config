@@ -28,6 +28,10 @@ let
             "HOSTCC=${clangUseLLVM}/bin/clang"
             "HOSTCXX=${clangUseLLVM}/bin/clang++"
           ];
+          extraConfig = ''
+            LTO_NONE n
+            LTO_CLANG_FULL y
+          '';
         };
       };
     in
@@ -44,32 +48,34 @@ let
     in
     kernel.override {
       inherit stdenv buildPackages;
-      argsOverride.structuredExtraConfig =
-        with lib.kernel; kernel.structuredExtraConfig // {
-          LTO_NONE = no;
-          LTO_CLANG_FULL = yes;
-        } // extraConfig;
+      argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // extraConfig;
     };
 
   linuxLTOPackagesFor = { ... }@args:
-    (self.linuxPackagesFor (linuxLTOFor args)).extend (self: super: {
-      ddcci-driver = super.ddcci-driver.overrideAttrs (old: {
-        makeFlags = (old.makeFlags or [ ]) ++ self.kernel.makeFlags;
-      });
+    (self.linuxPackagesFor (linuxLTOFor args)).extend (
+      self: super: {
+        ddcci-driver = super.ddcci-driver.overrideAttrs (
+          old: {
+            makeFlags = (old.makeFlags or [ ]) ++ self.kernel.makeFlags;
+          }
+        );
 
-      zfs = super.zfs.overrideAttrs (old: {
-        # XXX: This shouldn't be needed, but for some reason it is. I don't get
-        # it.
-        nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ self.stdenv.passthru.llvmPackages.lld ];
-        buildInputs = (old.buildInputs or [ ]) ++ [ self.stdenv.passthru.llvmPackages.libunwind ];
+        zfs = super.zfs.overrideAttrs (
+          old: {
+            # XXX: This shouldn't be needed, but for some reason it is. I don't get
+            # it.
+            nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ self.stdenv.passthru.llvmPackages.lld ];
+            buildInputs = (old.buildInputs or [ ]) ++ [ self.stdenv.passthru.llvmPackages.libunwind ];
 
-        postPatch = (old.postPatch or "") + ''
-          substituteInPlace config/kernel.m4 --replace \
-            "make modules" \
-            "make CC=${self.stdenv.cc}/bin/cc modules"
-        '';
-      });
-    });
+            postPatch = (old.postPatch or "") + ''
+              substituteInPlace config/kernel.m4 --replace \
+                "make modules" \
+                "make CC=${self.stdenv.cc}/bin/cc modules"
+            '';
+          }
+        );
+      }
+    );
 in
 _: rec {
   linuxPackages_xanmod_lto_zen3 = linuxLTOPackagesFor {
