@@ -7,6 +7,7 @@
 , pre-commit
 , sops
 , stylua
+, rnix-lsp
 
 , deploy-rs
 , pre-commit-check
@@ -22,12 +23,13 @@
   buildInputs = [
     cachix
     nix-build-uncached
-    nix-linter
-    nixpkgs-fmt
     pre-commit
 
-    stylua
     (luajit.withPackages (p: with p; [ luacheck ]))
+    nix-linter
+    nixpkgs-fmt
+    rnix-lsp
+    stylua
 
     deploy-rs
     sops
