@@ -48,7 +48,7 @@
           harden-dnssec-stripped = true;
           harden-glue = true;
           interface = [ "127.0.0.1" ];
-          num-threads = "2";
+          num-threads = "1";
           port = 5335;
           prefer-ip6 = false;
           prefetch = true;
@@ -66,14 +66,16 @@
           use-caps-for-id = "no";
           verbosity = 1;
         };
-        forward-zone = [{
-          name = ".";
-          forward-tls-upstream = true;
-          forward-addr = [
-            "1.1.1.1@853#cloudflare-dns.com"
-            "1.0.0.1@853#cloudflare-dns.com"
-          ];
-        }];
+        forward-zone = [
+          {
+            name = ".";
+            forward-tls-upstream = true;
+            forward-addr = [
+              "1.1.1.1@853#cloudflare-dns.com"
+              "1.0.0.1@853#cloudflare-dns.com"
+            ];
+          }
+        ];
       };
     };
   };
