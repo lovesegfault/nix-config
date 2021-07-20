@@ -97,7 +97,7 @@
 
   systemd.services.podman-pihole =
     let
-      pihole = "cc92567f15b3d707553369d8bebd0efae55593034d6a3c6f61ce7d63289c172a";
+      pihole = "b15b9f60394fff983902dd34f1e583a268023b30b23098702d5f8c84816d0e0a";
     in
     {
       description = "Pi-hole Podman Container";
