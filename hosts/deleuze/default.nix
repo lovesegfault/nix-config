@@ -9,7 +9,10 @@
   ];
 
   boot = {
-    kernel.sysctl."net.core.rmem_max" = 1048576;
+    kernel.sysctl = {
+      "net.core.rmem_max" = 1048576;
+      "net.core.wmem_max" = 1048576;
+    };
     kernelPackages = lib.mkForce pkgs.linuxPackages_rpi4_lto;
   };
 
@@ -40,18 +43,38 @@
       resolveLocalQueries = true;
       settings = {
         server = {
-          do-ip6 = false;
+          cache-max-ttl = 86400;
+          cache-min-ttl = 300;
+          deny-any = true;
           do-ip4 = true;
+          do-ip6 = false;
           do-tcp = true;
           do-udp = true;
           edns-buffer-size = "1472";
+          harden-algo-downgrade = true;
           harden-dnssec-stripped = true;
           harden-glue = true;
+          harden-large-queries = true;
+          harden-short-bufsize = true;
           interface = [ "127.0.0.1" ];
+          msg-cache-size = "128m";
+          neg-cache-size = "64m";
           num-threads = "1";
           port = 5335;
           prefer-ip6 = false;
           prefetch = true;
+          prefetch-key = true;
+          qname-minimisation = true;
+          rrset-cache-size = "256m";
+          rrset-roundrobin = true;
+          serve-expired = true;
+          so-rcvbuf = "4m";
+          so-reuseport = true;
+          so-sndbuf = "4m";
+          tls-cert-bundle = "/etc/ssl/certs/ca-certificates.crt";
+          unwanted-reply-threshold = 100000;
+          use-caps-for-id = "no";
+          verbosity = 1;
           private-address = [
             "10.0.0.0/8"
             "169.254.0.0/16"
@@ -62,20 +85,7 @@
           ];
           private-domain = [ "localdomain" ];
           domain-insecure = [ "localdomain" ];
-          tls-cert-bundle = "/etc/ssl/certs/ca-certificates.crt";
-          use-caps-for-id = "no";
-          verbosity = 1;
         };
-        forward-zone = [
-          {
-            name = ".";
-            forward-tls-upstream = true;
-            forward-addr = [
-              "1.1.1.1@853#cloudflare-dns.com"
-              "1.0.0.1@853#cloudflare-dns.com"
-            ];
-          }
-        ];
       };
     };
   };
