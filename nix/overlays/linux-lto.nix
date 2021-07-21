@@ -4,29 +4,33 @@ let
 
   stdenvLLVM =
     let
-      llvmPin = self.buildPackages.llvmPackages_12.override {
+      hostLLVM = self.buildPackages.llvmPackages_12.override {
+        bootBintools = null;
+        bootBintoolsNoLibc = null;
+      };
+      buildLLVM = self.llvmPackages_12.override {
         bootBintools = null;
         bootBintoolsNoLibc = null;
       };
 
-      stdenv' = self.overrideCC llvmPin.stdenv llvmPin.clangUseLLVM;
+      stdenv' = self.overrideCC hostLLVM.stdenv hostLLVM.clangUseLLVM;
 
       mkLLVMPlatform = platform: platform // {
         linux-kernel = platform.linux-kernel // {
-          makeFlags = with llvmPin; (platform.linux-kernel.makeFlags or [ ]) ++ [
+          makeFlags = (platform.linux-kernel.makeFlags or [ ]) ++ [
             "LLVM=1"
             "LLVM_IAS=1"
-            "LD=${lld}/bin/ld.lld"
-            "HOSTLD=${lld}/bin/ld.lld"
-            "AR=${llvm}/bin/llvm-ar"
-            "HOSTAR=${llvm}/bin/llvm-ar"
-            "NM=${llvm}/bin/llvm-nm"
-            "STRIP=${llvm}/bin/llvm-strip"
-            "OBJCOPY=${llvm}/bin/llvm-objcopy"
-            "OBJDUMP=${llvm}/bin/llvm-objdump"
-            "READELF=${llvm}/bin/llvm-readelf"
-            "HOSTCC=${clangUseLLVM}/bin/clang"
-            "HOSTCXX=${clangUseLLVM}/bin/clang++"
+            "LD=${buildLLVM.lld}/bin/ld.lld"
+            "HOSTLD=${hostLLVM.lld}/bin/ld.lld"
+            "AR=${buildLLVM.llvm}/bin/llvm-ar"
+            "HOSTAR=${hostLLVM.llvm}/bin/llvm-ar"
+            "NM=${buildLLVM.llvm}/bin/llvm-nm"
+            "STRIP=${buildLLVM.llvm}/bin/llvm-strip"
+            "OBJCOPY=${buildLLVM.llvm}/bin/llvm-objcopy"
+            "OBJDUMP=${buildLLVM.llvm}/bin/llvm-objdump"
+            "READELF=${buildLLVM.llvm}/bin/llvm-readelf"
+            "HOSTCC=${hostLLVM.clangUseLLVM}/bin/clang"
+            "HOSTCXX=${hostLLVM.clangUseLLVM}/bin/clang++"
           ];
           extraConfig = ''
             LTO_NONE n
@@ -38,7 +42,7 @@ let
     stdenv' // {
       hostPlatform = mkLLVMPlatform stdenv'.hostPlatform;
       buildPlatform = mkLLVMPlatform stdenv'.buildPlatform;
-      passthru = (stdenv'.passthru or { }) // { llvmPackages = llvmPin; };
+      passthru = (stdenv'.passthru or { }) // { llvmPackages = buildLLVM; };
     };
 
   linuxLTOFor = { kernel, extraConfig ? { } }:
