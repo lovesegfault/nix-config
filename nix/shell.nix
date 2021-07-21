@@ -7,7 +7,6 @@
 , pre-commit
 , sops
 , stylua
-, rnix-lsp
 
 , deploy-rs
 , pre-commit-check
@@ -28,7 +27,6 @@
     (luajit.withPackages (p: with p; [ luacheck ]))
     nix-linter
     nixpkgs-fmt
-    rnix-lsp
     stylua
 
     deploy-rs
