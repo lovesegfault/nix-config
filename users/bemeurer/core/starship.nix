@@ -22,7 +22,7 @@
         "$jobs"
         "$character"
       ];
-      nix_shell.symbol = "❄️";
+      nix_shell.symbol = "❄️ ";
     };
   };
 }
