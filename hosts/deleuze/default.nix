@@ -64,8 +64,8 @@
           harden-large-queries = true;
           harden-short-bufsize = true;
           interface = [ "127.0.0.1" ];
-          msg-cache-size = "128m";
-          neg-cache-size = "64m";
+          msg-cache-size = "256m";
+          neg-cache-size = "256m";
           num-threads = "1";
           port = 5335;
           prefer-ip6 = false;
