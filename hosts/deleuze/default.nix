@@ -35,6 +35,13 @@
   };
 
   services = {
+    chrony = {
+      enable = true;
+      extraConfig = ''
+        allow 10.0.0.0/24
+      '';
+    };
+    timesyncd.enable = lib.mkForce false;
     resolved.enable = lib.mkForce false;
     unbound = {
       enable = true;
