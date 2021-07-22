@@ -46,6 +46,7 @@
     matchConfig.MACAddress = "dc:a6:32:c1:37:1b";
   };
 
+  systemd.services.unbound.after = [ "chronyd.service" ];
   systemd.services.podman-pihole =
     let
       pihole = "b15b9f60394fff983902dd34f1e583a268023b30b23098702d5f8c84816d0e0a";
@@ -53,7 +54,7 @@
     {
       description = "Pi-hole Podman Container";
       wants = [ "network.target" ];
-      after = [ "network-online.target" ];
+      after = [ "network-online.target" "chronyd.service" ];
       environment.PODMAN_SYSTEMD_UNIT = "%n";
       serviceConfig = {
         ExecStart = "${pkgs.podman}/bin/podman start ${pihole}";
