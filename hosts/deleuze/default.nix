@@ -33,6 +33,7 @@
   services = {
     chrony = {
       enable = true;
+      servers = [ "time.nist.gov" "time.cloudflare.com" "time.google.com" "tick.usnogps.navy.mil" ];
       extraConfig = ''
         allow 10.0.0.0/24
       '';
