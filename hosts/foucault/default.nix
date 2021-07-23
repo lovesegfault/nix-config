@@ -3,7 +3,6 @@
     ../../core
 
     ../../dev
-    ../../dev/stcg-gcs
 
     ../../hardware/nixos-aarch64-builder
     ../../hardware/thinkpad-p1.nix

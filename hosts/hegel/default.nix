@@ -3,8 +3,6 @@
     ../../core
 
     ../../dev
-    ../../dev/stcg-cameras.nix
-    ../../dev/stcg-gcs
     ../../dev/virt-manager.nix
 
     ../../hardware/bluetooth.nix
