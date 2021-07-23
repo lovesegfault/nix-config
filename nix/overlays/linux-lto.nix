@@ -16,6 +16,7 @@ let
       stdenv' = self.overrideCC hostLLVM.stdenv hostLLVM.clangUseLLVM;
 
       mkLLVMPlatform = platform: platform // {
+        useLLVM = true;
         linux-kernel = platform.linux-kernel // {
           makeFlags = (platform.linux-kernel.makeFlags or [ ]) ++ [
             "LLVM=1"
