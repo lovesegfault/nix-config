@@ -1,6 +1,7 @@
 {
   xdg = {
     enable = true;
+    mimeApps.enable = true;
     userDirs = {
       enable = true;
       desktop = "$HOME/opt";
