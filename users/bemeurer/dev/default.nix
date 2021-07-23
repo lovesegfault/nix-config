@@ -7,7 +7,7 @@
         set auto-load safe-path /
       '';
     };
-    packages = with pkgs; [ arcanist commitizen ];
+    packages = with pkgs; [ commitizen ];
   };
 
   programs = {
@@ -26,11 +26,6 @@
 
     nix-index.enable = true;
 
-    zsh.shellAliases = {
-      af = "arc feature";
-      al = "arc land";
-      ad = "arc diff";
-      gco = lib.mkForce "git cz";
-    };
+    zsh.shellAliases.gco = lib.mkForce "git cz";
   };
 }
