@@ -2,7 +2,7 @@
   fonts = {
     enableDefaultFonts = false;
     enableGhostscriptFonts = false;
-    fontDir.enable = true;
+    fontDir.enable = false;
     fontconfig = {
       defaultFonts = {
         sansSerif = [ "IBM Plex Sans" ];
@@ -40,7 +40,6 @@
       ibm-plex
       noto-fonts-cjk
       noto-fonts-emoji
-      xlibs.fontalias
     ];
   };
 }
