@@ -47,36 +47,45 @@
   };
 
   systemd.services.unbound.after = [ "chronyd.service" ];
-  systemd.services.podman-pihole =
-    let
-      pihole = "b15b9f60394fff983902dd34f1e583a268023b30b23098702d5f8c84816d0e0a";
-    in
-    {
-      description = "Pi-hole Podman Container";
-      wants = [ "network.target" ];
-      after = [ "network-online.target" "chronyd.service" ];
-      environment.PODMAN_SYSTEMD_UNIT = "%n";
-      serviceConfig = {
-        ExecStart = "${pkgs.podman}/bin/podman start ${pihole}";
-        ExecStop = "${pkgs.podman}/bin/podman stop -t 10 ${pihole}";
-        ExecStopPost = "${pkgs.podman}/bin/podman stop -t 10 ${pihole}";
-        PIDFile = "/run/containers/storage/overlay-containers/${pihole}/userdata/conmon.pid";
-        Restart = "on-failure";
-        TimeoutStopSec = 70;
-        Type = "forking";
-      };
-      unitConfig.RequiresMountsFor = [ "/run/containers/storage" ];
-      wantedBy = [ "multi-user.target" ];
-    };
 
   time.timeZone = "America/Los_Angeles";
 
   # sops.secrets.root-password.sopsFile = ./root-password.yaml;
   # users.users.root.passwordFile = config.sops.secrets.root-password.path;
 
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-    dockerSocket.enable = true;
+  virtualisation = {
+    docker = {
+      enable = true;
+      extraOptions = "--ipv6 --fixed-cidr-v6=fd00::/80";
+      autoPrune.enable = true;
+    };
+    oci-containers.containers.pi-hole = {
+      autoStart = true;
+      image = "pihole/pihole:dev";
+      ports = [
+        "53:53/tcp"
+        "53:53/udp"
+        "67:67/udp"
+        "80:80/tcp"
+      ];
+      volumes = [
+        "/etc/pihole/:/etc/pihole/"
+        "/etc/dnsmasq.d/:/etc/dnsmasq.d/"
+      ];
+      environment = {
+        CUSTOM_CACHE_SIZE = "0";
+        DNSSEC = "false";
+        PIHOLE_DNS_ = "127.0.0.1#5335";
+        REV_SERVER = "true";
+        REV_SERVER_CIDR = "10.0.0.0/24";
+        REV_SERVER_DOMAIN = "localdomain";
+        REV_SERVER_TARGET = "10.0.0.1";
+        ServerIP = "10.0.0.2";
+        TZ = "America/Los_Angeles";
+        WEBPASSWORD = "3zKgwWMYJd36xo2uO5glT7Nx";
+        WEBTHEME = "default-darker";
+      };
+      extraOptions = [ "--network=host" ];
+    };
   };
 }
