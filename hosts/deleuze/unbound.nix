@@ -17,7 +17,7 @@
           cache-min-ttl = 300;
           deny-any = true;
           do-ip4 = true;
-          do-ip6 = false;
+          do-ip6 = true;
           do-tcp = true;
           do-udp = true;
           edns-buffer-size = "1472";
@@ -31,7 +31,6 @@
           neg-cache-size = "256m";
           num-threads = "1";
           port = 5335;
-          prefer-ip6 = false;
           prefetch = true;
           prefetch-key = true;
           qname-minimisation = true;
