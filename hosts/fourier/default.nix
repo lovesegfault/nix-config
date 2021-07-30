@@ -141,32 +141,18 @@
     done
   '';
 
-  systemd.network = {
-    netdevs.wifi-eth-bond = {
-      netdevConfig = {
-        Name = "wifi-eth-bond";
-        Kind = "bond";
-      };
-      bondConfig = {
-        Mode = "active-backup";
-        PrimaryReselectPolicy = "always";
-        MIIMonitorSec = "1s";
-      };
+  systemd.network.networks = {
+    eth = {
+      matchConfig.MACAddress = "18:c0:4d:31:0c:5f";
+      DHCP = "yes";
+      dhcpV4Config.RouteMetric = 10;
+      dhcpV6Config.RouteMetric = 10;
     };
-    networks = {
-      eth-bond = {
-        matchConfig.MACAddress = "18:c0:4d:31:0c:5f";
-        bond = [ "wifi-eth-bond" ];
-        networkConfig.PrimarySlave = true;
-      };
-      wifi-bond = {
-        matchConfig.MACAddress = "a8:7e:ea:cb:96:cf";
-        bond = [ "wifi-eth-bond" ];
-      };
-      wifi-eth-bond = {
-        matchConfig.Name = "wifi-eth-bond";
-        DHCP = "ipv4";
-      };
+    wifi = {
+      matchConfig.MACAddress = "a8:7e:ea:cb:96:cf";
+      DHCP = "yes";
+      dhcpV4Config.RouteMetric = 20;
+      dhcpV6Config.RouteMetric = 20;
     };
   };
 
