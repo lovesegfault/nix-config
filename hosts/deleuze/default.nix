@@ -81,6 +81,7 @@
         REV_SERVER_DOMAIN = "localdomain";
         REV_SERVER_TARGET = "10.0.0.1";
         ServerIP = "10.0.0.2";
+        ServerIPv6 = "fe80::dea6:32ff:fec1:371b";
         TZ = "America/Los_Angeles";
         WEBPASSWORD = "3zKgwWMYJd36xo2uO5glT7Nx";
         WEBTHEME = "default-darker";
