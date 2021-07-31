@@ -17,6 +17,7 @@
           dtparam=i2c_arm=on
           dtoverlay=i2c-rtc,ds3231
           dtoverlay=rpi-poe
+          dtoverlay=dwc2,dr_mode=host
         '';
         version = 4;
       };
