@@ -41,7 +41,6 @@
       extraUtilsCommands = "copy_bin_and_libs ${pkgs.hyperpixel4-init}/bin/hyperpixel4-init";
       preDeviceCommands = "hyperpixel4-init";
     };
-    kernelPackages = lib.mkForce pkgs.linuxPackages_rpi4_lto;
     kernelParams = [ "fbcon=rotate:1" ];
   };
 

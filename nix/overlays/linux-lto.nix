@@ -87,8 +87,4 @@ _: rec {
     kernel = self.linux_xanmod;
     extraConfig = { MZEN3 = lib.kernel.yes; };
   };
-
-  linuxPackages_rpi4_lto = linuxLTOPackagesFor {
-    kernel = self.linux_rpi4;
-  };
 }

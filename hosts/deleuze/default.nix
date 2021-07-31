@@ -11,8 +11,6 @@
     ./pi-hole.nix
   ];
 
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_rpi4_lto;
-
   console = {
     font = "ter-v28n";
     packages = with pkgs; [ terminus_font ];
