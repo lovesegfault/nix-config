@@ -1,12 +1,12 @@
 keys:
   - &aurelius 367C18D390C3A808327EAC26FB0436288083EE8B
   - &bemeurer C057AFED6D1499196E046BCB6976C95303C20664
+  - &camus 8A6D4D8E5A23070A6A0B8BB3E355C71669A91D46
   - &cantor 2FB208CEDD87F9392AD0B6D89AAC3DC443B2C338
   - &deleuze FB9ABF8F186420B645D3296D729C8DD8B510C842
   - &feuerbach AD5F47941C5378175E46D11A2BB43FA44085673C
   - &foucault 5C8B2ACA031733D4C59A8AF19DE06FED73F48056
   - &fourier A4EABC2BEEE48CFF55287E855FABEC432FE0176B
-  - &goethe 3384C94B3608A7AA762E0DA6AA7A4CDEB30B77A3
   - &hegel A2260154AA9528C06164F0FE0F175745C1DB0169
   - &kant DEF7B28E34C19CAD99E99401403CB50D7047B3AF
   - &riemann 41D56E398857FB3FDF920A2ED3D48D2FCB75EDC3
@@ -21,9 +21,9 @@ creation_rules:
       - pgp:
         - *bemeurer
         - *aurelius
+        - *camus
         - *deleuze
         - *foucault
-        - *goethe
         - *hegel
         - *riemann
   - path_regex: dev/stcg-gcs/stcg-aws-credentials.yaml
@@ -37,12 +37,12 @@ creation_rules:
       - pgp:
         - *bemeurer
         - *aurelius
+        - *camus
         - *cantor
         - *deleuze
         - *feuerbach
         - *foucault
         - *fourier
-        - *goethe
         - *hegel
         - *kant
         - *riemann
@@ -51,6 +51,11 @@ creation_rules:
       - pgp:
         - *bemeurer
         - *aurelius
+  - path_regex: hosts/camus/.*
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *camus
   - path_regex: hosts/cantor/.*
     key_groups:
       - pgp:
@@ -76,11 +81,6 @@ creation_rules:
       - pgp:
         - *bemeurer
         - *fourier
-  - path_regex: hosts/goethe/.*
-    key_groups:
-      - pgp:
-        - *bemeurer
-        - *goethe
   - path_regex: hosts/hegel/.*
     key_groups:
       - pgp:
