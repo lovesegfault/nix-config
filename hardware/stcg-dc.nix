@@ -1,4 +1,4 @@
-{
+{ lib, ... }: {
 
   imports = [ ./efi.nix ./no-mitigations.nix ./nvidia.nix ];
 
@@ -21,4 +21,6 @@
   ];
 
   services.fstrim.enable = true;
+
+  systemd.enableUnifiedCgroupHierarchy = lib.mkForce false;
 }
