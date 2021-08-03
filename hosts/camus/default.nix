@@ -1,4 +1,4 @@
-{ lib, modulesPath, ... }:
+{ lib, modulesPath, pkgs, ... }:
 {
   imports = [
     ../../core
@@ -58,10 +58,12 @@
     options = "-d";
   };
 
-  services.roon-bridge = {
-    enable = true;
-    openFirewall = true;
-  };
+  systemd.packages = with pkgs; [ networkaudiod ];
+  systemd.services.networkaudiod.wantedBy = [ "multi-user.target" ];
+  # services.roon-bridge = {
+  #   enable = true;
+  #   openFirewall = true;
+  # };
 
   systemd.network.networks.eth = {
     DHCP = "yes";
