@@ -13,6 +13,8 @@
     ./state.nix
     ./samba.nix
     ./prometheus.nix
+    ./unbound.nix
+    ./pi-hole.nix
   ];
 
   boot = {
@@ -20,12 +22,6 @@
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" ];
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernel.sysctl = {
-      "net.core.rmem_default" = 31457280;
-      "net.core.wmem_default" = 31457280;
-      "net.core.rmem_max" = 2147483647;
-      "net.core.wmem_max" = 2147483647;
-    };
     tmpOnTmpfs = true;
     zfs = {
       extraPools = [ "tank" ];
@@ -75,7 +71,10 @@
         from = 9100;
         to = 9200;
       }];
-      allowedUDPPorts = [ 9003 ]; # roon
+      allowedUDPPorts = [
+        123 # chronyd
+        9003 # roon
+      ];
       extraCommands = ''
         ## IGMP / Broadcast - required by Roon ##
         iptables -A INPUT -s 224.0.0.0/4 -j ACCEPT
@@ -105,6 +104,13 @@
   ];
 
   services = {
+    chrony = {
+      enable = true;
+      servers = [ "time.nist.gov" "time.cloudflare.com" "time.google.com" "tick.usnogps.navy.mil" ];
+      extraConfig = ''
+        allow 10.0.0.0/24
+      '';
+    };
     fstrim.enable = true;
     fwupd.enable = true;
     grafana = {
@@ -146,5 +152,9 @@
   # sops.secrets.root-password.sopsFile = ./root-password.yaml;
   # users.users.root.passwordFile = config.sops.secrets.root-password.path;
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    extraOptions = "--ipv6 --fixed-cidr-v6=fd00::/80";
+    autoPrune.enable = true;
+  };
 }
