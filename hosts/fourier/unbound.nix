@@ -16,15 +16,16 @@
       settings = {
         server = {
           aggressive-nsec = true;
-          delay-close = 10000;
           cache-max-ttl = 86400;
           cache-min-ttl = 300;
+          delay-close = 10000;
           deny-any = true;
           do-ip4 = true;
           do-ip6 = true;
           do-tcp = true;
           do-udp = true;
           edns-buffer-size = "1472";
+          extended-statistics = true;
           harden-algo-downgrade = true;
           harden-below-nxdomain = true;
           harden-dnssec-stripped = true;
@@ -51,6 +52,8 @@
           so-rcvbuf = "4m";
           so-reuseport = true;
           so-sndbuf = "4m";
+          statistics-cumulative = true;
+          statistics-interval = 0;
           tls-cert-bundle = "/etc/ssl/certs/ca-certificates.crt";
           unwanted-reply-threshold = 100000;
           use-caps-for-id = "no";
