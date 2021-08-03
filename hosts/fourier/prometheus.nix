@@ -11,6 +11,7 @@
         static_configs = [{
           targets = [
             "127.0.0.1:9091"
+            "127.0.0.1:9167"
             "cantor:9091"
             "feuerbach:9091"
           ];
@@ -22,11 +23,19 @@
         static_configs = [{ targets = [ "127.0.0.1:9090" ]; }];
       }
     ];
-    exporters.node = {
-      enable = true;
-      listenAddress = "127.0.0.1";
-      enabledCollectors = [ "systemd" "pressure" ];
-      port = 9091;
+    exporters = {
+      node = {
+        enable = true;
+        listenAddress = "127.0.0.1";
+        enabledCollectors = [ "systemd" "pressure" ];
+        port = 9091;
+      };
+      unbound = {
+        controlInterface = "/run/unbound/unbound.ctl";
+        enable = true;
+        port = 9167;
+        user = "unbound";
+      };
     };
   };
 }
