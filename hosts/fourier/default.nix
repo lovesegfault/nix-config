@@ -87,7 +87,6 @@
     };
     hostId = "80f4ef89";
     hostName = "fourier";
-    wireless.iwd.enable = true;
   };
 
   nix = {
@@ -141,19 +140,9 @@
     done
   '';
 
-  systemd.network.networks = {
-    eth = {
-      matchConfig.MACAddress = "18:c0:4d:31:0c:5f";
-      DHCP = "yes";
-      dhcpV4Config.RouteMetric = 10;
-      dhcpV6Config.RouteMetric = 10;
-    };
-    wifi = {
-      matchConfig.MACAddress = "a8:7e:ea:cb:96:cf";
-      DHCP = "yes";
-      dhcpV4Config.RouteMetric = 20;
-      dhcpV6Config.RouteMetric = 20;
-    };
+  systemd.network.networks.eth = {
+    matchConfig.MACAddress = "18:c0:4d:31:0c:5f";
+    DHCP = "yes";
   };
 
   swapDevices = [{ device = "/dev/disk/by-uuid/6075a47d-006a-4dbb-9f86-671955132e2f"; }];
