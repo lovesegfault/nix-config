@@ -27,6 +27,10 @@
           dtoverlay=i2c-rtc,ds3231
 
           dtoverlay=rpi-poe
+          dtparam=poe_fan_temp0=50000
+          dtparam=poe_fan_temp1=60000
+          dtparam=poe_fan_temp2=70000
+          dtparam=poe_fan_temp3=80000
         '';
         version = 4;
       };
