@@ -125,14 +125,6 @@
     };
   };
 
-  sound = {
-    enable = true;
-    extraConfig = ''
-      defaults.pcm.!card "Modius";
-      defaults.ctl.!card "Modius";
-    '';
-  };
-
   system.activationScripts.setIOScheduler = ''
     disks=(sda sdb sdc sdd nvme0n1)
     for disk in "''${disks[@]}"; do
