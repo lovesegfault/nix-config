@@ -51,7 +51,7 @@
 
   networking = {
     hostName = "camus";
-    wireless.iwd.enable = true;
+    firewall.trustedInterfaces = [ "eth0" ];
   };
 
   nix.gc = {
@@ -59,15 +59,9 @@
     options = "-d";
   };
 
-  systemd.network.networks = {
-    eth = {
-      DHCP = "yes";
-      matchConfig.MACAddress = "e4:5f:01:2a:4e:88";
-    };
-    wifi = {
-      DHCP = "yes";
-      matchConfig.MACAddress = "e4:5f:01:2a:4e:89";
-    };
+  systemd.network.networks.eth = {
+    DHCP = "yes";
+    matchConfig.MACAddress = "e4:5f:01:2a:4e:88";
   };
 
   time.timeZone = "America/Los_Angeles";
