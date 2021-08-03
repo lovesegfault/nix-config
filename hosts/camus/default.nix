@@ -9,6 +9,7 @@
   ];
 
   boot = {
+    initrd.availableKernelModules = [ "nvme" ];
     loader = {
       generic-extlinux-compatible.enable = lib.mkForce false;
       raspberryPi = {
@@ -22,7 +23,7 @@
         version = 4;
       };
     };
-    kernelParams = [ "console=ttyS0,115200n8" "console=ttyAMA0,115200n8" "console=tty0" ];
+    kernelParams = [ "earlycon=pl011,mmio32,0xfe201000" "console=ttyAMA0,115200" ];
   };
 
   fileSystems = lib.mkForce {
@@ -56,8 +57,6 @@
       matchConfig.MACAddress = "e4:5f:01:2a:4e:89";
     };
   };
-
-  systemd.services.unbound.after = [ "chronyd.service" ];
 
   time.timeZone = "America/Los_Angeles";
 
