@@ -15,10 +15,14 @@
       raspberryPi = {
         enable = true;
         firmwareConfig = ''
+          uart_2ndstage=1
+          dtoverlay=disable-bt
+
           dtparam=i2c_arm=on
+
+          dtoverlay=dwc2,dr_mode=host
           dtoverlay=i2c-rtc,ds3231
           dtoverlay=rpi-poe
-          dtoverlay=dwc2,dr_mode=host
         '';
         version = 4;
       };
