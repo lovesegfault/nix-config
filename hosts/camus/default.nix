@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, modulesPath, ... }:
 {
   imports = [
     ../../core
@@ -6,6 +6,8 @@
     ../../hardware/rpi4.nix
 
     ../../users/bemeurer
+
+    "${modulesPath}/services/audio/roon-bridge.nix"
   ];
 
   boot = {
@@ -17,9 +19,6 @@
         firmwareConfig = ''
           uart_2ndstage=1
           dtoverlay=disable-bt
-
-          over_voltage=6
-          arm_freq=2000
 
           dtoverlay=dwc2,dr_mode=host
 
@@ -57,6 +56,11 @@
   nix.gc = {
     automatic = true;
     options = "-d";
+  };
+
+  services.roon-bridge = {
+    enable = true;
+    openFirewall = true;
   };
 
   systemd.network.networks.eth = {
