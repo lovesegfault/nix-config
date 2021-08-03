@@ -18,10 +18,14 @@
           uart_2ndstage=1
           dtoverlay=disable-bt
 
-          dtparam=i2c_arm=on
+          over_voltage=6
+          arm_freq=2000
 
           dtoverlay=dwc2,dr_mode=host
+
+          dtparam=i2c_arm=on
           dtoverlay=i2c-rtc,ds3231
+
           dtoverlay=rpi-poe
         '';
         version = 4;
