@@ -118,6 +118,14 @@
       addr = "0.0.0.0";
       extraOptions.DASHBOARDS_MIN_REFRESH_INTERVAL = "1s";
     };
+    hqplayerd = {
+      enable = true;
+      auth = {
+        username = "admin";
+        password = "admin";
+      };
+      openFirewall = true;
+    };
     plex = {
       enable = true;
       openFirewall = true;
