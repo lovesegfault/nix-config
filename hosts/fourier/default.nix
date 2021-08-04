@@ -66,6 +66,7 @@
 
   networking = {
     firewall = {
+      trustedInterfaces = [ "eno1" ];
       allowedTCPPorts = [ 3000 ]; # grafana
       allowedTCPPortRanges = [{
         from = 9100;
