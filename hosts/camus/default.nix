@@ -1,4 +1,4 @@
-{ lib, modulesPath, pkgs, ... }:
+{ lib, ... }:
 {
   imports = [
     ../../core
@@ -6,8 +6,6 @@
     ../../hardware/rpi4.nix
 
     ../../users/bemeurer
-
-    "${modulesPath}/services/audio/roon-bridge.nix"
   ];
 
   boot = {
@@ -58,12 +56,7 @@
     options = "-d";
   };
 
-  systemd.packages = with pkgs; [ networkaudiod ];
-  systemd.services.networkaudiod.wantedBy = [ "multi-user.target" ];
-  # services.roon-bridge = {
-  #   enable = true;
-  #   openFirewall = true;
-  # };
+  services.networkaudiod.enable = true;
 
   systemd.network.networks.eth = {
     DHCP = "yes";
