@@ -146,6 +146,9 @@
     done
   '';
 
+  systemd.tmpfiles.rules = [ "d /var/lib/hqplayer/home  0755 hqplayer hqplayer - -" ];
+  systemd.services.hqplayerd.environment = { HOME = "/var/lib/hqplayer/home"; };
+
   systemd.network.networks.eth = {
     matchConfig.MACAddress = "18:c0:4d:31:0c:5f";
     DHCP = "yes";
