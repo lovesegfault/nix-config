@@ -66,7 +66,6 @@
 
   networking = {
     firewall = {
-      trustedInterfaces = [ "eno1" ];
       allowedTCPPorts = [ 3000 ]; # grafana
       allowedTCPPortRanges = [{
         from = 9100;
@@ -83,6 +82,8 @@
         iptables -A INPUT -s 240.0.0.0/5 -j ACCEPT
         iptables -A INPUT -m pkttype --pkt-type multicast -j ACCEPT
         iptables -A INPUT -m pkttype --pkt-type broadcast -j ACCEPT
+        ## HQPlayer
+        iptables -A INPUT -m mac --mac-source e4:5f:01:2a:4e:88 -j ACCEPT
       '';
     };
     hostId = "80f4ef89";
