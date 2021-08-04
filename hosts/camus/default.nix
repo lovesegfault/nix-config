@@ -58,6 +58,11 @@
 
   services.networkaudiod.enable = true;
 
+  # services.roon-bridge = {
+  #   enable = true;
+  #   openFirewall = true;
+  # };
+
   systemd.network.networks.eth = {
     DHCP = "yes";
     matchConfig.MACAddress = "e4:5f:01:2a:4e:88";
