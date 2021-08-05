@@ -1,8 +1,11 @@
 {
   environment.persistence."/nix/state" = {
     directories = [
+      "/etc/hqplayer"
+
       "/var/lib/docker"
       "/var/lib/grafana"
+      "/var/lib/hqplayer"
       "/var/lib/iwd"
       "/var/lib/plex"
       "/var/lib/prometheus2"
