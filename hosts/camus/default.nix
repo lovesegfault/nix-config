@@ -21,8 +21,6 @@
           dtoverlay=dwc2,dr_mode=host
 
           dtparam=i2c_arm=on
-          dtoverlay=i2c-rtc,ds3231
-
           dtoverlay=rpi-poe
           dtparam=poe_fan_temp0=50000
           dtparam=poe_fan_temp1=60000
