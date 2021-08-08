@@ -89,12 +89,4 @@
 
   # sops.secrets.root-password.sopsFile = ./root-password.yaml;
   # users.users.root.passwordFile = config.sops.secrets.root-password.path;
-
-  virtualisation = {
-    docker = {
-      enable = true;
-      extraOptions = "--ipv6 --fixed-cidr-v6=fd00::/80";
-      autoPrune.enable = true;
-    };
-  };
 }
