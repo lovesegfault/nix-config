@@ -3,7 +3,6 @@
     ./boot-silent.nix
     ./fonts.nix
     ./greetd.nix
-    ./gnome.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -26,6 +25,8 @@
     exec hash dbus-update-activation-environment 2>/dev/null && \
       dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
   '';
+
+  programs.dconf.enable = true;
 
   services.redshift = {
     enable = true;
