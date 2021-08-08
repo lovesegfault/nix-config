@@ -22,13 +22,6 @@
 
       extraConfig = "lua require('init')";
 
-      extraPackages = with pkgs; [
-        ctags
-        gcc
-        nodejs
-        tree-sitter
-      ];
-
       plugins = with pkgs.vimPlugins; [
         # ui
         gitsigns-nvim
