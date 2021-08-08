@@ -4,6 +4,7 @@
     ../../core
 
     ../../hardware/rpi4.nix
+    ../../hardware/no-mitigations.nix
 
     ../../users/bemeurer
   ];
