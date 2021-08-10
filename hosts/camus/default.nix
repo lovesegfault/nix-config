@@ -73,12 +73,12 @@
     options = "-d";
   };
 
-  services.networkaudiod.enable = true;
+  # services.networkaudiod.enable = true;
 
-  # services.roon-bridge = {
-  #   enable = true;
-  #   openFirewall = true;
-  # };
+  services.roon-bridge = {
+    enable = true;
+    openFirewall = true;
+  };
 
   systemd.network.networks.eth = {
     DHCP = "yes";
