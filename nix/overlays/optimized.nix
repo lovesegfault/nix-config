@@ -1,3 +1,4 @@
+_: super:
 let
   optimizeDrv = drv: drv.overrideAttrs (old: rec {
     _OPT_DRV_FLAGS = [
@@ -27,8 +28,14 @@ let
     NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + (toString _OPT_DRV_FLAGS);
     NIX_CFLAGS_LINK = (old.NIX_CFLAGS_LINK or "") + (toString _OPT_DRV_FLAGS);
   });
+
+  optimize = names:
+    super.lib.genAttrs
+      names
+      (name: optimizeDrv super.${name})
+  ;
 in
-_: super:
-{
-  neovim-unwrapped = optimizeDrv super.neovim-unwrapped;
-}
+optimize [
+  "neovim-unwrapped"
+  "easyeffects"
+]
