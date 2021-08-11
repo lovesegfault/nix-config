@@ -28,10 +28,13 @@
 
   programs.dconf.enable = true;
 
-  services.redshift = {
-    enable = true;
-    package = pkgs.redshift-wlr;
-    extraOptions = [ "-v" ];
+  services = {
+    dbus.packages = with pkgs; [ gnome.dconf ];
+    redshift = {
+      enable = true;
+      package = pkgs.redshift-wlr;
+      extraOptions = [ "-v" ];
+    };
   };
 
   xdg = {
