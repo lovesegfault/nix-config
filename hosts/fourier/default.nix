@@ -162,6 +162,11 @@
   # sops.secrets.root-password.sopsFile = ./root-password.yaml;
   # users.users.root.passwordFile = config.sops.secrets.root-password.path;
 
+  virtualisation = {
+    oci-containers.backend = "podman";
+    podman.enable = true;
+  };
+
   virtualisation.docker = {
     enable = true;
     extraOptions = "--ipv6 --fixed-cidr-v6=fd00::/80";
