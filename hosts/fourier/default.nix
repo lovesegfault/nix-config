@@ -10,11 +10,12 @@
 
     ../../users/bemeurer
 
-    ./state.nix
-    ./samba.nix
-    ./prometheus.nix
-    ./unbound.nix
+    ./hqplayerd.nix
     ./pi-hole.nix
+    ./prometheus.nix
+    ./samba.nix
+    ./state.nix
+    ./unbound.nix
   ];
 
   boot = {
@@ -88,8 +89,6 @@
         iptables -A INPUT -s 240.0.0.0/5 -j ACCEPT
         iptables -A INPUT -m pkttype --pkt-type multicast -j ACCEPT
         iptables -A INPUT -m pkttype --pkt-type broadcast -j ACCEPT
-        ## HQPlayer
-        iptables -A INPUT -m mac --mac-source e4:5f:01:2a:4e:88 -j ACCEPT
       '';
     };
     hostId = "80f4ef89";
@@ -125,14 +124,6 @@
       enable = true;
       addr = "0.0.0.0";
       extraOptions.DASHBOARDS_MIN_REFRESH_INTERVAL = "1s";
-    };
-    hqplayerd = {
-      enable = true;
-      auth = {
-        username = "admin";
-        password = "admin";
-      };
-      openFirewall = true;
     };
     plex = {
       enable = true;
