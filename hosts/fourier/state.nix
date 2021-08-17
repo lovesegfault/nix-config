@@ -2,6 +2,8 @@
   environment.persistence."/nix/state" = {
     directories = [
       "/etc/hqplayer"
+      "/etc/dnsmasq.d"
+      "/etc/pihole"
 
       "/var/lib/docker"
       "/var/lib/grafana"
