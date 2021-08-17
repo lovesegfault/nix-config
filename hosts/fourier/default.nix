@@ -5,7 +5,7 @@
     ../../dev
 
     ../../hardware/efi.nix
-    ../../hardware/nouveau.nix
+    ../../hardware/nvidia.nix
     ../../hardware/zfs.nix
 
     ../../users/bemeurer
