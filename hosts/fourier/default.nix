@@ -35,6 +35,12 @@
     packages = with pkgs; [ terminus_font ];
   };
 
+  environment.etc."resolv.conf".text = ''
+    nameserver 127.0.0.1
+    nameserver 1.1.1.1
+    options edns0
+  '';
+
   fileSystems = {
     "/" = {
       device = "tmpfs";
