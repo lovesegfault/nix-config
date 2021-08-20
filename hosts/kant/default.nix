@@ -14,6 +14,8 @@
     loader.grub.device = "/dev/vda";
   };
 
+  environment.memoryAllocator.provider = "libc";
+
   fileSystems."/" = {
     device = "/dev/vda1";
     fsType = "ext4";

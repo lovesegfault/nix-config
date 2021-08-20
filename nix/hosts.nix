@@ -33,6 +33,6 @@
   };
   kant = {
     system = "x86_64-linux";
-    hostname = "100.74.129.30";
+    hostname = "100.124.6.88";
   };
 }

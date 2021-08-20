@@ -8,14 +8,10 @@ keys:
   - &foucault 5C8B2ACA031733D4C59A8AF19DE06FED73F48056
   - &fourier A4EABC2BEEE48CFF55287E855FABEC432FE0176B
   - &hegel A2260154AA9528C06164F0FE0F175745C1DB0169
-  - &kant DEF7B28E34C19CAD99E99401403CB50D7047B3AF
+  - &kant 29D3418505A13A593E5E7ABD9F743C14BF7326CC
   - &riemann 41D56E398857FB3FDF920A2ED3D48D2FCB75EDC3
 
 creation_rules:
-  - path_regex: dev/stcg-x86_64-builder/stcg-x86_64-builder-key.yaml
-    key_groups:
-      - pgp:
-        - *bemeurer
   - path_regex: hardware/nixos-aarch64-builder/nixos-aarch64-builder-key.yaml
     key_groups:
       - pgp:
@@ -26,12 +22,6 @@ creation_rules:
         - *foucault
         - *hegel
         - *riemann
-  - path_regex: dev/stcg-gcs/stcg-aws-credentials.yaml
-    key_groups:
-      - pgp:
-        - *bemeurer
-        - *foucault
-        - *hegel
   - path_regex: users/bemeurer/bemeurer-password.yaml
     key_groups:
       - pgp:
