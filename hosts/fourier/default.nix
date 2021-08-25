@@ -163,10 +163,4 @@
     oci-containers.backend = "podman";
     podman.enable = true;
   };
-
-  virtualisation.docker = {
-    enable = true;
-    extraOptions = "--ipv6 --fixed-cidr-v6=fd00::/80";
-    autoPrune.enable = true;
-  };
 }
