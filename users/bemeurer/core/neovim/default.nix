@@ -31,7 +31,7 @@
         lualine-nvim
         neovim-ayu
         numb-nvim
-        nvim-bufferline-lua
+        bufferline-nvim
         nvim-lightbulb
         nvim-web-devicons
         todo-comments-nvim
