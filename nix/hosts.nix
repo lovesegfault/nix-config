@@ -7,17 +7,9 @@
     system = "aarch64-linux";
     hostname = "100.123.243.124";
   };
-  cantor = {
-    system = "x86_64-linux";
-    hostname = "100.76.151.127";
-  };
   deleuze = {
     system = "aarch64-linux";
     hostname = "100.91.202.65";
-  };
-  feuerbach = {
-    system = "x86_64-linux";
-    hostname = "100.99.22.81";
   };
   foucault = {
     system = "x86_64-linux";
