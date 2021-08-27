@@ -73,11 +73,11 @@
 
   networking = {
     firewall = {
-      allowedTCPPorts = [ 3000 ]; # grafana
-      allowedTCPPortRanges = [{
-        from = 9100;
-        to = 9200;
-      }];
+      allowedTCPPorts = [ 3000 20 21 ]; # grafana
+      allowedTCPPortRanges = [
+        { from = 9100; to = 9200; }
+        { from = 51000; to = 51999; }
+      ];
       allowedUDPPorts = [
         123 # chronyd
         9003 # roon
@@ -131,6 +131,17 @@
     };
     roon-server.enable = true;
     smartd.enable = true;
+    vsftpd = {
+      enable = true;
+      anonymousUser = true;
+      anonymousUserHome = "/srv/music";
+      anonymousUserNoPassword = true;
+      anonymousUmask = "444";
+      extraConfig = ''
+        pasv_min_port=51000
+        pasv_max_port=51999
+      '';
+    };
     zfs.autoScrub.pools = [ "tank" ];
     zfs.autoSnapshot = {
       enable = true;
