@@ -24,5 +24,8 @@
     enableSshSupport = true;
     defaultCacheTtl = 34560000;
     maxCacheTtl = 34560000;
+    extraConfig = ''
+      extra-socket /run/user/8888/gnupg/S.gpg-agent.extra
+    '';
   };
 }
