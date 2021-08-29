@@ -10,7 +10,6 @@
 
     ../../users/bemeurer
 
-    ./hqplayerd.nix
     ./pi-hole.nix
     ./prometheus.nix
     ./samba.nix
