@@ -73,7 +73,6 @@
   networking = {
     firewall = {
       allowedTCPPorts = [ 3000 20 21 ]; # grafana
-      allowedTCPPortRanges = [{ from = 51000; to = 51999; }]; # vsftpd
       allowedUDPPorts = [ 123 ]; # chronyd
     };
     hostId = "80f4ef89";
@@ -115,17 +114,6 @@
       openFirewall = true;
     };
     smartd.enable = true;
-    vsftpd = {
-      enable = true;
-      anonymousUser = true;
-      anonymousUserHome = "/srv/music";
-      anonymousUserNoPassword = true;
-      anonymousUmask = "444";
-      extraConfig = ''
-        pasv_min_port=51000
-        pasv_max_port=51999
-      '';
-    };
     zfs.autoScrub.pools = [ "tank" ];
     zfs.autoSnapshot = {
       enable = true;
