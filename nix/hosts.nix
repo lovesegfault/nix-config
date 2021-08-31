@@ -3,6 +3,10 @@
     system = "aarch64-linux";
     hostname = "100.92.104.42";
   };
+  bohr = {
+    system = "x86_64-linux";
+    hostname = "10.0.0.194";
+  };
   camus = {
     system = "aarch64-linux";
     hostname = "100.123.243.124";

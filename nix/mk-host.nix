@@ -48,9 +48,7 @@ nixpkgs.lib.nixosSystem {
     })
 
     ({
-      networking.hosts = mapAttrs' (n: v: nameValuePair v.hostname [ n ]) (import ./hosts.nix) // {
-        "100.86.242.13" = [ "bohr" ];
-      };
+      networking.hosts = mapAttrs' (n: v: nameValuePair v.hostname [ n ]) (import ./hosts.nix);
     })
 
     (../hosts + "/${name}")

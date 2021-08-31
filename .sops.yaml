@@ -1,6 +1,7 @@
 keys:
   - &aurelius 367C18D390C3A808327EAC26FB0436288083EE8B
   - &bemeurer C057AFED6D1499196E046BCB6976C95303C20664
+  - &bohr 6AB6DC8C2BC49A80D31B3ABB1DEBB8004BCBFC58
   - &camus 8A6D4D8E5A23070A6A0B8BB3E355C71669A91D46
   - &deleuze FB9ABF8F186420B645D3296D729C8DD8B510C842
   - &foucault 5C8B2ACA031733D4C59A8AF19DE06FED73F48056
@@ -23,6 +24,7 @@ creation_rules:
       - pgp:
         - *bemeurer
         - *aurelius
+        - *bohr
         - *camus
         - *deleuze
         - *foucault
@@ -34,6 +36,11 @@ creation_rules:
       - pgp:
         - *bemeurer
         - *aurelius
+  - path_regex: hosts/bohr/.*
+    key_groups:
+      - pgp:
+        - *bemeurer
+        - *bohr
   - path_regex: hosts/camus/.*
     key_groups:
       - pgp:
