@@ -42,6 +42,7 @@
     cpu.amd.updateMicrocode = true;
     enableRedistributableFirmware = true;
     pulseaudio.enable = false;
+    nvidia.nvidiaPersistenced = true;
   };
 
   home-manager.users.bemeurer = { ... }: { imports = [ ../../users/bemeurer/music ]; };
