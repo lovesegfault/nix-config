@@ -106,4 +106,5 @@
   time.timeZone = "America/Los_Angeles";
 
   users.groups.media.members = [ "bemeurer" "hqplayer" "roon-server" ];
+  users.groups.video.members = [ "hqplayer" ];
 }
