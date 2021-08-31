@@ -73,22 +73,8 @@
   networking = {
     firewall = {
       allowedTCPPorts = [ 3000 20 21 ]; # grafana
-      allowedTCPPortRanges = [
-        { from = 9100; to = 9200; }
-        { from = 51000; to = 51999; }
-      ];
-      allowedUDPPorts = [
-        123 # chronyd
-        9003 # roon
-      ];
-      extraCommands = ''
-        ## IGMP / Broadcast - required by Roon ##
-        iptables -A INPUT -s 224.0.0.0/4 -j ACCEPT
-        iptables -A INPUT -d 224.0.0.0/4 -j ACCEPT
-        iptables -A INPUT -s 240.0.0.0/5 -j ACCEPT
-        iptables -A INPUT -m pkttype --pkt-type multicast -j ACCEPT
-        iptables -A INPUT -m pkttype --pkt-type broadcast -j ACCEPT
-      '';
+      allowedTCPPortRanges = [{ from = 51000; to = 51999; }]; # vsftpd
+      allowedUDPPorts = [ 123 ]; # chronyd
     };
     hostId = "80f4ef89";
     hostName = "fourier";
@@ -128,7 +114,6 @@
       enable = true;
       openFirewall = true;
     };
-    roon-server.enable = true;
     smartd.enable = true;
     vsftpd = {
       enable = true;
@@ -164,7 +149,7 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  users.groups.media.members = [ "bemeurer" "hqplayer" "roon-server" "plex" ];
+  users.groups.media.members = [ "bemeurer" "plex" ];
 
   # sops.secrets.root-password.sopsFile = ./root-password.yaml;
   # users.users.root.passwordFile = config.sops.secrets.root-password.path;

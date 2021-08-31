@@ -1,18 +1,15 @@
 {
   environment.persistence."/nix/state" = {
     directories = [
-      "/etc/hqplayer"
       "/etc/dnsmasq.d"
       "/etc/pihole"
 
       "/var/lib/chrony"
       "/var/lib/containers"
       "/var/lib/grafana"
-      "/var/lib/hqplayer"
       "/var/lib/iwd"
       "/var/lib/plex"
       "/var/lib/prometheus2"
-      "/var/lib/roon-server"
       "/var/lib/tailscale"
       "/var/lib/unbound"
       "/var/log"
