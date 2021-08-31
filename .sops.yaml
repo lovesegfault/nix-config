@@ -2,14 +2,11 @@ keys:
   - &aurelius 367C18D390C3A808327EAC26FB0436288083EE8B
   - &bemeurer C057AFED6D1499196E046BCB6976C95303C20664
   - &camus 8A6D4D8E5A23070A6A0B8BB3E355C71669A91D46
-  - &cantor 2FB208CEDD87F9392AD0B6D89AAC3DC443B2C338
   - &deleuze FB9ABF8F186420B645D3296D729C8DD8B510C842
-  - &feuerbach AD5F47941C5378175E46D11A2BB43FA44085673C
   - &foucault 5C8B2ACA031733D4C59A8AF19DE06FED73F48056
   - &fourier A4EABC2BEEE48CFF55287E855FABEC432FE0176B
   - &hegel A2260154AA9528C06164F0FE0F175745C1DB0169
   - &kant 29D3418505A13A593E5E7ABD9F743C14BF7326CC
-  - &riemann 41D56E398857FB3FDF920A2ED3D48D2FCB75EDC3
 
 creation_rules:
   - path_regex: hardware/nixos-aarch64-builder/nixos-aarch64-builder-key.yaml
@@ -21,21 +18,17 @@ creation_rules:
         - *deleuze
         - *foucault
         - *hegel
-        - *riemann
   - path_regex: users/bemeurer/bemeurer-password.yaml
     key_groups:
       - pgp:
         - *bemeurer
         - *aurelius
         - *camus
-        - *cantor
         - *deleuze
-        - *feuerbach
         - *foucault
         - *fourier
         - *hegel
         - *kant
-        - *riemann
   - path_regex: hosts/aurelius/.*
     key_groups:
       - pgp:
@@ -46,21 +39,11 @@ creation_rules:
       - pgp:
         - *bemeurer
         - *camus
-  - path_regex: hosts/cantor/.*
-    key_groups:
-      - pgp:
-        - *bemeurer
-        - *cantor
   - path_regex: hosts/deleuze/.*
     key_groups:
       - pgp:
         - *bemeurer
         - *deleuze
-  - path_regex: hosts/feuerbach/.*
-    key_groups:
-      - pgp:
-        - *bemeurer
-        - *feuerbach
   - path_regex: hosts/foucault/.*
     key_groups:
       - pgp:
@@ -81,8 +64,3 @@ creation_rules:
       - pgp:
         - *bemeurer
         - *kant
-  - path_regex: hosts/riemann/.*
-    key_groups:
-      - pgp:
-        - *bemeurer
-        - *riemann
