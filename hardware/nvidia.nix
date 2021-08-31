@@ -13,6 +13,7 @@ in
   environment.systemPackages = [ nvidia_x11 ];
 
   hardware = {
+    nvidia.package = nvidia_x11;
     nvidia.modesetting.enable = true;
     opengl = {
       enable = true;
