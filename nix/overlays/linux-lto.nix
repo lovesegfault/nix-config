@@ -13,8 +13,6 @@ let
         bootBintoolsNoLibc = null;
       };
 
-      stdenv' = self.overrideCC hostLLVM.stdenv hostLLVM.clangUseLLVM;
-
       mkLLVMPlatform = platform: platform // {
         useLLVM = true;
         linux-kernel = platform.linux-kernel // {
@@ -36,11 +34,16 @@ let
           ];
         };
       };
+
+      stdenvClangUseLLVM = self.overrideCC hostLLVM.stdenv hostLLVM.clangUseLLVM;
+
+      stdenvPlatformLLVM = stdenvClangUseLLVM.override (old: {
+        hostPlatform = mkLLVMPlatform old.hostPlatform;
+        buildPlatform = mkLLVMPlatform old.buildPlatform;
+      });
     in
-    stdenv' // {
-      hostPlatform = mkLLVMPlatform stdenv'.hostPlatform;
-      buildPlatform = mkLLVMPlatform stdenv'.buildPlatform;
-      passthru = (stdenv'.passthru or { }) // { llvmPackages = buildLLVM; };
+    stdenvPlatformLLVM // {
+      passthru = (stdenvPlatformLLVM.passthru or { }) // { llvmPackages = buildLLVM; };
     };
 
   linuxLTOFor = { kernel, extraConfig ? { } }:
@@ -57,27 +60,12 @@ let
       } // extraConfig;
     };
 
-  linuxLTOPackagesFor = { ... }@args:
-    (self.linuxPackagesFor (linuxLTOFor args)).extend (
-      self: super: {
-        ddcci-driver = super.ddcci-driver.overrideAttrs (old: {
-          makeFlags = (old.makeFlags or [ ]) ++ self.kernel.makeFlags;
-        });
-
-        zfs = super.zfs.overrideAttrs (old: {
-          # XXX: This shouldn't be needed, but for some reason it is. I don't get
-          # it.
-          nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ self.stdenv.passthru.llvmPackages.lld ];
-          buildInputs = (old.buildInputs or [ ]) ++ [ self.stdenv.passthru.llvmPackages.libunwind ];
-
-          postPatch = (old.postPatch or "") + ''
-            substituteInPlace config/kernel.m4 --replace \
-              "make modules" \
-              "make CC=${self.stdenv.cc}/bin/cc modules"
-          '';
-        });
-      }
-    );
+  linuxLTOPackagesFor = args: (self.linuxPackagesFor (linuxLTOFor args)).extend (
+    self: super: {
+      # FIXME: Make upstream use the kernel's stdenv.
+      zfs = super.zfs.override { inherit (self) stdenv; };
+    }
+  );
 in
 _: rec {
   linuxPackages_xanmod_lto_zen3 = linuxLTOPackagesFor {
