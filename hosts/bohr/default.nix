@@ -16,7 +16,7 @@
   boot = {
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages_5_13;
+    kernelPackages = pkgs.linuxPackages_xanmod_lto_zen3;
     tmpOnTmpfs = true;
     zfs.extraPools = [ "tank" ];
   };
@@ -43,6 +43,7 @@
     enableRedistributableFirmware = true;
     pulseaudio.enable = false;
     nvidia.nvidiaPersistenced = true;
+    nvidia.nvidiaSettings = false;
   };
 
   home-manager.users.bemeurer = { ... }: { imports = [ ../../users/bemeurer/music ]; };
