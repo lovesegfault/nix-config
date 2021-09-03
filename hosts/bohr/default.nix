@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ../../core
 
@@ -97,6 +97,8 @@
       flags = "-k -p --utc";
     };
   };
+
+  systemd.enableUnifiedCgroupHierarchy = lib.mkForce false;
 
   systemd.network.networks.eth = {
     matchConfig.MACAddress = "18:c0:4d:8a:c3:75";

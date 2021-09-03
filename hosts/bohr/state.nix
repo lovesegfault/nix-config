@@ -3,6 +3,7 @@
     directories = [
       "/etc/hqplayer"
 
+      "/var/lib/docker"
       "/var/lib/hqplayer"
       "/var/lib/roon-server"
       "/var/lib/tailscale"
