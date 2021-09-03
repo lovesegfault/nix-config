@@ -60,12 +60,7 @@ let
       } // extraConfig;
     };
 
-  linuxLTOPackagesFor = args: (self.linuxPackagesFor (linuxLTOFor args)).extend (
-    self: super: {
-      # FIXME: Make upstream use the kernel's stdenv.
-      zfs = super.zfs.override { inherit (self) stdenv; };
-    }
-  );
+  linuxLTOPackagesFor = args: self.linuxPackagesFor (linuxLTOFor args);
 in
 _: rec {
   linuxPackages_xanmod_lto_zen3 = linuxLTOPackagesFor {
