@@ -11,6 +11,7 @@
     ../../users/bemeurer
 
     ./state.nix
+    ./hqplayerd.nix
   ];
 
   boot = {
@@ -84,12 +85,6 @@
   services = {
     fstrim.enable = true;
     fwupd.enable = true;
-    hqplayerd = {
-      enable = true;
-      auth.username = "admin";
-      auth.password = "admin";
-      openFirewall = true;
-    };
     roon-server.enable = true;
     smartd.enable = true;
     zfs.autoSnapshot = {
