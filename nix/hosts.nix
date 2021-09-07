@@ -5,7 +5,7 @@
   };
   bohr = {
     system = "x86_64-linux";
-    hostname = "10.0.0.194";
+    hostname = "100.123.20.5";
   };
   camus = {
     system = "aarch64-linux";
