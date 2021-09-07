@@ -5,7 +5,7 @@
     ../../users/bemeurer
 
     (modulesPath + "/profiles/qemu-guest.nix")
-    (modulesPath + "/profiles/hardened.nix")
+    # (modulesPath + "/profiles/hardened.nix")
   ];
 
   boot = {
