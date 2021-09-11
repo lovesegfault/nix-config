@@ -67,4 +67,9 @@ _: rec {
     kernel = self.linux_xanmod;
     extraConfig = { MZEN3 = lib.kernel.yes; };
   };
+
+  linuxPackages_xanmod_lto_skylake = linuxLTOPackagesFor {
+    kernel = self.linux_xanmod;
+    extraConfig = { MSKYLAKE = lib.kernel.yes; };
+  };
 }
