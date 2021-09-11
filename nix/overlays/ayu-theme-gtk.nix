@@ -7,7 +7,7 @@ self: _: {
       , autoreconfHook
       , pkg-config
       , gtk3
-      , gnome3
+      , gnome
       , gtk-engine-murrine
       , optipng
       , inkscape
@@ -38,7 +38,7 @@ self: _: {
         ];
 
         propagatedUserEnvPkgs = [
-          gnome3.gnome-themes-extra
+          gnome.gnome-themes-extra
           gtk-engine-murrine
         ];
 
@@ -50,7 +50,7 @@ self: _: {
         '';
 
         configureFlags = [
-          "--with-gnome-shell=${gnome3.gnome-shell.version}"
+          "--with-gnome-shell=${gnome.gnome-shell.version}"
           "--disable-unity"
         ];
 

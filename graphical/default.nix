@@ -7,7 +7,7 @@
 
   environment.systemPackages = with pkgs; [
     adwaita-qt
-    gnome3.adwaita-icon-theme
+    gnome.adwaita-icon-theme
     hicolor-icon-theme
     qgnomeplatform
     qt5.qtwayland
@@ -29,7 +29,7 @@
   programs.dconf.enable = true;
 
   services = {
-    dbus.packages = with pkgs; [ gnome.dconf ];
+    dbus.packages = with pkgs; [ dconf ];
     redshift = {
       enable = true;
       package = pkgs.redshift-wlr;

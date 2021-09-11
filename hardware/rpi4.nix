@@ -28,7 +28,7 @@
     enableAllFirmware = true;
     opengl = {
       setLdLibraryPath = true;
-      package = pkgs.mesa_drivers;
+      package = pkgs.mesa.drivers;
     };
     deviceTree.enable = true;
   };

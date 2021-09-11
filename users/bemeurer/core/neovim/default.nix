@@ -25,7 +25,7 @@
       plugins = with pkgs.vimPlugins; [
         # ui
         gitsigns-nvim
-        indent-blankline-nvim-lua
+        indent-blankline-nvim
         lsp-colors-nvim
         lsp_signature-nvim
         lualine-nvim
