@@ -24,7 +24,6 @@
       prusa-slicer
       shotwell
       signal-desktop
-      spotify
       thunderbird
       zoom-us
     ];
