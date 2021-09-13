@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   programs.firefox = {
     enable = (pkgs.hostPlatform.system == "x86_64-linux");
-    package = pkgs.firefox-wayland;
+    package = pkgs.firefox-bin;
   };
 
   xdg.mimeApps.defaultApplications = {
