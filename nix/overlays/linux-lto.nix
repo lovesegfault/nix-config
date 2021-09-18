@@ -60,16 +60,16 @@ let
       } // extraConfig;
     };
 
-  linuxLTOPackagesFor = args: self.linuxPackagesFor (linuxLTOFor args);
+  linuxLTOPackagesFor = args: self.linuxKernel.packagesFor (linuxLTOFor args);
 in
 _: rec {
   linuxPackages_xanmod_lto_zen3 = linuxLTOPackagesFor {
-    kernel = self.linux_xanmod;
+    kernel = self.linuxKernel.kernels.linux_xanmod;
     extraConfig = { MZEN3 = lib.kernel.yes; };
   };
 
   linuxPackages_xanmod_lto_skylake = linuxLTOPackagesFor {
-    kernel = self.linux_xanmod;
+    kernel = self.linuxKernel.kernels.linux_xanmod;
     extraConfig = { MSKYLAKE = lib.kernel.yes; };
   };
 }
