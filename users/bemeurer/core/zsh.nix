@@ -43,7 +43,7 @@
       bindkey "^[[1;5D" backward-word
       bindkey "^[[1;3D" backward-word
 
-      bindkey -s "^O" '${config.home.sessionVariables.EDITOR} $(fzf)^M'
+      bindkey -s "^O" 'fzf | xargs -r $VISUAL^M'
 
       bindkey -rpM viins '^[^['
       KEYTIMEOUT=1
