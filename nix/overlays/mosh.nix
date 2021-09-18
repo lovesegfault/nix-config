@@ -1,18 +1,24 @@
 self: super: {
-  mosh = super.mosh.overrideAttrs (
-    _: {
-      src = self.fetchFromGitHub {
-        owner = "mobile-shell";
-        repo = "mosh";
-        rev = "0cc492dbae2f6aaef9a54dc2a8ba3222868b150f";
-        sha256 = "0w7jxdsyxgnf5h09rm8mfgm5z1qc1sqwvgzvrwzb04yshxpsg0zd";
-      };
-      patches = [
-        (self.fetchpatch {
-          url = "https://raw.githubusercontent.com/xfix/nixpkgs/d655b917c1f594be01258c346b779414b93cca41/pkgs/tools/networking/mosh/bash_completion_datadir.patch";
-          sha256 = "04k1k33zh66k0mzdblj8zdci1jki93vnir876mkr1572kjaycwkw";
-        })
-      ];
-    }
-  );
+  mosh = super.mosh.overrideAttrs (_: {
+    src = self.fetchFromGitHub {
+      owner = "mobile-shell";
+      repo = "mosh";
+      rev = "e023e81c08897c95271b4f4f0726ec165bb6e1bd";
+      sha256 = "sha256-X2xJCiC5/vSijzZgQsWDzD+R8D8ppdZD6WeG4uoxyYw=";
+    };
+
+    patches = [
+      (self.fetchpatch {
+        url = "https://gist.githubusercontent.com/lovesegfault/dedd37512507cce2d209e924067af860/raw/f479e158d81ebd6807b4fa3783f9a3036503c6b9/gistfile0.txt";
+        sha256 = "sha256-wNBNqpTfPVWB4tBeYOXU6D7DsXXkKuQxmfOQ5BbKVcw=";
+      })
+    ];
+
+    postPatch = ''
+      substituteInPlace scripts/mosh.pl \
+          --subst-var-by ssh "${self.openssh}/bin/ssh"
+      substituteInPlace scripts/mosh.pl \
+          --subst-var-by mosh-client "$out/bin/mosh-client"
+    '';
+  });
 }
