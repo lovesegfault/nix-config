@@ -183,6 +183,5 @@
       storageDriver = "zfs";
       autoPrune.enable = true;
     };
-    libvirtd.enable = true;
   };
 }
