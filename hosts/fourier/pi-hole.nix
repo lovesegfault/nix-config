@@ -1,17 +1,12 @@
 {
   networking.firewall = {
-    allowedTCPPorts = [ 80 53 ];
-    allowedUDPPorts = [ 53 ];
+    allowedTCPPorts = [ 80 53 5335 ];
+    allowedUDPPorts = [ 53 5335 ];
   };
 
   virtualisation.oci-containers.containers.pi-hole = {
     autoStart = true;
-    image = "pihole/pihole:dev";
-    ports = [
-      "53:53/tcp"
-      "53:53/udp"
-      "80:80/tcp"
-    ];
+    image = "pihole/pihole:2021.09";
     volumes = [
       "/etc/pihole/:/etc/pihole/"
       "/etc/dnsmasq.d/:/etc/dnsmasq.d/"
