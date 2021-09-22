@@ -101,6 +101,3 @@ jobs:
     name: Success
     runs-on: ubuntu-latest
     needs: build-host
-    steps:
-      - name: NOP
-        run: echo "NOP"
