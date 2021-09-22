@@ -16,10 +16,6 @@
   name = "nix-config";
 
   nativeBuildInputs = [
-    sops-import-keys-hook
-  ];
-
-  buildInputs = [
     cachix
     nix-build-uncached
     pre-commit
@@ -32,6 +28,7 @@
     deploy-rs
     sops
     ssh-to-pgp
+    sops-import-keys-hook
   ];
 
   sopsPGPKeyDirs = [
