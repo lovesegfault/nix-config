@@ -26,6 +26,8 @@
         map to guest = bad user
         ntlm auth = ntlmv1-permitted
         min protocol = NT1
+        load printers = no
+        printcap name = /dev/null
       '';
       shares = {
         atabachnik = {
