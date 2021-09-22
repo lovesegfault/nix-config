@@ -27,9 +27,17 @@ jobs:
       - name: Update flakes
         run: nix flake update
       - uses: peter-evans/create-pull-request@v3
+        id: cpr
         with:
           branch: flake-update
           commit-message: "chore(nix): update flake inputs"
           delete-branch: true
           title: "chore(nix): update flake inputs"
           token: ${{ secrets.PAT }}
+
+      - uses: peter-evans/enable-pull-request-automerge@v1
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        with:
+          token: ${{ secrets.PAT }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: rebase
