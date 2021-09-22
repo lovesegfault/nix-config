@@ -96,3 +96,11 @@ jobs:
           cachix watch-exec nix-config -- \
             nix run nixpkgs#nix-build-uncached -- \
               -A packages.x86_64-linux.hosts.${{ matrix.host }}
+
+  success:
+    name: Success
+    runs-on: ubuntu-latest
+    needs: build-host
+    steps:
+      - name: NOP
+        run: echo "NOP"
