@@ -17,7 +17,7 @@
   boot = {
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages_xanmod_lto_zen3;
+    kernelPackages = pkgs.linuxPackages;
     tmpOnTmpfs = true;
     zfs.extraPools = [ "tank" ];
   };
