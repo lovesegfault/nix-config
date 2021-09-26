@@ -7,7 +7,6 @@ on:
       - flake-update
 jobs:
   lints:
-    name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
@@ -22,13 +21,12 @@ jobs:
         with:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
-      - name: lints
+      - name: run-lints
         run: |
           nix build -L .#checks.x86_64-linux.pre-commit-check || exit 1
           nix-instantiate --parse **/*.nix >& /dev/null || exit 1
 
   get-hosts:
-    name: Get hosts
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.get-hosts.outputs.matrix }}
@@ -50,7 +48,7 @@ jobs:
           echo "::set-output name=matrix::$(nix eval --json -f ./nix/hosts.nix | jq -c 'del(.foucault,.hegel) | { host: keys }')"
 
   build-host:
-    name: Build ${{ matrix.host }}
+    name: build-${{ matrix.host }}
     runs-on: ubuntu-latest
     needs: get-hosts
     strategy:
@@ -65,7 +63,7 @@ jobs:
           install_url: https://nixos-nix-install-tests.cachix.org/serve/ipa0c64h689jb4ys6hxsky2r8xpld0hv/install
           install_options: '--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve'
           extra_nix_config: experimental-features = nix-command flakes
-      - name: AArch64
+      - name: setup-aarch64-builder
         env:
           AARCH64_BOX_KEY: ${{ secrets.AARCH64_BOX_KEY }}
           KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
@@ -91,16 +89,30 @@ jobs:
         with:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
-      - name: nix build
+      - name: build-host
         run: |
           cachix watch-exec nix-config -- \
             nix run nixpkgs#nix-build-uncached -- \
               -A packages.x86_64-linux.hosts.${{ matrix.host }}
 
-  success:
-    name: Success
+  check:
     runs-on: ubuntu-latest
     needs: build-host
+    if: always()
     steps:
-      - name: NOP
-        run: echo "NOP"
+      - name: check
+        run: |
+          status_uri="https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/jobs"
+          user_str="admin:${{ secrets.PAT }}"
+          run="$(curl -X GET -s -u "${user_str}" "${status_uri}")"
+          jobs="$(jq '.jobs[]' <<< "${run}")"
+          statuses="$(jq '{job: .name, status: .conclusion}' <<< "${jobs}")"
+          builds="$(jq 'select(.job | contains("build"))' <<< "${statuses}")"
+          failed="$(jq 'select(.status | contains("fail"))' <<< "${builds}")"
+
+          if [ -z "${failed}" ]; then
+            echo "OK"
+          else
+            echo "FAIL"
+            exit 1
+          fi
