@@ -1,11 +1,10 @@
-name: update flakes
+name: update-flakes
 on:
   schedule:
     - cron:  '* */6 * * *'
   workflow_dispatch:
 jobs:
   update-flakes:
-    name: Update flake inputs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
@@ -24,7 +23,7 @@ jobs:
           signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
       - run: git config --global user.email "hatesegfault@protonmail.ch"
       - run: git config --global user.name "hatesegfault"
-      - name: Update flakes
+      - name: update-flakes
         run: nix flake update
       - uses: peter-evans/create-pull-request@v3
         id: cpr
