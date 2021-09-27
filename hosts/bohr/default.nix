@@ -17,9 +17,12 @@
   boot = {
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_xanmod_lto_zen3;
     tmpOnTmpfs = true;
     zfs.extraPools = [ "tank" ];
+    extraModprobeConfig = ''
+      options snd_usb_audio lowlatency=0
+    '';
   };
 
   fileSystems = {
