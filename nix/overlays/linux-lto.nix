@@ -58,7 +58,7 @@ let
         LTO_CLANG_FULL = yes;
         LTO_NONE = no;
         # XXX: https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg2519405.html
-        DEBUG_INFO_BTF = lib.mkForce no;
+        DEBUG_INFO = lib.mkForce no;
       } // extraConfig;
     };
 
