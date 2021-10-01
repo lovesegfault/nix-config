@@ -4,7 +4,7 @@ require("lovesegfault")
 vim.o.background = "dark"
 require("ayu").colorscheme()
 
-require("lovesegfault.compe")
+require("lovesegfault.cmp")
 require("lovesegfault.indent-blankline")
 require("lovesegfault.lsp")
 require("lovesegfault.feline")

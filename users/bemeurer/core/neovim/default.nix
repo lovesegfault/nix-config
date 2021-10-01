@@ -1,5 +1,4 @@
 { lib, pkgs, ... }: {
-
   home = {
     packages = with pkgs; [ neovim-remote ];
     sessionVariables = rec {
@@ -40,7 +39,6 @@
         # tooling
         nvim-bufdel
         rust-tools-nvim
-        snippets-nvim
         telescope-nvim
         vim-better-whitespace
         vim-commentary
@@ -52,11 +50,16 @@
         vim-visual-multi
 
         # completion
+        cmp-buffer
+        cmp-nvim-lsp
+        cmp-path
+        cmp_luasnip
+        lspkind-nvim
+        luasnip
         nvim-autopairs
-        nvim-compe
+        nvim-cmp
         nvim-lspconfig
         snippets-nvim
-        vim-vsnip
 
         # syntax
         (nvim-treesitter.withPlugins
@@ -86,7 +89,7 @@
         vim-nix
         vim-polyglot
       ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
-        compe-tabnine
+        cmp-tabnine
       ];
     };
   };
