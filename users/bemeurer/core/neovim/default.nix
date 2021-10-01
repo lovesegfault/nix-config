@@ -55,6 +55,7 @@
         cmp-nvim-lua
         cmp-path
         cmp_luasnip
+        crates-nvim
         lspkind-nvim
         luasnip
         nvim-autopairs
