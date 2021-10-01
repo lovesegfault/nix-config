@@ -12,7 +12,7 @@
 
   home = {
     stateVersion = "21.05";
-    packages = with pkgs; [ colorcheck exa mosh neofetch ripgrep ];
+    packages = with pkgs; [ colorcheck exa fd mosh neofetch ripgrep ];
   };
 
   programs = {
