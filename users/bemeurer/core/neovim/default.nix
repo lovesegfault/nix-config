@@ -28,7 +28,7 @@
         indent-blankline-nvim
         lsp-colors-nvim
         lsp_signature-nvim
-        lualine-nvim
+        feline-nvim
         neovim-ayu
         numb-nvim
         bufferline-nvim
