@@ -6,6 +6,14 @@ local flags = { debounce_text_changes = 150 }
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
+-- support crates and LSP
+vim.api.nvim_set_keymap(
+  "n",
+  "K",
+  [[<cmd>lua require("lovesegfault.utils").show_documentation()<CR>]],
+  { noremap = true, silent = true }
+)
+
 -- bindings
 local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -14,7 +22,6 @@ local on_attach = function(_, bufnr)
   local opts = { noremap = true, silent = true }
   map(bufnr, "n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   map(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  map(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
   map(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   map(bufnr, "n", "<C-s>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
   map(bufnr, "n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
