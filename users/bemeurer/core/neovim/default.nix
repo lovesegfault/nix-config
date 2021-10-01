@@ -81,6 +81,7 @@
               pkgs.tree-sitter.allGrammars
           )
         )
+        nvim-treesitter-textobjects
         editorconfig-vim
         gentoo-syntax
         lalrpop-vim
