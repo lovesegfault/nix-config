@@ -8,6 +8,7 @@
 , rnix-lsp
 , sops
 , stylua
+, sumneko-lua-language-server
 
 , deploy-rs
 , pre-commit-check
@@ -26,6 +27,7 @@
     nixpkgs-fmt
     rnix-lsp
     stylua
+    sumneko-lua-language-server
 
     deploy-rs
     sops
