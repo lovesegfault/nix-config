@@ -52,6 +52,7 @@
         # completion
         cmp-buffer
         cmp-nvim-lsp
+        cmp-nvim-lua
         cmp-path
         cmp_luasnip
         lspkind-nvim
