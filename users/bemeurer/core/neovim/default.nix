@@ -72,10 +72,7 @@
                   drv.pname
                   (map (v: "tree-sitter-${v}-grammar") [
                     "agda"
-                    "c-sharp"
-                    "embedded-template"
                     "fluent"
-                    "ocaml-interface"
                     "svelte"
                     "swift"
                     "verilog"
