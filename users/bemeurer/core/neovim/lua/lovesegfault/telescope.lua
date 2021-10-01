@@ -10,20 +10,18 @@ require("telescope").setup({
 })
 
 -- Add leader shortcuts
-map("n", "<leader>f", [[<cmd>lua require("telescope.builtin").find_files()<cr>]], { silent = true })
 map("n", "<leader><space>", [[<cmd>lua require("telescope.builtin").buffers()<cr>]], { silent = true })
-map("n", "<leader>l", [[<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<cr>]], { silent = true })
-map("n", "<leader>t", [[<cmd>lua require("telescope.builtin").tags()<cr>]], { silent = true })
-map("n", "<leader>?", [[<cmd>lua require("telescope.builtin").oldfiles()<cr>]], { silent = true })
-map("n", "<leader>sd", [[<cmd>lua require("telescope.builtin").grep_string()<cr>]], { silent = true })
-map("n", "<leader>sp", [[<cmd>lua require("telescope.builtin").live_grep()<cr>]], { silent = true })
-map(
-  "n",
-  "<leader>o",
-  [[<cmd>lua require("telescope.builtin").tags{ only_current_buffer = true }<cr>]],
-  { silent = true }
-)
+map("n", "<leader>ff", [[<cmd>lua require("telescope.builtin").find_files()<cr>]], { silent = true })
+map("n", "<leader>fb", [[<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<cr>]], { silent = true })
+map("n", "<leader>fl", [[<cmd>lua require("telescope.builtin").live_grep()<cr>]], { silent = true })
+map("n", "<leader>fs", [[<cmd>lua require("telescope.builtin").spell_suggest()<cr>]], { silent = true })
+map("n", "<leader>lr", [[<cmd>lua require("telescope.builtin").lsp_references()<cr>]], { silent = true })
+map("n", "<leader>ld", [[<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>]], { silent = true })
+map("n", "<leader>lw", [[<cmd>lua require("telescope.builtin").lsp_workspace_symbols()<cr>]], { silent = true })
+map("n", "<leader>dd", [[<cmd>lua require("telescope.builtin").lsp_document_diagnostics()<cr>]], { silent = true })
+map("n", "<leader>dw", [[<cmd>lua require("telescope.builtin").lsp_workspace_diagnostics()<cr>]], { silent = true })
 map("n", "<leader>gc", [[<cmd>lua require("telescope.builtin").git_commits()<cr>]], { silent = true })
-map("n", "<leader>gb", [[<cmd>lua require("telescope.builtin").git_branches()<cr>]], { silent = true })
+map("n", "<leader>gb", [[<cmd>lua require("telescope.builtin").git_bcommits()<cr>]], { silent = true })
 map("n", "<leader>gs", [[<cmd>lua require("telescope.builtin").git_status()<cr>]], { silent = true })
-map("n", "<leader>gp", [[<cmd>lua require("telescope.builtin").git_bcommits()<cr>]], { silent = true })
+map("n", "<leader>gt", [[<cmd>lua require("telescope.builtin").git_stash()<cr>]], { silent = true })
+map("n", "<leader>tr", [[<cmd>lua require("telescope.builtin").treesitter()<cr>]], { silent = true })
