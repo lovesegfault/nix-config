@@ -1,6 +1,7 @@
 local colors = require("ayu.colors")
 local lsp = require("feline.providers.lsp")
 local vi_mode_utils = require("feline.providers.vi_mode")
+require("nvim-gps").setup()
 
 local vi_mode_colors = {
   NORMAL = colors.entity,
@@ -173,6 +174,17 @@ local comps = {
       },
     },
   },
+  gps = {
+    provider = function()
+      return require("nvim-gps").get_location()
+    end,
+    enabled = function()
+      return require("nvim-gps").is_available()
+    end,
+    hl = {
+      fg = colors.constant,
+    },
+  },
   git = {
     branch = {
       provider = "git_branch",
@@ -234,6 +246,7 @@ table.insert(components.inactive, {})
 -- left
 table.insert(components.active[1], comps.vi_mode)
 table.insert(components.active[1], comps.file.info)
+table.insert(components.active[1], comps.gps)
 table.insert(components.active[1], comps.lsp.name)
 table.insert(components.inactive[1], comps.vi_mode)
 table.insert(components.inactive[1], comps.file.info)

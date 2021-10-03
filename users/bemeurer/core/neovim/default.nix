@@ -23,14 +23,15 @@
 
       plugins = with pkgs.vimPlugins; [
         # ui
+        bufferline-nvim
+        feline-nvim
         gitsigns-nvim
         indent-blankline-nvim
         lsp-colors-nvim
         lsp_signature-nvim
-        feline-nvim
         neovim-ayu
         numb-nvim
-        bufferline-nvim
+        nvim-gps
         nvim-lightbulb
         nvim-web-devicons
         todo-comments-nvim
