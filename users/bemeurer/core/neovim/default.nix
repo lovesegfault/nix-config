@@ -33,6 +33,7 @@
         numb-nvim
         nvim-gps
         nvim-lightbulb
+        nvim-treesitter-context
         nvim-web-devicons
         todo-comments-nvim
         trouble-nvim
