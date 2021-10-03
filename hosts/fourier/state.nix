@@ -2,12 +2,12 @@
   environment.persistence."/nix/state" = {
     directories = [
       "/etc/dnsmasq.d"
-      "/etc/pihole"
 
       "/var/lib/chrony"
       "/var/lib/containers"
       "/var/lib/grafana"
       "/var/lib/iwd"
+      "/var/lib/pihole"
       "/var/lib/plex"
       "/var/lib/prometheus2"
       "/var/lib/tailscale"

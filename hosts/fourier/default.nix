@@ -10,7 +10,7 @@
 
     ../../users/bemeurer
 
-    ./pi-hole.nix
+    ./pihole.nix
     ./prometheus.nix
     ./samba.nix
     ./state.nix

@@ -4,12 +4,13 @@
     allowedUDPPorts = [ 53 5335 ];
   };
 
-  virtualisation.oci-containers.containers.pi-hole = {
+  virtualisation.oci-containers.containers.pihole = {
     autoStart = true;
     image = "pihole/pihole:latest";
     volumes = [
-      "/etc/pihole/:/etc/pihole/"
-      "/etc/dnsmasq.d/:/etc/dnsmasq.d/"
+      "/var/lib/pihole/etc/php:/etc/php/"
+      "/var/lib/pihole/etc/pihole:/etc/pihole/"
+      "/var/lib/pihole/etc/dnsmasq.d/:/etc/dnsmasq.d/"
     ];
     environment = {
       CUSTOM_CACHE_SIZE = "0";
