@@ -6,7 +6,7 @@
 
   virtualisation.oci-containers.containers.pi-hole = {
     autoStart = true;
-    image = "pihole/pihole:2021.09";
+    image = "pihole/pihole:latest";
     volumes = [
       "/etc/pihole/:/etc/pihole/"
       "/etc/dnsmasq.d/:/etc/dnsmasq.d/"
