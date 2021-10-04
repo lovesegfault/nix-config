@@ -21,7 +21,6 @@
       gnome.evince
       gnome.gnome-calendar
       mbk
-      prusa-slicer
       shotwell
       signal-desktop
       thunderbird
