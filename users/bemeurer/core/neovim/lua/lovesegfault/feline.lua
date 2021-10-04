@@ -115,6 +115,14 @@ local comps = {
       },
     },
   },
+  position = {
+    provider = "position",
+    left_sep = " ",
+    hl = {
+      fg = colors.tag,
+      style = "bold",
+    },
+  },
   line_percentage = {
     provider = "line_percentage",
     left_sep = " ",
@@ -263,6 +271,7 @@ table.insert(components.active[3], comps.git.change)
 table.insert(components.active[3], comps.git.remove)
 table.insert(components.active[3], comps.git.branch)
 table.insert(components.active[3], comps.file.os)
+table.insert(components.active[3], comps.position)
 table.insert(components.active[3], comps.line_percentage)
 
 require("feline").setup({
