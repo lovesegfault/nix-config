@@ -3,7 +3,7 @@
     enable = true;
     inactiveInterval = 5;
     lockCmd = "${pkgs.i3lock-fancy-rapid}/bin/i3lock-fancy-rapid 10 15";
-    xautolockExtraOptions = [ "-lockaftersleep" ];
+    xautolock.extraOptions = [ "-lockaftersleep" ];
   };
 
   systemd.user.services = {
