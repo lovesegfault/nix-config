@@ -19,6 +19,7 @@
     gaa = "${ga} -A";
     gaap = "${gaa} --patch";
     gap = "${ga} --patch";
+    gb = "git branch";
     gch = "git checkout";
     gcl = "git clone";
     gco = "git commit";
@@ -30,6 +31,7 @@
     gdt = "git difftool";
     gdts = "${gdt} --staged";
     gf = "git fetch --all --prune --tags";
+    gfpl = "${gf} && ${gpl}";
     gff = "${gf} --force";
     gl = "git log --decorate --pretty=format:'%C(auto)%h %C(green)(%as)%C(reset)%C(blue) %<(20,trunc) %an%C(reset) %s%C(auto)%d'";
     gm = "git merge";
@@ -43,6 +45,11 @@
     grbsn = "${grb} --exec 'git commit --amend --no-edit -n -S'";
     grs = "git restore";
     grss = "${grs} --staged";
+    # TODO: deprecate
     gs = "git status";
+    gst = "git status";
+    gsw = "git switch";
+    gswc = "${gsw} -c";
+    gswcf = "${gsw} -C";
   };
 }
