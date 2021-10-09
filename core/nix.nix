@@ -22,7 +22,7 @@
       automatic = true;
       dates = [ "03:00" ];
     };
-    package = pkgs.nixUnstable;
+    package = pkgs.nix_2_4;
     trustedUsers = [ "root" "@wheel" ];
   };
 }
