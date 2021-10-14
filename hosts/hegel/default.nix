@@ -59,8 +59,6 @@
     packages = with pkgs; [ terminus_font ];
   };
 
-  environment.systemPackages = with pkgs; [ lutris ];
-
   environment.variables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
 
   fileSystems = {
@@ -130,8 +128,6 @@
     maxJobs = 32;
     systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-znver3" ];
   };
-
-  programs.steam.enable = true;
 
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
