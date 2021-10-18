@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ../../core
 
@@ -114,4 +114,7 @@
     enable = true;
     autoPrune.enable = true;
   };
+
+  age.secrets.rootPassword.file = ./password.age;
+  users.users.root.passwordFile = config.age.secrets.rootPassword.path;
 }

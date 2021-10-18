@@ -106,6 +106,6 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  age.secrets.aureliusRootPassword.file = ./password.age;
-  users.users.root.passwordFile = config.age.secrets.aureliusRootPassword.path;
+  age.secrets.rootPassword.file = ./password.age;
+  users.users.root.passwordFile = config.age.secrets.rootPassword.path;
 }

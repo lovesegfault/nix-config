@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ../../core
 
@@ -143,4 +143,7 @@
     oci-containers.backend = "podman";
     podman.enable = true;
   };
+
+  age.secrets.rootPassword.file = ./password.age;
+  users.users.root.passwordFile = config.age.secrets.rootPassword.path;
 }
