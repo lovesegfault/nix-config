@@ -1,8 +1,8 @@
 { self
+, agenix
 , deploy-rs
 , nixpkgs
 , pre-commit-hooks
-, sops-nix
 , ...
 }@inputs:
 let
@@ -12,9 +12,10 @@ let
   pkgs = import nixpkgs {
     inherit system;
 
-    overlays = map
+    overlays = (map
       (f: import (./overlays + "/${f}"))
-      (attrNames (readDir ./overlays));
+      (attrNames (readDir ./overlays)))
+    ++ [ agenix.overlay ];
 
     config = {
       allowUnfree = true;
@@ -31,7 +32,6 @@ in
     (mapAttrs (_: v: v.profiles.system.path) self.deploy.nodes);
 
   devShell.${system} = pkgs.callPackage ./shell.nix {
-    inherit (sops-nix.packages.${system}) sops-import-keys-hook;
     inherit (deploy-rs.packages.${system}) deploy-rs;
     inherit (self.checks.${system}) pre-commit-check;
   };

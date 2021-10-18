@@ -59,8 +59,8 @@
     maxJobs = 1;
   };
 
-  sops.secrets.ddclient.sopsFile = ./ddclient.yaml;
-  services.ddclient.configFile = config.sops.secrets.ddclient.path;
+  age.secrets.kantDdclient.file = ./ddclient.age;
+  services.ddclient.configFile = config.age.secrets.kantDdclient.path;
 
   services = {
     do-agent.enable = true;
@@ -72,7 +72,4 @@
   };
 
   time.timeZone = "America/Los_Angeles";
-
-  # sops.secrets.root-password.sopsFile = ./root-password.yaml;
-  # users.users.root.passwordFile = config.sops.secrets.root-password.path;
 }

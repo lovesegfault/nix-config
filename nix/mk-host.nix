@@ -6,7 +6,7 @@
 }:
 let
   inherit (pkgs.lib) mapAttrs' nameValuePair;
-  inherit (inputs) agenix impermanence home-manager sops-nix;
+  inherit (inputs) agenix impermanence home-manager;
   inherit (inputs.nixpkgs.lib) nixosSystem;
 in
 nixosSystem {
@@ -16,7 +16,6 @@ nixosSystem {
     agenix.nixosModules.age
     impermanence.nixosModules.impermanence
     home-manager.nixosModules.home-manager
-    sops-nix.nixosModules.sops
 
     { nixpkgs = { inherit (pkgs) config overlays; }; }
 

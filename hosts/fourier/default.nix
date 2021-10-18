@@ -139,9 +139,6 @@
 
   users.groups.media.members = [ "bemeurer" "plex" ];
 
-  # sops.secrets.root-password.sopsFile = ./root-password.yaml;
-  # users.users.root.passwordFile = config.sops.secrets.root-password.path;
-
   virtualisation = {
     oci-containers.backend = "podman";
     podman.enable = true;

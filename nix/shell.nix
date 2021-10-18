@@ -6,13 +6,12 @@
 , nixpkgs-fmt
 , pre-commit
 , rnix-lsp
-, sops
 , stylua
 , sumneko-lua-language-server
 
+, agenix
 , deploy-rs
 , pre-commit-check
-, sops-import-keys-hook
 , ssh-to-pgp
 }: mkShell {
   name = "nix-config";
@@ -29,18 +28,10 @@
     stylua
     sumneko-lua-language-server
 
+    agenix
     deploy-rs
-    sops
     ssh-to-pgp
-    sops-import-keys-hook
   ];
-
-  sopsPGPKeyDirs = [
-    "./keys/hosts"
-    "./keys/users"
-  ];
-
-  SOPS_GPG_KEYSERVER = "https://keys.openpgp.org";
 
   shellHook = ''
     ${pre-commit-check.shellHook}

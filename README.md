@@ -19,7 +19,6 @@ Hostnames are picked from my [hostname list][hostnames]
 ├── dev          # Developer tooling configuration
 ├── hardware     # Hardware-specific configuration
 ├── hosts        # Machine definitions
-├── keys         # PGP keys for SOPS
 ├── nix          # Nix build support files (overlays, deployment code, ci generators)
 ├── graphical    # Sway/i3 configuration for the desktop
 └── users        # Per-user configurations
