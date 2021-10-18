@@ -29,6 +29,7 @@ let
   overrideFlags = flags: drv: drv.overrideAttrs (old: {
     NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + (toString flags);
     NIX_CFLAGS_LINK = (old.NIX_CFLAGS_LINK or "") + (toString flags);
+    OPTFLAGS = (old.OPTFLAGS or "") + (toString flags);
   });
 
   optimize = names:
@@ -39,4 +40,5 @@ in
 optimize [
   "neovim-unwrapped"
   "easyeffects"
+  "btop"
 ]
