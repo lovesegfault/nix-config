@@ -1,33 +1,26 @@
-{ inputs
+{ pkgs
+, inputs
 , name
 , system
 , extraModules ? [ ]
 }:
 let
-  inherit (nixpkgs.lib) pathExists optionalAttrs mapAttrs' nameValuePair;
-  inherit (builtins) attrNames readDir;
-  inherit (inputs) nixpkgs impermanence home-manager sops-nix;
-
-  config = {
-    allowUnfree = true;
-    allowAliases = true;
-    joypixels.acceptLicense = true;
-  };
-
-  overlays = map
-    (f: import (./overlays + "/${f}"))
-    (attrNames (optionalAttrs (pathExists ./overlays) (readDir ./overlays)));
+  inherit (pkgs.lib) mapAttrs' nameValuePair;
+  inherit (inputs) agenix impermanence home-manager sops-nix;
+  inherit (inputs.nixpkgs.lib) nixosSystem;
 in
-nixpkgs.lib.nixosSystem {
+nixosSystem {
   inherit system;
 
   modules = [
-    ({ nixpkgs = { inherit config overlays; }; })
+    agenix.nixosModules.age
     impermanence.nixosModules.impermanence
     home-manager.nixosModules.home-manager
     sops-nix.nixosModules.sops
 
-    ({
+    { nixpkgs = { inherit (pkgs) config overlays; }; }
+
+    {
       nix.registry = {
         self.flake = inputs.self;
         template = {
@@ -45,11 +38,11 @@ nixpkgs.lib.nixosSystem {
           };
         };
       };
-    })
+    }
 
-    ({
+    {
       networking.hosts = mapAttrs' (n: v: nameValuePair v.hostname [ n ]) (import ./hosts.nix);
-    })
+    }
 
     (../hosts + "/${name}")
   ] ++ extraModules;
