@@ -6,6 +6,7 @@ let
 in
 with hosts;
 {
+  "hosts/aurelius/password.age".publicKeys = [ bemeurer aurelius ];
   "hosts/kant/ddclient.age".publicKeys = [ bemeurer kant ];
   "hardware/nixos-aarch64-builder/key.age".publicKeys = [ bemeurer aurelius camus deleuze foucault hegel ];
   "users/bemeurer/password.age".publicKeys = [ bemeurer ] ++ (attrValues hosts);

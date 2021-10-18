@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   imports = [
     ../../core
@@ -105,4 +105,7 @@
   };
 
   time.timeZone = "America/Los_Angeles";
+
+  age.secrets.aureliusRootPassword.file = ./password.age;
+  users.users.root.passwordFile = config.age.secrets.aureliusRootPassword.path;
 }
