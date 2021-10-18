@@ -53,6 +53,7 @@ self: _: {
             stripId3v2 "$MUS_DIR"
             reencodeFlac "$MUS_DIR"
             importMus "$MUS_DIR"
+            beet fingerprint
           }
 
           main "$@"
