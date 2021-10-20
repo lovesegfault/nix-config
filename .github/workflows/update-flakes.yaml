@@ -1,7 +1,7 @@
 name: update-flakes
 on:
   schedule:
-    - cron:  '* */6 * * *'
+    - cron:  '*/10 * * * *'
   workflow_dispatch:
 jobs:
   update-flakes:
