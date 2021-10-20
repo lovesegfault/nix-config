@@ -1,6 +1,7 @@
 { mkShell
 , cachix
 , luajit
+, jq
 , nix-build-uncached
 , nix-linter
 , nixpkgs-fmt
@@ -27,6 +28,7 @@
     rnix-lsp
     stylua
     sumneko-lua-language-server
+    jq
 
     agenix
     deploy-rs
