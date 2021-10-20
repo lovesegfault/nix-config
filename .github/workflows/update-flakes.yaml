@@ -4,8 +4,51 @@ on:
     - cron:  '*/10 * * * *'
   workflow_dispatch:
 jobs:
-  update-flakes:
+  get-flakes:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.get-flakes.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v2.3.5
+        with:
+          fetch-depth: 0
+          repository: lovesegfault/nix-config
+      - uses: cachix/install-nix-action@v14
+        with:
+          install_url: https://nixos-nix-install-tests.cachix.org/serve/ipa0c64h689jb4ys6hxsky2r8xpld0hv/install
+          install_options: '--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve'
+          extra_nix_config: experimental-features = nix-command flakes
+      - id: get-flakes
+        run: |
+          get_flake_revs() {
+            nix flake metadata --json \
+              | jq -c '
+                .locks.nodes
+                | map_values(.locked.rev | select(. != null))'
+          }
+
+          get_updated_flakes() {
+            jq -c -s '
+              .[1] as $new
+              | .[0]
+              | to_entries
+              | map({ flake: .key, old_rev: .value, new_rev: $new[.key] })
+              | map(select(.old_rev != .new_rev))
+              | {flake: map(.flake)}' <(echo "$1") <(echo "$2")
+          }
+
+          old="$(get_flake_revs)"
+          nix flake update
+          new="$(get_flake_revs)"
+
+          echo "::set-output name=matrix::$(get_updated_flakes "$old" "$new")"
+  update-flake:
+    name: update-${{ matrix.flake }}
+    runs-on: ubuntu-latest
+    needs: get-flakes
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.get-flakes.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v2.3.5
         with:
@@ -23,15 +66,19 @@ jobs:
           signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
       - run: git config --global user.email "hatesegfault@protonmail.ch"
       - run: git config --global user.name "hatesegfault"
-      - name: update-flakes
-        run: nix flake update
+      - name: update-flake
+        id: update-flake
+        run: |
+          echo "::set-output name=old_rev::$(nix flake metadata --json | jq -r '.locks.nodes.${{matrix.flake}}.locked.rev[0:8]')"
+          nix flake lock --update-input "${{ matrix.flake }}"
+          echo "::set-output name=new_rev::$(nix flake metadata --json | jq -r '.locks.nodes.${{matrix.flake}}.locked.rev[0:8]')"
       - uses: peter-evans/create-pull-request@v3
         id: cpr
         with:
-          branch: flake-update
-          commit-message: "chore(nix): update flake inputs"
+          branch: update-${{ matrix.flake }}-flake
           delete-branch: true
-          title: "chore(nix): update flake inputs"
+          commit-message: "chore(flake/inputs/${{ matrix.flake }}): ${{ steps.update-flake.outputs.old_rev }} -> ${{ steps.update-flake.outputs.new_rev }}"
+          title: "chore(flake/inputs/${{ matrix.flake }}): ${{ steps.update-flake.outputs.old_rev }} -> ${{ steps.update-flake.outputs.new_rev }}"
           token: ${{ secrets.PAT }}
 
       - uses: peter-evans/enable-pull-request-automerge@v1
