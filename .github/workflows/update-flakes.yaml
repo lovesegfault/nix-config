@@ -86,4 +86,4 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-          merge-method: rebase
+          merge-method: squash
