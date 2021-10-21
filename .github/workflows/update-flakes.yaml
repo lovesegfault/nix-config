@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.get-flakes.outputs.matrix }}
+      noop: ${{ steps.get-flakes.outputs.noop }}
     steps:
       - uses: actions/checkout@v2.3.5
         with:
@@ -41,12 +42,21 @@ jobs:
           nix flake update
           new="$(get_flake_revs)"
 
-          echo "::set-output name=matrix::$(get_updated_flakes "$old" "$new")"
+          updated="$(get_updated_flakes "$old" "$new")"
+          count="$(jq '.flake | length' <<< "$updated")"
+
+          if [ "$count" == 0 ]; then
+            echo "::set-output name=noop::true"
+          else
+            echo "::set-output name=noop::false"
+          fi
+
+          echo "::set-output name=matrix::$updated"
   update-flake:
     name: update-${{ matrix.flake }}
     runs-on: ubuntu-latest
     needs: get-flakes
-    if: ${{ fromJson(needs.get-flakes.outputs.matrix) }}.flake != [ ]
+    if: ${{ needs.get-flakes.outputs.noop == "false" }}
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.get-flakes.outputs.matrix) }}
