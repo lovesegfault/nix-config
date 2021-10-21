@@ -56,7 +56,7 @@ jobs:
     name: update-${{ matrix.flake }}
     runs-on: ubuntu-latest
     needs: get-flakes
-    if: ${{ needs.get-flakes.outputs.noop == "false" }}
+    if: ${{ needs.get-flakes.outputs.noop == 'false' }}
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.get-flakes.outputs.matrix) }}
