@@ -11,7 +11,6 @@
 , lttng-ust
 , makeWrapper
 , stdenv
-, zlib
 , openssl
 }:
 stdenv.mkDerivation rec {
