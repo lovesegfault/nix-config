@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
       urlVersion = builtins.replaceStrings [ "." "-" ] [ "00" "00" ] version;
     in
     fetchurl {
-      url = "https://download.roonlabs.com/updates/beta/RoonServer_linuxx64_${urlVersion}.tar.bz2";
+      url = "http://download.roonlabs.com/updates/beta/RoonServer_linuxx64_${urlVersion}.tar.bz2";
       sha256 = "sha256-rQ5LPjR8CPv4DuPY1ryLWrhmPe232eqDw0DgmpkbbcU=";
     };
 
