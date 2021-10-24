@@ -8,7 +8,6 @@
 , icu66
 , krb5
 , lib
-, lttng-ust
 , makeWrapper
 , stdenv
 , openssl
@@ -30,7 +29,6 @@ stdenv.mkDerivation rec {
     alsa-lib
     freetype
     krb5
-    lttng-ust
     stdenv.cc.cc.lib
   ];
 
@@ -79,6 +77,10 @@ stdenv.mkDerivation rec {
 
       mkdir -p $out/bin
       makeWrapper "$out/Server/RoonServer" "$out/bin/RoonServer" --run "cd $out"
+
+      # This is unused and depends on an ancient version of lttng-ust, so we
+      # just patch it out
+      patchelf --remove-needed liblttng-ust.so.0 $out/RoonDotnet/shared/Microsoft.NETCore.App/5.0.0/libcoreclrtraceptprovider.so
 
       # XXX: backcompat, remove when the systemd unit is updated
       ln -sf "$out/bin/RoonServer" $out/start.sh
