@@ -42,14 +42,6 @@
       "acpi_enforce_resources=lax"
       "amdgpu.ppfeaturemask=0xffffffff"
     ];
-    kernelPatches = [rec {
-      name = "cfg80211_dont_warn_if_a_self-managed_device_doesnt_have_a_regdom";
-      patch = pkgs.fetchpatch {
-        name = "${name}.patch";
-        url = "https://patchwork.kernel.org/project/linux-wireless/patch/iwlwifi.20210409123755.ba2ea961f4ae.I8fde32d3196e860efa3b4ec464c42194195b42ec@changeid/raw/";
-        sha256 = "sha256-Ej2OmDQqLAF+HSpmCaJoki9/Z84ll7RVbGUh7xuFxm4=";
-      };
-    }];
     tmpOnTmpfs = true;
   };
 
