@@ -7,7 +7,7 @@
         set auto-load safe-path /
       '';
     };
-    packages = with pkgs; [ commitizen git-lfs ];
+    packages = with pkgs; [ commitizen git-extras git-lfs ];
   };
 
   programs = {
