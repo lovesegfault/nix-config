@@ -39,6 +39,5 @@ let
 in
 optimize [
   "neovim-unwrapped"
-  "easyeffects"
   "btop"
 ]

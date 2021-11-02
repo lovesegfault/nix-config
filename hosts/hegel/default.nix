@@ -96,7 +96,6 @@
 
   home-manager.users.bemeurer = { ... }: {
     imports = [ ../../users/bemeurer/trusted ];
-    services.easyeffects.enable = true;
   };
 
   location = {
