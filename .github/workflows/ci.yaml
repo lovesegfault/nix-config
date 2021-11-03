@@ -5,6 +5,7 @@ on:
       - master
       - try
       - update-*
+      - dependabot/*
 jobs:
   lints:
     runs-on: ubuntu-latest
