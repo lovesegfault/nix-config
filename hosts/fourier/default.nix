@@ -21,7 +21,7 @@
     blacklistedKernelModules = [ "snd_hda_intel" "amd64_edac_mod" "sp5100_tco" ];
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" ];
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.zfs.latestCompatibleKernelPackages;
     tmpOnTmpfs = true;
     zfs = {
       extraPools = [ "tank" ];
