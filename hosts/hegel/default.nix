@@ -132,8 +132,9 @@
     udev.packages = with pkgs; [ logitech-udev-rules ];
     syncthing = {
       enable = true;
-      openDefaultPorts = true;
       devices.fourier.id = "LHJU64F-X3RD7KA-F63MN25-7TGMTFW-JNJCBU7-V7ZEVQL-OXVWOB4-YJ7HZAC";
+      guiAddress = "0.0.0.0:8384";
+      openDefaultPorts = true;
       folders.music = {
         devices = [ "fourier" ];
         path = "/srv/music";

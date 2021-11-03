@@ -117,6 +117,7 @@
     syncthing = {
       enable = true;
       group = "media";
+      guiAddress = "0.0.0.0:8384";
       openDefaultPorts = true;
       devices = with import ../../nix/hosts.nix; {
         bohr = {
