@@ -6,6 +6,7 @@
       "/var/lib/bluetooth"
       "/var/lib/iwd"
       "/var/lib/libvirt"
+      "/var/lib/syncthing"
       "/var/lib/tailscale"
       "/var/log"
 

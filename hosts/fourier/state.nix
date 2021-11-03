@@ -12,6 +12,7 @@
       "/var/lib/pihole"
       "/var/lib/plex"
       "/var/lib/prometheus2"
+      "/var/lib/syncthing"
       "/var/lib/tailscale"
       "/var/lib/unbound"
       "/var/log"

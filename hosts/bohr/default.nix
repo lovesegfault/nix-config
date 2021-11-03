@@ -90,6 +90,17 @@
     fwupd.enable = true;
     roon-server.enable = true;
     smartd.enable = true;
+    syncthing = {
+      enable = true;
+      openDefaultPorts = true;
+      devices.fourier.id = "LHJU64F-X3RD7KA-F63MN25-7TGMTFW-JNJCBU7-V7ZEVQL-OXVWOB4-YJ7HZAC";
+      folders.music = {
+        devices = [ "fourier" ];
+        path = "/srv/music";
+        type = "receiveonly";
+      };
+      group = "media";
+    };
     zfs.autoSnapshot = {
       enable = true;
       flags = "-k -p --utc";
