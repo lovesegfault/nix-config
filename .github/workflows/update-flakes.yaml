@@ -10,7 +10,7 @@ jobs:
       matrix: ${{ steps.get-flakes.outputs.matrix }}
       noop: ${{ steps.get-flakes.outputs.noop }}
     steps:
-      - uses: actions/checkout@v2.3.5
+      - uses: actions/checkout@v2.4.0
         with:
           fetch-depth: 0
           repository: lovesegfault/nix-config
@@ -61,7 +61,7 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.get-flakes.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v2.3.5
+      - uses: actions/checkout@v2.4.0
         with:
           fetch-depth: 0
           repository: lovesegfault/nix-config
