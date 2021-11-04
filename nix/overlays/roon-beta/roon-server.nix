@@ -14,15 +14,15 @@
 }:
 stdenv.mkDerivation rec {
   pname = "roon-server";
-  version = "1.8-842";
+  version = "1.8-846";
 
   src =
     let
       urlVersion = builtins.replaceStrings [ "." "-" ] [ "00" "00" ] version;
     in
     fetchurl {
-      url = "http://download.roonlabs.com/updates/beta/RoonServer_linuxx64_${urlVersion}.tar.bz2";
-      sha256 = "sha256-rQ5LPjR8CPv4DuPY1ryLWrhmPe232eqDw0DgmpkbbcU=";
+      url = "http://download.roonlabs.com/builds/RoonServer_linuxx64_${urlVersion}.tar.bz2";
+      sha256 = "sha256-BoHvODaAcK5b4/syOm3vpOTpq9ETovpWKUqG+UGr2e0=";
     };
 
   buildInputs = [
