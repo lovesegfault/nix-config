@@ -6,7 +6,6 @@
 
     ../../hardware/efi.nix
     ../../hardware/nvidia.nix
-    ../../hardware/zfs.nix
 
     ../../users/bemeurer
 
@@ -17,9 +16,8 @@
   boot = {
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages_xanmod_lto_zen3;
+    kernelPackages = pkgs.linuxPackages_5_14;
     tmpOnTmpfs = true;
-    zfs.extraPools = [ "tank" ];
     extraModprobeConfig = ''
       options snd_usb_audio lowlatency=0
     '';
