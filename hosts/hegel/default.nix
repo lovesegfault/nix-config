@@ -118,6 +118,10 @@
   nix = {
     maxJobs = 32;
     systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-znver3" ];
+    gc = {
+      automatic = true;
+      dates = "02:30";
+    };
   };
 
   security.pam.loginLimits = [
