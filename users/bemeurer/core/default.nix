@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./bash.nix
+    ./btop.nix
     ./git.nix
     ./htop.nix
     ./neovim
