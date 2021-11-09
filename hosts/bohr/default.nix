@@ -100,10 +100,6 @@
       };
       group = "media";
     };
-    zfs.autoSnapshot = {
-      enable = true;
-      flags = "-k -p --utc";
-    };
   };
 
   systemd.enableUnifiedCgroupHierarchy = lib.mkForce false;
