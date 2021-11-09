@@ -38,6 +38,16 @@
       fsType = "ext4";
       neededForBoot = true;
     };
+    "/srv/music" = {
+      device = "/dev/disk/by-uuid/91b15b49-9247-4d80-9799-a786a1a68920";
+      fsType = "btrfs";
+      options = [ "subvol=music" "noatime" ];
+    };
+    "/srv/roon" = {
+      device = "/dev/disk/by-uuid/91b15b49-9247-4d80-9799-a786a1a68920";
+      fsType = "btrfs";
+      options = [ "subvol=roon" "noatime" ];
+    };
   };
 
   hardware = {
