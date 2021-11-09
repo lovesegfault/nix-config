@@ -109,7 +109,7 @@
   systemd.enableUnifiedCgroupHierarchy = lib.mkForce false;
 
   systemd.network.networks.eth = {
-    matchConfig.MACAddress = "18:c0:4d:8a:c3:75";
+    matchConfig.MACAddress = "04:42:1a:0d:a3:40";
     DHCP = "yes";
   };
 
