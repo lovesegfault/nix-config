@@ -94,6 +94,11 @@
   ];
 
   services = {
+    btrfs.autoScrub = {
+      enable = true;
+      fileSystems = [ "/srv/music" "/srv/roon" ];
+      interval = "weekly";
+    };
     fstrim.enable = true;
     fwupd.enable = true;
     roon-server.enable = true;
