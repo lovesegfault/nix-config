@@ -61,6 +61,7 @@
 
   age.secrets.kantDdclient.file = ./ddclient.age;
   services.ddclient.configFile = config.age.secrets.kantDdclient.path;
+  services.ddclient.enable = true;
 
   services = {
     do-agent.enable = true;
