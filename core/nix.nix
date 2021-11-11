@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, ... }: {
   nix = {
     allowedUsers = [ "@wheel" ];
     binaryCaches = [
@@ -22,7 +22,6 @@
       automatic = true;
       dates = [ "03:00" ];
     };
-    package = pkgs.nix_2_4;
     trustedUsers = [ "root" "@wheel" ];
   };
 }
