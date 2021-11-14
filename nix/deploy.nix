@@ -1,11 +1,10 @@
-pkgs:
 { deploy-rs
 , ...
 }@inputs:
 let
   inherit (builtins) elemAt mapAttrs;
 
-  mkHost = name: system: import ./mk-host.nix { inherit pkgs inputs name system; };
+  mkHost = name: system: import ./mk-host.nix inputs { inherit name system; };
 
   mkPath = name: system: deploy-rs.lib.${system}.activate.nixos (mkHost name system);
 in

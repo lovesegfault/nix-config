@@ -1,13 +1,18 @@
-{ pkgs
-, inputs
-, name
+{ self
+, agenix
+, home-manager
+, impermanence
+, nixpkgs
+, templates
+, ...
+}@inputs:
+
+{ name
 , system
 , extraModules ? [ ]
 }:
 let
-  inherit (pkgs.lib) mapAttrs' nameValuePair;
-  inherit (inputs) agenix impermanence home-manager;
-  inherit (inputs.nixpkgs.lib) nixosSystem;
+  inherit (nixpkgs.lib) nixosSystem mapAttrs' nameValuePair;
 in
 nixosSystem {
   inherit system;
@@ -17,20 +22,20 @@ nixosSystem {
     impermanence.nixosModules.impermanence
     home-manager.nixosModules.home-manager
 
-    { nixpkgs = { inherit (pkgs) config overlays; }; }
+    { nixpkgs = { inherit (self.nixpkgs) config overlays; }; }
 
     {
       nix.registry = {
-        self.flake = inputs.self;
+        self.flake = self;
         template = {
-          flake = inputs.templates;
+          flake = templates;
           from = {
             id = "templates";
             type = "indirect";
           };
         };
         nixpkgs = {
-          flake = inputs.nixpkgs;
+          flake = nixpkgs;
           from = {
             id = "nixpkgs";
             type = "indirect";
