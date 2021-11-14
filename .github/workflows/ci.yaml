@@ -109,7 +109,7 @@ jobs:
           jobs="$(jq '.jobs[]' <<< "${run}")"
           statuses="$(jq '{job: .name, status: .conclusion}' <<< "${jobs}")"
           builds="$(jq 'select(.job | contains("build"))' <<< "${statuses}")"
-          failed="$(jq 'select(.status | contains("fail"))' <<< "${builds}")"
+          failed="$(jq 'select(.status | contains("success") | not)' <<< "${builds}")"
 
           if [ -z "${failed}" ]; then
             echo "OK"
