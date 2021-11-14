@@ -1,12 +1,12 @@
 self: _: {
   mbk = self.callPackage
     (
-      { writeSaneShellScriptBin, google-cloud-sdk }: writeSaneShellScriptBin {
+      { writeShellApplication, google-cloud-sdk }: writeShellApplication {
         name = "mbk";
 
-        buildInputs = [ google-cloud-sdk ];
+        runtimeInputs = [ google-cloud-sdk ];
 
-        src = ''
+        text = ''
           DOCUMENTS_BUCKET="gs://documents.meurer.org"
           MISC_BUCKET="gs://misc.meurer.org"
           MUSIC_BUCKET="gs://music.meurer.org"

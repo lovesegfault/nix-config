@@ -3,12 +3,12 @@
   # graphical/default.nix
   xdg.configFile."redshift/hooks/brightness.sh".source =
     let
-      brightness = pkgs.writeSaneShellScriptBin {
+      brightness = pkgs.writeShellApplication {
         name = "brightness.sh";
 
-        buildInputs = with pkgs; [ brillo ];
+        runtimeInputs = with pkgs; [ brillo ];
 
-        src = ''
+        text = ''
           # Set brightness via brillo when redshift status changes
 
           # Set brightness values for each status.

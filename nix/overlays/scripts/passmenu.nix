@@ -3,7 +3,7 @@ let
     { gopass
     , libnotify
     , ripgrep
-    , writeSaneShellScriptBin
+    , writeShellApplication
 
     , displayCmd
     , yankCmd
@@ -11,16 +11,16 @@ let
     , clearCmd
     , extraInputs ? [ ]
     }:
-    writeSaneShellScriptBin {
+    writeShellApplication {
       name = "passmenu";
 
-      buildInputs = [
+      runtimeInputs = [
         gopass
         libnotify
         ripgrep
       ] ++ extraInputs;
 
-      src = ''
+      text = ''
         password_list="$(gopass ls -f | rg "^(misc|hosts|websites)/.*$")"
         password_name="$(${displayCmd} <<< "$password_list")"
         password="$(gopass show --password "$password_name")"

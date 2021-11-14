@@ -1,18 +1,18 @@
 self: _: {
   screenocr = self.callPackage
     (
-      { writeSaneShellScriptBin
+      { writeShellApplication
       , coreutils
       , grim
       , slurp
       , tesseract4
       , wl-clipboard
-      }: writeSaneShellScriptBin {
+      }: writeShellApplication {
         name = "screenocr";
 
-        buildInputs = [ coreutils grim slurp tesseract4 wl-clipboard ];
+        runtimeInputs = [ coreutils grim slurp tesseract4 wl-clipboard ];
 
-        src = ''
+        text = ''
           grim -t png -g "$(slurp)" - \
             | tesseract stdin stdout -l "eng+equ" \
             | tr -d '\f' \

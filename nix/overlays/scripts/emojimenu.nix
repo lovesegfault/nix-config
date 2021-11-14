@@ -3,7 +3,7 @@ let
     { fetchurl
     , jq
     , runCommand
-    , writeSaneShellScriptBin
+    , writeShellApplication
 
     , displayCmd
     , yankCmd
@@ -20,12 +20,12 @@ let
         cat ${emoji_json} | jq -r '.[] | "\(.emoji) \t   \(.description)"' | sed -e 's,\\t,\t,g' > $out
       '';
     in
-    writeSaneShellScriptBin {
+    writeShellApplication {
       name = "emojimenu";
 
-      buildInputs = [ ] ++ extraInputs;
+      runtimeInputs = [ ] ++ extraInputs;
 
-      src = ''
+      text = ''
         emoji="$(${displayCmd} < ${emojis} | cut -f1 -d" ")"
 
         ${yankCmd} <<< "$emoji"

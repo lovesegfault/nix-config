@@ -3,22 +3,22 @@ let
     { gopass
     , libnotify
     , ripgrep
-    , writeSaneShellScriptBin
+    , writeShellApplication
 
     , displayCmd
     , yankCmd
     , extraInputs ? [ ]
     }:
-    writeSaneShellScriptBin {
+    writeShellApplication {
       name = "otpmenu";
 
-      buildInputs = [
+      runtimeInputs = [
         gopass
         libnotify
         ripgrep
       ] ++ extraInputs;
 
-      src = ''
+      text = ''
         otp_list="$(gopass ls -f | rg "^(otp)/.*$")"
         otp_name="$(${displayCmd} <<< "$otp_list")"
         otp_string="$(gopass otp "$otp_name")"

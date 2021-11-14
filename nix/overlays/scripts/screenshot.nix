@@ -1,18 +1,18 @@
 self: _: {
   screenshot = self.callPackage
     (
-      { writeSaneShellScriptBin
+      { writeShellApplication
       , libnotify
       , grim
       , slurp
       , swappy
       , wl-clipboard
-      }: writeSaneShellScriptBin {
+      }: writeShellApplication {
         name = "screenshot";
 
-        buildInputs = [ libnotify grim slurp swappy wl-clipboard ];
+        runtimeInputs = [ libnotify grim slurp swappy wl-clipboard ];
 
-        src = ''
+        text = ''
           grim -t png -g "$(slurp)" - \
             | swappy -f -
         '';

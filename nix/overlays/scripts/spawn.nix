@@ -1,16 +1,16 @@
 self: _: {
   spawn = self.callPackage
     (
-      { writeSaneShellScriptBin
+      { writeShellApplication
       , coreutils
       , systemd
       , util-linux
-      }: writeSaneShellScriptBin {
+      }: writeShellApplication {
         name = "spawn";
 
-        buildInputs = [ coreutils systemd util-linux ];
+        runtimeInputs = [ coreutils systemd util-linux ];
 
-        src = ''
+        text = ''
           [ "$#" -ge 1 ] || exit 1
           read -ra cmd <<<"$*"
           program="''${cmd[0]}"

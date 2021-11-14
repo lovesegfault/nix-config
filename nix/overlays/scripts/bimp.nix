@@ -1,16 +1,16 @@
 self: _: {
   bimp = self.callPackage
     (
-      { writeSaneShellScriptBin
+      { writeShellApplication
       , beets
       , flac
       , id3v2
       , imagemagick
       , parallel
-      }: writeSaneShellScriptBin {
+      }: writeShellApplication {
         name = "bimp";
 
-        buildInputs = [
+        runtimeInputs = [
           beets
           flac
           id3v2
@@ -18,7 +18,7 @@ self: _: {
           parallel
         ];
 
-        src = ''
+        text = ''
           function mkWorkDir() {
             if [[ ! -v WORK_DIR ]]; then
               WORK_DIR="$(mktemp -d --tmpdir=/tmp bimp.XXXXXX)"

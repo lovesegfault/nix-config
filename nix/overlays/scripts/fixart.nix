@@ -1,14 +1,14 @@
 self: _: {
   fixart = self.callPackage
     (
-      { writeSaneShellScriptBin
+      { writeShellApplication
       , beets
       , coreutils
       , findutils
-      }: writeSaneShellScriptBin {
+      }: writeShellApplication {
         name = "fixart";
-        buildInputs = [ beets coreutils findutils ];
-        src = ''
+        runtimeInputs = [ beets coreutils findutils ];
+        text = ''
           trap ctrl_c INT
 
           function ctrl_c() {
