@@ -20,8 +20,6 @@ let
     ${links}
   '';
 in
-self: super: {
-  lib = super.lib // {
-    joinHostDrvs = self.callPackage joinHostDrvs { };
-  };
+self: _: {
+  joinHostDrvs = self.callPackage joinHostDrvs { };
 }

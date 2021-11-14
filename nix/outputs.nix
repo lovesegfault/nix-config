@@ -9,13 +9,12 @@ let
   system = "x86_64-linux";
 
   inherit (builtins) attrNames readDir;
-  inherit (self.nixpkgs.lib) joinHostDrvs mapAttrs;
 in
 {
   defaultPackage.${system} = self.packages.${system}.hosts;
 
-  packages.${system}.hosts = joinHostDrvs "hosts"
-    (mapAttrs (_: v: v.profiles.system.path) self.deploy.nodes);
+  packages.${system}.hosts = self.nixpkgs.joinHostDrvs "hosts"
+    (self.nixpkgs.lib.mapAttrs (_: v: v.profiles.system.path) self.deploy.nodes);
 
   devShell.${system} = self.nixpkgs.callPackage ./shell.nix {
     inherit (deploy-rs.packages.${system}) deploy-rs;
