@@ -13,7 +13,6 @@
 , agenix
 , deploy-rs
 , pre-commit-check
-, ssh-to-pgp
 }: mkShell {
   name = "nix-config";
 
@@ -31,8 +30,7 @@
     jq
 
     agenix
-    deploy-rs
-    ssh-to-pgp
+    deploy-rs.deploy-rs
   ];
 
   shellHook = ''

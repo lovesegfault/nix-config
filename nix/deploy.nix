@@ -1,4 +1,4 @@
-{ deploy-rs
+{ self
 , ...
 }@inputs:
 let
@@ -6,7 +6,7 @@ let
 
   mkHost = name: system: import ./mk-host.nix inputs { inherit name system; };
 
-  mkPath = name: system: deploy-rs.lib.${system}.activate.nixos (mkHost name system);
+  mkPath = name: system: self.nixpkgs.deploy-rs.lib.activate.nixos (mkHost name system);
 in
 {
   deploy = {

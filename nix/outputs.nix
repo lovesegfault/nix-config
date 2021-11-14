@@ -17,7 +17,6 @@ in
     (self.nixpkgs.lib.mapAttrs (_: v: v.profiles.system.path) self.deploy.nodes);
 
   devShell.${system} = self.nixpkgs.callPackage ./shell.nix {
-    inherit (deploy-rs.packages.${system}) deploy-rs;
     inherit (self.checks.${system}) pre-commit-check;
   };
 
@@ -27,7 +26,7 @@ in
     overlays = (map
       (f: import (./overlays + "/${f}"))
       (attrNames (readDir ./overlays)))
-    ++ [ agenix.overlay ];
+    ++ [ agenix.overlay deploy-rs.overlay ];
 
     config = {
       allowUnfree = true;
@@ -36,7 +35,7 @@ in
   };
 
 
-  checks.${system} = (deploy-rs.lib."${system}".deployChecks self.deploy) // {
+  checks.${system} = (self.nixpkgs.deploy-rs.lib.deployChecks self.deploy) // {
     pre-commit-check = pre-commit-hooks.lib."${system}".run {
       src = ../.;
       hooks = {
