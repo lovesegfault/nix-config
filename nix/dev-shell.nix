@@ -10,7 +10,7 @@ mkShell {
   nativeBuildInputs = [
     (luajit.withPackages (p: with p; [ luacheck ]))
     act
-    agenix
+    ragenix
     cachix
     deploy-rs.deploy-rs
     jq

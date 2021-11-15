@@ -2,11 +2,6 @@
   description = "lovesegfault's NixOS config";
 
   inputs = {
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs = {
@@ -30,6 +25,12 @@
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "utils";
+    };
+
+    ragenix = {
+      url = "github:yaxitech/ragenix";
+      inputs.flake-utils.follows = "utils";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     templates.url = "github:NixOS/templates";

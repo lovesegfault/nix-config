@@ -1,9 +1,9 @@
 { self
-, agenix
 , deploy-rs
 , home-manager
 , impermanence
 , nixpkgs
+, ragenix
 , templates
 , ...
 }@inputs:
@@ -11,7 +11,7 @@ let
   inherit (nixpkgs.lib) mapAttrs' nameValuePair nixosSystem;
 
   genModules = hostName: system: [
-    agenix.nixosModules.age
+    ragenix.nixosModules.age
     impermanence.nixosModules.impermanence
     home-manager.nixosModules.home-manager
 

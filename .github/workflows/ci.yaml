@@ -17,7 +17,7 @@ jobs:
         with:
           install_url: https://nixos-nix-install-tests.cachix.org/serve/ipa0c64h689jb4ys6hxsky2r8xpld0hv/install
           install_options: '--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve'
-          extra_nix_config: experimental-features = nix-command flakes
+          extra_nix_config: experimental-features = nix-command flakes recursive-nix
       - uses: cachix/cachix-action@v10
         with:
           name: nix-config
@@ -39,7 +39,7 @@ jobs:
         with:
           install_url: https://nixos-nix-install-tests.cachix.org/serve/ipa0c64h689jb4ys6hxsky2r8xpld0hv/install
           install_options: '--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve'
-          extra_nix_config: experimental-features = nix-command flakes
+          extra_nix_config: experimental-features = nix-command flakes recursive-nix
       - uses: cachix/cachix-action@v10
         with:
           name: nix-config
@@ -63,7 +63,7 @@ jobs:
         with:
           install_url: https://nixos-nix-install-tests.cachix.org/serve/ipa0c64h689jb4ys6hxsky2r8xpld0hv/install
           install_options: '--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve'
-          extra_nix_config: experimental-features = nix-command flakes
+          extra_nix_config: experimental-features = nix-command flakes recursive-nix
       - name: setup-aarch64-builder
         env:
           AARCH64_BOX_KEY: ${{ secrets.AARCH64_BOX_KEY }}

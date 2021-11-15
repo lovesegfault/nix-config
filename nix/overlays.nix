@@ -1,4 +1,4 @@
-{ agenix, deploy-rs, nixpkgs, ... }:
+{ deploy-rs, nixpkgs, ragenix, ... }:
 let
   inherit (nixpkgs.lib) mapAttrs' nameValuePair removeSuffix;
   inherit (builtins) readDir;
@@ -9,6 +9,6 @@ let
     (readDir ./overlays);
 in
 {
-  agenix = final: prev: agenix.overlay final prev;
+  ragenix = final: prev: ragenix.overlay final prev;
   deploy-rs = final: prev: deploy-rs.overlay final prev;
 } // localOverlays
