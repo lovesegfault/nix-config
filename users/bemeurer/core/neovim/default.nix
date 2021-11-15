@@ -75,10 +75,13 @@
                   drv.pname
                   (map (v: "tree-sitter-${v}-grammar") [
                     "agda"
+                    "c-sharp"
+                    "cpp"
+                    "fennel"
                     "fluent"
-                    "svelte"
                     "swift"
                     "verilog"
+                    "zig"
                   ])
               )
               pkgs.tree-sitter.allGrammars
