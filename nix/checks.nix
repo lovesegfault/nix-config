@@ -9,7 +9,7 @@ with self.nixpkgs.${system};
 
 {
   pre-commit-check = pre-commit-hooks.lib.${system}.run {
-    src = ../.;
+    src = gitignoreSource ../.;
     hooks = {
       nixpkgs-fmt.enable = true;
       nix-linter.enable = true;

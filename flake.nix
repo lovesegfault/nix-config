@@ -10,7 +10,10 @@
       };
     };
 
-    utils.url = "github:numtide/flake-utils";
+    gitignore = {
+      url = "github:hercules-ci/gitignore.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -34,6 +37,8 @@
     };
 
     templates.url = "github:NixOS/templates";
+
+    utils.url = "github:numtide/flake-utils";
   };
 
   outputs = { self, nixpkgs, utils, ... }@inputs:
