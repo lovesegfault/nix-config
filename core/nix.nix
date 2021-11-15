@@ -14,7 +14,7 @@
     distributedBuilds = true;
     extraOptions = ''
       builders-use-substitutes = true
-      experimental-features = nix-command flakes
+      experimental-features = nix-command flakes recursive-nix
       flake-registry = /etc/nix/registry.json
     '';
     nrBuildUsers = config.nix.maxJobs * 2;
@@ -22,6 +22,7 @@
       automatic = true;
       dates = [ "03:00" ];
     };
+    systemFeatures = [ "recursive-nix" ];
     trustedUsers = [ "root" "@wheel" ];
   };
 }
