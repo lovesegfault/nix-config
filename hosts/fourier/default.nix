@@ -64,7 +64,7 @@
     pulseaudio.enable = false;
   };
 
-  home-manager.users.bemeurer = { ... }: {
+  home-manager.users.bemeurer = {
     imports = [
       ../../users/bemeurer/music
     ];
@@ -119,15 +119,9 @@
       group = "media";
       guiAddress = "0.0.0.0:8384";
       openDefaultPorts = true;
-      devices = with import ../../nix/hosts.nix; {
-        bohr = {
-          id = "IBTRLZT-R5UVCQ5-3OT3RT3-V74EA5I-A7W6EA5-BEMUZYQ-GSRGG2B-B7OTGAA";
-          addresses = [ "quic://10.0.0.4" "quic://${bohr.hostname}" ];
-        };
-        hegel = {
-          id = "MX6M6ZF-Z7S74CI-EH3EKCY-SC4RYJ2-DXFT47D-EWKAQ5U-5G4KKWH-JRVPGAA";
-          addresses = [ "quic://10.0.0.116" "quic://${hegel.hostname}" ];
-        };
+      devices = {
+        bohr.id = "IBTRLZT-R5UVCQ5-3OT3RT3-V74EA5I-A7W6EA5-BEMUZYQ-GSRGG2B-B7OTGAA";
+        hegel.id = "MX6M6ZF-Z7S74CI-EH3EKCY-SC4RYJ2-DXFT47D-EWKAQ5U-5G4KKWH-JRVPGAA";
       };
       folders.music = {
         devices = [ "bohr" "hegel" ];

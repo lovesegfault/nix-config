@@ -58,7 +58,7 @@
     nvidia.nvidiaSettings = false;
   };
 
-  home-manager.users.bemeurer = { ... }: { imports = [ ../../users/bemeurer/music ]; };
+  home-manager.users.bemeurer = { imports = [ ../../users/bemeurer/music ]; };
 
   networking = {
     # Roon

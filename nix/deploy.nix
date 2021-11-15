@@ -1,23 +1,66 @@
 { self
+, agenix
+, deploy-rs
+, home-manager
+, impermanence
+, nixpkgs
+, templates
 , ...
 }@inputs:
 let
-  inherit (builtins) elemAt mapAttrs;
+  inherit (nixpkgs.lib) mapAttrs' nameValuePair nixosSystem;
 
-  mkHost = name: system: import ./mk-host.nix inputs { inherit name system; };
+  genModules = hostName: system: [
+    agenix.nixosModules.age
+    impermanence.nixosModules.impermanence
+    home-manager.nixosModules.home-manager
 
-  mkPath = name: system: self.nixpkgs.deploy-rs.lib.activate.nixos (mkHost name system);
+    {
+      nixpkgs = {
+        localSystem.system = system;
+        inherit (self.nixpkgs.${system}) overlays config;
+      };
+
+      nix.registry = {
+        self.flake = self;
+        template = {
+          flake = templates;
+          from = {
+            id = "templates";
+            type = "indirect";
+          };
+        };
+        nixpkgs = {
+          flake = nixpkgs;
+          from = {
+            id = "nixpkgs";
+            type = "indirect";
+          };
+        };
+      };
+
+      networking.hosts = mapAttrs' (n: v: nameValuePair v.address [ n ]) (import ./hosts.nix);
+    }
+
+    (../hosts + "/${hostName}")
+  ];
+
+  mkHost = hostName: system: nixpkgs.lib.nixosSystem {
+    modules = genModules hostName system;
+    specialArgs.inputs = inputs;
+  };
+
+  mkActivation = hostName: localSystem:
+    deploy-rs.lib.${localSystem}.activate.nixos (mkHost hostName localSystem);
 in
 {
-  deploy = {
-    autoRollback = true;
-    magicRollback = true;
-    user = "root";
-    nodes = mapAttrs
-      (n: v: {
-        inherit (v) hostname;
-        profiles.system.path = mkPath n v.system;
-      })
-      (import ./hosts.nix);
-  };
+  autoRollback = true;
+  magicRollback = true;
+  user = "root";
+  nodes = builtins.mapAttrs
+    (host: info: {
+      hostname = info.address;
+      profiles.system.path = mkActivation host info.localSystem;
+    })
+    (import ./hosts.nix);
 }

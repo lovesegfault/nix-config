@@ -11,11 +11,11 @@
       url = "github:serokell/deploy-rs";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        utils.follows = "flake-utils";
+        utils.follows = "utils";
       };
     };
 
-    flake-utils.url = "github:numtide/flake-utils";
+    utils.url = "github:numtide/flake-utils";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -29,12 +29,31 @@
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
+      inputs.flake-utils.follows = "utils";
     };
 
     templates.url = "github:NixOS/templates";
   };
 
-  # FIXME: I can't η-reduce this for some reason
-  outputs = args: import ./nix/outputs.nix args;
+  outputs = { self, nixpkgs, utils, ... }@inputs:
+    {
+      deploy = import ./nix/deploy.nix inputs;
+
+      overlays = import ./nix/overlays.nix inputs;
+    }
+    // utils.lib.eachDefaultSystem (system: {
+      checks = import ./nix/checks.nix inputs system;
+
+      devShell = import ./nix/dev-shell.nix inputs system;
+
+      nixpkgs = import nixpkgs {
+        inherit system;
+        overlays = builtins.attrValues self.overlays;
+        config.allowUnfree = true;
+      };
+
+      packages.hosts = import ./nix/join-host-drvs.nix inputs system;
+
+      defaultPackage = self.packages.${system}.hosts;
+    });
 }

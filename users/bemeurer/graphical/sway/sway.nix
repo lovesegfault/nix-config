@@ -11,7 +11,7 @@
           terminal = config.wayland.windowManager.sway.config.terminal;
         in
         lib.mkOptionDefault {
-          "${modifier}+Return" = execSpawn "${terminal}";
+          "${modifier}+Return" = execSpawn terminal;
           "${modifier}+d" = execSpawn "${pkgs.drunmenu-wayland}/bin/drunmenu";
           "${modifier}+m" = execSpawn "${pkgs.emojimenu-wayland}/bin/emojimenu";
           "${modifier}+o" = execSpawn "${pkgs.screenocr}/bin/screenocr";

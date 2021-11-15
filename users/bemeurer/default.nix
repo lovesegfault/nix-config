@@ -27,7 +27,7 @@ with lib;
     passwordFile = config.age.secrets.bemeurerPassword.path;
   };
 
-  home-manager.users.bemeurer = { ... }: {
+  home-manager.users.bemeurer = {
     imports = [
       "${inputs.impermanence}/home-manager.nix"
       ./core

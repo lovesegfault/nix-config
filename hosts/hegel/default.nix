@@ -94,7 +94,7 @@
     };
   };
 
-  home-manager.users.bemeurer = { ... }: {
+  home-manager.users.bemeurer = {
     imports = [ ../../users/bemeurer/trusted ];
   };
 

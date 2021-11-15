@@ -12,7 +12,7 @@
           terminal = config.xsession.windowManager.i3.config.terminal;
         in
         lib.mkOptionDefault {
-          "${modifier}+Return" = execSpawn "${terminal}";
+          "${modifier}+Return" = execSpawn terminal;
           "${modifier}+d" = execSpawn "${pkgs.drunmenu-x11}/bin/drunmenu";
           "${modifier}+m" = execSpawn "${pkgs.emojimenu-x11}/bin/emojimenu";
           "${modifier}+t" = execSpawn "${pkgs.otpmenu-x11}/bin/otpmenu";

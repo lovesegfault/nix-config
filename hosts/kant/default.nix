@@ -21,7 +21,7 @@
     fsType = "ext4";
   };
 
-  home-manager.users.bemeurer = { ... }: {
+  home-manager.users.bemeurer = {
     home.packages = with pkgs; [ weechat ];
   };
 
