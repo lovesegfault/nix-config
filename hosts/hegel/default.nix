@@ -35,7 +35,6 @@
       '';
     };
     kernel.sysctl."vm.swappiness" = 1;
-    kernel.sysctl."net.ipv6.conf.wlan0.use_tempaddr" = 0; # https://github.com/tailscale/tailscale/issues/2045
     kernelModules = [ "kvm-amd" "ddcci-backlight" "i2c-dev" "nct6775" ];
     kernelPackages = pkgs.linuxPackages_xanmod_lto_zen3;
     kernelParams = [

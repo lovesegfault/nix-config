@@ -16,11 +16,7 @@ in
     ./zsh.nix
   ];
 
-  boot = {
-    # https://github.com/tailscale/tailscale/issues/2045
-    kernel.sysctl."net.ipv6.conf.all.use_tempaddr" = 0;
-    kernelParams = [ "log_buf_len=10M" ];
-  };
+  boot.kernelParams = [ "log_buf_len=10M" ];
 
   environment = {
     etc."nixos/configuration.nix".source = dummyConfig;
