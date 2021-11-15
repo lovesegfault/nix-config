@@ -4,8 +4,7 @@ on:
     branches:
       - master
       - try
-      - update-*
-      - dependabot/*
+  pull_request:
 jobs:
   lints:
     runs-on: ubuntu-latest
