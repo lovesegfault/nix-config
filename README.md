@@ -17,10 +17,10 @@ Hostnames are picked from my [hostname list][hostnames]
 .
 ├── core         # Baseline configurations applicable to all machines
 ├── dev          # Developer tooling configuration
+├── graphical    # Sway/i3 configuration for the desktop
 ├── hardware     # Hardware-specific configuration
 ├── hosts        # Machine definitions
 ├── nix          # Nix build support files (overlays, deployment code, ci generators)
-├── graphical    # Sway/i3 configuration for the desktop
 └── users        # Per-user configurations
 ```
 
@@ -28,12 +28,15 @@ Hostnames are picked from my [hostname list][hostnames]
 
 ### deploying
 To deploy all hosts:
-```shell
-deploy
+
+```console
+$ deploy
 ```
+
 To deploy a specific host:
-```shell
-deploy .#myHost
+
+```console
+$ deploy .#myHost
 ```
 
 ### adding overlays
