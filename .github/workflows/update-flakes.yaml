@@ -16,7 +16,6 @@ jobs:
       - uses: cachix/install-nix-action@v15
         with:
           extra_nix_config: |
-            access-token = github.com=${{ secrets.GITHUB_TOKEN }}
             experimental-features = nix-command flakes recursive-nix
       - id: get-flakes
         run: |
@@ -66,7 +65,6 @@ jobs:
       - uses: cachix/install-nix-action@v15
         with:
           extra_nix_config: |
-            access-token = github.com=${{ secrets.GITHUB_TOKEN }}
             experimental-features = nix-command flakes recursive-nix
       - uses: cachix/cachix-action@v10
         with:

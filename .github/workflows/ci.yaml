@@ -15,7 +15,6 @@ jobs:
       - uses: cachix/install-nix-action@v15
         with:
           extra_nix_config: |
-            access-token = github.com=${{ secrets.GITHUB_TOKEN }}
             experimental-features = nix-command flakes recursive-nix
       - uses: cachix/cachix-action@v10
         with:
@@ -35,7 +34,6 @@ jobs:
       - uses: cachix/install-nix-action@v15
         with:
           extra_nix_config: |
-            access-token = github.com=${{ secrets.GITHUB_TOKEN }}
             experimental-features = nix-command flakes recursive-nix
       - uses: cachix/cachix-action@v10
         with:
@@ -71,7 +69,6 @@ jobs:
       - uses: cachix/install-nix-action@v15
         with:
           extra_nix_config: |
-            access-token = github.com=${{ secrets.GITHUB_TOKEN }}
             experimental-features = nix-command flakes recursive-nix
       - name: setup-aarch64-builder
         env:
