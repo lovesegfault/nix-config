@@ -9,8 +9,8 @@
       "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
-    daemonIONiceLevel = 5;
-    daemonNiceLevel = 10;
+    daemonCPUSchedPolicy = "batch";
+    daemonIOSchedPriority = 5;
     distributedBuilds = true;
     extraOptions = ''
       builders-use-substitutes = true
