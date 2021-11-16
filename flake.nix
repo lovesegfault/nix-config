@@ -45,7 +45,7 @@
     {
       deploy = import ./nix/deploy.nix inputs;
 
-      overlays = import ./nix/overlays.nix inputs;
+      overlay = import ./nix/overlay.nix inputs;
     }
     // utils.lib.eachDefaultSystem (system: {
       checks = import ./nix/checks.nix inputs system;
@@ -54,7 +54,7 @@
 
       nixpkgs = import nixpkgs {
         inherit system;
-        overlays = builtins.attrValues self.overlays;
+        overlays = [ self.overlay ];
         config.allowUnfree = true;
       };
 
