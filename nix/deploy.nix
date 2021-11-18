@@ -22,7 +22,6 @@ let
       };
 
       nix.registry = {
-        self.flake = self;
         templates.flake = templates;
         nixpkgs.flake = nixpkgs;
       };
