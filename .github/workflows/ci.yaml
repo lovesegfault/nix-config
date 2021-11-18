@@ -22,8 +22,18 @@ jobs:
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
       - name: run-lints
         run: |
-          nix build -L .#checks.x86_64-linux.pre-commit-check || exit 1
-          nix-instantiate --parse **/*.nix >& /dev/null || exit 1
+          nix build -L .#checks.x86_64-linux.pre-commit-check
+          nix-instantiate --parse **/*.nix >& /dev/null
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.5
+      - uses: cachix/install-nix-action@v15
+        with:
+          extra_nix_config: experimental-features = nix-command flakes recursive-nix
+      - name: eval
+        run: |
+          nix eval -L .#hosts
 
   build-shell:
     runs-on: ubuntu-latest
