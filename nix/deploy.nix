@@ -23,20 +23,8 @@ let
 
       nix.registry = {
         self.flake = self;
-        template = {
-          flake = templates;
-          from = {
-            id = "templates";
-            type = "indirect";
-          };
-        };
-        nixpkgs = {
-          flake = nixpkgs;
-          from = {
-            id = "nixpkgs";
-            type = "indirect";
-          };
-        };
+        templates.flake = templates;
+        nixpkgs.flake = nixpkgs;
       };
 
       networking.hosts = mapAttrs' (n: v: nameValuePair v.address [ n ]) (import ./hosts.nix);
