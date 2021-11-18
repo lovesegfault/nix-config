@@ -11,8 +11,6 @@ jobs:
       noop: ${{ steps.get-flakes.outputs.noop }}
     steps:
       - uses: actions/checkout@v2.3.5
-        with:
-          fetch-depth: 0
       - uses: cachix/install-nix-action@v15
         with:
           extra_nix_config: |
@@ -60,8 +58,6 @@ jobs:
       matrix: ${{ fromJson(needs.get-flakes.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v2.3.5
-        with:
-          fetch-depth: 0
       - uses: cachix/install-nix-action@v15
         with:
           extra_nix_config: |
