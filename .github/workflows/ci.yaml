@@ -32,6 +32,28 @@ jobs:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
             experimental-features = nix-command flakes recursive-nix
+      - name: setup-aarch64-builder
+        env:
+          AARCH64_BOX_KEY: ${{ secrets.AARCH64_BOX_KEY }}
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+        run: |
+          sudo mkdir -p /root/.ssh
+          echo "$AARCH64_BOX_KEY" | sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
+          sudo chmod 0600 /root/.ssh/aarch64.community.nixos
+          echo "$KNOWN_HOSTS" | sudo tee -a /root/.ssh/known_hosts > /dev/null
+          nix_cfg=(
+            "builders-use-substitutes = true"
+          )
+          builder_cfg=(
+            lovesegfault@aarch64.nixos.community
+            aarch64-linux
+            /root/.ssh/aarch64.community.nixos
+            64
+            8
+            big-parallel
+          )
+          echo "${builder_cfg[*]}" | sudo tee /etc/nix/machines > /dev/null
+          echo "${nix_cfg[*]}" | sudo tee -a /etc/nix/nix.conf > /dev/null
       - name: eval
         run: |
           nix eval -L .#hosts
