@@ -23,8 +23,44 @@ jobs:
         run: |
           nix build -L .#checks.x86_64-linux.pre-commit-check
           nix-instantiate --parse **/*.nix >& /dev/null
-  eval:
+
+  build-shell:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.5
+      - uses: cachix/install-nix-action@v15
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            experimental-features = nix-command flakes recursive-nix
+      - uses: cachix/cachix-action@v10
+        with:
+          name: nix-config
+          signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+      - name: build-shell
+        run: |
+          cachix watch-exec nix-config -- \
+            nix build -L .#devShell.x86_64-linux.inputDerivation
+
+  get-hosts:
+    runs-on: ubuntu-latest
+    outputs:
+      hosts: ${{ steps.get-hosts.outputs.hosts }}
+    steps:
+      - uses: actions/checkout@v2.3.5
+      - uses: cachix/install-nix-action@v15
+      - id: get-hosts
+        run: |
+          echo "::set-output name=hosts::$(nix eval --json -f ./nix/hosts.nix | jq -c 'keys')"
+
+  eval-host:
+    name: eval-${{ matrix.host }}
+    runs-on: ubuntu-latest
+    needs: get-hosts
+    strategy:
+      fail-fast: false
+      matrix:
+        host: ${{ fromJson(needs.get-hosts.outputs.hosts) }}
     steps:
       - uses: actions/checkout@v2.3.5
       - uses: cachix/install-nix-action@v15
@@ -54,38 +90,12 @@ jobs:
           )
           echo "${builder_cfg[*]}" | sudo tee /etc/nix/machines > /dev/null
           echo "${nix_cfg[*]}" | sudo tee -a /etc/nix/nix.conf > /dev/null
-      - name: eval
-        run: |
-          nix eval -L .#hosts
-
-  build-shell:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2.3.5
-      - uses: cachix/install-nix-action@v15
-        with:
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            experimental-features = nix-command flakes recursive-nix
       - uses: cachix/cachix-action@v10
         with:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
-      - name: build-shell
-        run: |
-          cachix watch-exec nix-config -- \
-            nix build -L .#devShell.x86_64-linux.inputDerivation
-
-  get-hosts:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.get-hosts.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v2.3.5
-      - uses: cachix/install-nix-action@v15
-      - id: get-hosts
-        run: |
-          echo "::set-output name=matrix::$(nix eval --json -f ./nix/hosts.nix | jq -c 'del(.foucault,.hegel) | { host: keys }')"
+      - name: eval
+        run: nix eval -L .#hosts.${{ matrix.host }}
 
   build-host:
     name: build-${{ matrix.host }}
@@ -93,7 +103,11 @@ jobs:
     needs: get-hosts
     strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.get-hosts.outputs.matrix) }}
+      matrix:
+        host: ${{ fromJson(needs.get-hosts.outputs.hosts) }}
+        exclude:
+          - host: hegel
+          - host: foucault
     steps:
       - uses: actions/checkout@v2.3.5
       - uses: cachix/install-nix-action@v15
@@ -135,7 +149,7 @@ jobs:
 
   check:
     runs-on: ubuntu-latest
-    needs: build-host
+    needs: [ eval-host, build-host ]
     if: always()
     steps:
       - name: check
