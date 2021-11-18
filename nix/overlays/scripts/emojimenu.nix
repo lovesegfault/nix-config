@@ -32,16 +32,16 @@ let
       '';
     };
 in
-self: _: {
-  emojimenu-wayland = self.callPackage emojimenu {
+final: _: {
+  emojimenu-wayland = final.callPackage emojimenu {
     displayCmd = ''wofi --cache-file="$XDG_CACHE_HOME/wofi/emojimenu" -d "allow_markup=false" -p emoji--show dmenu'';
     yankCmd = "wl-copy --trim-newline";
-    extraInputs = with self; [ wl-clipboard wofi ];
+    extraInputs = with final; [ wl-clipboard wofi ];
   };
 
-  emojimenu-x11 = self.callPackage emojimenu {
+  emojimenu-x11 = final.callPackage emojimenu {
     displayCmd = ''rofi -cache-dir "$XDG_CACHE_HOME/rofi/emojimenu" -p emoji -dmenu'';
     yankCmd = "xclip -in -rmlastnl -selection clipboard";
-    extraInputs = with self; [ rofi xclip ];
+    extraInputs = with final; [ rofi xclip ];
   };
 }

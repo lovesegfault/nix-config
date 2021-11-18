@@ -1,16 +1,16 @@
-self: _: {
-  hyperpixel4-init = self.stdenv.mkDerivation {
+final: _: {
+  hyperpixel4-init = final.stdenv.mkDerivation {
     pname = "hyperpixel4-init";
     version = "2020-08-11";
 
-    src = self.fetchFromGitHub {
+    src = final.fetchFromGitHub {
       owner = "pimoroni";
       repo = "hyperpixel4";
       rev = "6633ee6b63dc6cf8ae5463852b4a24527b8c52f9";
       sha256 = "02qizyp01kfxc7759hcy02b14b489bayfpp5pir97341cwj1l59p";
     };
 
-    buildInputs = [ self.libgpiod ];
+    buildInputs = [ final.libgpiod ];
 
     buildPhase = ''
       gcc -o hyperpixel4-init src/hyperpixel4-init.c -lgpiod
@@ -23,18 +23,18 @@ self: _: {
     '';
   };
 
-  hyperpixel4 = self.stdenv.mkDerivation {
+  hyperpixel4 = final.stdenv.mkDerivation {
     pname = "hyperpixel4";
     version = "2020-08-11";
 
-    src = self.fetchFromGitHub {
+    src = final.fetchFromGitHub {
       owner = "pimoroni";
       repo = "hyperpixel4";
       rev = "c5e12814a3e3da520a16c4c1433ca767b0cdbc00";
       sha256 = "1lnqvhn2zsril332ngj2sib0qsqlcjnir1xkrw7xq5wwsrwvpypv";
     };
 
-    buildInputs = [ self.dtc ];
+    buildInputs = [ final.dtc ];
 
     buildPhase = ''
       dtc -@ -I dts -O dtb -o hyperpixel4-common.dtbo src/hyperpixel4-common-overlay.dts

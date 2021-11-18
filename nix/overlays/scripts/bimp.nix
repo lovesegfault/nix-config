@@ -1,5 +1,5 @@
-self: _: {
-  bimp = self.callPackage
+final: _: {
+  bimp = final.callPackage
     (
       { writeShellApplication
       , beets

@@ -1,5 +1,5 @@
-self: _: {
-  colorcheck = self.callPackage
+final: _: {
+  colorcheck = final.callPackage
     (
       { stdenv, fetchurl, perl }:
 

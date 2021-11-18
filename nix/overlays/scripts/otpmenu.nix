@@ -31,17 +31,17 @@ let
       '';
     };
 in
-self: _: {
-  otpmenu-wayland = self.callPackage otpmenu {
+final: _: {
+  otpmenu-wayland = final.callPackage otpmenu {
     displayCmd = ''wofi --cache-file="$XDG_CACHE_HOME/wofi/otpmenu" -p otp --show dmenu'';
     yankCmd = "wl-copy --trim-newline";
-    extraInputs = with self; [ wl-clipboard wofi ];
+    extraInputs = with final; [ wl-clipboard wofi ];
   };
 
-  otpmenu-x11 = self.callPackage otpmenu {
+  otpmenu-x11 = final.callPackage otpmenu {
     displayCmd = ''rofi -cache-dir "$XDG_CACHE_HOME/rofi/otpmenu" -p otp -dmenu'';
     yankCmd = "xclip -in -rmlastnl -selection clipboard";
-    extraInputs = with self; [ rofi xclip ];
+    extraInputs = with final; [ rofi xclip ];
   };
 }
 

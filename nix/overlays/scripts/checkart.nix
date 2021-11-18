@@ -1,5 +1,5 @@
-self: _: {
-  checkart = self.callPackage
+final: _: {
+  checkart = final.callPackage
     (
       { writeShellApplication
       , beets

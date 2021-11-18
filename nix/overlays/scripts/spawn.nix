@@ -1,5 +1,5 @@
-self: _: {
-  spawn = self.callPackage
+final: _: {
+  spawn = final.callPackage
     (
       { writeShellApplication
       , coreutils

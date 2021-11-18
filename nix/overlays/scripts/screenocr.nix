@@ -1,5 +1,5 @@
-self: _: {
-  screenocr = self.callPackage
+final: _: {
+  screenocr = final.callPackage
     (
       { writeShellApplication
       , coreutils

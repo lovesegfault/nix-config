@@ -1,5 +1,5 @@
-self: _: {
-  screenshot = self.callPackage
+final: _: {
+  screenshot = final.callPackage
     (
       { writeShellApplication
       , libnotify

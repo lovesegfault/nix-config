@@ -1,6 +1,6 @@
-self: super: {
-  mosh = super.mosh.overrideAttrs (_: {
-    src = self.fetchFromGitHub {
+final: prev: {
+  mosh = prev.mosh.overrideAttrs (_: {
+    src = final.fetchFromGitHub {
       owner = "mobile-shell";
       repo = "mosh";
       rev = "e023e81c08897c95271b4f4f0726ec165bb6e1bd";
@@ -8,7 +8,7 @@ self: super: {
     };
 
     patches = [
-      (self.fetchpatch {
+      (final.fetchpatch {
         url = "https://gist.githubusercontent.com/lovesegfault/dedd37512507cce2d209e924067af860/raw/f479e158d81ebd6807b4fa3783f9a3036503c6b9/gistfile0.txt";
         sha256 = "sha256-wNBNqpTfPVWB4tBeYOXU6D7DsXXkKuQxmfOQ5BbKVcw=";
       })
@@ -16,7 +16,7 @@ self: super: {
 
     postPatch = ''
       substituteInPlace scripts/mosh.pl \
-          --subst-var-by ssh "${self.openssh}/bin/ssh"
+          --subst-var-by ssh "${final.openssh}/bin/ssh"
       substituteInPlace scripts/mosh.pl \
           --subst-var-by mosh-client "$out/bin/mosh-client"
     '';

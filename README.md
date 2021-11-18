@@ -44,8 +44,8 @@ $ deploy .#myHost
 Overlays should be added as individual nix files to ./nix/overlays with format
 
 ```nix
-self: super: {
-    hello = (super.hello.overrideAttrs (oldAttrs: { doCheck = false; }));
+final: prev: {
+    hello = (prev.hello.overrideAttrs (oldAttrs: { doCheck = false; }));
 }
 ```
 

@@ -1,5 +1,5 @@
-self: _: {
-  mbk = self.callPackage
+final: _: {
+  mbk = final.callPackage
     (
       { writeShellApplication, google-cloud-sdk }: writeShellApplication {
         name = "mbk";

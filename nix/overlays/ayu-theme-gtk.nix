@@ -1,5 +1,5 @@
-self: _: {
-  ayu-theme-gtk = self.callPackage
+final: _: {
+  ayu-theme-gtk = final.callPackage
     (
       { stdenv
       , fetchFromGitHub

@@ -1,5 +1,5 @@
-self: _: {
-  fixart = self.callPackage
+final: _: {
+  fixart = final.callPackage
     (
       { writeShellApplication
       , beets

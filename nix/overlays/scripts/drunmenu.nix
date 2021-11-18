@@ -18,8 +18,8 @@ let
       '';
     };
 in
-self: _: {
-  drunmenu-wayland = self.callPackage drunmenu {
+final: _: {
+  drunmenu-wayland = final.callPackage drunmenu {
     displayCmd = ''
       wofi \
         --allow-images \
@@ -31,16 +31,16 @@ self: _: {
         --show=drun |
         sed "s/%[a-zA-Z]//g"
     '';
-    extraInputs = with self; [ gnused wofi ];
+    extraInputs = with final; [ gnused wofi ];
   };
 
-  drunmenu-x11 = self.callPackage drunmenu {
+  drunmenu-x11 = final.callPackage drunmenu {
     displayCmd = ''
       rofi \
         -cache-dir "$XDG_CACHE_HOME/rofi/drunmenu" \
         -run-command "echo {cmd}" \
         -show drun
     '';
-    extraInputs = with self; [ rofi ];
+    extraInputs = with final; [ rofi ];
   };
 }

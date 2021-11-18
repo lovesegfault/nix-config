@@ -1,4 +1,4 @@
-_: super:
+_: prev:
 let
   optimizedFlags = [
     # Enable all safe optimizations
@@ -33,9 +33,9 @@ let
   });
 
   optimize = names:
-    super.lib.genAttrs
+    prev.lib.genAttrs
       names
-      (name: overrideFlags ltoFlags super.${name});
+      (name: overrideFlags ltoFlags prev.${name});
 in
 optimize [
   "neovim-unwrapped"
