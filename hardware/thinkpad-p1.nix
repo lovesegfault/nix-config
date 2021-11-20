@@ -69,7 +69,10 @@
         USB_WHITELIST = [ "0bda:0328" "1050:0407" "056a:5193" ];
       };
     };
-
+    upower = {
+      enable = true;
+      criticalPowerAction = "PowerOff";
+    };
     xserver.dpi = 96;
   };
 
