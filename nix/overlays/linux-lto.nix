@@ -74,20 +74,6 @@ let
 
         meta.broken = kFinal.kernel.kernelOlder "3.10";
       });
-
-      ddcci-driver = kPrev.ddcci-driver.overrideAttrs (old: {
-        version = "0.4.2";
-        name = "ddcci-driver-${kFinal.kernel.version}-0.4.2";
-
-        patches = (old.patches or [ ]) ++ [
-          (final.fetchpatch {
-            url = "https://gitlab.com/ddcci-driver-linux/ddcci-driver-linux/-/commit/bf9d79852cbd0aa5c2e288ce51b8280f74a1f5d2.patch";
-            sha256 = "sha256-ShqVzkoRnlX4Y5ARY11YVYatFI1K7bAtLulP3/8/nwg=";
-          })
-        ];
-
-        meta.broken = kFinal.kernel.kernelOlder "5.1";
-      });
     }
   );
 in
