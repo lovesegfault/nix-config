@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1634404028,
-        "narHash": "sha256-JyP2Y6JCCYvUcVz7CXX5pXUfTGTU4GX51Yza82BgMfk=",
+        "lastModified": 1637458245,
+        "narHash": "sha256-2k0u5hO0o9p8LmcyDjGAEdZge7GGvZnKkJZEarLI9pA=",
         "owner": "ryantm",
         "repo": "agenix",
-        "rev": "53aa91b4170da35a96fab1577c9a34bc0da44e27",
+        "rev": "4a93de2bebf58a458611a5918a0ddd82d4ed15b1",
         "type": "github"
       },
       "original": {
@@ -206,11 +206,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1637492603,
-        "narHash": "sha256-d6ZVzaF88jERZK2V8viQSB600aRwOfHOI+zKrc2LQrg=",
+        "lastModified": 1637494886,
+        "narHash": "sha256-0+spnwApn1FU3ie8I1f6hXWVCK0K9NuL2V32Aokb534=",
         "owner": "yaxitech",
         "repo": "ragenix",
-        "rev": "db353f688a70c1d71723269f3c76b0bf945ffc9b",
+        "rev": "f2e1805199281aaab6cafcbf3e9240f8e24ef0a3",
         "type": "github"
       },
       "original": {
