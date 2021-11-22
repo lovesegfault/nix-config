@@ -27,7 +27,7 @@ final: _: {
         --insensitive \
         --define "drun-print_command=true" \
         --term=foot \
-        --cache-file="$XDG_CACHE_HOME/wofi/drunmenu" \
+        --cache-file="''${XDG_CACHE_HOME:-$HOME/.cache}/wofi/drunmenu" \
         --show=drun |
         sed "s/%[a-zA-Z]//g"
     '';
@@ -37,7 +37,7 @@ final: _: {
   drunmenu-x11 = final.callPackage drunmenu {
     displayCmd = ''
       rofi \
-        -cache-dir "$XDG_CACHE_HOME/rofi/drunmenu" \
+        -cache-dir "''${XDG_CACHE_HOME:-$HOME/.cache}/rofi/drunmenu" \
         -run-command "echo {cmd}" \
         -show drun
     '';
