@@ -61,7 +61,7 @@ in
       ln -sv ${../nix/overlays} $out/overlays
     '';
 
-    stateVersion = "21.05";
+    stateVersion = "21.11";
   };
 
   systemd.enableUnifiedCgroupHierarchy = true;

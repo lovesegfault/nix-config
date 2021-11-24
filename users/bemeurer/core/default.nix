@@ -12,7 +12,7 @@
   ];
 
   home = {
-    stateVersion = "21.05";
+    stateVersion = "21.11";
     packages = with pkgs; [ colorcheck exa fd kalker mosh neofetch ripgrep ];
   };
 
