@@ -1,18 +1,23 @@
 { pkgs, ... }: {
   programs.git = {
     enable = true;
+    delta = {
+      enable = true;
+      options.syntax-theme = "Nord";
+    };
     package = pkgs.gitFull;
     lfs.enable = false;
     userEmail = "bernardo@meurer.org";
     userName = "Bernardo Meurer";
     extraConfig = {
-      core.pager = "${pkgs.delta}/bin/delta --dark";
+      diff.colorMoved = "default";
       difftool.prompt = true;
       github.user = "lovesegfault";
       mergetool.prompt = true;
       init.defaultBranch = "main";
     };
   };
+
   programs.zsh.shellAliases = rec {
     g = "git";
     ga = "git add";
