@@ -65,10 +65,10 @@
         Type = "simple";
         ExecStart = ''
           ${pkgs.swayidle}/bin/swayidle -w \
-            timeout 300 '${pkgs.swaylock}/bin/swaylock' \
+            timeout 300 'swaylock' \
             timeout 600 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
-            before-sleep '${pkgs.swaylock}/bin/swaylock'
+            before-sleep 'swaylock'
         '';
         RestartSec = 3;
         Restart = "always";
