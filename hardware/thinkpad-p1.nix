@@ -14,6 +14,7 @@
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "kvm-intel" "i2c_dev" "ddcci-backlight" "tcp_bbr" "kvm_intel" ];
     kernelPackages = pkgs.linuxPackages_xanmod_lto_skylake;
+    kernelParams = [ "acpi_mask_gpe=0x69" ];
     tmpOnTmpfs = true;
   };
 
