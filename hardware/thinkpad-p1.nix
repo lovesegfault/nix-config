@@ -25,6 +25,16 @@
 
   environment.systemPackages = with pkgs; [ powertop ];
 
+  environment.etc."auto-cpufreq.conf".text = ''
+    [charger]
+    governor = performance
+    turbo = auto
+
+    [battery]
+    governor = performance
+    turbo = auto
+  '';
+
   hardware = {
     brillo.enable = true;
     enableRedistributableFirmware = true;
@@ -45,6 +55,9 @@
     tlp = {
       enable = true;
       settings = {
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_SCALING_GOVERNOR_ON_BAT = "performance";
+
         DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE = [ "bluetooth" "wifi" ];
         DEVICES_TO_ENABLE_ON_AC = [ "bluetooth" "wifi" ];
 
