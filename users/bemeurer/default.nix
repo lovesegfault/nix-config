@@ -32,6 +32,7 @@ with lib;
       "${inputs.impermanence}/home-manager.nix"
       ./core
       ./dev
+      ./modules
     ] ++ optionals config.programs.sway.enable [
       ./graphical
       ./graphical/sway
@@ -39,5 +40,8 @@ with lib;
       ./graphical
       ./graphical/i3
     ];
+
+    home.username = config.users.users.bemeurer.name;
+    home.uid = config.users.users.bemeurer.uid;
   };
 }

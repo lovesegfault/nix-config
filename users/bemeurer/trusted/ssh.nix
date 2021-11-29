@@ -1,4 +1,4 @@
-{
+{ config, ... }: {
   home.file.".ssh/config".text = ''
     Include ~/.ssh/config.private
 
@@ -29,7 +29,7 @@
         ForwardX11Trusted no
         HashKnownHosts yes
         IdentitiesOnly yes
-        IdentityAgent /run/user/8888/gnupg/S.gpg-agent.ssh
+        IdentityAgent /run/user/${toString config.home.uid}/gnupg/S.gpg-agent.ssh
         IdentityFile ~/.ssh/bemeurer
         IdentityFile ~/.ssh/yubikey_rsa.pub
         ServerAliveCountMax 5
