@@ -1,5 +1,21 @@
 {
+  services.gpg-agent = {
+    enable = true;
+    enableExtraSocket = true;
+    enableScDaemon = true;
+    enableSshSupport = true;
+    defaultCacheTtl = 34560000;
+    maxCacheTtl = 34560000;
+    extraConfig = ''
+      extra-socket /run/user/8888/gnupg/S.gpg-agent.extra
+    '';
+  };
+
   programs.gpg.settings = {
+    # Default/trusted key ID to use (helpful with throw-keyids)
+    default-key = "0x6976C95303C20664";
+    trusted-key = "0x6976C95303C20664";
+
     # https://github.com/drduh/config/blob/master/gpg.conf
     # https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration-Options.html
     # https://www.gnupg.org/documentation/manuals/gnupg/GPG-Esoteric-Options.html
