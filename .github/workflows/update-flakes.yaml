@@ -81,8 +81,8 @@ jobs:
         with:
           branch: update-${{ matrix.flake }}-flake
           delete-branch: true
-          commit-message: "chore(flake/inputs/${{ matrix.flake }}): ${{ steps.update-flake.outputs.old_rev }} -> ${{ steps.update-flake.outputs.new_rev }}"
-          title: "chore(flake/inputs/${{ matrix.flake }}): ${{ steps.update-flake.outputs.old_rev }} -> ${{ steps.update-flake.outputs.new_rev }}"
+          commit-message: "chore(flake): ${{ matrix.flake }} ${{ steps.update-flake.outputs.old_rev }} -> ${{ steps.update-flake.outputs.new_rev }}"
+          title: "chore(flake): ${{ matrix.flake }} ${{ steps.update-flake.outputs.old_rev }} -> ${{ steps.update-flake.outputs.new_rev }}"
           token: ${{ secrets.PAT }}
 
       - uses: peter-evans/enable-pull-request-automerge@v1
