@@ -107,7 +107,6 @@ let
         {
           command = "floating enable, sticky enable";
           criteria.title = ".*Sharing Indicator.*";
-          criteria.app_id = "firefox";
         }
       ];
     };
