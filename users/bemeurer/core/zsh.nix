@@ -8,6 +8,8 @@
     enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
+    enableSyntaxHighlighting = true;
+    enableVteIntegration = true;
     autocd = true;
     dotDir = ".config/zsh";
     history = {
@@ -82,28 +84,6 @@
           repo = "zsh-vim-mode";
           rev = "abef0c0c03506009b56bb94260f846163c4f287a";
           sha256 = "0cnjazclz1kyi13m078ca2v6l8pg4y8jjrry6mkvszd383dx1wib";
-        };
-      }
-      {
-        # https://github.com/zdharma/fast-syntax-highlighting
-        name = "fast-syntax-highlighting";
-        file = "fast-syntax-highlighting.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "zdharma";
-          repo = "fast-syntax-highlighting";
-          rev = "be2f385453670c18c40320a7384333f98fcd9f79";
-          sha256 = "sha256-SRM+PmbyEhIDo3V3X2BxtbYlfa/lKZ69CtLm8JTYUMo=";
-        };
-      }
-      {
-        # https://github.com/zdharma/history-search-multi-word
-        name = "history-search-multi-word";
-        file = "history-search-multi-word.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "zdharma";
-          repo = "history-search-multi-word";
-          rev = "f4efe71dbfae5f027c08f8ff8e8dca9bc946601c";
-          sha256 = "0v0jiv9wbf6dyxzsqai2j87nlbhy8l097v3pmss9ayr8h2faxkpx";
         };
       }
       {
