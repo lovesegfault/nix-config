@@ -12,12 +12,15 @@ let
     "discord"
     "commitizen"
   ];
-  inherit (prev.lib) listToAttrs nameValuePair;
-  nullDrv = final.runCommand "dummy" { } ''
-    mkdir -p $out/{bin,lib}
-    echo "dummy" > $out/bin/dummy
-    echo "dummy" > $out/lib/dummy
-  '';
+  inherit (prev.lib) listToAttrs makeOverridable nameValuePair;
+  nullDrv = final.callPackage
+    ({ runCommand, ... }:
+      runCommand "dummy" { } ''
+        mkdir -p $out/{bin,lib}
+        echo "dummy" > $out/bin/dummy
+        echo "dummy" > $out/lib/dummy
+      '')
+    { };
 
   dummyOverrides = listToAttrs (map (p: nameValuePair p nullDrv) maskedPkgs);
 in
