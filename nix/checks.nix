@@ -34,7 +34,6 @@ with self.nixpkgs.${system};
       "EmptyInherit"
       "EmptyLet"
       "EtaReduce"
-      "FreeLetInFunc"
       "LetInInheritRecset"
       "ListLiteralConcat"
       "NegateAtom"
@@ -48,6 +47,7 @@ with self.nixpkgs.${system};
       "BetaReduction"
       "EmptyVariadicParamSet"
       "UnneededAntiquote"
+      "no-FreeLetInFunc"
       "no-AlphabeticalArgs"
       "no-AlphabeticalBindings"
     ];
