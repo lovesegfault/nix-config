@@ -13,6 +13,12 @@ with self.nixpkgs.${system};
     hooks = {
       nixpkgs-fmt.enable = true;
       nix-linter.enable = true;
+      nix-parse = {
+        enable = true;
+        name = "nix-parse";
+        entry = "${nix}/bin/nix-instantiate --json --parse";
+        types = [ "file" "nix" ];
+      };
       stylua = {
         enable = true;
         name = "stylua";
