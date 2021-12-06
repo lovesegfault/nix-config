@@ -19,7 +19,9 @@ jobs:
         with:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
-      - name: run-lints
+      - name: parse
+        run: nix-instantiate --json --parse **/*.nix
+      - name: lints
         run: nix build -L .#checks.x86_64-linux.pre-commit-check
 
   build-shell:
