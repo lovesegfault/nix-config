@@ -15,19 +15,16 @@ with self.nixpkgs.${system};
       nix-linter.enable = true;
       nix-parse = {
         enable = true;
-        name = "nix-parse";
         entry = "${nix}/bin/nix-instantiate --json --parse";
         types = [ "file" "nix" ];
       };
       stylua = {
         enable = true;
-        name = "stylua";
         entry = "${stylua}/bin/stylua";
         types = [ "file" "lua" ];
       };
       luacheck = {
         enable = true;
-        name = "luacheck";
         entry = "${luajitPackages.luacheck}/bin/luacheck --std luajit --globals vim -- ";
         types = [ "file" "lua" ];
       };
