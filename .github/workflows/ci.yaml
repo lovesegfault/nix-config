@@ -141,6 +141,8 @@ jobs:
         with:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+      - name: add-mask-overlay
+        run: cp nix/mask-large-drvs.nix nix/overlays/
       - name: build-host
         run: |
           cachix watch-exec nix-config -- \
