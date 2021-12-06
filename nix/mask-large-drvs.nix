@@ -14,7 +14,9 @@ let
   ];
   inherit (prev.lib) listToAttrs nameValuePair;
   nullDrv = final.runCommand "dummy" { } ''
-    echo "This is a dummy drv"
+    mkdir -p $out/{bin,lib}
+    echo "dummy" > $out/bin/dummy
+    echo "dummy" > $out/lib/dummy
   '';
 
   dummyOverrides = listToAttrs (map (p: nameValuePair p nullDrv) maskedPkgs);
