@@ -15,7 +15,7 @@ with self.nixpkgs.${system};
       nix-linter.enable = true;
       nix-parse = {
         enable = true;
-        entry = "${nix}/bin/nix-instantiate --json --parse";
+        entry = "nix-instantiate --json --parse";
         types = [ "file" "nix" ];
       };
       stylua = {
