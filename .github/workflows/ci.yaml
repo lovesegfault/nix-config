@@ -140,10 +140,15 @@ jobs:
       - name: add-mask-overlay
         run: cp nix/mask-large-drvs.nix nix/overlays/
       - name: build-host
-        run: |
-          cachix watch-exec nix-config -- \
-            nix run nixpkgs#nix-build-uncached -- \
-              -A packages.x86_64-linux.hosts.${{ matrix.host }}
+        uses: nick-invision/retry@v2
+        with:
+          max_attempts: 2
+          timeout_minutes: 720
+          retry_on: error
+          command: |
+            cachix watch-exec nix-config -- \
+              nix run nixpkgs#nix-build-uncached -- \
+                -A packages.x86_64-linux.hosts.${{ matrix.host }}
 
   check:
     runs-on: ubuntu-latest
