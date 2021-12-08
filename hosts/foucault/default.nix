@@ -55,8 +55,7 @@
   };
 
   location = {
-    latitude = 37.861;
-    longitude = -122.273;
+    provider = "geoclue2";
   };
 
   networking = {
@@ -74,6 +73,13 @@
   ];
 
   services = {
+    geoclue2 = {
+      enable = true;
+      enable3G = false;
+      enableCDMA = false;
+      enableModemGPS = false;
+      submitData = true;
+    };
     logind.lidSwitchExternalPower = "ignore";
     mullvad-vpn.enable = true;
     udev.packages = with pkgs; [ logitech-udev-rules ];
