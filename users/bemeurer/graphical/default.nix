@@ -23,7 +23,7 @@
       obsidian
       shotwell
       signal-desktop
-      thunderbird
+      thunderbird-bin
       zoom-us
     ];
 
