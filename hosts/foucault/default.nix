@@ -28,24 +28,12 @@
       options = [ "defaults" "noatime" "size=20%" "mode=755" ];
     };
     "/boot" = {
-      device = "/dev/disk/by-uuid/17FB-AAD0";
+      device = "/dev/disk/by-uuid/2CE0-CC14";
       fsType = "vfat";
     };
     "/nix" = {
-      device = "rpool/local/nix";
-      fsType = "zfs";
-    };
-    "/srv/music" = {
-      device = "rpool/safe/music";
-      fsType = "zfs";
-    };
-    "/srv/pictures" = {
-      device = "rpool/safe/pictures";
-      fsType = "zfs";
-    };
-    "/state" = {
-      device = "rpool/safe/state";
-      fsType = "zfs";
+      device = "/dev/disk/by-uuid/6aa44989-7ada-4d74-9a6c-1c79297b5ef1";
+      fsType = "xfs";
       neededForBoot = true;
     };
   };
@@ -100,7 +88,7 @@
     };
   };
 
-  swapDevices = [{ device = "/dev/disk/by-uuid/840591d3-ac66-4137-bc39-4d9f9109c19a"; }];
+  swapDevices = [{ device = "/dev/disk/by-uuid/47602bda-4e3a-489a-b403-83cd9c673d4e"; }];
 
   time.timeZone = "Atlantic/Canary";
 
