@@ -26,16 +26,6 @@
 
   environment.systemPackages = with pkgs; [ powertop ];
 
-  environment.etc."auto-cpufreq.conf".text = ''
-    [charger]
-    governor = performance
-    turbo = auto
-
-    [battery]
-    governor = performance
-    turbo = auto
-  '';
-
   hardware = {
     brillo.enable = true;
     enableRedistributableFirmware = true;
@@ -49,7 +39,6 @@
   };
 
   services = {
-    auto-cpufreq.enable = true;
     fstrim.enable = true;
     fwupd.enable = true;
     hardware.bolt.enable = true;
