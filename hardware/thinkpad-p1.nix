@@ -62,7 +62,7 @@
 
         RUNTIME_PM_ON_AC = "auto";
         RUNTIME_PM_ON_BAT = "auto";
-        RUNTIME_PM_DRIVER_BLACKLIST = [ ];
+        RUNTIME_PM_DRIVER_BLACKLIST = [ "nouveau" "nvidia" ];
 
         SOUND_POWER_SAVE_ON_AC = "1";
         SOUND_POWER_SAVE_ON_BAT = "1";
