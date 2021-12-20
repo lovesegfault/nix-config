@@ -62,20 +62,7 @@ let
       } // extraConfig;
     };
 
-  linuxLTOPackagesFor = args: (final.linuxKernel.packagesFor (linuxLTOFor args)).extend (
-    kFinal: kPrev: {
-      zfs = kPrev.zfs.overrideAttrs (old: {
-        patches = (old.patches or [ ]) ++ [
-          (final.fetchpatch {
-            url = "https://gist.githubusercontent.com/lovesegfault/e5ada6a0e506178523d941a099a36aca/raw/640bfc92e5795a7580e49712d63155febbd5a8d3/gistfile0.txt";
-            sha256 = "sha256-RTUG3VrR1614vT8d4YJIt9HqYEr95vEIOb0Guuzr8NY=";
-          })
-        ];
-
-        meta.broken = kFinal.kernel.kernelOlder "3.10";
-      });
-    }
-  );
+  linuxLTOPackagesFor = args: (final.linuxKernel.packagesFor (linuxLTOFor args)).extend (_: _: { });
 in
 _: rec {
   linuxPackages_xanmod_lto_zen3 = linuxLTOPackagesFor {
