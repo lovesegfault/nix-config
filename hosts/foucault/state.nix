@@ -1,7 +1,7 @@
 {
-  age.sshKeyPaths = [ "/state/etc/ssh/ssh_host_ed25519_key" ];
+  age.sshKeyPaths = [ "/nix/state/etc/ssh/ssh_host_ed25519_key" ];
 
-  environment.persistence."/state" = {
+  environment.persistence."/nix/state" = {
     directories = [
       "/var/lib/bluetooth"
       "/var/lib/boltd"
@@ -62,7 +62,7 @@
     ];
   };
 
-  home-manager.users.bemeurer.home.persistence."/state/home/bemeurer" = {
+  home-manager.users.bemeurer.home.persistence."/nix/state/home/bemeurer" = {
     allowOther = true;
     files = [
       # ".arcrc"
