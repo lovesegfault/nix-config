@@ -18,6 +18,14 @@
     ./sway.nix
   ];
 
+  boot.initrd = {
+    availableKernelModules = [ "aesni_intel" "cryptd" ];
+    luks.devices.cryptroot = {
+      device = "/dev/disk/by-uuid/e298f4f8-3186-43e3-94e5-6a8b244efed9";
+      allowDiscards = true;
+    };
+  };
+
   environment.systemPackages = with pkgs; [ cntr wireguard-tools ];
 
   fileSystems = {
