@@ -6,8 +6,14 @@
       url = "github:serokell/deploy-rs";
       inputs = {
         nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "flake-compat";
         utils.follows = "utils";
       };
+    };
+
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
     };
 
     gitignore = {

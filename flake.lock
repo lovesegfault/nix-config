@@ -20,7 +20,9 @@
     },
     "deploy-rs": {
       "inputs": {
-        "flake-compat": "flake-compat",
+        "flake-compat": [
+          "flake-compat"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -225,6 +227,7 @@
     "root": {
       "inputs": {
         "deploy-rs": "deploy-rs",
+        "flake-compat": "flake-compat",
         "gitignore": "gitignore",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
