@@ -6,6 +6,7 @@ with lib;
   users.users.bemeurer = {
     createHome = true;
     description = "Bernardo Meurer";
+    group = "bemeurer";
     extraGroups = [ "wheel" "dialout" ]
       ++ optionals config.hardware.i2c.enable [ "i2c" ]
       ++ optionals config.networking.networkmanager.enable [ "networkmanager" ]
