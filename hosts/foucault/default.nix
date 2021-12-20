@@ -7,7 +7,6 @@
     ../../hardware/nixos-aarch64-builder
     ../../hardware/thinkpad-p1.nix
     ../../hardware/yubikey.nix
-    ../../hardware/zfs.nix
 
     ../../graphical
     ../../graphical/trusted.nix
