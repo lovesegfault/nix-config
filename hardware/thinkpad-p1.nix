@@ -42,6 +42,7 @@
     fstrim.enable = true;
     fwupd.enable = true;
     hardware.bolt.enable = true;
+    thermald.enable = true;
     tlp = {
       enable = true;
       settings = {
