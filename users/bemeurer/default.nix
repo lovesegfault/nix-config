@@ -3,6 +3,8 @@ with lib;
 {
   age.secrets.bemeurerPassword.file = ./password.age;
 
+  users.groups.bemeurer.gid = config.users.users.bemeurer.uid;
+
   users.users.bemeurer = {
     createHome = true;
     description = "Bernardo Meurer";
