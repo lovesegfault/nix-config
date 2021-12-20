@@ -75,7 +75,10 @@
       enableModemGPS = false;
       submitData = true;
     };
-    logind.lidSwitchExternalPower = "ignore";
+    logind = {
+      lidSwitch = "suspend-then-hibernate";
+      lidSwitchExternalPower = "ignore";
+    };
     udev.packages = with pkgs; [ logitech-udev-rules ];
     usbmuxd.enable = true;
   };
