@@ -18,7 +18,7 @@
     ./sway.nix
   ];
 
-  environment.systemPackages = with pkgs; [ cntr wireguard-tools mullvad-vpn ];
+  environment.systemPackages = with pkgs; [ cntr wireguard-tools ];
 
   fileSystems = {
     "/" = {
@@ -68,7 +68,6 @@
       submitData = true;
     };
     logind.lidSwitchExternalPower = "ignore";
-    mullvad-vpn.enable = true;
     udev.packages = with pkgs; [ logitech-udev-rules ];
     usbmuxd.enable = true;
   };
