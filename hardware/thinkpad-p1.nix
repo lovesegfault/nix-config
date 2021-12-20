@@ -74,7 +74,7 @@
     };
     upower = {
       enable = true;
-      criticalPowerAction = "PowerOff";
+      criticalPowerAction = "Hibernate";
     };
     xserver.dpi = 96;
   };
