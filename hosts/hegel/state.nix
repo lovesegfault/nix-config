@@ -1,5 +1,5 @@
 {
-  age.sshKeyPaths = [ "/state/etc/ssh/ssh_host_ed25519_key" ];
+  age.identityPaths = [ "/state/etc/ssh/ssh_host_ed25519_key" ];
 
   environment.persistence."/state" = {
     directories = [
