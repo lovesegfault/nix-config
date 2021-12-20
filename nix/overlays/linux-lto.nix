@@ -62,9 +62,15 @@ let
       } // extraConfig;
     };
 
-  linuxLTOPackagesFor = args: (final.linuxKernel.packagesFor (linuxLTOFor args)).extend (_: _: { });
+  kernelPkgsOverlay = _: _: { };
+
+  linuxLTOPackagesFor = args: (final.linuxKernel.packagesFor (linuxLTOFor args)).extend kernelPkgsOverlay;
 in
 _: rec {
+  linuxPackages_latest_lto = linuxLTOPackagesFor {
+    kernel = final.linuxKernel.packageAliases.linux_latest.kernel;
+  };
+
   linuxPackages_xanmod_lto_zen3 = linuxLTOPackagesFor {
     kernel = final.linuxKernel.kernels.linux_xanmod;
     extraConfig = { MZEN3 = lib.kernel.yes; };
