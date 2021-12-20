@@ -7,9 +7,8 @@
   ];
 
   boot = rec {
-    blacklistedKernelModules = [ "nouveau" ];
     extraModprobeConfig = "options kvm_intel nested=1";
-    extraModulePackages = with config.boot.kernelPackages; [ bbswitch ddcci-driver ];
+    extraModulePackages = with config.boot.kernelPackages; [ ddcci-driver ];
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "kvm-intel" "i2c_dev" "ddcci-backlight" "tcp_bbr" "kvm_intel" ];
@@ -30,7 +29,6 @@
     brillo.enable = true;
     enableRedistributableFirmware = true;
     i2c.enable = true;
-    nvidiaOptimus.disable = true;
   };
 
   nix = {
