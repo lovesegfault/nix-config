@@ -53,13 +53,13 @@ let
       passthru = (stdenvPlatformLLVM.passthru or { }) // { llvmPackages = buildLLVM; };
     };
 
-  linuxConfigFor = config: kernel:
+  applyCfg = config: kernel:
     kernel.override {
       argsOverride.kernelPatches = kernel.kernelPatches;
       argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // config;
     };
 
-  linuxLTOFor = kernel:
+  applyLTO = kernel:
     let
       stdenv = stdenvLLVM;
       buildPackages = final.buildPackages // { inherit stdenv; };
@@ -75,7 +75,7 @@ let
       };
     };
 
-  linuxUarchFor = kernel:
+  applyUarches = kernel:
     kernel.override {
       argsOverride.kernelPatches = kernel.kernelPatches ++ [{
 
@@ -93,13 +93,13 @@ let
 in
 _: {
   linuxPackages_latest_lto_skylake = packagesFor
-    (linuxConfigFor
+    (applyCfg
       { MSKYLAKE = yes; }
-      (linuxUarchFor
-        (linuxLTOFor linuxKernel.packageAliases.linux_latest.kernel)));
+      (applyUarches
+        (applyLTO linuxKernel.packageAliases.linux_latest.kernel)));
 
   linuxPackages_xanmod_lto_zen3 = packagesFor
-    (linuxConfigFor
+    (applyCfg
       { MZEN3 = yes; }
-      (linuxLTOFor linuxKernel.kernels.linux_xanmod));
+      (applyLTO linuxKernel.kernels.linux_xanmod));
 }
