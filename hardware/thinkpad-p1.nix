@@ -83,6 +83,4 @@
   sound.extraConfig = ''
     options snd-hda-intel model=generic
   '';
-
-  systemd.services.auto-cpufreq.wantedBy = [ "multi-user.target" ];
 }
