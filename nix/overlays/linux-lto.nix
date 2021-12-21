@@ -54,41 +54,34 @@ let
       passthru = (stdenvPlatformLLVM.passthru or { }) // { llvmPackages = buildLLVM; };
     };
 
-  applyCfg = config: kernel:
-    kernel.override {
-      argsOverride.kernelPatches = kernel.kernelPatches;
-      argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // config;
+  applyCfg = config: kernel: kernel.override {
+    argsOverride.kernelPatches = kernel.kernelPatches;
+    argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // config;
+  };
+
+  applyLTO = kernel: kernel.override {
+    stdenv = stdenvLLVM;
+    buildPackages = final.buildPackages // { stdenv = stdenvLLVM; };
+    argsOverride.kernelPatches = kernel.kernelPatches;
+    argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // {
+      LTO_CLANG_FULL = yes;
+      LTO_NONE = no;
+      # XXX: https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg2519405.html
+      DEBUG_INFO = lib.mkForce no;
     };
+  };
 
-  applyLTO = kernel:
-    let
-      stdenv = stdenvLLVM;
-      buildPackages = final.buildPackages // { inherit stdenv; };
-    in
-    kernel.override {
-      inherit stdenv buildPackages;
-      argsOverride.kernelPatches = kernel.kernelPatches;
-      argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // {
-        LTO_CLANG_FULL = yes;
-        LTO_NONE = no;
-        # XXX: https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg2519405.html
-        DEBUG_INFO = lib.mkForce no;
-      };
-    };
-
-  applyUarches = kernel:
-    kernel.override {
-      argsOverride.kernelPatches = kernel.kernelPatches ++ [{
-
+  applyUarches = kernel: kernel.override {
+    argsOverride.kernelPatches = kernel.kernelPatches ++ [{
+      name = "more-uarches-for-kernel-5.15";
+      patch = fetchpatch {
         name = "more-uarches-for-kernel-5.15";
-        patch = fetchpatch {
-          name = "more-uarches-for-kernel-5.15";
-          url = "https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/master/more-uarches-for-kernel-5.15%2B.patch";
-          sha256 = "sha256-WSN+1t8Leodt7YRosuDF7eiSL5/8PYseXzxquf0LtP8=";
-        };
-      }];
-      argsOverride.structuredExtraConfig = kernel.structuredExtraConfig;
-    };
+        url = "https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/master/more-uarches-for-kernel-5.15%2B.patch";
+        sha256 = "sha256-WSN+1t8Leodt7YRosuDF7eiSL5/8PYseXzxquf0LtP8=";
+      };
+    }];
+    argsOverride.structuredExtraConfig = kernel.structuredExtraConfig;
+  };
 
   inherit (linuxKernel) packagesFor;
 in
