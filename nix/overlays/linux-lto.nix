@@ -4,18 +4,19 @@ let
     fetchpatch
     lib
     linuxKernel
-    llvmPackages_12
     overrideCC
     ;
   inherit (lib.kernel) yes no;
 
+  llvmPackages = "llvmPackages_12";
+
   stdenvLLVM =
     let
-      hostLLVM = final.buildPackages.llvmPackages_12.override {
+      hostLLVM = final.buildPackages.${llvmPackages}.override {
         bootBintools = null;
         bootBintoolsNoLibc = null;
       };
-      buildLLVM = llvmPackages_12.override {
+      buildLLVM = final.${llvmPackages}.override {
         bootBintools = null;
         bootBintoolsNoLibc = null;
       };
