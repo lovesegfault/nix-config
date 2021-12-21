@@ -1,25 +1,19 @@
 final:
 let
-  inherit (final)
-    fetchpatch
-    lib
-    linuxKernel
-    overrideCC
-    ;
+  inherit (final) lib linuxKernel;
   inherit (lib.kernel) yes no;
 
-  llvmPackages = "llvmPackages_12";
+  applyCfg = config: kernel: kernel.override {
+    argsOverride.kernelPatches = kernel.kernelPatches;
+    argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // config;
+  };
 
-  stdenvLLVM =
+  applyLTO = kernel:
     let
-      hostLLVM = final.buildPackages.${llvmPackages}.override {
-        bootBintools = null;
-        bootBintoolsNoLibc = null;
-      };
-      buildLLVM = final.${llvmPackages}.override {
-        bootBintools = null;
-        bootBintoolsNoLibc = null;
-      };
+      llvmPackages = "llvmPackages_12";
+      noBintools = { bootBintools = null; bootBintoolsNoLibc = null; };
+      hostLLVM = final.buildPackages.${llvmPackages}.override noBintools;
+      buildLLVM = final.${llvmPackages}.override noBintools;
 
       mkLLVMPlatform = platform: platform // {
         useLLVM = true;
@@ -42,39 +36,31 @@ let
           ];
         };
       };
-
-      stdenvClangUseLLVM = overrideCC hostLLVM.stdenv hostLLVM.clangUseLLVM;
-
+      stdenvClangUseLLVM = final.overrideCC hostLLVM.stdenv hostLLVM.clangUseLLVM;
       stdenvPlatformLLVM = stdenvClangUseLLVM.override (old: {
         hostPlatform = mkLLVMPlatform old.hostPlatform;
         buildPlatform = mkLLVMPlatform old.buildPlatform;
       });
+      stdenv = stdenvPlatformLLVM // {
+        passthru = (stdenvPlatformLLVM.passthru or { }) // { llvmPackages = buildLLVM; };
+      };
     in
-    stdenvPlatformLLVM // {
-      passthru = (stdenvPlatformLLVM.passthru or { }) // { llvmPackages = buildLLVM; };
+    kernel.override {
+      inherit stdenv;
+      buildPackages = final.buildPackages // { inherit stdenv; };
+      argsOverride.kernelPatches = kernel.kernelPatches;
+      argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // {
+        LTO_CLANG_FULL = yes;
+        LTO_NONE = no;
+        # XXX: https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg2519405.html
+        DEBUG_INFO = lib.mkForce no;
+      };
     };
-
-  applyCfg = config: kernel: kernel.override {
-    argsOverride.kernelPatches = kernel.kernelPatches;
-    argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // config;
-  };
-
-  applyLTO = kernel: kernel.override {
-    stdenv = stdenvLLVM;
-    buildPackages = final.buildPackages // { stdenv = stdenvLLVM; };
-    argsOverride.kernelPatches = kernel.kernelPatches;
-    argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // {
-      LTO_CLANG_FULL = yes;
-      LTO_NONE = no;
-      # XXX: https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg2519405.html
-      DEBUG_INFO = lib.mkForce no;
-    };
-  };
 
   applyUarches = kernel: kernel.override {
     argsOverride.kernelPatches = kernel.kernelPatches ++ [{
       name = "more-uarches-for-kernel-5.15";
-      patch = fetchpatch {
+      patch = final.fetchpatch {
         name = "more-uarches-for-kernel-5.15";
         url = "https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/master/more-uarches-for-kernel-5.15%2B.patch";
         sha256 = "sha256-WSN+1t8Leodt7YRosuDF7eiSL5/8PYseXzxquf0LtP8=";
