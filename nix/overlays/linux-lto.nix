@@ -1,6 +1,13 @@
 final:
 let
-  inherit (final) lib;
+  inherit (final)
+    fetchpatch
+    lib
+    linuxKernel
+    llvmPackages_12
+    overrideCC
+    ;
+  inherit (lib.kernel) yes no;
 
   stdenvLLVM =
     let
@@ -8,7 +15,7 @@ let
         bootBintools = null;
         bootBintoolsNoLibc = null;
       };
-      buildLLVM = final.llvmPackages_12.override {
+      buildLLVM = llvmPackages_12.override {
         bootBintools = null;
         bootBintoolsNoLibc = null;
       };
@@ -35,7 +42,7 @@ let
         };
       };
 
-      stdenvClangUseLLVM = final.overrideCC hostLLVM.stdenv hostLLVM.clangUseLLVM;
+      stdenvClangUseLLVM = overrideCC hostLLVM.stdenv hostLLVM.clangUseLLVM;
 
       stdenvPlatformLLVM = stdenvClangUseLLVM.override (old: {
         hostPlatform = mkLLVMPlatform old.hostPlatform;
@@ -46,38 +53,53 @@ let
       passthru = (stdenvPlatformLLVM.passthru or { }) // { llvmPackages = buildLLVM; };
     };
 
-  linuxLTOFor = { kernel, extraConfig ? { } }:
+  linuxConfigFor = config: kernel:
+    kernel.override {
+      argsOverride.kernelPatches = kernel.kernelPatches;
+      argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // config;
+    };
+
+  linuxLTOFor = kernel:
     let
-      inherit (lib.kernel) yes no;
       stdenv = stdenvLLVM;
       buildPackages = final.buildPackages // { inherit stdenv; };
     in
     kernel.override {
       inherit stdenv buildPackages;
+      argsOverride.kernelPatches = kernel.kernelPatches;
       argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // {
         LTO_CLANG_FULL = yes;
         LTO_NONE = no;
         # XXX: https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg2519405.html
         DEBUG_INFO = lib.mkForce no;
-      } // extraConfig;
+      };
     };
 
-  kernelPkgsOverlay = _: _: { };
+  linuxUarchFor = kernel:
+    kernel.override {
+      argsOverride.kernelPatches = kernel.kernelPatches ++ [{
 
-  linuxLTOPackagesFor = args: (final.linuxKernel.packagesFor (linuxLTOFor args)).extend kernelPkgsOverlay;
+        name = "more-uarches-for-kernel-5.15";
+        patch = fetchpatch {
+          name = "more-uarches-for-kernel-5.15";
+          url = "https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/master/more-uarches-for-kernel-5.15%2B.patch";
+          sha256 = "sha256-WSN+1t8Leodt7YRosuDF7eiSL5/8PYseXzxquf0LtP8=";
+        };
+      }];
+      argsOverride.structuredExtraConfig = kernel.structuredExtraConfig;
+    };
+
+  inherit (linuxKernel) packagesFor;
 in
-_: rec {
-  linuxPackages_latest_lto = linuxLTOPackagesFor {
-    kernel = final.linuxKernel.packageAliases.linux_latest.kernel;
-  };
+_: {
+  linuxPackages_latest_lto_skylake = packagesFor
+    (linuxConfigFor
+      { MSKYLAKE = yes; }
+      (linuxUarchFor
+        (linuxLTOFor linuxKernel.packageAliases.linux_latest.kernel)));
 
-  linuxPackages_xanmod_lto_zen3 = linuxLTOPackagesFor {
-    kernel = final.linuxKernel.kernels.linux_xanmod;
-    extraConfig = { MZEN3 = lib.kernel.yes; };
-  };
-
-  linuxPackages_xanmod_lto_skylake = linuxLTOPackagesFor {
-    kernel = final.linuxKernel.kernels.linux_xanmod;
-    extraConfig = { MSKYLAKE = lib.kernel.yes; };
-  };
+  linuxPackages_xanmod_lto_zen3 = packagesFor
+    (linuxConfigFor
+      { MZEN3 = yes; }
+      (linuxLTOFor linuxKernel.kernels.linux_xanmod));
 }
