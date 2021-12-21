@@ -10,7 +10,7 @@ let
 
   applyLTO = kernel:
     let
-      llvmPackages = "llvmPackages_12";
+      llvmPackages = "llvmPackages_13";
       noBintools = { bootBintools = null; bootBintoolsNoLibc = null; };
       hostLLVM = final.buildPackages.${llvmPackages}.override noBintools;
       buildLLVM = final.${llvmPackages}.override noBintools;
