@@ -19,12 +19,9 @@
       discord
       element-desktop
       gnome.evince
-      gnome.gnome-calendar
-      obsidian
       shotwell
       signal-desktop
       thunderbird-bin
-      zoom-us
     ];
 
     sessionVariables = {
