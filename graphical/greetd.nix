@@ -24,7 +24,7 @@
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.sway}/bin/sway --config ${greetdSwayCfg}";
+          command = "${pkgs.systemd}/bin/systemd-cat -t gtkgreet ${pkgs.sway}/bin/sway --config ${greetdSwayCfg}";
         };
       };
     };
