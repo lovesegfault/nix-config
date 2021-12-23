@@ -1,5 +1,10 @@
 { pkgs, ... }: {
-  boot.kernelParams = [ "intel_iommu=on" ];
+  boot = {
+    extraModprobeConfig = "options kvm_intel nested=1";
+    kernelModules = [ "kvm_intel" ];
+    kernelParams = [ "intel_iommu=on" ];
+    initrd.kernelModules = [ "i915" ];
+  };
 
   hardware = {
     cpu.intel.updateMicrocode = true;

@@ -7,11 +7,10 @@
   ];
 
   boot = rec {
-    extraModprobeConfig = "options kvm_intel nested=1";
     extraModulePackages = with config.boot.kernelPackages; [ ddcci-driver ];
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
-    kernelModules = [ "kvm-intel" "i2c_dev" "ddcci-backlight" "tcp_bbr" "kvm_intel" ];
+    kernelModules = [ "i2c_dev" "ddcci-backlight" "tcp_bbr" ];
     kernelPackages = pkgs.linuxPackages_latest_lto_skylake;
     kernelParams = [ "acpi_mask_gpe=0x69" ];
     tmpOnTmpfs = true;
