@@ -72,11 +72,17 @@ let
   inherit (linuxKernel) packagesFor;
 in
 _: {
-  linuxPackages_latest_lto_skylake = packagesFor
+  linuxPackages_latest_lto_skylake = (packagesFor
     (applyCfg
       { MSKYLAKE = yes; }
       (applyUarches
-        (applyLTO linuxKernel.packageAliases.linux_latest.kernel)));
+        (applyLTO
+          linuxKernel.packageAliases.linux_latest.kernel)))).extend (final: prev:
+    {
+      acpi_call = prev.acpi_call.overrideAttrs (old: {
+        makeFlags = final.kernel.makeFlags ++ old.makeFlags;
+      });
+    });
 
   linuxPackages_xanmod_lto_zen3 = packagesFor
     (applyCfg
