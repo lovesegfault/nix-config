@@ -29,6 +29,9 @@
       };
     };
 
-  users.users.greeter.group = "greeter";
+  users.users.greeter = {
+    home = "/var/lib/greetd";
+    group = "greeter";
+  };
   users.groups.greeter = { };
 }
