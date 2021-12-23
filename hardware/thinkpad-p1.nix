@@ -7,10 +7,10 @@
   ];
 
   boot = rec {
-    extraModulePackages = with config.boot.kernelPackages; [ ddcci-driver ];
+    extraModulePackages = with config.boot.kernelPackages; [ acpi_call ddcci-driver ];
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
-    kernelModules = [ "i2c_dev" "ddcci-backlight" "tcp_bbr" ];
+    kernelModules = [ "acpi_call" "i2c_dev" "ddcci-backlight" "tcp_bbr" ];
     kernelPackages = pkgs.linuxPackages_latest_lto_skylake;
     kernelParams = [ "acpi_mask_gpe=0x69" ];
     tmpOnTmpfs = true;
