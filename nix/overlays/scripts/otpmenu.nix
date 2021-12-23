@@ -21,13 +21,10 @@ let
       text = ''
         otp_list="$(gopass ls -f | rg "^(otp)/.*$")"
         otp_name="$(${displayCmd} <<< "$otp_list")"
-        otp_string="$(gopass otp "$otp_name")"
+        otp_string="$(gopass otp -o "$otp_name")"
 
-        otp_code="$(cut -f1 -d " " <<< "$otp_string")"
-        otp_duration="$(cut -f 3 -d " " <<< "$otp_string")"
-
-        ${yankCmd} <<< "$otp_code"
-        notify-send "⏲ Copied $otp_name to clipboard. Lasts $otp_duration."
+        ${yankCmd} <<< "$otp_string"
+        notify-send "⏲ Copied $otp_name to clipboard."
       '';
     };
 in
