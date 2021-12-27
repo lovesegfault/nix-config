@@ -42,6 +42,7 @@
         # tooling
         nvim-bufdel
         rust-tools-nvim
+        suda-vim
         telescope-nvim
         vim-better-whitespace
         vim-commentary
