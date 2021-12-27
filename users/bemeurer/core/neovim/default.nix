@@ -44,6 +44,7 @@
         rust-tools-nvim
         suda-vim
         telescope-nvim
+        telescope-frecency-nvim
         vim-better-whitespace
         vim-commentary
         vim-fugitive
