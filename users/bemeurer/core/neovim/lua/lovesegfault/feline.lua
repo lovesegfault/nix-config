@@ -49,10 +49,10 @@ end
 
 local function lsp_diagnostics_info()
   return {
-    errs = lsp.get_diagnostics_count("Error"),
-    warns = lsp.get_diagnostics_count("Warning"),
-    infos = lsp.get_diagnostics_count("Information"),
-    hints = lsp.get_diagnostics_count("Hint"),
+    errs = lsp.get_diagnostics_count(vim.diagnostic.severity.ERROR),
+    warns = lsp.get_diagnostics_count(vim.diagnostic.severity.WARN),
+    infos = lsp.get_diagnostics_count(vim.diagnostic.severity.INFO),
+    hints = lsp.get_diagnostics_count(vim.diagnostic.severity.HINT),
   }
 end
 
