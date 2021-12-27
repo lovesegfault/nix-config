@@ -30,3 +30,8 @@ require("numb").setup()
 
 -- todo-comments
 require("todo-comments").setup()
+
+-- stabilize
+require("stabilize").setup({
+  nested = "QuickFixCmdPost,DiagnosticChanged *",
+})

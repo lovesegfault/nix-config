@@ -35,6 +35,7 @@
         nvim-lightbulb
         nvim-treesitter-context
         nvim-web-devicons
+        stabilize-nvim
         todo-comments-nvim
         trouble-nvim
 
