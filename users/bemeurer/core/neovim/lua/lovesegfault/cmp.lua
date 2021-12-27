@@ -69,9 +69,23 @@ cmp.setup({
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "cmp_tabnine" },
+    { name = "treesitter" },
     { name = "nvim_lua" },
     { name = "buffer" },
     { name = "path" },
+    { name = "latex_symbols" },
+  },
+})
+
+cmp.setup.cmdline(":", {
+  sources = {
+    { name = "cmdline" },
+  },
+})
+
+cmp.setup.cmdline("/", {
+  sources = {
+    { name = "buffer" },
   },
 })
 

@@ -56,9 +56,12 @@
 
         # completion
         cmp-buffer
+        cmp-cmdline
+        cmp-latex-symbols
         cmp-nvim-lsp
         cmp-nvim-lua
         cmp-path
+        cmp-treesitter
         cmp_luasnip
         crates-nvim
         lspkind-nvim
