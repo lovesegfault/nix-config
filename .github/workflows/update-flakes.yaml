@@ -45,7 +45,7 @@ jobs:
           signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
       - run: git config --global user.email "hatesegfault@protonmail.ch"
       - run: git config --global user.name "hatesegfault"
-      - uses: cpcloud/flake-update-action@1.0.2
+      - uses: cpcloud/flake-update-action@v1.0.2
         with:
           dependency: ${{ matrix.flake }}
           pull-request-token: ${{ secrets.PAT }}
