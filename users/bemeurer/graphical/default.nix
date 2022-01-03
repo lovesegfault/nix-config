@@ -8,6 +8,7 @@
 
   home = {
     packages = with pkgs; [
+      gammastep
       libnotify
       lollypop
       pavucontrol
