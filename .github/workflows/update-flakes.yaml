@@ -70,24 +70,11 @@ jobs:
           signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
       - run: git config --global user.email "hatesegfault@protonmail.ch"
       - run: git config --global user.name "hatesegfault"
-      - name: update-flake
-        id: update-flake
-        run: |
-          echo "::set-output name=old_rev::$(nix flake metadata --json | jq -r '.locks.nodes."${{matrix.flake}}".locked.rev[0:8]')"
-          nix flake lock --update-input "${{ matrix.flake }}"
-          echo "::set-output name=new_rev::$(nix flake metadata --json | jq -r '.locks.nodes."${{matrix.flake}}".locked.rev[0:8]')"
-      - uses: peter-evans/create-pull-request@v3
-        id: cpr
+      - uses: cpcloud/flake-update-actions@1.0.2
         with:
-          branch: update-${{ matrix.flake }}-flake
+          dependency: ${{ matrix.flake }}
+          pull-request-token: ${{ secrets.PAT }}
           delete-branch: true
-          commit-message: "chore(flake): ${{ matrix.flake }} ${{ steps.update-flake.outputs.old_rev }} -> ${{ steps.update-flake.outputs.new_rev }}"
-          title: "chore(flake): ${{ matrix.flake }} ${{ steps.update-flake.outputs.old_rev }} -> ${{ steps.update-flake.outputs.new_rev }}"
-          token: ${{ secrets.PAT }}
-
-      - uses: peter-evans/enable-pull-request-automerge@v1
-        if: steps.cpr.outputs.pull-request-operation == 'created'
-        with:
-          token: ${{ secrets.PAT }}
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-          merge-method: squash
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-branch-prefix: update-
+          automerge: true
