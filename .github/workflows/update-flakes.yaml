@@ -8,7 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.get-flakes.outputs.matrix }}
-      noop: ${{ steps.get-flakes.outputs.noop }}
     steps:
       - uses: actions/checkout@v2.3.5
       - uses: cachix/install-nix-action@v16
@@ -18,42 +17,18 @@ jobs:
             experimental-features = nix-command flakes recursive-nix
       - id: get-flakes
         run: |
-          get_flake_revs() {
+          get_flake_inputs() {
             nix flake metadata --json \
               | jq -c '
-                .locks.nodes
-                | map_values(.locked.rev | select(. != null))'
+                  .locks.nodes.root.inputs
+                  | {flake: keys}'
           }
 
-          get_updated_flakes() {
-            jq -c -s '
-              .[1] as $new
-              | .[0]
-              | to_entries
-              | map({ flake: .key, old_rev: .value, new_rev: $new[.key] })
-              | map(select(.old_rev != .new_rev))
-              | {flake: map(.flake)}' <(echo "$1") <(echo "$2")
-          }
-
-          old="$(get_flake_revs)"
-          nix flake update
-          new="$(get_flake_revs)"
-
-          updated="$(get_updated_flakes "$old" "$new")"
-          count="$(jq '.flake | length' <<< "$updated")"
-
-          if [ "$count" == 0 ]; then
-            echo "::set-output name=noop::true"
-          else
-            echo "::set-output name=noop::false"
-          fi
-
-          echo "::set-output name=matrix::$updated"
+          echo "::set-output name=matrix::$(get_flake_inputs)"
   update-flake:
     name: update-${{ matrix.flake }}
     runs-on: ubuntu-latest
     needs: get-flakes
-    if: ${{ needs.get-flakes.outputs.noop == 'false' }}
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.get-flakes.outputs.matrix) }}
