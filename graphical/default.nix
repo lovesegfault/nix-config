@@ -28,14 +28,7 @@
 
   programs.dconf.enable = true;
 
-  services = {
-    dbus.packages = with pkgs; [ dconf ];
-    redshift = {
-      enable = true;
-      package = pkgs.redshift-wlr;
-      extraOptions = [ "-v" ];
-    };
-  };
+  services.dbus.packages = with pkgs; [ dconf ];
 
   xdg = {
     autostart.enable = true;

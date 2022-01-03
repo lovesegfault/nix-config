@@ -4,7 +4,6 @@
     ./common.nix
     ./firefox.nix
     ./mpv.nix
-    ./redshift.nix
     ./mime.nix
   ];
 
@@ -51,7 +50,18 @@
     };
   };
 
-  services.gpg-agent.pinentryFlavor = "gnome3";
+  services = {
+    gpg-agent.pinentryFlavor = "gnome3";
+    gammastep = {
+      enable = true;
+      provider = "geoclue2";
+      tray = true;
+      settings.general = {
+        brightness-day = 1.0;
+        brightness-night = 0.4;
+      };
+    };
+  };
 
   systemd.user.services = {
     polkit = {
