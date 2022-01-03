@@ -10,7 +10,6 @@ let
     "firefox-bin"
     "zoom-us"
     "discord"
-    "commitizen"
   ];
   inherit (prev.lib) listToAttrs makeOverridable nameValuePair;
   nullDrv = final.callPackage

@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ pkgs, ... }: {
   home = {
     extraOutputsToInstall = [ "doc" "devdoc" ];
     file.gdbinit = {
@@ -7,7 +7,7 @@
         set auto-load safe-path /
       '';
     };
-    packages = with pkgs; [ commitizen git-extras git-lfs ];
+    packages = with pkgs; [ git-extras git-lfs ];
   };
 
   programs = {
@@ -32,7 +32,5 @@
     };
 
     nix-index.enable = true;
-
-    zsh.shellAliases.gco = lib.mkForce "git cz";
   };
 }
