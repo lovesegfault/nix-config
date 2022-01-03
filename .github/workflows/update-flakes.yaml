@@ -45,6 +45,7 @@ jobs:
         with:
           dependency: ${{ matrix.flake }}
           pull-request-token: ${{ secrets.PAT }}
+          pull-request-author: hatesegfault <hatesegfault@protonmail.ch>
           delete-branch: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pull-request-branch-prefix: update-
