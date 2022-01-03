@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [
+    ./alacritty.nix
     ./dunst.nix
     ./i3.nix
     ./polybar.nix
