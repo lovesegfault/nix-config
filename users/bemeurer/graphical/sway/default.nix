@@ -38,6 +38,23 @@
 
   xsession.pointerCursor.size = 24;
 
+  services.swayidle = {
+    enable = true;
+    events = [
+      { event = "before-sleep"; command = "swaylock -f"; }
+      { event = "lock"; command = "swaylock -f"; }
+    ];
+    timeouts = [
+      { timeout = 230; command = ''notify-send -t 30000 -- "Screen will lock in 30 seconds"''; }
+      { timeout = 300; command = "swaylock -f"; }
+      {
+        timeout = 600;
+        command = ''swaymsg "output * dpms off"'';
+        resumeCommand = ''swaymsg "output * dpms on"'';
+      }
+    ];
+  };
+
   systemd.user.services = {
     mako = {
       Unit = {
@@ -48,28 +65,6 @@
       Service = {
         Type = "simple";
         ExecStart = "${pkgs.mako}/bin/mako";
-        RestartSec = 3;
-        Restart = "always";
-      };
-      Install = {
-        WantedBy = [ "sway-session.target" ];
-      };
-    };
-    swayidle = {
-      Unit = {
-        Description = "swayidle";
-        Documentation = [ "man:swayidle(1)" ];
-        PartOf = [ "sway-session.target" ];
-      };
-      Service = {
-        Type = "simple";
-        ExecStart = ''
-          ${pkgs.swayidle}/bin/swayidle -w \
-            timeout 300 'swaylock' \
-            timeout 600 'swaymsg "output * dpms off"' \
-              resume 'swaymsg "output * dpms on"' \
-            before-sleep 'swaylock'
-        '';
         RestartSec = 3;
         Restart = "always";
       };
