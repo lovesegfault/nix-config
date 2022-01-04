@@ -52,8 +52,6 @@ let
       argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // {
         LTO_CLANG_FULL = yes;
         LTO_NONE = no;
-        # XXX: https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg2519405.html
-        DEBUG_INFO = lib.mkForce no;
       };
     };
 
@@ -86,6 +84,6 @@ _: {
 
   linuxPackages_xanmod_lto_zen3 = packagesFor
     (applyCfg
-      { MZEN3 = yes; }
+      { MZEN3 = yes; DEBUG_INFO = lib.mkForce no; }
       (applyLTO linuxKernel.kernels.linux_xanmod));
 }
