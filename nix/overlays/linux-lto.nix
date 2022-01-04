@@ -77,12 +77,7 @@ _: {
       { MSKYLAKE = yes; }
       (applyUarches
         (applyLTO
-          linuxKernel.packageAliases.linux_latest.kernel)))).extend (final: prev:
-    {
-      acpi_call = prev.acpi_call.overrideAttrs (old: {
-        makeFlags = final.kernel.makeFlags ++ old.makeFlags;
-      });
-    });
+          linuxKernel.packageAliases.linux_latest.kernel))));
 
   linuxPackages_xanmod_lto_zen3 = packagesFor
     (applyCfg
