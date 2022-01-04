@@ -8,7 +8,7 @@ let
     argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // config;
   };
 
-  applyLTO = kernel:
+  applyLLVM = kernel:
     let
       llvmPackages = "llvmPackages_13";
       noBintools = { bootBintools = null; bootBintoolsNoLibc = null; };
@@ -49,11 +49,12 @@ let
       inherit stdenv;
       buildPackages = final.buildPackages // { inherit stdenv; };
       argsOverride.kernelPatches = kernel.kernelPatches;
-      argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // {
-        LTO_CLANG_FULL = yes;
-        LTO_NONE = no;
-      };
     };
+
+  applyLTO = kernel:
+    applyCfg
+      { LTO_NONE = no; LTO_CLANG_FULL = yes; }
+      (applyLLVM kernel);
 
   applyUarches = kernel: kernel.override {
     argsOverride.kernelPatches = kernel.kernelPatches ++ [{
