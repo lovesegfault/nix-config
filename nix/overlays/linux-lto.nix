@@ -49,6 +49,7 @@ let
       inherit stdenv;
       buildPackages = final.buildPackages // { inherit stdenv; };
       argsOverride.kernelPatches = kernel.kernelPatches;
+      argsOverride.structuredExtraConfig = kernel.structuredExtraConfig;
     };
 
   applyLTO = kernel:
