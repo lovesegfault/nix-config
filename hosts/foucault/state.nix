@@ -39,6 +39,7 @@
       "/home/bemeurer/.local/share/nvim"
       "/home/bemeurer/.local/share/shotwell"
       "/home/bemeurer/.local/share/zsh"
+      "/home/bemeurer/.aws"
       "/home/bemeurer/.mozilla"
       "/home/bemeurer/.ssh"
       "/home/bemeurer/.thunderbird"
