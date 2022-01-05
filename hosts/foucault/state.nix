@@ -11,6 +11,7 @@
       "/var/lib/tailscale"
       "/var/log"
 
+      "/home/bemeurer/.cache/direnv"
       "/home/bemeurer/.cache/lollypop"
       "/home/bemeurer/.cache/mozilla"
       "/home/bemeurer/.cache/nix-index"
