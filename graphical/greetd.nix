@@ -22,6 +22,7 @@
     in
     {
       enable = true;
+      vt = 7;
       settings = {
         default_session = {
           command = "${pkgs.systemd}/bin/systemd-cat -t gtkgreet ${pkgs.sway}/bin/sway --config ${gtkgreetSwayCfg}";
