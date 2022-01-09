@@ -14,6 +14,7 @@
       "/home/bemeurer/.cache/direnv"
       "/home/bemeurer/.cache/lollypop"
       "/home/bemeurer/.cache/mozilla"
+      "/home/bemeurer/.cache/nix"
       "/home/bemeurer/.cache/nix-index"
       "/home/bemeurer/.cache/nvim"
       "/home/bemeurer/.cache/shotwell"
