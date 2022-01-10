@@ -4,12 +4,13 @@
 final: prev:
 let
   maskedPkgs = [
-    "signal-desktop"
-    "element-desktop"
-    "thunderbird"
-    "firefox-bin"
-    "zoom-us"
+    "darktable"
     "discord"
+    "element-desktop"
+    "firefox-bin"
+    "signal-desktop"
+    "thunderbird"
+    "zoom-us"
   ];
   inherit (prev.lib) listToAttrs makeOverridable nameValuePair;
   nullDrv = final.callPackage

@@ -15,10 +15,10 @@
       pinentry-gnome
       speedcrunch
     ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
+      darktable
       discord
       element-desktop
       gnome.evince
-      shotwell
       signal-desktop
       thunderbird-bin
     ];
