@@ -30,6 +30,7 @@
       "/home/bemeurer/.config/gcloud"
       "/home/bemeurer/.config/gopass"
       "/home/bemeurer/.config/pipewire"
+      "/home/bemeurer/.config/spotify"
       "/home/bemeurer/.gnupg"
       "/home/bemeurer/.local/share/TabNine"
       "/home/bemeurer/.local/share/bash"
