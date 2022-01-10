@@ -7,16 +7,12 @@
       {
         hostName = "aarch64.nixos.community";
         maxJobs = 64;
-        speedFactor = 8;
         sshKey = config.age.secrets.nixosAarch64BuilderKey.path;
         sshUser = "lovesegfault";
         system = "aarch64-linux";
         supportedFeatures = [ "big-parallel" ];
       }
     ];
-    extraOptions = ''
-      builders-use-substitutes = true
-    '';
   };
 
   programs.ssh = {
