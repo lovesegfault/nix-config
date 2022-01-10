@@ -11,6 +11,7 @@
       "/var/lib/tailscale"
       "/var/log"
 
+      "/home/bemeurer/.cache/darktable"
       "/home/bemeurer/.cache/direnv"
       "/home/bemeurer/.cache/lollypop"
       "/home/bemeurer/.cache/mozilla"
@@ -24,6 +25,7 @@
       "/home/bemeurer/.config/Element"
       "/home/bemeurer/.config/Signal"
       "/home/bemeurer/.config/TabNine"
+      "/home/bemeurer/.config/darktable"
       "/home/bemeurer/.config/dconf"
       "/home/bemeurer/.config/discord"
       "/home/bemeurer/.config/gcloud"
