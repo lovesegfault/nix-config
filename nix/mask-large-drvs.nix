@@ -9,6 +9,7 @@ let
     "element-desktop"
     "firefox-bin"
     "signal-desktop"
+    "spotify"
     "thunderbird"
     "zoom-us"
   ];

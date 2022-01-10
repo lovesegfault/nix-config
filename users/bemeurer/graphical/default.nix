@@ -20,6 +20,7 @@
       element-desktop
       gnome.evince
       signal-desktop
+      spotify
       thunderbird-bin
     ];
 
