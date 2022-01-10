@@ -5,10 +5,10 @@
     userDirs = {
       enable = true;
       desktop = "$HOME/opt";
-      documents = "$HOME/documents";
+      documents = "$HOME/doc";
       download = "$HOME/tmp";
-      music = "$HOME/music";
-      pictures = "$HOME/pictures";
+      music = "$HOME/mus";
+      pictures = "$HOME/img";
       publicShare = "$HOME/opt";
       templates = "$HOME/opt";
       videos = "$HOME/opt";

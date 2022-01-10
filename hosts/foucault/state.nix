@@ -46,6 +46,7 @@
       "/home/bemeurer/.ssh"
       "/home/bemeurer/.thunderbird"
       "/home/bemeurer/doc"
+      "/home/bemeurer/img"
       "/home/bemeurer/opt"
       "/home/bemeurer/src"
       "/home/bemeurer/tmp"
