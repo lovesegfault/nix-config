@@ -18,6 +18,7 @@
       "/home/bemeurer/.cache/nix"
       "/home/bemeurer/.cache/nix-index"
       "/home/bemeurer/.cache/nvim"
+      "/home/bemeurer/.cache/spotify"
       "/home/bemeurer/.cache/thunderbird"
       "/home/bemeurer/.cache/wofi"
       "/home/bemeurer/.cache/zsh"
