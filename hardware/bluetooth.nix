@@ -11,6 +11,8 @@
     };
   };
 
+  services.blueman.enable = true;
+
   # XXX: Due to how .serviceConfig is an option and .ExecStart is technically
   # a list, you will add multiple ExecStart='s to the .service file, and this
   # not a nixos option, you cant use things like mkForce on it. If you set it to

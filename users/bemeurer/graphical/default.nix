@@ -8,6 +8,7 @@
 
   home = {
     packages = with pkgs; [
+      blueman
       gammastep
       libnotify
       lollypop
@@ -52,6 +53,7 @@
   };
 
   services = {
+    blueman-applet.enable = true;
     gpg-agent.pinentryFlavor = "gnome3";
     gammastep = {
       enable = true;
