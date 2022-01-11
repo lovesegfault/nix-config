@@ -27,7 +27,7 @@
     };
     media-session.config.bluez-monitor.properties = {
       "bluez5.headset-roles" = [ "hsp_hs" "hsp_ag" ];
-      "bluez5.codecs" = [ "aac" "ldac" "aptx_hd" ];
+      "bluez5.codecs" = [ "ldac" "aac" "aptx_hd" "aptx" "sbc" ];
     };
   };
 
