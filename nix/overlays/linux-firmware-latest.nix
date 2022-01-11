@@ -1,13 +1,13 @@
 final: prev: {
-  firmwareLinuxNonfree = prev.firmwareLinuxNonfree.overrideAttrs (_: {
-    version = "unstable-2022-01-07";
+  linux-firmware = prev.linux-firmware.overrideAttrs (_: {
+    version = "unstable-2022-01-11";
 
     src = final.fetchgit {
       url = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";
-      rev = "182a186c570baab3968ca9116ee58b1875fb0168";
-      sha256 = "sha256-W/HsMnAIfCqm5XUPsPZ53dBCh/uNAlGfPEBRwmW9ZG0=";
+      rev = "13dca280f76009ba2c5f25408543a1aaaa062c25";
+      sha256 = "sha256-THnf5oWAFh5thCKoKH/kZcO0VU8QDETorG2xR51fmTk=";
     };
 
-    outputHash = "sha256-NSPyINzt5N+Wk0F5ftVE11Kj7LLhF3TpRfQ29qd4lCE=";
+    outputHash = "sha256-Xm9QSrDZOli585YvJPEtQThDxUx88Mykyv5tdoXa7Xw=";
   });
 }
