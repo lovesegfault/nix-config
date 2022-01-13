@@ -8,6 +8,7 @@
         FastConnectable = "true";
         JustWorksRepairing = "always";
         MultiProfile = "multiple";
+        Experimental = "true";
       };
     };
   };
