@@ -26,7 +26,7 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [ cntr wireguard-tools ];
+  environment.systemPackages = with pkgs; [ cntr wireguard-tools mullvad-vpn ];
 
   fileSystems = {
     "/" = {
@@ -79,6 +79,7 @@
       lidSwitch = "suspend-then-hibernate";
       lidSwitchExternalPower = "ignore";
     };
+    mullvad-vpn.enable = true;
     udev.packages = with pkgs; [ logitech-udev-rules ];
     usbmuxd.enable = true;
   };
