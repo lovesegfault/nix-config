@@ -12,11 +12,12 @@ final: _: {
 
         text = ''
           [ "$#" -ge 1 ] || exit 1
-          read -ra cmd <<<"$*"
-          program="''${cmd[0]}"
+          program="$0"
           name="$(basename "$program")"
           uuid="$(uuidgen)"
-          exec systemd-run --user --scope --unit "run-$name-$uuid" "''${cmd[@]}"
+          set -x
+          # shellcheck disable=SC2046
+          exec systemd-run --user --scope --unit "run-$name-$uuid" $(eval "$*")
         '';
       }
     )
