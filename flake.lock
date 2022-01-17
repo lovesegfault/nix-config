@@ -186,11 +186,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1642458740,
-        "narHash": "sha256-S6VJWyCHDnFREo6Q61h3TEcuIKo8AbvTgF1CfZRV3f8=",
+        "lastModified": 1642460965,
+        "narHash": "sha256-d3g6VfPS2tesdMNAsng88Nc0jkDATNgV2QIG+2qRVfM=",
         "owner": "yaxitech",
         "repo": "ragenix",
-        "rev": "022f948660a2b8cd9ab537b237827ae08e439375",
+        "rev": "c74a79d65e1be406a0152c3c28fc635b0efebd99",
         "type": "github"
       },
       "original": {
