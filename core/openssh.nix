@@ -3,7 +3,6 @@
 
   services.openssh = {
     enable = true;
-    challengeResponseAuthentication = false;
     permitRootLogin = lib.mkDefault "no";
   };
 }
