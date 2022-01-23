@@ -2,10 +2,7 @@
   "nodes": {
     "agenix": {
       "inputs": {
-        "nixpkgs": [
-          "ragenix",
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1641576265,
@@ -60,6 +57,21 @@
       "original": {
         "owner": "edolstra",
         "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1642700792,
+        "narHash": "sha256-XqHrk7hFb+zBvRg6Ghl+AZDq03ov6OshJLiSWOoX5es=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "846b2ae0fc4cc943637d3d1def4454213e203cba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
         "type": "github"
       }
     },
@@ -120,16 +132,46 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1642910085,
-        "narHash": "sha256-wdG5bcAD98A/ixa/8dQJdW7DNpi9D0JzKrBDjVUOoww=",
+        "lastModified": 1642953497,
+        "narHash": "sha256-h6+e14NyEQbH7osZtuEHOPS6twL5wINDEeffKaZ0xDY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "aec48ffcb120381e24a953486bf02c372f8ae50e",
+        "rev": "2d42d654aa482de067d30285d8d5bdce5e32ec62",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "ref": "nixos-unstable-small",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1642880071,
+        "narHash": "sha256-NZW5BczhluZVkKblxrFqJbawUPxuC2HdKQ1t/+vKA34=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "30daa988f107bc4c910c398a77b2b89864049932",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1642880071,
+        "narHash": "sha256-NZW5BczhluZVkKblxrFqJbawUPxuC2HdKQ1t/+vKA34=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "30daa988f107bc4c910c398a77b2b89864049932",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -198,14 +240,8 @@
     },
     "rust-overlay": {
       "inputs": {
-        "flake-utils": [
-          "ragenix",
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "ragenix",
-          "nixpkgs"
-        ]
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1642838864,
