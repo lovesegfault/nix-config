@@ -4,10 +4,10 @@ final: prev: {
 
     src = final.fetchgit {
       url = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";
-      rev = "13dca280f76009ba2c5f25408543a1aaaa062c25";
-      sha256 = "sha256-THnf5oWAFh5thCKoKH/kZcO0VU8QDETorG2xR51fmTk=";
+      rev = "0c6a7b3bf728b95c8b7b95328f94335e2bb2c967";
+      sha256 = "sha256-r3n0beZ/QqnFmrm48kpsfSbnXWWxVDggsBsbXCrueQE=";
     };
 
-    outputHash = "sha256-Xm9QSrDZOli585YvJPEtQThDxUx88Mykyv5tdoXa7Xw=";
+    outputHash = "sha256-npcSuoAVanRja/8jagsveVjLjjM9p2xKRj5kdWmxEUs=";
   });
 }
