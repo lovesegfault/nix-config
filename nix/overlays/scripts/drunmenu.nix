@@ -14,7 +14,9 @@ let
       text = ''
         program="$(${displayCmd})"
 
-        exec spawn "$program"
+        set -x
+        # shellcheck disable=SC2086
+        exec spawn $program
       '';
     };
 in
