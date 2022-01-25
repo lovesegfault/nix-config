@@ -1,5 +1,6 @@
 { deploy-rs
 , gitignore
+, nixgl
 , nixpkgs
 , ragenix
 , ...
@@ -15,5 +16,6 @@ in
 composeManyExtensions (localOverlays ++ [
   deploy-rs.overlay
   gitignore.overlay
+  nixgl.overlay
   ragenix.overlay
 ])

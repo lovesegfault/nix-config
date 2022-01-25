@@ -28,6 +28,12 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
+    nixgl = {
+      url = "github:lovesegfault/nixgl/flake";
+      inputs.flake-utils.follows = "utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     pre-commit-hooks = {
@@ -47,11 +53,22 @@
     utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, utils, ... }@inputs:
+  outputs = { self, home-manager, nixpkgs, utils, ... }@inputs:
     {
       deploy = import ./nix/deploy.nix inputs;
 
       overlay = import ./nix/overlay.nix inputs;
+
+      homeConfigurations = {
+        "beme@beme-glaptop" = home-manager.lib.homeManagerConfiguration rec {
+          configuration = import ./hosts/beme-glaptop;
+          homeDirectory = "/home/beme";
+          pkgs = self.nixpkgs.${system};
+          stateVersion = "21.11";
+          system = "x86_64-linux";
+          username = "beme";
+        };
+      };
     }
     // utils.lib.eachDefaultSystem (system: {
       checks = import ./nix/checks.nix inputs system;

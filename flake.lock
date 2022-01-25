@@ -130,6 +130,30 @@
         "type": "github"
       }
     },
+    "nixgl": {
+      "inputs": {
+        "flake-utils": [
+          "utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1643150838,
+        "narHash": "sha256-EuaRM5Bo/7nZvRNkQWURKAoyB0G93j4bJlPhyE5bdqU=",
+        "owner": "lovesegfault",
+        "repo": "nixgl",
+        "rev": "b29530a598cb48ae8f3000fcfe44b37f08fa06b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lovesegfault",
+        "ref": "flake",
+        "repo": "nixgl",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1643134871,
@@ -231,6 +255,7 @@
         "gitignore": "gitignore",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
+        "nixgl": "nixgl",
         "nixpkgs": "nixpkgs",
         "pre-commit-hooks": "pre-commit-hooks",
         "ragenix": "ragenix",
