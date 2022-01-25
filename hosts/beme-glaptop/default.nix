@@ -77,6 +77,9 @@
   };
 
   programs.foot.settings.main.font = lib.mkForce "monospace:size=6, emoji";
+  programs.gpg.scdaemonSettings = {
+    disable-ccid = true;
+  };
 
   systemd.user = {
     sessionVariables.LD_PRELOAD = "/usr/lib/x86_64-linux-gnu/libnss_cache.so.2";
