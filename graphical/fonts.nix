@@ -38,6 +38,8 @@
     fonts = with pkgs; [
       (nerdfonts.override { fonts = [ "Hack" ]; })
       ibm-plex
+      dejavu_fonts
+      unifont
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
