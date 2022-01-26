@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ../../users/bemeurer/core
     ../../users/bemeurer/dev
@@ -79,34 +79,48 @@
   };
 
   systemd.user = {
-    sessionVariables.LD_PRELOAD = "/usr/lib/x86_64-linux-gnu/libnss_cache.so.2";
-    services.goobuntu-indicator = {
-      Unit = {
-        Description = "Google Status Indicator";
-        PartOf = [ "sway-session.target" ];
-        After = [ "graphical-session.target" ];
-      };
-      Service = {
-        Environment = [ "XDG_CURRENT_DESKTOP=gnome" ];
-        ExecStart = "/usr/share/goobuntu-indicator/goobuntu_indicator.py";
-        Restart = "on-failure";
-        RestartSec = 5;
-      };
-      Install.WantedBy = [ "sway-session.target" ];
+    sessionVariables = {
+      LD_PRELOAD = "/usr/lib/x86_64-linux-gnu/libnss_cache.so.2";
+      XDG_DATA_DIRS = "${config.home.homeDirectory}/.nix-profile/share:/usr/share:\${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS";
     };
-    services.ssh-agent = {
-      Unit = {
-        Description = "Google SSH Key Agent";
+    services = {
+      geoclue-agent = {
+        Unit = {
+          Before = [ "gammastep.service" ];
+          Description = "Geoclue agent";
+        };
+        Service = {
+          Type = "exec";
+          ExecStart = "${pkgs.geoclue2.override { withDemoAgent = true;}}/libexec/geoclue-2.0/demos/agent";
+          Restart = "on-failure";
+          PrivateTmp = true;
+        };
+        Install.WantedBy = [ "default.target" ];
       };
-
-      Service = {
-        Type = "simple";
-        Environment = [ "DISPLAY=:0" ];
-        ExecStart = "/usr/bin/ssh-agent -D -a %t/ssh-agent.socket";
-        Restart = "on-failure";
+      goobuntu-indicator = {
+        Unit = {
+          Description = "Google Status Indicator";
+          PartOf = [ "sway-session.target" ];
+          After = [ "graphical-session.target" ];
+        };
+        Service = {
+          Environment = [ "XDG_CURRENT_DESKTOP=gnome" ];
+          ExecStart = "/usr/share/goobuntu-indicator/goobuntu_indicator.py";
+          Restart = "on-failure";
+          RestartSec = 5;
+        };
+        Install.WantedBy = [ "sway-session.target" ];
       };
-
-      Install.WantedBy = [ "default.target" ];
+      ssh-agent = {
+        Unit.Description = "Google SSH Key Agent";
+        Service = {
+          Type = "simple";
+          Environment = [ "DISPLAY=:0" ];
+          ExecStart = "/usr/bin/ssh-agent -D -a %t/ssh-agent.socket";
+          Restart = "on-failure";
+        };
+        Install.WantedBy = [ "default.target" ];
+      };
     };
   };
 
