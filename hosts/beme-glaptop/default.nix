@@ -33,6 +33,8 @@
     home-manager.enable = true;
     bash = {
       profileExtra = ''
+        source /home/beme/.nix-profile/etc/profile.d/nix.sh
+
         function _source_if() {
           if [ -f "$1" ]; then
             source "$1"
@@ -42,22 +44,21 @@
         _source_if /etc/profile.d/gnome-session_gnomerc.sh
         _source_if /etc/profile.d/im-config_wayland.sh
         _source_if /etc/profile.d/rekey.sh
-        _source_if /home/beme/.nix-profile/etc/profile.d/nix.sh
-        _source_if /home/beme/.nix-profile/etc/profile.d/hm-session-vars.sh
+
       '';
-      initExtra = ''
+
+      bashrcExtra = ''
         source $HOME/.profile
-        if [ "$SHELL" != "$HOME/.nix-profile/bin/zsh" ]
-        then
-          export SHELL="$HOME/.nix-profile/bin/zsh"
-          exec "$SHELL" -l    # -l: login shell again
-        fi
       '';
     };
-    foot.settings.main.font = lib.mkForce "monospace:size=6, emoji";
+    foot.settings.main = {
+      font = lib.mkForce "monospace:size=6, emoji";
+      shell = "zsh";
+    };
     gpg.scdaemonSettings.disable-ccid = true;
     zsh = {
       initExtra = ''
+        source /home/beme/.nix-profile/etc/profile.d/nix.sh
         if [[ -z "$DISPLAY" && "$TTY" = "/dev/tty1" ]]; then
           systemctl --user import-environment
           exec systemd-cat -t sway nixGLIntel sway
