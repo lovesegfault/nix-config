@@ -15,6 +15,7 @@
       pavucontrol
       pinentry-gnome
       speedcrunch
+      xdg-utils
     ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
       darktable
       discord
