@@ -58,6 +58,8 @@
         fi
       '';
     };
+    foot.settings.main.font = lib.mkForce "monospace:size=6, emoji";
+    gpg.scdaemonSettings.disable-ccid = true;
     zsh = {
       initExtraFirst = ''
         source $HOME/.profile
@@ -74,11 +76,6 @@
         fi
       '';
     };
-  };
-
-  programs.foot.settings.main.font = lib.mkForce "monospace:size=6, emoji";
-  programs.gpg.scdaemonSettings = {
-    disable-ccid = true;
   };
 
   systemd.user = {
@@ -112,4 +109,19 @@
       Install.WantedBy = [ "default.target" ];
     };
   };
+
+  xdg.configFile."nix/nix.conf".text = ''
+    max-jobs = 12
+    cores = 0
+    sandbox = true
+    substituters = https://nix-config.cachix.org https://nix-community.cachix.org https://cache.nixos.org/
+    trusted-public-keys = nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+    require-sigs = true
+
+    system-features = recursive-nix benchmark nixos-test big-parallel kvm
+    sandbox-fallback = false
+
+    builders-use-substitutes = true
+    experimental-features = nix-command flakes recursive-nix
+  '';
 }

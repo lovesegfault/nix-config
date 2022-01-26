@@ -61,7 +61,10 @@
 
       homeConfigurations = {
         "beme@beme-glaptop" = home-manager.lib.homeManagerConfiguration rec {
-          configuration = import ./hosts/beme-glaptop;
+          configuration.imports = [
+            ./hosts/beme-glaptop
+            (import ./nix/home-manager-flake.nix inputs)
+          ];
           homeDirectory = "/home/beme";
           pkgs = self.nixpkgs.${system};
           stateVersion = "21.11";
