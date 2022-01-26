@@ -57,9 +57,6 @@
     foot.settings.main.font = lib.mkForce "monospace:size=6, emoji";
     gpg.scdaemonSettings.disable-ccid = true;
     zsh = {
-      initExtraFirst = ''
-        source $HOME/.profile
-      '';
       initExtra = ''
         if [[ -z "$DISPLAY" && "$TTY" = "/dev/tty1" ]]; then
           systemctl --user import-environment
