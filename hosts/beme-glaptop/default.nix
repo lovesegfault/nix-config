@@ -34,6 +34,7 @@
     bash = {
       profileExtra = ''
         source /home/beme/.nix-profile/etc/profile.d/nix.sh
+        export SSH_AUTH_SOCK="''${XDG_RUNTIME_DIR}/ssh-agent.socket"
 
         function _source_if() {
           if [ -f "$1" ]; then
@@ -44,7 +45,6 @@
         _source_if /etc/profile.d/gnome-session_gnomerc.sh
         _source_if /etc/profile.d/im-config_wayland.sh
         _source_if /etc/profile.d/rekey.sh
-
       '';
 
       bashrcExtra = ''
@@ -59,6 +59,7 @@
     zsh = {
       initExtra = ''
         source /home/beme/.nix-profile/etc/profile.d/nix.sh
+        export SSH_AUTH_SOCK="''${XDG_RUNTIME_DIR}/ssh-agent.socket"
         if [[ -z "$DISPLAY" && "$TTY" = "/dev/tty1" ]]; then
           systemctl --user import-environment
           exec systemd-cat -t sway nixGLIntel sway
@@ -75,7 +76,7 @@
   systemd.user = {
     sessionVariables = {
       LD_PRELOAD = "/usr/lib/x86_64-linux-gnu/libnss_cache.so.2";
-      SSH_AUTH_SOCK = "\${XDG_RUNTIME_DIR}/ssh-agent.socket";
+      SSH_AUTH_SOCK = lib.mkForce "\${XDG_RUNTIME_DIR}/ssh-agent.socket";
       XDG_DATA_DIRS = "${config.home.homeDirectory}/.nix-profile/share:/usr/share\${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS";
     };
     services = {
