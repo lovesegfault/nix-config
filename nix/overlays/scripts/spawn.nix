@@ -12,10 +12,10 @@ final: _: {
 
         text = ''
           [ "$#" -ge 1 ] || exit 1
-          name="$(basename "$0")"
-          uuid="$(uuidgen)"
           set -x
-          exec systemd-run --user --scope --unit "run-$name-$uuid" "$@"
+          pname="$(basename "$1")"
+          uuid="$(uuidgen)"
+          exec systemd-run --user --scope --unit "spawn-$pname-$uuid" "$@"
         '';
       }
     )
