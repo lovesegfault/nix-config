@@ -33,9 +33,7 @@
     home-manager.enable = true;
     bash = {
       profileExtra = ''
-        export XDG_DATA_DIRS="$HOME/.nix-profile/share:/usr/share"
         export SSH_AUTH_SOCK="''${XDG_RUNTIME_DIR}/ssh-agent.socket"
-        export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libnss_cache.so.2"
 
         function _source_if() {
           if [ -f "$1" ]; then
@@ -81,7 +79,7 @@
   systemd.user = {
     sessionVariables = {
       LD_PRELOAD = "/usr/lib/x86_64-linux-gnu/libnss_cache.so.2";
-      XDG_DATA_DIRS = "${config.home.homeDirectory}/.nix-profile/share:/usr/share:\${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS";
+      XDG_DATA_DIRS = "${config.home.homeDirectory}/.nix-profile/share:/usr/share\${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS";
     };
     services = {
       geoclue-agent = {
