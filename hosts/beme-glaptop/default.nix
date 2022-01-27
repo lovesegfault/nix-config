@@ -117,6 +117,11 @@
         };
         Install.WantedBy = [ "default.target" ];
       };
+      waybar.Unit.PartOf = [ "tray.target" ];
+    };
+    targets.tray.Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
     };
   };
 
