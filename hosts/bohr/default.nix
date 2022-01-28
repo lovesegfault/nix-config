@@ -81,8 +81,10 @@
       automatic = true;
       options = "-d";
     };
-    maxJobs = 16;
-    systemFeatures = [ "benchmark" "nixos-test" "big-parallel" "kvm" ];
+    settings = {
+      max-jobs = 16;
+      system-features = [ "benchmark" "nixos-test" "big-parallel" "kvm" ];
+    };
   };
 
   security.pam.loginLimits = [

@@ -56,7 +56,7 @@
       automatic = true;
       options = "-d";
     };
-    maxJobs = 1;
+    settings.max-jobs = 1;
   };
 
   age.secrets.kantDdclient.file = ./ddclient.age;

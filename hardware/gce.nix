@@ -6,7 +6,7 @@
   networking.useNetworkd = lib.mkForce false;
   networking.interfaces.eth0.useDHCP = true;
 
-  nix.maxJobs = 64;
+  nix.settings.max-jobs = 64;
 
   services.fstrim.enable = true;
 

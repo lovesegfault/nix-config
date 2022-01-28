@@ -33,7 +33,7 @@
     deviceTree.enable = true;
   };
 
-  nix.maxJobs = 4;
+  nix.settings.max-jobs = 4;
 
   services = {
     fstrim.enable = true;

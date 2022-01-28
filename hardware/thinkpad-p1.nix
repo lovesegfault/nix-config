@@ -30,9 +30,9 @@
     i2c.enable = true;
   };
 
-  nix = {
-    maxJobs = 12;
-    systemFeatures = [ "benchmark" "nixos-test" "big-parallel" "kvm" "gccarch-skylake" ];
+  nix.settings = {
+    max-jobs = 12;
+    system-features = [ "benchmark" "nixos-test" "big-parallel" "kvm" "gccarch-skylake" ];
   };
 
   powerManagement.cpuFreqGovernor = "powersave";
