@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   home = {
     extraOutputsToInstall = [ "doc" "devdoc" ];
     file.gdbinit = {
@@ -32,5 +32,7 @@
     };
 
     nix-index.enable = true;
+
+    zsh.shellAliases.gco = lib.mkForce "git cz commit";
   };
 }
