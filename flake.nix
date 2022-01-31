@@ -82,6 +82,7 @@
         inherit system;
         overlays = [ self.overlay ];
         config.allowUnfree = true;
+        config.allowAliases = true;
       };
 
       packages.hosts = import ./nix/join-host-drvs.nix inputs system;
