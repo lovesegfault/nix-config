@@ -65,10 +65,9 @@
           exec systemd-cat -t sway nixGLIntel sway
         fi
       '';
-      envExtra = ''
-        if [[ -d /usr/share/zsh/vendor-completions ]]; then
-          export fpath=(/usr/share/zsh/vendor-completions ''${fpath})
-        fi
+      initExtraBeforeCompInit = ''
+        fpath+="/usr/share/zsh/vendor-completions"
+        fpath+=("${config.home.profileDirectory}"/share/zsh/site-functions "${config.home.profileDirectory}"/share/zsh/$ZSH_VERSION/functions "${config.home.profileDirectory}"/share/zsh/vendor-completions)
       '';
     };
   };
