@@ -119,20 +119,12 @@
       }
     },
     "nixgl": {
-      "inputs": {
-        "flake-utils": [
-          "utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
       "locked": {
-        "lastModified": 1643150838,
-        "narHash": "sha256-EuaRM5Bo/7nZvRNkQWURKAoyB0G93j4bJlPhyE5bdqU=",
+        "lastModified": 1643653689,
+        "narHash": "sha256-8J6HqBr8+JlZzjyMV8FrCS6ZI6rHo1pTMPilSBf6TaE=",
         "owner": "lovesegfault",
         "repo": "nixgl",
-        "rev": "b29530a598cb48ae8f3000fcfe44b37f08fa06b8",
+        "rev": "6a00a8c7694c791a1cd11abcc320191c6f240d94",
         "type": "github"
       },
       "original": {
