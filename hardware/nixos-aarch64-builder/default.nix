@@ -1,19 +1,18 @@
-{
+{ config, ... }: {
   age.secrets.nixosAarch64BuilderKey.file = ./key.age;
 
   nix = {
     distributedBuilds = true;
-    # FIXME: Broken for now...
-    # buildMachines = [
-    #   {
-    #     hostName = "aarch64.nixos.community";
-    #     maxJobs = 64;
-    #     sshKey = config.age.secrets.nixosAarch64BuilderKey.path;
-    #     sshUser = "lovesegfault";
-    #     systems = [ "aarch64-linux" ];
-    #     supportedFeatures = [ "big-parallel" ];
-    #   }
-    # ];
+    buildMachines = [
+      {
+        hostName = "aarch64.nixos.community";
+        maxJobs = 64;
+        sshKey = config.age.secrets.nixosAarch64BuilderKey.path;
+        sshUser = "lovesegfault";
+        systems = [ "aarch64-linux" ];
+        supportedFeatures = [ "big-parallel" ];
+      }
+    ];
   };
 
   programs.ssh = {
