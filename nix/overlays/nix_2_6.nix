@@ -1,3 +1,3 @@
 final: _: {
-  nix = final.nix_2_6;
+  nix = final.nixVersions.nix_2_6;
 }
