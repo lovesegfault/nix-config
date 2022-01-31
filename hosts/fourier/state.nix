@@ -16,19 +16,6 @@
       "/var/lib/tailscale"
       "/var/lib/unbound"
       "/var/log"
-
-      "/home/bemeurer/.cache/nix-index"
-      "/home/bemeurer/.cache/nvim"
-      "/home/bemeurer/.cache/zsh"
-      "/home/bemeurer/.config/beets"
-      "/home/bemeurer/.config/coc"
-      "/home/bemeurer/.local/share/bash"
-      "/home/bemeurer/.local/share/direnv"
-      "/home/bemeurer/.local/share/nvim"
-      "/home/bemeurer/.local/share/zsh"
-      "/home/bemeurer/.ssh"
-      "/home/bemeurer/src"
-      "/home/bemeurer/tmp"
     ];
     files = [
       "/etc/machine-id"
@@ -37,12 +24,21 @@
       "/etc/ssh/ssh_host_rsa_key"
       "/etc/ssh/ssh_host_rsa_key.pub"
     ];
-  };
-
-  home-manager.users.bemeurer.home.persistence."/nix/state/home/bemeurer" = {
-    allowOther = true;
-    files = [
-      ".gist-vim"
+    users.bemeurer.directories = [
+      ".cache/nix-index"
+      ".cache/nvim"
+      ".cache/zsh"
+      ".config/beets"
+      ".config/coc"
+      ".local/share/bash"
+      ".local/share/direnv"
+      ".local/share/nvim"
+      ".local/share/zsh"
+      "src"
+      "tmp"
+      { directory = ".gnupg"; mode = "0700"; }
+      { directory = ".local/share/keyrings"; mode = "0700"; }
+      { directory = ".ssh"; mode = "0700"; }
     ];
   };
 }
