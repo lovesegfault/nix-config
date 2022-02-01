@@ -72,12 +72,12 @@ let
   inherit (linuxKernel) packagesFor;
 in
 _: {
-  linuxPackages_latest_lto_skylake = (packagesFor
+  linuxPackages_latest_lto_skylake = packagesFor
     (applyCfg
       { MSKYLAKE = yes; }
       (applyUarches
         (applyLTO
-          linuxKernel.packageAliases.linux_latest.kernel))));
+          linuxKernel.packageAliases.linux_latest.kernel)));
 
   linuxPackages_xanmod_lto_zen3 = packagesFor
     (applyCfg
