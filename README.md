@@ -27,6 +27,7 @@ Hostnames are picked from my [hostname list][hostnames]
 ## usage
 
 ### deploying
+
 To deploy all hosts:
 
 ```console
@@ -37,6 +38,14 @@ To deploy a specific host:
 
 ```console
 $ deploy .#myHost
+```
+
+### non-nixOS hosts
+
+For non-NixOS hosts (i.e. home-manager-only systems such as `beme-glaptop`):
+
+```console
+$ home-manager --flake ~/src/nix-config switch
 ```
 
 ### adding overlays
