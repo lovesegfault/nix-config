@@ -106,6 +106,7 @@
         };
         Install.WantedBy = [ "sway-session.target" ];
       };
+      polkit.Service.ExecStart = lib.mkForce "/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1";
       ssh-agent = {
         Unit.Description = "Google SSH Key Agent";
         Service = {
