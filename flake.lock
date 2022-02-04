@@ -120,16 +120,15 @@
     },
     "nixgl": {
       "locked": {
-        "lastModified": 1643653689,
+        "lastModified": 1644013836,
         "narHash": "sha256-8J6HqBr8+JlZzjyMV8FrCS6ZI6rHo1pTMPilSBf6TaE=",
-        "owner": "lovesegfault",
+        "owner": "guibou",
         "repo": "nixgl",
-        "rev": "6a00a8c7694c791a1cd11abcc320191c6f240d94",
+        "rev": "17658df1e17a64bc23ee5c93cfa9e8b663a4ac81",
         "type": "github"
       },
       "original": {
-        "owner": "lovesegfault",
-        "ref": "flake",
+        "owner": "guibou",
         "repo": "nixgl",
         "type": "github"
       }

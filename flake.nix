@@ -28,7 +28,7 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    nixgl.url = "github:lovesegfault/nixgl/flake";
+    nixgl.url = "github:guibou/nixgl";
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
