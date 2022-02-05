@@ -2,6 +2,7 @@
   age.identityPaths = [ "/nix/state/etc/ssh/ssh_host_ed25519_key" ];
 
   environment.persistence."/nix/state" = {
+    hideMounts = true;
     directories = [
       "/var/lib/bluetooth"
       "/var/lib/boltd"
