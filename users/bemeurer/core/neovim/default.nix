@@ -43,8 +43,9 @@
         nvim-bufdel
         rust-tools-nvim
         suda-vim
-        telescope-nvim
+        tabular
         telescope-frecency-nvim
+        telescope-nvim
         vim-better-whitespace
         vim-commentary
         vim-fugitive
