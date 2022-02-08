@@ -11,19 +11,25 @@
   home = {
     uid = 907142;
     packages = with pkgs; [
+      (nerdfonts.override { fonts = [ "Hack" ]; })
+      adwaita-qt
+      brillo
+      btop
       glinuxPkgs
+      gnome.adwaita-icon-theme
+      gopass
+      gopass-jsonapi
+      hicolor-icon-theme
+      ibm-plex
       nix
       nixgl.nixGLIntel
-      ibm-plex
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
       noto-fonts-extra
-      (nerdfonts.override { fonts = [ "Hack" ]; })
-      brillo
-      btop
-      gopass
-      gopass-jsonapi
+      qgnomeplatform
+      qt5.qtwayland
+      spawn
     ];
   };
 
