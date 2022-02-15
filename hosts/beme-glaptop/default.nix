@@ -15,7 +15,7 @@
       adwaita-qt
       brillo
       btop
-      glinuxPkgs
+      glinux-mask
       gnome.adwaita-icon-theme
       gopass
       gopass-jsonapi
