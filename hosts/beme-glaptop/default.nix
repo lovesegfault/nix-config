@@ -16,13 +16,13 @@
       brillo
       btop
       glinux-mask
+      glinux-sway
       gnome.adwaita-icon-theme
       gopass
       gopass-jsonapi
       hicolor-icon-theme
       ibm-plex
       nix
-      nixgl.nixGLIntel
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
