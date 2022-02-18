@@ -23,6 +23,7 @@
       hicolor-icon-theme
       ibm-plex
       nix
+      nixgl.nixGLIntel
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
