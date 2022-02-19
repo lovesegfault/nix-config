@@ -10,5 +10,5 @@ final: _: {
     nativeBuildInputs = old.nativeBuildInputs ++ [
       final.autoreconfHook
     ];
-  })).override { withExperimental = true; };
+  })).override { withExperimental = false; };
 }
