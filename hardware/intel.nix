@@ -13,6 +13,10 @@
     };
   };
 
+  environment.systemPackages = with pkgs; [
+    intel-gpu-tools
+  ];
+
   hardware = {
     cpu.intel.updateMicrocode = true;
     opengl = {
