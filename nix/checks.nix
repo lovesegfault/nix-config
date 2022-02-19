@@ -20,7 +20,7 @@ with self.nixpkgs.${system};
           entry = "${stylua}/bin/stylua";
         };
         luacheck = {
-          enable = true;
+          enable = false;
           types = [ "file" "lua" ];
           entry = "${luajitPackages.luacheck}/bin/luacheck --std luajit --globals vim -- ";
         };
