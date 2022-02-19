@@ -67,7 +67,10 @@
   };
 
   systemd.user.services = {
-    gammastep.Unit.After = [ "geoclue-agent.service" ];
+    gammastep.Unit = {
+      After = [ "geoclue-agent.service" ];
+      Wants = [ "geoclue-agent.service" ];
+    };
     polkit = {
       Unit = {
         Description = "polkit-gnome";
