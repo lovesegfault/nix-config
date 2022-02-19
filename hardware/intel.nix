@@ -8,7 +8,7 @@
     initrd = {
       kernelModules = [ "i915" ];
       extraModprobeConfig = ''
-        options i915 enable_guc=2 enable_fbc=1 fastboot=1
+        options i915 enable_guc=3 enable_fbc=1 fastboot=1
       '';
     };
   };
