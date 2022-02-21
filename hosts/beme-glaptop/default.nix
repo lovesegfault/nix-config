@@ -52,6 +52,7 @@
         _source_if /etc/profile.d/gnome-session_gnomerc.sh
         _source_if /etc/profile.d/im-config_wayland.sh
         _source_if /etc/profile.d/rekey.sh
+        _source_if /usr/share/virtualenvwrapper/virtualenvwrapper.sh
       '';
 
       bashrcExtra = ''
@@ -66,11 +67,9 @@
     zsh = {
       initExtra = ''
         source /home/beme/.nix-profile/etc/profile.d/nix.sh
+        [ -f "/usr/share/virtualenvwrapper/virtualenvwrapper.sh" ] &&
+          source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
         export SSH_AUTH_SOCK="''${XDG_RUNTIME_DIR}/ssh-agent.socket"
-        if [[ -z "$DISPLAY" && "$TTY" = "/dev/tty1" ]]; then
-          systemctl --user import-environment
-          exec systemd-cat -t sway nixGLIntel sway
-        fi
       '';
       initExtraBeforeCompInit = ''
         fpath+="/usr/share/zsh/vendor-completions"
