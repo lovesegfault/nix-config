@@ -56,7 +56,7 @@
       overlay = import ./nix/overlay.nix inputs;
 
       homeConfigurations = {
-        "beme@beme-glaptop" = home-manager.lib.homeManagerConfiguration rec {
+        beme-glaptop = home-manager.lib.homeManagerConfiguration rec {
           configuration.imports = [
             ./hosts/beme-glaptop
             (import ./nix/home-manager-flake.nix inputs)
@@ -81,7 +81,7 @@
         config.allowAliases = true;
       };
 
-      packages.hosts = import ./nix/join-host-drvs.nix inputs system;
+      packages.hosts = import ./nix/build-hosts.nix inputs system;
 
       defaultPackage = self.packages.${system}.hosts;
     });
