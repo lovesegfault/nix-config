@@ -49,25 +49,13 @@
     utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, home-manager, nixpkgs, utils, ... }@inputs:
+  outputs = { self, nixpkgs, utils, ... }@inputs:
     {
       deploy = import ./nix/deploy.nix inputs;
 
       overlay = import ./nix/overlay.nix inputs;
 
-      homeConfigurations = {
-        beme-glaptop = home-manager.lib.homeManagerConfiguration rec {
-          configuration.imports = [
-            ./hosts/beme-glaptop
-            (import ./nix/home-manager-flake.nix inputs)
-          ];
-          homeDirectory = "/home/beme";
-          pkgs = self.nixpkgs.${system};
-          stateVersion = "21.11";
-          system = "x86_64-linux";
-          username = "beme";
-        };
-      };
+      homeConfigurations = import ./nix/home-manager.nix inputs;
     }
     // utils.lib.eachDefaultSystem (system: {
       checks = import ./nix/checks.nix inputs system;

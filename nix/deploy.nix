@@ -8,7 +8,9 @@
 , ...
 }@inputs:
 let
-  inherit (nixpkgs.lib) mapAttrs' nameValuePair nixosSystem;
+  inherit (nixpkgs.lib) filterAttrs mapAttrs' nameValuePair nixosSystem;
+
+  hosts = filterAttrs (_: v: !(v.hmOnly or false)) (import ./hosts.nix);
 
   genModules = hostName: system: [
     ragenix.nixosModules.age
@@ -26,7 +28,7 @@ let
         nixpkgs.flake = nixpkgs;
       };
 
-      networking.hosts = mapAttrs' (n: v: nameValuePair v.address [ n ]) (import ./hosts.nix);
+      networking.hosts = mapAttrs' (n: v: nameValuePair v.address [ n ]) hosts;
     }
 
     (../hosts + "/${hostName}")
@@ -49,5 +51,5 @@ in
       hostname = info.address;
       profiles.system.path = mkActivation host info.localSystem;
     })
-    (import ./hosts.nix);
+    hosts;
 }
