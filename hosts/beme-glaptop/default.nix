@@ -52,7 +52,6 @@
         _source_if /etc/profile.d/gnome-session_gnomerc.sh
         _source_if /etc/profile.d/im-config_wayland.sh
         _source_if /etc/profile.d/rekey.sh
-        _source_if /usr/share/virtualenvwrapper/virtualenvwrapper.sh
       '';
 
       bashrcExtra = ''
