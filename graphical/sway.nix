@@ -12,6 +12,7 @@
       wl-clipboard
       xwayland
     ];
+    extraOptions = [ "--unsupported-gpu" ];
     extraSessionCommands = ''
       export ECORE_EVAS_ENGINE=wayland_egl
       export ELM_ENGINE=wayland_egl

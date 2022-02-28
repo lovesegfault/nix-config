@@ -25,7 +25,7 @@
       vt = 7;
       settings = {
         default_session = {
-          command = "${pkgs.systemd}/bin/systemd-cat -t gtkgreet ${pkgs.sway}/bin/sway --config ${gtkgreetSwayCfg}";
+          command = "${pkgs.sway}/bin/sway --unsupported-gpu --config ${gtkgreetSwayCfg}";
         };
       };
     };
