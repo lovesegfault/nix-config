@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ./bluetooth.nix
     ./efi.nix
@@ -31,6 +31,18 @@
     brillo.enable = true;
     enableRedistributableFirmware = true;
     i2c.enable = true;
+    nvidia = {
+      nvidiaSettings = false;
+      powerManagement = {
+        enable = true;
+        finegrained = true;
+      };
+      prime = {
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+        offload.enable = true;
+      };
+    };
   };
 
   nix.settings = {
@@ -72,6 +84,16 @@
       criticalPowerAction = "Hibernate";
     };
     xserver.dpi = 96;
+  };
+
+  specialisation.performance.configuration = {
+    imports = [ ./nvidia.nix ];
+    system.nixos.tags = [ "performance" ];
+    boot.initrd.kernelModules = lib.mkForce (lib.remove "nouveau" config.boot.initrd.kernelModules);
+    home-manager.users.bemeurer.wayland.windowManager.sway.extraSessionCommands = ''
+      export GBM_BACKEND=nvidia-drm
+      export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    '';
   };
 
   sound.extraConfig = ''

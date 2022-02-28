@@ -1,8 +1,5 @@
 {
   home-manager.users.bemeurer.wayland.windowManager.sway = {
-    extraSessionCommands = ''
-      export WLR_DRM_DEVICES=/dev/dri/card0
-    '';
     config = {
       input = {
         "10730:258:Kinesis_Advantage2_Keyboard" = {
