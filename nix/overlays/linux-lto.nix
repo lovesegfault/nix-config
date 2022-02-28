@@ -12,8 +12,8 @@ let
     let
       llvmPackages = "llvmPackages_13";
       noBintools = { bootBintools = null; bootBintoolsNoLibc = null; };
-      hostLLVM = final.buildPackages.${llvmPackages}.override noBintools;
-      buildLLVM = final.${llvmPackages}.override noBintools;
+      hostLLVM = final.pkgsBuildHost.${llvmPackages}.override noBintools;
+      buildLLVM = final.pkgsBuildBuild.${llvmPackages}.override noBintools;
 
       mkLLVMPlatform = platform: platform // {
         useLLVM = true;
