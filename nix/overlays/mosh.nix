@@ -3,8 +3,8 @@ final: prev: {
     src = final.fetchFromGitHub {
       owner = "mobile-shell";
       repo = "mosh";
-      rev = "e023e81c08897c95271b4f4f0726ec165bb6e1bd";
-      sha256 = "sha256-X2xJCiC5/vSijzZgQsWDzD+R8D8ppdZD6WeG4uoxyYw=";
+      rev = "dbe419d0e069df3fedc212d456449f64d0280c76";
+      sha256 = "sha256-oQ0r1DezTnYHBQrk6u8jx4UOxQXvuzkzJ25S1n+auyY=";
     };
 
     patches = [
