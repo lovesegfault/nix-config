@@ -8,7 +8,10 @@
 
   boot = rec {
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ddcci-driver ];
-    initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
+    initrd = {
+      availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
+      kernelModules = [ "nouveau" ];
+    };
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "acpi_call" "i2c_dev" "ddcci-backlight" "tcp_bbr" ];
     kernelPackages = pkgs.linuxPackages_latest_lto_skylake;
