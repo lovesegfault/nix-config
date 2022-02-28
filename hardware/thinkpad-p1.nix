@@ -47,31 +47,18 @@
       settings = {
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-        CPU_HWP_DYN_BOOST_ON_AC = "1";
-        CPU_HWP_DYN_BOOST_ON_BAT = "0";
+        CPU_HWP_DYN_BOOST_ON_AC = 1;
+        CPU_HWP_DYN_BOOST_ON_BAT = 0;
         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
         CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
 
         DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE = [ "bluetooth" "wifi" ];
         DEVICES_TO_ENABLE_ON_AC = [ "bluetooth" "wifi" ];
 
-        DISK_APM_LEVEL_ON_AC = [ "255" "255" ];
-        DISK_APM_LEVEL_ON_BAT = [ "128" "1" ];
+        DISK_IOSCHED = [ "none" "mq-deadline" ];
 
-        DISK_DEVICES = [ "nvme0n1" "sda" ];
-        DISK_IOSCHED = [ "none" "bfq" ];
-
-        MAX_LOST_WORK_SECS_ON_AC = 15;
-        MAX_LOST_WORK_SECS_ON_BAT = 15;
-
-        RUNTIME_PM_DRIVER_DENYLIST = [ "nouveau" "nvidia" ];
-
-        SOUND_POWER_SAVE_ON_AC = "1";
-        SOUND_POWER_SAVE_ON_BAT = "1";
-        SOUND_POWER_SAVE_CONTROLLER = "Y";
-
-        START_CHARGE_THRESH_BAT0 = "40";
-        STOP_CHARGE_THRESH_BAT0 = "80";
+        START_CHARGE_THRESH_BAT0 = 40;
+        STOP_CHARGE_THRESH_BAT0 = 80;
 
         #                 sd-card     yubikey     wacom
         USB_ALLOWLIST = [ "0bda:0328" "1050:0407" "056a:5193" ];
