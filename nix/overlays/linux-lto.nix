@@ -57,16 +57,20 @@ let
       { LTO_NONE = no; LTO_CLANG_FULL = yes; }
       (applyLLVM kernel);
 
-  applyUarches = kernel: kernel.override {
-    argsOverride.kernelPatches = kernel.kernelPatches ++ [{
+  applyPatches = patches: kernel: kernel.override {
+    argsOverride.kernelPatches = kernel.kernelPatches ++ patches;
+    argsOverride.structuredExtraConfig = kernel.structuredExtraConfig;
+  };
+
+  patches = {
+    graysky = {
       name = "more-uarches-for-kernel-5.15";
       patch = final.fetchpatch {
         name = "more-uarches-for-kernel-5.15";
         url = "https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/master/more-uarches-for-kernel-5.15%2B.patch";
         sha256 = "sha256-WSN+1t8Leodt7YRosuDF7eiSL5/8PYseXzxquf0LtP8=";
       };
-    }];
-    argsOverride.structuredExtraConfig = kernel.structuredExtraConfig;
+    };
   };
 
   inherit (linuxKernel) packagesFor;
@@ -75,7 +79,8 @@ _: {
   linuxPackages_latest_lto_skylake = packagesFor
     (applyCfg
       { MSKYLAKE = yes; }
-      (applyUarches
+      (applyPatches
+        [ patches.graysky ]
         (applyLTO
           linuxKernel.packageAliases.linux_latest.kernel)));
 
