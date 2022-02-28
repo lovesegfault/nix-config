@@ -41,9 +41,7 @@ let
         hostPlatform = mkLLVMPlatform old.hostPlatform;
         buildPlatform = mkLLVMPlatform old.buildPlatform;
       });
-      stdenv = stdenvPlatformLLVM // {
-        passthru = (stdenvPlatformLLVM.passthru or { }) // { llvmPackages = buildLLVM; };
-      };
+      stdenv = stdenvPlatformLLVM;
     in
     kernel.override {
       inherit stdenv;
