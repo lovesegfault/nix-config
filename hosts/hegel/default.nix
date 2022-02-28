@@ -15,7 +15,6 @@
 
     ../../graphical
     ../../graphical/i3.nix
-    ../../graphical/sway.nix
     ../../graphical/trusted.nix
 
     ../../users/bemeurer

@@ -37,4 +37,6 @@
       export WLR_DRM_DEVICES=/dev/dri/card1
     '';
   };
+
+  programs.sway.enable = true;
 }

@@ -8,7 +8,6 @@
     ../../hardware/sound-pipewire.nix
 
     ../../graphical
-    ../../graphical/sway.nix
 
     ../../users/bemeurer
 

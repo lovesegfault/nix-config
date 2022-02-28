@@ -56,4 +56,6 @@
       focus output "Unknown 0x32EB 0x00000000"
     '';
   };
+
+  programs.sway.enable = true;
 }

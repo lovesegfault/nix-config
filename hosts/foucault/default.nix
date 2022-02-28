@@ -9,7 +9,6 @@
     ../../hardware/yubikey.nix
 
     ../../graphical
-    ../../graphical/sway.nix
     ../../graphical/trusted.nix
 
     ../../users/bemeurer

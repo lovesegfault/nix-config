@@ -10,10 +10,15 @@
     packages = with pkgs; [
       blueman
       gammastep
+      gnome.adwaita-icon-theme
+      hicolor-icon-theme
       libnotify
       lollypop
       pavucontrol
       pinentry-gnome
+      qgnomeplatform
+      qt5.qtwayland
+      spawn
       speedcrunch
       xdg-utils
     ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [

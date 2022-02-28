@@ -12,8 +12,12 @@
       grim
       imv
       slurp
+      swaybg
+      swayidle
+      swaylock
       wl-clipboard
       wofi
+      xwayland
     ];
   };
 
