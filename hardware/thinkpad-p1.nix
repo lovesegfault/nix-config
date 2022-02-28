@@ -68,6 +68,9 @@
         SOUND_POWER_SAVE_ON_BAT = "1";
         SOUND_POWER_SAVE_CONTROLLER = "Y";
 
+        START_CHARGE_THRESH_BAT0 = "40";
+        STOP_CHARGE_THRESH_BAT0 = "80";
+
         #                 sd-card     yubikey     wacom
         USB_WHITELIST = [ "0bda:0328" "1050:0407" "056a:5193" ];
       };
