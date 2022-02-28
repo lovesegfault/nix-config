@@ -62,7 +62,7 @@
 
         RUNTIME_PM_ON_AC = "auto";
         RUNTIME_PM_ON_BAT = "auto";
-        RUNTIME_PM_DRIVER_BLACKLIST = [ "nouveau" "nvidia" ];
+        RUNTIME_PM_DRIVER_DENYLIST = [ "nouveau" "nvidia" ];
 
         SOUND_POWER_SAVE_ON_AC = "1";
         SOUND_POWER_SAVE_ON_BAT = "1";
@@ -72,7 +72,7 @@
         STOP_CHARGE_THRESH_BAT0 = "80";
 
         #                 sd-card     yubikey     wacom
-        USB_WHITELIST = [ "0bda:0328" "1050:0407" "056a:5193" ];
+        USB_ALLOWLIST = [ "0bda:0328" "1050:0407" "056a:5193" ];
       };
     };
     upower = {
