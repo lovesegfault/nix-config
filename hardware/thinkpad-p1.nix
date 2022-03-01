@@ -90,6 +90,7 @@
     imports = [ ./nvidia.nix ];
     system.nixos.tags = [ "performance" ];
     boot.initrd.kernelModules = lib.mkForce (lib.remove "nouveau" config.boot.initrd.kernelModules);
+    environment.systemPackages = with pkgs; [ nvidia-offload ];
     home-manager.users.bemeurer.wayland.windowManager.sway.extraSessionCommands = ''
       export GBM_BACKEND=nvidia-drm
       export __GLX_VENDOR_LIBRARY_NAME=nvidia
