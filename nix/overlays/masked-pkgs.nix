@@ -29,7 +29,7 @@ let
 in
 {
   glinux-mask = maskFromPaths "glinux" [
-    "/usr/bin/ssh-agent"
-    "/usr/bin/swaylock"
+    "/bin/ssh-agent"
+    "/bin/swaylock"
   ];
 }
