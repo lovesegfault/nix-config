@@ -6,6 +6,8 @@
     ../../users/bemeurer/graphical
     ../../users/bemeurer/graphical/sway
     ../../users/bemeurer/trusted/gpg.nix
+
+    ./sway.nix
   ];
 
   home = {
