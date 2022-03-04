@@ -44,7 +44,6 @@
         };
         "Unknown 0x1400 0x00000000" = {
           mode = "3840x2160@60Hz";
-          position = "0,0";
           scale = "2";
           subpixel = "rgb";
         };
@@ -56,5 +55,28 @@
       workspace 1 output "Unknown 0x32EB 0x00000000"
       focus output "Unknown 0x1400 0x00000000"
     '';
+  };
+
+  services.kanshi = {
+    enable = true;
+    profiles = {
+      normal.outputs = [{
+        criteria = "Unknown 0x1400 0x00000000";
+        position = "0,0";
+        status = "enable";
+      }];
+      workdesk.outputs = [
+        {
+          criteria = "Unknown 0x1400 0x00000000";
+          status = "enable";
+          position = "960,2160";
+        }
+        {
+          criteria = "Samsung Electric Company LF32TU87 HCPRA06514";
+          status = "enable";
+          position = "0,0";
+        }
+      ];
+    };
   };
 }
