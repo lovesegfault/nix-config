@@ -22,7 +22,6 @@
         "$jobs"
         "$character"
       ];
-      nix_shell.symbol = "❄️ ";
     };
   };
 }
