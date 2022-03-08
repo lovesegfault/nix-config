@@ -146,4 +146,17 @@
     builders-use-substitutes = true
     experimental-features = nix-command flakes recursive-nix
   '';
+
+  xdg.mimeApps.defaultApplications = {
+    "application/x-extension-htm" = lib.mkForce "google-chrome.desktop";
+    "application/x-extension-html" = lib.mkForce "google-chrome.desktop";
+    "application/x-extension-shtml" = lib.mkForce "google-chrome.desktop";
+    "application/x-extension-xht" = lib.mkForce "google-chrome.desktop";
+    "application/x-extension-xhtml" = lib.mkForce "google-chrome.desktop";
+    "application/xhtml+xml" = lib.mkForce "google-chrome.desktop";
+    "text/html" = lib.mkForce "google-chrome.desktop";
+    "x-scheme-handler/chrome" = lib.mkForce "google-chrome.desktop";
+    "x-scheme-handler/http" = lib.mkForce "google-chrome.desktop";
+    "x-scheme-handler/https" = lib.mkForce "google-chrome.desktop";
+  };
 }
