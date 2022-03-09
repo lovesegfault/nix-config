@@ -61,7 +61,7 @@
       '';
     };
     foot.settings.main = {
-      font = lib.mkForce "monospace:size=6, emoji";
+      font = lib.mkForce "Hack Nerd Font:size=6, Noto Color Emoji:size=6.5";
       shell = "zsh";
     };
     gpg.scdaemonSettings.disable-ccid = true;
