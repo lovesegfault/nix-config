@@ -25,4 +25,8 @@ let
 
   dummyOverrides = listToAttrs (map (p: nameValuePair p nullDrv) maskedPkgs);
 in
-dummyOverrides
+dummyOverrides // {
+  linuxPackages_latest_lto_skylake = prev.linuxPackages_latest_lto_skylake // {
+    nvidia_x11 = nullDrv;
+  };
+}
