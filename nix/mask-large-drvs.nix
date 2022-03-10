@@ -21,6 +21,7 @@ let
         mkdir -p $out/{bin,lib}
         echo "dummy" > $out/bin/dummy
         echo "dummy" > $out/lib/dummy
+        runHook postInstall
       '')
     { };
 
@@ -30,7 +31,15 @@ dummyOverrides // {
   linuxPackages_latest_lto_skylake = prev.linuxPackages_latest_lto_skylake.extend (_: prev: {
     nvidiaPackages = prev.nvidiaPackages // {
       stable = nullDrv.overrideAttrs (_: {
-        useProfiles = true;
+        inherit (prev.nvidiaPackages.stable) useProfiles version;
+        bin = nullDrv;
+        persistenced = nullDrv;
+        lib32 = nullDrv;
+        postInstall = ''
+          touch $out/bin/nvidia-sleep.sh
+          mkdir -p $out/lib/systemd/system-sleep
+          touch $out/lib/systemd/system-sleep/nvidia
+        '';
       });
     };
   });
