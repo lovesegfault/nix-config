@@ -8,6 +8,7 @@ let
     "discord"
     "element-desktop"
     "firefox-bin"
+    "firefox-unwrapped"
     "signal-desktop"
     "spotify"
     "thunderbird"
