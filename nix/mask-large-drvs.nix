@@ -29,7 +29,9 @@ in
 dummyOverrides // {
   linuxPackages_latest_lto_skylake = prev.linuxPackages_latest_lto_skylake.extend (_: prev: {
     nvidiaPackages = prev.nvidiaPackages // {
-      stable = nullDrv;
+      stable = nullDrv.overrideAttrs (_: {
+        useProfiles = true;
+      });
     };
   });
 }
