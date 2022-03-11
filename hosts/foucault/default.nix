@@ -3,6 +3,7 @@
     ../../core
 
     ../../dev
+    ../../dev/virt-manager.nix
 
     ../../hardware/nixos-aarch64-builder
     ../../hardware/thinkpad-p1.nix
