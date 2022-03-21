@@ -21,7 +21,6 @@
         -b 'Poweroff' 'systemctl poweroff' \
         -b 'Reboot' 'systemctl reboot'
 
-        exec ${pkgs.systemd}/bin/systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
         include /etc/sway/config.d/*
       '';
     in
