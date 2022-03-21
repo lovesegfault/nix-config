@@ -33,12 +33,4 @@
         };
       };
     };
-
-  users.users.greeter = {
-    createHome = true;
-    group = "greeter";
-    home = "/var/lib/greetd";
-    isSystemUser = true;
-  };
-  users.groups.greeter = { };
 }
