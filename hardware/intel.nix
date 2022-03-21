@@ -2,15 +2,11 @@
   boot = {
     extraModprobeConfig = ''
       options kvm_intel nested=1
+      options i915 enable_guc=3 enable_fbc=1 fastboot=1
     '';
     kernelModules = [ "kvm_intel" ];
     kernelParams = [ "intel_iommu=on" ];
-    initrd = {
-      kernelModules = [ "i915" ];
-      extraModprobeConfig = ''
-        options i915 enable_guc=3 enable_fbc=1 fastboot=1
-      '';
-    };
+    initrd.kernelModules = [ "i915" ];
   };
 
   environment.systemPackages = with pkgs; [
