@@ -72,7 +72,7 @@
 
         DISK_IOSCHED = [ "none" "mq-deadline" ];
 
-        START_CHARGE_THRESH_BAT0 = 40;
+        START_CHARGE_THRESH_BAT0 = 70;
         STOP_CHARGE_THRESH_BAT0 = 80;
 
         #                 sd-card     yubikey     wacom
