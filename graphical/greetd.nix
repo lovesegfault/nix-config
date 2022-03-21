@@ -35,8 +35,10 @@
     };
 
   users.users.greeter = {
-    home = "/var/lib/greetd";
+    createHome = true;
     group = "greeter";
+    home = "/var/lib/greetd";
+    isSystemUser = true;
   };
   users.groups.greeter = { };
 }
