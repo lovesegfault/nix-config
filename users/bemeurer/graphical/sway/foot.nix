@@ -4,7 +4,7 @@
     settings = {
       main = {
         dpi-aware = "yes";
-        font = "monospace:size=6, emoji";
+        font = "monospace:size=6, emoji:size=6";
         notify = "${pkgs.libnotify}/bin/notify-send -a foot -i foot \${title} \${body}";
       };
       mouse.hide-when-typing = "yes";
