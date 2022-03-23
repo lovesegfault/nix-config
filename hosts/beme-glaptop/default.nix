@@ -12,6 +12,7 @@
 
   home = {
     uid = 907142;
+    sessionPath = [ "$HOME/.local/bin" ];
     packages = with pkgs; [
       (nerdfonts.override { fonts = [ "Hack" ]; })
       adwaita-qt
