@@ -88,16 +88,16 @@
   systemd.network.networks = {
     lan = {
       DHCP = "yes";
-      linkConfig.RequiredForOnline = "no";
+      linkConfig.RequiredForOnline = false;
       matchConfig.MACAddress = "48:2a:e3:61:39:66";
     };
     wifi = {
       DHCP = "yes";
       matchConfig.MACAddress = "98:3b:8f:cf:62:82";
-      linkConfig.Multicast = "yes";
+      linkConfig.Multicast = true;
       networkConfig = {
-        MulticastDNS = "yes";
-        LLMNR = "yes";
+        MulticastDNS = true;
+        LLMNR = true;
       };
     };
   };
