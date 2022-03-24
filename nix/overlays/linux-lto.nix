@@ -50,7 +50,12 @@ let
       argsOverride.structuredExtraConfig = kernel.structuredExtraConfig;
     };
 
-  applyLTO = kernel:
+  applyFullLTO = kernel:
+    applyCfg
+      { LTO_NONE = no; LTO_CLANG_FULL = yes; }
+      (applyLLVM kernel);
+
+  applyThinLTO = kernel:
     applyCfg
       { LTO_NONE = no; LTO_CLANG_FULL = yes; }
       (applyLLVM kernel);
@@ -79,11 +84,11 @@ _: {
       { MSKYLAKE = yes; }
       (applyPatches
         [ patches.graysky ]
-        (applyLTO
+        (applyThinLTO
           linuxKernel.packageAliases.linux_latest.kernel)));
 
   linuxPackages_xanmod_lto_zen3 = packagesFor
     (applyCfg
       { MZEN3 = yes; DEBUG_INFO = lib.mkForce no; }
-      (applyLTO linuxKernel.kernels.linux_xanmod));
+      (applyFullLTO linuxKernel.kernels.linux_xanmod));
 }
