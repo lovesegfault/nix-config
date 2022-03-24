@@ -57,7 +57,7 @@ let
 
   thinLTO = kernel:
     cfg
-      { LTO_NONE = no; LTO_CLANG_FULL = yes; }
+      { LTO_NONE = no; LTO_CLANG_THIN = yes; }
       (llvm kernel);
 
   patch = patches: kernel: kernel.override {
