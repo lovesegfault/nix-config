@@ -3,12 +3,12 @@ let
   inherit (final) lib linuxKernel;
   inherit (lib.kernel) yes no;
 
-  applyCfg = config: kernel: kernel.override {
+  cfg = config: kernel: kernel.override {
     argsOverride.kernelPatches = kernel.kernelPatches;
     argsOverride.structuredExtraConfig = kernel.structuredExtraConfig // config;
   };
 
-  applyLLVM = kernel:
+  llvm = kernel:
     let
       llvmPackages = "llvmPackages_13";
       noBintools = { bootBintools = null; bootBintoolsNoLibc = null; };
@@ -50,17 +50,17 @@ let
       argsOverride.structuredExtraConfig = kernel.structuredExtraConfig;
     };
 
-  applyFullLTO = kernel:
-    applyCfg
+  fullLTO = kernel:
+    cfg
       { LTO_NONE = no; LTO_CLANG_FULL = yes; }
-      (applyLLVM kernel);
+      (llvm kernel);
 
-  applyThinLTO = kernel:
-    applyCfg
+  thinLTO = kernel:
+    cfg
       { LTO_NONE = no; LTO_CLANG_FULL = yes; }
-      (applyLLVM kernel);
+      (llvm kernel);
 
-  applyPatches = patches: kernel: kernel.override {
+  patch = patches: kernel: kernel.override {
     argsOverride.kernelPatches = kernel.kernelPatches ++ patches;
     argsOverride.structuredExtraConfig = kernel.structuredExtraConfig;
   };
@@ -80,15 +80,15 @@ let
 in
 _: {
   linuxPackages_latest_lto_skylake = packagesFor
-    (applyCfg
+    (cfg
       { MSKYLAKE = yes; }
-      (applyPatches
+      (patch
         [ patches.graysky ]
-        (applyThinLTO
+        (thinLTO
           linuxKernel.packageAliases.linux_latest.kernel)));
 
   linuxPackages_xanmod_lto_zen3 = packagesFor
-    (applyCfg
+    (cfg
       { MZEN3 = yes; DEBUG_INFO = lib.mkForce no; }
-      (applyFullLTO linuxKernel.kernels.linux_xanmod));
+      (fullLTO linuxKernel.kernels.linux_xanmod));
 }
