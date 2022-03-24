@@ -3,7 +3,7 @@
 system:
 
 let
-  inherit (self.nixpkgs.${system}) lib runCommand;
+  inherit (self.legacyPackages.${system}) lib runCommand;
   inherit (lib) concatStrings escapeShellArg mapAttrs mapAttrsToList;
 
   deployDrvs = mapAttrs (_: deploy: deploy.profiles.system.path) self.deploy.nodes;

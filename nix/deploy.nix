@@ -20,7 +20,7 @@ let
     {
       nixpkgs = {
         localSystem.system = system;
-        inherit (self.nixpkgs.${system}) overlays config;
+        inherit (self.legacyPackages.${system}) overlays config;
       };
 
       nix.registry = {

@@ -8,7 +8,7 @@ let
     home-manager.lib.homeManagerConfiguration {
       inherit homeDirectory username;
       configuration = genModules hostName;
-      pkgs = self.nixpkgs.${localSystem};
+      pkgs = self.legacyPackages.${localSystem};
       stateVersion = "21.11";
       system = localSystem;
     };

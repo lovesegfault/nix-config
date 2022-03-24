@@ -5,7 +5,7 @@
 
 system:
 
-with self.nixpkgs.${system};
+with self.legacyPackages.${system};
 
 {
   pre-commit-check = pre-commit-hooks.lib.${system}.run

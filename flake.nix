@@ -53,24 +53,25 @@
     {
       deploy = import ./nix/deploy.nix inputs;
 
-      overlay = import ./nix/overlay.nix inputs;
+      overlays.default = import ./nix/overlay.nix inputs;
 
       homeConfigurations = import ./nix/home-manager.nix inputs;
     }
     // utils.lib.eachDefaultSystem (system: {
       checks = import ./nix/checks.nix inputs system;
 
-      devShell = import ./nix/dev-shell.nix inputs system;
+      devShells.default = import ./nix/dev-shell.nix inputs system;
 
-      nixpkgs = import nixpkgs {
+      packages = {
+        default = self.packages.${system}.hosts;
+        hosts = import ./nix/build-hosts.nix inputs system;
+      };
+
+      legacyPackages = import nixpkgs {
         inherit system;
-        overlays = [ self.overlay ];
+        overlays = [ self.overlays.default ];
         config.allowUnfree = true;
         config.allowAliases = true;
       };
-
-      packages.hosts = import ./nix/build-hosts.nix inputs system;
-
-      defaultPackage = self.packages.${system}.hosts;
     });
 }
