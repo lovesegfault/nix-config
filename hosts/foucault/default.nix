@@ -106,6 +106,11 @@
 
   time.timeZone = "America/Los_Angeles";
 
+  virtualisation.docker = {
+    enable = true;
+    autoPrune.enable = true;
+  };
+
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;
 }
