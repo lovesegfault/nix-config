@@ -22,7 +22,10 @@ jobs:
       - name: parse
         run: nix-instantiate --json --parse **/*.nix
       - name: lints
-        run: nix build -L --keep-going .#checks.x86_64-linux.pre-commit-check
+        run: |
+          cachix watch-exec nix-config -- \
+            nix build -L --keep-going \
+            .\#checks.x86_64-linux.pre-commit-check
 
   build-shell:
     runs-on: ubuntu-latest
@@ -40,7 +43,8 @@ jobs:
       - name: build-shell
         run: |
           cachix watch-exec nix-config -- \
-            nix build -L --keep-going .#devShell.x86_64-linux.inputDerivation
+            nix build -L --keep-going \
+            .\#devShells.x86_64-linux.default.inputDerivation
 
   get-hosts:
     runs-on: ubuntu-latest
