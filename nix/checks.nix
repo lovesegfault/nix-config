@@ -20,7 +20,7 @@ with self.legacyPackages.${system};
           entry = "${stylua}/bin/stylua";
         };
         luacheck = {
-          enable = false;
+          enable = true;
           types = [ "file" "lua" ];
           entry = "${luajitPackages.luacheck}/bin/luacheck --std luajit --globals vim -- ";
         };
