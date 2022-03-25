@@ -20,7 +20,7 @@ jobs:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
       - name: parse
-        run: nix-instantiate --json --parse ./**/*.nix
+        run: nix-instantiate --parse ./**/*.nix > /dev/null
       - name: lints
         run: |
           cachix watch-exec nix-config -- \
@@ -53,6 +53,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v16
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            experimental-features = nix-command flakes recursive-nix
       - id: get-hosts
         run: echo "::set-output name=hosts::$(nix eval --json -f ./nix/hosts.nix | jq -c 'keys')"
 
@@ -70,30 +74,20 @@ jobs:
         with:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            builders-use-substitutes = true
             experimental-features = nix-command flakes recursive-nix
-      - name: setup-aarch64-builder
-        env:
-          AARCH64_BOX_KEY: ${{ secrets.AARCH64_BOX_KEY }}
-          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
-        run: |
-          sudo mkdir -p /root/.ssh
-          echo "$AARCH64_BOX_KEY" | sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
-          sudo chmod 0600 /root/.ssh/aarch64.community.nixos
-          echo "$KNOWN_HOSTS" | sudo tee -a /root/.ssh/known_hosts > /dev/null
-          builder_cfg=(
-            lovesegfault@aarch64.nixos.community
-            aarch64-linux
-            /root/.ssh/aarch64.community.nixos
-            64
-            8
-            big-parallel
-          )
-          echo "${builder_cfg[*]}" | sudo tee /etc/nix/machines > /dev/null
       - uses: cachix/cachix-action@v10
         with:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+      - uses: ./.github/actions/setup-builder
+        with:
+          ssh-key: ${{ secrets.AARCH64_BOX_KEY }}
+          username: lovesegfault
+          hostname: aarch64.nixos.community
+          known-host: "aarch64.nixos.community,147.75.77.190 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUTz5i9u5H2FHNAmZJyoJfIGyUm/HfGhfwnc142L3ds"
+          system: aarch64-linux
+          cores: 64
+          features: big-parallel
       - name: eval
         run: nix-instantiate --eval -A packages.x86_64-linux.hosts.${{ matrix.host }}
 
@@ -112,32 +106,19 @@ jobs:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
             experimental-features = nix-command flakes recursive-nix
-      - name: setup-aarch64-builder
-        env:
-          AARCH64_BOX_KEY: ${{ secrets.AARCH64_BOX_KEY }}
-          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
-        run: |
-          sudo mkdir -p /root/.ssh
-          echo "$AARCH64_BOX_KEY" | sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
-          sudo chmod 0600 /root/.ssh/aarch64.community.nixos
-          echo "$KNOWN_HOSTS" | sudo tee -a /root/.ssh/known_hosts > /dev/null
-          nix_cfg=(
-            "builders-use-substitutes = true"
-          )
-          builder_cfg=(
-            lovesegfault@aarch64.nixos.community
-            aarch64-linux
-            /root/.ssh/aarch64.community.nixos
-            64
-            8
-            big-parallel
-          )
-          echo "${builder_cfg[*]}" | sudo tee /etc/nix/machines > /dev/null
-          echo "${nix_cfg[*]}" | sudo tee -a /etc/nix/nix.conf > /dev/null
       - uses: cachix/cachix-action@v10
         with:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+      - uses: ./.github/actions/setup-builder
+        with:
+          ssh-key: ${{ secrets.AARCH64_BOX_KEY }}
+          username: lovesegfault
+          hostname: aarch64.nixos.community
+          known-host: "aarch64.nixos.community,147.75.77.190 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUTz5i9u5H2FHNAmZJyoJfIGyUm/HfGhfwnc142L3ds"
+          system: aarch64-linux
+          cores: 64
+          features: big-parallel
       - name: add-mask-overlay
         run: cp nix/mask-large-drvs.nix nix/overlays/
       - name: build-host
