@@ -55,11 +55,6 @@ let
       { LTO_NONE = no; LTO_CLANG_FULL = yes; }
       (llvm kernel);
 
-  thinLTO = kernel:
-    cfg
-      { LTO_NONE = no; LTO_CLANG_THIN = yes; }
-      (llvm kernel);
-
   patch = patches: kernel: kernel.override {
     argsOverride.kernelPatches = kernel.kernelPatches ++ patches;
     argsOverride.structuredExtraConfig = kernel.structuredExtraConfig;
@@ -76,7 +71,7 @@ let
     };
   };
 
-  inherit (linuxKernel) packagesFor;
+  inherit (linuxKernel) kernels packagesFor;
 in
 _: {
   linuxPackages_latest_lto_skylake = packagesFor
@@ -84,11 +79,10 @@ _: {
       { MSKYLAKE = yes; }
       (patch
         [ patches.graysky ]
-        (thinLTO
-          linuxKernel.packageAliases.linux_latest.kernel)));
+        (fullLTO kernels.linux_5_16)));
 
   linuxPackages_xanmod_lto_zen3 = packagesFor
     (cfg
       { MZEN3 = yes; DEBUG_INFO = lib.mkForce no; }
-      (fullLTO linuxKernel.kernels.linux_xanmod));
+      (fullLTO kernels.linux_xanmod));
 }
