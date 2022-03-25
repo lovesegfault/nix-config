@@ -8,19 +8,30 @@ mkShell {
   name = "nix-config";
 
   nativeBuildInputs = [
-    (luajit.withPackages (p: with p; [ luacheck ]))
-    act
-    ragenix
+    # Nix
     cachix
     deploy-rs.deploy-rs
-    jq
     nix-build-uncached
     nix-linter
     nixpkgs-fmt
-    pre-commit
+    ragenix
     rnix-lsp
+
+    # Lua
     stylua
-  ] ++ lib.optionals (stdenv.hostPlatform.isLinux) [ sumneko-lua-language-server ];
+    (luajit.withPackages (p: with p; [ luacheck ]))
+    (lib.optional stdenv.hostPlatform.isLinux sumneko-lua-language-server)
+
+    # GitHub Actions
+    act
+    actionlint
+    python3Packages.pyflakes
+    shellcheck
+
+    # Misc
+    jq
+    pre-commit
+  ];
 
   shellHook = ''
     ${self.checks.${system}.pre-commit-check.shellHook}

@@ -24,6 +24,18 @@ with self.legacyPackages.${system};
           types = [ "file" "lua" ];
           entry = "${luajitPackages.luacheck}/bin/luacheck --std luajit --globals vim -- ";
         };
+        actionlint = {
+          enable = true;
+          files = "^.github/workflows/";
+          types = [ "yaml" ];
+          entry =
+            let
+              actionlintBin = "${actionlint}/bin/actionlint";
+              pyflakesBin = "${python3Packages.pyflakes}/bin/pyflakes";
+              shellcheckBin = "${shellcheck}/bin/shellcheck";
+            in
+            "${actionlintBin} -pyflakes ${pyflakesBin} -shellcheck ${shellcheckBin}";
+        };
       };
       settings.nix-linter.checks = [
         "DIYInherit"
