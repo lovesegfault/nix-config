@@ -26,6 +26,7 @@
       discord
       element-desktop
       gnome.evince
+      ledger-live-desktop
       signal-desktop
       thunderbird-bin
     ];

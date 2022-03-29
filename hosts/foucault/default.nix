@@ -46,6 +46,8 @@
     };
   };
 
+  hardware.ledger.enable = true;
+
   home-manager.users.bemeurer = {
     imports = [ ../../users/bemeurer/trusted ];
   };
