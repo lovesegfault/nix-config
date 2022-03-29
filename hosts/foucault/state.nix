@@ -36,6 +36,7 @@
         ".cache/wofi"
         ".cache/zsh"
         ".config/Element"
+        ".config/Ledger Live"
         ".config/Signal"
         ".config/TabNine"
         ".config/darktable"
