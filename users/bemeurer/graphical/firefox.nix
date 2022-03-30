@@ -1,8 +1,5 @@
-{ pkgs, ... }: {
-  programs.firefox = {
-    enable = (pkgs.hostPlatform.system == "x86_64-linux");
-    package = pkgs.firefox-bin;
-  };
+{
+  programs.firefox.enable = true;
 
   xdg.mimeApps.defaultApplications = {
     "application/x-extension-htm" = "firefox.desktop";
