@@ -6,7 +6,6 @@
     ../../dev/virt-manager.nix
 
     ../../hardware/nixos-aarch64-builder
-    ../../hardware/printer.nix
     ../../hardware/thinkpad-p1.nix
     ../../hardware/yubikey.nix
 
