@@ -46,6 +46,7 @@
         ".config/gcloud"
         ".config/gopass"
         ".config/libvirt"
+        ".config/op"
         ".config/pipewire"
         ".config/spotify"
         ".local/share/TabNine"
