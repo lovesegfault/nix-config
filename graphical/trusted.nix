@@ -2,6 +2,14 @@
   programs = {
     seahorse.enable = true;
     ssh.startAgent = true;
+    _1password = {
+      enable = true;
+      gid = 5001;
+    };
+    _1password-gui = {
+      enable = true;
+      gid = 5000;
+    };
   };
 
   security.pam.services.login.enableGnomeKeyring = true;

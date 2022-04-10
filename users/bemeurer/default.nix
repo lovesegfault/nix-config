@@ -30,6 +30,8 @@ with lib;
     passwordFile = config.age.secrets.bemeurerPassword.path;
   };
 
+  programs._1password-gui.polkitPolicyOwners = [ "bemeurer" ];
+
   home-manager.users.bemeurer = {
     imports = [
       "${inputs.impermanence}/home-manager.nix"
