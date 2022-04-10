@@ -35,6 +35,7 @@
         ".cache/thunderbird"
         ".cache/wofi"
         ".cache/zsh"
+        ".config/1Password"
         ".config/Element"
         ".config/Ledger Live"
         ".config/Signal"
