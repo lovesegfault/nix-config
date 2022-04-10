@@ -15,6 +15,8 @@
     sessionPath = [ "$HOME/.local/bin" ];
     packages = with pkgs; [
       (nerdfonts.override { fonts = [ "Hack" ]; })
+      _1password
+      _1password-gui
       adwaita-qt
       brillo
       btop
