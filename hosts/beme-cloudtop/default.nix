@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ../../users/bemeurer/core
     ../../users/bemeurer/dev
@@ -21,8 +21,9 @@
     home-manager.enable = true;
     bash = {
       profileExtra = ''
+        export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libnss_cache.so.2"
+        export XDG_DATA_DIRS="${config.home.homeDirectory}/.nix-profile/share:/usr/share''${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS"
         source ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh
-        export SSH_AUTH_SOCK="''${XDG_RUNTIME_DIR}/ssh-agent.socket"
 
         function _source_if() {
           if [ -f "$1" ]; then
@@ -48,30 +49,11 @@
         source ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh
         [ -f "/usr/share/virtualenvwrapper/virtualenvwrapper.sh" ] &&
           source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
-        export SSH_AUTH_SOCK="''${XDG_RUNTIME_DIR}/ssh-agent.socket"
       '';
       initExtraBeforeCompInit = ''
         fpath+="/usr/share/zsh/vendor-completions"
         fpath+=("${config.home.profileDirectory}"/share/zsh/site-functions "${config.home.profileDirectory}"/share/zsh/$ZSH_VERSION/functions "${config.home.profileDirectory}"/share/zsh/vendor-completions)
       '';
-    };
-  };
-
-  systemd.user = {
-    sessionVariables = {
-      LD_PRELOAD = "/usr/lib/x86_64-linux-gnu/libnss_cache.so.2";
-      SSH_AUTH_SOCK = lib.mkForce "\${XDG_RUNTIME_DIR}/ssh-agent.socket";
-      XDG_DATA_DIRS = "${config.home.homeDirectory}/.nix-profile/share:/usr/share\${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS";
-    };
-    services.ssh-agent = {
-      Unit.Description = "Google SSH Key Agent";
-      Service = {
-        Type = "simple";
-        Environment = [ "DISPLAY=:0" ];
-        ExecStart = "/usr/bin/ssh-agent -D -a %t/ssh-agent.socket";
-        Restart = "on-failure";
-      };
-      Install.WantedBy = [ "default.target" ];
     };
   };
 
