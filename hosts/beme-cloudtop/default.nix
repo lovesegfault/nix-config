@@ -3,8 +3,6 @@
     ../../users/bemeurer/core
     ../../users/bemeurer/dev
     ../../users/bemeurer/modules
-
-    ./sway.nix
   ];
 
   home = {
