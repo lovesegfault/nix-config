@@ -38,7 +38,7 @@
       bashrcExtra = ''
         source $HOME/.profile
         if ! [[ "$SHELL" =~ "zsh" ]]; then
-          export SHELL="${config.home.homeDirecory}/.nix-profile/bin/zsh"
+          export SHELL="${config.home.homeDirectory}/.nix-profile/bin/zsh"
           exec "$SHELL"
         fi
       '';
