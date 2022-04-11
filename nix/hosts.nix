@@ -4,6 +4,12 @@
     localSystem = "aarch64-linux";
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL8LfZJVnCw5Wq8+mym6uxTwg6+QhvkSjt0qfzap4C7w";
   };
+  beme-cloudtop = {
+    hmOnly = true;
+    localSystem = "x86_64-linux";
+    username = "beme";
+    homeDirectory = "/usr/local/google/home/beme";
+  };
   beme-glaptop = {
     hmOnly = true;
     localSystem = "x86_64-linux";
