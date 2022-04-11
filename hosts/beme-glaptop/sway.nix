@@ -38,6 +38,11 @@
         };
       };
       output = {
+        "Goldstar Company Ltd LG HDR 4K 0x0000BEAA" = {
+          mode = "3840x2160@60Hz";
+          subpixel = "rgb";
+          adaptive_sync = "on";
+        };
         "Samsung Electric Company LF32TU87 HCPRA06514" = {
           mode = "3840x2160@60Hz";
           subpixel = "rgb";
@@ -65,6 +70,19 @@
         position = "0,0";
         status = "enable";
       }];
+      home.outputs = [
+        {
+          criteria = "Unknown 0x1400 0x00000000";
+          status = "enable";
+          position = "0,0";
+        }
+        {
+          criteria = "Goldstar Company Ltd LG HDR 4K 0x0000BEAA";
+          status = "enable";
+          position = "1920,0";
+        }
+
+      ];
       workdesk.outputs = [
         {
           criteria = "Unknown 0x1400 0x00000000";
