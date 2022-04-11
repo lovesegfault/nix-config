@@ -12,6 +12,7 @@
     sessionPath = [ "$HOME/.local/bin" ];
     packages = with pkgs; [
       btop
+      foot.terminfo
       glinux-mask
       nix
       spawn
@@ -22,7 +23,7 @@
     home-manager.enable = true;
     bash = {
       profileExtra = ''
-        source /home/beme/.nix-profile/etc/profile.d/nix.sh
+        source ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh
         export SSH_AUTH_SOCK="''${XDG_RUNTIME_DIR}/ssh-agent.socket"
 
         function _source_if() {
@@ -42,7 +43,7 @@
     };
     zsh = {
       initExtra = ''
-        source /home/beme/.nix-profile/etc/profile.d/nix.sh
+        source ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh
         [ -f "/usr/share/virtualenvwrapper/virtualenvwrapper.sh" ] &&
           source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
         export SSH_AUTH_SOCK="''${XDG_RUNTIME_DIR}/ssh-agent.socket"
