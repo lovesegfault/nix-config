@@ -40,7 +40,6 @@
       export ECORE_EVAS_ENGINE=wayland_egl
       export ELM_ENGINE=wayland_egl
       export LIBSEAT_BACKEND="logind"
-      export MOZ_DISABLE_CONTENT_SANDBOX=1
       export MOZ_ENABLE_WAYLAND=1
       export QT_QPA_PLATFORM=xcb
       export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
