@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ./bluetooth.nix
     ./efi.nix
@@ -86,16 +86,16 @@
     xserver.dpi = 96;
   };
 
-  # specialisation.performance.configuration = {
-  #   imports = [ ./nvidia.nix ];
-  #   system.nixos.tags = [ "performance" ];
-  #   boot.initrd.kernelModules = lib.mkForce (lib.remove "nouveau" config.boot.initrd.kernelModules);
-  #   environment.systemPackages = with pkgs; [ nvidia-offload ];
-  #   home-manager.users.bemeurer.wayland.windowManager.sway.extraSessionCommands = ''
-  #     export GBM_BACKEND=nvidia-drm
-  #     export __GLX_VENDOR_LIBRARY_NAME=nvidia
-  #   '';
-  # };
+  specialisation.nvidia.configuration = {
+    imports = [ ./nvidia.nix ];
+    system.nixos.tags = [ "nvidia" ];
+    boot.initrd.kernelModules = lib.mkForce (lib.remove "nouveau" config.boot.initrd.kernelModules);
+    environment.systemPackages = with pkgs; [ nvidia-offload ];
+    home-manager.users.bemeurer.wayland.windowManager.sway.extraSessionCommands = ''
+      export GBM_BACKEND=nvidia-drm
+      export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    '';
+  };
 
   sound.extraConfig = ''
     options snd-hda-intel model=generic
