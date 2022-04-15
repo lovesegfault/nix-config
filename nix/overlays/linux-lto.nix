@@ -79,7 +79,7 @@ _: {
       { MSKYLAKE = yes; }
       (patch
         [ patches.graysky ]
-        (fullLTO kernels.linux_5_16)));
+        (fullLTO kernels.linux_5_17)));
 
   linuxPackages_xanmod_lto_zen3 = packagesFor
     (cfg
