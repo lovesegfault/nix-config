@@ -8,12 +8,7 @@
   };
 
   programs = {
-    git.extraConfig = {
-      core.editor = "nvim";
-      merge.tool = "nvimdiff";
-      "mergetool \"nvimdiff\"".cmd = "nvim -d $LOCAL $REMOTE";
-      diff.tool = "nvimdiff";
-    };
+    git.extraConfig.core.editor = "nvim";
     zsh.shellAliases = { vi = "nvim"; vim = "nvim"; };
 
     neovim = {

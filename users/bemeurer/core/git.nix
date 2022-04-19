@@ -3,7 +3,10 @@
     enable = true;
     delta = {
       enable = true;
-      options.syntax-theme = "Nord";
+      options = {
+        navigate = true;
+        syntax-theme = "Nord";
+      };
     };
     package = pkgs.gitFull;
     lfs.enable = false;
@@ -13,8 +16,9 @@
       diff.colorMoved = "default";
       difftool.prompt = true;
       github.user = "lovesegfault";
-      mergetool.prompt = true;
       init.defaultBranch = "main";
+      merge.conflictstyle = "zdiff3";
+      mergetool.prompt = true;
     };
   };
 
