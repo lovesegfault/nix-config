@@ -95,7 +95,7 @@ jobs:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
       - name: eval
-        run: nix-instantiate --eval -A packages.x86_64-linux.${{ matrix.host }}
+        run: nix eval --raw .\#packages.x86_64-linux..${{ matrix.host }}
 
   build-host:
     name: build-${{ matrix.host }}
