@@ -31,6 +31,7 @@ let
 
   genConfiguration = hostname: { localSystem, ... }:
     lib.nixosSystem {
+      system = localSystem;
       modules = [
         (../hosts + "/${hostname}")
         (hostPkgs localSystem)
