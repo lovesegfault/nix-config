@@ -1,17 +1,10 @@
-{ pkgs, ... }: {
+{ lib, pkgs, nixos-hardware, ... }: {
   imports = [
+    nixos-hardware.raspberry-pi-4
     ./nixos-aarch64-builder
   ];
 
-  boot = {
-    loader = {
-      grub.enable = false;
-      generic-extlinux-compatible.enable = true;
-    };
-    kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
-  };
-
-  console.keyMap = "us";
+  boot.kernelPackages = pkgs.linuxKernel.packageAliases.linux_latest;
 
   fileSystems = {
     "/boot/firmware" = {
@@ -24,23 +17,9 @@
     };
   };
 
-  hardware = {
-    enableAllFirmware = true;
-    opengl = {
-      setLdLibraryPath = true;
-      package = pkgs.mesa.drivers;
-    };
-    deviceTree.enable = true;
-  };
+  nix.settings.max-jobs = lib.mkDefault 4;
 
-  nix.settings.max-jobs = 4;
-
-  services = {
-    fstrim.enable = true;
-    xserver.videoDrivers = [ "modesetting" ];
-  };
-
-  swapDevices = [
+  swapDevices = lib.mkDefault [
     {
       device = "/swap";
       size = 2048;

@@ -16,7 +16,7 @@
 
   boot = {
     loader = {
-      generic-extlinux-compatible.enable = lib.mkForce false;
+      generic-extlinux-compatible.enable = false;
       raspberryPi = {
         enable = true;
         firmwareConfig = ''

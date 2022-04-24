@@ -1,4 +1,4 @@
-{ config, inputs, lib, pkgs, ... }:
+{ config, impermanence, lib, pkgs, ... }:
 with lib;
 {
   age.secrets.bemeurerPassword.file = ./password.age;
@@ -34,7 +34,7 @@ with lib;
 
   home-manager.users.bemeurer = {
     imports = [
-      "${inputs.impermanence}/home-manager.nix"
+      impermanence.home-manager.impermanence
       ./core
       ./dev
       ./modules

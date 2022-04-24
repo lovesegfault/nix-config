@@ -1,11 +1,12 @@
 { self
 , home-manager
 , impermanence
+, nixos-hardware
 , nixpkgs
 , ragenix
 , templates
 , ...
-}@inputs:
+}:
 let
   inherit (nixpkgs) lib;
   hosts = (import ./hosts.nix).nixosHosts;
@@ -40,7 +41,8 @@ let
         ragenix.nixosModules.age
       ];
       specialArgs = {
-        inherit inputs;
+        impermanence = impermanence.nixosModules;
+        nixos-hardware = nixos-hardware.nixosModules;
       };
     };
 in
