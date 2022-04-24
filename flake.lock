@@ -63,26 +63,6 @@
         "type": "github"
       }
     },
-    "gitignore": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1646480205,
-        "narHash": "sha256-kekOlTlu45vuK2L9nq8iVN17V3sB0WWPqTTW3a2SQG0=",
-        "owner": "hercules-ci",
-        "repo": "gitignore.nix",
-        "rev": "bff2832ec341cf30acb3a4d3e2e7f1f7b590116a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "gitignore.nix",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -216,7 +196,6 @@
       "inputs": {
         "deploy-rs": "deploy-rs",
         "flake-compat": "flake-compat",
-        "gitignore": "gitignore",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nixgl": "nixgl",
