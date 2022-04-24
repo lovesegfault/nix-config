@@ -2,7 +2,7 @@
 
 system:
 
-with self.legacyPackages.${system};
+with self.nixpkgs.${system};
 
 mkShell {
   name = "nix-config";

@@ -30,6 +30,8 @@
 
     nixgl.url = "github:guibou/nixgl";
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     pre-commit-hooks = {
@@ -56,18 +58,19 @@
       overlays.default = import ./nix/overlay.nix inputs;
 
       homeConfigurations = import ./nix/home-manager.nix inputs;
+
+      nixosConfigurations = import ./nix/nixos.nix inputs;
     }
-    // utils.lib.eachDefaultSystem (system: {
+    // utils.lib.eachSystem [ "aarch64-linux" "x86_64-linux" ] (system: {
       checks = import ./nix/checks.nix inputs system;
 
       devShells.default = import ./nix/dev-shell.nix inputs system;
 
       packages = {
-        default = self.packages.${system}.hosts;
-        hosts = import ./nix/build-hosts.nix inputs system;
-      };
+        default = self.packages.${system}.all-hosts;
+      } // (import ./nix/host-drvs.nix inputs system);
 
-      legacyPackages = import nixpkgs {
+      nixpkgs = import nixpkgs {
         inherit system;
         overlays = [ self.overlays.default ];
         config.allowUnfree = true;

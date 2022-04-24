@@ -150,7 +150,7 @@ jobs:
             cachix watch-exec nix-config -- \
               nix run nixpkgs#nix-build-uncached -- \
                 --keep-going \
-                -A packages.x86_64-linux.hosts.${{ matrix.host }}
+                -A packages.x86_64-linux.${{ matrix.host }}
 
   check:
     runs-on: ubuntu-latest

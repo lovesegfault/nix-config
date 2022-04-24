@@ -1,17 +1,7 @@
 { self, home-manager, nixpkgs, templates, ... }:
 let
-  inherit (nixpkgs.lib) concatStringsSep filterAttrs mapAttrs;
-
-  hosts = filterAttrs (_: v: v.hmOnly or false) (import ./hosts.nix);
-
-  genConfiguration = hostName: { homeDirectory, localSystem, username, ... }:
-    home-manager.lib.homeManagerConfiguration {
-      inherit homeDirectory username;
-      configuration = genModules hostName;
-      pkgs = self.legacyPackages.${localSystem};
-      stateVersion = "21.11";
-      system = localSystem;
-    };
+  inherit (nixpkgs) lib;
+  hosts = lib.filterAttrs (_: v: v.hmOnly or false) (import ./hosts.nix);
 
   genModules = hostName:
     { config, ... }: {
@@ -21,7 +11,7 @@ let
         nixpkgs.flake = nixpkgs;
       };
 
-      systemd.user.sessionVariables.NIX_PATH = concatStringsSep ":" [
+      systemd.user.sessionVariables.NIX_PATH = lib.concatStringsSep ":" [
         "nixpkgs=${config.xdg.dataHome}/nixpkgs"
         "nixpkgs-overlays=${config.xdg.dataHome}/overlays"
       ];
@@ -36,5 +26,14 @@ let
         '';
       };
     };
+
+  genConfiguration = hostName: { homeDirectory, localSystem, username, ... }:
+    home-manager.lib.homeManagerConfiguration {
+      inherit homeDirectory username;
+      configuration = genModules hostName;
+      pkgs = self.nixpkgs.${localSystem};
+      stateVersion = "21.11";
+      system = localSystem;
+    };
 in
-mapAttrs genConfiguration hosts
+lib.mapAttrs genConfiguration hosts
