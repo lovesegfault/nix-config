@@ -30,11 +30,6 @@
 
     nixgl.url = "github:guibou/nixgl";
 
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
