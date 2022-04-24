@@ -1,7 +1,7 @@
 { self, home-manager, nixpkgs, templates, ... }:
 let
   inherit (nixpkgs) lib;
-  hosts = lib.filterAttrs (_: v: v.hmOnly or false) (import ./hosts.nix);
+  hosts = (import ./hosts.nix).homeManagerHosts;
 
   genModules = hostName:
     { config, ... }: {

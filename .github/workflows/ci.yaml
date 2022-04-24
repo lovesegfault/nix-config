@@ -54,7 +54,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v17
       - id: get-hosts
-        run: echo "::set-output name=hosts::$(nix eval --json -f ./nix/hosts.nix | jq -c 'keys')"
+        run: echo "::set-output name=hosts::$(nix eval --json -f ./nix/hosts.nix allHosts | jq -c 'keys')"
 
   eval-host:
     name: eval-${{ matrix.host }}

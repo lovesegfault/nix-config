@@ -8,7 +8,7 @@
 }@inputs:
 let
   inherit (nixpkgs) lib;
-  hosts = lib.filterAttrs (_: v: !(v.hmOnly or false)) (import ./hosts.nix);
+  hosts = (import ./hosts.nix).nixosHosts;
 
   netHostMap = {
     networking.hosts = lib.mapAttrs' (n: v: lib.nameValuePair v.address [ n ]) hosts;
