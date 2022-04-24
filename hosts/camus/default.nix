@@ -21,7 +21,6 @@
 
   hardware = {
     deviceTree = {
-      enable = true;
       overlays = [{
         name = "rpi-poe-plus-overlay";
         dtsText = ''
@@ -30,10 +29,8 @@
           */
           /dts-v1/;
           /plugin/;
-
           / {
-            compatible = "brcm,bcm2835";
-
+            compatible = "brcm,bcm2711";
             fragment@0 {
               target-path = "/";
               __overlay__ {
@@ -43,12 +40,11 @@
                   cooling-min-state = <0>;
                   cooling-max-state = <4>;
                   #cooling-cells = <2>;
-                  cooling-levels = <0 1 10 100 255>;
+                  cooling-levels = <0 32 64 128 255>;
                   status = "okay";
                 };
               };
             };
-
             fragment@1 {
               target = <&cpu_thermal>;
               __overlay__ {
@@ -94,7 +90,6 @@
                 };
               };
             };
-
             fragment@2 {
               target-path = "/__overrides__";
               __overlay__ {
@@ -108,22 +103,6 @@
                 poe_fan_temp3_hyst =  <&trip3>,"hysteresis:0";
               };
             };
-
-            fragment@3 {
-              target-path = "/";
-              __overlay__ {
-                rpi_poe_power_supply: rpi-poe-power-supply@0 {
-                  compatible = "raspberrypi,rpi-poe-power-supply";
-                  firmware = <&firmware>;
-                  status = "okay";
-                };
-              };
-            };
-
-            &fan0 {
-              cooling-levels = <0 32 64 128 255>;
-            };
-
             __overrides__ {
               poe_fan_temp0 =    <&trip0>,"temperature:0";
               poe_fan_temp0_hyst =  <&trip0>,"hysteresis:0";
@@ -133,6 +112,16 @@
               poe_fan_temp2_hyst =  <&trip2>,"hysteresis:0";
               poe_fan_temp3 =    <&trip3>,"temperature:0";
               poe_fan_temp3_hyst =  <&trip3>,"hysteresis:0";
+            };
+            fragment@3 {
+              target-path = "/";
+              __overlay__ {
+                rpi_poe_power_supply: rpi-poe-power-supply@0 {
+                  compatible = "raspberrypi,rpi-poe-power-supply";
+                  firmware = <&firmware>;
+                  status = "okay";
+                };
+              };
             };
           };
         '';
@@ -144,7 +133,6 @@
         dr_mode = "host";
       };
       i2c1.enable = true;
-      fkms-3d.enable = true;
     };
   };
 

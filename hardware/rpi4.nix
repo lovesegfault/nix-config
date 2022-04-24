@@ -1,10 +1,8 @@
-{ lib, pkgs, nixos-hardware, ... }: {
+{ lib, nixos-hardware, ... }: {
   imports = [
     nixos-hardware.raspberry-pi-4
     ./nixos-aarch64-builder
   ];
-
-  boot.kernelPackages = pkgs.linuxKernel.packageAliases.linux_latest;
 
   fileSystems = {
     "/boot/firmware" = {
