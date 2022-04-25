@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   programs = {
     seahorse.enable = true;
-    ssh.startAgent = true;
     _1password = {
       enable = true;
       gid = 5001;

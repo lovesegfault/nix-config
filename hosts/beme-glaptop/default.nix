@@ -68,6 +68,7 @@
       shell = "zsh";
     };
     gpg.scdaemonSettings.disable-ccid = true;
+    ssh.startAgent = true;
     zsh = {
       initExtra = ''
         source /home/beme/.nix-profile/etc/profile.d/nix.sh
