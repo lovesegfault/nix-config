@@ -15,7 +15,7 @@ let
         (attrNames set)
       );
 
-  allHosts = {
+  hosts = {
     aurelius = {
       type = "nixos";
       address = "100.92.104.42";
@@ -79,7 +79,17 @@ let
   };
 in
 {
-  inherit allHosts;
-  nixosHosts = filterAttrs (_: v: v.type == "nixos") allHosts;
-  homeManagerHosts = filterAttrs (_: v: v.type == "home-manager") allHosts;
+  all = hosts;
+
+  nixos = rec {
+    all = filterAttrs (_: v: v.type == "nixos") hosts;
+    x86_64-linux = filterAttrs (_: v: v.localSystem == "x86_64-linux") all;
+    aarch64-linux = filterAttrs (_: v: v.localSystem == "aarch64-linux") all;
+  };
+
+  homeManager = rec {
+    all = filterAttrs (_: v: v.type == "home-manager") hosts;
+    x86_64-linux = filterAttrs (_: v: v.localSystem == "x86_64-linux") all;
+    aarch64-linux = filterAttrs (_: v: v.localSystem == "aarch64-linux") all;
+  };
 }

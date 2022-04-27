@@ -1,7 +1,7 @@
 { self, home-manager, nixpkgs, templates, ... }:
 let
   inherit (nixpkgs) lib;
-  hosts = (import ./hosts.nix).homeManagerHosts;
+  hosts = (import ./hosts.nix).homeManager.all;
 
   genModules = hostName:
     { config, ... }: {

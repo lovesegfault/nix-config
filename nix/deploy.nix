@@ -5,7 +5,7 @@
 }:
 let
   inherit (nixpkgs) lib;
-  hosts = (import ./hosts.nix).allHosts;
+  hosts = (import ./hosts.nix).all;
 
   genNode = hostName: nixosCfg:
     let

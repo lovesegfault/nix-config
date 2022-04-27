@@ -8,7 +8,7 @@ let
 
   bemeurer = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQgTWfmR/Z4Szahx/uahdPqvEP/e/KQ1dKUYLenLuY2";
 
-  hosts = mapAttrs (_: v: v.pubkey) (import ./nix/hosts.nix).nixosHosts;
+  hosts = mapAttrs (_: v: v.pubkey) (import ./nix/hosts.nix).nixos.all;
 in
 with hosts;
 {

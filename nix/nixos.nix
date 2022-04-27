@@ -9,7 +9,7 @@
 }:
 let
   inherit (nixpkgs) lib;
-  hosts = (import ./hosts.nix).nixosHosts;
+  hosts = (import ./hosts.nix).nixos.all;
 
   netHostMap = {
     networking.hosts = lib.mapAttrs' (n: v: lib.nameValuePair v.address [ n ]) hosts;
