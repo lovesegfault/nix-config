@@ -4,23 +4,17 @@
     ./nixos-aarch64-builder
   ];
 
-  fileSystems = {
-    "/boot/firmware" = {
-      device = "/dev/disk/by-label/FIRMWARE";
-      fsType = "vfat";
-    };
-    "/" = {
-      device = "/dev/disk/by-label/NIXOS_SD";
-      fsType = "ext4";
-    };
+  boot.initrd.availableKernelModules = [ "nvme" "pcie-brcmstb" "usbhid" "usb_storage" "vc4" ];
+
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/NIXOS_SD";
+    fsType = "ext4";
   };
 
   nix.settings.max-jobs = lib.mkDefault 4;
 
-  swapDevices = lib.mkDefault [
-    {
-      device = "/swap";
-      size = 2048;
-    }
-  ];
+  swapDevices = lib.mkDefault [{
+    device = "/swap";
+    size = 2048;
+  }];
 }

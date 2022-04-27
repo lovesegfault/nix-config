@@ -42,9 +42,9 @@ let
     };
     camus = {
       type = "nixos";
-      address = "100.93.239.123";
+      address = "100.110.36.53";
       localSystem = "aarch64-linux";
-      pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILHiPgCtFeaDbb1dVlr0PU+QGhb1PxXn371BsWzeOoIQ";
+      pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC1EjXv0xCbVitsGNuwbMp30/7N363/wBNkQJJhMFXRl";
     };
     deleuze = {
       type = "nixos";
