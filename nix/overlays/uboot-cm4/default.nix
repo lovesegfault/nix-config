@@ -1,7 +1,7 @@
 final: _: {
   ubootRaspberryPi4_64bit = final.buildUBoot rec {
     version = "2022.01";
-    src = fetchurl {
+    src = final.fetchurl {
       url = "ftp://ftp.denx.de/pub/u-boot/u-boot-${version}.tar.bz2";
       hash = "sha256-gbRUMifbIowD+KG/XdvIE7C7j2VVzkYGTvchpvxoBBM=";
     };
