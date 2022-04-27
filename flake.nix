@@ -50,7 +50,10 @@
     {
       deploy = import ./nix/deploy.nix inputs;
 
-      overlays.default = import ./nix/overlay.nix inputs;
+      overlays = {
+        default = import ./nix/overlay.nix inputs;
+        lite = import ./nix/mask-large-drvs.nix;
+      };
 
       homeConfigurations = import ./nix/home-manager.nix inputs;
 
@@ -67,7 +70,10 @@
 
       nixpkgs = import nixpkgs {
         inherit system;
-        overlays = [ self.overlays.default ];
+        overlays = [
+          self.overlays.default
+          self.overlays.lite
+        ];
         config.allowUnfree = true;
         config.allowAliases = true;
       };
