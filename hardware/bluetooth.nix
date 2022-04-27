@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   hardware.bluetooth = {
     enable = true;
-    package = pkgs.bluez_unstable;
     powerOnBoot = true;
     disabledPlugins = [ "sap" ];
     settings = {
