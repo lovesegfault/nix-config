@@ -72,7 +72,7 @@
         inherit system;
         overlays = [
           self.overlays.default
-          self.overlays.lite
+          # self.overlays.lite
         ];
         config.allowUnfree = true;
         config.allowAliases = true;
