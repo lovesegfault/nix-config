@@ -99,12 +99,15 @@
       }
     },
     "nixgl": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
       "locked": {
-        "lastModified": 1644013836,
-        "narHash": "sha256-8J6HqBr8+JlZzjyMV8FrCS6ZI6rHo1pTMPilSBf6TaE=",
+        "lastModified": 1651078744,
+        "narHash": "sha256-+S/NEzZoTt7EoSOMEUsR/LuNTtzYhbribFaIewNxdCQ=",
         "owner": "guibou",
         "repo": "nixgl",
-        "rev": "17658df1e17a64bc23ee5c93cfa9e8b663a4ac81",
+        "rev": "56f2fbcce7a08c60c98394a64e900d5e9227bcb2",
         "type": "github"
       },
       "original": {
@@ -129,6 +132,20 @@
       }
     },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1651024496,
+        "narHash": "sha256-uKSrrw/neSkxX6TXPSaMyfu7iKzFrK7F6HOt6vQefGY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d9e593ed5889f3906dc72811c45bf684be8865cf",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1651031716,
         "narHash": "sha256-muwdDKZ9uMPkeKa2EY0DxJub9nSa+3DZOSACBG+1VP4=",
@@ -200,7 +217,7 @@
         "impermanence": "impermanence",
         "nixgl": "nixgl",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "pre-commit-hooks": "pre-commit-hooks",
         "ragenix": "ragenix",
         "templates": "templates",
