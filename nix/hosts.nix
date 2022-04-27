@@ -2,18 +2,7 @@ let
   inherit (builtins) attrNames concatMap listToAttrs;
 
   filterAttrs = pred: set:
-    listToAttrs
-      (concatMap
-        (name:
-          let
-            value = set.${name};
-          in
-          if pred name value
-          then [{ inherit name value; }]
-          else [ ]
-        )
-        (attrNames set)
-      );
+    listToAttrs (concatMap (name: let value = set.${name}; in if pred name value then [{ inherit name value; }] else [ ]) (attrNames set));
 
   hosts = {
     aurelius = {
