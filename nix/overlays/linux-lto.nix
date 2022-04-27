@@ -62,24 +62,28 @@ let
 
   patches = {
     graysky = {
-      name = "more-uarches-for-kernel-5.15";
+      name = "more-uarches-for-kernel-5.17";
       patch = final.fetchpatch {
-        name = "more-uarches-for-kernel-5.15";
-        url = "https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/9c9c7e817dd2718566ec95f7742b162ab125316f/more-uarches-for-kernel-5.15%2B.patch";
-        sha256 = "sha256-WSN+1t8Leodt7YRosuDF7eiSL5/8PYseXzxquf0LtP8=";
+        name = "more-uarches-for-kernel-5.17";
+        url = "https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/master/more-uarches-for-kernel-5.17%2B.patch";
+        hash = "sha256-PYrvXEnkC5/KmCVBG+thlOTKD/LxI5cBcn7J4c/mg/0=";
       };
     };
   };
 
   inherit (linuxKernel) kernels packagesFor;
+
+  latest = kernels.linux_5_17;
 in
 _: {
+  linuxPackages_latest_lto = packagesFor (fullLTO latest);
+
   linuxPackages_latest_lto_skylake = packagesFor
     (cfg
       { MSKYLAKE = yes; }
       (patch
         [ patches.graysky ]
-        (fullLTO kernels.linux_5_17)));
+        (fullLTO latest)));
 
   linuxPackages_xanmod_lto_zen3 = packagesFor
     (cfg
