@@ -28,13 +28,7 @@ with self.nixpkgs.${system};
           enable = true;
           files = "^.github/workflows/";
           types = [ "yaml" ];
-          entry =
-            let
-              actionlintBin = "${actionlint}/bin/actionlint";
-              pyflakesBin = "${python3Packages.pyflakes}/bin/pyflakes";
-              shellcheckBin = "${shellcheck}/bin/shellcheck";
-            in
-            "${actionlintBin} -pyflakes ${pyflakesBin} -shellcheck ${shellcheckBin}";
+          entry = "${actionlint}/bin/actionlint";
         };
       };
       settings.nix-linter.checks = [
