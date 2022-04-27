@@ -1,4 +1,4 @@
-{ config, nixos-hardware, pkgs, ... }:
+{ config, nixos-hardware, ... }:
 {
   imports = [
     nixos-hardware.common-pc-ssd
@@ -11,8 +11,6 @@
 
     ../../users/bemeurer
   ];
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   console.keyMap = "us";
 
