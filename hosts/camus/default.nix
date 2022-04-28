@@ -14,10 +14,9 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [
-    "console=ttyS0,115200n8"
     "console=ttyAMA0,115200n8"
+    "console=ttyS0,115200n8"
     "console=tty0"
-    "console=ttyS0"
   ];
 
 
