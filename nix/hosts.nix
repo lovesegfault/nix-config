@@ -65,6 +65,12 @@ let
       localSystem = "x86_64-linux";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHkZdagumIM9Wvl6qwTjhEYdm9nC1ai5PSMpYbBPgsPL";
     };
+    nozick = {
+      type = "nixos";
+      address = "100.124.29.84";
+      localSystem = "x86_64-linux";
+      pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBEzb5JCgcXJZHDkY09vBAvIF34JabI+ZBpGqJDy6KbI";
+    };
   };
 in
 {

@@ -13,6 +13,8 @@ in
 with hosts;
 {
   "hosts/kant/ddclient.age".publicKeys = [ bemeurer kant ];
+  "hosts/nozick/acme.age".publicKeys = [ bemeurer nozick ];
+  "hosts/nozick/ddns.age".publicKeys = [ bemeurer nozick ];
   "hardware/nixos-aarch64-builder/key.age".publicKeys = [ bemeurer aurelius camus deleuze foucault hegel ];
   "users/bemeurer/password.age".publicKeys = [ bemeurer ] ++ (attrValues hosts);
 } // (
