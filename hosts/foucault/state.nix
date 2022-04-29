@@ -50,6 +50,7 @@
         ".config/pipewire"
         ".config/spotify"
         ".local/share/TabNine"
+        ".local/share/atuin"
         ".local/share/bash"
         ".local/share/direnv"
         ".local/share/iwctl"

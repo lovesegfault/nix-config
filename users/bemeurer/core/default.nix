@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   imports = [
+    ./atuin.nix
     ./bash.nix
     ./btop.nix
     ./git.nix
@@ -17,6 +18,10 @@
   };
 
   programs = {
+    atuin = {
+      enable = true;
+      settings.auto_sync = false;
+    };
     bat.enable = true;
     fzf.enable = true;
     gpg.enable = true;

@@ -43,6 +43,7 @@
         ".gsutil"
         ".local/share/Steam"
         ".local/share/TabNine"
+        ".local/share/atuin"
         ".local/share/bash"
         ".local/share/direnv"
         ".local/share/iwctl"

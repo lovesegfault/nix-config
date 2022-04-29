@@ -23,6 +23,7 @@
       ".cache/nix-index"
       ".cache/nvim"
       ".cache/zsh"
+      ".local/share/atuin"
       ".local/share/bash"
       ".local/share/direnv"
       ".local/share/nvim"
