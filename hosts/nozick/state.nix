@@ -4,6 +4,7 @@
   environment.persistence."/nix/state" = {
     directories = [
       "/var/lib/acme"
+      "/var/lib/chrony"
       "/var/lib/containers"
       "/var/lib/deluge"
       "/var/lib/grafana"
@@ -12,6 +13,7 @@
       "/var/lib/prometheus2"
       "/var/lib/sshguard"
       "/var/lib/tailscale"
+      "/var/lib/unbound"
       "/var/log"
     ];
     files = [
@@ -26,6 +28,7 @@
       ".cache/nvim"
       ".cache/zsh"
       ".config/beets"
+      ".config/rclone"
       ".local/share/atuin"
       ".local/share/bash"
       ".local/share/direnv"

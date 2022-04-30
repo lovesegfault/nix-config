@@ -12,6 +12,7 @@
     ./nginx.nix
     ./prometheus.nix
     ./state.nix
+    ./unbound.nix
   ];
 
   boot = {
@@ -110,6 +111,10 @@
   };
 
   services = {
+    chrony = {
+      enable = true;
+      servers = [ "time.nist.gov" "time.cloudflare.com" "time.google.com" "tick.usnogps.navy.mil" ];
+    };
     deluge = {
       enable = true;
       openFilesLimit = "1048576";

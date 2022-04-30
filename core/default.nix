@@ -20,7 +20,13 @@ in
 
   environment = {
     etc."nixos/configuration.nix".source = dummyConfig;
-    systemPackages = with pkgs; [ rsync foot.terminfo btop ];
+    systemPackages = with pkgs; [
+      btop
+      dogdns
+      foot.terminfo
+      neovim
+      rclone
+    ];
   };
 
   home-manager = {
