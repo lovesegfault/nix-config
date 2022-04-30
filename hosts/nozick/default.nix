@@ -157,6 +157,8 @@
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;
 
+  users.groups.media.members = [ "bemeurer" "deluge" "plex" ];
+
   virtualisation = {
     oci-containers.backend = "podman";
     containers.storage.settings.storage.driver = "zfs";
