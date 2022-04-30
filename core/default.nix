@@ -26,6 +26,7 @@ in
       foot.terminfo
       neovim
       rclone
+      rsync
     ];
   };
 
