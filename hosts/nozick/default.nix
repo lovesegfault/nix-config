@@ -8,7 +8,6 @@
 
     ../../users/bemeurer
 
-    ./ddns.nix
     ./nginx.nix
     ./prometheus.nix
     ./state.nix
@@ -18,6 +17,7 @@
   age.secrets = {
     acme.file = ./acme.age;
     agent.file = ./agent.age;
+    ddns.file = ./ddns.age;
     rootPassword.file = ./password.age;
   };
 
@@ -172,8 +172,18 @@
   users.groups.media.members = [ "bemeurer" "deluge" "plex" ];
 
   virtualisation = {
-    oci-containers.backend = "podman";
     containers.storage.settings.storage.driver = "zfs";
+    oci-containers = {
+      backend = "podman";
+      containers.ddns = {
+        autoStart = true;
+        image = "timothyjmiller/cloudflare-ddns:latest";
+        volumes = [
+          "${config.age.secrets.ddns.path}:/config.json"
+        ];
+        extraOptions = [ "--network=host" ];
+      };
+    };
     podman = {
       enable = true;
       extraPackages = with pkgs; [ zfs ];
