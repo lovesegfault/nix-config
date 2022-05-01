@@ -23,3 +23,4 @@ with hosts;
   "hardware/nixos-aarch64-builder/key.age".publicKeys = [ bemeurer aurelius camus deleuze foucault hegel ];
   "users/bemeurer/password.age".publicKeys = [ bemeurer ] ++ (attrValues hosts);
 } // allHostSecret "password"
+  // allHostSecret "agent"

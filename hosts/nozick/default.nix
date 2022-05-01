@@ -105,7 +105,6 @@
         email = "bernardo@meurer.org";
         credentialsFile = config.age.secrets.acme.path;
         dnsProvider = "cloudflare";
-        extraLegoFlags = [ "--dns.resolvers=1.1.1.1" ];
       };
     };
     pam.loginLimits = [
