@@ -78,6 +78,10 @@
   networking = {
     hostName = "nozick";
     hostId = "d0d7d1dc";
+    firewall = {
+      allowedTCPPorts = [ 49330 ];
+      allowedUDPPorts = [ 49330 ];
+    };
   };
 
   nix = {
