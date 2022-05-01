@@ -15,6 +15,12 @@
     ./unbound.nix
   ];
 
+  age.secrets = {
+    acme.file = ./acme.age;
+    agent.file = ./agent.age;
+    rootPassword.file = ./password.age;
+  };
+
   boot = {
     initrd = {
       availableKernelModules = [ "xhci_pci" "ahci" "sd_mod" ];
@@ -97,7 +103,6 @@
 
   powerManagement.cpuFreqGovernor = "performance";
 
-  age.secrets.acme.file = ./acme.age;
   security = {
     acme = {
       acceptTerms = true;
@@ -115,6 +120,10 @@
   };
 
   services = {
+    cachix-agent = {
+      enable = true;
+      credentialsFile = config.age.secrets.agent.path;
+    };
     chrony = {
       enable = true;
       servers = [ "time.nist.gov" "time.cloudflare.com" "time.google.com" "tick.usnogps.navy.mil" ];
@@ -158,7 +167,6 @@
 
   time.timeZone = "Etc/UTC";
 
-  age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;
 
   users.groups.media.members = [ "bemeurer" "deluge" "plex" ];
