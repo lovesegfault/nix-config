@@ -120,10 +120,6 @@
   };
 
   services = {
-    cachix-agent = {
-      enable = true;
-      credentialsFile = config.age.secrets.agent.path;
-    };
     chrony = {
       enable = true;
       servers = [ "time.nist.gov" "time.cloudflare.com" "time.google.com" "tick.usnogps.navy.mil" ];
