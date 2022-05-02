@@ -26,7 +26,7 @@
         zfs rollback -r rpool/local/root@blank
       '';
     };
-    kernelModules = [ "kvm-intel" ];
+    kernelModules = [ "kvm-intel" "tls" ];
     kernelPackages = pkgs.linuxPackages_latest_lto_skylake;
     loader = {
       efi.canTouchEfiVariables = true;
