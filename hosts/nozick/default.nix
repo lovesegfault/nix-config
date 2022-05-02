@@ -146,10 +146,12 @@
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
       statusPage = true;
+      package = pkgs.nginxMainline;
       virtualHosts = {
         "deluge.meurer.org" = {
           useACMEHost = "deluge.meurer.org";
           forceSSL = true;
+          kTLS = true;
           locations."/" = {
             proxyPass = "http://localhost:8112";
           };
@@ -157,6 +159,7 @@
         "grafana.meurer.org" = {
           useACMEHost = "grafana.meurer.org";
           forceSSL = true;
+          kTLS = true;
           locations."/" = {
             proxyPass = "http://localhost:3000";
           };
@@ -164,6 +167,7 @@
         "plex.meurer.org" = {
           useACMEHost = "plex.meurer.org";
           forceSSL = true;
+          kTLS = true;
           locations."/" = {
             proxyPass = "http://localhost:32400";
           };
@@ -171,6 +175,7 @@
         "stash.meurer.org" = {
           useACMEHost = "stash.meurer.org";
           forceSSL = true;
+          kTLS = true;
           locations."/" = {
             proxyPass = "http://localhost:9999";
           };
