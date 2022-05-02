@@ -8,7 +8,6 @@
 
     ../../users/bemeurer
 
-    ./nginx.nix
     ./prometheus.nix
     ./state.nix
     ./unbound.nix
@@ -112,6 +111,12 @@
         credentialsFile = config.age.secrets.acme.path;
         dnsProvider = "cloudflare";
       };
+      certs = {
+        "deluge.meurer.org" = { };
+        "grafana.meurer.org" = { };
+        "plex.meurer.org" = { };
+        "stash.meurer.org" = { };
+      };
     };
     pam.loginLimits = [
       { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
@@ -134,6 +139,43 @@
       enable = true;
       addr = "0.0.0.0";
       extraOptions.DASHBOARDS_MIN_REFRESH_INTERVAL = "1s";
+    };
+    nginx = {
+      enable = true;
+      recommendedOptimisation = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
+      statusPage = true;
+      virtualHosts = {
+        "deluge.meurer.org" = {
+          useACMEHost = "deluge.meurer.org";
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://localhost:8112";
+          };
+        };
+        "grafana.meurer.org" = {
+          useACMEHost = "grafana.meurer.org";
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://localhost:3000";
+          };
+        };
+        "plex.meurer.org" = {
+          useACMEHost = "plex.meurer.org";
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://localhost:32400";
+          };
+        };
+        "stash.meurer.org" = {
+          useACMEHost = "stash.meurer.org";
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://localhost:9999";
+          };
+        };
+      };
     };
     plex.enable = true;
     smartd.enable = true;
@@ -164,9 +206,13 @@
 
   time.timeZone = "Etc/UTC";
 
-  users.users.root.passwordFile = config.age.secrets.rootPassword.path;
-
-  users.groups.media.members = [ "bemeurer" "deluge" "plex" ];
+  users = {
+    users.root.passwordFile = config.age.secrets.rootPassword.path;
+    groups = {
+      acme.members = [ "nginx" ];
+      media.members = [ "bemeurer" "deluge" "plex" ];
+    };
+  };
 
   virtualisation = {
     containers.storage.settings.storage.driver = "zfs";
