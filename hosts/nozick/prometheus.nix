@@ -1,7 +1,7 @@
 {
   services.prometheus = {
     enable = true;
-    extraFlags = [ "--storage.tsdb.retention.time=6m" ];
+    extraFlags = [ "--storage.tsdb.retention.time=90d" ];
     scrapeConfigs = [
       {
         job_name = "node";
