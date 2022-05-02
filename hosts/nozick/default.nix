@@ -44,6 +44,7 @@
       };
     };
     tmpOnTmpfs = true;
+    zfs.requestEncryptionCredentials = [ ];
   };
 
   fileSystems = {
