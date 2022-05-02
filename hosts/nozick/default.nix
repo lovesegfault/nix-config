@@ -145,6 +145,7 @@
       recommendedOptimisation = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
+      recommendedGzipSettings = true;
       statusPage = true;
       package = pkgs.nginxMainline;
       virtualHosts = {
