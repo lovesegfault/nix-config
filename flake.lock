@@ -100,7 +100,9 @@
     },
     "nixgl": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1651078744,
@@ -133,25 +135,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1651024496,
-        "narHash": "sha256-uKSrrw/neSkxX6TXPSaMyfu7iKzFrK7F6HOt6vQefGY=",
+        "lastModified": 1651571043,
+        "narHash": "sha256-3PAjKbf8ZntRvDDn/VZIKrF4qh7ltZAUmTImRAp0D9o=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d9e593ed5889f3906dc72811c45bf684be8865cf",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1651031716,
-        "narHash": "sha256-muwdDKZ9uMPkeKa2EY0DxJub9nSa+3DZOSACBG+1VP4=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "d6b996030dd21c6509803267584b9aca3e133a07",
+        "rev": "d33eace057c830a5c1b43914d1e4287f7db605bb",
         "type": "github"
       },
       "original": {
@@ -217,7 +205,7 @@
         "impermanence": "impermanence",
         "nixgl": "nixgl",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "pre-commit-hooks": "pre-commit-hooks",
         "ragenix": "ragenix",
         "templates": "templates",

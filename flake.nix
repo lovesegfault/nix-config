@@ -23,7 +23,10 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    nixgl.url = "github:guibou/nixgl";
+    nixgl = {
+      url = "github:guibou/nixgl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
