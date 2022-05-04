@@ -152,7 +152,6 @@
         "grafana.meurer.org" = { };
         "plex.meurer.org" = { };
         "stash.meurer.org" = { };
-        "transmission.meurer.org" = { };
       };
     };
     pam.loginLimits = [
@@ -212,12 +211,6 @@
           kTLS = true;
           locations."/".proxyPass = "http://localhost:9999";
         };
-        "transmission.meurer.org" = {
-          useACMEHost = "transmission.meurer.org";
-          forceSSL = true;
-          kTLS = true;
-          locations."/".proxyPass = "http://localhost:9091";
-        };
       };
     };
     plex.enable = true;
@@ -255,19 +248,6 @@
     };
     smartd.enable = true;
     sshguard.enable = true;
-    transmission = {
-      enable = true;
-      openPeerPorts = true;
-      settings = {
-        download-dir = "/mnt/emp/";
-        incomplete-dir-enabled = false;
-        rpc-bind-address = "0.0.0.0";
-        watch-dir = "/mnt/emp/watch/";
-        watch-dir-enabled = true;
-        rpc-host-whitelist = "transmission.meurer.org";
-        rpc-host-whitelist-enabled = true;
-      };
-    };
     zfs = {
       autoScrub.pools = [ "rpool" ];
       autoSnapshot = {
@@ -298,7 +278,7 @@
     users.root.passwordFile = config.age.secrets.rootPassword.path;
     groups = {
       acme.members = [ "nginx" ];
-      media.members = [ "bemeurer" "deluge" "plex" "transmission" ];
+      media.members = [ "bemeurer" "deluge" "plex" ];
     };
   };
 
