@@ -79,6 +79,10 @@
     zfs.requestEncryptionCredentials = [ ];
   };
 
+  environment.systemPackages = with pkgs; [
+    smartmontools
+  ];
+
   fileSystems = {
     "/" = {
       device = "rpool/local/root";
