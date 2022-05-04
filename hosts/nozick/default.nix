@@ -213,7 +213,10 @@
         };
       };
     };
-    plex.enable = true;
+    plex = {
+      enable = true;
+      openFirewall = true;
+    };
     prometheus = {
       enable = true;
       extraFlags = [ "--storage.tsdb.retention.time=90d" ];
