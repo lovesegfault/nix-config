@@ -189,9 +189,7 @@
           useACMEHost = "deluge.meurer.org";
           forceSSL = true;
           kTLS = true;
-          locations."/" = {
-            proxyPass = "http://localhost:8112";
-          };
+          locations."/".proxyPass = "http://localhost:8112";
         };
         "grafana.meurer.org" = {
           useACMEHost = "grafana.meurer.org";
@@ -209,7 +207,10 @@
           useACMEHost = "stash.meurer.org";
           forceSSL = true;
           kTLS = true;
-          locations."/".proxyPass = "http://localhost:9999";
+          locations."/" = {
+            proxyPass = "http://localhost:9999";
+            proxyWebsockets = true;
+          };
         };
       };
     };
