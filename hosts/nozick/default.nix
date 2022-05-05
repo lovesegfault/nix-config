@@ -121,8 +121,8 @@
     hostName = "nozick";
     hostId = "d0d7d1dc";
     firewall = {
-      allowedTCPPorts = [ 49330 ];
-      allowedUDPPorts = [ 49330 ];
+      allowedTCPPorts = [ 32400 49330 ];
+      allowedUDPPorts = [ 32400 49330 ];
     };
   };
 
@@ -213,10 +213,7 @@
         };
       };
     };
-    plex = {
-      enable = true;
-      openFirewall = true;
-    };
+    plex.enable = true;
     prometheus = {
       enable = true;
       extraFlags = [ "--storage.tsdb.retention.time=90d" ];
