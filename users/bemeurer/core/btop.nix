@@ -8,8 +8,8 @@ let
     if isInt v then toString v
     else if lib.isDerivation v then toString v
     else if isString v then ''"${v}"''
-    else if true == v then "True"
-    else if false == v then "False"
+    else if v then "True"
+    else if !v then "False"
     else if null == v then err "null" v
     else if isList v then ''"${toString v}"''
     else if isAttrs v then err "attrsets" v

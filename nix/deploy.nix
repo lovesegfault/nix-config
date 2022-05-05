@@ -10,7 +10,7 @@ let
   genNode = hostName: nixosCfg:
     let
       inherit (hosts.${hostName}) address localSystem;
-      activate = deploy-rs.lib.${localSystem}.activate;
+      inherit (deploy-rs.lib.${localSystem}) activate;
     in
     {
       hostname = address;

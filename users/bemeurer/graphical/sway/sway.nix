@@ -7,8 +7,7 @@
       keybindings =
         let
           execSpawn = cmd: "exec ${pkgs.spawn}/bin/spawn ${cmd}";
-          modifier = config.wayland.windowManager.sway.config.modifier;
-          terminal = config.wayland.windowManager.sway.config.terminal;
+          inherit (config.wayland.windowManager.sway.config) modifier terminal;
         in
         lib.mkOptionDefault {
           "${modifier}+Return" = execSpawn terminal;

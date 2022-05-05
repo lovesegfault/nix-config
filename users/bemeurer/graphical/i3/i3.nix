@@ -8,8 +8,7 @@
       keybindings =
         let
           execSpawn = cmd: "exec --no-startup-id ${pkgs.spawn}/bin/spawn ${cmd}";
-          modifier = config.xsession.windowManager.i3.config.modifier;
-          terminal = config.xsession.windowManager.i3.config.terminal;
+          inherit (config.xsession.windowManager.i3.config) modifier terminal;
         in
         lib.mkOptionDefault {
           "${modifier}+Return" = execSpawn terminal;

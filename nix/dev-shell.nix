@@ -16,6 +16,7 @@ mkShell {
     nixpkgs-fmt
     ragenix
     rnix-lsp
+    statix
 
     # Lua
     stylua
