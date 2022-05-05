@@ -19,6 +19,7 @@
       wofi
       xwayland
     ];
+    pointerCursor.size = 24;
   };
 
   xdg.mimeApps.defaultApplications = {
@@ -39,8 +40,6 @@
     "image/x-tga" = lib.mkForce "imv.desktop";
     "image/x-xbitmap" = lib.mkForce "imv.desktop";
   };
-
-  xsession.pointerCursor.size = 24;
 
   services.swayidle = {
     enable = true;

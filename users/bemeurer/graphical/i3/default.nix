@@ -8,7 +8,13 @@
     ./screen-locker.nix
   ];
 
-  home.packages = with pkgs; [ xclip xsel ];
+  home = {
+    packages = with pkgs; [ xclip xsel ];
+    pointerCursor = {
+      size = true;
+      x11.enable = true;
+    };
+  };
 
   programs.feh.enable = true;
 
@@ -32,10 +38,7 @@
     "image/x-xbitmap" = lib.mkForce "feh.desktop";
   };
 
-  xsession = {
-    enable = true;
-    pointerCursor.size = lib.mkForce 16;
-  };
+  xsession.enable = true;
 
   services = {
     caffeine.enable = true;
