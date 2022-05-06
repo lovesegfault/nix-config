@@ -123,6 +123,7 @@
     firewall = {
       allowedTCPPorts = [ 32400 49330 ];
       allowedUDPPorts = [ 32400 49330 ];
+      logRefusedConnections = false;
     };
   };
 
