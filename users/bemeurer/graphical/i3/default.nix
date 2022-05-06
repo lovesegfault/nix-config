@@ -8,13 +8,7 @@
     ./screen-locker.nix
   ];
 
-  home = {
-    packages = with pkgs; [ xclip xsel ];
-    pointerCursor = {
-      size = true;
-      x11.enable = true;
-    };
-  };
+  home.packages = with pkgs; [ xclip xsel ];
 
   programs.feh.enable = true;
 

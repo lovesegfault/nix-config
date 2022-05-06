@@ -19,7 +19,6 @@
       wofi
       xwayland
     ];
-    pointerCursor.size = 24;
   };
 
   xdg.mimeApps.defaultApplications = {
