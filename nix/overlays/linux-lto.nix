@@ -85,6 +85,13 @@ _: {
         [ patches.graysky ]
         (fullLTO latest)));
 
+  linuxPackages_latest_lto_zen3 = packagesFor
+    (cfg
+      { MZEN3 = yes; }
+      (patch
+        [ patches.graysky ]
+        (fullLTO latest)));
+
   linuxPackages_xanmod_lto_zen3 = packagesFor
     (cfg
       { MZEN3 = yes; DEBUG_INFO = lib.mkForce no; }
