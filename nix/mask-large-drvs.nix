@@ -9,6 +9,7 @@ let
     "element-desktop"
     "firefox-bin"
     "ledger-live-desktop"
+    "plexamp"
     "signal-desktop"
     "spotify"
     "thunderbird"
