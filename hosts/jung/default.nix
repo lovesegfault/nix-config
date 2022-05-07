@@ -27,6 +27,8 @@
     packages = with pkgs; [ terminus_font ];
   };
 
+  environment.variables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
+
   fileSystems = {
     "/" = {
       device = "tmpfs";
@@ -47,6 +49,11 @@
   hardware = {
     cpu.amd.updateMicrocode = true;
     enableRedistributableFirmware = true;
+    opengl = {
+      enable = true;
+      driSupport = true;
+      extraPackages = with pkgs; [ rocm-opencl-icd rocm-opencl-runtime ];
+    };
   };
 
   networking = {
