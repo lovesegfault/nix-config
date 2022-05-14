@@ -254,11 +254,11 @@
     },
     "utils": {
       "locked": {
-        "lastModified": 1652372896,
-        "narHash": "sha256-lURGussfF3mGrFPQT3zgW7+RC0pBhbHzco0C7I+ilow=",
+        "lastModified": 1652556210,
+        "narHash": "sha256-wnDR0gGcBUEbt64iYO8dM2DHO9qb302Zn3HucOm/SDk=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "0d347c56f6f41de822a4f4c7ff5072f3382db121",
+        "rev": "f7e772af96fa47346832643526c26d4475385b60",
         "type": "github"
       },
       "original": {
