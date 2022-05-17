@@ -34,6 +34,10 @@
         { directory = ".gnupg"; mode = "0700"; }
         { directory = ".ssh"; mode = "0700"; }
       ];
+      files = [
+        ".config/cachix/cachix.dhall"
+        ".config/gh/hosts.yml"
+      ];
     };
   };
 }
