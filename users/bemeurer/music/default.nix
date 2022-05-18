@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-    (beets.override { enableAlternatives = true; })
+    beets-unstable
     bimp
     checkart
     essentia-extractor
