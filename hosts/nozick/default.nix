@@ -117,6 +117,12 @@
 
   hardware.enableRedistributableFirmware = true;
 
+  home-manager.users.bemeurer = {
+    imports = [
+      ../../users/bemeurer/music
+    ];
+  };
+
   networking = {
     hostName = "nozick";
     hostId = "d0d7d1dc";
