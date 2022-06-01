@@ -272,12 +272,9 @@
     { device = "/dev/disk/by-uuid/3cbbd63d-33e7-4eea-85d8-07e665367530"; }
   ];
 
-  systemd.network = {
-    networks.eth = {
-      matchConfig.MACAddress = "90:1b:0e:db:06:2f";
-      DHCP = "yes";
-    };
-    wait-online.anyInterface = true;
+  systemd.network.networks.eth = {
+    matchConfig.MACAddress = "90:1b:0e:db:06:2f";
+    DHCP = "yes";
   };
 
   time.timeZone = "Etc/UTC";

@@ -38,22 +38,19 @@
     options = "-d";
   };
 
-  systemd.network = {
-    networks = {
-      eth = {
-        DHCP = "yes";
-        matchConfig.MACAddress = "e4:5f:01:2a:4e:88";
-        dhcpV4Config.RouteMetric = 10;
-        dhcpV6Config.RouteMetric = 10;
-      };
-      wlan = {
-        DHCP = "yes";
-        matchConfig.MACAddress = "e4:5f:01:2a:4e:89";
-        dhcpV4Config.RouteMetric = 40;
-        dhcpV6Config.RouteMetric = 40;
-      };
+  systemd.network.networks = {
+    eth = {
+      DHCP = "yes";
+      matchConfig.MACAddress = "e4:5f:01:2a:4e:88";
+      dhcpV4Config.RouteMetric = 10;
+      dhcpV6Config.RouteMetric = 10;
     };
-    wait-online.anyInterface = true;
+    wlan = {
+      DHCP = "yes";
+      matchConfig.MACAddress = "e4:5f:01:2a:4e:89";
+      dhcpV4Config.RouteMetric = 40;
+      dhcpV6Config.RouteMetric = 40;
+    };
   };
 
   time.timeZone = "America/Los_Angeles";

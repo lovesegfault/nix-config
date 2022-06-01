@@ -81,22 +81,19 @@
 
   services.fwupd.enable = true;
 
-  systemd.network = {
-    networks = {
-      eth = {
-        DHCP = "yes";
-        matchConfig.MACAddress = "1c:83:41:30:ab:9b";
-        dhcpV4Config.RouteMetric = 10;
-        dhcpV6Config.RouteMetric = 10;
-      };
-      wifi = {
-        DHCP = "yes";
-        matchConfig.MACAddress = "60:dd:8e:12:67:bd";
-        dhcpV4Config.RouteMetric = 40;
-        dhcpV6Config.RouteMetric = 40;
-      };
+  systemd.network.networks = {
+    eth = {
+      DHCP = "yes";
+      matchConfig.MACAddress = "1c:83:41:30:ab:9b";
+      dhcpV4Config.RouteMetric = 10;
+      dhcpV6Config.RouteMetric = 10;
     };
-    wait-online.anyInterface = true;
+    wifi = {
+      DHCP = "yes";
+      matchConfig.MACAddress = "60:dd:8e:12:67:bd";
+      dhcpV4Config.RouteMetric = 40;
+      dhcpV6Config.RouteMetric = 40;
+    };
   };
 
   swapDevices = [{ device = "/dev/disk/by-uuid/a66412e6-ff55-4053-b436-d066319ed922"; }];

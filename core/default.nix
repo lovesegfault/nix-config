@@ -75,5 +75,7 @@ in
 
   systemd.enableUnifiedCgroupHierarchy = true;
 
+  systemd.network.wait-online.anyInterface = true;
+
   users.mutableUsers = false;
 }
