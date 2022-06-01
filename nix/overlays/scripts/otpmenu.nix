@@ -1,8 +1,7 @@
 let
   otpmenu =
-    { gopass
-    , libnotify
-    , ripgrep
+    { libnotify
+    , jq
     , writeShellApplication
 
     , displayCmd
@@ -13,18 +12,18 @@ let
       name = "otpmenu";
 
       runtimeInputs = [
-        gopass
+        jq
         libnotify
-        ripgrep
       ] ++ extraInputs;
 
       text = ''
-        otp_list="$(gopass ls -f | rg "^(otp)/.*$")"
-        otp_name="$(${displayCmd} <<< "$otp_list")"
-        otp_string="$(gopass otp -o "$otp_name")"
-
+        export PATH="/run/wrappers/bin:$PATH"
+        eval "$(op signin)"
+        items="$(op item list --categories=Login --format=json | jq -r '.[].title')"
+        item="$(${displayCmd} <<< "$items")"
+        otp_string="$(op item get --totp "$item")"
         ${yankCmd} <<< "$otp_string"
-        notify-send "⏲ Copied $otp_name to clipboard."
+        notify-send "⏲ Copied $item to clipboard."
       '';
     };
 in

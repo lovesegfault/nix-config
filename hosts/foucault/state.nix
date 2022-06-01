@@ -44,7 +44,6 @@
         ".config/dconf"
         ".config/discord"
         ".config/gcloud"
-        ".config/gopass"
         ".config/libvirt"
         ".config/op"
         ".config/pipewire"
@@ -66,7 +65,6 @@
         "src"
         "tmp"
         { directory = ".gnupg"; mode = "0700"; }
-        { directory = ".local/share/gopass"; mode = "0700"; }
         { directory = ".local/share/keyrings"; mode = "0700"; }
         { directory = ".ssh"; mode = "0700"; }
       ];

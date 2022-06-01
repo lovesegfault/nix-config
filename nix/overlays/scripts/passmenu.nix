@@ -1,8 +1,7 @@
 let
   passmenu =
-    { gopass
-    , libnotify
-    , ripgrep
+    { libnotify
+    , jq
     , writeShellApplication
 
     , displayCmd
@@ -15,18 +14,18 @@ let
       name = "passmenu";
 
       runtimeInputs = [
-        gopass
+        jq
         libnotify
-        ripgrep
       ] ++ extraInputs;
 
       text = ''
-        password_list="$(gopass ls -f | rg "^(misc|hosts|websites)/.*$")"
-        password_name="$(${displayCmd} <<< "$password_list")"
-        password="$(gopass show --password "$password_name")"
-
+        export PATH="/run/wrappers/bin:$PATH"
+        eval "$(op signin)"
+        items="$(op item list --categories=Login --format=json | jq -r '.[].title')"
+        item="$(${displayCmd} <<< "$items")"
+        password="$(op item get --fields label=password "$item")"
         ${yankCmd} <<< "$password"
-        notify-send "🔏 Copied $password_name to clipboard. Will clear in 45 seconds."
+        notify-send "🔏 Copied $item to clipboard. Will clear in 45 seconds."
 
         # wait 45 seconds, or until the clipboard changes.
         counter=0

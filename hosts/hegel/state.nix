@@ -37,7 +37,6 @@
         ".config/dconf"
         ".config/discord"
         ".config/gcloud"
-        ".config/gopass"
         ".config/pipewire"
         ".config/shotwell"
         ".gsutil"
