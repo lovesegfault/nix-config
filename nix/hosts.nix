@@ -11,18 +11,6 @@ let
       localSystem = "aarch64-linux";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL8LfZJVnCw5Wq8+mym6uxTwg6+QhvkSjt0qfzap4C7w";
     };
-    beme-cloudtop = {
-      type = "home-manager";
-      localSystem = "x86_64-linux";
-      username = "beme";
-      homeDirectory = "/usr/local/google/home/beme";
-    };
-    beme-glaptop = {
-      type = "home-manager";
-      localSystem = "x86_64-linux";
-      username = "beme";
-      homeDirectory = "/home/beme";
-    };
     bohr = {
       type = "nixos";
       address = "100.123.20.5";
