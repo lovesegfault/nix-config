@@ -175,7 +175,7 @@
     { device = "/dev/disk/by-uuid/4b74d5bd-3e62-4077-a126-6d73ad07267f"; }
   ];
 
-  time.timeZone = "America/Los_Angeles";
+  time.timeZone = "America/New_York";
 
   virtualisation = {
     docker = {

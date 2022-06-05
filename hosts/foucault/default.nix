@@ -105,7 +105,7 @@
 
   swapDevices = [{ device = "/dev/disk/by-uuid/47602bda-4e3a-489a-b403-83cd9c673d4e"; }];
 
-  time.timeZone = "America/Los_Angeles";
+  time.timeZone = "America/New_York";
 
   virtualisation.docker = {
     enable = true;

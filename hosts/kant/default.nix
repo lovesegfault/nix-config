@@ -72,7 +72,7 @@
     '';
   };
 
-  time.timeZone = "America/Los_Angeles";
+  time.timeZone = "America/New_York";
 
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;

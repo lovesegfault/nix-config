@@ -152,7 +152,7 @@
 
   swapDevices = [{ device = "/dev/disk/by-uuid/6075a47d-006a-4dbb-9f86-671955132e2f"; }];
 
-  time.timeZone = "America/Los_Angeles";
+  time.timeZone = "America/New_York";
 
   users.groups.media.members = [ "bemeurer" "plex" ];
 

@@ -98,7 +98,7 @@
 
   swapDevices = [{ device = "/dev/disk/by-uuid/a66412e6-ff55-4053-b436-d066319ed922"; }];
 
-  time.timeZone = "America/Los_Angeles";
+  time.timeZone = "America/New_York";
 
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;
