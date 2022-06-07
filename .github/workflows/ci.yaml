@@ -49,34 +49,27 @@ jobs:
             nix build -L --keep-going \
             .\#devShells.x86_64-linux.default.inputDerivation
 
-  get-linux-hosts:
+  get-hosts:
     runs-on: ubuntu-latest
     outputs:
-      hosts: ${{ steps.get-hosts.outputs.hosts }}
+      linux-hosts: ${{ steps.get-hosts.outputs.linux-hosts }}
+      darwin-hosts: ${{ steps.get-hosts.outputs.darwin-hosts }}
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v17
       - id: get-hosts
-        run: echo "::set-output name=hosts::$(nix eval --json -f ./nix/hosts.nix linux | jq -c 'keys')"
-
-  get-darwin-hosts:
-    runs-on: macos-latest
-    outputs:
-      hosts: ${{ steps.get-hosts.outputs.hosts }}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v17
-      - id: get-hosts
-        run: echo "::set-output name=hosts::$(nix eval --json -f ./nix/hosts.nix darwin | jq -c 'keys')"
+        run: |
+          echo "::set-output name=linux-hosts::$(nix eval --json -f ./nix/hosts.nix linux | jq -c 'keys')"
+          echo "::set-output name=darwin-hosts::$(nix eval --json -f ./nix/hosts.nix darwin | jq -c 'keys')"
 
   build-linux-host:
     name: build-${{ matrix.host }}
     runs-on: ubuntu-latest
-    needs: get-linux-hosts
+    needs: get-hosts
     strategy:
       fail-fast: false
       matrix:
-        host: ${{ fromJson(needs.get-linux-hosts.outputs.hosts) }}
+        host: ${{ fromJson(needs.get-hosts.outputs.linux-hosts) }}
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v17
@@ -127,11 +120,11 @@ jobs:
   build-darwin-host:
     name: build-${{ matrix.host }}
     runs-on: macos-latest
-    needs: get-darwin-hosts
+    needs: get-hosts
     strategy:
       fail-fast: false
       matrix:
-        host: ${{ fromJson(needs.get-darwin-hosts.outputs.hosts) }}
+        host: ${{ fromJson(needs.get-hosts.outputs.darwin-hosts) }}
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v17
@@ -144,7 +137,7 @@ jobs:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
       - name: add-lite-overlay
-        run: sed -i '/.*overlays\.lite/s/#\s*//g' flake.nix
+        run: gnused -i '/.*overlays\.lite/s/#\s*//g' flake.nix
       - name: build-host
         uses: nick-invision/retry@v2
         with:
