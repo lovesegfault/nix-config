@@ -62,7 +62,7 @@
 
       nixosConfigurations = import ./nix/nixos.nix inputs;
     }
-    // utils.lib.eachSystem [ "aarch64-linux" "x86_64-linux" ] (system: {
+    // utils.lib.eachSystem [ "aarch64-linux" "x86_64-darwin" "x86_64-linux" ] (system: {
       checks = import ./nix/checks.nix inputs system;
 
       devShells.default = import ./nix/dev-shell.nix inputs system;

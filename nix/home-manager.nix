@@ -11,7 +11,7 @@ let
         nixpkgs.flake = nixpkgs;
       };
 
-      systemd.user.sessionVariables.NIX_PATH = lib.concatStringsSep ":" [
+      home.sessionVariables.NIX_PATH = lib.concatStringsSep ":" [
         "nixpkgs=${config.xdg.dataHome}/nixpkgs"
         "nixpkgs-overlays=${config.xdg.dataHome}/overlays"
       ];
