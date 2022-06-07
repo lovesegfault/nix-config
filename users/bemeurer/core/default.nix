@@ -13,7 +13,7 @@
   ];
 
   home = {
-    stateVersion = "21.11";
+    stateVersion = import ../../../nix/state-version.nix;
     packages = with pkgs; [ colorcheck exa fd kalker mosh neofetch ripgrep ];
   };
 
