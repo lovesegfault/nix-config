@@ -61,6 +61,12 @@ let
       localSystem = "x86_64-linux";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHkZdagumIM9Wvl6qwTjhEYdm9nC1ai5PSMpYbBPgsPL";
     };
+    luther = {
+      type = "home-manager";
+      localSystem = "aarch64-linux";
+      username = "bemeurer";
+      homeDirectory = "/home/bemeurer";
+    };
     nozick = {
       type = "nixos";
       address = "100.124.29.84";
