@@ -28,7 +28,10 @@ jobs:
             .\#checks.x86_64-linux.pre-commit-check
 
   build-shell:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v17
@@ -46,7 +49,7 @@ jobs:
             nix build -L --keep-going \
             .\#devShells.x86_64-linux.default.inputDerivation
 
-  get-hosts:
+  get-linux-hosts:
     runs-on: ubuntu-latest
     outputs:
       hosts: ${{ steps.get-hosts.outputs.hosts }}
@@ -54,16 +57,26 @@ jobs:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v17
       - id: get-hosts
-        run: echo "::set-output name=hosts::$(nix eval --json -f ./nix/hosts.nix all | jq -c 'keys')"
+        run: echo "::set-output name=hosts::$(nix eval --json -f ./nix/hosts.nix linux | jq -c 'keys')"
 
-  build-host:
+  get-darwin-hosts:
+    runs-on: macos-latest
+    outputs:
+      hosts: ${{ steps.get-hosts.outputs.hosts }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v17
+      - id: get-hosts
+        run: echo "::set-output name=hosts::$(nix eval --json -f ./nix/hosts.nix darwin | jq -c 'keys')"
+
+  build-linux-host:
     name: build-${{ matrix.host }}
     runs-on: ubuntu-latest
-    needs: get-hosts
+    needs: get-linux-hosts
     strategy:
       fail-fast: false
       matrix:
-        host: ${{ fromJson(needs.get-hosts.outputs.hosts) }}
+        host: ${{ fromJson(needs.get-linux-hosts.outputs.hosts) }}
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v17
@@ -111,9 +124,42 @@ jobs:
                 --keep-going \
                 -A packages.x86_64-linux.${{ matrix.host }}
 
+  build-darwin-host:
+    name: build-${{ matrix.host }}
+    runs-on: macos-latest
+    needs: get-darwin-hosts
+    strategy:
+      fail-fast: false
+      matrix:
+        host: ${{ fromJson(needs.get-darwin-hosts.outputs.hosts) }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v17
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            experimental-features = nix-command flakes recursive-nix
+      - uses: cachix/cachix-action@v10
+        with:
+          name: nix-config
+          signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+      - name: add-lite-overlay
+        run: sed -i '/.*overlays\.lite/s/#\s*//g' flake.nix
+      - name: build-host
+        uses: nick-invision/retry@v2
+        with:
+          max_attempts: 2
+          timeout_minutes: 720
+          retry_on: error
+          command: |
+            cachix watch-exec nix-config -- \
+              nix run nixpkgs#nix-build-uncached -- \
+                --keep-going \
+                -A packages.x86_64-darwin.${{ matrix.host }}
+
   check:
     runs-on: ubuntu-latest
-    needs: [ build-host ]
+    needs: [ build-linux-host, build-darwin-host ]
     if: always()
     steps:
       - name: check

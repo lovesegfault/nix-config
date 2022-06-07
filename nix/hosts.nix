@@ -4,6 +4,8 @@ let
   filterAttrs = pred: set:
     listToAttrs (concatMap (name: let value = set.${name}; in if pred name value then [{ inherit name value; }] else [ ]) (attrNames set));
 
+  filterSystem = infix: filterAttrs (_: v: builtins.match ".*${infix}.*" v.localSystem != null);
+
   hosts = {
     aurelius = {
       type = "nixos";
@@ -70,15 +72,34 @@ in
 {
   all = hosts;
 
+  darwin = filterSystem "-darwin" hosts;
+  linux = filterSystem "-linux" hosts;
+
   nixos = rec {
     all = filterAttrs (_: v: v.type == "nixos") hosts;
-    x86_64-linux = filterAttrs (_: v: v.localSystem == "x86_64-linux") all;
-    aarch64-linux = filterAttrs (_: v: v.localSystem == "aarch64-linux") all;
+
+    darwin = filterSystem "-darwin" all;
+    linux = filterSystem "-linux" all;
+
+    aarch64 = filterSystem "aarch64-" all;
+    x86_64 = filterSystem "x86_64" all;
+
+    aarch64-linux = filterSystem "aarch64-linux" all;
+    x86_64-linux = filterSystem "x86_64-linux" all;
   };
 
   homeManager = rec {
     all = filterAttrs (_: v: v.type == "home-manager") hosts;
-    x86_64-linux = filterAttrs (_: v: v.localSystem == "x86_64-linux") all;
-    aarch64-linux = filterAttrs (_: v: v.localSystem == "aarch64-linux") all;
+
+    darwin = filterSystem "-darwin" all;
+    linux = filterSystem "-linux" all;
+
+    aarch64 = filterSystem "aarch64-" all;
+    x86_64 = filterSystem "x86_64" all;
+
+    aarch64-linux = filterSystem "aarch64-linux" all;
+    aarch64-darwin = filterSystem "aarch64-darwin" all;
+    x86_64-darwin = filterSystem "x86_64-darwin" all;
+    x86_64-linux = filterSystem "x86_64-linux" all;
   };
 }

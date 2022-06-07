@@ -9,7 +9,7 @@
     enableAutosuggestions = true;
     enableCompletion = true;
     enableSyntaxHighlighting = true;
-    enableVteIntegration = true;
+    enableVteIntegration = pkgs.stdenv.isLinux;
     autocd = true;
     dotDir = ".config/zsh";
     history = {
