@@ -3,7 +3,6 @@
     ../../users/bemeurer/core
     ../../users/bemeurer/dev
     ../../users/bemeurer/modules
-    # ../../users/bemeurer/trusted/gpg.nix
   ];
 
   home = {
