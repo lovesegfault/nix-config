@@ -56,19 +56,6 @@
     };
     shellAliases = {
       cat = "bat";
-      # rust
-      c = "cargo";
-      cb = "cargo build";
-      cbr = "cargo build --release";
-      cch = "cargo check";
-      cce = "cargo clean";
-      cdo = "cargo doc";
-      ccp = "cargo clippy";
-      cr = "cargo run";
-      crr = "cargo run --release";
-      ct = "cargo test";
-      ctr = "cargo test --release";
-      # exa
       ls = "exa --binary --header --long --classify";
       la = "ls --all";
       l = "ls";
