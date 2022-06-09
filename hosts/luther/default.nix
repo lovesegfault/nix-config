@@ -7,7 +7,6 @@
 
   home = {
     uid = 22314791;
-    sessionPath = [ "$HOME/.toolbox/bin" ];
     packages = with pkgs; [
       (nerdfonts.override { fonts = [ "Hack" ]; })
       btop
@@ -28,10 +27,12 @@
         if [ -f /etc/bashrc ]; then
         . /etc/bashrc
         fi
+        export PATH="$PATH:$HOME/.toolbox/bin"
       '';
     };
     zsh.initExtra = ''
       source ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh
+      export PATH="$PATH:$HOME/.toolbox/bin"
     '';
   };
 
