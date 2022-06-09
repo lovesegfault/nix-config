@@ -36,6 +36,8 @@
   };
 
   xdg.configFile."nix/nix.conf".text = ''
+    !include access-tokens.conf
+
     accept-flake-config = true
     auto-optimise-store = true
     builders-use-substitutes = true
