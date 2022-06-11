@@ -43,11 +43,20 @@ jobs:
         with:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+      - id: get-system
+        run: |
+          if [ '${{ matrix.os }}' == 'ubuntu-latest' ]; then
+            echo "::set-output name=system::x86_64-linux"
+          elif [ '${{ matrix.os }}' == 'macos-latest' ]; then
+            echo "::set-output name=system::x86_64-darwin"
+          else
+            exit 1
+          fi
       - name: build-shell
         run: |
           cachix watch-exec nix-config -- \
             nix build -L --keep-going \
-            .\#devShells.x86_64-linux.default.inputDerivation
+            '.#devShells.${{ steps.get-system.outputs.system }}.default.inputDerivation'
 
   get-hosts:
     runs-on: ubuntu-latest
