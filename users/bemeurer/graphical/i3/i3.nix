@@ -14,8 +14,6 @@
           "${modifier}+Return" = execSpawn terminal;
           "${modifier}+d" = execSpawn "${pkgs.drunmenu-x11}/bin/drunmenu";
           "${modifier}+m" = execSpawn "${pkgs.emojimenu-x11}/bin/emojimenu";
-          "${modifier}+t" = execSpawn "${pkgs.otpmenu-x11}/bin/otpmenu";
-          "${modifier}+p" = execSpawn "${pkgs.passmenu-x11}/bin/passmenu";
           "${modifier}+Shift+h" = "move left";
           "${modifier}+Shift+j" = "move down";
           "${modifier}+Shift+k" = "move up";

@@ -14,8 +14,6 @@
           "${modifier}+d" = execSpawn "${pkgs.drunmenu-wayland}/bin/drunmenu";
           "${modifier}+m" = execSpawn "${pkgs.emojimenu-wayland}/bin/emojimenu";
           "${modifier}+o" = execSpawn "${pkgs.screenocr}/bin/screenocr";
-          "${modifier}+t" = execSpawn "${pkgs.otpmenu-wayland}/bin/otpmenu";
-          "${modifier}+p" = execSpawn "${pkgs.passmenu-wayland}/bin/passmenu";
           "${modifier}+q" = execSpawn "swaylock -f";
           "Print" = execSpawn "${pkgs.screenshot}/bin/screenshot";
         };
