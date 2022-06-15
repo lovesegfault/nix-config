@@ -19,6 +19,7 @@
     kernel.sysctl."vm.swappiness" = 1;
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest_lto_zen3;
+    tmpOnTmpfs = true;
   };
 
   console = {
