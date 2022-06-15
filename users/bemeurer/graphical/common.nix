@@ -57,8 +57,6 @@ let
         execSpawn = cmd: "exec --no-startup-id ${pkgs.spawn}/bin/spawn ${cmd}";
       in
       lib.mkOptionDefault {
-        # passwords
-        "${modifier}+p" = execSpawn "${lib.getExe pkgs._1password-gui} --quick-access";
         # fancy workspace names
         "${modifier}+1" = "workspace 1";
         "${modifier}+2" = "workspace 2";
