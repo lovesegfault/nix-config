@@ -11,6 +11,7 @@
       (nerdfonts.override { fonts = [ "Hack" ]; })
       btop
       nix
+      rustup
     ];
   };
 
