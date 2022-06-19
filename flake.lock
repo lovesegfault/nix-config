@@ -90,11 +90,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1655594877,
-        "narHash": "sha256-AQ39Vlb6zhsJqIRz2cN923+ESBxHmeHMHoPqA80xOCE=",
+        "lastModified": 1655678104,
+        "narHash": "sha256-Cs7uvIJawhfE6Jw2Ej68imE228ip4ALxKL8/byLJycI=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5197e5df7d3a148b1ad080235f70800987bc3549",
+        "rev": "ce8266dedcba66155624eca88280ee425f4d3611",
         "type": "github"
       },
       "original": {
