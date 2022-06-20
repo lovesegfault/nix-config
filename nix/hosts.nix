@@ -31,6 +31,12 @@ let
       localSystem = "aarch64-linux";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPA2Ulu6atWys1O5u8NQom7Uy63RicmGbbOoFm8490p1";
     };
+    derrida = {
+      type = "home-manager";
+      localSystem = "x86_64-linux";
+      username = "bemeurer";
+      homeDirectory = "/home/bemeurer";
+    };
     foucault = {
       type = "nixos";
       address = "100.98.82.56";

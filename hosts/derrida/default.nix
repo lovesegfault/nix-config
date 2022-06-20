@@ -46,7 +46,7 @@
     cores = 0
     experimental-features = nix-command flakes recursive-nix
     http-connections = 0
-    max-jobs = 64
+    max-jobs = 96
     sandbox = true
     substituters = https://cache.nixos.org/ https://nix-config.cachix.org https://nix-community.cachix.org
     system-features = recursive-nix benchmark nixos-test big-parallel kvm
