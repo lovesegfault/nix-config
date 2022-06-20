@@ -1,9 +1,10 @@
 { lib, ... }:
 let
   mkValueString = v: with builtins;
-    let err = t: v: abort
-      ("generators.mkBtopKV: " +
-        "${t} not supported: ${toPretty {} v}");
+    let
+      err = t: v: abort
+        ("generators.mkBtopKV: " +
+          "${t} not supported: ${toPretty {} v}");
     in
     if isInt v then toString v
     else if lib.isDerivation v then toString v
