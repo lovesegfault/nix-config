@@ -9,7 +9,6 @@
     };
     packages = with pkgs; [
       commitizen
-      git
       git-extras
       git-lfs
       nix-update
