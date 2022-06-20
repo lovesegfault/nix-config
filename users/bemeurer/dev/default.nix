@@ -7,7 +7,16 @@
         set auto-load safe-path /
       '';
     };
-    packages = with pkgs; [ commitizen git-extras git-lfs ];
+    packages = with pkgs; [
+      commitizen
+      git
+      git-extras
+      git-lfs
+      nix-update
+      nixpkgs-review
+      tmate
+      upterm
+    ];
   };
 
   programs = {
