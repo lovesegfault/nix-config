@@ -68,7 +68,7 @@
       devShells.default = import ./nix/dev-shell.nix inputs system;
 
       packages = {
-        default = self.packages.${system}.all-hosts;
+        default = self.packages.${system}.all;
       } // (import ./nix/host-drvs.nix inputs system);
 
       nixpkgs = import nixpkgs {
