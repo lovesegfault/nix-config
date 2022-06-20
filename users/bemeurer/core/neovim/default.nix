@@ -95,9 +95,9 @@
         lalrpop-vim
         vim-nix
         vim-polyglot
-      ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
-        cmp-tabnine
-      ];
+      ]
+      ++ lib.optional (lib.elem pkgs.hostPlatform.system pkgs.tabnine.meta.platforms) cmp-tabnine
+      ;
     };
   };
 
