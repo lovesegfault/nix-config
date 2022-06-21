@@ -1,8 +1,11 @@
-_: prev: {
-  python39 = prev.python39.override {
+final: prev: {
+  python310 = prev.python39.override {
     packageOverrides = _: pyPrev: {
-      questionary = pyPrev.questionary.overrideAttrs (old: {
-        meta = old.meta // { broken = false; };
+      uharfbuzz = pyPrev.uharfbuzz.overrideAttrs (old: {
+        buildInputs = (old.buildInputs or [ ]) ++ [
+          final.darwin.apple_sdk.frameworks.ApplicationServices
+        ];
+        meta = (old.meta or { }) // { broken = false; };
       });
     };
   };
