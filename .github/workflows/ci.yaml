@@ -124,7 +124,7 @@ jobs:
             cachix watch-exec nix-config -- \
               nix run nixpkgs#nix-build-uncached -- \
                 --keep-going \
-                -A packages.x86_64-linux.${{ matrix.host }}
+                -A packages.x86_64-linux.all.${{ matrix.host }}
 
   build-darwin-host:
     name: build-${{ matrix.host }}
@@ -157,7 +157,7 @@ jobs:
             cachix watch-exec nix-config -- \
               nix run nixpkgs#nix-build-uncached -- \
                 --keep-going \
-                -A packages.x86_64-darwin.${{ matrix.host }}
+                -A packages.x86_64-darwin.all.${{ matrix.host }}
 
   check:
     runs-on: ubuntu-latest
