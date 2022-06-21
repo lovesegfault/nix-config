@@ -68,8 +68,8 @@ jobs:
       - uses: cachix/install-nix-action@v17
       - id: get-hosts
         run: |
-          echo "::set-output name=linux-hosts::$(nix eval --json -f ./nix/hosts.nix linux | jq -c 'keys')"
-          echo "::set-output name=darwin-hosts::$(nix eval --json -f ./nix/hosts.nix darwin | jq -c 'keys')"
+          echo "::set-output name=linux-hosts::$(nix eval --json -f ./nix/hosts.nix linux.all | jq -c 'keys')"
+          echo "::set-output name=darwin-hosts::$(nix eval --json -f ./nix/hosts.nix darwin.all | jq -c 'keys')"
 
   build-linux-host:
     name: build-${{ matrix.host }}
