@@ -30,10 +30,15 @@
         export PATH="$PATH:$HOME/.toolbox/bin"
       '';
     };
-    zsh.initExtra = ''
-      source ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh
-      export PATH="$PATH:$HOME/.toolbox/bin"
-    '';
+    zsh = {
+      initExtraBeforeCompinit = ''
+        fpath+="$HOME/.zsh/completion"
+      '';
+      initExtra = ''
+        source ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh
+        export PATH="$PATH:$HOME/.toolbox/bin"
+      '';
+    };
   };
 
   xdg.configFile."nix/nix.conf".text = ''
