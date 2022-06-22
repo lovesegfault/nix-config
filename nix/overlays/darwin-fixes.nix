@@ -1,4 +1,4 @@
-final: prev: {
+final: prev: prev.lib.optionalAttrs prev.stdenv.isDarwin {
   python310 = prev.python39.override {
     packageOverrides = _: pyPrev: {
       uharfbuzz = pyPrev.uharfbuzz.overrideAttrs (old: {
