@@ -31,7 +31,7 @@
       '';
     };
     zsh = {
-      initExtraBeforeCompinit = ''
+      initExtraBeforeCompInit = ''
         fpath+="$HOME/.zsh/completion"
       '';
       initExtra = ''
