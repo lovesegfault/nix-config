@@ -10,7 +10,7 @@ let
 
   llvm = kernel:
     let
-      llvmPackages = "llvmPackages_13";
+      llvmPackages = "llvmPackages_14";
       noBintools = { bootBintools = null; bootBintoolsNoLibc = null; };
       hostLLVM = final.pkgsBuildHost.${llvmPackages}.override noBintools;
       buildLLVM = final.pkgsBuildBuild.${llvmPackages}.override noBintools;
