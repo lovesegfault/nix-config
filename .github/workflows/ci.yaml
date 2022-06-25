@@ -37,7 +37,7 @@ jobs:
       - uses: cachix/install-nix-action@v17
       - id: get-hosts
         run: |
-          nix eval --json -f ./nix/hosts.nix all | jq '
+          nix eval --json -f ./nix/hosts.nix all | jq -c '
           map_values(
               if .localSystem  == "x86_64-linux" then "ubuntu-latest"
               elif .localSystem == "aarch64-linux" then "ubuntu-latest"
@@ -48,7 +48,7 @@ jobs:
           | map({ "name": .key, "system": .value })
           ' > hosts.json
 
-          jq 'map(.system) | unique | sort' hosts.json > systems.json
+          jq -c 'map(.system) | unique | sort' hosts.json > systems.json
 
           echo "::set-output name=hosts::$(cat hosts.json)"
           echo "::set-output name=systems::$(cat systems.json)"
