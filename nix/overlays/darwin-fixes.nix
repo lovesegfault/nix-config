@@ -1,5 +1,5 @@
 final: prev: prev.lib.optionalAttrs prev.stdenv.isDarwin {
-  python310 = prev.python39.override {
+  python39 = prev.python39.override {
     packageOverrides = _: pyPrev: {
       uharfbuzz = pyPrev.uharfbuzz.overrideAttrs (old: {
         buildInputs = (old.buildInputs or [ ])
