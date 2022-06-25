@@ -95,6 +95,7 @@ jobs:
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
             experimental-features = nix-command flakes recursive-nix
       - name: setup-aarch64-builder
+        if: matrix.host.system == 'ubuntu-latest'
         env:
           AARCH64_BOX_KEY: ${{ secrets.AARCH64_BOX_KEY }}
           KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
