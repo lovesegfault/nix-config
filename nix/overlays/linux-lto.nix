@@ -73,7 +73,7 @@ let
 
   inherit (linuxKernel) kernels packagesFor;
 
-  latest = kernels.linux_5_17;
+  latest = kernels.linux_5_18;
 in
 _: {
   linuxPackages_latest_lto = packagesFor (fullLTO latest);
