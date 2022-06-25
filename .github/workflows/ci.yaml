@@ -27,11 +27,39 @@ jobs:
             nix build -L --keep-going \
             .\#checks.x86_64-linux.pre-commit-check
 
+  get-hosts:
+    runs-on: ubuntu-latest
+    outputs:
+      hosts: ${{ steps.get-hosts.outputs.hosts }}
+      systems: ${{ steps.get-hosts.outputs.systems }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v17
+      - id: get-hosts
+        run: |
+          nix eval --json -f ./nix/hosts.nix all | jq '
+          map_values(
+              if .localSystem  == "x86_64-linux" then "ubuntu-latest"
+              elif .localSystem == "aarch64-linux" then "ubuntu-latest"
+              elif .localSystem == "x86_64-darwin" then "macos-latest"
+              else null end)
+          | to_entries
+          | map(select(.value != null))
+          | map({ "name": .key, "system": .value })
+          ' > hosts.json
+
+          jq 'map(.system) | unique | sort' hosts.json > systems.json
+
+          echo "::set-output name=hosts::$(cat hosts.json)"
+          echo "::set-output name=systems::$(cat systems.json)"
+
   build-shell:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.system }}
+    needs: get-hosts
     strategy:
+      fail-fast: false
       matrix:
-        os: [ ubuntu-latest, macos-latest ]
+        system: ${{ fromJson(needs.get-hosts.outputs.systems) }}
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v17
@@ -43,42 +71,22 @@ jobs:
         with:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
-      - id: get-system
-        run: |
-          if [ '${{ matrix.os }}' == 'ubuntu-latest' ]; then
-            echo "::set-output name=system::x86_64-linux"
-          elif [ '${{ matrix.os }}' == 'macos-latest' ]; then
-            echo "::set-output name=system::x86_64-darwin"
-          else
-            exit 1
-          fi
       - name: build-shell
         run: |
+          SYSTEM="$(nix eval --impure --expr 'builtins.currentSystem')"
           cachix watch-exec nix-config -- \
-            nix build -L --keep-going \
-            '.#devShells.${{ steps.get-system.outputs.system }}.default.inputDerivation'
+            nix run nixpkgs\#nix-build-uncached -- \
+              --keep-going \
+              -A "devShells.$SYSTEM.default.inputDerivation"
 
-  get-hosts:
-    runs-on: ubuntu-latest
-    outputs:
-      linux-hosts: ${{ steps.get-hosts.outputs.linux-hosts }}
-      darwin-hosts: ${{ steps.get-hosts.outputs.darwin-hosts }}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v17
-      - id: get-hosts
-        run: |
-          echo "::set-output name=linux-hosts::$(nix eval --json -f ./nix/hosts.nix linux.all | jq -c 'keys')"
-          echo "::set-output name=darwin-hosts::$(nix eval --json -f ./nix/hosts.nix darwin.all | jq -c 'keys')"
-
-  build-linux-host:
-    name: build-${{ matrix.host }}
-    runs-on: ubuntu-latest
+  build-host:
+    name: build-${{ matrix.host.name }}
+    runs-on: ${{ matrix.host.system }}
     needs: get-hosts
     strategy:
       fail-fast: false
       matrix:
-        host: ${{ fromJson(needs.get-hosts.outputs.linux-hosts) }}
+        host: ${{ fromJson(needs.get-hosts.outputs.hosts) }}
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v17
@@ -124,44 +132,11 @@ jobs:
             cachix watch-exec nix-config -- \
               nix run nixpkgs#nix-build-uncached -- \
                 --keep-going \
-                -A packages.x86_64-linux.all.${{ matrix.host }}
-
-  build-darwin-host:
-    name: build-${{ matrix.host }}
-    runs-on: macos-latest
-    needs: get-hosts
-    strategy:
-      fail-fast: false
-      matrix:
-        host: ${{ fromJson(needs.get-hosts.outputs.darwin-hosts) }}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v17
-        with:
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            experimental-features = nix-command flakes recursive-nix
-      - uses: cachix/cachix-action@v10
-        with:
-          name: nix-config
-          signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
-      - name: add-lite-overlay
-        run: nix run nixpkgs\#gnused -- -i '/.*overlays\.lite/s/#\s*//g' flake.nix
-      - name: build-host
-        uses: nick-invision/retry@v2
-        with:
-          max_attempts: 2
-          timeout_minutes: 720
-          retry_on: error
-          command: |
-            cachix watch-exec nix-config -- \
-              nix run nixpkgs#nix-build-uncached -- \
-                --keep-going \
-                -A packages.x86_64-darwin.all.${{ matrix.host }}
+                -A packages.x86_64-linux.all.${{ matrix.host.name }}
 
   check:
     runs-on: ubuntu-latest
-    needs: [ build-linux-host, build-darwin-host, build-shell ]
+    needs: [ build-host, build-shell ]
     if: always()
     steps:
       - name: check
