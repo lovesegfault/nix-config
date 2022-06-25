@@ -72,6 +72,12 @@ let
       localSystem = "x86_64-linux";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBEzb5JCgcXJZHDkY09vBAvIF34JabI+ZBpGqJDy6KbI";
     };
+    poincare = {
+      type = "home-manager";
+      localSystem = "aarch64-darwin";
+      username = "bemeurer";
+      homeDirectory = "/Users/bemeurer";
+    };
     zermelo = {
       type = "home-manager";
       localSystem = "x86_64-darwin";
