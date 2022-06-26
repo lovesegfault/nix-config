@@ -13,11 +13,11 @@ in
     signByDefault = false; # FIXME: GPG key expired
   };
 
-  xsession.windowManager.i3.config.keybindings = {
+  xsession.windowManager.i3.config.keybindings = lib.mkOptionDefault {
     "Mod4+p" = _1pQuick;
   };
 
-  wayland.windowManager.sway.config.keybindings = {
+  wayland.windowManager.sway.config.keybindings = lib.mkOptionDefault {
     "Mod4+p" = _1pQuick;
   };
 }
