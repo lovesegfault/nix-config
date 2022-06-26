@@ -20,4 +20,17 @@ final: prev: prev.lib.optionalAttrs prev.stdenv.isDarwin {
       });
     };
   };
+
+  haskellPackages = prev.haskellPackages.extend (_: hPrev: {
+    cachix = hPrev.cachix.overrideAttrs (_: {
+      __propagatedImpureHostDeps = [
+        "/System/Library/LaunchDaemons/com.apple.oahd.plist"
+      ];
+    });
+    hercules-ci-cnix-store = hPrev.hercules-ci-cnix-store.overrideAttrs (_: {
+      __propagatedImpureHostDeps = [
+        "/System/Library/LaunchDaemons/com.apple.oahd.plist"
+      ];
+    });
+  });
 }
