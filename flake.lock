@@ -80,24 +80,19 @@
     },
     "home-manager": {
       "inputs": {
-        "flake-compat": [
-          "flake-compat"
-        ],
         "nixpkgs": [
           "nixpkgs"
         ],
-        "nmd": "nmd",
-        "nmt": "nmt",
         "utils": [
           "flake-utils"
         ]
       },
       "locked": {
-        "lastModified": 1656199469,
-        "narHash": "sha256-17t4qc016C1p6oNSKOrYbOCErWhQI4dr4nzJKrGO8VE=",
+        "lastModified": 1656274966,
+        "narHash": "sha256-jU+OTSvUbvKKmbNNl4XkUyW3EGdqZDNEZtGs++NbDlM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "1dbac84b846e4bfa21a08e31e95e11f0965ed042",
+        "rev": "9550595502bf437be7eb32f312a924ec891872d1",
         "type": "github"
       },
       "original": {
@@ -170,38 +165,6 @@
         "ref": "nixos-unstable-small",
         "repo": "nixpkgs",
         "type": "github"
-      }
-    },
-    "nmd": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1653339422,
-        "narHash": "sha256-RNLq09vfj21TyYuUCeD6BNTNC6Ew8bLhQULZytN4Xx8=",
-        "owner": "rycee",
-        "repo": "nmd",
-        "rev": "91dee681dd1c478d6040a00835d73c0f4a4c5c29",
-        "type": "gitlab"
-      },
-      "original": {
-        "owner": "rycee",
-        "repo": "nmd",
-        "type": "gitlab"
-      }
-    },
-    "nmt": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1648075362,
-        "narHash": "sha256-u36WgzoA84dMVsGXzml4wZ5ckGgfnvS0ryzo/3zn/Pc=",
-        "owner": "rycee",
-        "repo": "nmt",
-        "rev": "d83601002c99b78c89ea80e5e6ba21addcfe12ae",
-        "type": "gitlab"
-      },
-      "original": {
-        "owner": "rycee",
-        "repo": "nmt",
-        "type": "gitlab"
       }
     },
     "pre-commit-hooks": {
