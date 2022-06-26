@@ -7,7 +7,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "flake-compat";
-        utils.follows = "utils";
+        utils.follows = "flake-utils";
       };
     };
 
@@ -19,6 +19,8 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
+      inputs.flake-compat.follows = "flake-compat";
     };
 
     impermanence.url = "github:nix-community/impermanence";
@@ -35,21 +37,21 @@
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "utils";
+      inputs.flake-utils.follows = "flake-utils";
     };
 
     ragenix = {
       url = "github:yaxitech/ragenix";
-      inputs.flake-utils.follows = "utils";
+      inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     templates.url = "github:NixOS/templates";
 
-    utils.url = "github:numtide/flake-utils";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, utils, ... }@inputs:
+  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
     {
       deploy = import ./nix/deploy.nix inputs;
 
@@ -62,7 +64,7 @@
 
       nixosConfigurations = import ./nix/nixos.nix inputs;
     }
-    // utils.lib.eachSystem [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ] (system: {
+    // flake-utils.lib.eachSystem [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ] (system: {
       checks = import ./nix/checks.nix inputs system;
 
       devShells.default = import ./nix/dev-shell.nix inputs system;
