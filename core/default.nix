@@ -70,7 +70,7 @@ in
       ln -sv ${../nix/overlays} $out/overlays
     '';
 
-    stateVersion = import ../nix/state-version.nix;
+    stateVersion = "22.05";
   };
 
   systemd.enableUnifiedCgroupHierarchy = true;

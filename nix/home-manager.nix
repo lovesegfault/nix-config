@@ -3,7 +3,7 @@ let
   inherit (nixpkgs) lib;
   hosts = (import ./hosts.nix).homeManager.all;
 
-  genModules = hostName:
+  genModules = hostName: { homeDirectory, ... }:
     { config, ... }: {
       imports = [ (../hosts + "/${hostName}") ];
       nix.registry = {
@@ -11,10 +11,13 @@ let
         nixpkgs.flake = nixpkgs;
       };
 
-      home.sessionVariables.NIX_PATH = lib.concatStringsSep ":" [
-        "nixpkgs=${config.xdg.dataHome}/nixpkgs"
-        "nixpkgs-overlays=${config.xdg.dataHome}/overlays"
-      ];
+      home = {
+        inherit homeDirectory;
+        sessionVariables.NIX_PATH = lib.concatStringsSep ":" [
+          "nixpkgs=${config.xdg.dataHome}/nixpkgs"
+          "nixpkgs-overlays=${config.xdg.dataHome}/overlays"
+        ];
+      };
 
       xdg = {
         dataFile = {
@@ -27,13 +30,10 @@ let
       };
     };
 
-  genConfiguration = hostName: { homeDirectory, localSystem, username, ... }:
+  genConfiguration = hostName: { localSystem, ... }@attrs:
     home-manager.lib.homeManagerConfiguration {
-      inherit homeDirectory username;
-      configuration = genModules hostName;
       pkgs = self.nixpkgs.${localSystem};
-      stateVersion = import ./state-version.nix;
-      system = localSystem;
+      modules = [ (genModules hostName attrs) ];
     };
 in
 lib.mapAttrs genConfiguration hosts

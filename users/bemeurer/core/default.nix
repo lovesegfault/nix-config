@@ -13,7 +13,8 @@
   ];
 
   home = {
-    stateVersion = import ../../../nix/state-version.nix;
+    username = "bemeurer";
+    stateVersion = "22.05";
     packages = with pkgs; [ bandwhich colorcheck exa fd kalker mosh neofetch ripgrep ];
   };
 

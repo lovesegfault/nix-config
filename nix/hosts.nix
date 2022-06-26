@@ -27,7 +27,6 @@ let
     derrida = {
       type = "home-manager";
       localSystem = "x86_64-linux";
-      username = "bemeurer";
       homeDirectory = "/home/bemeurer";
     };
     foucault = {
@@ -63,7 +62,6 @@ let
     luther = {
       type = "home-manager";
       localSystem = "aarch64-linux";
-      username = "bemeurer";
       homeDirectory = "/home/bemeurer";
     };
     nozick = {
@@ -75,13 +73,11 @@ let
     poincare = {
       type = "home-manager";
       localSystem = "aarch64-darwin";
-      username = "bemeurer";
       homeDirectory = "/Users/bemeurer";
     };
     zermelo = {
       type = "home-manager";
       localSystem = "x86_64-darwin";
-      username = "bemeurer";
       homeDirectory = "/Users/bemeurer";
     };
   };
