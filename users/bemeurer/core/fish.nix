@@ -5,27 +5,21 @@
       enable = true;
       interactiveShellInit = lib.mkMerge [
         (lib.mkBefore ''
-          fish_vi_key_bindings
-          set fish_greeting
-          set ATUIN_NOBIND true
+          set -g ATUIN_NOBIND true
+          set -g fish_escape_delay_ms 300
+          set -g fish_greeting
         '')
         (lib.mkAfter ''
           enable_ayu_theme_dark
-          starship init fish | source
           ${pkgs.any-nix-shell}/bin/any-nix-shell fish | source
 
-          bind \cr _atuin_search
-          bind \t 'commandline -f complete && _atuin_suppress_tui'
-          bind \e 'commandline -f cancel && _atuin_unsuppress_tui'
-          bind \r 'commandline -f execute && _atuin_unsuppress_tui'
-          bind \n 'commandline -f execute && _atuin_unsuppress_tui'
-          if bind -M insert > /dev/null 2>&1
-              bind -M insert \cr _atuin_search
-              bind -M insert \t 'commandline -f complete && _atuin_suppress_tui'
-              bind -M insert \e 'commandline -f cancel && _atuin_unsuppress_tui'
-              bind -M insert \r 'commandline -f execute && _atuin_unsuppress_tui'
-              bind -M insert \n 'commandline -f execute && _atuin_unsuppress_tui'
-          end
+          fish_vi_key_bindings insert
+          # atuin
+          bind -M insert \cr _atuin_search
+          # quickly open text file
+          bind -M insert \co 'fzf | xargs -r $VISUAL'
+
+          starship init fish | source
         '')
       ];
       plugins = [
