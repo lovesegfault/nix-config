@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ../../users/bemeurer/core
     ../../users/bemeurer/dev
@@ -7,7 +7,10 @@
 
   home = {
     uid = 504;
-    sessionPath = [ "$HOME/.toolbox/bin" ];
+    sessionPath = [
+      "${config.home.homeDirectory}/.toolbox/bin"
+      "/opt/homebrew/bin"
+    ];
     packages = with pkgs; [
       (nerdfonts.override { fonts = [ "Hack" ]; })
       btop
