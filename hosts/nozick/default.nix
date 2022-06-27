@@ -17,6 +17,10 @@
     acme.file = ./acme.age;
     agent.file = ./agent.age;
     ddns.file = ./ddns.age;
+    nextcloud = {
+      file = ./nextcloud.age;
+      owner = "nextcloud";
+    };
     rootPassword.file = ./password.age;
   };
 
@@ -191,6 +195,7 @@
       hostName = "nextcloud.meurer.org";
       https = true;
       package = pkgs.nextcloud24;
+      config.adminpassFile = config.age.secrets.nextcloud.path;
     };
     nginx = {
       enable = true;
