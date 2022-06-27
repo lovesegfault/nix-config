@@ -17,10 +17,9 @@ let
 in
 with hosts;
 {
-  "hosts/kant/ddclient.age".publicKeys = [ bemeurer kant ];
   "hosts/nozick/acme.age".publicKeys = [ bemeurer nozick ];
   "hosts/nozick/ddns.age".publicKeys = [ bemeurer nozick ];
-  "hardware/nixos-aarch64-builder/key.age".publicKeys = [ bemeurer aurelius camus deleuze foucault hegel jung ];
+  "hardware/nixos-aarch64-builder/key.age".publicKeys = [ bemeurer aurelius foucault hegel jung ];
   "users/bemeurer/password.age".publicKeys = [ bemeurer ] ++ (attrValues hosts);
   "users/bemeurer/activate-token.age".publicKeys = [ bemeurer ];
 } // allHostSecret "password"
