@@ -8,6 +8,7 @@
       "/var/lib/containers"
       "/var/lib/deluge"
       "/var/lib/grafana"
+      "/var/lib/nextcloud"
       "/var/lib/plex"
       "/var/lib/private/ddclient"
       "/var/lib/prometheus2"

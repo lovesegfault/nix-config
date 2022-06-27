@@ -157,6 +157,7 @@
       certs = {
         "deluge.meurer.org" = { };
         "grafana.meurer.org" = { };
+        "nextcloud.meurer.org" = { };
         "plex.meurer.org" = { };
         "stash.meurer.org" = { };
       };
@@ -183,6 +184,14 @@
       addr = "0.0.0.0";
       extraOptions.DASHBOARDS_MIN_REFRESH_INTERVAL = "1s";
     };
+    nextcloud = {
+      enable = true;
+      appstoreEnable = true;
+      autoUpdateApps.enable = true;
+      hostName = "nextcloud.meurer.org";
+      https = true;
+      package = pkgs.nextcloud24;
+    };
     nginx = {
       enable = true;
       recommendedOptimisation = true;
@@ -203,6 +212,11 @@
           forceSSL = true;
           kTLS = true;
           locations."/".proxyPass = "http://localhost:3000";
+        };
+        "nextcloud.meurer.org" = {
+          useACMEHost = "grafana.meurer.org";
+          forceSSL = true;
+          kTLS = true;
         };
         "plex.meurer.org" = {
           useACMEHost = "plex.meurer.org";
