@@ -222,6 +222,7 @@
           useACMEHost = "grafana.meurer.org";
           forceSSL = true;
           kTLS = true;
+          listenAddresses = [ "0.0.0.0" ];
         };
         "plex.meurer.org" = {
           useACMEHost = "plex.meurer.org";
