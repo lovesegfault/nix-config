@@ -15,7 +15,11 @@
       (nerdfonts.override { fonts = [ "Hack" ]; })
       btop
       nix
+      openssh
     ];
+    shellAliases = {
+      tailscale = "/Applications/Tailscale.app/Contents/MacOS/Tailscale";
+    };
   };
 
   programs = {
