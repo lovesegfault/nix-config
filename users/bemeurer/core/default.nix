@@ -33,6 +33,7 @@
     bat.enable = true;
     fzf.enable = true;
     gpg.enable = true;
+    zoxide.enable = true;
   };
 
   systemd.user.startServices = "sd-switch";
