@@ -5,11 +5,11 @@
       EDITOR = "nvim";
       VISUAL = EDITOR;
     };
+    shellAliases = { vi = "nvim"; vim = "nvim"; };
   };
 
   programs = {
     git.extraConfig.core.editor = "nvim";
-    zsh.shellAliases = { vi = "nvim"; vim = "nvim"; };
 
     neovim = {
       enable = true;

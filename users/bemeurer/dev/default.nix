@@ -16,6 +16,7 @@
       tmate
       upterm
     ];
+    shellAliases.gco = lib.mkForce "git cz commit";
   };
 
   programs = {
@@ -40,7 +41,5 @@
     };
 
     nix-index.enable = true;
-
-    zsh.shellAliases.gco = lib.mkForce "git cz commit";
   };
 }

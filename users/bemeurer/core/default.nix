@@ -3,6 +3,7 @@
     ./atuin.nix
     ./bash.nix
     ./btop.nix
+    ./fish.nix
     ./git.nix
     ./htop.nix
     ./neovim
@@ -16,6 +17,12 @@
     username = "bemeurer";
     stateVersion = "22.05";
     packages = with pkgs; [ bandwhich colorcheck exa fd kalker mosh neofetch ripgrep ];
+    shellAliases = {
+      cat = "bat";
+      ls = "exa --binary --header --long --classify";
+      la = "ls --all";
+      l = "ls";
+    };
   };
 
   programs = {

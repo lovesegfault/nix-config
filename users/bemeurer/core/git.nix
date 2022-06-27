@@ -25,7 +25,7 @@
     };
   };
 
-  programs.zsh.shellAliases = rec {
+  home.shellAliases = rec {
     g = "git";
     ga = "git add";
     gaa = "${ga} -A";

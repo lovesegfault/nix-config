@@ -54,12 +54,6 @@
     sessionVariables = {
       RPROMPT = "";
     };
-    shellAliases = {
-      cat = "bat";
-      ls = "exa --binary --header --long --classify";
-      la = "ls --all";
-      l = "ls";
-    };
     plugins = [
       {
         # https://github.com/softmoth/zsh-vim-mode
