@@ -13,13 +13,16 @@ in
     ./resolved.nix
     ./tmux.nix
     ./xdg.nix
-    ./zsh.nix
   ];
 
   boot.kernelParams = [ "log_buf_len=10M" ];
 
   environment = {
     etc."nixos/configuration.nix".source = dummyConfig;
+    pathsToLink = [
+      "/share/fish"
+      "/share/zsh"
+    ];
     systemPackages = with pkgs; [
       btop
       dogdns
@@ -55,6 +58,14 @@ in
   ];
 
   nixpkgs.config.allowUnfree = true;
+
+  programs = {
+    fish.enable = true;
+    zsh = {
+      enable = true;
+      enableGlobalCompInit = false;
+    };
+  };
 
   security.sudo = {
     enable = true;
