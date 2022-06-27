@@ -23,11 +23,7 @@ in
       "/share/zsh"
     ];
     systemPackages = with pkgs; [
-      btop
-      dogdns
-      foot.terminfo
       neovim
-      rclone
       rsync
     ];
   };

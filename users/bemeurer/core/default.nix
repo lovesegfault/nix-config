@@ -16,7 +16,18 @@
   home = {
     username = "bemeurer";
     stateVersion = "22.05";
-    packages = with pkgs; [ bandwhich colorcheck exa fd kalker mosh neofetch ripgrep ];
+    packages = with pkgs; [
+      bandwhich
+      btop
+      colorcheck
+      exa
+      fd
+      kalker
+      mosh
+      neofetch
+      rclone
+      ripgrep
+    ];
     shellAliases = {
       cat = "bat";
       ls = "exa --binary --header --long --classify";
