@@ -12,18 +12,6 @@ let
       localSystem = "x86_64-linux";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBTh+kYOeeYoBuxvA00nGojfBHUQlXW3iF7aRIw9VbY1";
     };
-    camus = {
-      type = "nixos";
-      address = "100.110.36.53";
-      localSystem = "aarch64-linux";
-      pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC1EjXv0xCbVitsGNuwbMp30/7N363/wBNkQJJhMFXRl";
-    };
-    deleuze = {
-      type = "nixos";
-      address = "100.91.202.65";
-      localSystem = "aarch64-linux";
-      pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPA2Ulu6atWys1O5u8NQom7Uy63RicmGbbOoFm8490p1";
-    };
     derrida = {
       type = "home-manager";
       localSystem = "x86_64-linux";
@@ -53,12 +41,6 @@ let
       localSystem = "x86_64-linux";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHws1wwXYHDmU+Bjcbw8IZv2V+fbxaTDQc44XoUQ604t";
     };
-    kant = {
-      type = "nixos";
-      address = "100.124.6.88";
-      localSystem = "x86_64-linux";
-      pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHkZdagumIM9Wvl6qwTjhEYdm9nC1ai5PSMpYbBPgsPL";
-    };
     luther = {
       type = "home-manager";
       localSystem = "aarch64-linux";
@@ -73,11 +55,6 @@ let
     poincare = {
       type = "home-manager";
       localSystem = "aarch64-darwin";
-      homeDirectory = "/Users/bemeurer";
-    };
-    zermelo = {
-      type = "home-manager";
-      localSystem = "x86_64-darwin";
       homeDirectory = "/Users/bemeurer";
     };
   };
