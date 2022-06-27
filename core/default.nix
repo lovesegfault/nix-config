@@ -9,7 +9,6 @@ in
   imports = [
     ./aspell.nix
     ./nix.nix
-    ./openssh.nix
     ./resolved.nix
     ./tmux.nix
     ./xdg.nix
@@ -61,6 +60,7 @@ in
 
   programs = {
     fish.enable = true;
+    mosh.enable = true;
     zsh = {
       enable = true;
       enableGlobalCompInit = false;
@@ -72,8 +72,13 @@ in
     wheelNeedsPassword = false;
   };
 
-  services.tailscale.enable = true;
-  systemd.services.tailscaled.after = [ "network-online.target" "systemd-resolved.service" ];
+  services = {
+    openssh = {
+      enable = true;
+      permitRootLogin = lib.mkDefault "no";
+    };
+    tailscale.enable = true;
+  };
 
   system = {
     extraSystemBuilderCmds = ''
@@ -84,9 +89,11 @@ in
     stateVersion = "22.05";
   };
 
-  systemd.enableUnifiedCgroupHierarchy = true;
-
-  systemd.network.wait-online.anyInterface = true;
+  systemd = {
+    enableUnifiedCgroupHierarchy = true;
+    network.wait-online.anyInterface = true;
+    services.tailscaled.after = [ "network-online.target" "systemd-resolved.service" ];
+  };
 
   users.mutableUsers = false;
 }
