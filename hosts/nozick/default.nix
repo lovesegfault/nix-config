@@ -17,10 +17,6 @@
     acme.file = ./acme.age;
     agent.file = ./agent.age;
     ddns.file = ./ddns.age;
-    keycloak = {
-      file = ./keycloak.age;
-      owner = "keycloak";
-    };
     nextcloud = {
       file = ./nextcloud.age;
       owner = "nextcloud";
@@ -165,7 +161,6 @@
       certs = {
         "deluge.meurer.org" = { };
         "grafana.meurer.org" = { };
-        "keycloak.meurer.org" = { };
         "nextcloud.meurer.org" = { };
         "plex.meurer.org" = { };
         "stash.meurer.org" = { };
@@ -192,18 +187,6 @@
       enable = true;
       addr = "0.0.0.0";
       extraOptions.DASHBOARDS_MIN_REFRESH_INTERVAL = "1s";
-    };
-    keycloak = {
-      enable = true;
-      initialAdminPassword = "pistil-bought-lamina-edit-demur";
-      database.passwordFile = config.age.secrets.keycloak.path;
-      settings = rec {
-        hostname = "keycloak.meurer.org";
-        proxy = "edge";
-        http-host = "127.0.0.1";
-        http-port = 8080;
-        https-port = 8443;
-      };
     };
     nextcloud = {
       enable = true;
@@ -239,13 +222,6 @@
           forceSSL = true;
           kTLS = true;
           locations."/".proxyPass = "http://localhost:3000";
-        };
-        "keycloak.meurer.org" = {
-          useACMEHost = "keycloak.meurer.org";
-          forceSSL = true;
-          kTLS = true;
-          listenAddresses = [ "0.0.0.0" ];
-          locations."/".proxyPass = "http://localhost:8080";
         };
         "nextcloud.meurer.org" = {
           useACMEHost = "nextcloud.meurer.org";
