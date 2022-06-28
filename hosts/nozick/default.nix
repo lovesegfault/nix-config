@@ -228,6 +228,10 @@
           forceSSL = true;
           kTLS = true;
           listenAddresses = [ "0.0.0.0" ];
+          extraConfig = ''
+            ssl_client_certificate /etc/nginx/certs/origin-pull-ca.pem;
+            ssl_verify_client on;
+          '';
         };
         "plex.meurer.org" = {
           useACMEHost = "plex.meurer.org";
