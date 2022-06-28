@@ -1,6 +1,5 @@
 { lib, pkgs, ... }: {
   programs = {
-    direnv.enableZshIntegration = true;
     fish = {
       enable = true;
       interactiveShellInit = lib.mkMerge [
@@ -34,6 +33,5 @@
         }
       ];
     };
-    starship.enableZshIntegration = true;
   };
 }
