@@ -10,6 +10,7 @@
       "/var/lib/grafana"
       "/var/lib/nextcloud"
       "/var/lib/plex"
+      "/var/lib/postgresql"
       "/var/lib/private/ddclient"
       "/var/lib/prometheus2"
       "/var/lib/sshguard"

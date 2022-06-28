@@ -131,7 +131,7 @@
     hostName = "nozick";
     hostId = "d0d7d1dc";
     firewall = {
-      allowedTCPPorts = [ 32400 49330 ];
+      allowedTCPPorts = [ 443 32400 49330 ];
       allowedUDPPorts = [ 32400 49330 ];
       logRefusedConnections = false;
     };
@@ -195,7 +195,12 @@
       hostName = "nextcloud.meurer.org";
       https = true;
       package = pkgs.nextcloud24;
-      config.adminpassFile = config.age.secrets.nextcloud.path;
+      config = {
+        adminpassFile = config.age.secrets.nextcloud.path;
+        dbhost = "/run/postgresql";
+        dbtype = "pgsql";
+        defaultPhoneRegion = "US";
+      };
     };
     nginx = {
       enable = true;
@@ -242,6 +247,14 @@
       };
     };
     plex.enable = true;
+    postgresql = {
+      enable = true;
+      ensureDatabases = [ "nextcloud" ];
+      ensureUsers = [{
+        name = "nextcloud";
+        ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
+      }];
+    };
     prometheus = {
       enable = true;
       extraFlags = [ "--storage.tsdb.retention.time=90d" ];
