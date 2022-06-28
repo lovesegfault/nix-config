@@ -8,14 +8,12 @@
       '';
     };
     packages = with pkgs; [
-      commitizen
-      git-extras
       git-lfs
       nix-update
       nixpkgs-review
       tmate
       upterm
-    ];
+    ] ++ (lib.optional (!pkgs.stdenv.isDarwin) pkgs.commitizen);
     shellAliases.gco = lib.mkForce "git cz commit";
   };
 

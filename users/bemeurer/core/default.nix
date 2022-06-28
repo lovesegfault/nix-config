@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ./atuin.nix
     ./bash.nix
@@ -24,10 +24,9 @@
       fd
       kalker
       mosh
-      neofetch
       rclone
       ripgrep
-    ];
+    ] ++ (lib.optional (!pkgs.stdenv.isDarwin) pkgs.neofetch);
     shellAliases = {
       cat = "bat";
       ls = "exa --binary --header --long --classify";
