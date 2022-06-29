@@ -21,6 +21,7 @@
       file = ./nextcloud.age;
       owner = "nextcloud";
     };
+    vouch.file = ./vouch.age;
     rootPassword.file = ./password.age;
   };
 
@@ -164,6 +165,7 @@
         "nextcloud.meurer.org" = { };
         "plex.meurer.org" = { };
         "stash.meurer.org" = { };
+        "vouch.meurer.org" = { };
       };
     };
     pam.loginLimits = [
@@ -248,6 +250,19 @@
             proxyWebsockets = true;
           };
         };
+        "vouch.meurer.org" = {
+          useACMEHost = "vouch.meurer.org";
+          forceSSL = true;
+          kTLS = true;
+          listenAddresses = [ "0.0.0.0" ];
+          locations."/" = {
+            proxyPass = "http://localhost:30746";
+            extraConfig = ''
+              proxy_set_header Host $host;
+              add_header Access-Control-Allow-Origin https://vouch.meurer.org;
+            '';
+          };
+        };
       };
     };
     plex.enable = true;
@@ -309,18 +324,63 @@
     { device = "/dev/disk/by-uuid/3cbbd63d-33e7-4eea-85d8-07e665367530"; }
   ];
 
-  systemd.network.networks.eth = {
-    matchConfig.MACAddress = "90:1b:0e:db:06:2f";
-    DHCP = "yes";
+  systemd = {
+    services.vouch-proxy =
+      let
+        config = {
+          vouch = {
+            listen = "localhost";
+            port = 30746;
+            domains = [ "meurer.org" ];
+            whiteList = [
+              "bernardo@meurer.org"
+            ];
+          };
+          oauth = {
+            provider = "google";
+            callback_urls = [ "https://vouch.meurer.org" ];
+            preferredDomain = "meurer.org";
+          };
+        };
+        configFile = (pkgs.formats.yaml { }).generate "config.yml" config;
+      in
+      {
+        description = "Vouch Proxy";
+        after = [ "network.target" ];
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          ExecStart = "${pkgs.vouch-proxy}/bin/vouch-proxy -config ${configFile}";
+          EnvironmentFile = config.secrets.vouch.path;
+          Restart = "on-failure";
+          RestartSec = 5;
+          WorkingDirectory = "/var/lib/vouch-proxy";
+          StateDirectory = "vouch-proxy";
+          RuntimeDirectory = "vouch-proxy";
+          User = "vouch-proxy";
+          Group = "vouch-proxy";
+          StartLimitBurst = 3;
+        };
+      };
+    network.networks.eth = {
+      matchConfig.MACAddress = "90:1b:0e:db:06:2f";
+      DHCP = "yes";
+    };
   };
 
   time.timeZone = "Etc/UTC";
 
   users = {
-    users.root.passwordFile = config.age.secrets.rootPassword.path;
+    users = {
+      vouch-proxy = {
+        isSystemUser = true;
+        group = "vouch-proxy";
+      };
+      root.passwordFile = config.age.secrets.rootPassword.path;
+    };
     groups = {
       acme.members = [ "nginx" ];
       media.members = [ "bemeurer" "deluge" "plex" ];
+      vouch-proxy = { };
     };
   };
 

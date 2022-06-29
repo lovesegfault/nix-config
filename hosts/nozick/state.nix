@@ -16,6 +16,7 @@
       "/var/lib/sshguard"
       "/var/lib/tailscale"
       "/var/lib/unbound"
+      "/var/lib/vouch-proxy"
       "/var/log"
     ];
     files = [
