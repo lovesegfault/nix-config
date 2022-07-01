@@ -9,19 +9,18 @@
 
     ../../users/bemeurer
 
+    ./deluge.nix
+    ./grafana.nix
+    ./nextcloud.nix
     ./state.nix
     ./unbound.nix
+    ./vouch.nix
   ];
 
   age.secrets = {
     acme.file = ./acme.age;
     agent.file = ./agent.age;
     ddns.file = ./ddns.age;
-    nextcloud = {
-      file = ./nextcloud.age;
-      owner = "nextcloud";
-    };
-    vouch.file = ./vouch.age;
     rootPassword.file = ./password.age;
   };
 
@@ -74,9 +73,9 @@
         version = 2;
         mirroredBoots = [
           { devices = [ "/dev/disk/by-uuid/3C46-FB41" ]; path = "/boot"; }
-          { devices = [ "/dev/disk/by-uuid/3C1E-F6BC" ]; path = "/boot-1"; }
+          # { devices = [ "/dev/disk/by-uuid/3C1E-F6BC" ]; path = "/boot-1"; }
           { devices = [ "/dev/disk/by-uuid/3BF7-22B8" ]; path = "/boot-2"; }
-          { devices = [ "/dev/disk/by-uuid/3BCE-B683" ]; path = "/boot-3"; }
+          # { devices = [ "/dev/disk/by-uuid/3BCE-B683" ]; path = "/boot-3"; }
         ];
       };
     };
@@ -132,8 +131,8 @@
     hostName = "nozick";
     hostId = "d0d7d1dc";
     firewall = {
-      allowedTCPPorts = [ 443 32400 49330 ];
-      allowedUDPPorts = [ 32400 49330 ];
+      allowedTCPPorts = [ 443 32400 ];
+      allowedUDPPorts = [ 32400 ];
       logRefusedConnections = false;
     };
   };
@@ -160,12 +159,7 @@
         dnsProvider = "cloudflare";
       };
       certs = {
-        "deluge.meurer.org" = { };
-        "grafana.meurer.org" = { };
-        "nextcloud.meurer.org" = { };
-        "plex.meurer.org" = { };
         "stash.meurer.org" = { };
-        "vouch.meurer.org" = { };
       };
     };
     pam.loginLimits = [
@@ -180,30 +174,6 @@
       enable = true;
       servers = [ "time.nist.gov" "time.cloudflare.com" "time.google.com" "tick.usnogps.navy.mil" ];
     };
-    deluge = {
-      enable = true;
-      openFilesLimit = "1048576";
-      web.enable = true;
-    };
-    grafana = {
-      enable = true;
-      addr = "0.0.0.0";
-      extraOptions.DASHBOARDS_MIN_REFRESH_INTERVAL = "1s";
-    };
-    nextcloud = {
-      enable = true;
-      appstoreEnable = true;
-      autoUpdateApps.enable = true;
-      hostName = "nextcloud.meurer.org";
-      https = true;
-      package = pkgs.nextcloud24;
-      config = {
-        adminpassFile = config.age.secrets.nextcloud.path;
-        dbhost = "/run/postgresql";
-        dbtype = "pgsql";
-        defaultPhoneRegion = "US";
-      };
-    };
     nginx = {
       enable = true;
       recommendedOptimisation = true;
@@ -215,55 +185,6 @@
       resolver.addresses = [ "127.0.0.1:53" ];
       resolver.ipv6 = false;
       virtualHosts = {
-        "deluge.meurer.org" = {
-          useACMEHost = "deluge.meurer.org";
-          forceSSL = true;
-          kTLS = true;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:8112";
-            extraConfig = ''
-              auth_request /validate;
-              proxy_set_header X-Vouch-User $auth_resp_x_vouch_user;
-              error_page 401 = @error401;
-            '';
-          };
-          locations."@error401".extraConfig = ''
-            return 302 https://vouch.meurer.org/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err;
-          '';
-          locations."/validate" = {
-            proxyPass = "http://127.0.0.1:30746/validate";
-            extraConfig = ''
-              internal;
-              proxy_pass_request_body off;
-              proxy_set_header Content-Length "";
-              auth_request_set $auth_resp_x_vouch_user $upstream_http_x_vouch_user;
-              auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
-              auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
-              auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
-            '';
-          };
-        };
-        "grafana.meurer.org" = {
-          useACMEHost = "grafana.meurer.org";
-          forceSSL = true;
-          kTLS = true;
-          locations."/".proxyPass = "http://127.0.0.1:3000";
-        };
-        "nextcloud.meurer.org" = {
-          useACMEHost = "nextcloud.meurer.org";
-          forceSSL = true;
-          kTLS = true;
-          extraConfig = ''
-            ssl_client_certificate /etc/nginx/certs/origin-pull-ca.pem;
-            ssl_verify_client on;
-          '';
-        };
-        "plex.meurer.org" = {
-          useACMEHost = "plex.meurer.org";
-          forceSSL = true;
-          kTLS = true;
-          locations."/".proxyPass = "http://127.0.0.1:32400";
-        };
         "stash.meurer.org" = {
           useACMEHost = "stash.meurer.org";
           forceSSL = true;
@@ -273,60 +194,9 @@
             proxyWebsockets = true;
           };
         };
-        "vouch.meurer.org" = {
-          useACMEHost = "vouch.meurer.org";
-          forceSSL = true;
-          kTLS = true;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:30746";
-            extraConfig = ''
-              add_header Access-Control-Allow-Origin https://vouch.meurer.org;
-            '';
-          };
-        };
       };
     };
     plex.enable = true;
-    postgresql = {
-      enable = true;
-      ensureDatabases = [ "nextcloud" ];
-      ensureUsers = [{
-        name = "nextcloud";
-        ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
-      }];
-    };
-    prometheus = {
-      enable = true;
-      extraFlags = [ "--storage.tsdb.retention.time=90d" ];
-      scrapeConfigs = [
-        {
-          job_name = "node";
-          scrape_interval = "10s";
-          static_configs = [{ targets = [ "127.0.0.1:9100" ]; }];
-        }
-        {
-          job_name = "unbound";
-          scrape_interval = "30s";
-          static_configs = [{ targets = [ "127.0.0.1:9167" ]; }];
-        }
-        {
-          job_name = "prometheus";
-          scrape_interval = "30s";
-          static_configs = [{ targets = [ "127.0.0.1:9090" ]; }];
-        }
-      ];
-      exporters = {
-        node = {
-          enable = true;
-          enabledCollectors = [ "systemd" "pressure" ];
-        };
-        unbound = {
-          enable = true;
-          controlInterface = "/run/unbound/unbound.ctl";
-          user = "unbound";
-        };
-      };
-    };
     smartd.enable = true;
     sshguard.enable = true;
     zfs = {
@@ -345,64 +215,18 @@
     { device = "/dev/disk/by-uuid/3cbbd63d-33e7-4eea-85d8-07e665367530"; }
   ];
 
-  systemd = {
-    services.vouch-proxy =
-      let
-        cfg = {
-          vouch = {
-            listen = "127.0.0.1";
-            port = 30746;
-            domains = [ "meurer.org" ];
-            whiteList = [
-              "bernardo@meurer.org"
-            ];
-          };
-          oauth = {
-            provider = "google";
-            callback_urls = [
-              "https://vouch.meurer.org/auth"
-            ];
-          };
-        };
-        cfgFile = (pkgs.formats.yaml { }).generate "config.yml" cfg;
-      in
-      {
-        description = "Vouch Proxy";
-        after = [ "network.target" ];
-        wantedBy = [ "multi-user.target" ];
-        serviceConfig = {
-          ExecStart = "${pkgs.vouch-proxy}/bin/vouch-proxy -config ${cfgFile}";
-          EnvironmentFile = config.age.secrets.vouch.path;
-          Restart = "on-failure";
-          RestartSec = 5;
-          WorkingDirectory = "/var/lib/vouch-proxy";
-          StateDirectory = "vouch-proxy";
-          RuntimeDirectory = "vouch-proxy";
-          User = "vouch-proxy";
-          Group = "vouch-proxy";
-          StartLimitBurst = 3;
-        };
-      };
-    network.networks.eth = {
-      matchConfig.MACAddress = "90:1b:0e:db:06:2f";
-      DHCP = "yes";
-    };
+  systemd.network.networks.eth = {
+    matchConfig.MACAddress = "90:1b:0e:db:06:2f";
+    DHCP = "yes";
   };
 
   time.timeZone = "Etc/UTC";
 
   users = {
-    users = {
-      vouch-proxy = {
-        isSystemUser = true;
-        group = "vouch-proxy";
-      };
-      root.passwordFile = config.age.secrets.rootPassword.path;
-    };
+    users.root.passwordFile = config.age.secrets.rootPassword.path;
     groups = {
       acme.members = [ "nginx" ];
-      media.members = [ "bemeurer" "deluge" "plex" ];
-      vouch-proxy = { };
+      media.members = [ "bemeurer" "plex" ];
     };
   };
 

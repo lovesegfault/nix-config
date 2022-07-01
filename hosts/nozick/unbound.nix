@@ -1,4 +1,6 @@
 { lib, ... }: {
+  environment.persistence."/nix/state".directories = [ "/var/lib/unbound" ];
+
   services = {
     resolved.enable = lib.mkForce false;
     unbound = {
