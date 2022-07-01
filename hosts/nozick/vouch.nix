@@ -53,6 +53,8 @@
           whiteList = [
             "bernardo@meurer.org"
           ];
+          testing = true;
+          logLevel = "debug";
         };
         oauth = {
           provider = "google";
