@@ -32,4 +32,8 @@ in
     "/bin/ssh-agent"
     "/bin/swaylock"
   ];
+
+  gixy = final.writeShellScriptBin "gixy" ''
+    echo "Ignoring gixy"
+  '';
 }

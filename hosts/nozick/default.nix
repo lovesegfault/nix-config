@@ -210,26 +210,49 @@
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
       recommendedGzipSettings = true;
-      statusPage = true;
       package = pkgs.nginxMainline;
+      proxyResolveWhileRunning = true;
+      resolver.addresses = [ "127.0.0.1:53" ];
+      resolver.ipv6 = false;
       virtualHosts = {
         "deluge.meurer.org" = {
           useACMEHost = "deluge.meurer.org";
           forceSSL = true;
           kTLS = true;
-          locations."/".proxyPass = "http://localhost:8112";
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:8112";
+            extraConfig = ''
+              auth_request /validate;
+              proxy_set_header X-Vouch-User $auth_resp_x_vouch_user;
+              error_page 401 = @error401;
+            '';
+          };
+          locations."@error401".extraConfig = ''
+            return 302 https://vouch.meurer.org/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err;
+          '';
+          locations."/validate" = {
+            proxyPass = "http://127.0.0.1:30746/validate";
+            extraConfig = ''
+              internal;
+              proxy_pass_request_body off;
+              proxy_set_header Content-Length "";
+              auth_request_set $auth_resp_x_vouch_user $upstream_http_x_vouch_user;
+              auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
+              auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
+              auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
+            '';
+          };
         };
         "grafana.meurer.org" = {
           useACMEHost = "grafana.meurer.org";
           forceSSL = true;
           kTLS = true;
-          locations."/".proxyPass = "http://localhost:3000";
+          locations."/".proxyPass = "http://127.0.0.1:3000";
         };
         "nextcloud.meurer.org" = {
           useACMEHost = "nextcloud.meurer.org";
           forceSSL = true;
           kTLS = true;
-          listenAddresses = [ "0.0.0.0" ];
           extraConfig = ''
             ssl_client_certificate /etc/nginx/certs/origin-pull-ca.pem;
             ssl_verify_client on;
@@ -239,14 +262,14 @@
           useACMEHost = "plex.meurer.org";
           forceSSL = true;
           kTLS = true;
-          locations."/".proxyPass = "http://localhost:32400";
+          locations."/".proxyPass = "http://127.0.0.1:32400";
         };
         "stash.meurer.org" = {
           useACMEHost = "stash.meurer.org";
           forceSSL = true;
           kTLS = true;
           locations."/" = {
-            proxyPass = "http://localhost:9999";
+            proxyPass = "http://127.0.0.1:9999";
             proxyWebsockets = true;
           };
         };
@@ -254,11 +277,9 @@
           useACMEHost = "vouch.meurer.org";
           forceSSL = true;
           kTLS = true;
-          listenAddresses = [ "0.0.0.0" ];
           locations."/" = {
-            proxyPass = "http://localhost:30746";
+            proxyPass = "http://127.0.0.1:30746";
             extraConfig = ''
-              proxy_set_header Host $host;
               add_header Access-Control-Allow-Origin https://vouch.meurer.org;
             '';
           };
@@ -327,9 +348,9 @@
   systemd = {
     services.vouch-proxy =
       let
-        config = {
+        cfg = {
           vouch = {
-            listen = "localhost";
+            listen = "127.0.0.1";
             port = 30746;
             domains = [ "meurer.org" ];
             whiteList = [
@@ -338,19 +359,20 @@
           };
           oauth = {
             provider = "google";
-            callback_urls = [ "https://vouch.meurer.org" ];
-            preferredDomain = "meurer.org";
+            callback_urls = [
+              "https://vouch.meurer.org/auth"
+            ];
           };
         };
-        configFile = (pkgs.formats.yaml { }).generate "config.yml" config;
+        cfgFile = (pkgs.formats.yaml { }).generate "config.yml" cfg;
       in
       {
         description = "Vouch Proxy";
         after = [ "network.target" ];
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {
-          ExecStart = "${pkgs.vouch-proxy}/bin/vouch-proxy -config ${configFile}";
-          EnvironmentFile = config.secrets.vouch.path;
+          ExecStart = "${pkgs.vouch-proxy}/bin/vouch-proxy -config ${cfgFile}";
+          EnvironmentFile = config.age.secrets.vouch.path;
           Restart = "on-failure";
           RestartSec = 5;
           WorkingDirectory = "/var/lib/vouch-proxy";
