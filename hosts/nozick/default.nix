@@ -181,7 +181,6 @@
       recommendedTlsSettings = true;
       recommendedGzipSettings = true;
       package = pkgs.nginxMainline;
-      proxyResolveWhileRunning = true;
       resolver.addresses = [ "127.0.0.1:53" ];
       resolver.ipv6 = false;
       virtualHosts = {

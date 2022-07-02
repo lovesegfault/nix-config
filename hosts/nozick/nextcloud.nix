@@ -30,7 +30,7 @@
     forceSSL = true;
     kTLS = true;
     extraConfig = ''
-      ssl_client_certificate /etc/nginx/certs/origin-pull-ca.pem;
+      ssl_client_certificate /etc/ssl/certs/origin-pull-ca.pem;
       ssl_verify_client on;
     '';
   };
