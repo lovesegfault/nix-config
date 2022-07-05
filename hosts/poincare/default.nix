@@ -14,7 +14,6 @@
     packages = with pkgs; [
       (nerdfonts.override { fonts = [ "Hack" ]; })
       btop
-      nix
       openssh
     ];
     shellAliases = {
