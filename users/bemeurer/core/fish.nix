@@ -17,18 +17,25 @@
           bind -M insert \cr _atuin_search
           # quickly open text file
           bind -M insert \co 'fzf | xargs -r $VISUAL'
-
-          starship init fish | source
         '')
       ];
       plugins = [
         {
-          name = "ayu-theme";
+          name = "ayu-theme.fish";
           src = pkgs.fetchFromGitHub {
             owner = "edouard-lopez";
             repo = "ayu-theme.fish";
             rev = "d351d24263d87bef3a90424e0e9c74746673e383";
             hash = "sha256-rx9izD2pc3hLObOehuiMwFB4Ta5G1lWVv9Jdb+JHIz0=";
+          };
+        }
+        {
+          name = "autopair.fish";
+          src = pkgs.fetchFromGitHub {
+            owner = "jorgebucaran";
+            repo = "autopair.fish";
+            rev = "1.0.4";
+            hash = "sha256-s1o188TlwpUQEN3X5MxUlD/2CFCpEkWu83U9O+wg3VU=";
           };
         }
       ];
