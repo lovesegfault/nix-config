@@ -117,9 +117,6 @@ jobs:
           )
           echo "${builder_cfg[*]}" | sudo tee /etc/nix/machines > /dev/null
           echo "${nix_cfg[*]}" | sudo tee -a /etc/nix/nix.conf > /dev/null
-      - uses: nixbuild/nixbuild-action@v12
-        with:
-          nixbuild_ssh_key: ${{ secrets.NIXBUILD_SSH_KEY }}
       - uses: cachix/cachix-action@v10
         with:
           name: nix-config
