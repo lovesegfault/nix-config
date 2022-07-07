@@ -25,6 +25,7 @@
       kalker
       mosh
       rclone
+      rsync
       ripgrep
     ] ++ (lib.optional (!pkgs.stdenv.isDarwin) pkgs.neofetch);
     shellAliases = {
