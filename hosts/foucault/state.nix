@@ -4,12 +4,15 @@
   environment.persistence."/nix/state" = {
     hideMounts = true;
     directories = [
+      "/etc/hqplayer"
       "/var/lib/bluetooth"
       "/var/lib/boltd"
       "/var/lib/docker"
       "/var/lib/fwupd"
+      "/var/lib/hqplayer"
       "/var/lib/iwd"
       "/var/lib/libvirt"
+      "/var/lib/roon-server"
       "/var/lib/tailscale"
       "/var/log"
     ];
