@@ -60,10 +60,7 @@
     {
       deploy = import ./nix/deploy.nix inputs;
 
-      overlays = {
-        default = import ./nix/overlay.nix inputs;
-        lite = import ./nix/mask-large-drvs.nix;
-      };
+      overlays.default = import ./nix/overlay.nix inputs;
 
       darwinConfigurations = import ./nix/darwin.nix inputs;
 
@@ -84,7 +81,6 @@
         inherit system;
         overlays = [
           self.overlays.default
-          # self.overlays.lite
         ];
         config.allowUnfree = true;
         config.allowAliases = true;

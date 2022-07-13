@@ -121,8 +121,6 @@ jobs:
         with:
           name: nix-config
           signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
-      - name: add-lite-overlay
-        run: nix run nixpkgs\#gnused -- -i '/.*overlays\.lite/s/#\s*//g' flake.nix
       - name: build-host
         uses: nick-invision/retry@v2
         with:
