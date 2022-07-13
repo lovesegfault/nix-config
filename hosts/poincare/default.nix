@@ -89,7 +89,12 @@ in
     };
   };
 
-  home-manager.useGlobalPkgs = true;
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    verbose = true;
+  };
+
   home-manager.users.bemeurer = { config, pkgs, ... }: {
     imports = [
       ../../users/bemeurer/core
@@ -162,11 +167,9 @@ in
 
     nix-daemon = {
       enable = true;
-      enableSocketListener = true;
       logFile = "/var/log/nix-daemon.log";
     };
   };
-
 
   system = {
     defaults = {
