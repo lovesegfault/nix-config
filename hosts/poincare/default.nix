@@ -16,7 +16,6 @@ in
       ln -sv ${../../nix/overlays} $out/overlays
     '';
     systemPackages = with pkgs; [ git openssh ];
-    variables.TERMINFO_DIRS = "${pkgs.kitty.terminfo.outPath}/share/terminfo";
   };
 
   fonts = {
@@ -161,7 +160,7 @@ in
     skhd = {
       enable = true;
       skhdConfig = ''
-        cmd - return : kitty -1 -d=~
+        cmd - return : kitty -1 -d ~
       '';
     };
 
