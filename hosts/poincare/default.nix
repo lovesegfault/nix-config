@@ -25,6 +25,7 @@ in
 
   homebrew = {
     enable = true;
+    autoUpdate = true;
     brews = [ "git" ];
     taps = [
       "1password/tap"
