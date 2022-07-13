@@ -47,6 +47,7 @@ in
       "kitty"
       "knockknock"
       "ksdiff"
+      "little-snitch"
       "lunar"
       "macupdater"
       "mullvadvpn"
