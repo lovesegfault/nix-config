@@ -42,7 +42,7 @@ let
 
   genConfiguration = hostName: { localSystem, ... }@attrs:
     home-manager.lib.homeManagerConfiguration {
-      pkgs = self.nixpkgs.${localSystem};
+      pkgs = self.pkgs.${localSystem};
       modules = [ (genModules hostName attrs) ];
     };
 in

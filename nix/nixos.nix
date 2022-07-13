@@ -22,19 +22,12 @@ let
     };
   };
 
-  hostPkgs = localSystem: {
-    nixpkgs = {
-      localSystem.system = localSystem;
-      pkgs = self.nixpkgs.${localSystem};
-    };
-  };
-
   genConfiguration = hostname: { localSystem, ... }:
     lib.nixosSystem {
       system = localSystem;
+      pkgs = self.pkgs.${localSystem};
       modules = [
         (../hosts + "/${hostname}")
-        (hostPkgs localSystem)
         nixRegistry
         netHostMap
         home-manager.nixosModules.home-manager

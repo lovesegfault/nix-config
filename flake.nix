@@ -2,6 +2,11 @@
   description = "lovesegfault's NixOS config";
 
   inputs = {
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs = {
@@ -60,6 +65,8 @@
         lite = import ./nix/mask-large-drvs.nix;
       };
 
+      darwinConfigurations = import ./nix/darwin.nix inputs;
+
       homeConfigurations = import ./nix/home-manager.nix inputs;
 
       nixosConfigurations = import ./nix/nixos.nix inputs;
@@ -73,7 +80,7 @@
         default = self.packages.${system}.all;
       } // (import ./nix/host-drvs.nix inputs system);
 
-      nixpkgs = import nixpkgs {
+      pkgs = import nixpkgs {
         inherit system;
         overlays = [
           self.overlays.default

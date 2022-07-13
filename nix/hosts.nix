@@ -53,9 +53,9 @@ let
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBEzb5JCgcXJZHDkY09vBAvIF34JabI+ZBpGqJDy6KbI";
     };
     poincare = {
-      type = "home-manager";
+      type = "darwin";
       localSystem = "aarch64-darwin";
-      homeDirectory = "/Users/bemeurer";
+      pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMYvFEyV+nebaTfrwAULWDmCk0L6O+1OyZc43JnizcIB";
     };
   };
 
@@ -70,6 +70,7 @@ let
     all = filterAttrs filter hosts;
 
     nixos = genFamily (_: v: v.type == "nixos") all;
+    nix-darwin = genFamily (_: v: v.type == "darwin") all;
     homeManager = genFamily (_: v: v.type == "home-manager") all;
 
     darwin = genFamily (systemPred "-darwin") all;
