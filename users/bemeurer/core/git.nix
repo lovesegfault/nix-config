@@ -20,7 +20,7 @@
       difftool.prompt = true;
       github.user = "lovesegfault";
       init.defaultBranch = "main";
-      merge.conflictstyle = "zdiff3";
+      merge.conflictstyle = "diff3";
       mergetool.prompt = true;
     };
   };
