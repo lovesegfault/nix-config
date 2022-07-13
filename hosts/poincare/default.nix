@@ -73,9 +73,7 @@ in
       "Amphetamine" = 937984704;
       "DaisyDisk" = 411643860;
       "Deliveries" = 290986013;
-      "GarageBand" = 682658836;
       "Geekbench 5" = 1478447657;
-      "iMovie" = 408981434;
       "Kaleidoscope" = 1575557335;
       "Keynote" = 409183694;
       "LanguageTool" = 1534275760;
@@ -158,7 +156,7 @@ in
     skhd = {
       enable = true;
       skhdConfig = ''
-        cmd - return : kitty -d=~
+        cmd - return : kitty -1 -d=~
       '';
     };
 
