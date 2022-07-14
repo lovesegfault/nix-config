@@ -15,7 +15,17 @@ in
       ln -sv ${pkgs.path} $out/nixpkgs
       ln -sv ${../../nix/overlays} $out/overlays
     '';
-    systemPackages = with pkgs; [ git openssh ];
+    systemPackages = with pkgs; [
+      coreutils
+      findutils
+      gawk
+      git
+      gnugrep
+      gnused
+      gnutar
+      gnutls
+      openssh
+    ];
   };
 
   fonts = {
