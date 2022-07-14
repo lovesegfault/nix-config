@@ -24,7 +24,7 @@ in
       gnused
       gnutar
       gnutls
-      openssh
+      (openssh_gssapi.override { withKerberos = true; })
     ];
   };
 
@@ -105,7 +105,7 @@ in
     verbose = true;
   };
 
-  home-manager.users.bemeurer = { config, pkgs, ... }: {
+  home-manager.users.bemeurer = { config, ... }: {
     imports = [
       ../../users/bemeurer/core
       ../../users/bemeurer/dev
@@ -113,11 +113,6 @@ in
     ];
     home = {
       file.".nixpkgs/darwin-configuration.nix".source = dummyConfig;
-
-      packages = with pkgs; [
-        btop
-        openssh
-      ];
 
       sessionPath = [
         "${config.home.homeDirectory}/.toolbox/bin"
