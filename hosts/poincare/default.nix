@@ -116,6 +116,7 @@ in
 
       sessionPath = [
         "${config.home.homeDirectory}/.toolbox/bin"
+        "${config.home.homeDirectory}/.local/bin"
         "/opt/homebrew/bin"
       ];
 
