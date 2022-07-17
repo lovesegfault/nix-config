@@ -1,14 +1,8 @@
 { pkgs, ... }: {
   programs = {
     seahorse.enable = true;
-    _1password = {
-      enable = true;
-      gid = 5001;
-    };
-    _1password-gui = {
-      enable = true;
-      gid = 5000;
-    };
+    _1password.enable = true;
+    _1password-gui.enable = true;
   };
 
   security.pam.services.login.enableGnomeKeyring = true;
