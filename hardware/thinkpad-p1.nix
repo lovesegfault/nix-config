@@ -1,4 +1,4 @@
-{ config, lib, nixos-hardware, pkgs, ... }: {
+{ config, nixos-hardware, pkgs, ... }: {
   imports = [
     nixos-hardware.lenovo-thinkpad-p1
     ./bluetooth.nix
