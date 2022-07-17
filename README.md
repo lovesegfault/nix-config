@@ -7,11 +7,11 @@ based, and position-independent, meaning there is no moving around of
 Deployment is done using [deploy-rs], see [usage](#usage).
 
 For the configurations' entry points see the individual [hosts], as well as
-[flake.nix]. For adding overlays see [overlays](#overlays).
+[flake.nix]. For adding overlays see [overlays](#Adding-overlays).
 
 Hostnames are picked from my [hostname list][hostnames]
 
-## structure
+## Structure
 
 ```
 .
@@ -20,13 +20,15 @@ Hostnames are picked from my [hostname list][hostnames]
 ├── graphical    # Sway/i3 configuration for the desktop
 ├── hardware     # Hardware-specific configuration
 ├── hosts        # Machine definitions
-├── nix          # Nix build support files (overlays, deployment code, ci generators)
+├── nix          # Nix build support files (overlays, deployment code)
 └── users        # Per-user configurations
 ```
 
-## usage
+## Usage
 
-### deploying
+### Deploying
+
+#### NixOS
 
 To deploy all hosts:
 
@@ -40,15 +42,23 @@ To deploy a specific host:
 $ deploy .#myHost
 ```
 
-### non-nixOS hosts
+#### Darwin
+
+For macOS hosts using `nix-darwin`:
+
+```console 
+$ darwin-rebuild --impure --flake ~/src/nix-config#poincare switch
+```
+
+#### Home Manager
 
 For non-NixOS hosts (i.e. home-manager-only systems such as `beme-glaptop`):
 
 ```console
-$ home-manager --flake ~/src/nix-config switch
+$ home-manager --flake ~/src/nix-config#myHost switch
 ```
 
-### adding overlays
+### Adding overlays
 
 Overlays should be added as individual nix files to ./nix/overlays with format
 
@@ -59,11 +69,6 @@ final: prev: {
 ```
 
 For more examples see [./nix/overlays][overlays].
-
-## issues
-
-* my wallpapers are maintained ad-hoc
-* zsh plugins must be manually updated
 
 [deploy-rs]: https://github.com/serokell/deploy-rs
 [hosts]: https://github.com/lovesegfault/nix-config/blob/master/hosts
