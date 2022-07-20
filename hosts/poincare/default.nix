@@ -69,6 +69,7 @@ in
       "raycast"
       "roon"
       "shottr"
+      "stats"
       "tailscale"
       "thunderbird"
       "topnotch"
