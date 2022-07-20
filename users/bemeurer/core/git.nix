@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   programs.git = {
     enable = true;
     delta = {
@@ -9,7 +9,7 @@
       };
     };
     package = pkgs.gitFull;
-    lfs.enable = false;
+    lfs.enable = lib.mkDefault false;
     userEmail = "bernardo@meurer.org";
     userName = "Bernardo Meurer";
     extraConfig = {

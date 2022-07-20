@@ -28,6 +28,7 @@
         export PATH="$PATH:$HOME/.toolbox/bin"
       '';
     };
+    git.lfs.enable = true;
     zsh.initExtra = ''
       export PATH="$PATH:$HOME/.toolbox/bin"
     '';
