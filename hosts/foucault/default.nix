@@ -16,7 +16,6 @@
 
     ./state.nix
     ./sway.nix
-    ./roon.nix
   ];
 
   boot.initrd = {
