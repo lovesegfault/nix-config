@@ -29,6 +29,11 @@ let
       localSystem = "x86_64-linux";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJEc036Z0umFUeSgksRgBWhcEeqiVhuXNQZTipZVRMn";
     };
+    goethe = {
+      type = "home-manager";
+      localSystem = "x86_64-linux";
+      homeDirectory = "/home/bemeurer";
+    };
     hegel = {
       type = "nixos";
       address = "100.102.43.14";
