@@ -2,12 +2,11 @@ final: _: {
   fixart = final.callPackage
     (
       { writeShellApplication
-      , beets
       , coreutils
       , findutils
       }: writeShellApplication {
         name = "fixart";
-        runtimeInputs = [ beets coreutils findutils ];
+        runtimeInputs = [ coreutils findutils ];
         text = ''
           function ctrl_c() {
               exit 1;
