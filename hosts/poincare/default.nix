@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   dummyConfig = pkgs.writeText "darwin-configuration.nix" ''
     assert builtins.trace "This is a dummy config, use the nix-config flake!" false;
@@ -15,6 +15,7 @@ in
       ln -sv ${pkgs.path} $out/nixpkgs
       ln -sv ${../../nix/overlays} $out/overlays
     '';
+    shells = with pkgs; [ fish ];
     systemPackages = with pkgs; [
       coreutils
       findutils
@@ -26,6 +27,7 @@ in
       gnutls
       (openssh_gssapi.override { withKerberos = true; })
     ];
+    variables.SHELL = lib.getExe pkgs.fish;
   };
 
   fonts = {
@@ -204,6 +206,6 @@ in
     description = "Bernardo Meurer";
     home = "/Users/bemeurer";
     isHidden = false;
-    shell = "/bin/zsh";
+    shell = pkgs.fish;
   };
 }
