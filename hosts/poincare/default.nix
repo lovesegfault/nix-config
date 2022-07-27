@@ -131,6 +131,7 @@ in
 
       uid = 504;
     };
+    programs.git.lfs.enable = true;
   };
 
   nix = {
