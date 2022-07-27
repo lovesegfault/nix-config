@@ -27,7 +27,10 @@ in
       gnutls
       (openssh_gssapi.override { withKerberos = true; })
     ];
-    variables.SHELL = lib.getExe pkgs.fish;
+    variables = {
+      JAVA_HOME = "$(/usr/libexec/java_home)";
+      SHELL = lib.getExe pkgs.fish;
+    };
   };
 
   fonts = {
