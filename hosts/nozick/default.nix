@@ -195,6 +195,9 @@
         };
       };
     };
+    openssh.extraConfig = ''
+      MaxStartups 40:30:120
+    '';
     plex.enable = true;
     smartd.enable = true;
     sshguard.enable = true;
