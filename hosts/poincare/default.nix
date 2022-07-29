@@ -88,7 +88,6 @@ in
     masApps = {
       "1Password for Safari" = 1569813296;
       "Amphetamine" = 937984704;
-      "DaisyDisk" = 411643860;
       "Deliveries" = 290986013;
       "Geekbench 5" = 1478447657;
       "Kaleidoscope" = 1575557335;
