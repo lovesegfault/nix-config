@@ -55,7 +55,6 @@ in
       "dash"
       "detexify"
       "discord"
-      "docker"
       "element"
       "firefox"
       "google-chrome"
