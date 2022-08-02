@@ -62,6 +62,12 @@ let
       localSystem = "aarch64-darwin";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMYvFEyV+nebaTfrwAULWDmCk0L6O+1OyZc43JnizcIB";
     };
+    spinoza = {
+      type = "nixos";
+      address = "0.0.0.0";
+      localSystem = "x86_64-linux";
+      pubkey = "FIXME";
+    };
   };
 
   inherit (builtins) attrNames concatMap listToAttrs;
