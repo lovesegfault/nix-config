@@ -37,7 +37,7 @@
     };
     "/nix" = {
       device = "/dev/disk/by-uuid/9ea17c8d-62c0-44d8-952f-9438a3a46bf2";
-      fsType = "xfs";
+      fsType = "ext4";
       neededForBoot = true;
     };
   };
