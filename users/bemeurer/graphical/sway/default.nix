@@ -21,7 +21,6 @@
   };
 
   programs.swaylock.settings = {
-    ignore-empty-password = true;
     image = "${config.xdg.dataHome}/wall.png";
     indicator-caps-lock = true;
     scaling = "fill";
