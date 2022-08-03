@@ -32,7 +32,7 @@ let
         };
       };
 
-    defaultWorkspace = "workspace number 1";
+    defaultWorkspace = "workspace 1";
 
     floating = {
       inherit modifier;
