@@ -186,6 +186,7 @@ local comps = {
     provider = function()
       return require("nvim-gps").get_location()
     end,
+    left_sep = " ",
     enabled = function()
       return require("nvim-gps").is_available()
     end,
