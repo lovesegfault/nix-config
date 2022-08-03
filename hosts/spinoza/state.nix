@@ -7,6 +7,7 @@
       "/var/lib/bluetooth"
       "/var/lib/docker"
       "/var/lib/fwupd"
+      "/var/lib/fprint"
       "/var/lib/iwd"
       "/var/lib/libvirt"
       "/var/lib/tailscale"
