@@ -17,8 +17,10 @@ let
 
   nixRegistry = {
     nix.registry = {
-      templates.flake = templates;
       nixpkgs.flake = nixpkgs;
+      p.flake = nixpkgs;
+      pkgs.flake = nixpkgs;
+      templates.flake = templates;
     };
   };
 
