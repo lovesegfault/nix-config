@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   programs.waybar = {
     enable = true;
     package = pkgs.waybar.override { pulseSupport = true; };
@@ -91,7 +91,7 @@
         spacing = 5;
       };
     }];
-    style = ''
+    style = lib.mkDefault ''
       * {
         border: none;
         border-radius: 0;
