@@ -108,6 +108,10 @@ let
           command = "floating enable, sticky enable";
           criteria.title = ".*Sharing Indicator.*";
         }
+        {
+          command = "floating enable";
+          criteria.title = "Plexamp";
+        }
       ];
     };
   };
