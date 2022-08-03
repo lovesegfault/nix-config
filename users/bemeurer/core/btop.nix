@@ -71,7 +71,7 @@ in
     shown_boxes = "cpu mem net proc";
 
     # Update time in milliseconds, recommended 2000 ms or above for better sample times for graphs.
-    update_ms = 500;
+    update_ms = 1000;
 
     # Processes sorting, "pid" "program" "arguments" "threads" "user" "memory" "cpu lazy" "cpu responsive",
     # "cpu lazy" sorts top process over time (easier to follow), "cpu responsive" updates top process directly.
