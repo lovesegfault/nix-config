@@ -157,6 +157,10 @@
         background-color: #273747;
       }
     '';
-    systemd.enable = false;
+
+    systemd = {
+      enable = true;
+      target = "sway-session.target";
+    };
   };
 }
