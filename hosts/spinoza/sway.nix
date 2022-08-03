@@ -2,19 +2,7 @@
   home-manager.users.bemeurer.wayland.windowManager.sway = {
     config = {
       input = {
-        "10730:258:Kinesis_Advantage2_Keyboard" = {
-          xkb_layout = "us";
-        };
-        "2:7:SynPS/2_Synaptics_TouchPad" = {
-          accel_profile = "adaptive";
-          click_method = "button_areas";
-          dwt = "disabled";
-          natural_scroll = "enabled";
-          scroll_method = "two_finger";
-          tap = "enabled";
-        };
-
-        "1739:0:Synaptics_TM3418-002" = {
+        "1267:12849:ELAN06A0:00_04F3:3231_Touchpad" = {
           accel_profile = "adaptive";
           click_method = "button_areas";
           dwt = "disabled";
@@ -27,24 +15,12 @@
           accel_profile = "adaptive";
           dwt = "enabled";
         };
-
-        "1133:16495:Logitech_MX_Ergo" = {
-          accel_profile = "adaptive";
-          click_method = "button_areas";
-          natural_scroll = "enabled";
-        };
-
-        "1133:45085:Logitech_MX_Ergo_Multi-Device_Trackball" = {
-          accel_profile = "adaptive";
-          click_method = "button_areas";
-          natural_scroll = "enabled";
-        };
       };
       output = {
-        "Unknown 0x32EB 0x00000000" = {
-          mode = "3840x2160@60Hz";
+        "Unknown 0x4167 0x00000000" = {
+          mode = "2880x1800@60Hz";
           position = "0,0";
-          scale = "2";
+          scale = "1";
           subpixel = "rgb";
         };
       };
