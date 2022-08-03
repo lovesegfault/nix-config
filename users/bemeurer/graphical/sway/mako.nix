@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   programs.mako =
     let
       homeIcons = "${config.home.homeDirectory}/.nix-profile/share/icons/hicolor";
@@ -11,7 +11,7 @@
       backgroundColor = "#0A0E14";
       borderColor = "#53BDFA";
       defaultTimeout = 30 * 1000; # millis
-      font = "monospace 10";
+      font = lib.mkDefault "monospace 10";
       iconPath = "${homeIcons}:${systemIcons}:${homePixmaps}:${systemPixmaps}";
       icons = true;
       maxIconSize = 96;

@@ -33,6 +33,8 @@
     '';
   };
 
+  home-manager.users.bemeurer.programs.mako.font = "monospace 18";
+
   home-manager.users.bemeurer.programs.waybar.style = ''
     * {
       border: none;
