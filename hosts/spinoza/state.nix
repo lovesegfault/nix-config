@@ -1,5 +1,5 @@
 {
-  # age.identityPaths = [ "/nix/state/etc/ssh/ssh_host_ed25519_key" ];
+  age.identityPaths = [ "/nix/state/etc/ssh/ssh_host_ed25519_key" ];
 
   environment.persistence."/nix/state" = {
     hideMounts = true;

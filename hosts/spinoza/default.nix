@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ../../core
 
@@ -103,11 +103,6 @@
     autoPrune.enable = true;
   };
 
-  # age.secrets.rootPassword.file = ./password.age;
-  # users.users.root.passwordFile = config.age.secrets.rootPassword.path;
-  users.users.root.password = "tofu";
-  users.users.bemeurer = {
-    passwordFile = lib.mkForce null;
-    password = "tofu";
-  };
+  age.secrets.rootPassword.file = ./password.age;
+  users.users.root.passwordFile = config.age.secrets.rootPassword.path;
 }

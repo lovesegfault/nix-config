@@ -64,9 +64,9 @@ let
     };
     spinoza = {
       type = "nixos";
-      address = "0.0.0.0";
+      address = "100.68.240.30";
       localSystem = "x86_64-linux";
-      pubkey = "FIXME";
+      pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDUZPmPTATZ4nBWstPqlUiguvxr26XWAE9BGPVNNRBR5";
     };
   };
 
