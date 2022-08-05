@@ -11,7 +11,7 @@
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
     kernelModules = [ "kvm-amd" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
-    kernelPackages = pkgs.linuxPackages_latest_lto_zen3;
+    kernelPackages = pkgs.linuxPackages_5_19_lto_zen3;
     tmpOnTmpfs = true;
   };
 
