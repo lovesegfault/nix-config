@@ -18,7 +18,7 @@ jobs:
       - uses: cachix/cachix-action@v10
         with:
           name: nix-config
-          signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: parse
         run: nix-instantiate --json --parse ./**/*.nix
       - name: lints
@@ -70,7 +70,7 @@ jobs:
       - uses: cachix/cachix-action@v10
         with:
           name: nix-config
-          signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: build-shell
         run: |
           SYSTEM="$(nix eval --impure --expr 'builtins.currentSystem')"
@@ -120,7 +120,7 @@ jobs:
       - uses: cachix/cachix-action@v10
         with:
           name: nix-config
-          signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: build-host
         uses: nick-invision/retry@v2
         with:
