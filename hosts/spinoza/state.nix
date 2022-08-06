@@ -43,6 +43,7 @@
         ".config/TabNine"
         ".config/darktable"
         ".config/dconf"
+        ".config/deluge"
         ".config/discord"
         ".config/gcloud"
         ".config/libvirt"
