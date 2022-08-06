@@ -43,7 +43,7 @@
   services = {
     fprintd.enable = true;
     fwupd.enable = true;
-    xserver.dpi = 96;
+    hardware.bolt.enable = true;
     tlp = {
       enable = true;
       settings = {
@@ -62,5 +62,6 @@
         STOP_CHARGE_THRESH_BAT0 = 80;
       };
     };
+    xserver.dpi = 96;
   };
 }
