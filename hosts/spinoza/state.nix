@@ -24,6 +24,7 @@
     users.bemeurer = {
       directories = [
         ".aws"
+        ".cache/Plexamp"
         ".cache/darktable"
         ".cache/direnv"
         ".cache/lollypop"
@@ -37,6 +38,7 @@
         ".config/1Password"
         ".config/Element"
         ".config/Ledger Live"
+        ".config/Plexamp"
         ".config/Signal"
         ".config/TabNine"
         ".config/darktable"
@@ -46,6 +48,7 @@
         ".config/libvirt"
         ".config/op"
         ".config/pipewire"
+        ".local/share/Plexamp"
         ".local/share/TabNine"
         ".local/share/atuin"
         ".local/share/bash"
