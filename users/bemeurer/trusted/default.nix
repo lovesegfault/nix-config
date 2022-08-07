@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   _1pQuick = "exec --no-startup-id ${pkgs.spawn}/bin/spawn ${lib.getExe pkgs._1password-gui} --quick-access";
 in
@@ -14,11 +14,11 @@ in
   };
 
   xsession.windowManager.i3.config.keybindings = lib.mkOptionDefault {
-    "Mod4+p" = _1pQuick;
+    "${config.xsession.windowManager.i3.config.modifier}+p" = _1pQuick;
   };
 
   wayland.windowManager.sway.config.keybindings = lib.mkOptionDefault {
-    "Mod4+p" = _1pQuick;
+    "${config.wayland.windowManager.sway.config.modifier}+p" = _1pQuick;
   };
 }
 

@@ -81,8 +81,8 @@ let
         # normal ones
         "Mod1+Tab" = " workspace next";
         "Mod4+Tab" = " workspace prev";
-        "Mod4+comma" = " workspace prev";
-        "Mod4+period" = " workspace next";
+        "${modifier}+comma" = " workspace prev";
+        "${modifier}+period" = " workspace next";
         "XF86AudioLowerVolume" = execSpawn "${pkgs.ponymix}/bin/ponymix decrease 1";
         "XF86AudioMicMute" = execSpawn "${pkgs.ponymix}/bin/ponymix -t source toggle";
         "XF86AudioMute" = execSpawn "${pkgs.ponymix}/bin/ponymix -t sink toggle";
