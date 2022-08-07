@@ -91,8 +91,8 @@ let
         "XF86AudioPlay" = execSpawn "${pkgs.playerctl}/bin/playerctl play";
         "XF86AudioPrev" = execSpawn "${pkgs.playerctl}/bin/playerctl previous";
         "XF86AudioRaiseVolume" = execSpawn "${pkgs.ponymix}/bin/ponymix increase 1";
-        "XF86MonBrightnessDown" = execSpawn "${pkgs.brillo}/bin/brillo -e -U 0.5";
-        "XF86MonBrightnessUp" = execSpawn "${pkgs.brillo}/bin/brillo -e -A 0.5";
+        "XF86MonBrightnessDown" = execSpawn "${pkgs.brillo}/bin/brillo -e -U 1";
+        "XF86MonBrightnessUp" = execSpawn "${pkgs.brillo}/bin/brillo -e -A 1";
       };
 
     modifier = "Mod1";
