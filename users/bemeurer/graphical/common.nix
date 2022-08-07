@@ -95,7 +95,7 @@ let
         "XF86MonBrightnessUp" = execSpawn "${pkgs.brillo}/bin/brillo -e -A 0.5";
       };
 
-    modifier = "Mod4";
+    modifier = "Mod1";
 
     window = {
       border = 0;
