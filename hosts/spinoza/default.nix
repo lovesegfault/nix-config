@@ -23,7 +23,7 @@
     allowDiscards = true;
   };
 
-  environment.systemPackages = with pkgs; [ cntr wireguard-tools mullvad-vpn ];
+  environment.systemPackages = with pkgs; [ cntr wireguard-tools mullvad-vpn powertop ];
 
   fileSystems = {
     "/" = {

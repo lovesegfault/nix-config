@@ -21,12 +21,16 @@
     packages = with pkgs; [ terminus_font ];
   };
 
-  environment.systemPackages = with pkgs; [ powertop ];
+  environment.variables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
 
   hardware = {
     brillo.enable = true;
     enableRedistributableFirmware = true;
     i2c.enable = true;
+    opengl = {
+      enable = true;
+      driSupport = true;
+    };
   };
 
   nix.settings = {
