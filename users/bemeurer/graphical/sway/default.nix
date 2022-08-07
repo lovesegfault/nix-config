@@ -30,16 +30,16 @@
   services.swayidle = {
     enable = true;
     events = [
-      { event = "before-sleep"; command = "swaylock -f"; }
-      { event = "lock"; command = "swaylock -f"; }
+      { event = "before-sleep"; command = "${lib.getExe pkgs.swaylock} -f"; }
+      { event = "lock"; command = "${lib.getExe pkgs.swaylock} -f"; }
     ];
     timeouts = [
-      { timeout = 230; command = ''notify-send -t 30000 -- "Screen will lock in 30 seconds"''; }
-      { timeout = 300; command = "swaylock -f"; }
+      { timeout = 230; command = ''${lib.getExe pkgs.libnotify} -t 30000 -- "Screen will lock in 30 seconds"''; }
+      { timeout = 300; command = "${lib.getExe pkgs.swaylock} -f"; }
       {
         timeout = 600;
-        command = ''swaymsg "output * dpms off"'';
-        resumeCommand = ''swaymsg "output * dpms on"'';
+        command = ''${pkgs.sway}/bin/swaymsg "output * dpms off"'';
+        resumeCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms on"'';
       }
     ];
   };
