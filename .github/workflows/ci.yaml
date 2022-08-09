@@ -39,9 +39,9 @@ jobs:
         run: |
           nix eval --json -f ./nix/hosts.nix all | jq -c '
           map_values(
-              if .localSystem  == "x86_64-linux" then "ubuntu-latest"
-              elif .localSystem == "aarch64-linux" then "ubuntu-latest"
-              elif .localSystem == "x86_64-darwin" then "macos-latest"
+              if .hostPlatform  == "x86_64-linux" then "ubuntu-latest"
+              elif .hostPlatform == "aarch64-linux" then "ubuntu-latest"
+              elif .hostPlatform == "x86_64-darwin" then "macos-latest"
               else null end)
           | to_entries
           | map(select(.value != null))
