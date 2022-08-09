@@ -102,5 +102,5 @@ _: {
       { MZEN3 = yes; PINCTRL_AMD = yes; }
       (patch
         [ patches.graysky ]
-        (fullLTO latest)));
+        (fullLTO kernels.linux_5_19)));
 }
