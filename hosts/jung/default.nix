@@ -43,6 +43,7 @@
     "/nix" = {
       device = "/dev/disk/by-uuid/4610a590-b6b8-4a8f-82a3-9ec7592911eb";
       fsType = "ext4";
+      options = [ "defaults" "noatime" ];
       neededForBoot = true;
     };
   };
