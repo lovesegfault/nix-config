@@ -24,10 +24,10 @@ let
     };
   };
 
-  genConfiguration = hostname: { localSystem, ... }:
+  genConfiguration = hostname: { hostPlatform, ... }:
     lib.nixosSystem {
-      system = localSystem;
-      pkgs = self.pkgs.${localSystem};
+      system = hostPlatform;
+      pkgs = self.pkgs.${hostPlatform};
       modules = [
         (../hosts + "/${hostname}")
         nixRegistry

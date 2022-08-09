@@ -16,10 +16,10 @@ let
     };
   };
 
-  genConfiguration = hostname: { localSystem, ... }:
+  genConfiguration = hostname: { hostPlatform, ... }:
     darwin.lib.darwinSystem {
-      system = localSystem;
-      pkgs = self.pkgs.${localSystem};
+      system = hostPlatform;
+      pkgs = self.pkgs.${hostPlatform};
       modules = [
         (../hosts + "/${hostname}")
         nixRegistry
