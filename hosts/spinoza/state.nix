@@ -6,7 +6,6 @@
     directories = [
       "/var/lib/bluetooth"
       "/var/lib/boltd"
-      "/var/lib/docker"
       "/var/lib/fwupd"
       "/var/lib/fprint"
       "/var/lib/iwd"
