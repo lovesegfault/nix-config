@@ -96,4 +96,11 @@ _: {
     (cfg
       { MZEN3 = yes; DEBUG_INFO = lib.mkForce no; }
       (fullLTO kernels.linux_xanmod));
+
+  linuxPackages_5_19_lto_zen3 = packagesFor
+    (cfg
+      { MZEN3 = yes; PINCTRL_AMD = yes; }
+      (patch
+        [ patches.graysky ]
+        (fullLTO latest)));
 }
