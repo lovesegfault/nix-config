@@ -2,7 +2,6 @@
   imports = [
     ../../core
 
-    ../../hardware/bluetooth.nix
     ../../hardware/efi.nix
     ../../hardware/nixos-aarch64-builder
 
