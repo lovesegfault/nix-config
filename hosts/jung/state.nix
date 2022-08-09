@@ -3,7 +3,7 @@
 
   environment.persistence."/nix/state" = {
     directories = [
-      "/var/lib/bluetooth"
+      "/var/lib/fwupd"
       "/var/lib/iwd"
       "/var/lib/tailscale"
       "/var/log"
@@ -17,6 +17,8 @@
     ];
     users.bemeurer = {
       directories = [
+        ".cache/.direnv"
+        ".cache/nix"
         ".cache/nix-index"
         ".cache/nvim"
         ".cache/zsh"
@@ -24,6 +26,7 @@
         ".local/share/atuin"
         ".local/share/bash"
         ".local/share/direnv"
+        ".local/share/fish"
         ".local/share/iwctl"
         ".local/share/nvim"
         ".local/share/zsh"
