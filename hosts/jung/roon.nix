@@ -19,8 +19,6 @@
 
   services = {
     hqplayerd.enable = true;
-    hqplayerd.auth.username = "admin";
-    hqplayerd.auth.password = "admin";
     roon-server.enable = true;
   };
 

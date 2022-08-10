@@ -1,5 +1,8 @@
-{ config, pkgs, ... }: {
+{ config, nixos-hardware, pkgs, ... }: {
   imports = [
+    nixos-hardware.common-cpu-amd
+    nixos-hardware.common-gpu-amd
+    nixos-hardware.common-pc-laptop-ssd
     ../../core
 
     ../../hardware/efi.nix
@@ -12,10 +15,7 @@
   ];
 
   boot = {
-    initrd = {
-      availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
-      kernelModules = [ "amdgpu" ];
-    };
+    initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" "dm-snapshot" ];
     kernel.sysctl."vm.swappiness" = 1;
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest_lto_zen3;
@@ -27,8 +27,6 @@
     keyMap = "us";
     packages = with pkgs; [ terminus_font ];
   };
-
-  environment.variables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
 
   fileSystems = {
     "/" = {
@@ -47,20 +45,15 @@
       neededForBoot = true;
     };
     "/mnt/music" = {
-      device = "/dev/disk/by-uuid/2ce6a4ee-a531-450c-852f-52e760106f85";
-      fsType = "f2fs";
-      options = [ "defaults" "atgc" "gc_merge" "lazytime" "noatime" ];
+      device = "/dev/disk/by-uuid/90bcbccf-f8a0-47a7-b542-1c1a66de20e3";
+      fsType = "ext4";
+      options = [ "defaults" "noatime" ];
     };
   };
 
   hardware = {
-    cpu.amd.updateMicrocode = true;
     enableRedistributableFirmware = true;
-    opengl = {
-      enable = true;
-      driSupport = true;
-      extraPackages = with pkgs; [ rocm-opencl-icd rocm-opencl-runtime ];
-    };
+    opengl.enable = true;
   };
 
   networking = {
@@ -121,7 +114,10 @@
 
   time.timeZone = "America/New_York";
 
-  users.groups.media.members = [ "bemeurer" ];
+  users.groups.media = {
+    gid = 999;
+    members = [ "bemeurer" ];
+  };
 
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;
