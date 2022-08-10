@@ -4,7 +4,16 @@
   environment.persistence."/nix/state" = {
     directories = [
       "/var/lib/fwupd"
+      {
+        directory = "/var/lib/hqplayer";
+        user = "hqplayer";
+        group = "hqplayer";
+      }
       "/var/lib/iwd"
+      {
+        directory = "/var/lib/roon-server";
+        inherit (config.services.roon-server) user group;
+      }
       {
         directory = "/var/lib/syncthing";
         inherit (config.services.syncthing) user group;

@@ -7,6 +7,7 @@
 
     ../../users/bemeurer
 
+    ./roon.nix
     ./state.nix
   ];
 
@@ -120,8 +121,7 @@
 
   time.timeZone = "America/New_York";
 
-  users.groups.media.members = [ "bemeurer" "hqplayer" "roon-server" ];
-  users.groups.video.members = [ "hqplayer" ];
+  users.groups.media.members = [ "bemeurer" ];
 
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;
