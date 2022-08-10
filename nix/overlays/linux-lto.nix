@@ -99,7 +99,7 @@ _: {
 
   linuxPackages_5_19_lto_zen3 = packagesFor
     (cfg
-      { MZEN3 = yes; PINCTRL_AMD = yes; }
+      { MZEN3 = yes; }
       (patch
         [ patches.graysky ]
         (fullLTO kernels.linux_5_19)));
