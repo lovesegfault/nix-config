@@ -45,6 +45,11 @@
       options = [ "defaults" "noatime" ];
       neededForBoot = true;
     };
+    "/mnt/music" = {
+      device = "/dev/disk/by-uuid/2ce6a4ee-a531-450c-852f-52e760106f85";
+      fsType = "f2fs";
+      options = [ "defaults" "atgc" "gc_merge" "lazytime" "noatime" ];
+    };
   };
 
   hardware = {
@@ -80,7 +85,21 @@
     { domain = "*"; type = "-"; item = "nproc"; value = "unlimited"; }
   ];
 
-  services.fwupd.enable = true;
+  services = {
+    fwupd.enable = true;
+    smartd.enable = true;
+    syncthing = {
+      enable = true;
+      guiAddress = "0.0.0.0:8384";
+      devices.nozick.id = "SJH2ZVC-EUWTL4M-ZEP57G6-O5A6DYX-4AWZU7C-XF4GGED-5F6OHGC-KDHPMA6";
+      folders.music = {
+        devices = [ "nozick" ];
+        path = "/mnt/music";
+        type = "receiveonly";
+      };
+      group = "media";
+    };
+  };
 
   systemd.network.networks = {
     eth = {
@@ -100,6 +119,9 @@
   swapDevices = [{ device = "/dev/disk/by-uuid/a66412e6-ff55-4053-b436-d066319ed922"; }];
 
   time.timeZone = "America/New_York";
+
+  users.groups.media.members = [ "bemeurer" "hqplayer" "roon-server" ];
+  users.groups.video.members = [ "hqplayer" ];
 
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;

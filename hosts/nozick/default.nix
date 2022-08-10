@@ -201,6 +201,19 @@
     plex.enable = true;
     smartd.enable = true;
     sshguard.enable = true;
+    syncthing = {
+      enable = true;
+      group = "media";
+      guiAddress = "0.0.0.0:8384";
+      devices = {
+        jung.id = "GXCBSO2-RQAR3CC-ACW6JWB-IAZHQZO-XZWSYKL-SYB2GNS-T4R5QO2-Q76BXAV";
+      };
+      folders.music = {
+        devices = [ "jung" ];
+        path = "/mnt/music";
+        type = "sendonly";
+      };
+    };
     zfs = {
       autoScrub.pools = [ "rpool" ];
       autoSnapshot = {
