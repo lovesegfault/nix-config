@@ -1,4 +1,4 @@
-{
+{ config, ... }: {
   networking.firewall = {
     allowedTCPPortRanges = [
       { from = 8008; to = 8009; }
@@ -26,6 +26,6 @@
 
   sound.enable = true;
 
-  users.groups.media.members = [ "roon" "hqplayer" ];
+  users.groups.media.members = [ config.services.roon-server.user "hqplayer" ];
   users.groups.video.members = [ "hqplayer" ];
 }
