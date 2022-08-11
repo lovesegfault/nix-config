@@ -47,6 +47,7 @@ in
       "homebrew/cask"
     ];
     casks = [
+      "1password"
       "1password-cli"
       "aldente"
       "alt-tab"
