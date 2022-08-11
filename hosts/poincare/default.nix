@@ -76,7 +76,6 @@ in
       "roon"
       "shottr"
       "stats"
-      "tailscale"
       "thunderbird"
       "topnotch"
       "visual-studio-code"
@@ -102,6 +101,7 @@ in
       "Speedtest" = 1153157709;
       "The Unarchiver" = 425424353;
       "Xcode" = 497799835;
+      "Tailscale" = 1475387142;
     };
   };
 
