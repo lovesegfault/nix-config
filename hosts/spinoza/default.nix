@@ -16,6 +16,7 @@
 
     ./state.nix
     ./sway.nix
+    ./localtime.nix
   ];
 
   boot.initrd.luks.devices.cryptroot = {
@@ -105,8 +106,6 @@
   ];
 
   swapDevices = [{ device = "/dev/disk/by-uuid/6d3d9006-e2e9-4de9-b194-3481e7df506c"; }];
-
-  time.timeZone = "America/New_York";
 
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;
