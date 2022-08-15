@@ -1,5 +1,4 @@
 { deploy-rs
-, nixgl
 , nixpkgs
 , ragenix
 , ...
@@ -14,6 +13,5 @@ let
 in
 composeManyExtensions (localOverlays ++ [
   deploy-rs.overlay
-  nixgl.overlay
   ragenix.overlay
 ])

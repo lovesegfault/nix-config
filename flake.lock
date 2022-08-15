@@ -136,26 +136,6 @@
         "type": "github"
       }
     },
-    "nixgl": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1656321324,
-        "narHash": "sha256-Sz0uWspqvshGFbT+XmRVVayuW514rNNLLvrre8jBLLU=",
-        "owner": "guibou",
-        "repo": "nixgl",
-        "rev": "047a34b2f087e2e3f93d43df8e67ada40bf70e5c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "guibou",
-        "repo": "nixgl",
-        "type": "github"
-      }
-    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1660407119,
@@ -243,7 +223,6 @@
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
-        "nixgl": "nixgl",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "pre-commit-hooks": "pre-commit-hooks",
