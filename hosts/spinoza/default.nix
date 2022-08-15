@@ -16,7 +16,6 @@
 
     ./state.nix
     ./sway.nix
-    ./localtime.nix
   ];
 
   boot.initrd.luks.devices.cryptroot = {
@@ -78,6 +77,7 @@
       enableModemGPS = false;
       submitData = true;
     };
+    localtimed.enable = true;
     logind = {
       lidSwitch = "suspend";
       lidSwitchExternalPower = "ignore";
