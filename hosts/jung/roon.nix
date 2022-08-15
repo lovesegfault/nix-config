@@ -18,12 +18,10 @@
   };
 
   services = {
-    hqplayerd.enable = true;
     roon-server.enable = true;
   };
 
   sound.enable = true;
 
-  users.groups.media.members = [ config.services.roon-server.user "hqplayer" ];
-  users.groups.video.members = [ "hqplayer" ];
+  users.groups.media.members = [ config.services.roon-server.user ];
 }
