@@ -34,7 +34,7 @@
         };
       };
       extraConfig = ''
-        bindswitch --locked --reload lid:on exec "swaymsg output eDP-1 disable && swaylock -f"
+        bindswitch --locked --reload lid:on output eDP-1 disable
         bindswitch --locked --reload lid:off output eDP-1 enable
       '';
     };
