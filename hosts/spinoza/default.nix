@@ -44,6 +44,10 @@
   };
 
   hardware.ledger.enable = true;
+  hardware.opengl.extraPackages = with pkgs; [
+    libvdpau-va-gl
+    vaapiVdpau
+  ];
 
   home-manager.users.bemeurer = {
     imports = [
