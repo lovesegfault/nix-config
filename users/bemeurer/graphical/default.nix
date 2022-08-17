@@ -2,8 +2,9 @@
   imports = [
     ./common.nix
     ./firefox.nix
-    ./mpv.nix
+    ./kitty.nix
     ./mime.nix
+    ./mpv.nix
   ];
 
   home = {
