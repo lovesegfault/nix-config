@@ -47,7 +47,7 @@
         }
       ];
 
-      terminal = "${config.programs.alacritty.package}/bin/alacritty";
+      terminal = lib.getExe config.programs.kitty.package;
 
       window.commands = [
         { command = "floating enable"; criteria.class = "feh"; }

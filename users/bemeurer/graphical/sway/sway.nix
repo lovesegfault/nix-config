@@ -20,7 +20,7 @@
 
       output = { "*" = { bg = "${config.xdg.dataHome}/wall.png fill"; }; };
 
-      terminal = "${config.programs.foot.package}/bin/foot";
+      terminal = lib.getExe config.programs.kitty.package;
 
       window.commands = [
         { command = "floating enable"; criteria.app_id = "imv"; }

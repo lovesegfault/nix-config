@@ -1,7 +1,7 @@
-{ config, ... }: {
+{ config, lib, ... }: {
   programs.rofi = {
     enable = true;
-    terminal = "${config.programs.foot.package}/bin/foot";
+    terminal = lib.getExe config.programs.kitty.package;
     theme = ./ayu.rasi;
     extraConfig = {
       modi = "drun";
