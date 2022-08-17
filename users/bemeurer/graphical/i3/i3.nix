@@ -47,7 +47,7 @@
         }
       ];
 
-      terminal = lib.getExe config.programs.kitty.package;
+      terminal = "${lib.getExe config.programs.kitty.package} -1";
 
       window.commands = [
         { command = "floating enable"; criteria.class = "feh"; }
