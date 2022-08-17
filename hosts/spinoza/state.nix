@@ -4,6 +4,7 @@
   environment.persistence."/nix/state" = {
     hideMounts = true;
     directories = [
+      "/var/cache/powertop"
       "/var/lib/bluetooth"
       "/var/lib/boltd"
       "/var/lib/fwupd"
