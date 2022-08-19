@@ -49,11 +49,22 @@
       fsType = "ext4";
       options = [ "defaults" "noatime" ];
     };
+    "/mnt/music-opus" = {
+      device = "/dev/disk/by-uuid/b6dc070f-5758-4bfe-8bfd-68b55da44ef1";
+      fsType = "ext4";
+      options = [ "defaults" "noatime" ];
+    };
   };
 
   hardware = {
     enableRedistributableFirmware = true;
     opengl.enable = true;
+  };
+
+  home-manager.users.bemeurer = {
+    imports = [
+      ../../users/bemeurer/music
+    ];
   };
 
   networking = {

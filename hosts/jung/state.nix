@@ -36,6 +36,7 @@
         ".cache/nvim"
         ".cache/zsh"
         ".config/TabNine"
+        ".config/beets"
         ".local/share/atuin"
         ".local/share/bash"
         ".local/share/direnv"
