@@ -73,17 +73,25 @@ let
 
   inherit (linuxKernel) kernels packagesFor;
 
-  latest = kernels.linux_5_18;
+  zfs = kernels.linux_5_18;
+  latest = kernels.linux_5_19;
 in
 _: {
   linuxPackages_latest_lto = packagesFor (fullLTO latest);
 
-  linuxPackages_latest_lto_skylake = packagesFor
+  linuxPackages_zfs_lto_skylake = packagesFor
     (cfg
       { MSKYLAKE = yes; }
       (patch
         [ patches.graysky ]
-        (fullLTO latest)));
+        (fullLTO zfs)));
+
+  linuxPackages_zfs_lto_zen3 = packagesFor
+    (cfg
+      { MZEN3 = yes; }
+      (patch
+        [ patches.graysky ]
+        (fullLTO zfs)));
 
   linuxPackages_latest_lto_zen3 = packagesFor
     (cfg
@@ -91,16 +99,4 @@ _: {
       (patch
         [ patches.graysky ]
         (fullLTO latest)));
-
-  linuxPackages_xanmod_lto_zen3 = packagesFor
-    (cfg
-      { MZEN3 = yes; DEBUG_INFO = lib.mkForce no; }
-      (fullLTO kernels.linux_xanmod));
-
-  linuxPackages_5_19_lto_zen3 = packagesFor
-    (cfg
-      { MZEN3 = yes; }
-      (patch
-        [ patches.graysky ]
-        (fullLTO kernels.linux_5_19)));
 }

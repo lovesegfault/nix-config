@@ -15,7 +15,7 @@
     };
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelModules = [ "acpi_call" "i2c_dev" "ddcci-backlight" "tcp_bbr" ];
-    kernelPackages = pkgs.linuxPackages_latest_lto_skylake;
+    kernelPackages = pkgs.linuxPackages_zfs_lto_skylake;
     kernelParams = [ "acpi_mask_gpe=0x69" ];
     tmpOnTmpfs = true;
   };

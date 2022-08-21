@@ -35,7 +35,7 @@
     };
     kernel.sysctl."vm.swappiness" = 1;
     kernelModules = [ "kvm-amd" "ddcci-backlight" "i2c-dev" "nct6775" ];
-    kernelPackages = pkgs.linuxPackages_xanmod_lto_zen3;
+    kernelPackages = pkgs.linuxPackages_zfs_lto_zen3;
     kernelParams = [
       "acpi_enforce_resources=lax"
       "amdgpu.ppfeaturemask=0xffffffff"

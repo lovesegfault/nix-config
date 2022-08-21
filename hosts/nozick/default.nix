@@ -63,7 +63,7 @@
       "net.netfilter.nf_conntrack_tcp_timeout_time_wait" = 1;
     };
     kernelModules = [ "kvm-intel" "tls" "tcp_bbr" ];
-    kernelPackages = pkgs.linuxPackages_latest_lto_skylake;
+    kernelPackages = pkgs.linuxPackages_zfs_lto_skylake;
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {
