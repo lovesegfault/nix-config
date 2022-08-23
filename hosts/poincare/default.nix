@@ -134,32 +134,33 @@ in
 
   nix = {
     package = pkgs.nix_macos;
-    binaryCachePublicKeys = [
-      "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-    binaryCaches = [
-      "https://nix-config.cachix.org"
-      "https://nix-community.cachix.org"
-    ];
-    daemonIONice = true;
-    daemonNiceLevel = 5;
+    daemonIOLowPriority = true;
     gc.automatic = true;
     nixPath = [{
       nixpkgs = "/run/current-system/sw/nixpkgs";
       nixpkgs-overlays = "/run/current-system/sw/overlays";
     }];
-    trustedUsers = [ "root" "bemeurer" ];
-    useSandbox = true;
+    settings = {
+      accept-flake-config = true;
+      auto-optimise-store = true;
+      build-users-group = "nixbld";
+      builders-use-substitutes = true;
+      connect-timeout = 5;
+      experimental-features = [ "nix-command" "flakes" "recursive-nix" ];
+      http-connections = 0;
+      sandbox = true;
+      substituters = [
+        "https://nix-config.cachix.org"
+        "https://nix-community.cachix.org"
+      ];
+      trusted-public-keys = [
+        "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+      trusted-users = [ "root" "bemeurer" ];
+    };
     extraOptions = ''
       !include tokens.conf
-      accept-flake-config = true
-      auto-optimise-store = true
-      build-users-group = nixbld
-      builders-use-substitutes = true
-      connect-timeout = 5
-      experimental-features = nix-command flakes recursive-nix
-      http-connections = 0
     '';
   };
 
