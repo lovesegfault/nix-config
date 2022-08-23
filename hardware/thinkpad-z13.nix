@@ -64,6 +64,6 @@
         STOP_CHARGE_THRESH_BAT0 = 80;
       };
     };
-    xserver.dpi = 96;
+    xserver.dpi = 250;
   };
 }
