@@ -18,10 +18,17 @@
     ./sway.nix
   ];
 
-  boot.initrd.luks.devices.cryptroot = {
-    device = "/dev/disk/by-uuid/f8e32b80-d520-4171-ade3-d6ddbf9363d0";
-    allowDiscards = true;
+  boot = {
+    plymouth.enable = true;
+    initrd = {
+      systemd.enable = true;
+      luks.devices.cryptroot = {
+        device = "/dev/disk/by-uuid/f8e32b80-d520-4171-ade3-d6ddbf9363d0";
+        allowDiscards = true;
+      };
+    };
   };
+
 
   environment.systemPackages = with pkgs; [ cntr wireguard-tools mullvad-vpn powertop ];
 
