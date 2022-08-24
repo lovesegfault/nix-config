@@ -1,31 +1,32 @@
-{ config, ... }: {
+{
   home.file.".ssh/config".text = ''
-    Include ~/.ssh/config.private
+    CanonicalizeHostname yes
+    PermitLocalCommand yes
 
-    Host github.com
-        ControlMaster no
-        User git
+    Include ~/.ssh/config.host
 
-    Host aarch64.nixos.community
-        IdentityFile ~/.ssh/nixos-aarch64-builder
-        User lovesegfault
+    Match canonical Host aarch64.nixos.community,147.28.143.250
+      User lovesegfault
+
+    Match canonical Host *.meurer.org,*.meurer.org.beta.tailscale.net
+      ForwardAgent yes
+
+    Match canonical Host *
+      ChallengeResponseAuthentication no
+      ControlMaster auto
+      ControlPath ~/.ssh/ssh-%r@%h:%p
+      ControlPersist 30m
+      ForwardAgent no
+      ForwardX11 no
+      ForwardX11Trusted no
+      HashKnownHosts yes
+      ServerAliveCountMax 5
+      ServerAliveInterval 60
+      StrictHostKeyChecking ask
+      VerifyHostKeyDNS yes
+      SetEnv TERM=xterm-256color
 
     Host *
-        AddKeysToAgent yes
-        ChallengeResponseAuthentication no
-        ControlMaster auto
-        ControlPath ~/.ssh/a-%C
-        ControlPersist 30m
-        ForwardAgent no
-        ForwardX11 no
-        ForwardX11Trusted no
-        HashKnownHosts yes
-        IdentitiesOnly yes
-        IdentityAgent /run/user/${toString config.home.uid}/gnupg/S.gpg-agent.ssh
-        IdentityFile ~/.ssh/yubikey_rsa.pub
-        ServerAliveCountMax 5
-        ServerAliveInterval 60
-        StrictHostKeyChecking ask
-        VerifyHostKeyDNS yes
+      CanonicalDomains meurer.org.beta.tailscale.net
   '';
 }
