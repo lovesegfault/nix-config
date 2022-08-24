@@ -4,7 +4,6 @@ let
 in
 {
   imports = [
-    ./ssh.nix
     ./gpg.nix
   ];
 
