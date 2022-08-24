@@ -115,6 +115,7 @@ in
       ../../users/bemeurer/core
       ../../users/bemeurer/dev
       ../../users/bemeurer/modules
+      ../../users/bemeurer/trusted
     ];
     home = {
       file.".nixpkgs/darwin-configuration.nix".source = dummyConfig;
