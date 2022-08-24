@@ -7,6 +7,7 @@
     ./git.nix
     ./htop.nix
     ./neovim
+    ./ssh.nix
     ./starship.nix
     ./tmux.nix
     ./xdg.nix
