@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   home.sessionVariables = {
-    SSH_AUTH_SOCK = "$HOME/.1password/agent.sock";
+    SSH_AUTH_SOCK = "\${SSH_AUTH_SOCK:-\"$HOME/.1password/agent.sock\"}";
   };
 
   systemd.user.services._1password = {
