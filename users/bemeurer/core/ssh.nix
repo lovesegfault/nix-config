@@ -1,9 +1,11 @@
 {
   home.file.".ssh/config".text = ''
-    CanonicalizeHostname yes
-    PermitLocalCommand yes
-
     Include ~/.ssh/config.host
+
+    Host *
+      CanonicalizeHostname yes
+      PermitLocalCommand yes
+      CanonicalDomains meurer.org.beta.tailscale.net
 
     Match canonical Host aarch64.nixos.community,147.28.143.250
       User lovesegfault
@@ -25,8 +27,5 @@
       StrictHostKeyChecking ask
       VerifyHostKeyDNS yes
       SetEnv TERM=xterm-256color
-
-    Host *
-      CanonicalDomains meurer.org.beta.tailscale.net
   '';
 }
