@@ -26,6 +26,5 @@
       ServerAliveInterval 60
       StrictHostKeyChecking ask
       VerifyHostKeyDNS yes
-      SetEnv TERM=xterm-256color
   '';
 }
