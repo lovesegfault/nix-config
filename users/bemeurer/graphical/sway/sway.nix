@@ -4,6 +4,10 @@
     config = {
       bars = [ ];
 
+      input = {
+        "type:keyboard".xkb_options = "caps:escape";
+      };
+
       keybindings =
         let
           execSpawn = cmd: "exec ${pkgs.spawn}/bin/spawn ${cmd}";
