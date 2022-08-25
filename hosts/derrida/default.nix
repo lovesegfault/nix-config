@@ -28,9 +28,17 @@
         export PATH="$PATH:$HOME/.toolbox/bin"
       '';
     };
-    git.lfs.enable = true;
-    zsh.initExtra = ''
-      export PATH="$PATH:$HOME/.toolbox/bin"
+    fish.shellInit = ''
+      fish_add_path --append --path "$HOME/.toolbox/bin"
     '';
+    git.lfs.enable = true;
+    zsh = {
+      initExtraBeforeCompInit = ''
+        fpath+=("$HOME/.zsh/completion")
+      '';
+      initExtra = ''
+        export PATH="$PATH:$HOME/.toolbox/bin"
+      '';
+    };
   };
 }
