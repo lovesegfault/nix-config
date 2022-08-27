@@ -50,6 +50,7 @@ let
       inner = 10;
       outer = 5;
       smartBorders = "on";
+      smartGaps = true;
     };
 
     keybindings =
