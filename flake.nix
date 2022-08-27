@@ -63,17 +63,17 @@
 
       nixosConfigurations = import ./nix/nixos.nix inputs;
     }
-    // flake-utils.lib.eachSystem [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ] (system: {
-      checks = import ./nix/checks.nix inputs system;
+    // flake-utils.lib.eachSystem [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ] (localSystem: {
+      checks = import ./nix/checks.nix inputs localSystem;
 
-      devShells.default = import ./nix/dev-shell.nix inputs system;
+      devShells.default = import ./nix/dev-shell.nix inputs localSystem;
 
       packages = {
-        default = self.packages.${system}.all;
-      } // (import ./nix/host-drvs.nix inputs system);
+        default = self.packages.${localSystem}.all;
+      } // (import ./nix/host-drvs.nix inputs localSystem);
 
       pkgs = import nixpkgs {
-        inherit system;
+        inherit localSystem;
         overlays = [
           self.overlays.default
         ];

@@ -26,10 +26,13 @@ let
 
   genConfiguration = hostname: { hostPlatform, ... }:
     lib.nixosSystem {
-      system = hostPlatform;
-      pkgs = self.pkgs.${hostPlatform};
       modules = [
         (../hosts + "/${hostname}")
+        {
+          nixpkgs.pkgs = self.pkgs.${hostPlatform};
+          # FIXME: This shouldn't be needed, but is for some reason
+          nixpkgs.hostPlatform = hostPlatform;
+        }
         nixRegistry
         netHostMap
         home-manager.nixosModules.home-manager
