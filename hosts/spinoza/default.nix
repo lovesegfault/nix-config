@@ -114,7 +114,8 @@
   };
 
   services.pipewire.package = pkgs.pipewire-optimized;
-  systemd.package = pkgs.systemd-optimized;
+  # FIXME: Breaks systemd-boot?
+  # systemd.package = pkgs.systemd-optimized;
 
   systemd.user.services.geoclue-agent.after = [
     "network.target"
