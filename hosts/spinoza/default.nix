@@ -74,6 +74,8 @@
     wireless.iwd.enable = true;
   };
 
+  nixpkgs.overlays = [ (import ./optimized-pkgs.nix) ];
+
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
     { domain = "*"; type = "-"; item = "nofile"; value = "1048576"; }
@@ -110,6 +112,9 @@
       };
     };
   };
+
+  services.pipewire.package = pkgs.pipewire-optimized;
+  systemd.package = pkgs.systemd-optimized;
 
   systemd.user.services.geoclue-agent.after = [
     "network.target"
