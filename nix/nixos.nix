@@ -11,10 +11,6 @@ let
   inherit (nixpkgs) lib;
   hosts = (import ./hosts.nix).nixos.all;
 
-  netHostMap = {
-    networking.hosts = lib.mapAttrs' (n: v: lib.nameValuePair v.address [ n ]) hosts;
-  };
-
   nixRegistry = {
     nix.registry = {
       nixpkgs.flake = nixpkgs;
@@ -34,7 +30,6 @@ let
           nixpkgs.hostPlatform = hostPlatform;
         }
         nixRegistry
-        netHostMap
         home-manager.nixosModules.home-manager
         impermanence.nixosModules.impermanence
         ragenix.nixosModules.age
