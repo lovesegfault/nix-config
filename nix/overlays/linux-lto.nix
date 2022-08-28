@@ -95,7 +95,7 @@ _: {
 
   linuxPackages_latest_lto_zen3 = packagesFor
     (cfg
-      { MZEN3 = yes; }
+      { MZEN3 = yes; CPU_FREQ_STAT = yes; }
       (patch
         [ patches.graysky ]
         (fullLTO latest)));
