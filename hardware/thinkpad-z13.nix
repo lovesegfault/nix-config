@@ -10,7 +10,7 @@
 
   boot = {
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = [ "amd-pstate" "kvm-amd" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages_latest_lto_zen3;
     tmpOnTmpfs = true;
