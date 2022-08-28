@@ -66,7 +66,7 @@ in
 
   security.sudo = {
     enable = true;
-    wheelNeedsPassword = false;
+    wheelNeedsPassword = lib.mkDefault false;
   };
 
   services = {

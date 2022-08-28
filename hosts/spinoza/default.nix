@@ -113,6 +113,8 @@
     };
   };
 
+  security.sudo.wheelNeedsPassword = true;
+
   services.pipewire.package = pkgs.pipewire-optimized;
   # FIXME: Breaks systemd-boot?
   # systemd.package = pkgs.systemd-optimized;
