@@ -20,7 +20,7 @@
       qgnomeplatform
       qt5.qtwayland
       spawn
-      speedcrunch
+      qalculate-gtk
       xdg-utils
     ] ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
       darktable
