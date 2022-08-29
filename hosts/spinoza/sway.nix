@@ -23,6 +23,10 @@
             accel_profile = "adaptive";
             dwt = "enabled";
           };
+
+          "1386:21222:Wacom_HID_52E6_Finger" = {
+            map_to_output = "eDP-1";
+          };
         };
         output = {
           "Unknown 0x4167 0x00000000" = {
