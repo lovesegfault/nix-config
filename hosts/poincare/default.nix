@@ -46,6 +46,10 @@ in
       "homebrew/core"
       "homebrew/cask"
     ];
+    brews = [
+      "git"
+      "mas"
+    ];
     casks = [
       "1password"
       "1password-cli"
