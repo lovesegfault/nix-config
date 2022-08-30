@@ -24,7 +24,7 @@
 
       output = { "*" = { bg = "${config.xdg.dataHome}/wall.png fill"; }; };
 
-      terminal = "${lib.getExe config.programs.kitty.package} -1";
+      terminal = lib.getExe pkgs.foot;
 
       window.commands = [
         { command = "floating enable"; criteria.app_id = "imv"; }
