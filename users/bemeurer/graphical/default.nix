@@ -9,7 +9,6 @@
 
   home = {
     packages = with pkgs; [
-      blueman
       gammastep
       gnome.adwaita-icon-theme
       hicolor-icon-theme
@@ -69,7 +68,6 @@
   };
 
   services = {
-    blueman-applet.enable = true;
     gpg-agent.pinentryFlavor = "gnome3";
     gammastep = {
       enable = true;

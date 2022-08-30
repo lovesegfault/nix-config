@@ -12,8 +12,6 @@
     };
   };
 
-  services.blueman.enable = true;
-
   hardware.pulseaudio = {
     package = pkgs.pulseaudio.override { bluetoothSupport = true; };
     extraConfig = ''
