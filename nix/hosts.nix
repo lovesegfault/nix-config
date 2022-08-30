@@ -6,12 +6,6 @@ let
       hostPlatform = "aarch64-linux";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL8LfZJVnCw5Wq8+mym6uxTwg6+QhvkSjt0qfzap4C7w";
     };
-    bohr = {
-      type = "nixos";
-      address = "100.123.20.5";
-      hostPlatform = "x86_64-linux";
-      pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBTh+kYOeeYoBuxvA00nGojfBHUQlXW3iF7aRIw9VbY1";
-    };
     derrida = {
       type = "home-manager";
       hostPlatform = "x86_64-linux";
