@@ -12,7 +12,7 @@
       Type = "simple";
       ExecStart = "${pkgs._1password-gui}/bin/1password --silent";
       Restart = "always";
-      RestartSec = "3s";
+      RestartSec = "1s";
     };
     Install = {
       WantedBy = [ "graphical-session.target" ];
