@@ -29,7 +29,6 @@ let
       in
       {
         foot = applyGraphite (applyHost prev.foot);
-        kitty = applyGraphite (applyHost prev.kitty);
         neovim-unwrapped = applyGraphite (applyHost prev.neovim-unwrapped);
         nix = applyGraphite (applyHost prev.nix);
         sway-unwrapped = applyGraphite (applyHost prev.sway-unwrapped);
