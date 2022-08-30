@@ -23,12 +23,6 @@ let
       hostPlatform = "x86_64-linux";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN0IrRSWNqfLBqXHlM0zpyP21/UGiztIQ+y3KDx+R7ux";
     };
-    fourier = {
-      type = "nixos";
-      address = "100.77.106.120";
-      hostPlatform = "x86_64-linux";
-      pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJEc036Z0umFUeSgksRgBWhcEeqiVhuXNQZTipZVRMn";
-    };
     goethe = {
       type = "home-manager";
       hostPlatform = "x86_64-linux";
