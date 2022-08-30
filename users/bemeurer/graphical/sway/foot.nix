@@ -1,7 +1,6 @@
 { lib, pkgs, ... }: {
   programs.foot = {
     enable = true;
-    server.enable = true;
     settings = {
       main = {
         dpi-aware = "yes";

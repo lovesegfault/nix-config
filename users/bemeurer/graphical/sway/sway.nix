@@ -24,7 +24,7 @@
 
       output = { "*" = { bg = "${config.xdg.dataHome}/wall.png fill"; }; };
 
-      terminal = "${pkgs.foot}/bin/footclient -E";
+      terminal = lib.getExe pkgs.foot;
 
       window.commands = [
         { command = "floating enable"; criteria.app_id = "imv"; }
