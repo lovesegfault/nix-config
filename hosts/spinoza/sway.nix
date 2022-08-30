@@ -43,6 +43,8 @@
       '';
     };
 
+    programs.foot.settings.main.font = "monospace:size=4, emoji:size=4";
+
     programs.mako.font = "monospace 18";
 
     programs.waybar.style = ''
