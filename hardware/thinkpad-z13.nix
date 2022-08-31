@@ -10,7 +10,7 @@
 
   boot = {
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
-    kernelModules = [ "amd-pstate" "kvm-amd" ];
+    kernelModules = [ "amd-pstate" "kvm-amd" "thinkpad_acpi" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages_latest_lto_zen3;
     tmpOnTmpfs = true;
@@ -46,6 +46,7 @@
     fprintd.enable = true;
     fwupd.enable = true;
     hardware.bolt.enable = true;
+    thinkfan.enable = true;
     tlp = {
       enable = true;
       settings = {
