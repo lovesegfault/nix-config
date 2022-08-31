@@ -113,5 +113,10 @@
         background-color: #273747;
       }
     '';
+
+    services.gammastep.settings.general = {
+      brightness-day = null;
+      brightness-night = null;
+    };
   };
 }

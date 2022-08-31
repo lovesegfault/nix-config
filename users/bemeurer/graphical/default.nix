@@ -74,8 +74,8 @@
       provider = "geoclue2";
       tray = true;
       settings.general = {
-        brightness-day = 1.0;
-        brightness-night = 0.4;
+        brightness-day = lib.mkDefault 1.0;
+        brightness-night = lib.mkDefault 0.4;
       };
     };
     udiskie = {
