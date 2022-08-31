@@ -86,7 +86,7 @@
   };
 
   systemd.user.services = {
-    polkit = {
+    polkit-gnome = {
       Unit = {
         Description = "polkit-gnome";
         Documentation = [ "man:polkit(8)" ];
