@@ -115,8 +115,8 @@
     '';
 
     services.gammastep.settings.general = {
-      brightness-day = null;
-      brightness-night = null;
+      brightness-day = 1.0;
+      brightness-night = 1.0;
     };
   };
 }
