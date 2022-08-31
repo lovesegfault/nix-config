@@ -64,6 +64,11 @@
         STOP_CHARGE_THRESH_BAT0 = 80;
       };
     };
+    upower = {
+      enable = true;
+      # FIXME: When I swap to a larger NVME, this should be "Hibernate"
+      criticalPowerAction = "PowerOff";
+    };
     xserver.dpi = 250;
   };
 }
