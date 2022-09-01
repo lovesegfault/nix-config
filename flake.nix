@@ -25,7 +25,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";
-      inputs.flake-compat.follows = "flake-compat";
     };
 
     impermanence.url = "github:nix-community/impermanence";
