@@ -43,4 +43,9 @@
       ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
     }];
   };
+
+  systemd.services.nextcloud-setup = {
+    requires = [ "postgresql.service" ];
+    after = [ "postgresql.service" ];
+  };
 }
