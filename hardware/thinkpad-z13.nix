@@ -46,7 +46,6 @@
     fprintd.enable = true;
     fwupd.enable = true;
     hardware.bolt.enable = true;
-    thinkfan.enable = true;
     tlp = {
       enable = true;
       settings = {
