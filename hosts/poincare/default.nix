@@ -40,7 +40,11 @@ in
 
   homebrew = {
     enable = true;
-    autoUpdate = true;
+    onActivation = {
+      cleanup = "zap";
+      autoUpdate = true;
+      upgrade = true;
+    };
     taps = [
       "1password/tap"
       "homebrew/core"
@@ -87,7 +91,6 @@ in
       "zoom"
       "zulip"
     ];
-    cleanup = "zap";
     masApps = {
       "Amphetamine" = 937984704;
       "Deliveries" = 290986013;
