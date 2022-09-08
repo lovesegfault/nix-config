@@ -137,7 +137,10 @@ in
 
       uid = 504;
     };
-    programs.git.lfs.enable = true;
+    programs.git = {
+      lfs.enable = true;
+      extraConfig.gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+    };
   };
 
   nix = {
