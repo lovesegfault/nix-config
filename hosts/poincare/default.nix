@@ -141,7 +141,6 @@ in
   };
 
   nix = {
-    package = pkgs.nix_macos;
     daemonIOLowPriority = true;
     gc.automatic = true;
     nixPath = [{
