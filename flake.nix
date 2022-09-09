@@ -31,7 +31,7 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
