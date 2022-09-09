@@ -199,11 +199,12 @@
     };
     oauth2_proxy = {
       enable = true;
-      cookie.domain = ".meurer.org";
+      cookie.domain = ".nozick.meurer.org";
       email.domains = [ "meurer.org" ];
       keyFile = config.age.secrets.oauth2.path;
       nginx.virtualHosts = [ "stash.nozick.meurer.org" ];
       reverseProxy = true;
+      extraConfig.whitelist-domain = ".nozick.meurer.org";
     };
     openssh.extraConfig = ''
       MaxStartups 40:30:120
