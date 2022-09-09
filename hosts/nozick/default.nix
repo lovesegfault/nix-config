@@ -14,13 +14,13 @@
     ./nextcloud.nix
     ./state.nix
     ./unbound.nix
-    ./vouch.nix
   ];
 
   age.secrets = {
     acme.file = ./acme.age;
     agent.file = ./agent.age;
     ddns.file = ./ddns.age;
+    oauth2.file = ./oauth2.age;
     rootPassword.file = ./password.age;
   };
 
@@ -158,9 +158,7 @@
         credentialsFile = config.age.secrets.acme.path;
         dnsProvider = "cloudflare";
       };
-      certs = {
-        "stash.meurer.org" = { };
-      };
+      certs."stash.nozick.meurer.org" = { };
     };
     pam.loginLimits = [
       { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
@@ -184,16 +182,28 @@
       resolver.addresses = [ "127.0.0.1:53" ];
       resolver.ipv6 = false;
       virtualHosts = {
-        "stash.meurer.org" = {
-          useACMEHost = "stash.meurer.org";
-          forceSSL = true;
+        "stash.nozick.meurer.org" = {
+          useACMEHost = "stash.nozick.meurer.org";
           kTLS = true;
+          forceSSL = true;
           locations."/" = {
             proxyPass = "http://127.0.0.1:9999";
             proxyWebsockets = true;
           };
+          extraConfig = ''
+            ssl_client_certificate /etc/ssl/certs/origin-pull-ca.pem;
+            ssl_verify_client on;
+          '';
         };
       };
+    };
+    oauth2_proxy = {
+      enable = true;
+      cookie.domain = ".meurer.org";
+      email.domains = [ "meurer.org" ];
+      keyFile = config.age.secrets.oauth2.path;
+      nginx.virtualHosts = [ "stash.nozick.meurer.org" ];
+      reverseProxy = true;
     };
     openssh.extraConfig = ''
       MaxStartups 40:30:120

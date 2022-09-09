@@ -4,12 +4,16 @@
     "/var/lib/prometheus2"
   ];
 
-  security.acme.certs."grafana.meurer.org" = { };
+  security.acme.certs."grafana.nozick.meurer.org" = { };
 
   services.grafana = {
     enable = true;
     addr = "127.0.0.1";
-    extraOptions.DASHBOARDS_MIN_REFRESH_INTERVAL = "1s";
+    domain = "grafana.nozick.meurer.org";
+    extraOptions = {
+      DASHBOARDS_MIN_REFRESH_INTERVAL = "1s";
+      AUTH_PROXY_ENABLED = "true";
+    };
   };
 
   services.prometheus = {
@@ -45,10 +49,19 @@
     };
   };
 
-  services.nginx.virtualHosts."grafana.meurer.org" = {
-    useACMEHost = "grafana.meurer.org";
+  services.nginx.virtualHosts."grafana.nozick.meurer.org" = {
+    useACMEHost = "grafana.nozick.meurer.org";
     forceSSL = true;
     kTLS = true;
-    locations."/".proxyPass = "http://127.0.0.1:3000";
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:3000";
+      proxyWebsockets = true;
+    };
+    extraConfig = ''
+      ssl_client_certificate /etc/ssl/certs/origin-pull-ca.pem;
+      ssl_verify_client on;
+    '';
   };
+
+  services.oauth2_proxy.nginx.virtualHosts = [ "grafana.nozick.meurer.org" ];
 }

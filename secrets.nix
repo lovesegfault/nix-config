@@ -20,7 +20,7 @@ with hosts;
   "hosts/nozick/acme.age".publicKeys = [ bemeurer nozick ];
   "hosts/nozick/ddns.age".publicKeys = [ bemeurer nozick ];
   "hosts/nozick/nextcloud.age".publicKeys = [ bemeurer nozick ];
-  "hosts/nozick/vouch.age".publicKeys = [ bemeurer nozick ];
+  "hosts/nozick/oauth2.age".publicKeys = [ bemeurer nozick ];
   "hardware/nixos-aarch64-builder/key.age".publicKeys = [ bemeurer aurelius foucault jung spinoza ];
   "users/bemeurer/password.age".publicKeys = [ bemeurer ] ++ (attrValues hosts);
   "users/bemeurer/activate-token.age".publicKeys = [ bemeurer ];

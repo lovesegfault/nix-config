@@ -6,7 +6,7 @@
     allowedUDPPorts = [ 49330 ];
   };
 
-  security.acme.certs."deluge.meurer.org" = { };
+  security.acme.certs."deluge.nozick.meurer.org" = { };
 
   services.deluge = {
     enable = true;
@@ -14,8 +14,8 @@
     web.enable = true;
   };
 
-  services.nginx.virtualHosts."deluge.meurer.org" = {
-    useACMEHost = "deluge.meurer.org";
+  services.nginx.virtualHosts."deluge.nozick.meurer.org" = {
+    useACMEHost = "deluge.nozick.meurer.org";
     forceSSL = true;
     kTLS = true;
     locations."/".proxyPass = "http://127.0.0.1:8112";
@@ -24,6 +24,8 @@
       ssl_verify_client on;
     '';
   };
+
+  services.oauth2_proxy.nginx.virtualHosts = [ "deluge.nozick.meurer.org" ];
 
   users.groups.media.members = [ "deluge" ];
 }
