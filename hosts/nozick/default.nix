@@ -131,7 +131,7 @@
     hostName = "nozick";
     hostId = "d0d7d1dc";
     firewall = {
-      allowedTCPPorts = [ 443 32400 ];
+      allowedTCPPorts = [ 80 443 32400 ];
       allowedUDPPorts = [ 32400 ];
       logRefusedConnections = false;
     };
