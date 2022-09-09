@@ -11,8 +11,20 @@
     addr = "127.0.0.1";
     domain = "grafana.nozick.meurer.org";
     extraOptions = {
-      DASHBOARDS_MIN_REFRESH_INTERVAL = "1s";
+      AUTH_BASIC_ENABLED = "false";
+      AUTH_DISABLE_LOGIN_FORM = "true";
+      AUTH_LOGIN_COOKIE_NAME = "_oauth2_proxy";
+      AUTH_OAUTH_AUTO_LOGIN = "true";
+      AUTH_PROXY_AUTO_SIGN_UP = "true";
       AUTH_PROXY_ENABLED = "true";
+      AUTH_PROXY_ENABLE_LOGIN_TOKEN = "false";
+      AUTH_PROXY_HEADERS = "Name:X-User Email:X-Email";
+      AUTH_PROXY_HEADER_NAME = "X-Email";
+      AUTH_PROXY_HEADER_PROPERTY = "email";
+      AUTH_SIGNOUT_REDIRECT_URL = "https://grafana.nozick.meurer.org/oauth2/sign_out";
+      USERS_ALLOW_SIGNUP = "false";
+      USERS_AUTO_ASSIGN_ORG = "true";
+      USERS_AUTO_ASSIGN_ORG_ROLE = "Admin";
     };
   };
 

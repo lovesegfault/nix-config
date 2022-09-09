@@ -204,7 +204,12 @@
       keyFile = config.age.secrets.oauth2.path;
       nginx.virtualHosts = [ "stash.nozick.meurer.org" ];
       reverseProxy = true;
-      extraConfig.whitelist-domain = ".nozick.meurer.org";
+      passBasicAuth = true;
+      setXauthrequest = true;
+      extraConfig = {
+        whitelist-domain = "*.nozick.meurer.org";
+        cookie-samesite = "lax";
+      };
     };
     openssh.extraConfig = ''
       MaxStartups 40:30:120
