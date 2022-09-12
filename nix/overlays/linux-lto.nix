@@ -1,4 +1,4 @@
-final:
+final: _:
 let
   inherit (final) lib linuxKernel;
   inherit (lib.kernel) yes no;
@@ -76,7 +76,7 @@ let
   zfs = kernels.linux_5_18;
   latest = kernels.linux_5_19;
 in
-_: {
+{
   linuxPackages_latest_lto = packagesFor (fullLTO latest);
 
   linuxPackages_zfs_lto_skylake = packagesFor

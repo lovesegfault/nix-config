@@ -5,13 +5,18 @@
 }:
 
 let
-  inherit (nixpkgs.lib) composeManyExtensions;
-  inherit (builtins) attrNames readDir;
-  localOverlays = map
-    (f: import (./overlays + "/${f}"))
-    (attrNames (readDir ./overlays));
+  inherit (nixpkgs) lib;
+  localOverlays =
+    lib.mapAttrs'
+      (f: _: lib.nameValuePair
+        (lib.removeSuffix ".nix" f)
+        (import (./overlays + "/${f}")))
+      (builtins.readDir ./overlays);
+
 in
-composeManyExtensions (localOverlays ++ [
-  deploy-rs.overlay
-  ragenix.overlay
-])
+localOverlays // {
+  default = lib.composeManyExtensions ((lib.attrValues localOverlays) ++ [
+    deploy-rs.overlay
+    ragenix.overlay
+  ]);
+}

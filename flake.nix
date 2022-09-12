@@ -54,7 +54,7 @@
     {
       deploy = import ./nix/deploy.nix inputs;
 
-      overlays.default = import ./nix/overlay.nix inputs;
+      overlays = import ./nix/overlay.nix inputs;
 
       darwinConfigurations = import ./nix/darwin.nix inputs;
 
