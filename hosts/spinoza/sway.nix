@@ -29,7 +29,7 @@
           };
         };
         output = {
-          "Unknown 0x4167 0x00000000" = {
+          "eDP-1" = {
             mode = "2880x1800@60Hz";
             position = "0,0";
             scale = "1";
