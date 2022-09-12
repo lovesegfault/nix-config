@@ -1,6 +1,7 @@
 { config, nixos-hardware, pkgs, ... }: {
   imports = [
     nixos-hardware.common-cpu-amd
+    nixos-hardware.common-cpu-amd-pstate
     nixos-hardware.common-gpu-amd
     nixos-hardware.common-pc-laptop-ssd
     ../../core
