@@ -47,6 +47,7 @@
 
     programs.mako.font = "monospace 18";
 
+    programs.waybar.settings.main.temperature.hwmon-path = "/sys/class/hwmon/hwmon3/temp1_input";
     programs.waybar.style = ''
       * {
         border: none;

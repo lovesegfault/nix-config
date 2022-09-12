@@ -57,7 +57,6 @@
         format-alt = "{ifname}: {ipaddr}/{cidr}";
       };
       temperature = {
-        thermal-zone = lib.mkDefault 0;
         critical-threshold = lib.mkDefault 90;
         format = "{temperatureC}°C {icon}";
         format-icons = [ "" "" "" ];
