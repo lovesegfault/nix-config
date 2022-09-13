@@ -7,8 +7,10 @@ let
     { config, pkgs, ... }: {
       imports = [ (../hosts + "/${hostName}") ];
       nix.registry = {
-        templates.flake = templates;
         nixpkgs.flake = nixpkgs;
+        p.flake = nixpkgs;
+        pkgs.flake = nixpkgs;
+        templates.flake = templates;
       };
 
       home = {
