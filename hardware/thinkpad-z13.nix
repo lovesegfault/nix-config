@@ -1,4 +1,4 @@
-{ nixos-hardware, pkgs, ... }: {
+{ config, nixos-hardware, pkgs, ... }: {
   imports = [
     nixos-hardware.common-cpu-amd
     nixos-hardware.common-gpu-amd
@@ -64,6 +64,12 @@
         STOP_CHARGE_THRESH_BAT0 = 80;
       };
     };
+    udev.extraRules = ''
+      SUBSYSTEM=="power_supply", KERNEL=="AC", ATTR{online}=="0", RUN+="${config.systemd.package}/bin/systemctl start battery.target"
+      SUBSYSTEM=="power_supply", KERNEL=="AC", ATTR{online}=="0", RUN+="${config.systemd.package}/bin/systemctl stop ac.target"
+      SUBSYSTEM=="power_supply", KERNEL=="AC", ATTR{online}=="1", RUN+="${config.systemd.package}/bin/systemctl start ac.target"
+      SUBSYSTEM=="power_supply", KERNEL=="AC", ATTR{online}=="1", RUN+="${config.systemd.package}/bin/systemctl stop battery.target"
+    '';
     upower = {
       enable = true;
       # FIXME: When I swap to a larger NVME, this should be "Hibernate"
@@ -71,4 +77,18 @@
     };
     xserver.dpi = 250;
   };
+
+  systemd.targets = {
+    ac = {
+      description = "On AC power";
+      unitConfig.DefaultDependencies = false;
+    };
+    battery = {
+      description = "On battery power";
+      unitConfig.DefaultDependencies = false;
+    };
+  };
+
+  systemd.services.tailscaled.partOf = [ "ac.target" ];
+  systemd.services.syncthing.partOf = [ "ac.target" ];
 }
