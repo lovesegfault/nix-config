@@ -42,6 +42,8 @@
     ];
   };
 
+  powerManagement.cpuFreqGovernor = "schedutil";
+
   services = {
     fprintd.enable = true;
     fwupd.enable = true;
