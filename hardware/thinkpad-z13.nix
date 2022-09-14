@@ -10,7 +10,7 @@
 
   boot = {
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
-    kernelModules = [ "amd-pstate" "kvm-amd" "thinkpad_acpi" ];
+    kernelModules = [ "amd-pstate" "cpufreq_ondemand" "kvm-amd" "thinkpad_acpi" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages_latest_lto_zen3;
     tmpOnTmpfs = true;
@@ -42,8 +42,6 @@
     ];
   };
 
-  powerManagement.cpuFreqGovernor = "schedutil";
-
   services = {
     fprintd.enable = true;
     fwupd.enable = true;
@@ -51,8 +49,8 @@
     tlp = {
       enable = true;
       settings = {
-        CPU_SCALING_GOVERNOR_ON_AC = "schedutil";
-        CPU_SCALING_GOVERNOR_ON_BAT = "schedutil";
+        CPU_SCALING_GOVERNOR_ON_AC = "ondemand";
+        CPU_SCALING_GOVERNOR_ON_BAT = "ondemand";
 
         PLATFORM_PROFILE_ON_AC = "performance";
         PLATFORM_PROFILE_ON_BAT = "low-power";
