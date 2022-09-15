@@ -85,7 +85,7 @@
     };
   };
 
-  powerManagement.cpuFreqGovernor = "schedutil";
+  powerManagement.cpuFreqGovernor = "ondemand";
 
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
