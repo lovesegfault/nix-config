@@ -90,6 +90,26 @@
     };
   };
 
-  systemd.services.tailscaled.partOf = [ "ac.target" ];
-  systemd.services.syncthing.partOf = [ "ac.target" ];
+  systemd.services = {
+    cpufreq-conservative-sampling-rate = {
+      after = [ "battery.target" ];
+      bindsTo = [ "battery.target" ];
+      wantedBy = [ "battery.target" ];
+      serviceConfig.Type = "oneshot";
+      script = ''
+        echo "98304" > /sys/devices/system/cpu/cpufreq/conservative/sampling_rate
+      '';
+    };
+    cpufreq-ondemand-sampling-rate = {
+      after = [ "ac.target" ];
+      bindsTo = [ "ac.target" ];
+      wantedBy = [ "ac.target" ];
+      serviceConfig.Type = "oneshot";
+      script = ''
+        echo "98304" > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+      '';
+    };
+    tailscaled.partOf = [ "ac.target" ];
+    syncthing.partOf = [ "ac.target" ];
+  };
 }
