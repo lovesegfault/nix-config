@@ -34,6 +34,7 @@
             position = "0,0";
             scale = "1";
             subpixel = "rgb";
+            max_render_time = "3";
           };
         };
       };
