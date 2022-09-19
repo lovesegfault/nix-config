@@ -6,24 +6,51 @@
     clock24 = true;
     escapeTime = 0;
     newSession = true;
-    plugins = with pkgs.tmuxPlugins; [ prefix-highlight ];
+    plugins = with pkgs.tmuxPlugins; [
+      vim-tmux-navigator
+    ];
     secureSocket = false;
     terminal = "tmux-256color";
     historyLimit = 30000;
+    keyMode = "vi";
+    prefix = "C-a";
     extraConfig = ''
-      unbind C-b
-      set-option -g prefix C-g
-      bind-key C-g last-window
-      bind-key v split-window -h -c "#{pane_current_path}"
-      bind-key b split-window -c "#{pane_current_path}"
-      bind-key g send-prefix
-      bind-key -n S-Left swap-window -t -1
-      bind-key -n S-Right swap-window -t +1
-      bind-key -n M-h select-pane -L
-      bind-key -n M-j select-pane -D
-      bind-key -n M-k select-pane -U
-      bind-key -n M-l select-pane -R
-      bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+      set -ga terminal-overrides ",*256col*:Tc"
+
+      bind C-a last-window
+      bind a send-prefix
+      bind R source-file ~/.tmux.conf \; display-message "Config reloaded..."
+
+      bind : command-prompt
+      bind r refresh-client
+      bind L clear-history
+
+      bind space next-window
+      bind bspace previous-window
+      bind enter next-layout
+
+      bind v split-window -h -c "#{pane_current_path}"
+      bind s split-window -v -c "#{pane_current_path}"
+      bind h select-pane -L
+      bind j select-pane -D
+      bind k select-pane -U
+      bind l select-pane -R
+      bind | split-window -h -c "#{pane_current_path}"
+      bind - split-window -v -c "#{pane_current_path}"
+
+      bind C-o rotate-window
+
+      bind + select-layout main-horizontal
+      bind = select-layout main-vertical
+
+      bind a last-pane
+      bind q display-panes
+      bind c new-window
+      bind t next-window
+      bind T previous-window
+
+      bind [ copy-mode
+      bind ] paste-buffer
 
       set -g base-index 0
       set-window-option -g automatic-rename
@@ -41,11 +68,7 @@
       set -g pane-active-border-style "bg=$bg,fg=$border_active_fg"
       set -g window-status-current-style "fg=$border_active_fg"
       set -g window-status-style "fg=$fg"
-
-      set -g status-right '#{prefix_highlight} %a | %Y-%m-%d | %H:%M'
-
-      set -g default-terminal "tmux-256color"
-      set -ga terminal-overrides ",*256col*:Tc"
+      set -g status-right '%a | %Y-%m-%d | %H:%M'
     '';
   };
 }

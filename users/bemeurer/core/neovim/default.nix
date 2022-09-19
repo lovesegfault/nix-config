@@ -48,6 +48,7 @@
         vim-rhubarb
         vim-sleuth
         vim-surround
+        vim-tmux-navigator
         vim-visual-multi
 
         # completion
