@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ../../users/bemeurer/core
     ../../users/bemeurer/dev
@@ -31,7 +31,10 @@
     fish.shellInit = ''
       fish_add_path --append --path "$HOME/.toolbox/bin"
     '';
-    git.lfs.enable = true;
+    git = {
+      lfs.enable = true;
+      userEmail = lib.mkForce "bemeurer@amazon.com";
+    };
     zsh = {
       initExtraBeforeCompInit = ''
         fpath+=("$HOME/.zsh/completion")
