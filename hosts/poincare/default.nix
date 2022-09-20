@@ -180,6 +180,8 @@ in
     zsh.enable = true;
   };
 
+  security.pam.enableSudoTouchIdAuth = true;
+
   services = {
     skhd = {
       enable = true;
@@ -187,7 +189,6 @@ in
         cmd - return : kitty -1 -d ~
       '';
     };
-
     nix-daemon = {
       enable = true;
       logFile = "/var/log/nix-daemon.log";
