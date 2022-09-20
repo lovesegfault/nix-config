@@ -32,9 +32,10 @@
     ];
     shellAliases = {
       cat = "bat";
-      ls = "exa --binary --header --long --classify";
-      la = "ls --all";
+      cls = "clear";
       l = "ls";
+      la = "ls --all";
+      ls = "exa --binary --header --long --classify";
     };
   };
 
