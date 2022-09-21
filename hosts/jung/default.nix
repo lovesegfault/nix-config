@@ -124,6 +124,10 @@
     };
   };
 
+  systemd.tmpfiles.rules = [
+    "w- /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate - - - - 98304"
+  ];
+
   swapDevices = [{ device = "/dev/disk/by-uuid/a66412e6-ff55-4053-b436-d066319ed922"; }];
 
   time.timeZone = "America/New_York";
