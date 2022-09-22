@@ -85,7 +85,7 @@
     };
   };
 
-  powerManagement.cpuFreqGovernor = "ondemand";
+  powerManagement.cpuFreqGovernor = "performance";
 
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
@@ -123,10 +123,6 @@
       dhcpV6Config.RouteMetric = 40;
     };
   };
-
-  systemd.tmpfiles.rules = [
-    "w- /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate - - - - 98304"
-  ];
 
   swapDevices = [{ device = "/dev/disk/by-uuid/a66412e6-ff55-4053-b436-d066319ed922"; }];
 
