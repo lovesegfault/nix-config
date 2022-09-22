@@ -14,8 +14,6 @@
     neovim = {
       enable = true;
 
-      extraConfig = "lua require('init')";
-
       plugins = with pkgs.vimPlugins; [
         # ui
         bufferline-nvim
@@ -103,4 +101,5 @@
   };
 
   xdg.configFile."nvim/lua".source = ./lua;
+  xdg.configFile."nvim/init.lua".source = ./init.lua;
 }

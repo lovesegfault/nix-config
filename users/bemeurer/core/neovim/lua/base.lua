@@ -1,4 +1,4 @@
-local utils = require("lovesegfault.utils")
+local utils = require("utils")
 local map = utils.map
 
 -- local fn = vim.fn

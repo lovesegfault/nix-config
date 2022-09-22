@@ -10,7 +10,7 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 vim.api.nvim_set_keymap(
   "n",
   "K",
-  [[<cmd>lua require("lovesegfault.utils").show_documentation()<CR>]],
+  [[<cmd>lua require("utils").show_documentation()<CR>]],
   { noremap = true, silent = true }
 )
 
