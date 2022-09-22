@@ -73,10 +73,12 @@ let
 
   inherit (linuxKernel) kernels packagesFor;
 
-  zfs = kernels.linux_5_18;
+  zfs = kernels.linux_5_15;
   latest = kernels.linux_5_19;
 in
 {
+  linuxPackages_zfs_lto = packagesFor (fullLTO zfs);
+
   linuxPackages_latest_lto = packagesFor (fullLTO latest);
 
   linuxPackages_zfs_lto_skylake = packagesFor
