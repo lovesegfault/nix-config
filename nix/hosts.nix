@@ -11,12 +11,6 @@ let
       hostPlatform = "x86_64-linux";
       homeDirectory = "/home/bemeurer";
     };
-    foucault = {
-      type = "nixos";
-      address = "100.98.82.56";
-      hostPlatform = "x86_64-linux";
-      pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN0IrRSWNqfLBqXHlM0zpyP21/UGiztIQ+y3KDx+R7ux";
-    };
     goethe = {
       type = "home-manager";
       hostPlatform = "x86_64-linux";
