@@ -110,6 +110,8 @@
       '';
     };
     tailscaled.partOf = [ "ac.target" ];
+    tailscaled.wantedBy = [ "ac.target" ];
     syncthing.partOf = [ "ac.target" ];
+    syncthing.wantedBy = [ "ac.target" ];
   };
 }
