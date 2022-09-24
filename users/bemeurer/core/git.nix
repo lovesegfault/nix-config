@@ -51,6 +51,7 @@
     gmc = "${gm} --continue";
     gpl = "git pull --rebase";
     gps = "git push";
+    gpsf = "git push --force-with-lease";
     grb = "git rebase";
     grba = "${grb} --abort";
     grbc = "${grb} --continue";
