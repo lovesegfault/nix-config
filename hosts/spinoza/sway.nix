@@ -3,8 +3,8 @@
 
   home-manager.users.bemeurer = {
     home.sessionVariables = {
-      GDK_DPI_SCALE = "1.2";
-      ELM_SCALE = "1.2";
+      GDK_DPI_SCALE = "1.3";
+      ELM_SCALE = "1.3";
     };
 
     wayland.windowManager.sway = {
