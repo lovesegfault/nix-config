@@ -158,7 +158,7 @@ in
       connect-timeout = 5;
       experimental-features = [ "nix-command" "flakes" "recursive-nix" ];
       http-connections = 0;
-      sandbox = true;
+      sandbox = false;
       substituters = [
         "https://nix-config.cachix.org"
         "https://nix-community.cachix.org"
