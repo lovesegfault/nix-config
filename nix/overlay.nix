@@ -17,6 +17,6 @@ in
 localOverlays // {
   default = lib.composeManyExtensions ((lib.attrValues localOverlays) ++ [
     deploy-rs.overlay
-    ragenix.overlay
+    ragenix.overlays.default
   ]);
 }
