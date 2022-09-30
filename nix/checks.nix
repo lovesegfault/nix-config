@@ -12,25 +12,12 @@ with self.pkgs.${system};
     {
       src = lib.cleanSource ../.;
       hooks = {
+        actionlint.enable = true;
+        luacheck.enable = true;
         nix-linter.enable = true;
         nixpkgs-fmt.enable = true;
         statix.enable = true;
-        stylua = {
-          enable = true;
-          types = [ "file" "lua" ];
-          entry = "${stylua}/bin/stylua";
-        };
-        luacheck = {
-          enable = true;
-          types = [ "file" "lua" ];
-          entry = "${luajitPackages.luacheck}/bin/luacheck --std luajit --globals vim -- ";
-        };
-        actionlint = {
-          enable = true;
-          files = "^.github/workflows/";
-          types = [ "yaml" ];
-          entry = "${actionlint}/bin/actionlint";
-        };
+        stylua.enable = true;
       };
       settings.nix-linter.checks = [
         "DIYInherit"
