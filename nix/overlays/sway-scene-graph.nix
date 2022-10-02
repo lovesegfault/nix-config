@@ -3,10 +3,10 @@ final: prev: {
     version = "unstable-2022-09-11";
     src = final.fetchFromGitLab {
       domain = "gitlab.freedesktop.org";
-      owner = "wlroots";
+      owner = "Nefsen402";
       repo = "wlroots";
-      rev = "4cc3abb96676afaffda064ededb9c5ebe92a821f";
-      hash = "sha256-wQGEZOj/j1tUeJg5l0hLPR9poTUiI4uciA40HAjGJws=";
+      rev = "63353163271c6e534c293a93699f33a709dbee95";
+      hash = "sha256-ROAWTZ2vxT99mbkwOXb3CEXsB/FadLDUvuUt5XVcc1o=";
     };
   });
 
@@ -16,8 +16,8 @@ final: prev: {
     src = final.fetchFromGitHub {
       owner = "Nefsen402";
       repo = "sway";
-      rev = "4be5102e6504d70d2b73421e386a63fdf3039f9a";
-      hash = "sha256-doOqK6owQA7nZNDGQ9f/r4nzy+z7F0yNXhtlwlRbDLg=";
+      rev = "606cbfc28b6099f8dea036a2a11566111fd9e8d8";
+      hash = "sha256-QF6yVpp/GPgYwB28RBIT7Vehi1EJm+OOdeS4MOzl5u8=";
     };
 
     buildInputs = old.buildInputs ++ (with final; [
