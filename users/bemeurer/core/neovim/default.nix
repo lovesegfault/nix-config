@@ -1,6 +1,5 @@
 { lib, pkgs, ... }: {
   home = {
-    packages = with pkgs; [ neovim-remote ];
     sessionVariables = rec {
       EDITOR = "nvim";
       VISUAL = EDITOR;
