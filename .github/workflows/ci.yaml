@@ -15,7 +15,7 @@ jobs:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
             experimental-features = nix-command flakes recursive-nix
-      - uses: cachix/cachix-action@v10
+      - uses: cachix/cachix-action@v11
         with:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -67,7 +67,7 @@ jobs:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
             experimental-features = nix-command flakes recursive-nix
-      - uses: cachix/cachix-action@v10
+      - uses: cachix/cachix-action@v11
         with:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -117,7 +117,7 @@ jobs:
           )
           echo "${builder_cfg[*]}" | sudo tee /etc/nix/machines > /dev/null
           echo "${nix_cfg[*]}" | sudo tee -a /etc/nix/nix.conf > /dev/null
-      - uses: cachix/cachix-action@v10
+      - uses: cachix/cachix-action@v11
         with:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
