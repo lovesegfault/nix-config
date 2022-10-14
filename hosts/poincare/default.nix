@@ -69,14 +69,11 @@ in
       "google-chrome"
       "iterm2"
       "kitty"
-      "knockknock"
       "ksdiff"
-      "little-snitch"
       "lunar"
       "macupdater"
       "mullvadvpn"
       "nextcloud"
-      "oversight"
       "parallels"
       "plexamp"
       "prusaslicer"
@@ -101,7 +98,6 @@ in
       "Noizio" = 928871589;
       "Numbers" = 409203825;
       "Pages" = 409201541;
-      "Reeder" = 1529448980;
       "Slack" = 803453959;
       "Soulver 3" = 1508732804;
       "Speedtest" = 1153157709;
