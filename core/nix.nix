@@ -12,6 +12,8 @@
         "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
+      cores = 0;
+      max-jobs = "auto";
     };
     daemonCPUSchedPolicy = "batch";
     daemonIOSchedPriority = 5;
@@ -21,8 +23,6 @@
       experimental-features = nix-command flakes recursive-nix
       flake-registry = /etc/nix/registry.json
     '';
-    cores = 0;
-    max-jobs = "auto";
     optimise = {
       automatic = true;
       dates = [ "03:00" ];
