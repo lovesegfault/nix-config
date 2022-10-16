@@ -11,8 +11,6 @@
     fsType = "ext4";
   };
 
-  nix.settings.max-jobs = lib.mkDefault 4;
-
   swapDevices = lib.mkDefault [{
     device = "/swap";
     size = 2048;

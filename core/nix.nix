@@ -1,4 +1,4 @@
-{ config, ... }: {
+{
   nix = {
     settings = {
       allowed-users = [ "@wheel" ];
@@ -21,7 +21,8 @@
       experimental-features = nix-command flakes recursive-nix
       flake-registry = /etc/nix/registry.json
     '';
-    nrBuildUsers = config.nix.settings.max-jobs * 2;
+    cores = 0;
+    max-jobs = "auto";
     optimise = {
       automatic = true;
       dates = [ "03:00" ];

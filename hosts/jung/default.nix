@@ -75,10 +75,7 @@
   };
 
   nix = {
-    settings = {
-      max-jobs = 16;
-      system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-znver3" ];
-    };
+    settings.system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-znver3" ];
     gc = {
       automatic = true;
       dates = "02:30";

@@ -142,10 +142,7 @@
       automatic = true;
       options = "-d";
     };
-    settings = {
-      max-jobs = 8;
-      system-features = [ "benchmark" "nixos-test" "big-parallel" "kvm" ];
-    };
+    settings.system-features = [ "benchmark" "nixos-test" "big-parallel" "kvm" ];
   };
 
   powerManagement.cpuFreqGovernor = "performance";

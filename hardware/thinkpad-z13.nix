@@ -32,16 +32,13 @@
     opengl.enable = true;
   };
 
-  nix.settings = {
-    max-jobs = 16;
-    system-features = [
-      "benchmark"
-      "nixos-test"
-      "big-parallel"
-      "kvm"
-      "gccarch-znver3"
-    ];
-  };
+  nix.settings.system-features = [
+    "benchmark"
+    "nixos-test"
+    "big-parallel"
+    "kvm"
+    "gccarch-znver3"
+  ];
 
   services = {
     fprintd.enable = true;
