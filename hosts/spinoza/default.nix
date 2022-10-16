@@ -44,8 +44,14 @@
     };
     "/nix" = {
       device = "/dev/disk/by-uuid/9ea17c8d-62c0-44d8-952f-9438a3a46bf2";
-      fsType = "ext4";
-      options = [ "defaults" "noatime" "commit=15" ];
+      fsType = "btrfs";
+      options = [ "defaults" "noatime" "discard=async" "compress=zstd" "subvol=nix" ];
+      neededForBoot = true;
+    };
+    "/nix/state" = {
+      device = "/dev/disk/by-uuid/9ea17c8d-62c0-44d8-952f-9438a3a46bf2";
+      fsType = "btrfs";
+      options = [ "defaults" "noatime" "discard=async" "compress=zstd" "subvol=state" ];
       neededForBoot = true;
     };
   };
