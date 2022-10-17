@@ -89,6 +89,11 @@
   ];
 
   services = {
+    btrfs.autoScrub = {
+      enable = true;
+      fileSystems = [ "/nix" ];
+      interval = "weekly";
+    };
     geoclue2 = {
       enable = true;
       enable3G = false;
