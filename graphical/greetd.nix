@@ -7,15 +7,10 @@
   services.greetd =
     let
       theme = "${pkgs.ayu-theme-gtk}/share/themes/Ayu-Dark/gtk-3.0/gtk.css";
-      swayMin = pkgs.sway.override {
-        withBaseWrapper = false;
-        withGtkWrapper = false;
-        dbusSupport = false;
-      };
-      gtkgreetSwayCfg = pkgs.writeText "sway-config" ''
-        exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -s ${theme} -l; ${swayMin}/bin/swaymsg exit"
+      greetdSwayCfg = pkgs.writeText "sway-config" ''
+        exec "${lib.getExe pkgs.greetd.gtkgreet} -s ${theme} -l; ${pkgs.sway-unwrapped}/bin/swaymsg exit"
 
-        bindsym Mod4+shift+e exec ${swayMin}/bin/swaynag \
+        bindsym Mod4+shift+e exec ${pkgs.sway-unwrapped}/bin/swaynag \
         -t warning \
         -m 'What do you want to do?' \
         -b 'Poweroff' 'systemctl poweroff' \
@@ -29,7 +24,7 @@
       vt = 7;
       settings = {
         default_session = {
-          command = "${swayMin}/bin/sway --unsupported-gpu --config ${gtkgreetSwayCfg}";
+          command = "${pkgs.sway-unwrapped}/bin/sway --unsupported-gpu --config ${greetdSwayCfg}";
         };
       };
     };
