@@ -113,6 +113,19 @@
   };
 
   systemd.network.networks = {
+    anker = {
+      DHCP = "yes";
+      matchConfig.MACAddress = "f8:e4:3b:a9:9d:e2";
+      linkConfig = {
+        MTUBytes = "1400";
+        Multicast = true;
+        RequiredForOnline = "routable";
+      };
+      networkConfig = {
+        MulticastDNS = true;
+        LLMNR = true;
+      };
+    };
     wifi = {
       DHCP = "yes";
       matchConfig.MACAddress = "04:7b:cb:b2:47:de";
