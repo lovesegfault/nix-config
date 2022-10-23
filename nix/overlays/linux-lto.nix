@@ -65,8 +65,8 @@ let
       name = "more-uarches-for-kernel-5.17";
       patch = final.fetchpatch {
         name = "more-uarches-for-kernel-5.17";
-        url = "https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/master/more-uarches-for-kernel-5.17%2B.patch";
-        hash = "sha256-PYrvXEnkC5/KmCVBG+thlOTKD/LxI5cBcn7J4c/mg/0=";
+        url = "https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/e73759c808f500f412dedfd77ca6c1ade43675c9/more-uarches-for-kernel-5.17%2B.patch";
+        hash = "sha256-XOLR4MpyUWIy6ee1uDXGV/f483JjH1Sny+AQpC+baZc=";
       };
     };
   };
