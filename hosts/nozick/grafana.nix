@@ -8,23 +8,29 @@
 
   services.grafana = {
     enable = true;
-    addr = "127.0.0.1";
-    domain = "grafana.nozick.meurer.org";
-    extraOptions = {
-      AUTH_BASIC_ENABLED = "false";
-      AUTH_DISABLE_LOGIN_FORM = "true";
-      AUTH_LOGIN_COOKIE_NAME = "_oauth2_proxy";
-      AUTH_OAUTH_AUTO_LOGIN = "true";
-      AUTH_PROXY_AUTO_SIGN_UP = "true";
-      AUTH_PROXY_ENABLED = "true";
-      AUTH_PROXY_ENABLE_LOGIN_TOKEN = "false";
-      AUTH_PROXY_HEADERS = "Name:X-User Email:X-Email";
-      AUTH_PROXY_HEADER_NAME = "X-Email";
-      AUTH_PROXY_HEADER_PROPERTY = "email";
-      AUTH_SIGNOUT_REDIRECT_URL = "https://grafana.nozick.meurer.org/oauth2/sign_out";
-      USERS_ALLOW_SIGNUP = "false";
-      USERS_AUTO_ASSIGN_ORG = "true";
-      USERS_AUTO_ASSIGN_ORG_ROLE = "Admin";
+    settings = {
+      server = {
+        http_addr = "127.0.0.1";
+        domain = "grafana.nozick.meurer.org";
+      };
+      auth = {
+        "basic.enabled" = false;
+        disable_login_form = true;
+        login_cookie_name = "_oauth2_proxy";
+        oauth_auto_login = true;
+        signout_redirect_url = "https://grafana.nozick.meurer.org/oauth2/sign_out";
+        "proxy.auto_sign_up" = true;
+        "proxy.enabled" = true;
+        "proxy.enable_login_token" = false;
+        "proxy.headers" = "Name:X-User Email:X-Email";
+        "proxy.header_name" = "X-Email";
+        "proxy.header_property" = "email";
+      };
+      users = {
+        allow_signup = false;
+        auto_assign_org = true;
+        auto_assign_org_role = "Editor";
+      };
     };
   };
 
