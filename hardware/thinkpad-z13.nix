@@ -9,7 +9,7 @@
   ];
 
   boot = {
-    initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
+    initrd.availableKernelModules = [ "amd-pstate" "cpufreq_conservative" "nvme" "sd_mod" "thinkpad_acpi" "thunderbolt" "usb_storage" "xhci_pci" ];
     kernelModules = [ "amd-pstate" "cpufreq_conservative" "cpufreq_ondemand" "kvm-amd" "thinkpad_acpi" ];
     kernelParams = [
       "mem_sleep_default=deep"
