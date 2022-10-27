@@ -6,7 +6,10 @@
       enable = true;
       qemu = {
         package = pkgs.qemu_kvm;
-        ovmf.enable = true;
+        ovmf = {
+          enable = true;
+          packages = with pkgs; [ OVMFFull.fd ];
+        };
         swtpm.enable = true;
       };
     };
