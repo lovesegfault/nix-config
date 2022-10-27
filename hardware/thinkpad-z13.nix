@@ -11,7 +11,11 @@
   boot = {
     initrd.availableKernelModules = [ "amd-pstate" "cpufreq_conservative" "nvme" "sd_mod" "thinkpad_acpi" "thunderbolt" "usb_storage" "xhci_pci" ];
     kernelModules = [ "amd-pstate" "cpufreq_conservative" "cpufreq_ondemand" "kvm-amd" "thinkpad_acpi" ];
-    kernelParams = [ "mem_sleep_default=deep" ];
+    kernelParams = [
+      "mem_sleep_default=deep"
+      # FIXME: Remove these once a kernel fix comes up
+      "nvme_core.default_ps_max_latency_us=1000"
+    ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages_latest_lto_zen3;
     tmpOnTmpfs = true;
