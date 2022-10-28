@@ -116,8 +116,9 @@
     anker = {
       DHCP = "yes";
       matchConfig.MACAddress = "f8:e4:3b:a9:9d:e2";
+      dhcpV4Config.RouteMetric = 20;
+      dhcpV6Config.RouteMetric = 20;
       linkConfig = {
-        MTUBytes = "1400";
         Multicast = true;
         RequiredForOnline = "routable";
       };
@@ -129,6 +130,8 @@
     wifi = {
       DHCP = "yes";
       matchConfig.MACAddress = "04:7b:cb:b2:47:de";
+      dhcpV4Config.RouteMetric = 40;
+      dhcpV6Config.RouteMetric = 40;
       linkConfig.Multicast = true;
       networkConfig = {
         MulticastDNS = true;
