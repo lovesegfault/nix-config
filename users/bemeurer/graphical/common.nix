@@ -93,6 +93,10 @@ let
           command = "floating enable";
           criteria.title = "Plexamp";
         }
+        {
+          command = "floating enable, sticky enable";
+          criteria.app_id = "polkit-gnome-authentication-agent-1";
+        }
       ];
     };
   };
