@@ -50,8 +50,8 @@ jobs:
 
           jq -c 'map(.system) | unique | sort' hosts.json > systems.json
 
-          echo "::set-output name=hosts::$(cat hosts.json)"
-          echo "::set-output name=systems::$(cat systems.json)"
+          echo "hosts=$(cat hosts.json)" >> "$GITHUB_OUTPUT"
+          echo "systems=$(cat systems.json)" >> "$GITHUB_OUTPUT"
 
   build-shell:
     runs-on: ${{ matrix.system }}

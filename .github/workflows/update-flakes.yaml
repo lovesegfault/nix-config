@@ -24,7 +24,7 @@ jobs:
                   | {flake: keys}'
           }
 
-          echo "::set-output name=matrix::$(get_flake_inputs)"
+          echo "matrix=$(get_flake_inputs)" >> "$GITHUB_OUTPUT"
   update-flake:
     name: update-${{ matrix.flake }}
     runs-on: ubuntu-latest
