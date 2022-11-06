@@ -4,7 +4,10 @@
     allowedUDPPorts = [ 55000 ];
   };
 
-  services.roon-server.enable = true;
+  services.roon-server = {
+    enable = true;
+    openFirewall = true;
+  };
 
   sound.enable = true;
 
