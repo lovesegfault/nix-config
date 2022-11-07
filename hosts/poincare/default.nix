@@ -101,9 +101,10 @@ in
       "Slack" = 803453959;
       "Soulver 3" = 1508732804;
       "Speedtest" = 1153157709;
+      "Tailscale" = 1475387142;
+      "The Clock" = 488764545;
       "The Unarchiver" = 425424353;
       "Xcode" = 497799835;
-      "Tailscale" = 1475387142;
     };
   };
 
