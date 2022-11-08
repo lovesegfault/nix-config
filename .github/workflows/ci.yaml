@@ -138,19 +138,6 @@ jobs:
     needs: [ build-host, build-shell ]
     if: always()
     steps:
-      - name: check
-        run: |
-          status_uri="https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/jobs"
-          user_str="admin:${{ secrets.PAT }}"
-          run="$(curl -X GET -s -u "${user_str}" "${status_uri}")"
-          jobs="$(jq '.jobs[]' <<< "${run}")"
-          statuses="$(jq '{job: .name, status: .conclusion}' <<< "${jobs}")"
-          builds="$(jq 'select(.job | contains("build"))' <<< "${statuses}")"
-          failed="$(jq 'select(.status | contains("success") | not)' <<< "${builds}")"
-
-          if [ -z "${failed}" ]; then
-            echo "OK"
-          else
-            echo "FAIL"
-            exit 1
-          fi
+      - uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
