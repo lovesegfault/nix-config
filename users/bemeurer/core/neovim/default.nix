@@ -76,18 +76,16 @@
                   drv.pname
                   (map (v: "tree-sitter-${v}-grammar") [
                     "agda"
+                    "bash"
                     "fluent"
                     "kotlin"
-                    "markdown"
-                    "supercollider"
-                    "swift"
-                    "verilog"
+                    "ql-dbscheme"
+                    "sql"
                   ])
               )
               pkgs.tree-sitter.allGrammars
           )
         )
-        nvim-treesitter-textobjects
         editorconfig-vim
         gentoo-syntax
         lalrpop-vim
