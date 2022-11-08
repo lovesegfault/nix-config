@@ -30,6 +30,7 @@
         stabilize-nvim
         todo-comments-nvim
         trouble-nvim
+        true-zen-nvim
 
         # tooling
         nvim-bufdel

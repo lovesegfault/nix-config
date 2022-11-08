@@ -94,3 +94,6 @@ map("n", "<leader>gb", [[<cmd>lua require("telescope.builtin").git_bcommits()<cr
 map("n", "<leader>gs", [[<cmd>lua require("telescope.builtin").git_status()<cr>]], { silent = true })
 map("n", "<leader>gt", [[<cmd>lua require("telescope.builtin").git_stash()<cr>]], { silent = true })
 map("n", "<leader>tr", [[<cmd>lua require("telescope.builtin").treesitter()<cr>]], { silent = true })
+
+-- true-zen
+require("true-zen").setup()
