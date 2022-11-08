@@ -23,8 +23,8 @@
         lsp_signature-nvim
         neovim-ayu
         numb-nvim
-        nvim-gps
         nvim-lightbulb
+        nvim-navic
         nvim-treesitter-context
         nvim-web-devicons
         stabilize-nvim

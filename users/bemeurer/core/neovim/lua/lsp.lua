@@ -1,9 +1,12 @@
 local nvim_lsp = require("lspconfig")
+local navic = require("nvim-navic")
+local lsp_signature = require("lsp_signature")
 
 local flags = { debounce_text_changes = 150 }
 
+local capabilities = {}
 -- snippet support
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+capabilities = vim.tbl_extend("keep", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 -- support crates and LSP
 vim.api.nvim_set_keymap(
@@ -14,7 +17,7 @@ vim.api.nvim_set_keymap(
 )
 
 -- bindings
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   local map = vim.api.nvim_buf_set_keymap
@@ -35,7 +38,8 @@ local on_attach = function(_, bufnr)
   map(bufnr, "n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
   map(bufnr, "n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 
-  require("lsp_signature").on_attach()
+  lsp_signature.on_attach({}, bufnr)
+  navic.attach(client, bufnr)
 end
 
 -- Enable the following language servers
