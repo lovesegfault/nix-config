@@ -30,7 +30,6 @@ let
       {
         foot = applyGraphite (applyHost prev.foot);
         neovim-unwrapped = applyGraphite (applyHost prev.neovim-unwrapped);
-        nix = applyGraphite (applyHost prev.nix);
         sway-unwrapped = applyGraphite (applyHost prev.sway-unwrapped);
         waybar = applyGraphite (applyHost prev.waybar);
         wireplumber = applyGraphite (applyHost prev.wireplumber);
