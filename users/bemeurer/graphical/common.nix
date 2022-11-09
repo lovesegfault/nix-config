@@ -53,28 +53,24 @@ let
       smartGaps = true;
     };
 
-    keybindings =
-      let
-        execSpawn = cmd: "exec --no-startup-id ${pkgs.spawn}/bin/spawn ${cmd}";
-      in
-      lib.mkOptionDefault {
-        "${modifier}+0" = "workspace 10";
-        "${modifier}+Shift+0" = "move container to workspace 10";
-        "${modifier}+comma" = "workspace prev";
-        "${modifier}+period" = "workspace next";
-        "Mod1+Tab" = "workspace next";
-        "Mod4+Tab" = "workspace prev";
-        "XF86AudioLowerVolume" = execSpawn "${lib.getExe pkgs.ponymix} decrease 1";
-        "XF86AudioMicMute" = execSpawn "${lib.getExe pkgs.ponymix} -t source toggle";
-        "XF86AudioMute" = execSpawn "${lib.getExe pkgs.ponymix} -t sink toggle";
-        "XF86AudioNext" = execSpawn "${lib.getExe pkgs.playerctl} next";
-        "XF86AudioPause" = execSpawn "${lib.getExe pkgs.playerctl} pause";
-        "XF86AudioPlay" = execSpawn "${lib.getExe pkgs.playerctl} play";
-        "XF86AudioPrev" = execSpawn "${lib.getExe pkgs.playerctl} previous";
-        "XF86AudioRaiseVolume" = execSpawn "${lib.getExe pkgs.ponymix} increase 1";
-        "XF86MonBrightnessDown" = execSpawn "${lib.getExe pkgs.brillo} -e -U 1";
-        "XF86MonBrightnessUp" = execSpawn "${lib.getExe pkgs.brillo} -e -A 1";
-      };
+    keybindings = lib.mkOptionDefault {
+      "${modifier}+0" = "workspace 10";
+      "${modifier}+Shift+0" = "move container to workspace 10";
+      "${modifier}+comma" = "workspace prev";
+      "${modifier}+period" = "workspace next";
+      "Mod1+Tab" = "workspace next";
+      "Mod4+Tab" = "workspace prev";
+      "XF86AudioLowerVolume" = "${lib.getExe pkgs.ponymix} decrease 1";
+      "XF86AudioMicMute" = "${lib.getExe pkgs.ponymix} -t source toggle";
+      "XF86AudioMute" = "${lib.getExe pkgs.ponymix} -t sink toggle";
+      "XF86AudioNext" = "${lib.getExe pkgs.playerctl} next";
+      "XF86AudioPause" = "${lib.getExe pkgs.playerctl} pause";
+      "XF86AudioPlay" = "${lib.getExe pkgs.playerctl} play";
+      "XF86AudioPrev" = "${lib.getExe pkgs.playerctl} previous";
+      "XF86AudioRaiseVolume" = "${lib.getExe pkgs.ponymix} increase 1";
+      "XF86MonBrightnessDown" = "${lib.getExe pkgs.brillo} -e -U 1";
+      "XF86MonBrightnessUp" = "${lib.getExe pkgs.brillo} -e -A 1";
+    };
 
     modifier = "Mod1";
 
