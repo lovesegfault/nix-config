@@ -14,7 +14,7 @@
     kernelParams = [
       "mem_sleep_default=deep"
       # FIXME: Remove these once a kernel fix comes up
-      "nvme_core.default_ps_max_latency_us=1000"
+      "nvme_core.default_ps_max_latency_us=0"
     ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages_latest_lto_zen3;
