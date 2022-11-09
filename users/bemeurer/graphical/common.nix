@@ -60,16 +60,16 @@ let
       "${modifier}+period" = "workspace next";
       "Mod1+Tab" = "workspace next";
       "Mod4+Tab" = "workspace prev";
-      "XF86AudioLowerVolume" = "${lib.getExe pkgs.ponymix} decrease 1";
-      "XF86AudioMicMute" = "${lib.getExe pkgs.ponymix} -t source toggle";
-      "XF86AudioMute" = "${lib.getExe pkgs.ponymix} -t sink toggle";
-      "XF86AudioNext" = "${lib.getExe pkgs.playerctl} next";
-      "XF86AudioPause" = "${lib.getExe pkgs.playerctl} pause";
-      "XF86AudioPlay" = "${lib.getExe pkgs.playerctl} play";
-      "XF86AudioPrev" = "${lib.getExe pkgs.playerctl} previous";
-      "XF86AudioRaiseVolume" = "${lib.getExe pkgs.ponymix} increase 1";
-      "XF86MonBrightnessDown" = "${lib.getExe pkgs.brillo} -e -U 1";
-      "XF86MonBrightnessUp" = "${lib.getExe pkgs.brillo} -e -A 1";
+      "XF86AudioLowerVolume" = "exec --no-startup-id ${lib.getExe pkgs.ponymix} decrease 1";
+      "XF86AudioMicMute" = "exec --no-startup-id ${lib.getExe pkgs.ponymix} -t source toggle";
+      "XF86AudioMute" = "exec --no-startup-id ${lib.getExe pkgs.ponymix} -t sink toggle";
+      "XF86AudioNext" = "exec --no-startup-id ${lib.getExe pkgs.playerctl} next";
+      "XF86AudioPause" = "exec --no-startup-id ${lib.getExe pkgs.playerctl} pause";
+      "XF86AudioPlay" = "exec --no-startup-id ${lib.getExe pkgs.playerctl} play";
+      "XF86AudioPrev" = "exec --no-startup-id ${lib.getExe pkgs.playerctl} previous";
+      "XF86AudioRaiseVolume" = "exec --no-startup-id ${lib.getExe pkgs.ponymix} increase 1";
+      "XF86MonBrightnessDown" = "exec --no-startup-id ${lib.getExe pkgs.brillo} -e -U 1";
+      "XF86MonBrightnessUp" = "exec --no-startup-id ${lib.getExe pkgs.brillo} -e -A 1";
     };
 
     modifier = "Mod1";
