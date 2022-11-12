@@ -18,6 +18,7 @@
       pinentry-gnome
       qgnomeplatform
       qt5.qtwayland
+      qt6.qtwayland
       spawn
       qalculate-gtk
       xdg-utils
