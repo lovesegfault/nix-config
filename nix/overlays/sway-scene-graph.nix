@@ -12,29 +12,29 @@ final: prev: {
     outputHash = null;
   });
 
-  wlroots_0_16 = final.wlroots_0_15.overrideAttrs (old: {
-    version = "unstable-2022-11-08";
+  wlroots_0_17 = final.wlroots_0_15.overrideAttrs (old: {
+    version = "unstable-2022-11-11";
 
     src = final.fetchFromGitLab {
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "eec95e3d5e1a4f2e13b1f6b34cc287475ca57daf";
-      sha256 = "sha256-be2sn82vNdq7vItsEGILJGMvuQfvAjyZSjpV9CRT91A=";
+      rev = "2b22a1047840912c8c86781282faa5aa08684f64";
+      sha256 = "sha256-xkaD5pUG6hcnSnssLXb2CLGtQ+nJxYlG0QVnYgrzwco=";
     };
 
     buildInputs = old.buildInputs ++ [ final.hwdata_364 ];
   });
 
   sway-unwrapped = (prev.sway-unwrapped.overrideAttrs (old: {
-    version = "scene-graph-2022-11-01";
+    version = "scene-graph-2022-11-11";
     src = final.fetchFromGitHub {
       owner = "Nefsen402";
       repo = "sway";
-      rev = "5b3d952026515c432329e17152d95e6ac5cb8bf5";
-      hash = "sha256-tqrpji/X4P7u8gc5bDgoOsrngi8ZX1hw9efPIXLWZ+w=";
+      rev = "fc97730895c10016f8e97bf44d872b46c325090a";
+      hash = "sha256-p5c3NDumHnJcBzPYTJJMj9VjYE8nQWywf2TkBccv834=";
     };
 
     buildInputs = old.buildInputs ++ (with final; [ pcre2 xorg.xcbutilwm ]);
-  })).override { wlroots = final.wlroots_0_16; };
+  })).override { wlroots = final.wlroots_0_17; };
 }
