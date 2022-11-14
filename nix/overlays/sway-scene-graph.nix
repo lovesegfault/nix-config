@@ -19,8 +19,8 @@ final: prev: {
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "2b22a1047840912c8c86781282faa5aa08684f64";
-      sha256 = "sha256-xkaD5pUG6hcnSnssLXb2CLGtQ+nJxYlG0QVnYgrzwco=";
+      rev = "65836ce357e4140d4e5250228a05ddd96119a883";
+      hash = "sha256-QimttzdrgUnE5ewBednTD3O3tTHlD5VL5uL8czAY9fE=";
     };
 
     buildInputs = old.buildInputs ++ [ final.hwdata_364 ];
@@ -31,8 +31,8 @@ final: prev: {
     src = final.fetchFromGitHub {
       owner = "Nefsen402";
       repo = "sway";
-      rev = "fc97730895c10016f8e97bf44d872b46c325090a";
-      hash = "sha256-p5c3NDumHnJcBzPYTJJMj9VjYE8nQWywf2TkBccv834=";
+      rev = "2e4007d6048856f6581e4f571e2a36cd42057795";
+      hash = "sha256-Q7rzLRz/lGvo5a/eqJoUGE2LSubxuKoVvf8OGlGoeqM=";
     };
 
     buildInputs = old.buildInputs ++ (with final; [ pcre2 xorg.xcbutilwm ]);
