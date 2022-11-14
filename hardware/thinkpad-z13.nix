@@ -50,10 +50,8 @@
     auth      requisite     pam_nologin.so
     auth      required      pam_succeed_if.so uid >= 1000 quiet
     auth      sufficient    ${pkgs.fprintd}/lib/security/pam_fprintd.so
-    auth      optional      ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
 
     password  required      ${pkgs.fprintd}/lib/security/pam_fprintd.so
-    password  optional      ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
 
     session   include       login
   '';
