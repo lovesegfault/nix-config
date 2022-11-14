@@ -7,6 +7,7 @@
     ../../core
 
     ../../hardware/efi.nix
+    ../../hardware/fast-networking.nix
     ../../hardware/nixos-aarch64-builder
 
     ../../users/bemeurer
