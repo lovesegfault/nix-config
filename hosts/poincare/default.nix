@@ -151,7 +151,8 @@ in
     }];
     settings = {
       accept-flake-config = true;
-      auto-optimise-store = true;
+      # XXX: Causes annoying "cannot link ... to ...: File exists" errors
+      auto-optimise-store = false;
       build-users-group = "nixbld";
       builders-use-substitutes = true;
       connect-timeout = 5;
