@@ -191,10 +191,17 @@
       devices = {
         jung.id = "GXCBSO2-RQAR3CC-ACW6JWB-IAZHQZO-XZWSYKL-SYB2GNS-T4R5QO2-Q76BXAV";
       };
-      folders.music = {
-        devices = [ "jung" ];
-        path = "/mnt/music";
-        type = "sendonly";
+      folders = {
+        music = {
+          devices = [ "jung" ];
+          path = "/mnt/music";
+          type = "sendonly";
+        };
+        opus = {
+          devices = [ "jung" ];
+          path = "/mnt/music-opus";
+          type = "sendonly";
+        };
       };
     };
     zfs = {

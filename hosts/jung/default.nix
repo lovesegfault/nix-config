@@ -98,10 +98,17 @@
       enable = true;
       guiAddress = "0.0.0.0:8384";
       devices.nozick.id = "SJH2ZVC-EUWTL4M-ZEP57G6-O5A6DYX-4AWZU7C-XF4GGED-5F6OHGC-KDHPMA6";
-      folders.music = {
-        devices = [ "nozick" ];
-        path = "/mnt/music";
-        type = "receiveonly";
+      folders = {
+        music = {
+          devices = [ "nozick" ];
+          path = "/mnt/music";
+          type = "receiveonly";
+        };
+        opus = {
+          devices = [ "nozick" ];
+          path = "/mnt/music-opus";
+          type = "receiveonly";
+        };
       };
       group = "media";
     };
