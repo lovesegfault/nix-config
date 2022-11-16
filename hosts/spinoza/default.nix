@@ -129,7 +129,7 @@
     };
     wifi = {
       DHCP = "yes";
-      matchConfig.MACAddress = "04:7b:cb:b2:47:de";
+      matchConfig.MACAddress = "04:7b:cb:29:02:d2";
       dhcpV4Config.RouteMetric = 40;
       dhcpV6Config.RouteMetric = 40;
       linkConfig.Multicast = true;
