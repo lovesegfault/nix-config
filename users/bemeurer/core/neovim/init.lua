@@ -8,6 +8,9 @@ require("base")
 vim.o.background = "dark"
 require("ayu").colorscheme()
 
+-- crates
+require("crates").setup()
+
 require("completion")
 local lsp = require("lsp")
 require("statusline")
