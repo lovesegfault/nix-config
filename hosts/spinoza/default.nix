@@ -28,6 +28,7 @@
       systemd.enable = true;
     };
     plymouth.enable = true;
+    resumeDevice = "/dev/cryptroot/swap";
   };
 
 
