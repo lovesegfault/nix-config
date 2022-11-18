@@ -89,6 +89,7 @@
   ];
 
   services = {
+    automatic-timezoned.enable = true;
     btrfs.autoScrub = {
       enable = true;
       fileSystems = [ "/nix" ];
@@ -101,7 +102,6 @@
       enableModemGPS = false;
       submitData = true;
     };
-    localtimed.enable = true;
     logind = {
       lidSwitch = "suspend";
       lidSwitchExternalPower = "ignore";
