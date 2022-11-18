@@ -19,14 +19,15 @@
   ];
 
   boot = {
-    plymouth.enable = true;
     initrd = {
-      systemd.enable = true;
+      kernelModules = [ "dm-snapshot" ];
       luks.devices.cryptroot = {
-        device = "/dev/disk/by-uuid/f8e32b80-d520-4171-ade3-d6ddbf9363d0";
+        device = "/dev/disk/by-uuid/75fa9c3c-3b95-479b-ad90-32d83528524d";
         allowDiscards = true;
       };
+      systemd.enable = true;
     };
+    plymouth.enable = true;
   };
 
 
@@ -39,19 +40,31 @@
       options = [ "defaults" "noatime" "size=20%" "mode=755" ];
     };
     "/boot" = {
-      device = "/dev/disk/by-uuid/03D1-5AC1";
+      device = "/dev/disk/by-uuid/D506-6330";
       fsType = "vfat";
     };
-    "/nix" = {
-      device = "/dev/disk/by-uuid/9ea17c8d-62c0-44d8-952f-9438a3a46bf2";
+    "/mnt/music-opus" = {
+      device = "/dev/disk/by-uuid/8b6542d9-5407-418f-80ca-2dacd06655cb";
       fsType = "btrfs";
-      options = [ "defaults" "noatime" "discard=async" "compress=zstd" "subvol=nix" ];
+      options = [ "defaults" "noatime" "discard=async" "subvol=music-opus" ];
       neededForBoot = true;
     };
     "/nix/state" = {
-      device = "/dev/disk/by-uuid/9ea17c8d-62c0-44d8-952f-9438a3a46bf2";
+      device = "/dev/disk/by-uuid/8b6542d9-5407-418f-80ca-2dacd06655cb";
       fsType = "btrfs";
-      options = [ "defaults" "noatime" "discard=async" "compress=zstd" "subvol=state" ];
+      options = [ "defaults" "noatime" "discard=async" "compress=zstd" "subvol=nix/state" ];
+      neededForBoot = true;
+    };
+    "/nix/store" = {
+      device = "/dev/disk/by-uuid/8b6542d9-5407-418f-80ca-2dacd06655cb";
+      fsType = "btrfs";
+      options = [ "defaults" "noatime" "discard=async" "compress=zstd" "subvol=nix/store" ];
+      neededForBoot = true;
+    };
+    "/nix/var" = {
+      device = "/dev/disk/by-uuid/8b6542d9-5407-418f-80ca-2dacd06655cb";
+      fsType = "btrfs";
+      options = [ "defaults" "noatime" "discard=async" "subvol=nix/var" ];
       neededForBoot = true;
     };
   };
@@ -92,7 +105,7 @@
     automatic-timezoned.enable = true;
     btrfs.autoScrub = {
       enable = true;
-      fileSystems = [ "/nix" ];
+      fileSystems = [ "/nix/store" "/nix/state" "/nix/var" ];
       interval = "weekly";
     };
     geoclue2 = {
@@ -152,7 +165,7 @@
     "NetworkManager-wait-online.service"
   ];
 
-  swapDevices = [{ device = "/dev/disk/by-uuid/6d3d9006-e2e9-4de9-b194-3481e7df506c"; }];
+  swapDevices = [{ device = "/dev/disk/by-uuid/898fb6e1-bba3-40ce-8f79-8deb2e2d4f37"; }];
 
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;
