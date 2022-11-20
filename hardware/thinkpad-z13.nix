@@ -88,6 +88,22 @@
   };
 
   systemd.services = {
+    ath11k-suspend = {
+      before = [ "sleep.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.kmod}/bin/rmmod ath11k_pci ath11k";
+      };
+      wantedBy = [ "sleep.target" ];
+    };
+    ath11k-resume = {
+      after = [ "suspend.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.kmod}/bin/modprobe ath11k_pci";
+      };
+      wantedBy = [ "suspend.target" "multi-user.target" ];
+    };
     cpufreq-conservative-sampling-rate = {
       after = [ "battery.target" ];
       bindsTo = [ "battery.target" ];
@@ -106,7 +122,11 @@
         echo "98304" > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
       '';
     };
-    tailscaled.partOf = [ "ac.target" ];
-    tailscaled.wantedBy = [ "ac.target" ];
+    tailscaled = {
+      partOf = [ "ac.target" ];
+      wantedBy = [ "ac.target" ];
+    };
   };
+
+  systemd.tmpfiles.rules = [ "w /sys/power/image_size - - - - 0" ];
 }
