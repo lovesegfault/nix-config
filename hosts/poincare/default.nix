@@ -55,40 +55,40 @@ in
       "mas"
     ];
     casks = [
-      "1password"
-      "1password-cli"
-      "aldente"
-      "alt-tab"
-      "amethyst"
-      "balenaetcher"
-      "bartender"
-      "daisydisk"
-      "dash"
-      "detexify"
-      "discord"
-      "element"
-      "firefox"
-      "google-chrome"
-      "iterm2"
-      "kitty"
-      "ksdiff"
-      "lunar"
-      "macupdater"
-      "mullvadvpn"
-      "nextcloud"
-      "parallels"
-      "plexamp"
-      "quip"
-      "raycast"
-      "roon"
-      "shottr"
-      "signal"
-      "stats"
-      "thunderbird"
-      "topnotch"
-      "visual-studio-code"
-      "zoom"
-      "zulip"
+      { name = "1password"; greedy = true; }
+      { name = "1password-cli"; greedy = true; }
+      { name = "aldente"; greedy = true; }
+      { name = "alt-tab"; greedy = true; }
+      { name = "amethyst"; greedy = true; }
+      { name = "balenaetcher"; greedy = true; }
+      { name = "bartender"; greedy = true; }
+      { name = "daisydisk"; greedy = true; }
+      { name = "dash"; greedy = true; }
+      { name = "detexify"; greedy = true; }
+      { name = "discord"; greedy = true; }
+      { name = "element"; greedy = true; }
+      { name = "firefox"; greedy = true; }
+      { name = "google-chrome"; greedy = true; }
+      { name = "iterm2"; greedy = true; }
+      { name = "kitty"; greedy = true; }
+      { name = "ksdiff"; greedy = true; }
+      { name = "lunar"; greedy = true; }
+      { name = "macupdater"; greedy = true; }
+      { name = "mullvadvpn"; greedy = true; }
+      { name = "nextcloud"; greedy = true; }
+      { name = "parallels"; greedy = true; }
+      { name = "plexamp"; greedy = true; }
+      { name = "quip"; greedy = true; }
+      { name = "raycast"; greedy = true; }
+      { name = "roon"; greedy = true; }
+      { name = "shottr"; greedy = true; }
+      { name = "signal"; greedy = true; }
+      { name = "stats"; greedy = true; }
+      { name = "thunderbird"; greedy = true; }
+      { name = "topnotch"; greedy = true; }
+      { name = "visual-studio-code"; greedy = true; }
+      { name = "zoom"; greedy = true; }
+      { name = "zulip"; greedy = true; }
     ];
     masApps = {
       "Amphetamine" = 937984704;
