@@ -1,6 +1,7 @@
 { lib, pkgs, ... }: {
   imports = [
     ./common.nix
+    ./chromium.nix
     ./firefox.nix
     ./kitty.nix
     ./mime.nix
