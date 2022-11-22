@@ -84,7 +84,6 @@ in
       { name = "shottr"; greedy = true; }
       { name = "signal"; greedy = true; }
       { name = "stats"; greedy = true; }
-      { name = "thunderbird"; greedy = true; }
       { name = "topnotch"; greedy = true; }
       { name = "visual-studio-code"; greedy = true; }
       { name = "zoom"; greedy = true; }
