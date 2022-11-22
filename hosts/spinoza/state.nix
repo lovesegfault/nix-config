@@ -50,6 +50,7 @@
         ".config/libvirt"
         ".config/op"
         ".config/pipewire"
+        ".config/Mullvad VPN"
         ".local/share/Plexamp"
         ".local/share/TabNine"
         ".local/share/atuin"
