@@ -15,6 +15,7 @@ let
       address = "100.80.1.112";
       hostPlatform = "x86_64-linux";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHws1wwXYHDmU+Bjcbw8IZv2V+fbxaTDQc44XoUQ604t";
+      remoteBuild = true;
     };
     luther = {
       type = "home-manager";
@@ -26,6 +27,7 @@ let
       address = "100.124.29.84";
       hostPlatform = "x86_64-linux";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBEzb5JCgcXJZHDkY09vBAvIF34JabI+ZBpGqJDy6KbI";
+      remoteBuild = true;
     };
     poincare = {
       type = "darwin";
@@ -37,6 +39,7 @@ let
       address = "100.68.240.30";
       hostPlatform = "x86_64-linux";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDUZPmPTATZ4nBWstPqlUiguvxr26XWAE9BGPVNNRBR5";
+      remoteBuild = true;
     };
   };
 
