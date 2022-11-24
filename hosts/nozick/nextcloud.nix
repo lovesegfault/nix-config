@@ -14,6 +14,7 @@
     enable = true;
     appstoreEnable = true;
     autoUpdateApps.enable = true;
+    enableBrokenCiphersForSSE = false;
     hostName = "nextcloud.meurer.org";
     https = true;
     package = pkgs.nextcloud25;
