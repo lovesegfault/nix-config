@@ -299,11 +299,11 @@
     },
     "templates": {
       "locked": {
-        "lastModified": 1665394171,
-        "narHash": "sha256-9PxRGDx3RIGnoL55/TwpTYPsNSgdoIi/TSbPQ8CRalU=",
+        "lastModified": 1669413554,
+        "narHash": "sha256-ljlMaTVs/aiygN0MtVWmLL8cJ0btX6GxST6D8klCb6o=",
         "owner": "NixOS",
         "repo": "templates",
-        "rev": "3248d54007cb7cb4cccdfba3e0d074f10ae013fd",
+        "rev": "dfd2a90b1507f2eaedb2f9f4798f728f0006ad30",
         "type": "github"
       },
       "original": {
