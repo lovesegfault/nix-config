@@ -31,34 +31,34 @@ with final.lib;
   });
 
   mesa_latest = (final.mesa.overrideAttrs (old: rec {
-    version = "22.3.0-rc3";
+    version = "22.3.0-rc4";
     src = final.fetchurl {
       url = "https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-${version}/mesa-mesa-${version}.tar.gz";
-      hash = "sha256-6YA0cGJvNeKYDK0uzi59eVGZF5S3zn6eN0Ic4ibxLMk=";
+      hash = "sha256-EVVY1IrYaktFLR6WKEbz0L/Fbxc+iiceVVnkhYTb7bQ=";
     };
     mesonFlags = remove "-Dxvmc-libs-path=${placeholder "drivers"}/lib" old.mesonFlags;
   })).override { libdrm = final.libdrm_latest; wayland-protocols = final.wayland-protocols_latest; };
 
   wlroots_0_17 = (final.wlroots_0_15.overrideAttrs (old: {
-    version = "unstable-2022-11-19";
+    version = "unstable-2022-11-25";
     src = final.fetchFromGitLab {
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "4ff46e6cf9463e594605928feeb7c55cf323b5e7";
-      hash = "sha256-CX+PYJP2PxZWL380WzyMNsrfRgIb/78brdwvDg/zj28=";
+      rev = "f0375eed24276e27e036f724c9fde5d344fc140a";
+      hash = "sha256-41XAMSnkogNcjtLFWQooFHnePV/3OvYwq8AUwk8qMxU=";
     };
     buildInputs = old.buildInputs ++ [ final.hwdata_latest ];
     dontStrip = true;
   })).override { mesa = final.mesa_latest; wayland-protocols = final.wayland-protocols_latest; };
 
   sway-unwrapped = (prev.sway-unwrapped.overrideAttrs (old: {
-    version = "scene-graph-2022-11-19";
+    version = "scene-graph-2022-11-24";
     src = final.fetchFromGitHub {
       owner = "Nefsen402";
       repo = "sway";
-      rev = "b6b81b0854465dd367355b1444bd34552232b912";
-      hash = "sha256-p8cVG8l42lhNvFMAclcJVJ5Oh6EceuPHX1FSjZ2nyvo=";
+      rev = "c05362699e1f29c27678656f243102e0dcd9b80d";
+      hash = "sha256-vkpzcpFOJthXhxBIZ++eavO/HoZj7XgmAL/otGzrQtI=";
     };
     buildInputs = old.buildInputs ++ (with final; [ pcre2 xorg.xcbutilwm ]);
     dontStrip = true;
