@@ -23,42 +23,42 @@ with final.lib;
 
   wayland-protocols_latest = final.wayland-protocols.overrideAttrs (old: rec {
     inherit (old) pname;
-    version = "1.28";
+    version = "1.31";
     src = final.fetchurl {
       url = "https://gitlab.freedesktop.org/wayland/${pname}/-/releases/${version}/downloads/${pname}-${version}.tar.xz";
-      hash = "sha256-x2Wftr8UkF5o72BfiY3mDRwGa/ZtvqknmFc93ewVNbY=";
+      hash = "sha256-oH+nIu2HZ27AINhncUvJovJMRk2nORLzlwbu71IZ4jg=";
     };
   });
 
   mesa_latest = (final.mesa.overrideAttrs (old: rec {
-    version = "22.3.0-rc4";
+    version = "22.3.0";
     src = final.fetchurl {
       url = "https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-${version}/mesa-mesa-${version}.tar.gz";
-      hash = "sha256-EVVY1IrYaktFLR6WKEbz0L/Fbxc+iiceVVnkhYTb7bQ=";
+      hash = "sha256-iTJpmr9G0uy26N0gjsK45n6lde8cuW41xFGQVzbhrrA=";
     };
     mesonFlags = remove "-Dxvmc-libs-path=${placeholder "drivers"}/lib" old.mesonFlags;
   })).override { libdrm = final.libdrm_latest; wayland-protocols = final.wayland-protocols_latest; };
 
   wlroots_0_17 = (final.wlroots_0_15.overrideAttrs (old: {
-    version = "unstable-2022-11-25";
+    version = "unstable-2022-12-09";
     src = final.fetchFromGitLab {
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "f0375eed24276e27e036f724c9fde5d344fc140a";
-      hash = "sha256-41XAMSnkogNcjtLFWQooFHnePV/3OvYwq8AUwk8qMxU=";
+      rev = "8f58c060fd6095e34ede2a2d1c14caea517636e7";
+      hash = "sha256-XRBwmO6MbGZ3QEq5Ly+1EUAUMS2wxMfuvH3Ry/dE1E4=";
     };
     buildInputs = old.buildInputs ++ [ final.hwdata_latest ];
     dontStrip = true;
   })).override { mesa = final.mesa_latest; wayland-protocols = final.wayland-protocols_latest; };
 
   sway-unwrapped = (prev.sway-unwrapped.overrideAttrs (old: {
-    version = "scene-graph-2022-11-24";
+    version = "scene-graph-2022-12-09";
     src = final.fetchFromGitHub {
       owner = "Nefsen402";
       repo = "sway";
-      rev = "c05362699e1f29c27678656f243102e0dcd9b80d";
-      hash = "sha256-vkpzcpFOJthXhxBIZ++eavO/HoZj7XgmAL/otGzrQtI=";
+      rev = "993deff56993dd5565061a73b6ca2d65cfa6e135";
+      hash = "sha256-6bN3ux/POQwMeNkN8r/sgg+3p6agbgK+1FKzK9oCxiA=";
     };
     buildInputs = old.buildInputs ++ (with final; [ pcre2 xorg.xcbutilwm ]);
     dontStrip = true;
