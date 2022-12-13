@@ -83,6 +83,7 @@ in
       { name = "roon"; greedy = true; }
       { name = "shottr"; greedy = true; }
       { name = "signal"; greedy = true; }
+      { name = "spotify"; greedy = true; }
       { name = "stats"; greedy = true; }
       { name = "topnotch"; greedy = true; }
       { name = "visual-studio-code"; greedy = true; }
