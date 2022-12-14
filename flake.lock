@@ -28,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1668784520,
-        "narHash": "sha256-gGgVAMwYPPmrfnvnoRi6OkEB5KRsNTb9uYzEceLdO/g=",
+        "lastModified": 1671015382,
+        "narHash": "sha256-Ag2zzhO2Cv2+bgKmbbbSua/hdktGT1GnMA2TX4K2EhI=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "6349b99bc2b96ded34d068a88c7c5ced406b7f7f",
+        "rev": "852f451fee7bc3a353b097f5f9d36a8d307c3416",
         "type": "github"
       },
       "original": {
