@@ -83,7 +83,7 @@ in
       ln -sv ${../nix/overlays} $out/overlays
     '';
 
-    stateVersion = "22.05";
+    stateVersion = "22.11";
   };
 
   systemd = {
