@@ -128,5 +128,9 @@
     };
   };
 
+  systemd.sleep.extraConfig = ''
+    HibernateMode=shutdown
+  '';
+
   systemd.tmpfiles.rules = [ "w /sys/power/image_size - - - - 0" ];
 }
