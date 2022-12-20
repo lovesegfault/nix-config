@@ -60,6 +60,7 @@ in
       { name = "aldente"; greedy = true; }
       { name = "alt-tab"; greedy = true; }
       { name = "amethyst"; greedy = true; }
+      { name = "appcleaner"; greedy = true; }
       { name = "balenaetcher"; greedy = true; }
       { name = "bartender"; greedy = true; }
       { name = "daisydisk"; greedy = true; }
@@ -85,6 +86,7 @@ in
       { name = "signal"; greedy = true; }
       { name = "spotify"; greedy = true; }
       { name = "stats"; greedy = true; }
+      { name = "tidal"; greedy = true; }
       { name = "topnotch"; greedy = true; }
       { name = "visual-studio-code"; greedy = true; }
       { name = "zoom"; greedy = true; }
