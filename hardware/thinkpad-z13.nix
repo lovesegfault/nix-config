@@ -64,8 +64,7 @@
     };
     upower = {
       enable = true;
-      # FIXME: When I swap to a larger NVME, this should be "Hibernate"
-      criticalPowerAction = "PowerOff";
+      criticalPowerAction = "Hibernate";
     };
     xserver.dpi = 250;
   };
