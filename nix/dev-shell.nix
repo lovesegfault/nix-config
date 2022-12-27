@@ -12,7 +12,6 @@ mkShell {
     cachix
     deploy-rs.deploy-rs
     nix-build-uncached
-    nix-linter
     nixpkgs-fmt
     ragenix
     rnix-lsp
