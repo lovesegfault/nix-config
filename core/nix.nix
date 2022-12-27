@@ -20,6 +20,7 @@
     daemonIOSchedPriority = 5;
     distributedBuilds = true;
     extraOptions = ''
+      !include tokens.conf
       builders-use-substitutes = true
       experimental-features = nix-command flakes recursive-nix
       flake-registry = /etc/nix/registry.json
