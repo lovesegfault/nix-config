@@ -13,7 +13,7 @@
     initrd.availableKernelModules = [ "nvme" "thinkpad_acpi" "thunderbolt" "xhci_pci" ];
     kernelModules = [ "cpufreq_conservative" "cpufreq_ondemand" "kvm-amd" "thinkpad_acpi" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
-    kernelPackages = pkgs.linuxPackages_latest_lto_zen3;
+    kernelPackages = pkgs.linuxPackages_latest;
     tmpOnTmpfs = true;
   };
 

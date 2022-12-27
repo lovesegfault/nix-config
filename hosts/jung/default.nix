@@ -20,7 +20,7 @@
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" "dm-snapshot" ];
     kernel.sysctl."vm.swappiness" = 1;
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages_latest_lto_zen3;
+    kernelPackages = pkgs.linuxPackages_latest;
     tmpOnTmpfs = true;
   };
 

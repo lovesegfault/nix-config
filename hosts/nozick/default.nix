@@ -33,7 +33,6 @@
       '';
     };
     kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_zfs_lto_skylake;
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {
