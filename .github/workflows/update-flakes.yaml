@@ -41,7 +41,7 @@ jobs:
             experimental-features = nix-command flakes recursive-nix
       - run: git config --global user.email "hatesegfault@protonmail.ch"
       - run: git config --global user.name "hatesegfault"
-      - uses: cpcloud/flake-update-action@v1.0.2
+      - uses: cpcloud/flake-update-action@v1.0.4
         with:
           dependency: ${{ matrix.flake }}
           pull-request-token: ${{ secrets.PAT }}
