@@ -54,7 +54,7 @@ let
     all = filterAttrs filter hosts;
 
     nixos = genFamily (_: v: v.type == "nixos") all;
-    nix-darwin = genFamily (_: v: v.type == "darwin") all;
+    darwin = genFamily (_: v: v.type == "darwin") all;
     homeManager = genFamily (_: v: v.type == "home-manager") all;
 
     darwin = genFamily (systemPred "-darwin") all;
