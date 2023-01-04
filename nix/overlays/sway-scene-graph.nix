@@ -11,13 +11,13 @@ with final.lib;
   });
 
   wlroots_0_17 = (final.wlroots_0_16.overrideAttrs (old: {
-    version = "unstable-2022-12-09";
+    version = "unstable-2023-02-04";
     src = final.fetchFromGitLab {
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "8f58c060fd6095e34ede2a2d1c14caea517636e7";
-      hash = "sha256-XRBwmO6MbGZ3QEq5Ly+1EUAUMS2wxMfuvH3Ry/dE1E4=";
+      rev = "e0b2bf2a6b8699ac75973702a791efe5af8d421e";
+      hash = "sha256-CtdYMeWXsCblM+HenD7AP2oqKd+gi+7MoTKANccOPHI=";
     };
   })).override { mesa = final.mesa_latest; };
 
