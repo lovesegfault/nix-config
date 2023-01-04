@@ -34,7 +34,15 @@
 
         # tooling
         nvim-bufdel
-        rust-tools-nvim
+        (rust-tools-nvim.overrideAttrs (old: {
+          # https://github.com/simrat39/rust-tools.nvim/issues/309
+          patches = (old.patches or [ ]) ++ [
+            (pkgs.fetchpatch {
+              url = "https://github.com/simrat39/rust-tools.nvim/commit/c813f21402bfaa55da839c4ca6f9ff3f62ebb089.patch";
+              hash = "sha256-3dWNwQyPZR3+1U+GSS+PpuElqy/KFAzyh/Le3o/vkIg=";
+            })
+          ];
+        }))
         suda-vim
         tabular
         telescope-frecency-nvim
