@@ -7,7 +7,7 @@
 }:
 let
   inherit (nixpkgs) lib;
-  hosts = (import ./hosts.nix).darwin.all;
+  hosts = (import ./hosts.nix).darwin;
 
   nixRegistry = {
     nix.registry = {

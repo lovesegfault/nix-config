@@ -9,7 +9,7 @@
 }:
 let
   inherit (nixpkgs) lib;
-  hosts = (import ./hosts.nix).nixos.all;
+  hosts = (import ./hosts.nix).nixos;
 
   nixRegistry = {
     nix.registry = {

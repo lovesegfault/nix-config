@@ -13,7 +13,7 @@ let
   hostDrvs = nixosDrvs // homeDrvs // darwinDrvs;
 
   structuredHostDrvs = lib.mapAttrsRecursiveCond
-    (as: !(as ? "type" && (lib.elem as.type [ "darwin" "home-manager" "nixos" ])))
+    (hostAttr: !(hostAttr ? "type" && (lib.elem hostAttr.type [ "darwin" "homeManager" "nixos" ])))
     (path: _: hostDrvs.${lib.last path})
     hosts;
 

@@ -68,9 +68,15 @@
 
       devShells.default = import ./nix/dev-shell.nix inputs localSystem;
 
-      packages = {
-        default = self.packages.${localSystem}.all;
-      } // (import ./nix/host-drvs.nix inputs localSystem);
+      packages =
+        let
+          hostDrvs = import ./nix/host-drvs.nix inputs localSystem;
+          default =
+            if builtins.hasAttr "${localSystem}" hostDrvs
+            then { default = self.packages.${localSystem}.${localSystem}; }
+            else { };
+        in
+        hostDrvs // default;
 
       pkgs = import nixpkgs {
         inherit localSystem;
