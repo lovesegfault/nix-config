@@ -6,6 +6,22 @@ on:
       - try
   pull_request:
 jobs:
+  flake-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v18
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            experimental-features = nix-command flakes recursive-nix
+      - uses: cachix/cachix-action@v12
+        with:
+          name: nix-config
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: flake-check
+        run: |
+          nix flake check --no-build
   lints:
     runs-on: ubuntu-latest
     steps:
@@ -135,7 +151,7 @@ jobs:
 
   check:
     runs-on: ubuntu-latest
-    needs: [ build-host, build-shell ]
+    needs: [ build-host, build-shell, flake-check, lints ]
     if: always()
     steps:
       - uses: re-actors/alls-green@release/v1
