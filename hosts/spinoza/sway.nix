@@ -2,11 +2,6 @@
   programs.sway.enable = true;
 
   home-manager.users.bemeurer = {
-    home.sessionVariables = {
-      GDK_DPI_SCALE = "1.3";
-      ELM_SCALE = "1.3";
-    };
-
     wayland.windowManager.sway = {
       config = {
         input = {
@@ -41,6 +36,10 @@
       extraConfig = ''
         bindswitch --locked --reload lid:on output eDP-1 disable
         bindswitch --locked --reload lid:off output eDP-1 enable
+      '';
+      extraSessionCommands = ''
+        export GDK_DPI_SCALE="1.3"
+        export ELM_SCALE="1.3"
       '';
     };
 
