@@ -169,6 +169,7 @@
       passBasicAuth = true;
       setXauthrequest = true;
       extraConfig = {
+        skip-provider-button = true;
         whitelist-domain = "*.nozick.meurer.org";
         cookie-samesite = "lax";
       };

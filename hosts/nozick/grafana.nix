@@ -14,22 +14,23 @@
         domain = "grafana.nozick.meurer.org";
       };
       auth = {
-        "basic.enabled" = false;
         disable_login_form = true;
         login_cookie_name = "_oauth2_proxy";
         oauth_auto_login = true;
-        signout_redirect_url = "https://grafana.nozick.meurer.org/oauth2/sign_out";
-        "proxy.auto_sign_up" = true;
-        "proxy.enabled" = true;
-        "proxy.enable_login_token" = false;
-        "proxy.headers" = "Name:X-User Email:X-Email";
-        "proxy.header_name" = "X-Email";
-        "proxy.header_property" = "email";
+        signout_redirect_url = "https://grafana.nozick.meurer.org/oauth2/sign_out?rd=https%3A%2F%2Fgrafana.nozick.meurer.org";
+      };
+      "auth.basic".enabled = false;
+      "auth.proxy" = {
+        enabled = true;
+        auto_sign_up = true;
+        enable_login_token = false;
+        header_name = "X-Email";
+        header_property = "email";
       };
       users = {
         allow_signup = false;
         auto_assign_org = true;
-        auto_assign_org_role = "Editor";
+        auto_assign_org_role = "Viewer";
       };
     };
   };
