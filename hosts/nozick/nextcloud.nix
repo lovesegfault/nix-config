@@ -30,10 +30,6 @@
     useACMEHost = "nextcloud.meurer.org";
     forceSSL = true;
     kTLS = true;
-    extraConfig = ''
-      ssl_client_certificate /etc/ssl/certs/origin-pull-ca.pem;
-      ssl_verify_client on;
-    '';
   };
 
   services.postgresql = {

@@ -29,10 +29,6 @@
     forceSSL = true;
     kTLS = true;
     locations."/".proxyPass = "http://127.0.0.1:4200";
-    extraConfig = ''
-      ssl_client_certificate /etc/ssl/certs/origin-pull-ca.pem;
-      ssl_verify_client on;
-    '';
   };
 
   services.oauth2_proxy.nginx.virtualHosts = [ "flood.nozick.meurer.org" ];

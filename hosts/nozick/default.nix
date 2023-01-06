@@ -156,10 +156,6 @@
             proxyPass = "http://127.0.0.1:9999";
             proxyWebsockets = true;
           };
-          extraConfig = ''
-            ssl_client_certificate /etc/ssl/certs/origin-pull-ca.pem;
-            ssl_verify_client on;
-          '';
         };
       };
     };

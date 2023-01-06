@@ -75,10 +75,6 @@
       proxyPass = "http://127.0.0.1:3000";
       proxyWebsockets = true;
     };
-    extraConfig = ''
-      ssl_client_certificate /etc/ssl/certs/origin-pull-ca.pem;
-      ssl_verify_client on;
-    '';
   };
 
   services.oauth2_proxy.nginx.virtualHosts = [ "grafana.nozick.meurer.org" ];
