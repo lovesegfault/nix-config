@@ -10,7 +10,6 @@
     port = 42266;
     group = "media";
     configText = ''
-      log.xmlrpc = (cat, (cfg.logs), "xmlrpc.log")
       log.add_output = "rpc_events", "log"
 
       pieces.memory.max.set = 8192M
