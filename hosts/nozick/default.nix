@@ -10,9 +10,9 @@
 
     ../../users/bemeurer
 
-    ./deluge.nix
     ./grafana.nix
     ./nextcloud.nix
+    ./rtorrent.nix
     ./state.nix
     ./unbound.nix
   ];
