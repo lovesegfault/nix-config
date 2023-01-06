@@ -14,8 +14,8 @@
 
       pieces.memory.max.set = 8192M
       network.http.max_open.set = 256
-      network.max_open_files.set = 1024
-      network.max_open_sockets.set = 4096
+      network.max_open_files.set = 4096
+      network.max_open_sockets.set = 1024
       network.tos.set = throughput
       network.http.dns_cache_timeout.set = 0
 
@@ -25,6 +25,8 @@
       schedule2 = watch_directory_shows,10,10,"load.verbose=/mnt/shows/watch/*.torrent,d.directory.set=/mnt/shows"
     '';
   };
+
+  systemd.services.rtorrent.serviceConfig.LimitNOFILE = "524288";
 
   services.nginx.virtualHosts."flood.nozick.meurer.org" = {
     useACMEHost = "flood.nozick.meurer.org";
