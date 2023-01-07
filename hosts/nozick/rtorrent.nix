@@ -19,10 +19,10 @@
       network.tos.set = throughput
       network.http.dns_cache_timeout.set = 0
 
-      schedule2 = watch_directory_emp,10,10,"load.verbose=/mnt/emp/watch/*.torrent,d.directory.set=/mnt/emp"
-      schedule2 = watch_directory_movies,10,10,"load.verbose=/mnt/movies/watch/*.torrent,d.directory.set=/mnt/movies"
-      schedule2 = watch_directory_redacted,10,10,"load.verbose=/mnt/redacted/watch/*.torrent,d.directory.set=/mnt/redacted"
-      schedule2 = watch_directory_shows,10,10,"load.verbose=/mnt/shows/watch/*.torrent,d.directory.set=/mnt/shows"
+      schedule2 = watch_directory_emp,10,10,"load.start_verbose=/mnt/emp/watch/*.torrent,d.directory.set=/mnt/emp"
+      schedule2 = watch_directory_movies,10,10,"load.start_verbose=/mnt/movies/watch/*.torrent,d.directory.set=/mnt/movies"
+      schedule2 = watch_directory_redacted,10,10,"load.start_verbose=/mnt/redacted/watch/*.torrent,d.directory.set=/mnt/redacted"
+      schedule2 = watch_directory_shows,10,10,"load.start_verbose=/mnt/shows/watch/*.torrent,d.directory.set=/mnt/shows"
     '';
   };
 
