@@ -1,7 +1,6 @@
 { self, home-manager, nixpkgs, templates, ... }:
 let
   inherit (nixpkgs) lib;
-  hosts = (import ./hosts.nix).homeManager;
 
   genModules = hostName: { homeDirectory, ... }:
     { config, pkgs, ... }: {
@@ -48,4 +47,4 @@ let
       modules = [ (genModules hostName attrs) ];
     };
 in
-lib.mapAttrs genConfiguration hosts
+lib.mapAttrs genConfiguration self.hosts.homeManager

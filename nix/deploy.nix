@@ -5,11 +5,10 @@
 }:
 let
   inherit (nixpkgs) lib;
-  hosts = (import ./hosts.nix).all;
 
   genNode = hostName: nixosCfg:
     let
-      inherit (hosts.${hostName}) address hostPlatform remoteBuild;
+      inherit (self.hosts.${hostName}) address hostPlatform remoteBuild;
       inherit (deploy-rs.lib.${hostPlatform}) activate;
     in
     {

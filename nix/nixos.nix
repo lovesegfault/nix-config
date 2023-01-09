@@ -9,7 +9,6 @@
 }:
 let
   inherit (nixpkgs) lib;
-  hosts = (import ./hosts.nix).nixos;
 
   nixRegistry = {
     nix.registry = {
@@ -40,4 +39,4 @@ let
       };
     };
 in
-lib.mapAttrs genConfiguration hosts
+lib.mapAttrs genConfiguration self.hosts.nixos

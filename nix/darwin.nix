@@ -1,13 +1,6 @@
-{ self
-, darwin
-, home-manager
-, nixpkgs
-, templates
-, ...
-}:
+{ self, darwin, home-manager, nixpkgs, templates, ... }:
 let
   inherit (nixpkgs) lib;
-  hosts = (import ./hosts.nix).darwin;
 
   nixRegistry = {
     nix.registry = {
@@ -29,4 +22,4 @@ let
       ];
     };
 in
-lib.mapAttrs genConfiguration hosts
+lib.mapAttrs genConfiguration self.hosts.darwin

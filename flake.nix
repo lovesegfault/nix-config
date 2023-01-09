@@ -53,6 +53,8 @@
 
   outputs = { self, nixpkgs, flake-utils, ... }@inputs:
     {
+      hosts = import ./nix/hosts.nix;
+
       deploy = import ./nix/deploy.nix inputs;
 
       overlays = import ./nix/overlay.nix inputs;
