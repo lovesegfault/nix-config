@@ -22,4 +22,4 @@ let
       ];
     };
 in
-lib.mapAttrs genConfiguration self.hosts.darwin
+lib.mapAttrs genConfiguration (self.hosts.darwin or { })

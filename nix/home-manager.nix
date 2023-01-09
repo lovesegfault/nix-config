@@ -47,4 +47,4 @@ let
       modules = [ (genModules hostName attrs) ];
     };
 in
-lib.mapAttrs genConfiguration self.hosts.homeManager
+lib.mapAttrs genConfiguration (self.hosts.homeManager or { })

@@ -23,5 +23,5 @@ in
   autoRollback = false;
   magicRollback = true;
   user = "root";
-  nodes = lib.mapAttrs genNode self.nixosConfigurations;
+  nodes = lib.mapAttrs genNode (self.nixosConfigurations or { });
 }

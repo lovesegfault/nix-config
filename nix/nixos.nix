@@ -39,4 +39,4 @@ let
       };
     };
 in
-lib.mapAttrs genConfiguration self.hosts.nixos
+lib.mapAttrs genConfiguration (self.hosts.nixos or { })
