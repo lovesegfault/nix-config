@@ -8,13 +8,14 @@
     ../../hardware/no-mitigations.nix
     ../../hardware/zfs.nix
 
+    ../../services/unbound.nix
+
     ../../users/bemeurer
 
     ./grafana.nix
     ./nextcloud.nix
     ./rtorrent.nix
     ./state.nix
-    ./unbound.nix
   ];
 
   age.secrets = {
