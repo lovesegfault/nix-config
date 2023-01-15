@@ -147,4 +147,9 @@
 
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;
+
+  virtualisation = {
+    oci-containers.backend = "podman";
+    podman.enable = true;
+  };
 }
