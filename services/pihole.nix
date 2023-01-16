@@ -14,7 +14,7 @@
 
   virtualisation.oci-containers.containers.pihole = {
     autoStart = true;
-    image = "pihole/pihole:2023.1";
+    image = "pihole/pihole:2023.1.1";
     volumes = [ "/var/lib/pihole:/etc/pihole/" ];
     environment = {
       CUSTOM_CACHE_SIZE = "0";
