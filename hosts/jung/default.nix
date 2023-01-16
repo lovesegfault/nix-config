@@ -163,17 +163,14 @@
     oci-containers = {
       backend = "podman";
       containers.pihole.environment = {
-        CUSTOM_CACHE_SIZE = "0";
-        DNSSEC = "false";
         FTLCONF_LOCAL_IPV4 = "192.168.50.2";
         FTLCONF_LOCAL_IPV6 = "fe80::67b:cbff:fe29:2d2";
+        INTERFACE = "eno1";
         PIHOLE_DNS_ = "127.0.0.1#5335";
-        REV_SERVER = "true";
         REV_SERVER_CIDR = "192.168.50.0/24";
         REV_SERVER_DOMAIN = "local";
         REV_SERVER_TARGET = "192.168.50.1";
         TZ = "America/New_York";
-        WEBTHEME = "default-darker";
       };
     };
     podman.enable = true;
