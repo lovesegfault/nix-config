@@ -10,6 +10,8 @@
     ../../hardware/fast-networking.nix
     ../../hardware/nixos-aarch64-builder
 
+    ../../services/unbound.nix
+
     ../../users/bemeurer
 
     ./roon.nix
@@ -29,6 +31,13 @@
     keyMap = "us";
     packages = with pkgs; [ terminus_font ];
   };
+
+  environment.etc."resolv.conf".text = ''
+    nameserver 127.0.0.1
+    nameserver 100.100.100.100
+    options edns0 trust-ad
+    search local meurer.org.beta.tailscale.net
+  '';
 
   fileSystems = {
     "/" = {
