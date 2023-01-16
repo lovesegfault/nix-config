@@ -3,6 +3,11 @@
 
   environment.persistence."/nix/state" = {
     directories = [
+      {
+        directory = "/var/lib/chrony";
+        user = "chrony";
+        group = "chrony";
+      }
       "/var/lib/fwupd"
       {
         directory = "/var/lib/hqplayer";
