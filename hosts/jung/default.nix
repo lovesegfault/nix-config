@@ -36,6 +36,7 @@
   environment.etc."resolv.conf".text = ''
     nameserver 127.0.0.1
     nameserver 100.100.100.100
+    nameserver 1.1.1.1
     options edns0 trust-ad
     search local meurer.org.beta.tailscale.net
   '';
