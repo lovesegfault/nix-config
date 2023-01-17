@@ -15,6 +15,8 @@ with self.pkgs.${system};
         actionlint.enable = true;
         luacheck.enable = true;
         nixpkgs-fmt.enable = true;
+        shellcheck.enable = true;
+        shfmt.enable = true;
         statix.enable = true;
         stylua.enable = true;
       };
