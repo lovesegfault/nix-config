@@ -3,7 +3,6 @@
 
   environment.persistence."/nix/state" = {
     directories = [
-      "/var/lib/acme"
       "/var/lib/chrony"
       "/var/lib/containers"
       "/var/lib/plex"
