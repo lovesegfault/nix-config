@@ -1,8 +1,5 @@
 {
-  environment.persistence."/nix/state".directories = [
-    "/var/lib/grafana"
-    "/var/lib/prometheus2"
-  ];
+  environment.persistence."/nix/state".directories = [ "/var/lib/grafana" ];
 
   security.acme.certs."grafana.nozick.meurer.org" = { };
 
@@ -31,29 +28,6 @@
         allow_signup = false;
         auto_assign_org = true;
         auto_assign_org_role = "Viewer";
-      };
-    };
-  };
-
-  services.prometheus = {
-    enable = true;
-    extraFlags = [ "--storage.tsdb.retention.time=90d" ];
-    scrapeConfigs = [
-      {
-        job_name = "node";
-        scrape_interval = "10s";
-        static_configs = [{ targets = [ "127.0.0.1:9100" ]; }];
-      }
-      {
-        job_name = "prometheus";
-        scrape_interval = "30s";
-        static_configs = [{ targets = [ "127.0.0.1:9090" ]; }];
-      }
-    ];
-    exporters = {
-      node = {
-        enable = true;
-        enabledCollectors = [ "systemd" "pressure" ];
       };
     };
   };

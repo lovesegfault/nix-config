@@ -9,6 +9,7 @@
     ../../hardware/zfs.nix
 
     ../../services/unbound.nix
+    ../../services/prometheus.nix
 
     ../../users/bemeurer
 
