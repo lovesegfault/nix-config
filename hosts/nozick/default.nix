@@ -9,6 +9,7 @@
     ../../hardware/zfs.nix
 
     ../../services/grafana.nix
+    ../../services/oauth2.nix
     ../../services/prometheus.nix
     ../../services/unbound.nix
 
@@ -23,7 +24,6 @@
     acme.file = ./acme.age;
     agent.file = ./agent.age;
     ddns.file = ./ddns.age;
-    oauth2.file = ./oauth2.age;
     rootPassword.file = ./password.age;
   };
 
@@ -161,21 +161,7 @@
         };
       };
     };
-    oauth2_proxy = {
-      enable = true;
-      cookie.domain = ".nozick.meurer.org";
-      email.domains = [ "meurer.org" ];
-      keyFile = config.age.secrets.oauth2.path;
-      nginx.virtualHosts = [ "stash.nozick.meurer.org" ];
-      reverseProxy = true;
-      passBasicAuth = true;
-      setXauthrequest = true;
-      extraConfig = {
-        skip-provider-button = true;
-        whitelist-domain = "*.nozick.meurer.org";
-        cookie-samesite = "lax";
-      };
-    };
+    oauth2_proxy.nginx.virtualHosts = [ "stash.nozick.meurer.org" ];
     openssh.extraConfig = ''
       MaxStartups 40:30:120
     '';

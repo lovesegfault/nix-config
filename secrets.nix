@@ -17,13 +17,13 @@ let
 in
 with hosts;
 {
+  "hardware/nixos-aarch64-builder/key.age".publicKeys = [ bemeurer jung spinoza ];
   "hosts/nozick/acme.age".publicKeys = [ bemeurer nozick ];
   "hosts/nozick/ddns.age".publicKeys = [ bemeurer nozick ];
   "hosts/nozick/nextcloud.age".publicKeys = [ bemeurer nozick ];
-  "hosts/nozick/oauth2.age".publicKeys = [ bemeurer nozick ];
-  "hardware/nixos-aarch64-builder/key.age".publicKeys = [ bemeurer jung spinoza ];
+  "services/oauth2.age".publicKeys = [ bemeurer nozick ];
   "services/pihole.age".publicKeys = [ bemeurer jung ];
-  "users/bemeurer/password.age".publicKeys = [ bemeurer ] ++ (attrValues hosts);
   "users/bemeurer/activate-token.age".publicKeys = [ bemeurer ];
+  "users/bemeurer/password.age".publicKeys = [ bemeurer ] ++ (attrValues hosts);
 } // allHostSecret "password"
   // allHostSecret "agent"
