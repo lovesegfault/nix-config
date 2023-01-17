@@ -1,5 +1,9 @@
 {
-  environment.persistence."/nix/state".directories = [ "/var/lib/prometheus2" ];
+  environment.persistence."/nix/state".directories = [{
+    directory = "/var/lib/prometheus2";
+    user = "prometheus";
+    group = "prometheus";
+  }];
 
   services.prometheus = {
     enable = true;
