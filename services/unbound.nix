@@ -6,6 +6,18 @@
 
   services = {
     resolved.enable = lib.mkForce false;
+    prometheus = {
+      scrapeConfigs = [{
+        job_name = "unbound";
+        scrape_interval = "30s";
+        static_configs = [{ targets = [ "127.0.0.1:9167" ]; }];
+      }];
+      exporters.unbound = {
+        enable = true;
+        controlInterface = "/run/unbound/unbound.ctl";
+        user = "unbound";
+      };
+    };
     unbound = {
       enable = true;
       enableRootTrustAnchor = true;
