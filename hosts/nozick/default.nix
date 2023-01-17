@@ -9,6 +9,7 @@
     ../../hardware/zfs.nix
 
     ../../services/grafana.nix
+    ../../services/nginx.nix
     ../../services/oauth2.nix
     ../../services/prometheus.nix
     ../../services/unbound.nix
@@ -21,8 +22,6 @@
   ];
 
   age.secrets = {
-    acme.file = ./acme.age;
-    agent.file = ./agent.age;
     ddns.file = ./ddns.age;
     rootPassword.file = ./password.age;
   };
@@ -119,15 +118,7 @@
   powerManagement.cpuFreqGovernor = "performance";
 
   security = {
-    acme = {
-      acceptTerms = true;
-      defaults = {
-        email = "bernardo@meurer.org";
-        credentialsFile = config.age.secrets.acme.path;
-        dnsProvider = "cloudflare";
-      };
-      certs."stash.nozick.meurer.org" = { };
-    };
+    acme.certs."stash.nozick.meurer.org" = { };
     pam.loginLimits = [
       { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
       { domain = "*"; type = "-"; item = "nofile"; value = "1048576"; }
@@ -141,12 +132,6 @@
       servers = [ "time.nist.gov" "time.cloudflare.com" "time.google.com" "tick.usnogps.navy.mil" ];
     };
     nginx = {
-      enable = true;
-      recommendedOptimisation = true;
-      recommendedProxySettings = true;
-      recommendedTlsSettings = true;
-      recommendedGzipSettings = true;
-      package = pkgs.nginxMainline;
       resolver.addresses = [ "127.0.0.1:53" ];
       resolver.ipv6 = false;
       virtualHosts = {
@@ -213,10 +198,7 @@
 
   users = {
     users.root.passwordFile = config.age.secrets.rootPassword.path;
-    groups = {
-      acme.members = [ "nginx" ];
-      media.members = [ "bemeurer" "plex" ];
-    };
+    groups.media.members = [ "bemeurer" "plex" ];
   };
 
   virtualisation = {

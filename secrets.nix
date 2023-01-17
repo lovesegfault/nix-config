@@ -18,9 +18,9 @@ in
 with hosts;
 {
   "hardware/nixos-aarch64-builder/key.age".publicKeys = [ bemeurer jung spinoza ];
-  "hosts/nozick/acme.age".publicKeys = [ bemeurer nozick ];
   "hosts/nozick/ddns.age".publicKeys = [ bemeurer nozick ];
   "hosts/nozick/nextcloud.age".publicKeys = [ bemeurer nozick ];
+  "services/acme.age".publicKeys = [ bemeurer nozick ];
   "services/oauth2.age".publicKeys = [ bemeurer nozick ];
   "services/pihole.age".publicKeys = [ bemeurer jung ];
   "users/bemeurer/activate-token.age".publicKeys = [ bemeurer ];
