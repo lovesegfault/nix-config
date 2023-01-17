@@ -8,12 +8,12 @@
     ../../hardware/no-mitigations.nix
     ../../hardware/zfs.nix
 
-    ../../services/unbound.nix
+    ../../services/grafana.nix
     ../../services/prometheus.nix
+    ../../services/unbound.nix
 
     ../../users/bemeurer
 
-    ./grafana.nix
     ./nextcloud.nix
     ./rtorrent.nix
     ./state.nix

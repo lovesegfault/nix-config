@@ -1,20 +1,22 @@
+{ config, ... }:
+with config.networking;
 {
   environment.persistence."/nix/state".directories = [ "/var/lib/grafana" ];
 
-  security.acme.certs."grafana.nozick.meurer.org" = { };
+  security.acme.certs."grafana.${hostName}.meurer.org" = { };
 
   services.grafana = {
     enable = true;
     settings = {
       server = {
         http_addr = "127.0.0.1";
-        domain = "grafana.nozick.meurer.org";
+        domain = "grafana.${hostName}.meurer.org";
       };
       auth = {
         disable_login_form = true;
         login_cookie_name = "_oauth2_proxy";
         oauth_auto_login = true;
-        signout_redirect_url = "https://grafana.nozick.meurer.org/oauth2/sign_out?rd=https%3A%2F%2Fgrafana.nozick.meurer.org";
+        signout_redirect_url = "https://grafana.${hostName}.meurer.org/oauth2/sign_out?rd=https%3A%2F%2Fgrafana.${hostName}.meurer.org";
       };
       "auth.basic".enabled = false;
       "auth.proxy" = {
@@ -32,8 +34,8 @@
     };
   };
 
-  services.nginx.virtualHosts."grafana.nozick.meurer.org" = {
-    useACMEHost = "grafana.nozick.meurer.org";
+  services.nginx.virtualHosts."grafana.${hostName}.meurer.org" = {
+    useACMEHost = "grafana.${hostName}.meurer.org";
     forceSSL = true;
     kTLS = true;
     locations."/" = {
@@ -42,5 +44,5 @@
     };
   };
 
-  services.oauth2_proxy.nginx.virtualHosts = [ "grafana.nozick.meurer.org" ];
+  services.oauth2_proxy.nginx.virtualHosts = [ "grafana.${hostName}.meurer.org" ];
 }
