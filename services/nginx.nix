@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   age.secrets.acme.file = ./acme.age;
 
   environment.persistence."/nix/state".directories = [
