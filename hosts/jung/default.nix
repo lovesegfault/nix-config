@@ -10,10 +10,10 @@
     ../../hardware/fast-networking.nix
     ../../hardware/nixos-aarch64-builder
 
+    ../../services/blocky.nix
     ../../services/grafana.nix
     ../../services/nginx.nix
     ../../services/oauth2.nix
-    ../../services/pihole.nix
     ../../services/prometheus.nix
     ../../services/unbound.nix
 
@@ -107,6 +107,13 @@
   ];
 
   services = {
+    blocky.settings = {
+      conditional.mapping = {
+        ".local" = "192.168.50.1";
+        "." = "192.168.50.1";
+      };
+      clientLookup.upstream = "192.168.50.1";
+    };
     chrony = {
       enable = true;
       servers = [ "time.nist.gov" "time.cloudflare.com" "time.google.com" "tick.usnogps.navy.mil" ];
@@ -167,17 +174,7 @@
 
   virtualisation = {
     containers.containersConf.settings.engine.helper_binaries_dir = [ "${pkgs.netavark}/bin" ];
-    oci-containers = {
-      backend = "podman";
-      containers.pihole.environment = {
-        FTLCONF_LOCAL_IPV4 = "192.168.50.2";
-        FTLCONF_LOCAL_IPV6 = "fe80::67b:cbff:fe29:2d2";
-        REV_SERVER_CIDR = "192.168.50.0/24";
-        REV_SERVER_DOMAIN = "local";
-        REV_SERVER_TARGET = "192.168.50.1";
-        TZ = "America/New_York";
-      };
-    };
+    oci-containers.backend = "podman";
     podman.enable = true;
   };
 }

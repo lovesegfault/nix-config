@@ -1,4 +1,4 @@
-{ config, lib, ... }: {
+{ config, lib, pkgs, ... }: {
   environment.persistence."/nix/state".directories = [{
     directory = "/var/lib/unbound";
     inherit (config.services.unbound) user group;
