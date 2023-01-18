@@ -114,7 +114,7 @@
         allow 192.168.50.0/24
       '';
     };
-    nginx.resolver.addresses = [ "127.0.0.1#5335" ];
+    nginx.resolver.addresses = [ "127.0.0.1:5335" ];
     fwupd.enable = true;
     smartd.enable = true;
     syncthing = {
