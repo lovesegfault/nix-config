@@ -12,7 +12,7 @@
 
     ../../services/grafana.nix
     ../../services/nginx.nix
-    ../../services/oauth2.age
+    ../../services/oauth2.nix
     ../../services/pihole.nix
     ../../services/prometheus.nix
     ../../services/unbound.nix
