@@ -135,6 +135,7 @@
       };
       group = "media";
     };
+    unbound.settings.server.access-control = [ "192.168.50.0/24 allow" ];
   };
 
   systemd.network.networks = {
@@ -171,7 +172,6 @@
       containers.pihole.environment = {
         FTLCONF_LOCAL_IPV4 = "192.168.50.2";
         FTLCONF_LOCAL_IPV6 = "fe80::67b:cbff:fe29:2d2";
-        PIHOLE_DNS_ = "127.0.0.1#5335";
         REV_SERVER_CIDR = "192.168.50.0/24";
         REV_SERVER_DOMAIN = "local";
         REV_SERVER_TARGET = "192.168.50.1";

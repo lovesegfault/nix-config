@@ -12,7 +12,10 @@
 
   security.acme.certs."pihole.${config.networking.hostName}.meurer.org" = { };
 
-  services.unbound.settings.port = "5335";
+  services.unbound.settings.server = {
+    access-control = [ "10.88.0.0/24 allow" ];
+    port = "5335";
+  };
 
   services.nginx.virtualHosts."pihole.${config.networking.hostName}.meurer.org" = {
     useACMEHost = "pihole.${config.networking.hostName}.meurer.org";
@@ -30,6 +33,7 @@
     volumes = [ "/var/lib/pihole:/etc/pihole/" ];
     environment = {
       CUSTOM_CACHE_SIZE = "0";
+      PIHOLE_DNS_ = "10.88.0.1#5335";
       DNSSEC = "false";
       REV_SERVER = "true";
       VIRTUAL_HOST = "pihole.${config.networking.hostName}.meurer.org";
@@ -39,8 +43,6 @@
     ports = [
       "53:53/tcp"
       "53:53/udp"
-      "5335:5335/tcp"
-      "5335:5335/udp"
       "8053:80/tcp"
     ];
   };

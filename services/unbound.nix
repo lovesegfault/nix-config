@@ -43,7 +43,7 @@
           harden-large-queries = true;
           harden-short-bufsize = true;
           infra-cache-slabs = 8;
-          interface = [ "127.0.0.1" ];
+          interface = [ "0.0.0.0" ];
           key-cache-slabs = 8;
           msg-cache-size = "256m";
           msg-cache-slabs = 8;
