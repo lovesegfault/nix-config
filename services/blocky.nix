@@ -49,6 +49,12 @@
           "https://v.firebog.net/hosts/static/w3kbl.txt"
           "https://zerodot1.gitlab.io/CoinBlockerLists/hosts_browser"
         ];
+        whiteLists.default = [
+          (pkgs.writeText "default.txt" ''
+            www.t.co
+            t.co
+          '')
+        ];
         clientGroupsBlock.default = [ "default" ];
       };
       caching.maxTime = -1;
