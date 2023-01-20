@@ -23,6 +23,7 @@
       enableRootTrustAnchor = true;
       localControlSocketPath = "/run/unbound/unbound.ctl";
       resolveLocalQueries = true;
+      package = pkgs.unbound-full;
       settings = {
         server = {
           aggressive-nsec = true;
