@@ -32,7 +32,7 @@
   };
 
 
-  environment.systemPackages = with pkgs; [ cntr wireguard-tools mullvad-vpn powertop ];
+  environment.systemPackages = with pkgs; [ cntr wireguard-tools powertop ];
 
   fileSystems = {
     "/" = {
@@ -120,7 +120,6 @@
       lidSwitch = "suspend";
       lidSwitchExternalPower = "ignore";
     };
-    mullvad-vpn.enable = true;
     udev.packages = with pkgs; [ logitech-udev-rules ];
     udisks2.enable = true;
     usbmuxd.enable = true;
