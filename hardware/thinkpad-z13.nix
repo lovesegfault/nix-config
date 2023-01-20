@@ -70,25 +70,6 @@
     xserver.dpi = 250;
   };
 
-  systemd.services = {
-    ath11k-suspend = {
-      before = [ "sleep.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.kmod}/bin/rmmod ath11k_pci ath11k";
-      };
-      wantedBy = [ "sleep.target" ];
-    };
-    ath11k-resume = {
-      after = [ "suspend.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.kmod}/bin/modprobe ath11k_pci";
-      };
-      wantedBy = [ "suspend.target" "multi-user.target" ];
-    };
-  };
-
   systemd.sleep.extraConfig = ''
     HibernateMode=shutdown
   '';
