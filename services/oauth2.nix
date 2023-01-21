@@ -6,7 +6,6 @@
     cookie.domain = ".${config.networking.hostName}.meurer.org";
     email.domains = [ "meurer.org" ];
     keyFile = config.age.secrets.oauth2.path;
-    nginx.virtualHosts = [ "stash.${config.networking.hostName}.meurer.org" ];
     reverseProxy = true;
     passBasicAuth = true;
     setXauthrequest = true;
