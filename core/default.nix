@@ -72,7 +72,7 @@ in
   services = {
     openssh = {
       enable = true;
-      permitRootLogin = lib.mkDefault "no";
+      settings.PermitRootLogin = lib.mkDefault "no";
     };
     tailscale.enable = true;
   };
