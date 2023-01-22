@@ -1,4 +1,5 @@
 { lib, pkgs, ... }: {
+  systemd.user.services.waybar.Service.Restart = lib.mkForce "always";
   programs.waybar = {
     enable = true;
     package = pkgs.waybar.override { pulseSupport = true; };
