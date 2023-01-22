@@ -27,7 +27,6 @@
       directories = [
         ".aws"
         ".cache/chromium"
-        ".cache/darktable"
         ".cache/direnv"
         ".cache/lollypop"
         ".cache/mozilla"
@@ -40,7 +39,6 @@
         ".cache/zsh"
         ".config/1Password"
         ".config/chromium"
-        ".config/darktable"
         ".config/dconf"
         ".config/deluge"
         ".config/discord"
