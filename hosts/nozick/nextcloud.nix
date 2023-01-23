@@ -1,6 +1,7 @@
 { config, pkgs, ... }: {
   environment.persistence."/nix/state".directories = [
-    "/var/lib/nextcloud"
+    { directory = "/var/lib/nextcloud"; user = "nextcloud"; group = "nextcloud"; }
+    { directory = "/var/lib/postgresql"; user = "postgres"; group = "postgres"; }
   ];
 
   age.secrets.nextcloud = {

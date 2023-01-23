@@ -6,7 +6,6 @@
       "/var/lib/chrony"
       "/var/lib/containers"
       "/var/lib/plex"
-      "/var/lib/postgresql"
       "/var/lib/sshguard"
       {
         directory = "/var/lib/syncthing";
