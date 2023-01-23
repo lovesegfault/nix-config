@@ -1,7 +1,8 @@
 { config, pkgs, ... }: {
+  imports = [ ../../services/postgresql.nix ];
+
   environment.persistence."/nix/state".directories = [
     { directory = "/var/lib/nextcloud"; user = "nextcloud"; group = "nextcloud"; }
-    { directory = "/var/lib/postgresql"; user = "postgres"; group = "postgres"; }
   ];
 
   age.secrets.nextcloud = {
@@ -34,7 +35,6 @@
   };
 
   services.postgresql = {
-    enable = true;
     ensureDatabases = [ "nextcloud" ];
     ensureUsers = [{
       name = "nextcloud";
