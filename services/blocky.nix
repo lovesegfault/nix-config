@@ -1,9 +1,7 @@
 { lib, pkgs, ... }: {
-  environment.persistence."/nix/state".directories = [{
-    directory = "/var/lib/blocky";
-    user = "blocky";
-    group = "blocky";
-  }];
+  environment.persistence."/nix/state".directories = [
+    { directory = "/var/lib/blocky"; user = "blocky"; group = "blocky"; }
+  ];
 
   networking.firewall = {
     allowedTCPPorts = [ 53 5335 ];

@@ -2,11 +2,7 @@
   age.secrets.acme.file = ./acme.age;
 
   environment.persistence."/nix/state".directories = [
-    {
-      directory = "/var/lib/acme";
-      user = "acme";
-      group = "acme";
-    }
+    { directory = "/var/lib/acme"; user = "acme"; group = "acme"; }
   ];
 
   security.acme = {

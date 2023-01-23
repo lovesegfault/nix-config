@@ -1,11 +1,9 @@
 { config, ... }:
 with config.networking;
 {
-  environment.persistence."/nix/state".directories = [{
-    directory = "/var/lib/grafana";
-    user = "grafana";
-    group = "grafana";
-  }];
+  environment.persistence."/nix/state".directories = [
+    { directory = "/var/lib/grafana"; user = "grafana"; group = "grafana"; }
+  ];
 
   security.acme.certs."grafana.${hostName}.meurer.org" = { };
 

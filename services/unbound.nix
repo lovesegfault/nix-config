@@ -1,8 +1,7 @@
 { config, lib, pkgs, ... }: {
-  environment.persistence."/nix/state".directories = [{
-    directory = "/var/lib/unbound";
-    inherit (config.services.unbound) user group;
-  }];
+  environment.persistence."/nix/state".directories = [
+    { directory = "/var/lib/unbound"; inherit (config.services.unbound) user group; }
+  ];
 
   services = {
     resolved.enable = lib.mkForce false;

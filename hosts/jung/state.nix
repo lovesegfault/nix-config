@@ -3,26 +3,12 @@
 
   environment.persistence."/nix/state" = {
     directories = [
-      {
-        directory = "/var/lib/chrony";
-        user = "chrony";
-        group = "chrony";
-      }
+      { directory = "/var/lib/chrony"; user = "chrony"; group = "chrony"; }
       "/var/lib/fwupd"
-      {
-        directory = "/var/lib/hqplayer";
-        user = "hqplayer";
-        group = "hqplayer";
-      }
+      { directory = "/var/lib/hqplayer"; user = "hqplayer"; group = "hqplayer"; }
       "/var/lib/iwd"
-      {
-        directory = "/var/lib/roon-server";
-        inherit (config.services.roon-server) user group;
-      }
-      {
-        directory = "/var/lib/syncthing";
-        inherit (config.services.syncthing) user group;
-      }
+      { directory = "/var/lib/roon-server"; inherit (config.services.roon-server) user group; }
+      { directory = "/var/lib/syncthing"; inherit (config.services.syncthing) user group; }
       "/var/lib/tailscale"
       "/var/log"
     ];

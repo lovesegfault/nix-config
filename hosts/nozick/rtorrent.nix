@@ -1,9 +1,7 @@
 { pkgs, ... }: {
-  environment.persistence."/nix/state".directories = [{
-    directory = "/var/lib/rtorrent";
-    user = "rtorrent";
-    group = "media";
-  }];
+  environment.persistence."/nix/state".directories = [
+    { directory = "/var/lib/rtorrent"; user = "rtorrent"; group = "media"; }
+  ];
 
   security.acme.certs."flood.nozick.meurer.org" = { };
 

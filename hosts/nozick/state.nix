@@ -7,10 +7,7 @@
       "/var/lib/containers"
       "/var/lib/plex"
       "/var/lib/sshguard"
-      {
-        directory = "/var/lib/syncthing";
-        inherit (config.services.syncthing) user group;
-      }
+      { directory = "/var/lib/syncthing"; inherit (config.services.syncthing) user group; }
       "/var/lib/tailscale"
       "/var/log"
     ];
