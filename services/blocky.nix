@@ -1,8 +1,7 @@
 { lib, pkgs, ... }: {
-  imports = [ ./unbound.nix ];
-
-  environment.persistence."/nix/state".directories = [
-    { directory = "/var/lib/blocky"; user = "blocky"; group = "blocky"; }
+  imports = [
+    ./unbound.nix
+    ./postgresql.nix
   ];
 
   networking.firewall = {
@@ -60,8 +59,8 @@
       caching.maxTime = -1;
       prometheus.enable = true;
       queryLog = {
-        type = "csv";
-        target = "/var/lib/blocky";
+        type = "postgresql";
+        target = "postgres://blocky?host=/run/postgresql";
         logRetentionDays = 15;
       };
       port = "0.0.0.0:53";
@@ -70,6 +69,24 @@
       ede.enable = true;
     };
   };
+
+  services.postgresql = {
+    ensureDatabases = [ "blocky" ];
+    ensureUsers = [
+      {
+        name = "blocky";
+        ensurePermissions."DATABASE blocky" = "ALL PRIVILEGES";
+      }
+      {
+        name = "grafana";
+        ensurePermissions."DATABASE blocky" = "CONNECT";
+      }
+    ];
+  };
+
+  systemd.services.postgresql.postStart = lib.mkAfter ''
+    $PSQL -tAc 'GRANT pg_read_all_data TO grafana'
+  '';
 
   services.prometheus.scrapeConfigs = [{
     job_name = "blocky";
@@ -80,17 +97,34 @@
   services.grafana = {
     declarativePlugins = with pkgs.grafanaPlugins; [ grafana-piechart-panel ];
     settings.panels.disable_sanitize_html = true;
+    provision.datasources.settings = {
+      apiVersion = 1;
+      datasources = [{
+        name = "Blocky Query Log";
+        type = "postgres";
+        url = "/run/postgresql";
+        database = "blocky";
+        user = "grafana";
+        orgId = 1;
+      }];
+      deleteDatasources = [{
+        name = "Blocky Query Log";
+        orgId = 1;
+      }];
+    };
   };
 
   services.unbound.settings.server.port = "5335";
 
   systemd.services.blocky = {
-    after = [ "unbound.service" ];
+    after = [ "unbound.service" "postgresql.service" ];
     requires = [ "unbound.service" ];
     serviceConfig = {
       DynamicUser = lib.mkForce false;
       User = "blocky";
       Group = "blocky";
+      Restart = "on-failure";
+      RestartSec = "1";
     };
   };
 
