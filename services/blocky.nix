@@ -1,4 +1,6 @@
 { lib, pkgs, ... }: {
+  imports = [ ./unbound.nix ];
+
   environment.persistence."/nix/state".directories = [
     { directory = "/var/lib/blocky"; user = "blocky"; group = "blocky"; }
   ];

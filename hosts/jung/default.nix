@@ -15,7 +15,6 @@
     ../../services/nginx.nix
     ../../services/oauth2.nix
     ../../services/prometheus.nix
-    ../../services/unbound.nix
 
     ../../users/bemeurer
 
