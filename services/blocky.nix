@@ -61,7 +61,7 @@
       queryLog = {
         type = "postgresql";
         target = "postgres://blocky?host=/run/postgresql";
-        logRetentionDays = 15;
+        logRetentionDays = 90;
       };
       port = "0.0.0.0:53";
       httpPort = 4000;
