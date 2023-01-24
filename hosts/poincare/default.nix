@@ -102,7 +102,6 @@ in
       "Noizio" = 928871589;
       "Numbers" = 409203825;
       "Pages" = 409201541;
-      "Slack" = 803453959;
       "Soulver 3" = 1508732804;
       "Speedtest" = 1153157709;
       "Tailscale" = 1475387142;
