@@ -219,11 +219,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1674487663,
-        "narHash": "sha256-wuDr8rfBLcY7EIsFrFEj2dKYvsKjGib42Q2X3ZaDVf4=",
+        "lastModified": 1674550893,
+        "narHash": "sha256-HXI8AB96PP7UZ7iPANACXM8qc9eMz0ljxBEDM8JJKhY=",
         "owner": "cachix",
         "repo": "pre-commit-hooks.nix",
-        "rev": "3a12b647bc6da39b69bffcc7aaa31cdbc9b7ff7c",
+        "rev": "7bdf85f6bbef581eb687838d19f2b35a4c9d77f0",
         "type": "github"
       },
       "original": {
