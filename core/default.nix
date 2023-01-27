@@ -75,6 +75,7 @@ in
       settings.PermitRootLogin = lib.mkDefault "no";
     };
     tailscale.enable = true;
+    fwupd.daemonSettings.EspLocation = config.boot.loader.efi.efiSysMountPoint;
   };
 
   system = {
