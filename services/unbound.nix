@@ -75,8 +75,8 @@
             "fd00::/8"
             "fe80::/10"
           ];
-          private-domain = [ "localdomain" ];
-          domain-insecure = [ "localdomain" ];
+          private-domain = [ "local" ];
+          domain-insecure = [ "local" ];
         };
       };
     };
