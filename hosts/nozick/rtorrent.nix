@@ -14,10 +14,18 @@
     configText = ''
       log.add_output = "rpc_events", "log"
 
-      pieces.memory.max.set = 8192M
-      network.http.max_open.set = 256
-      network.max_open_files.set = 4096
-      network.max_open_sockets.set = 1024
+      throttle.max_uploads.set = 128
+      throttle.max_uploads.global.set = 4096
+      throttle.min_peers.normal.set = 16
+      throttle.max_peers.normal.set = 64
+      throttle.min_peers.seed.set = 32
+      throttle.max_peers.seed.set = 128
+      trackers.numwant.set = -1
+
+      pieces.memory.max.set = 16384M
+      network.http.max_open.set = 4096
+      network.max_open_files.set = 8192
+      network.max_open_sockets.set = 4096
       network.tos.set = throughput
       network.http.dns_cache_timeout.set = 0
 
