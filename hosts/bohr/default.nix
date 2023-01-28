@@ -1,22 +1,22 @@
-{ config, lib, pkgs, ... }: {
+{ config, nixos-hardware, pkgs, ... }: {
   imports = [
+    nixos-hardware.common-cpu-amd
+    nixos-hardware.common-cpu-amd-pstate
+    nixos-hardware.common-gpu-amd
+    nixos-hardware.common-pc-laptop-ssd
     ../../core
 
-    ../../dev
-
     ../../hardware/efi.nix
-    ../../hardware/nvidia.nix
 
     ../../users/bemeurer
 
     ./state.nix
-    ./hqplayerd.nix
   ];
 
   boot = {
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages_latest_lto_zen3;
+    kernelPackages = pkgs.linuxPackages_latest;
     tmpOnTmpfs = true;
     extraModprobeConfig = ''
       options snd_usb_audio lowlatency=0
@@ -51,29 +51,14 @@
   };
 
   hardware = {
-    cpu.amd.updateMicrocode = true;
     enableRedistributableFirmware = true;
     pulseaudio.enable = false;
-    nvidia.nvidiaPersistenced = true;
-    nvidia.nvidiaSettings = false;
   };
 
   networking = {
-    # Roon
-    firewall = {
-      allowedTCPPortRanges = [{ from = 9100; to = 9200; }];
-      allowedUDPPorts = [ 9003 ];
-      extraCommands = ''
-        ## IGMP / Broadcast - required by Roon ##
-        iptables -A INPUT -s 224.0.0.0/4 -j ACCEPT
-        iptables -A INPUT -d 224.0.0.0/4 -j ACCEPT
-        iptables -A INPUT -s 240.0.0.0/5 -j ACCEPT
-        iptables -A INPUT -m pkttype --pkt-type multicast -j ACCEPT
-        iptables -A INPUT -m pkttype --pkt-type broadcast -j ACCEPT
-      '';
-    };
     hostId = "40f886cd";
     hostName = "bohr";
+    wireless.iwd.enable = true;
   };
 
   nix = {
@@ -81,10 +66,7 @@
       automatic = true;
       options = "-d";
     };
-    settings = {
-      max-jobs = 16;
-      system-features = [ "benchmark" "nixos-test" "big-parallel" "kvm" ];
-    };
+    settings.system-features = [ "benchmark" "nixos-test" "big-parallel" "kvm" ];
   };
 
   security.pam.loginLimits = [
@@ -101,40 +83,28 @@
     };
     fstrim.enable = true;
     fwupd.enable = true;
-    roon-server.enable = true;
+    roon-bridge.enable = true;
     smartd.enable = true;
-    syncthing = {
-      enable = true;
-      devices.fourier.id = "LHJU64F-X3RD7KA-F63MN25-7TGMTFW-JNJCBU7-V7ZEVQL-OXVWOB4-YJ7HZAC";
-      guiAddress = "0.0.0.0:8384";
-      openDefaultPorts = true;
-      folders.music = {
-        devices = [ "fourier" ];
-        path = "/srv/music";
-        type = "receiveonly";
-      };
-      group = "media";
-    };
   };
 
-  systemd.enableUnifiedCgroupHierarchy = lib.mkForce false;
-
-  systemd.network.networks.eth = {
-    matchConfig.MACAddress = "04:42:1a:0d:a3:40";
-    DHCP = "yes";
+  systemd.network.networks = {
+    eth = {
+      DHCP = "yes";
+      matchConfig.MACAddress = "04:42:1a:0d:a3:40";
+      dhcpV4Config.RouteMetric = 10;
+      dhcpV6Config.RouteMetric = 10;
+    };
+    wifi = {
+      DHCP = "yes";
+      matchConfig.MACAddress = "38:fc:98:17:78:39";
+      dhcpV4Config.RouteMetric = 40;
+      dhcpV6Config.RouteMetric = 40;
+    };
   };
 
   swapDevices = [{ device = "/dev/disk/by-uuid/66ee7c01-6753-41ca-8987-2eecac3bb653"; }];
 
-  time.timeZone = "America/Los_Angeles";
-
-  users.groups.media.members = [ "bemeurer" "hqplayer" "roon-server" ];
-  users.groups.video.members = [ "hqplayer" ];
-
-  virtualisation.docker = {
-    enable = true;
-    autoPrune.enable = true;
-  };
+  time.timeZone = "America/New_York";
 
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;

@@ -5,10 +5,6 @@
     directories = [
       "/etc/hqplayer"
 
-      "/var/lib/docker"
-      "/var/lib/hqplayer"
-      "/var/lib/roon-server"
-      "/var/lib/syncthing"
       "/var/lib/tailscale"
       "/var/log"
     ];
