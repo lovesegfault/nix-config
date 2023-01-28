@@ -1,4 +1,4 @@
-{ config, nixos-hardware, pkgs, ... }: {
+{ config, lib, nixos-hardware, pkgs, ... }: {
   imports = [
     nixos-hardware.common-cpu-amd
     nixos-hardware.common-cpu-amd-pstate
@@ -86,6 +86,8 @@
     roon-bridge.enable = true;
     smartd.enable = true;
   };
+
+  systemd.services.roon-bridge.serviceConfig.ExecStart = lib.mkForce "${pkgs.roon-bridge}/bin/RoonBridge";
 
   systemd.network.networks = {
     eth = {
