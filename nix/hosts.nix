@@ -1,5 +1,11 @@
 let
   hosts = {
+    bohr = {
+      type = "nixos";
+      address = "100.123.20.5";
+      hostPlatform = "x86_64-linux";
+      pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBTh+kYOeeYoBuxvA00nGojfBHUQlXW3iF7aRIw9VbY1";
+    };
     derrida = {
       type = "homeManager";
       hostPlatform = "x86_64-linux";
