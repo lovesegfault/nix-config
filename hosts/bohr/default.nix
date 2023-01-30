@@ -83,7 +83,10 @@
     };
     fstrim.enable = true;
     fwupd.enable = true;
-    roon-bridge.enable = true;
+    roon-bridge = {
+      enable = true;
+      openFirewall = true;
+    };
     smartd.enable = true;
   };
 
