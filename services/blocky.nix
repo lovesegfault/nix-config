@@ -1,4 +1,6 @@
-{ lib, pkgs, ... }: {
+{ config, hostAddress, lib, pkgs, ... }:
+with config.networking;
+{
   imports = [
     ./unbound.nix
     ./postgresql.nix
@@ -113,6 +115,12 @@
       }];
     };
   };
+
+  services.nginx.virtualHosts."grafana.${hostName}.meurer.org".locations."/".extraConfig = ''
+    add_header Access-Control-Allow-Origin "http://${hostAddress}";
+    add_header Access-Control-Allow-Origin "http://127.0.0.1";
+    add_header Access-Control-Allow-Origin "http://localhost";
+  '';
 
   services.unbound.settings.server.port = "5335";
 
