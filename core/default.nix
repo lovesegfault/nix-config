@@ -70,6 +70,7 @@ in
   };
 
   services = {
+    dbus.implementation = "broker";
     openssh = {
       enable = true;
       settings.PermitRootLogin = lib.mkDefault "no";
