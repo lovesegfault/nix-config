@@ -19,7 +19,7 @@ let
     };
   };
 
-  genConfiguration = hostname: { hostPlatform, ... }:
+  genConfiguration = hostname: { address, hostPlatform, ... }:
     lib.nixosSystem {
       modules = [
         (../hosts + "/${hostname}")
@@ -36,6 +36,7 @@ let
       specialArgs = {
         impermanence = impermanence.nixosModules;
         nixos-hardware = nixos-hardware.nixosModules;
+        hostAddress = address;
       };
     };
 in
