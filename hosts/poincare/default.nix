@@ -25,7 +25,8 @@ in
       gnused
       gnutar
       gnutls
-      (openssh_gssapi.override { withKerberos = true; })
+      ncurses
+      openssh_gssapi
     ];
     variables = {
       JAVA_HOME = "$(/usr/libexec/java_home)";
