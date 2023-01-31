@@ -154,7 +154,7 @@ in
 
     # Optional filter for shown disks, should be full path of a mountpoint, separate multiple values with whitespace " ".
     # Begin line with "exclude=" to change to exclude filter, otherwise defaults to "most include" filter. Example: disks_filter="exclude=/boot /home/user".
-    disks_filter = "/ /state /nix /nix/state /srv/music /srv/pictures";
+    disks_filter = "/ /nix /nix/state /nix/store /mnt/emp /mnt/movies /mnt/music /mnt/redacted /mnt/shows";
 
     # Show graphs instead of meters for memory values.
     mem_graphs = false;
@@ -172,7 +172,7 @@ in
     show_disks = true;
 
     # Filter out non physical disks. Set this to false to include network disks, RAM disks and similar.
-    only_physical = true;
+    only_physical = false;
 
     # Read disks list from /etc/fstab. This also disables only_physical.
     use_fstab = true;
