@@ -38,15 +38,10 @@
       fsType = "ext4";
       neededForBoot = true;
     };
-    "/srv/music" = {
+    "/mnt/music" = {
       device = "/dev/disk/by-uuid/91b15b49-9247-4d80-9799-a786a1a68920";
       fsType = "btrfs";
       options = [ "subvol=music" "noatime" ];
-    };
-    "/srv/roon" = {
-      device = "/dev/disk/by-uuid/91b15b49-9247-4d80-9799-a786a1a68920";
-      fsType = "btrfs";
-      options = [ "subvol=roon" "noatime" ];
     };
   };
 
@@ -78,7 +73,7 @@
   services = {
     btrfs.autoScrub = {
       enable = true;
-      fileSystems = [ "/srv/music" "/srv/roon" ];
+      fileSystems = [ "/mnt/music" ];
       interval = "weekly";
     };
     fstrim.enable = true;
@@ -88,6 +83,21 @@
       openFirewall = true;
     };
     smartd.enable = true;
+    syncthing = {
+      enable = true;
+      guiAddress = "0.0.0.0:8384";
+      devices = {
+        jung.id = "GXCBSO2-RQAR3CC-ACW6JWB-IAZHQZO-XZWSYKL-SYB2GNS-T4R5QO2-Q76BXAV";
+        nozick.id = "SJH2ZVC-EUWTL4M-ZEP57G6-O5A6DYX-4AWZU7C-XF4GGED-5F6OHGC-KDHPMA6";
+      };
+      folders = {
+        music = {
+          devices = [ "jung" "nozick" ];
+          path = "/mnt/music";
+          type = "receiveonly";
+        };
+      };
+    };
   };
 
   systemd.services.roon-bridge.serviceConfig.ExecStart = lib.mkForce "${pkgs.roon-bridge}/bin/RoonBridge";
@@ -113,4 +123,6 @@
 
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;
+
+  users.groups.media.members = [ "bemeurer" config.services.syncthing.user ];
 }

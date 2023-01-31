@@ -159,10 +159,11 @@
       guiAddress = "0.0.0.0:8384";
       devices = {
         jung.id = "GXCBSO2-RQAR3CC-ACW6JWB-IAZHQZO-XZWSYKL-SYB2GNS-T4R5QO2-Q76BXAV";
+        bohr.id = "QIBE7XV-ALGJQ7U-OY57XR6-QPCBXEF-7C7XD6B-RJFU3BM-3AOVBA5-OIOBLQH";
       };
       folders = {
         music = {
-          devices = [ "jung" ];
+          devices = [ "bohr" "jung" ];
           path = "/mnt/music";
           type = "sendonly";
         };

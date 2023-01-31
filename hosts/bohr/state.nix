@@ -1,4 +1,4 @@
-{
+{ config, ... }: {
   age.identityPaths = [ "/nix/state/etc/ssh/ssh_host_ed25519_key" ];
 
   environment.persistence."/nix/state" = {
@@ -6,6 +6,7 @@
     directories = [
       "/var/lib/iwd"
       "/var/lib/tailscale"
+      { directory = "/var/lib/syncthing"; inherit (config.services.syncthing) user group; }
       "/var/log"
     ];
     files = [

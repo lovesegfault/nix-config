@@ -126,10 +126,13 @@
     syncthing = {
       enable = true;
       guiAddress = "0.0.0.0:8384";
-      devices.nozick.id = "SJH2ZVC-EUWTL4M-ZEP57G6-O5A6DYX-4AWZU7C-XF4GGED-5F6OHGC-KDHPMA6";
+      devices = {
+        bohr.id = "QIBE7XV-ALGJQ7U-OY57XR6-QPCBXEF-7C7XD6B-RJFU3BM-3AOVBA5-OIOBLQH";
+        nozick.id = "SJH2ZVC-EUWTL4M-ZEP57G6-O5A6DYX-4AWZU7C-XF4GGED-5F6OHGC-KDHPMA6";
+      };
       folders = {
         music = {
-          devices = [ "nozick" ];
+          devices = [ "bohr" "nozick" ];
           path = "/mnt/music";
           type = "receiveonly";
         };
