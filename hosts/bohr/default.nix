@@ -8,6 +8,10 @@
 
     ../../hardware/efi.nix
 
+    ../../services/nginx.nix
+    ../../services/oauth2.nix
+    ../../services/syncthing.nix
+
     ../../users/bemeurer
 
     ./state.nix
@@ -83,19 +87,11 @@
       openFirewall = true;
     };
     smartd.enable = true;
-    syncthing = {
-      enable = true;
-      guiAddress = "0.0.0.0:8384";
-      devices = {
-        jung.id = "GXCBSO2-RQAR3CC-ACW6JWB-IAZHQZO-XZWSYKL-SYB2GNS-T4R5QO2-Q76BXAV";
-        nozick.id = "SJH2ZVC-EUWTL4M-ZEP57G6-O5A6DYX-4AWZU7C-XF4GGED-5F6OHGC-KDHPMA6";
-      };
-      folders = {
-        music = {
-          devices = [ "jung" "nozick" ];
-          path = "/mnt/music";
-          type = "receiveonly";
-        };
+    syncthing.folders = {
+      music = {
+        devices = [ "jung" "nozick" ];
+        path = "/mnt/music";
+        type = "receiveonly";
       };
     };
   };
@@ -122,5 +118,8 @@
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;
 
-  users.groups.media.members = [ "bemeurer" config.services.syncthing.user ];
+  users.groups.media = {
+    gid = 999;
+    members = [ "bemeurer" config.services.syncthing.user ];
+  };
 }

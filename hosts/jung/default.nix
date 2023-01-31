@@ -15,6 +15,7 @@
     ../../services/nginx.nix
     ../../services/oauth2.nix
     ../../services/prometheus.nix
+    ../../services/syncthing.nix
 
     ../../users/bemeurer
 
@@ -123,26 +124,17 @@
     nginx.resolver.addresses = [ "127.0.0.1:5335" ];
     fwupd.enable = true;
     smartd.enable = true;
-    syncthing = {
-      enable = true;
-      guiAddress = "0.0.0.0:8384";
-      devices = {
-        bohr.id = "QIBE7XV-ALGJQ7U-OY57XR6-QPCBXEF-7C7XD6B-RJFU3BM-3AOVBA5-OIOBLQH";
-        nozick.id = "SJH2ZVC-EUWTL4M-ZEP57G6-O5A6DYX-4AWZU7C-XF4GGED-5F6OHGC-KDHPMA6";
+    syncthing.folders = {
+      music = {
+        devices = [ "bohr" "nozick" ];
+        path = "/mnt/music";
+        type = "receiveonly";
       };
-      folders = {
-        music = {
-          devices = [ "bohr" "nozick" ];
-          path = "/mnt/music";
-          type = "receiveonly";
-        };
-        opus = {
-          devices = [ "nozick" ];
-          path = "/mnt/music-opus";
-          type = "receiveonly";
-        };
+      opus = {
+        devices = [ "nozick" ];
+        path = "/mnt/music-opus";
+        type = "receiveonly";
       };
-      group = "media";
     };
     unbound.settings.server.access-control = [ "192.168.50.0/24 allow" ];
   };
@@ -168,7 +160,7 @@
 
   users.groups.media = {
     gid = 999;
-    members = [ "bemeurer" ];
+    members = [ "bemeurer" config.services.syncthing.user ];
   };
 
   age.secrets.rootPassword.file = ./password.age;

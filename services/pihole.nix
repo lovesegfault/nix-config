@@ -1,4 +1,6 @@
-{ config, ... }: {
+{ config, ... }:
+with config.networking;
+{
   age.secrets.pihole.file = ./pihole.age;
 
   environment.persistence."/nix/state".directories = [
@@ -10,15 +12,15 @@
     allowedUDPPorts = [ 53 5335 ];
   };
 
-  security.acme.certs."pihole.${config.networking.hostName}.meurer.org" = { };
+  security.acme.certs."pihole.${hostName}.meurer.org" = { };
 
   services.unbound.settings.server = {
     access-control = [ "10.88.0.0/24 allow" ];
     port = "5335";
   };
 
-  services.nginx.virtualHosts."pihole.${config.networking.hostName}.meurer.org" = {
-    useACMEHost = "pihole.${config.networking.hostName}.meurer.org";
+  services.nginx.virtualHosts."pihole.${hostName}.meurer.org" = {
+    useACMEHost = "pihole.${hostName}.meurer.org";
     forceSSL = true;
     kTLS = true;
     locations."/" = {
@@ -36,7 +38,7 @@
       PIHOLE_DNS_ = "10.88.0.1#5335";
       DNSSEC = "false";
       REV_SERVER = "true";
-      VIRTUAL_HOST = "pihole.${config.networking.hostName}.meurer.org";
+      VIRTUAL_HOST = "pihole.${hostName}.meurer.org";
       WEBTHEME = "default-darker";
     };
     environmentFiles = [ config.age.secrets.pihole.path ];

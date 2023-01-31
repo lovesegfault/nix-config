@@ -12,6 +12,7 @@
     ../../services/nginx.nix
     ../../services/oauth2.nix
     ../../services/prometheus.nix
+    ../../services/syncthing.nix
     ../../services/unbound.nix
 
     ../../users/bemeurer
@@ -153,25 +154,16 @@
     plex.enable = true;
     smartd.enable = true;
     sshguard.enable = true;
-    syncthing = {
-      enable = true;
-      group = "media";
-      guiAddress = "0.0.0.0:8384";
-      devices = {
-        jung.id = "GXCBSO2-RQAR3CC-ACW6JWB-IAZHQZO-XZWSYKL-SYB2GNS-T4R5QO2-Q76BXAV";
-        bohr.id = "QIBE7XV-ALGJQ7U-OY57XR6-QPCBXEF-7C7XD6B-RJFU3BM-3AOVBA5-OIOBLQH";
+    syncthing.folders = {
+      music = {
+        devices = [ "bohr" "jung" ];
+        path = "/mnt/music";
+        type = "sendonly";
       };
-      folders = {
-        music = {
-          devices = [ "bohr" "jung" ];
-          path = "/mnt/music";
-          type = "sendonly";
-        };
-        opus = {
-          devices = [ "jung" ];
-          path = "/mnt/music-opus";
-          type = "sendonly";
-        };
+      opus = {
+        devices = [ "jung" ];
+        path = "/mnt/music-opus";
+        type = "sendonly";
       };
     };
     zfs = {
@@ -199,7 +191,7 @@
 
   users = {
     users.root.passwordFile = config.age.secrets.rootPassword.path;
-    groups.media.members = [ "bemeurer" "plex" ];
+    groups.media.members = [ "bemeurer" "plex" config.services.syncthing.user ];
   };
 
   virtualisation = {
