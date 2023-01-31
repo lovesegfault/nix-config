@@ -6,6 +6,7 @@
     directories = [
       "/var/lib/iwd"
       "/var/lib/tailscale"
+      { directory = "/var/lib/roon-bridge"; inherit (config.services.roon-bridge) user group; }
       { directory = "/var/lib/syncthing"; inherit (config.services.syncthing) user group; }
       "/var/log"
     ];

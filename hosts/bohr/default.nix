@@ -100,8 +100,6 @@
     };
   };
 
-  systemd.services.roon-bridge.serviceConfig.ExecStart = lib.mkForce "${pkgs.roon-bridge}/bin/RoonBridge";
-
   systemd.network.networks = {
     eth = {
       DHCP = "yes";
