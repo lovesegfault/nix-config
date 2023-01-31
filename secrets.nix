@@ -5,6 +5,18 @@ let
 
   hosts = mapAttrs (_: v: v.pubkey) (import ./nix/hosts.nix).nixos;
 
+  secrets = with hosts; {
+    "hardware/nixos-aarch64-builder/key.age" = [ jung spinoza ];
+    "hosts/nozick/ddns.age" = [ nozick ];
+    "hosts/nozick/nextcloud.age" = [ nozick ];
+    "services/acme.age" = [ bohr jung nozick ];
+    "services/oauth2.age" = [ bohr jung nozick ];
+    "services/pihole.age" = [ ];
+    "users/bemeurer/password.age" = attrValues hosts;
+  };
+
+  secrets' = mapAttrs (_: v: { publicKeys = [ bemeurer ] ++ v; }) secrets;
+
   allHostSecret = secretName:
     listToAttrs (
       map
@@ -15,15 +27,4 @@ let
         (attrNames hosts)
     );
 in
-with hosts;
-{
-  "hardware/nixos-aarch64-builder/key.age".publicKeys = [ bemeurer jung spinoza ];
-  "hosts/nozick/ddns.age".publicKeys = [ bemeurer nozick ];
-  "hosts/nozick/nextcloud.age".publicKeys = [ bemeurer nozick ];
-  "services/acme.age".publicKeys = [ bemeurer jung nozick ];
-  "services/oauth2.age".publicKeys = [ bemeurer jung nozick ];
-  "services/pihole.age".publicKeys = [ bemeurer jung ];
-  "users/bemeurer/activate-token.age".publicKeys = [ bemeurer ];
-  "users/bemeurer/password.age".publicKeys = [ bemeurer ] ++ (attrValues hosts);
-} // allHostSecret "password"
-  // allHostSecret "agent"
+secrets' // allHostSecret "password"
