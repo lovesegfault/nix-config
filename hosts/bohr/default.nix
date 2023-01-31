@@ -58,6 +58,11 @@
     hostId = "40f886cd";
     hostName = "bohr";
     wireless.iwd.enable = true;
+    nftables.enable = true;
+    firewall.extraInputRules = ''
+      # Allow roon-bridge to talk to roon-server in jung
+      ip saddr 192.158.50.2 accept
+    '';
   };
 
   nix = {
@@ -82,10 +87,7 @@
     };
     fstrim.enable = true;
     fwupd.enable = true;
-    roon-bridge = {
-      enable = true;
-      openFirewall = true;
-    };
+    roon-bridge.enable = true;
     smartd.enable = true;
     syncthing.folders = {
       music = {
