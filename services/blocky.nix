@@ -11,6 +11,8 @@ with config.networking;
     allowedUDPPorts = [ 53 5335 ];
   };
 
+  environment.systemPackages = with pkgs; [ blocky ];
+
   services.blocky = {
     enable = true;
     settings = {
