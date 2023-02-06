@@ -25,11 +25,12 @@
         if [ -f /etc/bashrc ]; then
         . /etc/bashrc
         fi
-        export PATH="$PATH:$HOME/.toolbox/bin"
+        export PATH="$PATH:$HOME/.toolbox/bin:/apollo/env/bt-rust/bin"
       '';
     };
     fish.shellInit = ''
       fish_add_path --append --path "$HOME/.toolbox/bin"
+      fish_add_path --append --path "/apollo/env/bt-rust/bin"
     '';
     git.lfs.enable = true;
     zsh = {
@@ -42,7 +43,7 @@
           export SHELL="$(realpath "$(which fish)")"
           exec fish --login
         else
-          export PATH="$PATH:$HOME/.toolbox/bin"
+          export PATH="$PATH:$HOME/.toolbox/bin:/apollo/env/bt-rust/bin"
         fi
       '';
     };
