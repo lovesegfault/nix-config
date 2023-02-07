@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v18
+      - uses: cachix/install-nix-action@v19
         with:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
@@ -34,7 +34,7 @@ jobs:
       systems: ${{ steps.get-hosts.outputs.systems }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v18
+      - uses: cachix/install-nix-action@v19
       - id: get-hosts
         run: |
           nix eval --json -f ./nix/hosts.nix all | jq -c '
@@ -62,7 +62,7 @@ jobs:
         system: ${{ fromJson(needs.get-hosts.outputs.systems) }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v18
+      - uses: cachix/install-nix-action@v19
         with:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
@@ -89,7 +89,7 @@ jobs:
         host: ${{ fromJson(needs.get-hosts.outputs.hosts) }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v18
+      - uses: cachix/install-nix-action@v19
         with:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
