@@ -109,7 +109,7 @@
     automatic-timezoned.enable = true;
     btrfs.autoScrub = {
       enable = true;
-      fileSystems = [ "/nix/store" "/nix/state" "/nix/var" ];
+      fileSystems = [ "/mnt/music-opus" "/nix/state" "/nix/var" ];
       interval = "weekly";
     };
     geoclue2 = {
