@@ -204,10 +204,18 @@ in
         AppleTemperatureUnit = "Celsius";
         InitialKeyRepeat = 25;
         KeyRepeat = 2;
+        NSAutomaticSpellingCorrectionEnabled = false;
       };
       SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
       finder.QuitMenuItem = true;
-      dock.autohide = true;
+      dock = {
+        autohide = true;
+        autohide-delay = 0.0;
+        autohide-time-modifier = 0.0;
+        mineffect = "scale";
+        orientation = "left";
+        show-recents = false;
+      };
     };
     keyboard = {
       enableKeyMapping = true;
