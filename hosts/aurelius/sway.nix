@@ -1,22 +1,8 @@
 { lib, ... }: {
   environment.etc."sway/config.d/inputs.conf".text = ''
-    input "1241:4611:HID_04d9:1203" {
+    input "1:1:AT_Translated_Set_2_keyboard" {
       xkb_layout us
-    }
-
-    input "1133:16495:Logitech_MX_Ergo" {
-      accel_profile adaptive
-      natural_scroll enabled
-    }
-
-    input "1133:16511:Logitech_G502" {
-      accel_profile adaptive
-      natural_scroll enabled
-    }
-
-    input "1133:45085:Logitech_MX_Ergo_Multi-Device_Trackball" {
-      accel_profile adaptive
-      natural_scroll enabled
+      repeat_rate 70
     }
   '';
 
@@ -32,10 +18,21 @@
     config = {
       gaps = lib.mkForce null;
       modifier = lib.mkForce "Mod1";
+      input = {
+        "1:1:AT_Translated_Set_2_keyboard" = {
+          xkb_layout = "us";
+          repeat_rate = "70";
+        };
+      };
+      output = {
+        "DSI-1" = {
+          mode = "480x800@60Hz";
+          position = "0,0";
+          subpixel = "rgb";
+          transform = "90";
+        };
+      };
     };
-    extraSessionCommands = ''
-      export WLR_DRM_DEVICES=/dev/dri/card1
-    '';
   };
 
   programs.sway.enable = true;

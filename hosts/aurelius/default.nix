@@ -57,38 +57,22 @@
     };
   };
 
-  home-manager.users.bemeurer = {
-    wayland.windowManager.sway = {
-      extraSessionCommands = ''
-        export WLR_DRM_DEVICES=/dev/dri/card1
-      '';
-      config = {
-        input = {
-          "1:1:AT_Translated_Set_2_keyboard" = {
-            xkb_layout = "us";
-            repeat_rate = "70";
-          };
-        };
-        output = {
-          "DSI-1" = {
-            mode = "480x800@60Hz";
-            position = "0,0";
-            subpixel = "rgb";
-            transform = "90";
-          };
-        };
-      };
-    };
-  };
-
-  location = {
-    latitude = 37.861;
-    longitude = -122.273;
-  };
+  location.provider = "geoclue2";
 
   networking = {
     hostName = "aurelius";
     wireless.iwd.enable = true;
+  };
+
+  services = {
+    automatic-timezoned.enable = true;
+    geoclue2 = {
+      enable = true;
+      enable3G = false;
+      enableCDMA = false;
+      enableModemGPS = false;
+      submitData = true;
+    };
   };
 
   swapDevices = lib.mkDefault [{
