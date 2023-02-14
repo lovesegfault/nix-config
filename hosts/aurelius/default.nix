@@ -1,8 +1,11 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
+    nixos-hardware.raspberry-pi-4
+
     ../../core
 
+    ../../hardware/nixos-aarch64-builder
     ../../hardware/bluetooth.nix
     ../../hardware/rpi4.nix
     ../../hardware/sound-pipewire.nix
@@ -37,6 +40,7 @@
       };
     };
     initrd = {
+      availableKernelModules = [ "nvme" ];
       extraUtilsCommands = "copy_bin_and_libs ${pkgs.hyperpixel4-init}/bin/hyperpixel4-init";
       preDeviceCommands = "hyperpixel4-init";
     };
@@ -87,6 +91,11 @@
     hostName = "aurelius";
     wireless.iwd.enable = true;
   };
+
+  swapDevices = lib.mkDefault [{
+    device = "/swap";
+    size = 2048;
+  }];
 
   systemd.network.networks = {
     lan = {
