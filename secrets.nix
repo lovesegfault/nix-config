@@ -6,7 +6,7 @@ let
   hosts = mapAttrs (_: v: v.pubkey) (import ./nix/hosts.nix).nixos;
 
   secrets = with hosts; {
-    "hardware/nixos-aarch64-builder/key.age" = [ jung spinoza ];
+    "hardware/nixos-aarch64-builder/key.age" = [ aurelius jung spinoza ];
     "hosts/nozick/ddns.age" = [ nozick ];
     "hosts/nozick/nextcloud.age" = [ nozick ];
     "services/acme.age" = [ bohr jung nozick ];
