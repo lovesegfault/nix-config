@@ -35,7 +35,7 @@ let
       ];
       specialArgs = {
         impermanence = impermanence.nixosModules;
-        nixos-hardware = nixos-hardware.nixosModules;
+        hardware = nixos-hardware.nixosModules;
         hostAddress = address;
       };
     };

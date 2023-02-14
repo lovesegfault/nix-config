@@ -1,9 +1,9 @@
-{ config, lib, nixos-hardware, pkgs, ... }: {
+{ config, lib, hardware, pkgs, ... }: {
   imports = [
-    nixos-hardware.common-cpu-amd
-    nixos-hardware.common-cpu-amd-pstate
-    nixos-hardware.common-gpu-amd
-    nixos-hardware.common-pc-laptop-ssd
+    hardware.common-cpu-amd
+    hardware.common-cpu-amd-pstate
+    hardware.common-gpu-amd
+    hardware.common-pc-laptop-ssd
     ../../core
 
     ../../hardware/efi.nix

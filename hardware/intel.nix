@@ -1,5 +1,5 @@
-{ nixos-hardware, pkgs, ... }: {
-  imports = [ nixos-hardware.common-cpu-intel ];
+{ hardware, pkgs, ... }: {
+  imports = [ hardware.common-cpu-intel ];
   boot = {
     extraModprobeConfig = ''
       options kvm_intel nested=1
