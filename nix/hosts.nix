@@ -2,7 +2,7 @@ let
   hosts = {
     aurelius = {
       type = "nixos";
-      address = "100.92.104.42";
+      address = "100.92.35.75";
       hostPlatform = "aarch64-linux";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL8LfZJVnCw5Wq8+mym6uxTwg6+QhvkSjt0qfzap4C7w";
       remoteBuild = false;
