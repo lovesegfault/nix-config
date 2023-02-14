@@ -7,7 +7,6 @@
 
     ../../hardware/nixos-aarch64-builder
     ../../hardware/bluetooth.nix
-    ../../hardware/rpi4.nix
     ../../hardware/sound-pipewire.nix
 
     ../../graphical
