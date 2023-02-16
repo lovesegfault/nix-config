@@ -21,6 +21,7 @@ with final.lib;
       hash = "sha256-ntJlF0PXguPsWCOJ7WQYcOKVpESlFaWDapdDGRybVyM=";
     };
     nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ final.hwdata ];
+    mesonFlags = (old.mesonFlags or [ ]) ++ [ "-Dwerror=false" ];
   });
 
   sway-unwrapped = (prev.sway-unwrapped.overrideAttrs (old: {
