@@ -1,4 +1,4 @@
-{ config, hardware, pkgs, ... }: {
+{ config, hardware, lib, pkgs, ... }: {
   imports = [
     hardware.common-cpu-amd
     hardware.common-cpu-amd-pstate
@@ -75,7 +75,10 @@
 
   hardware = {
     enableRedistributableFirmware = true;
-    opengl.enable = true;
+    opengl = {
+      enable = true;
+      extraPackages32 = lib.mkForce [ ];
+    };
   };
 
   home-manager.users.bemeurer = {
