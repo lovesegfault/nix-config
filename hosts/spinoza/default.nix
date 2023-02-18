@@ -4,6 +4,7 @@
 
     ../../dev
     ../../dev/virt-manager.nix
+    ../../dev/podman.nix
 
     ../../hardware/nixos-aarch64-builder
     ../../hardware/thinkpad-z13.nix
