@@ -175,7 +175,7 @@ in
     only_physical = false;
 
     # Read disks list from /etc/fstab. This also disables only_physical.
-    use_fstab = true;
+    use_fstab = false;
 
     # Toggles if io activity % (disk busy time) should be shown in regular disk usage view.
     show_io_stat = true;
