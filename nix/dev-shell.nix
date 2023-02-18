@@ -20,7 +20,7 @@ mkShell {
     # Lua
     stylua
     (luajit.withPackages (p: with p; [ luacheck ]))
-    sumneko-lua-language-server
+    lua-language-server
 
     # Shell
     shellcheck

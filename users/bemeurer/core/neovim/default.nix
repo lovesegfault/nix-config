@@ -93,7 +93,7 @@
         vim-nix
         vim-polyglot
       ]
-      ++ lib.optional (lib.elem pkgs.hostPlatform.system pkgs.tabnine.meta.platforms) cmp-tabnine
+      ++ lib.optional (lib.elem pkgs.stdenv.hostPlatform.system pkgs.tabnine.meta.platforms) cmp-tabnine
       ;
     };
   };
