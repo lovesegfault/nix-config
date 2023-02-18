@@ -1,4 +1,4 @@
-{ config, hardware, lib, pkgs, ... }: {
+{ config, hardware, pkgs, ... }: {
   imports = [
     hardware.common-cpu-amd
     hardware.common-cpu-amd-pstate
@@ -30,10 +30,7 @@
     brillo.enable = true;
     enableRedistributableFirmware = true;
     i2c.enable = true;
-    opengl = {
-      enable = true;
-      extraPackages32 = lib.mkForce [ ];
-    };
+    opengl.enable = true;
   };
 
   nix.settings.system-features = [
