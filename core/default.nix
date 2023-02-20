@@ -64,9 +64,15 @@ in
     };
   };
 
-  security.sudo = {
-    enable = true;
-    wheelNeedsPassword = lib.mkDefault false;
+  security = {
+    pam.services = {
+      login.u2fAuth = true;
+      sudo.u2fAuth = true;
+    };
+    sudo = {
+      enable = true;
+      wheelNeedsPassword = lib.mkDefault false;
+    };
   };
 
   services = {

@@ -52,6 +52,7 @@
         ".config/Plexamp"
         ".config/Signal"
         ".config/TabNine"
+        ".config/Yubico"
         ".local/share/atuin"
         ".local/share/bash"
         ".local/share/direnv"
