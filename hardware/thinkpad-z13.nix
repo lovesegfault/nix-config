@@ -11,11 +11,12 @@
 
   boot = {
     initrd.availableKernelModules = [ "nvme" "thinkpad_acpi" "thunderbolt" "xhci_pci" ];
+    blacklistedKernelModules = [ "sp5100_tco" ];
     kernelModules = [ "cpufreq_conservative" "cpufreq_ondemand" "kvm-amd" "thinkpad_acpi" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
-      "nmi_watchdog=0"
+      "nowatchdog"
       "acpi.prefer_microsoft_guid=1" # XXX: Maybe helps with sleep?
     ];
     tmpOnTmpfs = true;
