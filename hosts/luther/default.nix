@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ../../users/bemeurer/core
     ../../users/bemeurer/dev
@@ -32,6 +32,7 @@
       fish_add_path --append --path "$HOME/.toolbox/bin"
       fish_add_path --append --path "/apollo/env/bt-rust/bin"
     '';
+    git.userEmail = lib.mkForce "bemeurer@amazon.com";
     zsh = {
       initExtraBeforeCompInit = ''
         fpath+=("$HOME/.zsh/completion")
