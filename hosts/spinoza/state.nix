@@ -78,7 +78,6 @@
       files = [
         ".config/cachix/cachix.dhall"
         ".config/gh/hosts.yml"
-        ".local/share/wall.png"
       ];
     };
   };

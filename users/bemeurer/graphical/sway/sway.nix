@@ -22,7 +22,7 @@
           "Print" = execSpawn "${pkgs.screenshot}/bin/screenshot";
         };
 
-      output = { "*" = { bg = "${config.xdg.dataHome}/wall.png fill"; }; };
+      output = { "*" = { bg = "${../../assets/walls/plants-00.jpg} fill"; }; };
 
       terminal = lib.getExe pkgs.foot;
 
