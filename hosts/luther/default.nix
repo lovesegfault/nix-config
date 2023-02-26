@@ -32,7 +32,6 @@
       fish_add_path --append --path "$HOME/.toolbox/bin"
       fish_add_path --append --path "/apollo/env/bt-rust/bin"
     '';
-    git.lfs.enable = true;
     zsh = {
       initExtraBeforeCompInit = ''
         fpath+=("$HOME/.zsh/completion")

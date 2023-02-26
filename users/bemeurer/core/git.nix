@@ -9,7 +9,7 @@
       };
     };
     package = pkgs.gitFull;
-    lfs.enable = lib.mkDefault false;
+    lfs.enable = true;
     userEmail = "bernardo@meurer.org";
     userName = "Bernardo Meurer";
     extraConfig = {
