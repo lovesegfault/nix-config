@@ -59,7 +59,7 @@
           After = [ "xrandr.service" "picom.service" ];
         };
         Service = {
-          ExecStart = "${pkgs.feh}/bin/feh --bg-fill ${../../assets/walls/plants-00.jpg}";
+          ExecStart = "${pkgs.feh}/bin/feh --bg-fill ${config.xdg.dataHome}/wall.png";
           RemainAfterExit = true;
           Type = "oneshot";
         };

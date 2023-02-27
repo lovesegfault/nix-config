@@ -21,7 +21,7 @@
   };
 
   programs.swaylock.settings = {
-    image = "${../../assets/walls/plants-00.jpg}";
+    image = "${config.xdg.dataHome}/wall.png";
     indicator-caps-lock = true;
     scaling = "fill";
     show-failed-attempts = true;
