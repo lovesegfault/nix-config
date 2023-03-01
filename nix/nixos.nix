@@ -10,25 +10,23 @@
 let
   inherit (nixpkgs) lib;
 
-  nixRegistry = {
-    nix.registry = {
-      nixpkgs.flake = nixpkgs;
-      p.flake = nixpkgs;
-      pkgs.flake = nixpkgs;
-      templates.flake = templates;
-    };
-  };
-
   genConfiguration = hostname: { address, hostPlatform, ... }:
     lib.nixosSystem {
       modules = [
         (../hosts + "/${hostname}")
         {
-          nixpkgs.pkgs = self.pkgs.${hostPlatform};
-          # FIXME: This shouldn't be needed, but is for some reason
-          nixpkgs.hostPlatform = hostPlatform;
+          nix.registry = {
+            nixpkgs.flake = nixpkgs;
+            p.flake = nixpkgs;
+            pkgs.flake = nixpkgs;
+            templates.flake = templates;
+          };
+          nixpkgs = {
+            pkgs = self.pkgs.${hostPlatform};
+            # FIXME: This shouldn't be needed, but is for some reason it is.
+            inherit hostPlatform;
+          };
         }
-        nixRegistry
         home-manager.nixosModules.home-manager
         impermanence.nixosModules.impermanence
         ragenix.nixosModules.age
