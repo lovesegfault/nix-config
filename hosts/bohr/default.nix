@@ -61,7 +61,7 @@
     nftables.enable = true;
     firewall.extraInputRules = ''
       # Allow roon-bridge to talk to roon-server in jung
-      ip saddr 192.168.1.2 accept
+      ip saddr 10.0.0.2 accept
     '';
   };
 

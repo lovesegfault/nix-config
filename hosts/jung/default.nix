@@ -109,16 +109,16 @@
   services = {
     blocky.settings = {
       conditional.mapping = {
-        ".local" = "192.168.1.1";
-        "." = "192.168.1.1";
+        ".local" = "10.0.0.1";
+        "." = "10.0.0.1";
       };
-      clientLookup.upstream = "192.168.1.1";
+      clientLookup.upstream = "10.0.0.1";
     };
     chrony = {
       enable = true;
       servers = [ "time.nist.gov" "time.cloudflare.com" "time.google.com" "tick.usnogps.navy.mil" ];
       extraConfig = ''
-        allow 192.168.1.0/24
+        allow 10.0.0.0/24
       '';
     };
     nginx.resolver.addresses = [ "127.0.0.1:5335" ];
@@ -136,7 +136,7 @@
         type = "receiveonly";
       };
     };
-    unbound.settings.server.access-control = [ "192.168.1.0/24 allow" ];
+    unbound.settings.server.access-control = [ "10.0.0.0/24 allow" ];
   };
 
   systemd.network.networks = {
