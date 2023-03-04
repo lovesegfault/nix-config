@@ -3,21 +3,12 @@
 
   environment.persistence."/nix/state" = {
     directories = [
-      "/etc/dnsmasq.d"
-
-      "/var/lib/chrony"
+      { directory = "/var/lib/chrony"; user = "chrony"; group = "chrony"; }
       "/var/lib/containers"
-      "/var/lib/grafana"
+      "/var/lib/fwupd"
       "/var/lib/iwd"
-      "/var/lib/pihole"
-      "/var/lib/plex"
-      "/var/lib/prometheus2"
-      {
-        directory = "/var/lib/syncthing";
-        inherit (config.services.syncthing) user group;
-      }
+      "/var/lib/nixos"
       "/var/lib/tailscale"
-      "/var/lib/unbound"
       "/var/log"
     ];
     files = [
@@ -28,20 +19,25 @@
       "/etc/ssh/ssh_host_rsa_key.pub"
     ];
     users.bemeurer.directories = [
+      ".cache/.direnv"
+      ".cache/nix"
       ".cache/nix-index"
       ".cache/nvim"
       ".cache/zsh"
+      ".config/TabNine"
       ".config/beets"
-      ".config/coc"
       ".local/share/atuin"
       ".local/share/bash"
       ".local/share/direnv"
+      ".local/share/fish"
+      ".local/share/iwctl"
       ".local/share/nvim"
       ".local/share/zsh"
+      "doc"
+      "opt"
       "src"
       "tmp"
       { directory = ".gnupg"; mode = "0700"; }
-      { directory = ".local/share/keyrings"; mode = "0700"; }
       { directory = ".ssh"; mode = "0700"; }
     ];
   };
