@@ -4,6 +4,7 @@
   environment.persistence."/nix/state" = {
     hideMounts = true;
     directories = [
+      "/var/lib/nixos"
       "/var/lib/iwd"
       "/var/lib/tailscale"
       { directory = "/var/lib/roon-bridge"; inherit (config.services.roon-bridge) user group; }

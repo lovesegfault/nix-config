@@ -7,6 +7,7 @@
       "/var/lib/fwupd"
       { directory = "/var/lib/hqplayer"; user = "hqplayer"; group = "hqplayer"; }
       "/var/lib/iwd"
+      "/var/lib/nixos"
       { directory = "/var/lib/roon-server"; inherit (config.services.roon-server) user group; }
       "/var/lib/tailscale"
       "/var/log"

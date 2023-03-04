@@ -7,10 +7,11 @@
       "/var/cache/powertop"
       "/var/lib/bluetooth"
       "/var/lib/boltd"
-      "/var/lib/fwupd"
       "/var/lib/fprint"
+      "/var/lib/fwupd"
       "/var/lib/iwd"
       "/var/lib/libvirt"
+      "/var/lib/nixos"
       "/var/lib/tailscale"
       "/var/log"
     ];

@@ -5,6 +5,7 @@
     directories = [
       "/var/lib/chrony"
       "/var/lib/containers"
+      "/var/lib/nixos"
       "/var/lib/plex"
       "/var/lib/sshguard"
       "/var/lib/tailscale"
