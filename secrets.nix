@@ -9,8 +9,8 @@ let
     "hardware/nixos-aarch64-builder/key.age" = [ aurelius jung spinoza ];
     "hosts/nozick/ddns.age" = [ nozick ];
     "hosts/nozick/nextcloud.age" = [ nozick ];
-    "services/acme.age" = [ bohr jung nozick ];
-    "services/oauth2.age" = [ bohr jung nozick ];
+    "services/acme.age" = [ bohr fourier jung nozick ];
+    "services/oauth2.age" = [ bohr fourier jung nozick ];
     "services/pihole.age" = [ ];
     "users/bemeurer/password.age" = attrValues hosts;
   };

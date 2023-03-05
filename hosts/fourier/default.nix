@@ -5,11 +5,16 @@
     hardware.common-pc-laptop-ssd
     ../../core
 
-    ../../dev
-
     ../../hardware/efi.nix
-    ../../hardware/nouveau.nix
+    ../../hardware/fast-networking.nix
     ../../hardware/zfs.nix
+
+    ../../services/blocky.nix
+    ../../services/grafana.nix
+    ../../services/nginx.nix
+    ../../services/oauth2.nix
+    ../../services/prometheus.nix
+    ../../services/syncthing.nix
 
     ../../users/bemeurer
 
@@ -32,6 +37,14 @@
     keyMap = "us";
     packages = with pkgs; [ terminus_font ];
   };
+
+  environment.etc."resolv.conf".text = ''
+    nameserver 127.0.0.1
+    nameserver 100.100.100.100
+    nameserver 1.1.1.1
+    options edns0 trust-ad
+    search local meurer.org.beta.tailscale.net
+  '';
 
   fileSystems = {
     "/" = {
@@ -76,13 +89,25 @@
   ];
 
   services = {
+    blocky.settings = {
+      conditional.mapping = {
+        ".local" = "10.0.0.1";
+        "." = "10.0.0.1";
+      };
+      clientLookup.upstream = "10.0.0.1";
+    };
     chrony = {
       enable = true;
       servers = [ "time.nist.gov" "time.cloudflare.com" "time.google.com" "tick.usnogps.navy.mil" ];
+      extraConfig = ''
+        allow 10.0.0.0/24
+      '';
     };
+    nginx.resolver.addresses = [ "127.0.0.1:5335" ];
     fstrim.enable = true;
     fwupd.enable = true;
     smartd.enable = true;
+    unbound.settings.server.access-control = [ "10.0.0.0/24 allow" ];
     zfs.autoScrub.pools = [ "tank" ];
     zfs.autoSnapshot = {
       enable = true;
