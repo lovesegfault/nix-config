@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }: {
-  programs.mako =
+  services.mako =
     let
       homeIcons = "${config.home.homeDirectory}/.nix-profile/share/icons/hicolor";
       homePixmaps = "${config.home.homeDirectory}/.nix-profile/share/pixmaps";
