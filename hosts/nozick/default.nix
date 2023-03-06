@@ -156,12 +156,12 @@
     sshguard.enable = true;
     syncthing.folders = {
       music = {
-        devices = [ "bohr" "jung" ];
+        devices = [ "bohr" "fourier" "jung" ];
         path = "/mnt/music";
         type = "sendonly";
       };
       opus = {
-        devices = [ "jung" ];
+        devices = [ "fourier" "jung" ];
         path = "/mnt/music-opus";
         type = "sendonly";
       };

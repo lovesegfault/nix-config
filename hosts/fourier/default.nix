@@ -107,6 +107,18 @@
     fstrim.enable = true;
     fwupd.enable = true;
     smartd.enable = true;
+    syncthing.folders = {
+      music = {
+        devices = [ "bohr" "jung" "nozick" ];
+        path = "/srv/music";
+        type = "receiveonly";
+      };
+      opus = {
+        devices = [ "jung" "nozick" ];
+        path = "/srv/opus";
+        type = "receiveonly";
+      };
+    };
     unbound.settings.server.access-control = [ "10.0.0.0/24 allow" ];
     zfs.autoScrub.pools = [ "tank" ];
     zfs.autoSnapshot = {
@@ -131,13 +143,17 @@
 
   time.timeZone = "America/New_York";
 
-  users.groups.media.members = [ "bemeurer" ];
-
-  virtualisation = {
-    oci-containers.backend = "podman";
-    podman.enable = true;
+  users.groups.media = {
+    gid = 999;
+    members = [ "bemeurer" config.services.syncthing.user ];
   };
 
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;
+
+  virtualisation = {
+    containers.containersConf.settings.engine.helper_binaries_dir = [ "${pkgs.netavark}/bin" ];
+    oci-containers.backend = "podman";
+    podman.enable = true;
+  };
 }
