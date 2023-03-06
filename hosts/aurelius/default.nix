@@ -5,49 +5,22 @@
 
     ../../core
 
-    ../../hardware/nixos-aarch64-builder
-    ../../hardware/bluetooth.nix
-    ../../hardware/sound-pipewire.nix
+    # ../../hardware/nixos-aarch64-builder
+    # ../../hardware/bluetooth.nix
+    # ../../hardware/sound-pipewire.nix
 
-    ../../graphical
+    # ../../graphical
 
     ../../users/bemeurer
 
-    ./sway.nix
+    # ./sway.nix
+    ./hyperpixel4.nix
   ];
 
-  boot = {
-    loader = {
-      generic-extlinux-compatible.enable = false;
-      raspberryPi = {
-        enable = true;
-        firmwareConfig = ''
-          dtparam=audio=on
-          dtparam=spi=on
-          dtoverlay=vc4-fkms-v3d
-
-          dtoverlay=hyperpixel4-common
-          dtoverlay=hyperpixel4-0x14,touchscreen-swapped-x-y,touchscreen-inverted-y
-          dtoverlay=hyperpixel4-0x5d,touchscreen-swapped-x-y,touchscreen-inverted-y
-          enable_dpi_lcd=1
-          dpi_group=2
-          dpi_mode=87
-          dpi_output_format=0x7f216
-          dpi_timings=480 0 10 16 59 800 0 15 113 15 0 0 0 60 0 32000000 6
-        '';
-        version = 4;
-      };
-    };
-    initrd = {
-      availableKernelModules = [ "nvme" ];
-      extraUtilsCommands = "copy_bin_and_libs ${pkgs.hyperpixel4-init}/bin/hyperpixel4-init";
-      preDeviceCommands = "hyperpixel4-init";
-    };
-    kernelParams = [ "fbcon=rotate:1" ];
-  };
+  boot.blacklistedKernelModules = [ "i2c_gpio" "spi_gpio" "goodix" ];
 
   fileSystems = lib.mkForce {
-    "/boot" = {
+    "/boot/firmware" = {
       device = "/dev/disk/by-label/FIRMWARE";
       fsType = "vfat";
     };
@@ -57,15 +30,23 @@
     };
   };
 
+  hardware.raspberry-pi."4" = {
+    audio.enable = true;
+    dwc2.enable = true;
+    fkms-3d.enable = true;
+  };
+
   location.provider = "geoclue2";
 
   networking = {
     hostName = "aurelius";
-    wireless.iwd.enable = true;
+    wireless.enable = true;
   };
 
   services = {
     automatic-timezoned.enable = true;
+    # XXX: dbus-broker seems broken on the RPi4 kernel
+    dbus.implementation = lib.mkForce "dbus";
     geoclue2 = {
       enable = true;
       enable3G = false;
@@ -85,14 +66,16 @@
       DHCP = "yes";
       linkConfig.RequiredForOnline = "no";
       matchConfig.MACAddress = "dc:a6:32:63:ac:71";
+      dhcpV4Config.RouteMetric = 10;
+      dhcpV6Config.RouteMetric = 10;
     };
     wifi = {
       DHCP = "yes";
       matchConfig.MACAddress = "dc:a6:32:63:ac:72";
+      dhcpV4Config.RouteMetric = 40;
+      dhcpV6Config.RouteMetric = 40;
     };
   };
-
-  time.timeZone = "America/Los_Angeles";
 
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;
