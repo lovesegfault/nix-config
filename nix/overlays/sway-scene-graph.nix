@@ -1,13 +1,14 @@
 final: prev:
 with final.lib;
 {
-  libxkbcommon_1_5_0 = final.libxkbcommon.overrideAttrs (old: rec {
-    version = "1.5.0";
-    src = final.fetchFromGitHub {
-      owner = "xkbcommon";
-      repo = "libxkbcommon";
-      rev = "xkbcommon-${version}";
-      hash = "sha256-+LJa+v4eV36xBNYFDelgLIc7EyHVtspIRAluf16i774=";
+  libdisplay-info = prev.libdisplay-info.overrideAttrs (old: rec {
+    version = "0.1.1";
+    src = final.fetchFromGitLab {
+      domain = "gitlab.freedesktop.org";
+      owner = "emersion";
+      repo = old.pname;
+      rev = version;
+      hash = "sha256-7t1CoLus3rPba9paapM7+H3qpdsw7FlzJsSHFwM/2Lk=";
     };
   });
 
@@ -17,10 +18,11 @@ with final.lib;
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "822eb07eaca392d9b7a99b0d8b96e402c8976fb4";
-      hash = "sha256-ntJlF0PXguPsWCOJ7WQYcOKVpESlFaWDapdDGRybVyM=";
+      rev = "774d2c82f0cc6ed5b20762fb74bab3e8bfd9f858";
+      hash = "sha256-XIH/eTL1A42spHAvbeELAEXJoVdJEdBUvYTL/Z98m80=";
     };
     nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ final.hwdata ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ final.libdisplay-info ];
     mesonFlags = (old.mesonFlags or [ ]) ++ [ "-Dwerror=false" ];
   });
 
@@ -29,8 +31,8 @@ with final.lib;
     src = final.fetchFromGitHub {
       owner = "Nefsen402";
       repo = "sway";
-      rev = "d767e1a92cba244fdf971641835e73665a9436a3";
-      hash = "sha256-LzeS7BcsceFQj0Sfbqi/MzjH9hrAyq1b5rSzo8xzbM8=";
+      rev = "71cf46491af766dc98a0d4082d7a0c22e3980632";
+      hash = "sha256-hi5kruKcBHFkluzsafrypu/d5x4n7SAJd8NwtVbAiu4=";
     };
-  })).override { libxkbcommon = final.libxkbcommon_1_5_0; wlroots_0_16 = final.wlroots_0_17; };
+  })).override { wlroots_0_16 = final.wlroots_0_17; };
 }
