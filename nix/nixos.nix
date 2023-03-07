@@ -21,11 +21,7 @@ let
             pkgs.flake = nixpkgs;
             templates.flake = templates;
           };
-          nixpkgs = {
-            pkgs = self.pkgs.${hostPlatform};
-            # FIXME: This shouldn't be needed, but is for some reason it is.
-            inherit hostPlatform;
-          };
+          nixpkgs.pkgs = self.pkgs.${hostPlatform};
         }
         home-manager.nixosModules.home-manager
         impermanence.nixosModules.impermanence
