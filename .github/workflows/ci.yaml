@@ -120,15 +120,10 @@ jobs:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: build-host
-        uses: nick-invision/retry@v2
-        with:
-          max_attempts: 2
-          timeout_minutes: 720
-          retry_on: error
-          command: |
-            nix run nixpkgs#nix-build-uncached -- \
-              --keep-going \
-              -A packages.x86_64-linux.all.${{ matrix.host.name }}
+        run: |
+          nix run nixpkgs#nix-build-uncached -- \
+            --keep-going \
+            -A packages.x86_64-linux.all.${{ matrix.host.name }}
 
   check:
     runs-on: ubuntu-latest
