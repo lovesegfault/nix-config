@@ -106,7 +106,7 @@ jobs:
             "builders-use-substitutes = true"
           )
           builder_cfg=(
-            lovesegfault@aarch64.nixos.community
+            ssh-ng://lovesegfault@aarch64.nixos.community
             aarch64-linux
             /root/.ssh/aarch64.community.nixos
             64
