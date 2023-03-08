@@ -8,7 +8,9 @@ let
   nixosDrvs = lib.mapAttrs (_: nixos: nixos.config.system.build.toplevel) self.nixosConfigurations;
   homeDrvs = lib.mapAttrs (_: home: home.activationPackage) self.homeConfigurations;
   darwinDrvs = lib.mapAttrs (_: darwin: darwin.system) self.darwinConfigurations;
-  hostDrvs = nixosDrvs // homeDrvs // darwinDrvs;
+
+  hostDrvs' = nixosDrvs // homeDrvs // darwinDrvs;
+  hostDrvs = lib.mapAttrs (_: drv: drv // { allowSubstitutes = true; }) hostDrvs';
 
   structuredHostDrvs = lib.mapAttrsRecursiveCond
     (hostAttr: !(hostAttr ? "type" && (lib.elem hostAttr.type [ "darwin" "homeManager" "nixos" ])))
