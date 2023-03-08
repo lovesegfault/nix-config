@@ -7,6 +7,8 @@
       {
         hostName = "aarch64.nixos.community";
         maxJobs = 64;
+        protocol = "ssh-ng";
+        publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU1VVHo1aTl1NUgyRkhOQW1aSnlvSmZJR3lVbS9IZkdoZnduYzE0MkwzZHMgcm9vdEBuaXhvcwo=";
         sshKey = config.age.secrets.nixosAarch64BuilderKey.path;
         sshUser = "lovesegfault";
         systems = [ "aarch64-linux" ];
