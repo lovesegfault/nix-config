@@ -26,12 +26,12 @@ runs:
           experimental-features = nix-command flakes recursive-nix
         github-token: ${{ fromJSON(inputs.secrets).GITHUB_TOKEN }}
     - uses: cachix/cachix-action@v12
-      if: ${{ inputs.cachix }}
+      if: ${{ inputs.cachix == 'true' }}
       with:
         name: nix-config
         authToken: ${{ fromJSON(inputs.secrets).CACHIX_AUTH_TOKEN }}
     - name: setup-aarch64-builder
-      if: ${{ inputs.aarch64 }}
+      if: ${{ inputs.aarch64 == 'true' }}
       env:
         AARCH64_BOX_KEY: ${{ fromJSON(inputs.secrets).AARCH64_BOX_KEY }}
         KNOWN_HOSTS: ${{ fromJSON(inputs.secrets).KNOWN_HOSTS }}
