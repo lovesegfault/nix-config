@@ -76,8 +76,6 @@ jobs:
           nix run nixpkgs\#nix-build-uncached -- \
             --keep-going \
             -A "devShells.$SYSTEM.default.inputDerivation"
-      - name: cachix-push
-        run: |
           cachix push nix-config ./result*
 
   build-host:
@@ -132,9 +130,7 @@ jobs:
             nix run nixpkgs#nix-build-uncached -- \
               --keep-going \
               -A packages.x86_64-linux.all.${{ matrix.host.name }}
-      - name: cachix-push
-        run: |
-          cachix push nix-config ./result*
+            cachix push nix-config ./result*
 
   check:
     runs-on: ubuntu-latest
