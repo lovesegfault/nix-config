@@ -11,7 +11,7 @@
         publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU1VVHo1aTl1NUgyRkhOQW1aSnlvSmZJR3lVbS9IZkdoZnduYzE0MkwzZHMgcm9vdEBuaXhvcwo=";
         sshKey = config.age.secrets.nixosAarch64BuilderKey.path;
         sshUser = "lovesegfault";
-        systems = [ "aarch64-linux" ];
+        system = "aarch64-linux";
         supportedFeatures = [ "big-parallel" ];
       }
     ];
