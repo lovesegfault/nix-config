@@ -56,6 +56,7 @@ jobs:
           echo "systems=$(cat "$TMP/systems.json")" >> "$GITHUB_OUTPUT"
 
   build-shell:
+    name: build-shell (${{ matrix.system.hostPlatform }})
     runs-on: ${{ matrix.system.ghSystem }}
     needs: get-hosts
     strategy:
