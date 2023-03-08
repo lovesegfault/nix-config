@@ -3,17 +3,17 @@
 system:
 
 let
-  inherit (self.pkgs.${system}) lib linkFarm;
+  inherit (self.pkgs.${system}) lib linkFarm forceCached;
 
   nixosDrvs = lib.mapAttrs (_: nixos: nixos.config.system.build.toplevel) self.nixosConfigurations;
   homeDrvs = lib.mapAttrs (_: home: home.activationPackage) self.homeConfigurations;
   darwinDrvs = lib.mapAttrs (_: darwin: darwin.system) self.darwinConfigurations;
   hostDrvs = nixosDrvs // homeDrvs // darwinDrvs;
 
-  structuredHostDrvs = lib.mapAttrsRecursiveCond
+  structuredHostDrvs = forceCached (lib.mapAttrsRecursiveCond
     (hostAttr: !(hostAttr ? "type" && (lib.elem hostAttr.type [ "darwin" "homeManager" "nixos" ])))
     (path: _: hostDrvs.${lib.last path})
-    self.hosts;
+    self.hosts);
 
   structuredHostFarms = lib.mapAttrsRecursiveCond
     (as: !(lib.any lib.isDerivation (lib.attrValues as)))
