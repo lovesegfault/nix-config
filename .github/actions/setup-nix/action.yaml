@@ -32,6 +32,7 @@ runs:
       env:
         AARCH64_BOX_KEY: ${{ secrets.AARCH64_BOX_KEY }}
         KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+      shell: bash
       run: |
         sudo mkdir -p /etc/ssh
         echo "$AARCH64_BOX_KEY" | sudo tee /etc/ssh/nixos-aarch64-builder > /dev/null
