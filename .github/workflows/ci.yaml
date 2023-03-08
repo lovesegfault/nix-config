@@ -37,17 +37,17 @@ jobs:
       - id: get-hosts
         run: |
           nix eval --json -f ./nix/hosts.nix all | jq -c '
-          map_values(
-              if .hostPlatform  == "x86_64-linux" then "ubuntu-latest"
-              elif .hostPlatform == "aarch64-linux" then "ubuntu-latest"
-              elif .hostPlatform == "x86_64-darwin" then "macos-latest"
-              else null end)
-          | to_entries
-          | map(select(.value != null))
-          | map({ "name": .key, "system": .value })
+            to_entries
+            | map({name: .key} + .value)
+            | map_values(
+                if .hostPlatform  == "x86_64-linux" then . + {ghSystem: "ubuntu-latest"}
+                elif .hostPlatform == "aarch64-linux" then . + {ghSystem: "ubuntu-latest"}
+                elif .hostPlatform == "x86_64-darwin" then . + {ghSystem: "macos-latest"}
+                else . + {ghSystem: null} end)
+            | map_values(select(.ghSystem != null))
           ' > hosts.json
 
-          jq -c 'map(.system) | unique | sort' hosts.json > systems.json
+          jq -c 'map(.ghSystem) | unique | sort' hosts.json > systems.json
 
           echo "hosts=$(cat hosts.json)" >> "$GITHUB_OUTPUT"
           echo "systems=$(cat systems.json)" >> "$GITHUB_OUTPUT"
@@ -79,7 +79,7 @@ jobs:
 
   build-host:
     name: build-${{ matrix.host.name }}
-    runs-on: ${{ matrix.host.system }}
+    runs-on: ${{ matrix.host.ghSystem }}
     needs: get-hosts
     strategy:
       fail-fast: false
@@ -93,7 +93,7 @@ jobs:
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
             experimental-features = nix-command flakes recursive-nix
       - name: setup-aarch64-builder
-        if: matrix.host.system == 'ubuntu-latest'
+        if: matrix.host.hostPlatform == 'aarch64-linux'
         env:
           AARCH64_BOX_KEY: ${{ secrets.AARCH64_BOX_KEY }}
           KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
@@ -123,7 +123,7 @@ jobs:
         run: |
           nix run nixpkgs#nix-build-uncached -- \
             --keep-going \
-            -A packages.x86_64-linux.all.${{ matrix.host.name }}
+            -A packages.${{ matrix.host.hostPlatform }}.${{ matrix.host.name }}
 
   check:
     runs-on: ubuntu-latest
