@@ -2,6 +2,9 @@ name: "Setup Nix"
 description: "Sets up Nix, Cachix, and remote builders"
 
 inputs:
+  secrets:
+    description: "secrets JSON"
+    required: true
   cachix:
     description: "Whether to setup cachix"
     required: true
@@ -21,17 +24,17 @@ runs:
         extra-conf: |
           builders-use-substitutes = true
           experimental-features = nix-command flakes recursive-nix
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ fromJSON(inputs.secrets).GITHUB_TOKEN }}
     - uses: cachix/cachix-action@v12
       if: ${{ inputs.cachix }}
       with:
         name: nix-config
-        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        authToken: ${{ fromJSON(inputs.secrets).CACHIX_AUTH_TOKEN }}
     - name: setup-aarch64-builder
       if: ${{ inputs.aarch64 }}
       env:
-        AARCH64_BOX_KEY: ${{ secrets.AARCH64_BOX_KEY }}
-        KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+        AARCH64_BOX_KEY: ${{ fromJSON(inputs.secrets).AARCH64_BOX_KEY }}
+        KNOWN_HOSTS: ${{ fromJSON(inputs.secrets).KNOWN_HOSTS }}
       shell: bash
       run: |
         sudo mkdir -p /etc/ssh

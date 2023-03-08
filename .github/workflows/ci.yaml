@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup-nix
+        with:
+          secrets: ${{ toJSON(secrets) }}
       - name: parse
         run: nix-instantiate --json --parse ./**/*.nix
       - name: lints
@@ -28,6 +30,7 @@ jobs:
       - uses: ./.github/actions/setup-nix
         with:
           cachix: false
+          secrets: ${{ toJSON(secrets) }}
       - id: get-hosts
         run: |
           TMP="$(mktemp -d)"
@@ -64,6 +67,7 @@ jobs:
       - uses: ./.github/actions/setup-nix
         with:
           aarch64: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
+          secrets: ${{ toJSON(secrets) }}
       - name: build-shell
         run: |
           nix run nixpkgs\#nix-build-uncached -- \
@@ -83,6 +87,7 @@ jobs:
       - uses: ./.github/actions/setup-nix
         with:
           aarch64: ${{ matrix.host.hostPlatform == 'aarch64-linux' }}
+          secrets: ${{ toJSON(secrets) }}
       - name: build-host
         run: |
           nix run nixpkgs#nix-build-uncached -- \
