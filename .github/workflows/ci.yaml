@@ -10,15 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
-        with:
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            experimental-features = nix-command flakes recursive-nix
-      - uses: cachix/cachix-action@v12
-        with:
-          name: nix-config
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - uses: ./.github/actions/setup-nix
       - name: parse
         run: nix-instantiate --json --parse ./**/*.nix
       - name: lints
@@ -33,9 +25,12 @@ jobs:
       systems: ${{ steps.get-hosts.outputs.systems }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: ./.github/actions/setup-nix
+        with:
+          cachix: false
       - id: get-hosts
         run: |
+          TMP="$(mktemp -d)"
           nix eval --json -f ./nix/hosts.nix all | jq -c '
             to_entries
             | map({name: .key} + .value)
@@ -44,16 +39,21 @@ jobs:
                 elif .hostPlatform == "aarch64-linux" then . + {ghSystem: "ubuntu-latest"}
                 elif .hostPlatform == "x86_64-darwin" then . + {ghSystem: "macos-latest"}
                 else . + {ghSystem: null} end)
-            | map_values(select(.ghSystem != null))
-          ' > hosts.json
+            | map(select(.ghSystem != null))
+          ' > "$TMP/hosts.json"
 
-          jq -c 'map(.ghSystem) | unique | sort' hosts.json > systems.json
+          # shellcheck disable=SC2002
+          cat "$TMP/hosts.json" | jq -c '
+            map({hostPlatform, ghSystem})
+            | unique_by(.hostPlatform)
+            | sort_by(.ghSystem)
+          ' > "$TMP/systems.json"
 
-          echo "hosts=$(cat hosts.json)" >> "$GITHUB_OUTPUT"
-          echo "systems=$(cat systems.json)" >> "$GITHUB_OUTPUT"
+          echo "hosts=$(cat "$TMP/hosts.json")" >> "$GITHUB_OUTPUT"
+          echo "systems=$(cat "$TMP/systems.json")" >> "$GITHUB_OUTPUT"
 
   build-shell:
-    runs-on: ${{ matrix.system }}
+    runs-on: ${{ matrix.system.ghSystem }}
     needs: get-hosts
     strategy:
       fail-fast: false
@@ -61,21 +61,14 @@ jobs:
         system: ${{ fromJson(needs.get-hosts.outputs.systems) }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: ./.github/actions/setup-nix
         with:
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            experimental-features = nix-command flakes recursive-nix
-      - uses: cachix/cachix-action@v12
-        with:
-          name: nix-config
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          aarch64: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
       - name: build-shell
         run: |
-          SYSTEM="$(nix eval --impure --expr 'builtins.currentSystem')"
           nix run nixpkgs\#nix-build-uncached -- \
             --keep-going \
-            -A "devShells.$SYSTEM.default.inputDerivation"
+            -A "devShells.${{ matrix.system.hostPlatform }}.default.inputDerivation"
 
   build-host:
     name: build-${{ matrix.host.name }}
@@ -87,35 +80,9 @@ jobs:
         host: ${{ fromJson(needs.get-hosts.outputs.hosts) }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: ./.github/actions/setup-nix
         with:
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            builders-use-substitutes = true
-            experimental-features = nix-command flakes recursive-nix
-      - name: setup-aarch64-builder
-        if: matrix.host.hostPlatform == 'aarch64-linux'
-        env:
-          AARCH64_BOX_KEY: ${{ secrets.AARCH64_BOX_KEY }}
-        run: |
-          sudo mkdir -p /root/.ssh
-          echo "$AARCH64_BOX_KEY" | sudo tee /root/.ssh/aarch64.community.nixos > /dev/null
-          sudo chmod 0644 /root/.ssh/aarch64.community.nixos
-          builder_cfg=(
-            ssh-ng://lovesegfault@aarch64.nixos.community
-            aarch64-linux
-            /root/.ssh/aarch64.community.nixos
-            64
-            1
-            big-parallel
-            -
-            c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU1VVHo1aTl1NUgyRkhOQW1aSnlvSmZJR3lVbS9IZkdoZnduYzE0MkwzZHMgcm9vdEBuaXhvcwo=
-          )
-          echo "${builder_cfg[*]}" | sudo tee /etc/nix/machines > /dev/null
-      - uses: cachix/cachix-action@v12
-        with:
-          name: nix-config
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          aarch64: ${{ matrix.host.hostPlatform == 'aarch64-linux' }}
       - name: build-host
         run: |
           nix run nixpkgs#nix-build-uncached -- \

@@ -1,0 +1,50 @@
+name: "Setup Nix"
+description: "Sets up Nix, Cachix, and remote builders"
+
+inputs:
+  cachix:
+    description: "Whether to setup cachix"
+    required: true
+    default: true
+    type: boolean
+  aarch64:
+    description: "Whether to setup the aarch64 builder"
+    requrired: true
+    default: false
+    type: boolean
+
+runs:
+  using: "composite"
+  steps:
+    - uses: DeterminateSystems/nix-installer-action@v1
+      with:
+        extra-conf: |
+          builders-use-substitutes = true
+          experimental-features = nix-command flakes recursive-nix
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: cachix/cachix-action@v12
+      if: ${{ inputs.cachix }}
+      with:
+        name: nix-config
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+    - name: setup-aarch64-builder
+      if: ${{ inputs.aarch64 }}
+      env:
+        AARCH64_BOX_KEY: ${{ secrets.AARCH64_BOX_KEY }}
+        KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+      run: |
+        sudo mkdir -p /etc/ssh
+        echo "$AARCH64_BOX_KEY" | sudo tee /etc/ssh/nixos-aarch64-builder > /dev/null
+        sudo chmod 0600 /etc/ssh/nixos-aarch64-builder
+        echo "$KNOWN_HOSTS" | sudo tee -a /etc/ssh/ssh_known_hosts > /dev/null
+        builder_cfg=(
+          ssh://lovesegfault@aarch64.nixos.community
+          aarch64-linux
+          /etc/ssh/nixos-aarch64-builder
+          64
+          1
+          big-parallel
+          -
+          c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU1VVHo1aTl1NUgyRkhOQW1aSnlvSmZJR3lVbS9IZkdoZnduYzE0MkwzZHMgcm9vdEBuaXhvcwo=
+        )
+        echo "${builder_cfg[*]}" | sudo tee /etc/nix/machines > /dev/null
