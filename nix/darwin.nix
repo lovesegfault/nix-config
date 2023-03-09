@@ -4,9 +4,9 @@ let
 
   nixRegistry = {
     nix.registry = {
+      nix-config.flake = self;
       nixpkgs.flake = nixpkgs;
       p.flake = nixpkgs;
-      pkgs.flake = nixpkgs;
       templates.flake = templates;
     };
   };
