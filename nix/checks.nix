@@ -15,7 +15,10 @@ with self.pkgs.${system};
         actionlint.enable = true;
         luacheck.enable = true;
         nixpkgs-fmt.enable = true;
-        shellcheck.enable = true;
+        shellcheck = {
+          enable = true;
+          types_or = lib.mkForce [ ];
+        };
         shfmt.enable = true;
         statix.enable = true;
         stylua.enable = true;
