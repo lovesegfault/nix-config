@@ -14,7 +14,7 @@ mkShell {
     nix-build-uncached
     nixpkgs-fmt
     ragenix
-    rnix-lsp
+    nil
     statix
 
     # Lua

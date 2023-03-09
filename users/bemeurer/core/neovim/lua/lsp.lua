@@ -43,7 +43,7 @@ local on_attach = function(client, bufnr)
 end
 
 -- Enable the following language servers
-local servers = { "clangd", "pyright", "texlab", "tsserver", "rnix", "metals", "ltex" }
+local servers = { "clangd", "pyright", "texlab", "tsserver", "nil_ls", "metals", "ltex" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup({ on_attach = on_attach, capabilities = capabilities, flags = flags })
 end
