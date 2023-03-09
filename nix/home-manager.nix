@@ -6,7 +6,8 @@ let
     { config, pkgs, ... }: {
       imports = [ (../hosts + "/${hostName}") ];
       nix.registry = {
-        nix-config.flake = self;
+        # FIXME: Why doesn't this eval?
+        # nix-config.flake = self;
         nixpkgs.flake = nixpkgs;
         p.flake = nixpkgs;
         templates.flake = templates;
