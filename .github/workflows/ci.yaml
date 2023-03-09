@@ -97,7 +97,7 @@ jobs:
 
   check:
     runs-on: ubuntu-latest
-    needs: [ build-host, build-shell ]
+    needs: [ lints, build-host, build-shell ]
     if: always()
     steps:
       - uses: re-actors/alls-green@release/v1
