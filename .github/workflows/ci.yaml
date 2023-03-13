@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup-nix
         with:
-          secrets: ${{ toJSON(secrets) }}
+          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: parse
         run: nix-instantiate --json --parse ./**/*.nix
       - name: lints
@@ -30,7 +30,6 @@ jobs:
       - uses: ./.github/actions/setup-nix
         with:
           cachix: false
-          secrets: ${{ toJSON(secrets) }}
       - id: get-hosts
         run: |
           TMP="$(mktemp -d)"
@@ -67,8 +66,9 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup-nix
         with:
-          aarch64: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
-          secrets: ${{ toJSON(secrets) }}
+          aarch64-builder: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
+          aarch64-builder-key: ${{ secrets.AARCH64_BUILDER_KEY }}
+          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: build-shell
         run: |
           nix run nixpkgs\#nix-build-uncached -- \
@@ -87,8 +87,9 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup-nix
         with:
-          aarch64: ${{ matrix.host.hostPlatform == 'aarch64-linux' }}
-          secrets: ${{ toJSON(secrets) }}
+          aarch64-builder: ${{ matrix.host.hostPlatform == 'aarch64-linux' }}
+          aarch64-builder-key: ${{ secrets.AARCH64_BUILDER_KEY }}
+          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: build-host
         run: |
           nix run nixpkgs#nix-build-uncached -- \

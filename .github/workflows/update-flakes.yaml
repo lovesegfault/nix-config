@@ -1,7 +1,7 @@
 name: update-flakes
 on:
   schedule:
-    - cron:  '*/30 * * * *'
+    - cron:  '*/120 * * * *'
   workflow_dispatch:
 jobs:
   get-flakes:
@@ -10,11 +10,9 @@ jobs:
       matrix: ${{ steps.get-flakes.outputs.matrix }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: ./.github/actions/setup-nix
         with:
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            experimental-features = nix-command flakes recursive-nix
+          cachix: false
       - id: get-flakes
         run: |
           get_flake_inputs() {
@@ -34,11 +32,9 @@ jobs:
       matrix: ${{ fromJson(needs.get-flakes.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: ./.github/actions/setup-nix
         with:
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            experimental-features = nix-command flakes recursive-nix
+          cachix: false
       - run: git config --global user.email "hatesegfault@protonmail.ch"
       - run: git config --global user.name "hatesegfault"
       - uses: cpcloud/flake-update-action@v1.0.4
