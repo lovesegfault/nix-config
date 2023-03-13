@@ -51,7 +51,7 @@ runs:
           sudo tee -a /etc/ssh/ssh_known_hosts > /dev/null
 
         builder_cfg=(
-          ssh://lovesegfault@aarch64.nixos.community
+          ssh-ng://lovesegfault@aarch64.nixos.community
           aarch64-linux
           /etc/ssh/nixos-aarch64-builder
           64
