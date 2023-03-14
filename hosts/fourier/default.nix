@@ -1,8 +1,9 @@
-{ config, hardware, pkgs, ... }: {
-  imports = [
-    hardware.common-cpu-amd
-    hardware.common-cpu-amd-pstate
-    hardware.common-pc-laptop-ssd
+{ config, nixos-hardware, pkgs, ... }: {
+  imports = with nixos-hardware.nixosModules; [
+    common-cpu-amd
+    common-cpu-amd-pstate
+    common-pc-laptop-ssd
+
     ../../core
 
     ../../hardware/efi.nix

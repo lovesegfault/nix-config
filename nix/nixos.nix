@@ -26,7 +26,6 @@ let
       ];
       specialArgs = {
         hostAddress = address;
-        hardware = nixos-hardware.nixosModules;
         inherit home-manager impermanence nix-index-database nixos-hardware ragenix;
       };
     };

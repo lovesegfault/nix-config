@@ -1,7 +1,7 @@
-{ config, lib, hardware, pkgs, ... }:
+{ config, lib, nixos-hardware, ... }:
 {
   imports = [
-    hardware.raspberry-pi-4
+    nixos-hardware.nixosModules.raspberry-pi-4
 
     ../../core
 

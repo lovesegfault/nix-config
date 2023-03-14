@@ -1,6 +1,6 @@
-{ config, lib, hardware, pkgs, ... }: {
+{ config, lib, nixos-hardware, pkgs, ... }: {
   imports = [
-    hardware.common-cpu-intel-cpu-only
+    nixos-hardware.nixosModules.common-cpu-intel-cpu-only
 
     ../../core
 
