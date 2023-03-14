@@ -11,7 +11,7 @@
 let
   inherit (nixpkgs) lib;
 
-  genConfiguration = hostname: { address, hostPlatform, ... }:
+  genConfiguration = hostname: { address, hostPlatform, type, ... }:
     lib.nixosSystem {
       modules = [
         (../hosts + "/${hostname}")
@@ -26,6 +26,7 @@ let
       ];
       specialArgs = {
         hostAddress = address;
+        hostType = type;
         inherit home-manager impermanence nix-index-database nixos-hardware ragenix;
       };
     };

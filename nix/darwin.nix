@@ -10,7 +10,7 @@
 let
   inherit (nixpkgs) lib;
 
-  genConfiguration = hostname: { hostPlatform, ... }:
+  genConfiguration = hostname: { hostPlatform, type, ... }:
     darwin.lib.darwinSystem {
       system = hostPlatform;
       pkgs = self.pkgs.${hostPlatform};
@@ -25,6 +25,7 @@ let
         }
       ];
       specialArgs = {
+        hostType = type;
         inherit home-manager impermanence nix-index-database;
       };
     };

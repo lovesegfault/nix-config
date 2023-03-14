@@ -47,11 +47,12 @@ let
       };
     };
 
-  genConfiguration = hostName: { hostPlatform, ... }@attrs:
+  genConfiguration = hostName: { hostPlatform, type, ... }@attrs:
     home-manager.lib.homeManagerConfiguration {
       pkgs = self.pkgs.${hostPlatform};
       modules = [ (genModules hostName attrs) ];
       extraSpecialArgs = {
+        hostType = type;
         inherit impermanence nix-index-database;
       };
     };
