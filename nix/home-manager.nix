@@ -1,4 +1,10 @@
-{ self, home-manager, nixpkgs, templates, ... }:
+{ self
+, home-manager
+, nix-index-database
+, nixpkgs
+, templates
+, ...
+}:
 let
   inherit (nixpkgs) lib;
 
@@ -43,7 +49,10 @@ let
   genConfiguration = hostName: { hostPlatform, ... }@attrs:
     home-manager.lib.homeManagerConfiguration {
       pkgs = self.pkgs.${hostPlatform};
-      modules = [ (genModules hostName attrs) ];
+      modules = [
+        (genModules hostName attrs)
+        nix-index-database.hmModules.nix-index
+      ];
     };
 in
 lib.mapAttrs genConfiguration (self.hosts.homeManager or { })

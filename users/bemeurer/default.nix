@@ -1,4 +1,10 @@
-{ config, impermanence, lib, pkgs, ... }:
+{ config
+, impermanence
+, lib
+, nix-index-database
+, pkgs
+, ...
+}:
 with lib;
 {
   age.secrets.bemeurerPassword.file = ./password.age;
@@ -35,6 +41,7 @@ with lib;
   home-manager.users.bemeurer = {
     imports = [
       impermanence.home-manager.impermanence
+      nix-index-database.hmModules.nix-index
       ./core
       ./dev
       ./modules

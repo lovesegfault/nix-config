@@ -47,6 +47,7 @@
     bat.enable = true;
     fzf.enable = true;
     gpg.enable = true;
+    nix-index.enable = true;
     zoxide.enable = true;
   };
 

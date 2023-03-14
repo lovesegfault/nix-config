@@ -23,7 +23,6 @@
       directories = [
         ".cache/.direnv"
         ".cache/nix"
-        ".cache/nix-index"
         ".cache/nvim"
         ".cache/zsh"
         ".config/TabNine"

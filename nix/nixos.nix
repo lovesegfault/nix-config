@@ -1,6 +1,7 @@
 { self
 , home-manager
 , impermanence
+, nix-index-database
 , nixos-hardware
 , nixpkgs
 , ragenix
@@ -24,12 +25,14 @@ let
         }
         home-manager.nixosModules.home-manager
         impermanence.nixosModules.impermanence
+        nix-index-database.nixosModules.nix-index
         ragenix.nixosModules.age
       ];
       specialArgs = {
-        impermanence = impermanence.nixosModules;
-        hardware = nixos-hardware.nixosModules;
         hostAddress = address;
+        hardware = nixos-hardware.nixosModules;
+        impermanence = impermanence.nixosModules;
+        inherit nix-index-database;
       };
     };
 in

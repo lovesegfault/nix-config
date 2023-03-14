@@ -20,7 +20,6 @@
       "/etc/ssh/ssh_host_rsa_key.pub"
     ];
     users.bemeurer.directories = [
-      ".cache/nix-index"
       ".cache/nvim"
       ".cache/zsh"
       ".config/beets"

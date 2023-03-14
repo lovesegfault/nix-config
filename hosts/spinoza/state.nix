@@ -32,7 +32,6 @@
         ".cache/lollypop"
         ".cache/mozilla"
         ".cache/nix"
-        ".cache/nix-index"
         ".cache/nvim"
         ".cache/Plexamp"
         ".cache/thunderbird"

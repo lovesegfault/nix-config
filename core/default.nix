@@ -56,6 +56,8 @@ in
   nixpkgs.config.allowUnfree = true;
 
   programs = {
+    command-not-found.enable = false;
+    nix-index.enable = true;
     fish.enable = true;
     mosh.enable = true;
     zsh = {
