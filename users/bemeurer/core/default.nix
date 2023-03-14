@@ -1,5 +1,8 @@
-{ pkgs, ... }: {
+{ impermanence, nix-index-database, pkgs, ... }: {
   imports = [
+    impermanence.nixosModules.home-manager.impermanence
+    nix-index-database.hmModules.nix-index
+
     ./atuin.nix
     ./bash.nix
     ./btop.nix

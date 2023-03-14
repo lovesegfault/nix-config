@@ -2,6 +2,7 @@
 , home-manager
 , nix-index-database
 , nixpkgs
+, impermanence
 , templates
 , ...
 }:
@@ -49,10 +50,10 @@ let
   genConfiguration = hostName: { hostPlatform, ... }@attrs:
     home-manager.lib.homeManagerConfiguration {
       pkgs = self.pkgs.${hostPlatform};
-      modules = [
-        (genModules hostName attrs)
-        nix-index-database.hmModules.nix-index
-      ];
+      modules = [ (genModules hostName attrs) ];
+      extraSpecialArgs = {
+        inherit impermanence nix-index-database;
+      };
     };
 in
 lib.mapAttrs genConfiguration (self.hosts.homeManager or { })

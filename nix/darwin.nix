@@ -1,14 +1,14 @@
-{ self, darwin, home-manager, nixpkgs, templates, ... }:
+{ self
+, darwin
+, home-manager
+, impermanence
+, nix-index-database
+, nixpkgs
+, templates
+, ...
+}:
 let
   inherit (nixpkgs) lib;
-
-  nixRegistry = {
-    nix.registry = {
-      nixpkgs.flake = nixpkgs;
-      p.flake = nixpkgs;
-      templates.flake = templates;
-    };
-  };
 
   genConfiguration = hostname: { hostPlatform, ... }:
     darwin.lib.darwinSystem {
@@ -16,9 +16,17 @@ let
       pkgs = self.pkgs.${hostPlatform};
       modules = [
         (../hosts + "/${hostname}")
-        nixRegistry
-        home-manager.darwinModules.home-manager
+        {
+          nix.registry = {
+            nixpkgs.flake = nixpkgs;
+            p.flake = nixpkgs;
+            templates.flake = templates;
+          };
+        }
       ];
+      specialArgs = {
+        inherit home-manager impermanence nix-index-database;
+      };
     };
 in
 lib.mapAttrs genConfiguration (self.hosts.darwin or { })

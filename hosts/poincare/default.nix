@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ home-manager, impermanence, lib, nix-index-database, pkgs, ... }:
 let
   dummyConfig = pkgs.writeText "darwin-configuration.nix" ''
     assert builtins.trace "This is a dummy config, use the nix-config flake!" false;
@@ -6,6 +6,10 @@ let
   '';
 in
 {
+  imports = [
+    home-manager.darwinModules.home-manager
+  ];
+
   environment = {
     pathsToLink = [
       "/share/fish"
@@ -116,6 +120,9 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
     verbose = true;
+    extraSpecialArgs = {
+      inherit impermanence nix-index-database;
+    };
   };
 
   home-manager.users.bemeurer = { config, ... }: {

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, home-manager, impermanence, nix-index-database, ragenix, ... }:
 let
   dummyConfig = pkgs.writeText "configuration.nix" ''
     assert builtins.trace "This is a dummy config, use deploy-rs!" false;
@@ -7,6 +7,11 @@ let
 in
 {
   imports = [
+    home-manager.nixosModules.home-manager
+    impermanence.nixosModules.impermanence
+    nix-index-database.nixosModules.nix-index
+    ragenix.nixosModules.age
+
     ./aspell.nix
     ./nix.nix
     ./resolved.nix
@@ -32,6 +37,9 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
     verbose = true;
+    extraSpecialArgs = {
+      inherit impermanence nix-index-database;
+    };
   };
 
   i18n.defaultLocale = "en_US.UTF-8";

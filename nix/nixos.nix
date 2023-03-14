@@ -23,16 +23,11 @@ let
           };
           nixpkgs.pkgs = self.pkgs.${hostPlatform};
         }
-        home-manager.nixosModules.home-manager
-        impermanence.nixosModules.impermanence
-        nix-index-database.nixosModules.nix-index
-        ragenix.nixosModules.age
       ];
       specialArgs = {
         hostAddress = address;
         hardware = nixos-hardware.nixosModules;
-        impermanence = impermanence.nixosModules;
-        inherit nix-index-database;
+        inherit home-manager impermanence nix-index-database nixos-hardware ragenix;
       };
     };
 in
