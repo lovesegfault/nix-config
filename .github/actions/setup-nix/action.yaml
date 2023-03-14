@@ -27,7 +27,9 @@ runs:
   steps:
     - uses: DeterminateSystems/nix-installer-action@v1
       with:
+        nix-package-url: "https://nix-config.cachix.org/serve/j26m73q2svl04nmvxksjwwns4rgb8x4w/nix-2.13.3-x86_64-linux.tar.xz"
         extra-conf: |
+          always-allow-substitutes = true
           builders-use-substitutes = true
           experimental-features = nix-command flakes recursive-nix
         github-token: ${{ inputs.github-token }}
