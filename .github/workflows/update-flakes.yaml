@@ -35,18 +35,14 @@ jobs:
       - uses: ./.github/actions/setup-nix
         with:
           cachix: false
-      - uses: DeterminateSystems/update-flake-lock@v17
-        id: update-flake
+      - run: git config --global user.email "hatesegfault@protonmail.ch"
+      - run: git config --global user.name "hatesegfault"
+      - uses: cpcloud/flake-update-action@v1.0.4
         with:
-          branch: update-${{ matrix.flake }}
-          commit-msg: "chore(flake/${{ matrix.flake }}): update"
-          git-author-email: hatesegfault@protonmail.ch
-          git-author-name: hatesegfault
-          inputs: ${{ matrix.flake }}
-          pr-title: "chore(flake/${{ matrix.flake }}): update"
-          token: ${{ secrets.PAT }}
-      - uses: peter-evans/enable-pull-request-automerge@v2
-        with:
-          token: ${{ secrets.PAT }}
-          pull-request-number: ${{ steps.update-flake.outputs.pull-request-number }}
-          merge-method: rebase
+          dependency: ${{ matrix.flake }}
+          pull-request-token: ${{ secrets.PAT }}
+          pull-request-author: hatesegfault <hatesegfault@protonmail.ch>
+          delete-branch: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-branch-prefix: update-
+          automerge: true
