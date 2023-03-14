@@ -25,7 +25,6 @@
         numb-nvim
         nvim-lightbulb
         nvim-navic
-        nvim-treesitter-context
         nvim-web-devicons
         stabilize-nvim
         todo-comments-nvim
