@@ -99,4 +99,13 @@ map("n", "<leader>gt", [[<cmd>lua require("telescope.builtin").git_stash()<cr>]]
 map("n", "<leader>tr", [[<cmd>lua require("telescope.builtin").treesitter()<cr>]], { silent = true })
 
 -- true-zen
-require("true-zen").setup()
+require("true-zen").setup({
+  modes = {
+    ataraxis = {
+      minimum_writing_area = {
+        width = 80,
+        height = 48,
+      },
+    },
+  },
+})
