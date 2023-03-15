@@ -65,6 +65,7 @@
         nvim-cmp
         nvim-lspconfig
         snippets-nvim
+        ltex_extra
 
         # syntax
         (nvim-treesitter.withPlugins

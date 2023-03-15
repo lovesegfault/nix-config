@@ -43,10 +43,23 @@ local on_attach = function(client, bufnr)
 end
 
 -- Enable the following language servers
-local servers = { "clangd", "pyright", "texlab", "tsserver", "nil_ls", "metals", "ltex" }
+local servers = { "clangd", "pyright", "texlab", "tsserver", "nil_ls", "metals" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup({ on_attach = on_attach, capabilities = capabilities, flags = flags })
 end
+
+nvim_lsp["ltex"].setup({
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+    require("ltex_extra").setup({
+      load_langs = { "en-US" },
+      init_check = true,
+      path = "./.ltex/", -- string : path to store dictionaries. Relative path uses current working directory
+      log_level = "none",
+    })
+  end,
+})
 
 nvim_lsp["lua_ls"].setup({
   on_attach = on_attach,
