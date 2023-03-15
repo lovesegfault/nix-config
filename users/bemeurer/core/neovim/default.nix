@@ -74,14 +74,38 @@
               (drv:
                 !elem
                   drv.pname
-                  (map (v: "tree-sitter-${v}-grammar") [
-                    "agda"
+                  ((map (v: "tree-sitter-${v}-grammar") [
                     "bash"
-                    "fluent"
+                    "beancount"
+                    "bibtex"
+                    "c-sharp"
+                    "clojure"
+                    "cmake"
+                    "cpp"
+                    "cuda"
+                    "eex"
+                    "elixir"
+                    "erlang"
+                    "fish"
+                    "fortran"
+                    "gdscript"
+                    "heex"
+                    "java"
+                    "julia"
                     "kotlin"
+                    "latex"
+                    "nickel"
+                    "nix"
+                    "python"
                     "ql-dbscheme"
-                    "sql"
-                  ])
+                    "regex"
+                    "ruby"
+                    "scala"
+                    "smithy"
+                    "tsx"
+                    "typescript"
+                    "zig"
+                  ]) ++ [ "markdown_inline-grammar" ])
               )
               pkgs.tree-sitter.allGrammars
           )
