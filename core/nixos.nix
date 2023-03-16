@@ -12,6 +12,11 @@
 
   boot.kernelParams = [ "log_buf_len=10M" ];
 
+  documentation = {
+    dev.enable = true;
+    man.generateCaches = true;
+  };
+
   i18n.defaultLocale = "en_US.UTF-8";
 
   networking = {

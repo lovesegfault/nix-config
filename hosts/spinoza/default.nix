@@ -2,16 +2,15 @@
   imports = [
     ../../core
 
-    ../../dev
-    ../../dev/virt-manager.nix
-    ../../dev/podman.nix
-
     ../../hardware/nixos-aarch64-builder
     ../../hardware/thinkpad-z13.nix
     ../../hardware/yubikey.nix
 
     ../../graphical
     ../../graphical/trusted.nix
+
+    ../../services/virt-manager.nix
+    ../../services/podman.nix
 
     ../../users/bemeurer
 
@@ -35,7 +34,6 @@
     plymouth.enable = true;
     resumeDevice = "/dev/cryptroot/swap";
   };
-
 
   environment.systemPackages = with pkgs; [ cntr wireguard-tools powertop ];
 
