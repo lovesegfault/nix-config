@@ -1,7 +1,0 @@
-{
-  imports = [
-    ./core
-    ./dev
-    ./modules
-  ];
-}

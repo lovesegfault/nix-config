@@ -1,20 +1,12 @@
 { lib, pkgs, ... }: {
-  imports = [
-    ../../users/bemeurer/core
-    ../../users/bemeurer/dev
-    ../../users/bemeurer/modules
-  ];
+  imports = [ ../../users/bemeurer ];
 
   home = {
     uid = 22314791;
-    packages = with pkgs; [
-      btop
-      rustup
-    ];
+    packages = with pkgs; [ rustup ];
   };
 
   programs = {
-    home-manager.enable = true;
     bash = {
       bashrcExtra = ''
         if [ -f /etc/bashrc ]; then

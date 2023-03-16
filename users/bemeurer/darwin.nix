@@ -1,11 +1,6 @@
 { pkgs, ... }: {
   home-manager.users.bemeurer = { config, ... }: {
-    imports = [
-      ../../users/bemeurer/core
-      ../../users/bemeurer/dev
-      ../../users/bemeurer/modules
-      ../../users/bemeurer/trusted
-    ];
+    imports = [ ./trusted ];
     programs.git.extraConfig.gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
   };
 

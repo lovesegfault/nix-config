@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 let
   mkValueString = v: with builtins;
     let
@@ -20,6 +20,7 @@ let
   mkKeyValue = lib.generators.mkKeyValueDefault { inherit mkValueString; } "=";
 in
 {
+  home.packages = with pkgs; [ btop ];
   xdg.configFile."btop/btop.conf".text = lib.generators.toKeyValue { inherit mkKeyValue; } {
     # Name of a btop++/bpytop/bashtop formatted ".theme" file, "Default" and "TTY" for builtin themes.
     # Themes should be placed in "../share/btop/themes" relative to binary or "$HOME/.config/btop/themes"

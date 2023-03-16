@@ -22,7 +22,6 @@
     stateVersion = "22.11";
     packages = with pkgs; [
       bandwhich
-      btop
       colorcheck
       exa
       fd
