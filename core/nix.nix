@@ -1,10 +1,15 @@
-{
+{ hostType, lib, ... }: {
   nix = {
     settings = {
-      auto-optimise-store = true;
+      accept-flake-config = true;
+      # XXX: Causes annoying "cannot link ... to ...: File exists" errors on Darwin
+      auto-optimise-store = hostType == "nixos";
       allowed-users = [ "@wheel" ];
+      build-users-group = "nixbld";
+      builders-use-substitutes = true;
       trusted-users = [ "root" "@wheel" ];
       system-features = [ "recursive-nix" ];
+      sandbox = hostType == "nixos";
       substituters = [
         "https://nix-config.cachix.org"
         "https://nix-community.cachix.org"
@@ -15,19 +20,28 @@
       ];
       cores = 0;
       max-jobs = "auto";
+      experimental-features = [ "nix-command" "flakes" "recursive-nix" ];
+      connect-timeout = 5;
+      http-connections = 0;
+      flake-registry = "/etc/nix/registry.json";
     };
-    daemonCPUSchedPolicy = "batch";
-    daemonIOSchedPriority = 5;
+
     distributedBuilds = true;
+    nixPath = [
+      "nixpkgs=/run/current-system/sw/nixpkgs"
+      "nixpkgs-overlays=/run/current-system/sw/overlays"
+    ];
     extraOptions = ''
       !include tokens.conf
-      builders-use-substitutes = true
-      experimental-features = nix-command flakes recursive-nix
-      flake-registry = /etc/nix/registry.json
     '';
+  } // lib.optionalAttrs (hostType == "nixos") {
+    daemonCPUSchedPolicy = "batch";
+    daemonIOSchedPriority = 5;
     optimise = {
       automatic = true;
       dates = [ "03:00" ];
     };
+  } // lib.optionalAttrs (hostType == "darwin") {
+    daemonIOLowPriority = true;
   };
 }

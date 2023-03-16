@@ -1,28 +1,13 @@
-{ config, lib, pkgs, home-manager, impermanence, nix-index-database, ragenix, ... }:
-let
-  dummyConfig = pkgs.writeText "configuration.nix" ''
-    assert builtins.trace "This is a dummy config, use deploy-rs!" false;
-    { }
-  '';
-in
-{
+{ lib, pkgs, hostType, impermanence, nix-index-database, ... }: {
   imports = [
-    home-manager.nixosModules.home-manager
-    impermanence.nixosModules.impermanence
-    nix-index-database.nixosModules.nix-index
-    ragenix.nixosModules.age
-
     ./aspell.nix
     ./nix.nix
-    ./resolved.nix
-    ./tmux.nix
-    ./xdg.nix
-  ];
-
-  boot.kernelParams = [ "log_buf_len=10M" ];
+  ]
+  ++ lib.optional (hostType == "nixos") ./nixos.nix
+  ++ lib.optional (hostType == "darwin") ./darwin.nix
+  ;
 
   environment = {
-    etc."nixos/configuration.nix".source = dummyConfig;
     pathsToLink = [
       "/share/fish"
       "/share/zsh"
@@ -42,70 +27,9 @@ in
     };
   };
 
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  networking = {
-    firewall = {
-      checkReversePath = "loose";
-      trustedInterfaces = [ "tailscale0" ];
-      allowedUDPPorts = [ config.services.tailscale.port ];
-    };
-    useDHCP = false;
-    useNetworkd = true;
-    wireguard.enable = true;
-  };
-
-  nix.nixPath = [
-    "nixos-config=${dummyConfig}"
-    "nixpkgs=/run/current-system/nixpkgs"
-    "nixpkgs-overlays=/run/current-system/overlays"
-  ];
-
-  nixpkgs.config.allowUnfree = true;
-
   programs = {
-    command-not-found.enable = false;
     nix-index.enable = true;
     fish.enable = true;
-    mosh.enable = true;
-    zsh = {
-      enable = true;
-      enableGlobalCompInit = false;
-    };
+    zsh.enable = true;
   };
-
-  security = {
-    pam.services.sudo.u2fAuth = true;
-    sudo = {
-      enable = true;
-      wheelNeedsPassword = lib.mkDefault false;
-    };
-  };
-
-  services = {
-    dbus.implementation = "broker";
-    openssh = {
-      enable = true;
-      settings.PermitRootLogin = lib.mkDefault "no";
-    };
-    tailscale.enable = true;
-    fwupd.daemonSettings.EspLocation = config.boot.loader.efi.efiSysMountPoint;
-  };
-
-  system = {
-    extraSystemBuilderCmds = ''
-      ln -sv ${pkgs.path} $out/nixpkgs
-      ln -sv ${../nix/overlays} $out/overlays
-    '';
-
-    stateVersion = "22.11";
-  };
-
-  systemd = {
-    enableUnifiedCgroupHierarchy = true;
-    network.wait-online.anyInterface = true;
-    services.tailscaled.after = [ "network-online.target" "systemd-resolved.service" ];
-  };
-
-  users.mutableUsers = false;
 }
