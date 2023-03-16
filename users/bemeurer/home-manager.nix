@@ -1,0 +1,7 @@
+{
+  imports = [
+    ./core
+    ./dev
+    ./modules
+  ];
+}

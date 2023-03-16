@@ -23,6 +23,9 @@
       ncurses
       openssh_gssapi
     ];
+    systemPath = lib.mkBefore [
+      "/opt/homebrew/bin"
+    ];
     variables = {
       SHELL = lib.getExe pkgs.fish;
     };
