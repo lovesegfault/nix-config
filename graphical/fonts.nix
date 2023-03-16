@@ -1,8 +1,20 @@
-{ pkgs, ... }: {
+{ hostType, lib, pkgs, ... }: {
   fonts = {
+    fontDir.enable = hostType == "darwin";
+    fonts = with pkgs; [
+      (nerdfonts.override { fonts = [ "Hack" ]; })
+      ibm-plex
+      dejavu_fonts
+      unifont
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-emoji
+      noto-fonts-extra
+    ];
+  } // lib.optionalAttrs (hostType == "nixos") {
     enableDefaultFonts = false;
     enableGhostscriptFonts = false;
-    fontDir.enable = false;
     fontconfig = {
       defaultFonts = {
         sansSerif = [ "IBM Plex Sans" ];
@@ -35,16 +47,5 @@
         </fontconfig>
       '';
     };
-    fonts = with pkgs; [
-      (nerdfonts.override { fonts = [ "Hack" ]; })
-      ibm-plex
-      dejavu_fonts
-      unifont
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-      noto-fonts-emoji
-      noto-fonts-extra
-    ];
   };
 }
