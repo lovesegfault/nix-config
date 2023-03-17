@@ -29,7 +29,6 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    verbose = true;
     extraSpecialArgs = {
       inherit impermanence nix-index-database;
     };
