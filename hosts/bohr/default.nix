@@ -46,7 +46,7 @@
     "/mnt/music" = {
       device = "/dev/disk/by-uuid/91b15b49-9247-4d80-9799-a786a1a68920";
       fsType = "btrfs";
-      options = [ "subvol=music" "noatime" ];
+      options = [ "defaults" "noatime" "discard=async" "subvol=music" ];
     };
   };
 
