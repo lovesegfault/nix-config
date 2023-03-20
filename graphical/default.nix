@@ -1,8 +1,14 @@
-{ hostType, lib, ... }: {
-  imports = [
-    ./fonts.nix
-  ]
-  ++ lib.optional (hostType == "nixos") ./nixos.nix
-  ++ lib.optional (hostType == "darwin") ./darwin.nix
-  ;
+{ hostType, ... }: {
+  imports =
+    let
+      sysConfig =
+        if hostType == "nixos" then ./nixos.nix
+        else if hostType == "darwin" then ./darwin.nix
+        else throw "Unknown hostType '${hostType}' for graphical"
+      ;
+    in
+    [
+      sysConfig
+      ./fonts.nix
+    ];
 }

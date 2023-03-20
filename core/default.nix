@@ -1,11 +1,17 @@
-{ lib, pkgs, hostType, impermanence, nix-index-database, ... }: {
-  imports = [
-    ./aspell.nix
-    ./nix.nix
-  ]
-  ++ lib.optional (hostType == "nixos") ./nixos.nix
-  ++ lib.optional (hostType == "darwin") ./darwin.nix
-  ;
+{ pkgs, hostType, impermanence, nix-index-database, ... }: {
+  imports =
+    let
+      sysConfig =
+        if hostType == "nixos" then ./nixos.nix
+        else if hostType == "darwin" then ./darwin.nix
+        else throw "Unknown hostType '${hostType}' for core"
+      ;
+    in
+    [
+      sysConfig
+      ./aspell.nix
+      ./nix.nix
+    ];
 
   documentation = {
     enable = true;
