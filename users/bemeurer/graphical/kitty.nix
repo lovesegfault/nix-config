@@ -1,4 +1,8 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+let
+  inherit (pkgs.stdenv) hostPlatform;
+in
+{
   programs.kitty = {
     enable = true;
     settings = {
@@ -28,8 +32,11 @@
       color14 = "#95E6CB";
       color15 = "#FFFFFF";
       update_check_interval = 0;
-    };
-  } // (lib.optionalAttrs pkgs.stdenv.isDarwin {
-    darwinLaunchOptions = [ "--single-instance" "--directory=~" ];
-  });
+    } // (lib.optionalAttrs hostPlatform.isMacOS {
+      font_family = "Hack Nerd Font Mono";
+      font_size = "11.0";
+    });
+
+    darwinLaunchOptions = lib.mkIf hostPlatform.isMacOS [ "--single-instance" "--directory=~" ];
+  };
 }

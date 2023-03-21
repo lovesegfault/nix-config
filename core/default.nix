@@ -1,17 +1,13 @@
 { pkgs, hostType, impermanence, nix-index-database, ... }: {
-  imports =
-    let
-      sysConfig =
-        if hostType == "nixos" then ./nixos.nix
-        else if hostType == "darwin" then ./darwin.nix
-        else throw "Unknown hostType '${hostType}' for core"
-      ;
-    in
-    [
-      sysConfig
-      ./aspell.nix
-      ./nix.nix
-    ];
+  imports = [
+    (
+      if hostType == "nixos" then ./nixos.nix
+      else if hostType == "darwin" then ./darwin.nix
+      else throw "Unknown hostType '${hostType}' for core"
+    )
+    ./aspell.nix
+    ./nix.nix
+  ];
 
   documentation = {
     enable = true;
@@ -36,7 +32,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {
-      inherit impermanence nix-index-database;
+      inherit hostType impermanence nix-index-database;
     };
   };
 

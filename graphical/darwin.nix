@@ -15,12 +15,8 @@
       { name = "bartender"; greedy = true; }
       { name = "daisydisk"; greedy = true; }
       { name = "dash"; greedy = true; }
-      { name = "discord"; greedy = true; }
-      { name = "element"; greedy = true; }
       { name = "firefox"; greedy = true; }
       { name = "google-chrome"; greedy = true; }
-      { name = "iterm2"; greedy = true; }
-      { name = "kitty"; greedy = true; }
       { name = "ksdiff"; greedy = true; }
       { name = "lunar"; greedy = true; }
       { name = "macupdater"; greedy = true; }
