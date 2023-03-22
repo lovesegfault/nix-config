@@ -49,7 +49,6 @@ for _, lsp in ipairs(servers) do
 end
 
 nvim_lsp["ltex"].setup({
-  capabilities = capabilities,
   on_attach = function(client, bufnr)
     on_attach(client, bufnr)
     require("ltex_extra").setup({
@@ -59,6 +58,8 @@ nvim_lsp["ltex"].setup({
       log_level = "none",
     })
   end,
+  capabilities = capabilities,
+  flags = flags,
 })
 
 nvim_lsp["lua_ls"].setup({
@@ -85,6 +86,19 @@ nvim_lsp["lua_ls"].setup({
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {
         enable = false,
+      },
+    },
+  },
+})
+
+nvim_lsp["nil_ls"].setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  flags = flags,
+  settings = {
+    ["nil"] = {
+      formatting = {
+        command = { "nixpkgs-fmt" },
       },
     },
   },
