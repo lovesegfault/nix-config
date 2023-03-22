@@ -51,4 +51,38 @@
       "Xcode" = 497799835;
     };
   };
+
+  security.pam.enableSudoTouchIdAuth = true;
+
+  services.skhd = {
+    enable = true;
+    skhdConfig = ''
+      cmd - return : kitty -1 -d ~
+    '';
+  };
+
+  system = {
+    defaults = {
+      NSGlobalDomain = {
+        AppleInterfaceStyle = "Dark";
+        AppleTemperatureUnit = "Celsius";
+        InitialKeyRepeat = 25;
+        KeyRepeat = 2;
+        NSAutomaticSpellingCorrectionEnabled = false;
+      };
+      finder.QuitMenuItem = true;
+      dock = {
+        autohide = true;
+        autohide-delay = 0.0;
+        autohide-time-modifier = 0.0;
+        mineffect = "scale";
+        orientation = "left";
+        show-recents = false;
+      };
+    };
+    keyboard = {
+      enableKeyMapping = true;
+      remapCapsLockToEscape = true;
+    };
+  };
 }
