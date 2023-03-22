@@ -5,6 +5,7 @@
       else if hostType == "darwin" then ./darwin.nix
       else throw "Unknown hostType '${hostType}' for users/bemeurer/graphical"
     )
+    ./alacritty.nix
     ./kitty.nix
     ./mpv.nix
   ];

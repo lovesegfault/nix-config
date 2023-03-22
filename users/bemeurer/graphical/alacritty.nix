@@ -1,22 +1,20 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  inherit (pkgs.stdenv) hostPlatform;
+in
+{
   programs.alacritty = {
     enable = true;
     settings = {
-      env.TERM = "xterm-256color";
       font = {
-        normal = {
-          family = "monospace";
-          style = "Regular";
-        };
-        bold = {
-          family = "monospace";
-          style = "Bold";
-        };
-        italic = {
-          family = "monospace";
-          style = "Italic";
-        };
-        size = 8;
+        normal.family =
+          if hostPlatform.isLinux then "monospace"
+          else if hostPlatform.isMacOS then "Hack Nerd Font Mono"
+          else null;
+        size =
+          if hostPlatform.isLinux then 13
+          else if hostPlatform.isMacOS then 11
+          else null;
       };
       colors = {
         primary = {
@@ -44,7 +42,6 @@
           yellow = "0xFFB454";
         };
       };
-      shell.program = "${pkgs.zsh}/bin/zsh";
     };
   };
 }
