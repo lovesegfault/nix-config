@@ -57,6 +57,7 @@
         ".local/share/bash"
         ".local/share/direnv"
         ".local/share/fish"
+        ".local/share/images"
         ".local/share/iwctl"
         ".local/share/libvirt"
         ".local/share/lollypop"
