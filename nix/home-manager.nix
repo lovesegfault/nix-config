@@ -3,6 +3,7 @@
 , nix-index-database
 , nixpkgs
 , impermanence
+, stylix
 , templates
 , ...
 }:
@@ -53,7 +54,7 @@ let
       modules = [ (genModules hostName attrs) ];
       extraSpecialArgs = {
         hostType = type;
-        inherit impermanence nix-index-database;
+        inherit impermanence nix-index-database stylix;
       };
     };
 in

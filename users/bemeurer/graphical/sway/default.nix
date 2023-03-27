@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ./foot.nix
     ./mako.nix
@@ -21,7 +21,6 @@
   };
 
   programs.swaylock.settings = {
-    image = "${config.xdg.dataHome}/wall.png";
     indicator-caps-lock = true;
     scaling = "fill";
     show-failed-attempts = true;

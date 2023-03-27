@@ -71,6 +71,13 @@
       inputs.agenix.follows = "agenix";
     };
 
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+      inputs.flake-compat.follows = "flake-compat";
+    };
+
     templates.url = "github:NixOS/templates";
 
     flake-utils.url = "github:numtide/flake-utils";

@@ -37,13 +37,8 @@
 
   gtk = {
     enable = true;
-    font.name = "sans";
     gtk2.extraConfig = "gtk-application-prefer-dark-theme = true";
     gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
-    theme = {
-      package = pkgs.ayu-theme-gtk;
-      name = "Ayu-Dark";
-    };
   };
 
   qt = {

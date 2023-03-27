@@ -16,12 +16,6 @@
     enableDefaultFonts = false;
     enableGhostscriptFonts = false;
     fontconfig = {
-      defaultFonts = {
-        sansSerif = [ "IBM Plex Sans" ];
-        serif = [ "IBM Plex Sans" ];
-        monospace = [ "Hack Nerd Font" ];
-        emoji = [ "Noto Color Emoji" ];
-      };
       localConf = ''
         <?xml version="1.0"?>
         <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
@@ -46,6 +40,25 @@
             </alias>
         </fontconfig>
       '';
+    };
+  };
+} // lib.optionalAttrs (hostType == "nixos") {
+  stylix.fonts = lib.mkIf (hostType == "nixos") {
+    sansSerif = {
+      package = pkgs.ibm-plex;
+      name = "IBM Plex Sans";
+    };
+    serif = {
+      package = pkgs.ibm-plex;
+      name = "IBM Plex Serif";
+    };
+    monospace = {
+      package = pkgs.nerdfonts.override { fonts = [ "Hack" ]; };
+      name = "Hack Nerd Font";
+    };
+    emoji = {
+      package = pkgs.noto-fonts-emoji;
+      name = "Noto Color Emoji";
     };
   };
 }

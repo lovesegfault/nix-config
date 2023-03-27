@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, pkgs, ... }: {
   services.mako =
     let
       homeIcons = "${config.home.homeDirectory}/.nix-profile/share/icons/hicolor";
@@ -8,16 +8,12 @@
     in
     {
       enable = true;
-      backgroundColor = "#0A0E14";
-      borderColor = "#53BDFA";
       defaultTimeout = 30 * 1000; # millis
-      font = lib.mkDefault "monospace 10";
       iconPath = "${homeIcons}:${systemIcons}:${homePixmaps}:${systemPixmaps}";
       icons = true;
       maxIconSize = 96;
       maxVisible = 3;
       sort = "-time";
-      textColor = "#B3B1AD";
       width = 500;
     };
 

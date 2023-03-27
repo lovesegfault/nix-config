@@ -43,10 +43,6 @@
       '';
     };
 
-    programs.foot.settings.main.font = "monospace:size=5, emoji:size=5";
-
-    services.mako.font = "monospace 16";
-
     programs.waybar.settings.main.temperature.hwmon-path = "/sys/class/hwmon/hwmon3/temp1_input";
     programs.waybar.style = ''
       * {

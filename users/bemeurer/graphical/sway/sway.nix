@@ -22,8 +22,6 @@
           "Print" = execSpawn "${pkgs.screenshot}/bin/screenshot";
         };
 
-      output = { "*" = { bg = "${config.xdg.dataHome}/wall.png fill"; }; };
-
       terminal = lib.getExe pkgs.foot;
 
       window.commands = [
