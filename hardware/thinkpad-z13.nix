@@ -7,7 +7,7 @@
 
     ./bluetooth.nix
     ./efi.nix
-    ./sound-pipewire.nix
+    ./sound.nix
   ];
 
   boot = {
