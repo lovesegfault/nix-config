@@ -10,7 +10,6 @@
     alsa.enable = true;
     jack.enable = true;
     pulse.enable = true;
-    media-session.enable = false;
     wireplumber.enable = true;
     config = {
       pipewire."context.properties"."default.clock.allowed-rates" = [
