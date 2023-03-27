@@ -11,6 +11,7 @@ local luasnip = require("luasnip")
 
 -- nvim-cmp setup
 local cmp = require("cmp")
+local lspkind = require("lspkind")
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -25,9 +26,16 @@ cmp.setup({
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.close(),
     ["<Right>"] = cmp.mapping.close(),
-    ["<CR>"] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+    ["<CR>"] = cmp.mapping({
+      i = function(fallback)
+        if cmp.visible() and cmp.get_active_entry() then
+          cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+        else
+          fallback()
+        end
+      end,
+      s = cmp.mapping.confirm({ select = true }),
+      c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
     }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -40,7 +48,6 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
-
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -52,18 +59,11 @@ cmp.setup({
     end, { "i", "s" }),
   },
   formatting = {
-    format = function(entry, vim_item)
-      vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
-      vim_item.menu = ({
-        buffer = "[Buffer]",
-        cmp_tabnine = "[TN]",
-        luasnip = "[Snip]",
-        nvim_lsp = "[LSP]",
-        nvim_lua = "[Lua]",
-        path = "[Path]",
-      })[entry.source.name]
-      return vim_item
-    end,
+    format = lspkind.cmp_format({
+      mode = "symbol_text",
+      maxwidth = 50,
+      ellipsis_char = "…",
+    }),
   },
   sources = {
     { name = "nvim_lsp" },
