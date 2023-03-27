@@ -1,6 +1,6 @@
 { lib, pkgs, ... }: {
   environment.etc = {
-    "pipewire/pipewire/99-allowed-rates.conf".text = builtins.toJSON {
+    "pipewire/pipewire.conf.d/99-allowed-rates.conf".text = builtins.toJSON {
       "context.properties"."default.clock.allowed-rates" = [
         44100
         48000
@@ -14,13 +14,13 @@
         768000
       ];
     };
-    "pipewire/pipewire-pulse/99-resample.conf".text = builtins.toJSON {
+    "pipewire/pipewire-pulse.conf.d/99-resample.conf".text = builtins.toJSON {
       "stream.properties"."resample.quality" = 15;
     };
-    "pipewire/client/99-resample.conf".text = builtins.toJSON {
+    "pipewire/client.conf.d/99-resample.conf".text = builtins.toJSON {
       "stream.properties"."resample.quality" = 15;
     };
-    "pipewire/client-rt/99-resample.conf".text = builtins.toJSON {
+    "pipewire/client-rt.conf.d/99-resample.conf".text = builtins.toJSON {
       "stream.properties"."resample.quality" = 15;
     };
   };
