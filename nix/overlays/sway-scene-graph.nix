@@ -1,33 +1,24 @@
 final: prev:
-with final.lib;
 {
-  libdisplay-info = prev.libdisplay-info.overrideAttrs (old: rec {
-    version = "0.1.1";
-    src = final.fetchFromGitLab {
-      domain = "gitlab.freedesktop.org";
-      owner = "emersion";
-      repo = old.pname;
-      rev = version;
-      hash = "sha256-7t1CoLus3rPba9paapM7+H3qpdsw7FlzJsSHFwM/2Lk=";
-    };
-  });
-
   wlroots_0_17 = final.wlroots_0_16.overrideAttrs (old: {
-    version = "unstable-2023-02-15";
+    version = "unstable-2023-03-26";
     src = final.fetchFromGitLab {
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "774d2c82f0cc6ed5b20762fb74bab3e8bfd9f858";
-      hash = "sha256-XIH/eTL1A42spHAvbeELAEXJoVdJEdBUvYTL/Z98m80=";
+      rev = "59d2743c0cc4bb77527449fccfe1fba03357457c";
+      hash = "sha256-yivhyQeWLTwHxUISio2P8u0S9Vkp5Lhc7UlNONA1DaQ=";
     };
     nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ final.hwdata ];
-    buildInputs = (old.buildInputs or [ ]) ++ [ final.libdisplay-info ];
+    buildInputs = (old.buildInputs or [ ]) ++ [
+      final.libdisplay-info
+      final.libliftoff
+    ];
     mesonFlags = (old.mesonFlags or [ ]) ++ [ "-Dwerror=false" ];
   });
 
   sway-unwrapped = (prev.sway-unwrapped.overrideAttrs (old: {
-    version = "scene-graph-2023-02-15";
+    version = "scene-graph-2023-03-03";
     src = final.fetchFromGitHub {
       owner = "Nefsen402";
       repo = "sway";
