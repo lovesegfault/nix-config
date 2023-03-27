@@ -1,4 +1,30 @@
 { lib, pkgs, ... }: {
+  environment.etc = {
+    "pipewire/pipewire/99-allowed-rates.conf".text = builtins.toJSON {
+      "context.properties"."default.clock.allowed-rates" = [
+        44100
+        48000
+        88200
+        96000
+        176400
+        192000
+        358000
+        384000
+        716000
+        768000
+      ];
+    };
+    "pipewire/pipewire-pulse/99-resample.conf".text = builtins.toJSON {
+      "stream.properties"."resample.quality" = 15;
+    };
+    "pipewire/client/99-resample.conf".text = builtins.toJSON {
+      "stream.properties"."resample.quality" = 15;
+    };
+    "pipewire/client-rt/99-resample.conf".text = builtins.toJSON {
+      "stream.properties"."resample.quality" = 15;
+    };
+  };
+
   environment.systemPackages = with pkgs; [ pulseaudio ];
 
   hardware.pulseaudio.enable = lib.mkForce false;
@@ -11,23 +37,6 @@
     jack.enable = true;
     pulse.enable = true;
     wireplumber.enable = true;
-    config = {
-      pipewire."context.properties"."default.clock.allowed-rates" = [
-        44100
-        48000
-        88200
-        96000
-        176400
-        192000
-        358000
-        384000
-        716000
-        768000
-      ];
-      pipewire-pulse."stream.properties"."resample.quality" = 15;
-      client."stream.properties"."resample.quality" = 15;
-      client-rt."stream.properties"."resample.quality" = 15;
-    };
   };
 
   sound.enable = true;
