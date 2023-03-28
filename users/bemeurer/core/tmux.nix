@@ -15,11 +15,12 @@
     keyMode = "vi";
     prefix = "C-a";
     extraConfig = ''
-      set -ga terminal-overrides ",*256col*:Tc"
+      set -ag terminal-overrides ",alacritty*:RGB,foot*:RGB,xterm-kitty*:RGB"
+      set -as terminal-features ",alacritty*:RGB,foot*:RGB,xterm-kitty*:RGB"
 
       bind C-a last-window
       bind a send-prefix
-      bind R source-file ~/.tmux.conf \; display-message "Config reloaded..."
+      bind R source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded..."
 
       bind : command-prompt
       bind r refresh-client
