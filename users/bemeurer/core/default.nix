@@ -1,4 +1,4 @@
-{ impermanence, nix-index-database, pkgs, stylix, ... }: {
+{ hostType, impermanence, nix-index-database, pkgs, stylix, ... }: {
   imports = [
     impermanence.nixosModules.home-manager.impermanence
     nix-index-database.hmModules.nix-index
@@ -61,6 +61,8 @@
       url = "https://media.githubusercontent.com/media/lovesegfault/nix-config/bda48ceaf8112a8b3a50da782bf2e65a2b5c4708/users/bemeurer/assets/walls/plants-00.jpg";
       hash = "sha256-n8EQgzKEOIG6Qq7og7CNqMMFliWM5vfi2zNILdpmUfI=";
     };
+    targets.gnome.enable = hostType == "nixos";
+    targets.gtk.enable = hostType == "nixos";
   };
 
   systemd.user.startServices = "sd-switch";
