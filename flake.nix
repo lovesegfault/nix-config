@@ -2,7 +2,7 @@
   description = "lovesegfault's NixOS config";
 
   nixConfig = {
-    substituters = [
+    trusted-substituters = [
       "https://cache.nixos.org"
       "https://nix-config.cachix.org"
       "https://nix-community.cachix.org"
