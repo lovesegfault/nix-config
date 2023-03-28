@@ -36,6 +36,8 @@
     };
   };
 
+  stylix.targets.plymouth.enable = false;
+
   xdg.portal = {
     enable = true;
     wlr.enable = true;
