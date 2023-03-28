@@ -120,7 +120,7 @@
       submitData = true;
     };
     logind = {
-      lidSwitch = "suspend";
+      lidSwitch = "suspend-then-hibernate";
       lidSwitchExternalPower = "ignore";
     };
     udev.packages = with pkgs; [ logitech-udev-rules ];
