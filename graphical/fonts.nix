@@ -2,15 +2,12 @@
   fonts = {
     fontDir.enable = hostType == "darwin";
     fonts = with pkgs; [
-      (nerdfonts.override { fonts = [ "Hack" ]; })
-      ibm-plex
-      dejavu_fonts
-      unifont
+      # dejavu_fonts
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      noto-fonts-emoji
       noto-fonts-extra
+      unifont
     ];
   } // lib.optionalAttrs (hostType == "nixos") {
     enableDefaultFonts = false;
@@ -42,14 +39,14 @@
       '';
     };
   };
-} // lib.optionalAttrs (hostType == "nixos") {
-  stylix.fonts = lib.mkIf (hostType == "nixos") {
+
+  stylix.fonts = {
     sansSerif = {
       package = pkgs.ibm-plex;
       name = "IBM Plex Sans";
     };
     serif = {
-      package = pkgs.ibm-plex;
+      package = pkgs.dejavu_fonts;
       name = "IBM Plex Serif";
     };
     monospace = {
