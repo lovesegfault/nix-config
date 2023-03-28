@@ -1,7 +1,14 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox.override { cfg.enableTridactylNative = true; };
+    package =
+      let
+        ff =
+          if lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.firefox-bin
+          then pkgs.firefox-bin
+          else pkgs.firefox;
+      in
+      ff.override { cfg.enableTridactylNative = true; };
   };
 
   xdg.mimeApps.defaultApplications = {
