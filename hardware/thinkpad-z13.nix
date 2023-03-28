@@ -16,10 +16,7 @@
     kernelModules = [ "cpufreq_conservative" "cpufreq_ondemand" "kvm-amd" "thinkpad_acpi" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [
-      "nowatchdog"
-      "acpi.prefer_microsoft_guid=1" # XXX: Maybe helps with sleep?
-    ];
+    kernelParams = [ "nowatchdog" ];
     tmpOnTmpfs = true;
   };
 
