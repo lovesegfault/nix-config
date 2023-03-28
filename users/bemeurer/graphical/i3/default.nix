@@ -3,7 +3,7 @@
     ./dunst.nix
     ./i3.nix
     ./polybar.nix
-    ./rofi
+    ./rofi.nix
     ./screen-locker.nix
   ];
 
