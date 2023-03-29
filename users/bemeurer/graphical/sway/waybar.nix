@@ -163,4 +163,6 @@
       target = "sway-session.target";
     };
   };
+
+  stylix.targets.waybar.enable = false;
 }
