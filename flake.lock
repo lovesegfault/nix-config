@@ -44,28 +44,6 @@
         "type": "github"
       }
     },
-    "coricamu": {
-      "inputs": {
-        "nixpkgs": [
-          "stylix",
-          "nixpkgs"
-        ],
-        "utils": "utils"
-      },
-      "locked": {
-        "lastModified": 1677749800,
-        "narHash": "sha256-xIqxDr4fkOA5R4OudbQoUMS8xvPJNCyGfqugENutSP4=",
-        "owner": "danth",
-        "repo": "coricamu",
-        "rev": "40db414609dc6d72319987d3e9d7b56fe405c28f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "danth",
-        "repo": "coricamu",
-        "type": "github"
-      }
-    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -370,7 +348,6 @@
     "stylix": {
       "inputs": {
         "base16": "base16",
-        "coricamu": "coricamu",
         "flake-compat": [
           "flake-compat"
         ],
@@ -382,11 +359,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1680023459,
-        "narHash": "sha256-9INeu9GEIzqhNMd+/CD2rmX3bNtu+sWuPcEeEh4BjkI=",
+        "lastModified": 1680047654,
+        "narHash": "sha256-bvbx+Xhq5HXRl5js0EnCHu90RSdtwJf2yazoIetg2Ro=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "e626c4e54e7ecc903781c6f0fab89f889a7ba1f4",
+        "rev": "a3f9fa981b9af8c8d57dc830d4ca6ddff085eee5",
         "type": "github"
       },
       "original": {
@@ -407,21 +384,6 @@
       "original": {
         "owner": "NixOS",
         "repo": "templates",
-        "type": "github"
-      }
-    },
-    "utils": {
-      "locked": {
-        "lastModified": 1642700792,
-        "narHash": "sha256-XqHrk7hFb+zBvRg6Ghl+AZDq03ov6OshJLiSWOoX5es=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "846b2ae0fc4cc943637d3d1def4454213e203cba",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
         "type": "github"
       }
     }
