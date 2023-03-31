@@ -10,11 +10,6 @@ let
 
     focus.followMouse = false;
 
-    fonts = {
-      names = [ "monospace" ];
-      size = 10.0;
-    };
-
     gaps = {
       inner = 10;
       outer = 5;

@@ -1,4 +1,4 @@
-{
+{ lib, ... }: {
   programs.sway.enable = true;
 
   home-manager.users.bemeurer = {
@@ -44,12 +44,12 @@
     };
 
     programs.waybar.settings.main.temperature.hwmon-path = "/sys/class/hwmon/hwmon3/temp1_input";
-    programs.waybar.style = ''
+    programs.waybar.style = lib.mkForce ''
       * {
         border: none;
         border-radius: 0;
         font-family: monospace;
-        font-size: 18px;
+        font-size: 16px;
         min-height: 0;
       }
 

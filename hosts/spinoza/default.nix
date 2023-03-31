@@ -162,6 +162,13 @@
   # FIXME: Breaks systemd-boot?
   # systemd.package = pkgs.systemd-optimized;
 
+  stylix.fonts.sizes = {
+    desktop = 16;
+    applications = 14;
+    terminal = 12;
+    popups = 16;
+  };
+
   systemd.user.services.geoclue-agent.after = [
     "network.target"
     "systemd-networkd-wait-online.service"

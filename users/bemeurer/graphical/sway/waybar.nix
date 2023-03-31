@@ -91,78 +91,10 @@
         spacing = lib.mkDefault 5;
       };
     };
-    style = lib.mkDefault ''
-      * {
-        border: none;
-        border-radius: 0;
-        font-family: monospace;
-        font-size: 13px;
-        min-height: 0;
-      }
-
-      #waybar {
-        background-color: #0D1016;
-        color: #B3B1AD;
-        transition: background-color 0.2s;
-      }
-
-      #waybar.hidden {
-        opacity: 0.2;
-      }
-
-      #workspaces {
-        margin: 0 3px 0 1px;
-      }
-
-      #workspaces button {
-        background: transparent;
-        border: none;
-        padding: 0 8px;
-      }
-
-      #workspaces button:hover {
-        box-shadow: inherit;
-        border-bottom: 3px solid #E6B450;
-      }
-
-      #workspaces button.focused {
-        background-color: #273747;
-        color: #E6B450;
-        border-bottom: 3px solid #E6B450;
-      }
-
-      #workspaces button.urgent {
-        color: #FF3333;
-      }
-
-      #battery,
-      #clock,
-      #cpu,
-      #memory,
-      #disk,
-      #temperature,
-      #backlight,
-      #network,
-      #pulseaudio,
-      #custom-media,
-      #tray,
-      #idle_inhibitor,
-      #mode {
-        padding: 0 5px;
-        margin: 0 2px;
-      }
-
-      #idle_inhibitor.activated {
-        color: #E6B450;
-        background-color: #273747;
-      }
-    '';
 
     systemd = {
       enable = true;
       target = "sway-session.target";
     };
   };
-
-  stylix.targets.waybar.enable = false;
 }
