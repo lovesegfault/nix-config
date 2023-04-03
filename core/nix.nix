@@ -29,7 +29,6 @@
     distributedBuilds = true;
     nixPath = [
       "nixpkgs=/run/current-system/sw/nixpkgs"
-      "nixpkgs-overlays=/run/current-system/sw/overlays"
     ];
     extraOptions = ''
       !include tokens.conf

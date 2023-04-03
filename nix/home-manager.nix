@@ -23,7 +23,6 @@ let
         inherit homeDirectory;
         sessionVariables.NIX_PATH = lib.concatStringsSep ":" [
           "nixpkgs=${config.xdg.dataHome}/nixpkgs"
-          "nixpkgs-overlays=${config.xdg.dataHome}/overlays"
         ];
       };
 
@@ -38,10 +37,7 @@ let
       }];
 
       xdg = {
-        dataFile = {
-          nixpkgs.source = nixpkgs;
-          overlays.source = ../nix/overlays;
-        };
+        dataFile.nixpkgs.source = nixpkgs;
         configFile."nix/nix.conf".text = ''
           flake-registry = ${config.xdg.configHome}/nix/registry.json
         '';
