@@ -22,7 +22,7 @@
       gnutar
       gnutls
       ncurses
-      openssh_gssapi
+      openssh
     ];
     systemPath = lib.mkBefore [
       "/opt/homebrew/bin"
