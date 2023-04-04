@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          lfs: false
       - uses: ./.github/actions/setup-nix
         with:
           cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -27,6 +29,8 @@ jobs:
       systems: ${{ steps.get-hosts.outputs.systems }}
     steps:
       - uses: actions/checkout@v3
+        with:
+          lfs: false
       - uses: ./.github/actions/setup-nix
         with:
           cachix: false
@@ -64,6 +68,8 @@ jobs:
         system: ${{ fromJson(needs.get-hosts.outputs.systems) }}
     steps:
       - uses: actions/checkout@v3
+        with:
+          lfs: false
       - uses: ./.github/actions/setup-nix
         with:
           aarch64-builder: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
@@ -85,6 +91,8 @@ jobs:
         host: ${{ fromJson(needs.get-hosts.outputs.hosts) }}
     steps:
       - uses: actions/checkout@v3
+        with:
+          lfs: false
       - uses: ./.github/actions/setup-nix
         with:
           aarch64-builder: ${{ matrix.host.hostPlatform == 'aarch64-linux' }}

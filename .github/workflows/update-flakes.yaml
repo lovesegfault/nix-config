@@ -10,6 +10,8 @@ jobs:
       matrix: ${{ steps.get-flakes.outputs.matrix }}
     steps:
       - uses: actions/checkout@v3
+        with:
+          lfs: false
       - uses: ./.github/actions/setup-nix
         with:
           cachix: false
@@ -32,6 +34,8 @@ jobs:
       matrix: ${{ fromJson(needs.get-flakes.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v3
+        with:
+          lfs: false
       - uses: ./.github/actions/setup-nix
         with:
           cachix: false
