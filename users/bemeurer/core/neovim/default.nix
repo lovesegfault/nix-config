@@ -40,7 +40,7 @@
         vim-better-whitespace # highlight and strip trailing whitespace
         guess-indent-nvim # automatic indentation style detection
         nvim-surround # add/change/delete surrounding delimiter pairs with ease
-        vim-tmux-navigator
+        tmux-nvim
         vim-visual-multi
 
         # completion

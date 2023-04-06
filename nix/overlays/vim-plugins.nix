@@ -1,5 +1,15 @@
 final: prev: {
   vimPlugins = prev.vimPlugins // {
+    tmux-nvim = final.vimUtils.buildVimPlugin {
+      name = "tmux.nvim";
+      src = final.fetchFromGitHub {
+        owner = "aserowy";
+        repo = "tmux.nvim";
+        rev = "9ba03cc5dfb30f1dc9eb50d0796dfdd52c5f454e";
+        hash = "sha256-ZBnQFKe8gySFQ9v6j4C/F/mq+bCH1n8G42AlBx6MbXY=";
+      };
+    };
+
     ltex_extra = final.vimUtils.buildVimPlugin {
       name = "ltex_extra";
       src = final.fetchFromGitHub {

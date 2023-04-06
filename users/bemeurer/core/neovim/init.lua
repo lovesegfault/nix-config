@@ -115,6 +115,9 @@ map("n", "<leader>gs", [[<cmd>lua require("telescope.builtin").git_status()<cr>]
 map("n", "<leader>gt", [[<cmd>lua require("telescope.builtin").git_stash()<cr>]], { silent = true })
 map("n", "<leader>tr", [[<cmd>lua require("telescope.builtin").treesitter()<cr>]], { silent = true })
 
+-- tmux-nvim
+require("tmux").setup()
+
 -- true-zen
 require("true-zen").setup({
   modes = {
