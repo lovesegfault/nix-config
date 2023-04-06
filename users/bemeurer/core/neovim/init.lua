@@ -40,10 +40,11 @@ require("stabilize").setup({
 })
 
 -- indent-blankline
-g.indent_blankline_char = "▏"
-g.indent_blankline_filetype_exclude = { "help" }
-g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
-g.indent_blankline_char_highlight = "LineNr"
+require("indent_blankline").setup({
+  char = "▏",
+  show_current_context = true,
+  show_current_context_start = true,
+})
 
 -- rust-tools
 require("rust-tools").setup({
