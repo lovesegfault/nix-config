@@ -19,7 +19,6 @@
         feline-nvim
         gitsigns-nvim
         indent-blankline-nvim
-        lsp-colors-nvim
         lsp_signature-nvim
         neovim-ayu
         numb-nvim
