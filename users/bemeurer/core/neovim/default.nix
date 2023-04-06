@@ -32,10 +32,9 @@
         true-zen-nvim # distraction-free writing
 
         # tooling
-        bufdelete-nvim
+        bufdelete-nvim # delete buffers without losing window layout
         rust-tools-nvim
-        suda-vim
-        tabular
+        suda-vim # sudo write
         telescope-frecency-nvim
         telescope-nvim
         vim-better-whitespace

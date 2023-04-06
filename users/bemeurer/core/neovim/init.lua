@@ -85,6 +85,11 @@ telescope.setup({
     generic_sorter = require("telescope.sorters").get_fzy_sorter,
     file_sorter = require("telescope.sorters").get_fzy_sorter,
   },
+  extensions = {
+    frecency = {
+      auto_validate = false,
+    },
+  },
 })
 telescope.load_extension("frecency")
 map("n", "<leader><space>", [[<cmd>lua require("telescope.builtin").buffers()<cr>]], { silent = true })
