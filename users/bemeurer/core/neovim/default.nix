@@ -25,7 +25,8 @@
         nvim-lightbulb # lightbulb sign when LSP actions are available
         nvim-navic # status/bufferline component to show LSP context
         nvim-web-devicons # file icons for trouble-nvim
-        stabilize-nvim
+        # TODO: Remove with Neovim 0.9, set splitkeep=screen instead.
+        stabilize-nvim # stabilize window open/close events
         todo-comments-nvim
         trouble-nvim # list for showing LSP diagnostics
         true-zen-nvim
