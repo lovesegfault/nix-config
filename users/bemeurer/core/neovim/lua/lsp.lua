@@ -39,8 +39,10 @@ local on_attach = function(client, bufnr)
   map(bufnr, "n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
   map(bufnr, "n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
   lsp_signature.on_attach({}, bufnr)
-  navic.attach(client, bufnr)
   nvim_lightbulb.setup({ autocmd = { enabled = true } })
 end
 

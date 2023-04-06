@@ -23,7 +23,7 @@
         neovim-ayu # colorscheme
         numb-nvim # peek lines in non-obtrusive way
         nvim-lightbulb # lightbulb sign when LSP actions are available
-        nvim-navic
+        nvim-navic # status/bufferline component to show LSP context
         nvim-web-devicons
         stabilize-nvim
         todo-comments-nvim
