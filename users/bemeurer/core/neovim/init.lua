@@ -47,6 +47,9 @@ require("stabilize").setup({
   nested = "QuickFixCmdPost,DiagnosticChanged *",
 })
 
+-- surround
+require("nvim-surround").setup()
+
 -- indent-blankline
 require("indent_blankline").setup({
   char = "▏",

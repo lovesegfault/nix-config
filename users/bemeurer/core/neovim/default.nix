@@ -39,7 +39,7 @@
         telescope-nvim
         vim-better-whitespace # highlight and strip trailing whitespace
         guess-indent-nvim # automatic indentation style detection
-        vim-surround
+        nvim-surround # add/change/delete surrounding delimiter pairs with ease
         vim-tmux-navigator
         vim-visual-multi
 
