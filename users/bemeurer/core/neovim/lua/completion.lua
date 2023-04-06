@@ -8,6 +8,8 @@ end
 
 -- luasnip setup
 local luasnip = require("luasnip")
+require("luasnip.loaders.from_vscode").lazy_load()
+
 vim.api.nvim_create_autocmd("ModeChanged", {
   pattern = "*",
   callback = function()

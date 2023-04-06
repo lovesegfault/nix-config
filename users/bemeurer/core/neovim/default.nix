@@ -51,15 +51,18 @@
         cmp-nvim-lua # completion source for nvim's lua API
         cmp-path # completion source for paths
         cmp-treesitter # completion source for tree-sitter
-        cmp_luasnip # completion source for snippets
         crates-nvim # crates.io dependency version info
         null-ls-nvim # inject LSP diagnostics, code actions
         lspkind-nvim # pictograms for lsp completion items
-        luasnip # snippet engine
         nvim-autopairs # automatic pairing of delimiters
         nvim-cmp # completion engine
         nvim-lspconfig # LSP
         ltex_extra # ltex LSP configuration
+
+        # snippets
+        cmp_luasnip # completion source for snippets
+        luasnip # snippet engine
+        friendly-snippets
 
         # syntax
         editorconfig-vim
