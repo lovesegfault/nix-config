@@ -27,7 +27,7 @@
         nvim-web-devicons # file icons for trouble-nvim
         # TODO: Remove with Neovim 0.9, set splitkeep=screen instead.
         stabilize-nvim # stabilize window open/close events
-        todo-comments-nvim
+        todo-comments-nvim # highlight, list and search todo comments
         trouble-nvim # list for showing LSP diagnostics
         true-zen-nvim
 

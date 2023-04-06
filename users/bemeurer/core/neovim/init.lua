@@ -33,6 +33,7 @@ require("numb").setup()
 
 -- todo-comments
 require("todo-comments").setup()
+map("n", "<leader>tt", "<cmd>TodoTelescope<cr>", { silent = true })
 
 -- stabilize
 require("stabilize").setup({
