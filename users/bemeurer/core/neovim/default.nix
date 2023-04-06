@@ -37,11 +37,7 @@
         suda-vim # sudo write
         telescope-frecency-nvim
         telescope-nvim
-        vim-better-whitespace
-        vim-commentary
-        vim-fugitive
-        vim-gist
-        vim-rhubarb
+        vim-better-whitespace # highlight and strip trailing whitespace
         vim-sleuth
         vim-surround
         vim-tmux-navigator
