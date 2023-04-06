@@ -22,6 +22,7 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 })
 
 -- nvim-cmp setup
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local cmp = require("cmp")
 local lspkind = require("lspkind")
 cmp.setup({
@@ -93,6 +94,8 @@ cmp.setup.cmdline("/", {
     { name = "buffer" },
   },
 })
+
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 vim.api.nvim_create_autocmd("BufRead", {
   group = vim.api.nvim_create_augroup("CmpSourceCargo", { clear = true }),

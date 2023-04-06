@@ -54,9 +54,9 @@
         cmp_luasnip # completion source for snippets
         crates-nvim # crates.io dependency version info
         null-ls-nvim # inject LSP diagnostics, code actions
-        lspkind-nvim
-        luasnip
-        nvim-autopairs
+        lspkind-nvim # pictograms for lsp completion items
+        luasnip # snippet engine
+        nvim-autopairs # automatic pairing of delimiters
         nvim-cmp
         nvim-lspconfig
         snippets-nvim
