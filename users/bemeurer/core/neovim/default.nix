@@ -15,14 +15,14 @@
 
       plugins = with pkgs.vimPlugins; [
         # ui
-        bufferline-nvim
-        feline-nvim
-        gitsigns-nvim
-        indent-blankline-nvim
-        lsp_signature-nvim
-        neovim-ayu
-        numb-nvim
-        nvim-lightbulb
+        bufferline-nvim # bufferline
+        feline-nvim # statusline
+        gitsigns-nvim # git status sign decorations
+        indent-blankline-nvim # indentation guides
+        lsp_signature-nvim # function signature pop-ups
+        neovim-ayu # colorscheme
+        numb-nvim # peek lines in non-obtrusive way
+        nvim-lightbulb # lightbulb sign when LSP actions are available
         nvim-navic
         nvim-web-devicons
         stabilize-nvim
