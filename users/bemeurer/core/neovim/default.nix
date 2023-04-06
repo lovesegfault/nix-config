@@ -38,7 +38,7 @@
         telescope-frecency-nvim
         telescope-nvim
         vim-better-whitespace # highlight and strip trailing whitespace
-        vim-sleuth
+        guess-indent-nvim # automatic indentation style detection
         vim-surround
         vim-tmux-navigator
         vim-visual-multi

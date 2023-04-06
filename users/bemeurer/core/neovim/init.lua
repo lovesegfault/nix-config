@@ -16,6 +16,9 @@ local lsp = require("lsp")
 require("statusline")
 require("treesitter")
 
+-- guess-indent
+require("guess-indent").setup()
+
 -- autopair
 require("nvim-autopairs").setup({ map_cr = true, map_complete = true })
 
