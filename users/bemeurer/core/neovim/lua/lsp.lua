@@ -1,7 +1,25 @@
-local nvim_lsp = require("lspconfig")
-local navic = require("nvim-navic")
 local lsp_signature = require("lsp_signature")
+local navic = require("nvim-navic")
 local nvim_lightbulb = require("nvim-lightbulb")
+local nvim_lsp = require("lspconfig")
+local null_ls = require("null-ls")
+
+null_ls.setup({
+  sources = {
+    null_ls.builtins.code_actions.gitsigns,
+    null_ls.builtins.code_actions.statix,
+    null_ls.builtins.diagnostics.actionlint,
+    null_ls.builtins.diagnostics.checkmake,
+    null_ls.builtins.diagnostics.chktex,
+    null_ls.builtins.diagnostics.cppcheck,
+    null_ls.builtins.diagnostics.editorconfig_checker,
+    null_ls.builtins.diagnostics.luacheck,
+    null_ls.builtins.diagnostics.ruff,
+    null_ls.builtins.diagnostics.shellcheck,
+    null_ls.builtins.diagnostics.statix,
+    null_ls.builtins.formatting.shfmt,
+  },
+})
 
 local flags = { debounce_text_changes = 150 }
 

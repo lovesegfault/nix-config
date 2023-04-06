@@ -40,20 +40,20 @@
         vim-better-whitespace # highlight and strip trailing whitespace
         guess-indent-nvim # automatic indentation style detection
         nvim-surround # add/change/delete surrounding delimiter pairs with ease
-        tmux-nvim
-        vim-visual-multi
+        tmux-nvim # tmux integration (copy buffer, navigation)
+        vim-visual-multi # multiple cursors
 
         # completion
-        cmp-buffer
-        cmp-cmdline
-        cmp-latex-symbols
-        cmp-nvim-lsp
-        cmp-nvim-lua
-        cmp-path
-        cmp-treesitter
-        cmp_luasnip
-        crates-nvim
-        null-ls-nvim
+        cmp-buffer # completion source for buffer words
+        cmp-cmdline # completion for vim's command line
+        cmp-latex-symbols # completion source for latex symbols
+        cmp-nvim-lsp # completion source for LSP
+        cmp-nvim-lua # completion source for nvim's lua API
+        cmp-path # completion source for paths
+        cmp-treesitter # completion source for tree-sitter
+        cmp_luasnip # completion source for snippets
+        crates-nvim # crates.io dependency version info
+        null-ls-nvim # inject LSP diagnostics, code actions
         lspkind-nvim
         luasnip
         nvim-autopairs
