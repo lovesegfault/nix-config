@@ -57,10 +57,10 @@
         lspkind-nvim # pictograms for lsp completion items
         luasnip # snippet engine
         nvim-autopairs # automatic pairing of delimiters
-        nvim-cmp
-        nvim-lspconfig
+        nvim-cmp # completion engine
+        nvim-lspconfig # LSP
         snippets-nvim
-        ltex_extra
+        ltex_extra # ltex LSP configuration
 
         # syntax
         (nvim-treesitter.withPlugins
