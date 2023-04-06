@@ -1,6 +1,7 @@
 local nvim_lsp = require("lspconfig")
 local navic = require("nvim-navic")
 local lsp_signature = require("lsp_signature")
+local nvim_lightbulb = require("nvim-lightbulb")
 
 local flags = { debounce_text_changes = 150 }
 
@@ -40,6 +41,7 @@ local on_attach = function(client, bufnr)
 
   lsp_signature.on_attach({}, bufnr)
   navic.attach(client, bufnr)
+  nvim_lightbulb.setup({ autocmd = { enabled = true } })
 end
 
 -- Enable the following language servers
@@ -106,9 +108,6 @@ nvim_lsp["nil_ls"].setup({
 
 -- Map :Format to vim.lsp.buf.formatting()
 vim.cmd([[ command! Format execute "lua vim.lsp.buf.format({ async = true })" ]])
-
-vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
-
-vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = true })]])
+vim.cmd([[ autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = true }) ]])
 
 return { on_attach = on_attach, capabilities = capabilities, flags = flags }
