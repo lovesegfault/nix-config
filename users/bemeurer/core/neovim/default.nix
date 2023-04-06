@@ -59,10 +59,14 @@
         nvim-autopairs # automatic pairing of delimiters
         nvim-cmp # completion engine
         nvim-lspconfig # LSP
-        snippets-nvim
         ltex_extra # ltex LSP configuration
 
         # syntax
+        editorconfig-vim
+        gentoo-syntax
+        lalrpop-vim
+        vim-nix
+        vim-polyglot
         (nvim-treesitter.withPlugins
           (_:
             with builtins;
@@ -106,11 +110,6 @@
               pkgs.tree-sitter.allGrammars
           )
         )
-        editorconfig-vim
-        gentoo-syntax
-        lalrpop-vim
-        vim-nix
-        vim-polyglot
       ]
       ++ lib.optional (lib.elem pkgs.stdenv.hostPlatform.system pkgs.tabnine.meta.platforms) cmp-tabnine
       ;
