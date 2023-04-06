@@ -24,10 +24,10 @@
         numb-nvim # peek lines in non-obtrusive way
         nvim-lightbulb # lightbulb sign when LSP actions are available
         nvim-navic # status/bufferline component to show LSP context
-        nvim-web-devicons
+        nvim-web-devicons # file icons for trouble-nvim
         stabilize-nvim
         todo-comments-nvim
-        trouble-nvim
+        trouble-nvim # list for showing LSP diagnostics
         true-zen-nvim
 
         # tooling
