@@ -159,8 +159,7 @@ map("", "<C-h>", "<C-W>h")
 map("", "<C-l>", "<C-W>l")
 
 ---- Close the current buffer
-require("bufdel")
-map("", "<leader>bd", ":BufDel<cr>")
+map("", "<leader>bd", ":bdelete<cr>")
 
 ---- Close all the buffers
 map("", "<leader>ba", ":bufdo bd<cr>")

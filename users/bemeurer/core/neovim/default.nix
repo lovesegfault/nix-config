@@ -29,10 +29,10 @@
         stabilize-nvim # stabilize window open/close events
         todo-comments-nvim # highlight, list and search todo comments
         trouble-nvim # list for showing LSP diagnostics
-        true-zen-nvim
+        true-zen-nvim # distraction-free writing
 
         # tooling
-        nvim-bufdel
+        bufdelete-nvim
         rust-tools-nvim
         suda-vim
         tabular

@@ -19,6 +19,10 @@ require("treesitter")
 -- autopair
 require("nvim-autopairs").setup({ map_cr = true, map_complete = true })
 
+-- bufdelete
+require("bufdelete")
+map("", "<leader>bd", "<cmd>Bdelete<cr>")
+
 -- bufferline
 require("bufferline").setup({ options = { diagnostics = "nvim_lsp" } })
 
