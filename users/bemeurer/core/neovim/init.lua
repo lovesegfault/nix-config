@@ -28,6 +28,9 @@ map("", "<leader>bd", "<cmd>Bdelete<cr>")
 -- bufferline
 require("bufferline").setup({ options = { diagnostics = "nvim_lsp" } })
 
+-- dap
+require("dap")
+
 -- gitsigns
 require("gitsigns").setup()
 

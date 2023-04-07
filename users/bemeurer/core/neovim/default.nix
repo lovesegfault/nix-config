@@ -59,6 +59,9 @@
         nvim-lspconfig # LSP
         ltex_extra # ltex LSP configuration
 
+        # debugging
+        nvim-dap
+
         # snippets
         cmp_luasnip # completion source for snippets
         luasnip # snippet engine
