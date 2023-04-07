@@ -65,7 +65,7 @@
         friendly-snippets
 
         # syntax
-        editorconfig-vim
+        editorconfig-nvim
         gentoo-syntax
         lalrpop-vim
         vim-nix

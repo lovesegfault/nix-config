@@ -1,4 +1,3 @@
-local g = vim.g
 local utils = require("utils")
 local map = utils.map
 
@@ -28,9 +27,6 @@ map("", "<leader>bd", "<cmd>Bdelete<cr>")
 
 -- bufferline
 require("bufferline").setup({ options = { diagnostics = "nvim_lsp" } })
-
--- editorconfig
-g.EditorConfig_exclude_patterns = { "fugitive://.*", "scp://.*" }
 
 -- gitsigns
 require("gitsigns").setup()
