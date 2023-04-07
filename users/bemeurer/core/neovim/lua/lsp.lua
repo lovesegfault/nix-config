@@ -1,8 +1,9 @@
 local lsp_signature = require("lsp_signature")
 local navic = require("nvim-navic")
+local null_ls = require("null-ls")
 local nvim_lightbulb = require("nvim-lightbulb")
 local nvim_lsp = require("lspconfig")
-local null_ls = require("null-ls")
+local rust_tools = require("rust-tools")
 
 null_ls.setup({
   sources = {
@@ -23,9 +24,7 @@ null_ls.setup({
 
 local flags = { debounce_text_changes = 150 }
 
-local capabilities = {}
--- snippet support
-capabilities = vim.tbl_extend("keep", capabilities, require("cmp_nvim_lsp").default_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- support crates and LSP
 vim.api.nvim_set_keymap(
@@ -126,8 +125,13 @@ nvim_lsp["nil_ls"].setup({
   },
 })
 
+rust_tools.setup({
+  server = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = flags,
+  },
+})
+
 -- Map :Format to vim.lsp.buf.formatting()
 vim.cmd([[ command! Format execute "lua vim.lsp.buf.format({ async = true })" ]])
-vim.cmd([[ autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = true }) ]])
-
-return { on_attach = on_attach, capabilities = capabilities, flags = flags }
