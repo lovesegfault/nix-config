@@ -7,54 +7,33 @@ require("base")
 vim.o.background = "dark"
 require("ayu").colorscheme()
 
--- crates
-require("crates").setup()
-
+-- modularized / complex configs
 require("treesitter")
 require("completion")
 require("lsp")
 require("statusline")
 
--- guess-indent
+-- simple / no-config plugins
+require("bufferline").setup({ options = { diagnostics = "nvim_lsp" } })
+require("crates").setup()
+require("dap")
+require("gitsigns").setup()
 require("guess-indent").setup()
-
--- autopair
+require("indent_blankline").setup({ char = "▏", show_current_context = true, show_current_context_start = true })
+require("numb").setup()
 require("nvim-autopairs").setup({ map_cr = true, map_complete = true })
+require("nvim-surround").setup()
+require("stabilize").setup({ nested = "QuickFixCmdPost,DiagnosticChanged *" })
+require("tmux").setup()
+require("true-zen").setup({ modes = { ataraxis = { minimum_writing_area = { width = 80, height = 48 } } } })
 
 -- bufdelete
 require("bufdelete")
 map("", "<leader>bd", "<cmd>Bdelete<cr>")
 
--- bufferline
-require("bufferline").setup({ options = { diagnostics = "nvim_lsp" } })
-
--- dap
-require("dap")
-
--- gitsigns
-require("gitsigns").setup()
-
--- numb
-require("numb").setup()
-
 -- todo-comments
 require("todo-comments").setup()
 map("n", "<leader>tt", "<cmd>TodoTelescope<cr>", { silent = true })
-
--- stabilize
-require("stabilize").setup({
-  nested = "QuickFixCmdPost,DiagnosticChanged *",
-})
-
--- surround
-require("nvim-surround").setup()
-
--- indent-blankline
-require("indent_blankline").setup({
-  char = "▏",
-  show_current_context = true,
-  show_current_context_start = true,
-})
 
 -- trouble
 require("trouble").setup()
@@ -96,18 +75,3 @@ map("n", "<leader>gb", [[<cmd>lua require("telescope.builtin").git_bcommits()<cr
 map("n", "<leader>gs", [[<cmd>lua require("telescope.builtin").git_status()<cr>]], { silent = true })
 map("n", "<leader>gt", [[<cmd>lua require("telescope.builtin").git_stash()<cr>]], { silent = true })
 map("n", "<leader>tr", [[<cmd>lua require("telescope.builtin").treesitter()<cr>]], { silent = true })
-
--- tmux-nvim
-require("tmux").setup()
-
--- true-zen
-require("true-zen").setup({
-  modes = {
-    ataraxis = {
-      minimum_writing_area = {
-        width = 80,
-        height = 48,
-      },
-    },
-  },
-})
