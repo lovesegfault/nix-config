@@ -9,18 +9,19 @@ local sections = {
   },
   diff = {
     "diff",
-    symbols = { added = "", modified = "柳", removed = "" },
+    symbols = { added = "", modified = "柳", removed = "" },
   },
   filename = {
     "filename",
     symbols = {
-      modified = "●", -- Text to show when the file is modified.
-      readonly = "🔒", -- Text to show when the file is non-modifiable or readonly.
-      unnamed = "[No Name]", -- Text to show for unnamed buffers.
-      newfile = "[New]", -- Text to show for newly created file before first write
+      modified = "●",
+      readonly = "🔒",
+      unnamed = "[No Name]",
+      newfile = "[New]",
     },
   },
   filetype = {
+    "filetype",
     icon_only = true,
   },
   navic = {
@@ -35,6 +36,7 @@ local sections = {
 
 lualine.setup({
   options = {
+    theme = "ayu_dark",
     section_separators = "",
     component_separators = "",
   },

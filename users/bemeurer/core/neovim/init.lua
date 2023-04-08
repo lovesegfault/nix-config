@@ -11,7 +11,7 @@ require("ayu").colorscheme()
 require("treesitter")
 require("completion")
 require("lsp")
-require("statusline")
+require("status")
 
 -- simple / no-config plugins
 require("bufferline").setup({ options = { diagnostics = "nvim_lsp" } })
