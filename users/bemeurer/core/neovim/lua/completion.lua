@@ -24,8 +24,8 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 })
 
 -- nvim-cmp setup
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local cmp = require("cmp")
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local lspkind = require("lspkind")
 cmp.setup({
   snippet = {

@@ -5,11 +5,11 @@ local sections = {
   diagnostics = {
     "diagnostics",
     sources = { "nvim_lsp" },
-    symbols = { error = "", warn = "", info = "", hint = "" },
+    symbols = { error = " ", warn = " ", info = " ", hint = " " },
   },
   diff = {
     "diff",
-    symbols = { added = "", modified = "柳", removed = "" },
+    symbols = { added = " ", modified = "柳 ", removed = " " },
   },
   filename = {
     "filename",
