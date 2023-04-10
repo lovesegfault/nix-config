@@ -1,3 +1,4 @@
+local fidget = require("fidget")
 local lsp_signature = require("lsp_signature")
 local navic = require("nvim-navic")
 local null_ls = require("null-ls")
@@ -58,6 +59,7 @@ local on_attach = function(client, bufnr)
   map(bufnr, "n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
   map(bufnr, "n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 
+  fidget.setup()
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
   end

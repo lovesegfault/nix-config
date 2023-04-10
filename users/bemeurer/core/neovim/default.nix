@@ -16,14 +16,11 @@
       plugins = with pkgs.vimPlugins; [
         # ui
         bufferline-nvim # bufferline
-        feline-nvim # statusline
         lualine-nvim # statusline
         gitsigns-nvim # git status sign decorations
         indent-blankline-nvim # indentation guides
-        lsp_signature-nvim # function signature pop-ups
         neovim-ayu # colorscheme
         numb-nvim # peek lines in non-obtrusive way
-        nvim-lightbulb # lightbulb sign when LSP actions are available
         nvim-navic # status/bufferline component to show LSP context
         nvim-web-devicons # file icons for trouble-nvim
         # TODO: Remove with Neovim 0.9, set splitkeep=screen instead.
@@ -31,6 +28,12 @@
         todo-comments-nvim # highlight, list and search todo comments
         trouble-nvim # list for showing LSP diagnostics
         true-zen-nvim # distraction-free writing
+
+        # lsp
+        fidget-nvim # ui for nvim-lsp progress
+        lsp_signature-nvim # function signature pop-ups
+        nvim-lightbulb # lightbulb sign when LSP actions are available
+        nvim-lspconfig # LSP
 
         # tooling
         bufdelete-nvim # delete buffers without losing window layout
@@ -58,7 +61,6 @@
         lspkind-nvim # pictograms for lsp completion items
         nvim-autopairs # automatic pairing of delimiters
         nvim-cmp # completion engine
-        nvim-lspconfig # LSP
         ltex_extra # ltex LSP configuration
 
         # debugging
