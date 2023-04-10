@@ -96,6 +96,11 @@ map("n", "<leader>gs", [[<cmd>lua require("telescope.builtin").git_status()<cr>]
 map("n", "<leader>gt", [[<cmd>lua require("telescope.builtin").git_stash()<cr>]], { silent = true })
 map("n", "<leader>tr", [[<cmd>lua require("telescope.builtin").treesitter()<cr>]], { silent = true })
 
+-- which-key
+vim.o.timeout = true
+vim.o.timeoutlen = 300
+require("which-key").setup()
+
 -- whitespace
 require("whitespace-nvim").setup({
   ignored_filetypes = { "TelescopePrompt", "Trouble", "dashboard", "help" },
