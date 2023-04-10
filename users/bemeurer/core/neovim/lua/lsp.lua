@@ -62,7 +62,10 @@ local on_attach = function(client, bufnr)
     navic.attach(client, bufnr)
   end
   lsp_signature.on_attach({}, bufnr)
-  nvim_lightbulb.setup({ autocmd = { enabled = true } })
+  nvim_lightbulb.setup({
+    autocmd = { enabled = true },
+    ignore = { "null-ls" },
+  })
 end
 
 -- Enable the following language servers
