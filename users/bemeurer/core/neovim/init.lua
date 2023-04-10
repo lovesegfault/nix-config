@@ -31,6 +31,26 @@ require("true-zen").setup({ modes = { ataraxis = { minimum_writing_area = { widt
 require("bufdelete")
 map("", "<leader>bd", "<cmd>Bdelete<cr>")
 
+-- dashboard
+require("dashboard").setup({
+  theme = "hyper",
+  config = {
+    week_header = {
+      enable = true,
+    },
+    shortcut = {
+      {
+        icon = " ",
+        icon_hl = "@variable",
+        desc = "Files",
+        group = "Label",
+        action = "Telescope find_files",
+        key = "f",
+      },
+    },
+  },
+})
+
 -- todo-comments
 require("todo-comments").setup()
 map("n", "<leader>tt", "<cmd>TodoTelescope<cr>", { silent = true })
@@ -75,3 +95,9 @@ map("n", "<leader>gb", [[<cmd>lua require("telescope.builtin").git_bcommits()<cr
 map("n", "<leader>gs", [[<cmd>lua require("telescope.builtin").git_status()<cr>]], { silent = true })
 map("n", "<leader>gt", [[<cmd>lua require("telescope.builtin").git_stash()<cr>]], { silent = true })
 map("n", "<leader>tr", [[<cmd>lua require("telescope.builtin").treesitter()<cr>]], { silent = true })
+
+-- whitespace
+require("whitespace-nvim").setup({
+  ignored_filetypes = { "TelescopePrompt", "Trouble", "dashboard", "help" },
+})
+map("n", "<leader>tw", [[<cmd>lua require("whitespace-nvim").trim()<cr>]], { silent = true })

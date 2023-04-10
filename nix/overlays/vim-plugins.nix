@@ -19,5 +19,15 @@ final: prev: {
         hash = "sha256-2knrqgDTSxT4ZGjZvO7RbFdvrVmTWOLS3OoGPfy4du4=";
       };
     };
+
+    whitespace-nvim = final.vimUtils.buildVimPlugin {
+      name = "whitespace.nvim";
+      src = final.fetchFromGitHub {
+        owner = "johnfrankmorgan";
+        repo = "whitespace.nvim";
+        rev = "525f67b3f01910c73f07f0848839aab0b7ab9f42";
+        hash = "sha256-yUrffl0py6bDdKukPbzPm5f9X8sBjQWeSCUxmRJYYk8=";
+      };
+    };
   };
 }
