@@ -52,6 +52,7 @@
         cmp-nvim-lua # completion source for nvim's lua API
         cmp-path # completion source for paths
         cmp-treesitter # completion source for tree-sitter
+        cmp-nvim-lsp-signature-help # completion fn signature info
         crates-nvim # crates.io dependency version info
         null-ls-nvim # inject LSP diagnostics, code actions
         lspkind-nvim # pictograms for lsp completion items

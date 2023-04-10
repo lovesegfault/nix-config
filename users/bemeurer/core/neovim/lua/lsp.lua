@@ -36,7 +36,9 @@ vim.api.nvim_set_keymap(
 
 -- bindings
 local on_attach = function(client, bufnr)
+  vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+  vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
 
   local map = vim.api.nvim_buf_set_keymap
   local opts = { noremap = true, silent = true }
