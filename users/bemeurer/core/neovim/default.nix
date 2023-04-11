@@ -87,32 +87,21 @@
               (drv:
                 !elem
                   drv.pname
-                  ((map (v: "tree-sitter-${v}-grammar") [
+                  (map (v: "tree-sitter-${v}-grammar") [
                     "bash"
-                    "beancount"
                     "c-sharp"
-                    "clojure"
-                    "cmake"
                     "cpp"
                     "cuda"
                     "erlang"
-                    "fish"
-                    "fortran"
                     "gdscript"
                     "java"
-                    "julia"
                     "kotlin"
-                    "nickel"
-                    "python"
                     "ql-dbscheme"
                     "ruby"
                     "scala"
                     "smithy"
                     "sql"
-                    "tsx"
-                    "typescript"
-                    "zig"
-                  ]) ++ [ "markdown_inline-grammar" ])
+                  ])
               )
               pkgs.tree-sitter.allGrammars
           )
