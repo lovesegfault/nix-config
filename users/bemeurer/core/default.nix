@@ -4,7 +4,6 @@
     nix-index-database.hmModules.nix-index
     stylix.homeManagerModules.stylix
 
-    ./atuin.nix
     ./bash.nix
     ./btop.nix
     ./fish.nix
@@ -46,6 +45,7 @@
     atuin = {
       enable = true;
       settings.auto_sync = false;
+      flags = [ "--disable-up-arrow" ];
     };
     bat.enable = true;
     fzf.enable = true;
