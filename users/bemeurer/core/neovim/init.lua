@@ -5,7 +5,6 @@ vim.o.background = "dark"
 require("ayu").colorscheme()
 
 -- modularized / complex configs
-require("treesitter")
 require("completion")
 require("lsp")
 require("status")
@@ -53,6 +52,14 @@ todo_comments.setup()
 vim.keymap.set("n", "<leader>tt", "<cmd>TodoTelescope<cr>", { desc = "Search todo with Telescope", silent = true })
 vim.keymap.set("n", "[t", todo_comments.jump_prev, { desc = "Previous todo comment" })
 vim.keymap.set("n", "]t", todo_comments.jump_next, { desc = "Next todo comment" })
+
+-- treesitter
+require("nvim-treesitter.configs").setup({
+  auto_install = false,
+  highlight = { enable = true },
+  incremental_selection = { enable = true },
+  indent = { enable = true },
+})
 
 -- trouble
 require("trouble").setup()
