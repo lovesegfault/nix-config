@@ -72,7 +72,6 @@
         luasnip # snippet engine
 
         # syntax
-        editorconfig-nvim
         gentoo-syntax
         lalrpop-vim
         vim-nix
