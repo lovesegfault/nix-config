@@ -28,7 +28,7 @@
       "/opt/homebrew/bin"
     ];
     variables = {
-      SHELL = lib.getExe pkgs.fish;
+      SHELL = lib.getExe pkgs.zsh;
     };
   };
 

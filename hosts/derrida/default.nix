@@ -30,13 +30,7 @@
         fpath+=("$HOME/.zsh/completion")
       '';
       initExtra = ''
-        if [ -z "$ZSH_AUTO_RAN_FISH" ]; then
-          export ZSH_AUTO_RAN_FISH=true
-          export SHELL="$(realpath "$(which fish)")"
-          exec fish --login
-        else
-          export PATH="$PATH:$HOME/.toolbox/bin:/apollo/env/bt-rust/bin"
-        fi
+        export PATH="$PATH:$HOME/.toolbox/bin:/apollo/env/bt-rust/bin"
       '';
     };
   };

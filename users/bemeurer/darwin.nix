@@ -12,6 +12,6 @@
     description = "Bernardo Meurer";
     home = "/Users/bemeurer";
     isHidden = false;
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
   };
 }
