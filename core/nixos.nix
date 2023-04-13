@@ -1,10 +1,10 @@
-{ config, lib, pkgs, home-manager, impermanence, nix-index-database, ragenix, stylix, ... }:
+{ agenix, config, lib, pkgs, home-manager, impermanence, nix-index-database, stylix, ... }:
 {
   imports = [
+    agenix.nixosModules.age
     home-manager.nixosModules.home-manager
     impermanence.nixosModules.impermanence
     nix-index-database.nixosModules.nix-index
-    ragenix.nixosModules.age
     stylix.nixosModules.stylix
     ./resolved.nix
     ./tmux.nix

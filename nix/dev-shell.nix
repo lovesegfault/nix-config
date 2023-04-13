@@ -9,11 +9,11 @@ mkShell {
 
   nativeBuildInputs = [
     # Nix
+    agenix
     cachix
     deploy-rs.deploy-rs
     nix-build-uncached
     nixpkgs-fmt
-    ragenix
     nil
     statix
 

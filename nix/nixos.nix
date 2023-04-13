@@ -1,10 +1,10 @@
 { self
 , home-manager
+, agenix
 , impermanence
 , nix-index-database
 , nixos-hardware
 , nixpkgs
-, ragenix
 , stylix
 , templates
 , ...
@@ -28,7 +28,7 @@ let
       specialArgs = {
         hostAddress = address;
         hostType = type;
-        inherit home-manager impermanence nix-index-database nixos-hardware ragenix stylix;
+        inherit agenix home-manager impermanence nix-index-database nixos-hardware stylix;
       };
     };
 in

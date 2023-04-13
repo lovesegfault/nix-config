@@ -1,6 +1,6 @@
-{ deploy-rs
+{ agenix
+, deploy-rs
 , nixpkgs
-, ragenix
 , ...
 }:
 
@@ -16,7 +16,7 @@ let
 in
 localOverlays // {
   default = lib.composeManyExtensions ((lib.attrValues localOverlays) ++ [
+    agenix.overlays.default
     deploy-rs.overlay
-    ragenix.overlays.default
   ]);
 }

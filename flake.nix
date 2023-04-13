@@ -64,13 +64,6 @@
       inputs.flake-compat.follows = "flake-compat";
     };
 
-    ragenix = {
-      url = "github:yaxitech/ragenix";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.agenix.follows = "agenix";
-    };
-
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
