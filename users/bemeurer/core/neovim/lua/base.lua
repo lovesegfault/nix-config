@@ -102,6 +102,9 @@ opt.tm = 500
 ---- add a bit extra margin to the left
 opt.foldcolumn = "1"
 
+---- stabilize window open/close events
+opt.splitkeep = "screen"
+
 -- colors and fonts -----------------------------------------------------------
 ---- Enable syntax highlighting
 cmd("syntax enable")

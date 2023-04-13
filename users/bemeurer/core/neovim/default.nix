@@ -29,9 +29,6 @@
         true-zen-nvim # distraction-free writing
         which-key-nvim # popups for keybindings for commands
 
-        # TODO: Remove with Neovim 0.9, set splitkeep=screen instead.
-        stabilize-nvim # stabilize window open/close events
-
         # lsp
         fidget-nvim # ui for nvim-lsp progress
         lsp_signature-nvim # function signature pop-ups
