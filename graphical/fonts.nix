@@ -2,11 +2,12 @@
   fonts = {
     fontDir.enable = hostType == "darwin";
     fonts = with pkgs; [
+      # FIXME: Make nix-darwin stop exploding when there are repeated fonts
       # dejavu_fonts
+      # noto-fonts-extra
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      noto-fonts-extra
       unifont
     ];
   } // lib.optionalAttrs (hostType == "nixos") {
