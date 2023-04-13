@@ -23,7 +23,6 @@ require("indent_blankline").setup({ char = "▏", show_current_context = true, s
 require("numb").setup()
 require("nvim-autopairs").setup({ map_cr = true, map_complete = true })
 require("nvim-surround").setup()
-require("stabilize").setup({ nested = "QuickFixCmdPost,DiagnosticChanged *" })
 require("tmux").setup()
 require("true-zen").setup({ modes = { ataraxis = { minimum_writing_area = { width = 80, height = 48 } } } })
 
