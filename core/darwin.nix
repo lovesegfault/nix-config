@@ -8,7 +8,6 @@
   environment = {
     postBuild = ''
       ln -sv ${pkgs.path} $out/nixpkgs
-      ln -sv ${../nix/overlays} $out/overlays
     '';
     shells = with pkgs; [ fish zsh ];
     shellAliases.tailscale = "/Applications/Tailscale.app/Contents/MacOS/Tailscale";

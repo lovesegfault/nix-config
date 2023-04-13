@@ -28,7 +28,7 @@
 
     distributedBuilds = true;
     nixPath = [
-      "nixpkgs=/run/current-system/sw/nixpkgs"
+      "nixpkgs=/run/current-system/nixpkgs"
     ];
     extraOptions = ''
       !include tokens.conf
