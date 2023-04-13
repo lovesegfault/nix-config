@@ -1,6 +1,3 @@
-local utils = require("utils")
-local map = utils.map
-
 require("base")
 
 -- ayu colorscheme
@@ -28,7 +25,7 @@ require("true-zen").setup({ modes = { ataraxis = { minimum_writing_area = { widt
 
 -- bufdelete
 require("bufdelete")
-map("", "<leader>bd", "<cmd>Bdelete<cr>")
+vim.keymap.set("n", "<leader>bd", "<cmd>Bdelete<cr>", { silent = true })
 
 -- dashboard
 require("dashboard").setup({
@@ -43,7 +40,7 @@ require("dashboard").setup({
         icon_hl = "@variable",
         desc = "Files",
         group = "Label",
-        action = "Telescope find_files",
+        action = "Telescope frecency",
         key = "f",
       },
     },
@@ -51,26 +48,24 @@ require("dashboard").setup({
 })
 
 -- todo-comments
-require("todo-comments").setup()
-map("n", "<leader>tt", "<cmd>TodoTelescope<cr>", { silent = true })
+local todo_comments = require("todo-comments")
+todo_comments.setup()
+vim.keymap.set("n", "<leader>tt", "<cmd>TodoTelescope<cr>", { desc = "Search todo with Telescope", silent = true })
+vim.keymap.set("n", "[t", todo_comments.jump_prev, { desc = "Previous todo comment" })
+vim.keymap.set("n", "]t", todo_comments.jump_next, { desc = "Next todo comment" })
 
 -- trouble
 require("trouble").setup()
-map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true })
-map("n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>", { silent = true })
-map("n", "<leader>xd", "<cmd>Trouble lsp_document_diagnostics<cr>", { silent = true })
-map("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true })
-map("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true })
-map("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true })
+vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
 
 -- telescope
 local telescope = require("telescope")
 telescope.setup({
-  defaults = {
-    mappings = { i = { ["<C-u>"] = false, ["<C-d>"] = false } },
-    generic_sorter = require("telescope.sorters").get_fzy_sorter,
-    file_sorter = require("telescope.sorters").get_fzy_sorter,
-  },
   extensions = {
     frecency = {
       auto_validate = false,
@@ -78,22 +73,23 @@ telescope.setup({
   },
 })
 telescope.load_extension("frecency")
-map("n", "<leader><space>", [[<cmd>lua require("telescope.builtin").buffers()<cr>]], { silent = true })
-map("n", "<leader>ff", [[<cmd>lua require("telescope.builtin").find_files()<cr>]], { silent = true })
-map("n", "<leader>fb", [[<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<cr>]], { silent = true })
-map("n", "<leader>fg", [[<cmd>lua require("telescope.builtin").git_files()<cr>]], { silent = true })
-map("n", "<leader>fl", [[<cmd>lua require("telescope.builtin").live_grep()<cr>]], { silent = true })
-map("n", "<leader>fs", [[<cmd>lua require("telescope.builtin").spell_suggest()<cr>]], { silent = true })
-map("n", "<leader>lr", [[<cmd>lua require("telescope.builtin").lsp_references()<cr>]], { silent = true })
-map("n", "<leader>ld", [[<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>]], { silent = true })
-map("n", "<leader>lw", [[<cmd>lua require("telescope.builtin").lsp_workspace_symbols()<cr>]], { silent = true })
-map("n", "<leader>dd", [[<cmd>lua require("telescope.builtin").lsp_document_diagnostics()<cr>]], { silent = true })
-map("n", "<leader>dw", [[<cmd>lua require("telescope.builtin").lsp_workspace_diagnostics()<cr>]], { silent = true })
-map("n", "<leader>gc", [[<cmd>lua require("telescope.builtin").git_commits()<cr>]], { silent = true })
-map("n", "<leader>gb", [[<cmd>lua require("telescope.builtin").git_bcommits()<cr>]], { silent = true })
-map("n", "<leader>gs", [[<cmd>lua require("telescope.builtin").git_status()<cr>]], { silent = true })
-map("n", "<leader>gt", [[<cmd>lua require("telescope.builtin").git_stash()<cr>]], { silent = true })
-map("n", "<leader>tr", [[<cmd>lua require("telescope.builtin").treesitter()<cr>]], { silent = true })
+
+local ts_builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>fb", ts_builtin.buffers, { silent = true })
+vim.keymap.set("n", "<leader>fc", ts_builtin.current_buffer_fuzzy_find, { silent = true })
+vim.keymap.set("n", "<leader>ff", telescope.extensions.frecency.frecency, { silent = true })
+vim.keymap.set("n", "<leader>fl", ts_builtin.live_grep, { silent = true })
+vim.keymap.set("n", "<leader>fg", ts_builtin.git_files, { silent = true })
+
+vim.keymap.set("n", "<leader>ld", ts_builtin.lsp_definitions, { silent = true })
+vim.keymap.set("n", "<leader>li", ts_builtin.lsp_implementations, { silent = true })
+vim.keymap.set("n", "<leader>lr", ts_builtin.lsp_references, { silent = true })
+vim.keymap.set("n", "<leader>ls", ts_builtin.lsp_workspace_symbols, { silent = true })
+vim.keymap.set("n", "<leader>lt", ts_builtin.lsp_type_definitions, { silent = true })
+
+vim.keymap.set("n", "<leader>gc", ts_builtin.git_commits, { silent = true })
+vim.keymap.set("n", "<leader>gb", ts_builtin.git_bcommits, { silent = true })
+vim.keymap.set("n", "<leader>gs", ts_builtin.git_status, { silent = true })
 
 -- which-key
 vim.o.timeout = true
@@ -101,7 +97,8 @@ vim.o.timeoutlen = 300
 require("which-key").setup()
 
 -- whitespace
-require("whitespace-nvim").setup({
+local whitespace = require("whitespace-nvim")
+whitespace.setup({
   ignored_filetypes = { "TelescopePrompt", "Trouble", "dashboard", "help" },
 })
-map("n", "<leader>tw", [[<cmd>lua require("whitespace-nvim").trim()<cr>]], { silent = true })
+vim.keymap.set("n", "<leader>tw", whitespace.trim, { silent = true })
