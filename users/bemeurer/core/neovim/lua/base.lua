@@ -1,11 +1,7 @@
-local utils = require("utils")
-local map = utils.map
-
--- local fn = vim.fn
 local cmd = vim.cmd
 local g = vim.g
+local keymap = vim.keymap
 local opt = vim.opt
-local wo = vim.wo
 
 -- general --------------------------------------------------------------------
 ---- sets how many lines of history vim has to remember
@@ -17,18 +13,16 @@ cmd("filetype indent on")
 
 ---- set to auto read when a file is changed from the outside
 opt.autoread = true
-cmd("au FocusGained,BufEnter * checktime")
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  command = "checktime",
+})
 
 ---- with a map leader it's possible to do extra key combinations
 ---- like <leader>w saves the current file
 g.mapleader = ","
 
 ---- fast saving
-map("n", "<leader>w", ":w!<cr>")
-
----- :W sudo saves the file
----- (useful for handling the permission-denied error)
-cmd("command! W execute 'w !sudo tee % > /dev/null' <bar> edit!")
+keymap.set("n", "<leader>w", ":w!<cr>")
 
 ---- disable unused providers
 g.loaded_node_provider = 0
@@ -38,7 +32,7 @@ g.loaded_ruby_provider = 0
 
 -- ui -------------------------------------------------------------------------
 ---- enable the sign column
-wo.signcolumn = "yes"
+vim.wo.signcolumn = "yes"
 
 ---- incremental live completion
 opt.inccommand = "nosplit"
@@ -106,9 +100,6 @@ opt.foldcolumn = "1"
 opt.splitkeep = "screen"
 
 -- colors and fonts -----------------------------------------------------------
----- Enable syntax highlighting
-cmd("syntax enable")
-
 ---- Enable 24-bit colors
 opt.termguicolors = true
 
@@ -148,53 +139,65 @@ opt.si = true
 
 -- clipboard related ----------------------------------------------------------
 ---- Map ,y/p to yank/paste to/from system clipboard
-map("", "<leader>y", '"+y')
-map("", "<leader>p", '"+p')
+keymap.set("", "<leader>y", '"+y')
+keymap.set("", "<leader>p", '"+p')
 
 -- moving around, tabs, windows and buffers -----------------------------------
 ---- Disable highlight when <leader><cr> is pressed
-map("", "<leader><cr>", ":nohl<cr>", { silent = true })
+keymap.set("", "<leader><cr>", ":nohl<cr>", { silent = true })
 
 ---- Smart way to move between windows
-map("", "<C-j>", "<C-W>j")
-map("", "<C-k>", "<C-W>k")
-map("", "<C-h>", "<C-W>h")
-map("", "<C-l>", "<C-W>l")
+keymap.set("", "<C-j>", "<C-W>j")
+keymap.set("", "<C-k>", "<C-W>k")
+keymap.set("", "<C-h>", "<C-W>h")
+keymap.set("", "<C-l>", "<C-W>l")
 
 ---- Close the current buffer
-map("", "<leader>bd", ":bdelete<cr>")
+keymap.set("n", "<leader>bd", ":bdelete<cr>")
 
 ---- Close all the buffers
-map("", "<leader>ba", ":bufdo bd<cr>")
+keymap.set("n", "<leader>ba", ":bufdo bd<cr>")
 
-map("", "<leader>l", ":bnext<cr>")
-map("", "<leader>h", ":bprevious<cr>")
+keymap.set("n", "<leader>l", ":bnext<cr>")
+keymap.set("n", "<leader>h", ":bprevious<cr>")
 
 ---- Useful mappings for managing tabs
-map("", "<leader>tn", ":tabnew<cr>")
-map("", "<leader>to", ":tabonly<cr>")
-map("", "<leader>tc", ":tabclose<cr>")
-map("", "<leader>tm", ":tabmove")
-map("", "<leader>t<leader>", ":tabnext")
+keymap.set("n", "<leader>tn", ":tabnew<cr>")
+keymap.set("n", "<leader>to", ":tabonly<cr>")
+keymap.set("n", "<leader>tc", ":tabclose<cr>")
+keymap.set("n", "<leader>tm", ":tabmove")
+keymap.set("n", "<leader>t<leader>", ":tabnext")
 
 ---- Let 'tl' toggle between this and the last accessed tab
 g.lasttab = 1
-map("n", "<Leader>tl", ':exe "tabn ".g:lasttab<CR>')
-cmd("au TabLeave * let g:lasttab = tabpagenr()")
+keymap.set("n", "<Leader>tl", ':exe "tabn ".g:lasttab<CR>')
+vim.api.nvim_create_autocmd("TabLeave", {
+  callback = function()
+    vim.g.lasttab = vim.fn.tabpagenr()
+  end,
+})
 
 ---- Opens a new tab with the current buffer's path
 ---- Super useful when editing files in the same directory
-map("", "<leader>te", ':tabedit <C-r>=expand("%:p:h")<cr>/')
+keymap.set("", "<leader>te", ':tabedit <C-r>=expand("%:p:h")<cr>/')
 
 ---- Switch CWD to the directory of the open buffer
-map("", "<leader>cd", ":cd %:p:h<cr>:pwd<cr>")
+keymap.set("", "<leader>cd", ":cd %:p:h<cr>:pwd<cr>")
 
 ---- Specify the behavior when switching between buffers
 opt.switchbuf = "useopen,usetab,newtab"
 opt.stal = 2
 
 ---- Return to last edit position when opening files (You want this!)
-cmd([[au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
+vim.api.nvim_create_autocmd("BufReadPost", {
+  callback = function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
 
 -- status line ----------------------------------------------------------------
 ---- Always show the status line
@@ -205,27 +208,27 @@ opt.statusline = [[ %F%m%r%h %w  CWD: %r%{getcwd()}%h   Line: %l  Column: %c]]
 
 -- editing mappings -----------------------------------------------------------
 ---- Remap VIM 0 to first non-blank character
-map("", "0", "^")
+keymap.set("", "0", "^")
 
 ---- Move a line of text using ALT+[jk] or Command+[jk] on mac
-map("n", "<M-j>", "mz:m+<cr>`z")
-map("n", "<M-k>", "mz:m-2<cr>`z")
-map("v", "<M-j>", ":m'>+<cr>`<my`>mzgv`yo`z")
-map("v", "<M-k>", ":m'<-2<cr>`>my`<mzgv`yo`z")
+keymap.set("n", "<M-j>", "mz:m+<cr>`z")
+keymap.set("n", "<M-k>", "mz:m-2<cr>`z")
+keymap.set("v", "<M-j>", ":m'>+<cr>`<my`>mzgv`yo`z")
+keymap.set("v", "<M-k>", ":m'<-2<cr>`>my`<mzgv`yo`z")
 
 -- spell checking--------------------------------------------------------------
 ---- Pressing ,ss will toggle and untoggle spell checking
-map("", "<leader>ss", ":setlocal spell!<cr>")
+keymap.set("", "<leader>ss", ":setlocal spell!<cr>")
 
 ---- Shortcuts using <leader>
-map("", "<leader>sn", "]s")
-map("", "<leader>sp", "[s")
-map("", "<leader>sa", "zg")
-map("", "<leader>s?", "z=")
+keymap.set("", "<leader>sn", "]s")
+keymap.set("", "<leader>sp", "[s")
+keymap.set("", "<leader>sa", "zg")
+keymap.set("", "<leader>s?", "z=")
 
 -- misc -----------------------------------------------------------------------
 ---- Remove the Windows ^M - when the encodings gets messed up
-map("", "<Leader>m", "mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm")
+keymap.set("", "<Leader>m", "mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm")
 
 ---- Toggle paste mode on and off
-map("", "<leader>pp", ":setlocal paste!<cr>")
+keymap.set("", "<leader>pp", ":setlocal paste!<cr>")
