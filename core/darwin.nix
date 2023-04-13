@@ -6,9 +6,6 @@
   ];
 
   environment = {
-    postBuild = ''
-      ln -sv ${pkgs.path} $out/nixpkgs
-    '';
     shells = with pkgs; [ fish zsh ];
     shellAliases.tailscale = "/Applications/Tailscale.app/Contents/MacOS/Tailscale";
     systemPackages = with pkgs; [
@@ -60,5 +57,8 @@
   system = {
     stateVersion = 4;
     defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
+    activationScripts.postActivation.text = ''
+      ln -sv ${pkgs.path} /run/current-system/nixpkgs
+    '';
   };
 }
