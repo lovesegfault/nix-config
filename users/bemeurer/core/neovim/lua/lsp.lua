@@ -1,11 +1,6 @@
-local fidget = require("fidget")
-local lsp_signature = require("lsp_signature")
-local navic = require("nvim-navic")
-local null_ls = require("null-ls")
-local nvim_lightbulb = require("nvim-lightbulb")
 local nvim_lsp = require("lspconfig")
-local rust_tools = require("rust-tools")
 
+local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
     null_ls.builtins.code_actions.gitsigns,
@@ -44,34 +39,47 @@ vim.keymap.set("n", "K", show_documentation, { silent = true })
 
 -- bindings
 local on_attach = function(client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-  vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
+  -- Enable completion triggered by <c-x><c-o>
+  vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+  vim.bo[bufnr].formatexpr = "v:lua.vim.lsp.formatexpr()"
+  vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
 
-  local map = vim.api.nvim_buf_set_keymap
-  local opts = { noremap = true, silent = true }
-  map(bufnr, "n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  map(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  map(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  map(bufnr, "n", "<C-s>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  map(bufnr, "n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-  map(bufnr, "n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-  map(bufnr, "n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-  map(bufnr, "n", "<leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-  map(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  map(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  map(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  map(bufnr, "n", "<leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-  map(bufnr, "n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-  map(bufnr, "n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-  map(bufnr, "n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+  -- Buffer local mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local ts_builtin = require("telescope.builtin")
+  local opts = { buffer = bufnr, silent = true }
 
-  fidget.setup()
+  vim.keymap.set("n", "ca", vim.lsp.buf.code_action, opts)
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+  vim.keymap.set("n", "gd", ts_builtin.lsp_definitions, opts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+  vim.keymap.set("n", "gi", ts_builtin.lsp_implementations, opts)
+  vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+  vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
+  vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
+  vim.keymap.set("n", "<leader>wl", function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, opts)
+  vim.keymap.set("n", "<leader>ws", ts_builtin.lsp_workspace_symbols, opts)
+  vim.keymap.set("n", "<leader>D", ts_builtin.lsp_type_definitions, opts)
+  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+  vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
+  vim.keymap.set("n", "gr", ts_builtin.lsp_references, opts)
+  vim.keymap.set("n", "<leader>f", function()
+    vim.lsp.buf.format({ async = true })
+  end, opts)
+  vim.keymap.set("n", "[d", vim.lsp.diagnostic.goto_prev, opts)
+  vim.keymap.set("n", "]d", vim.lsp.diagnostic.goto_next, opts)
+
+  require("fidget").setup()
+
   if client.server_capabilities.documentSymbolProvider then
-    navic.attach(client, bufnr)
+    require("nvim-navic").attach(client, bufnr)
   end
-  lsp_signature.on_attach({}, bufnr)
-  nvim_lightbulb.setup({
+
+  require("lsp_signature").on_attach({}, bufnr)
+
+  require("nvim-lightbulb").setup({
     autocmd = { enabled = true },
     ignore = { "null-ls" },
   })
@@ -139,7 +147,7 @@ nvim_lsp["nil_ls"].setup({
   },
 })
 
-rust_tools.setup({
+require("rust-tools").setup({
   server = {
     on_attach = on_attach,
     capabilities = capabilities,

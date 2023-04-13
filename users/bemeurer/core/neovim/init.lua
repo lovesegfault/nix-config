@@ -90,12 +90,6 @@ end, { silent = true })
 vim.keymap.set("n", "<leader>fl", ts_builtin.live_grep, { silent = true })
 vim.keymap.set("n", "<leader>fg", ts_builtin.git_files, { silent = true })
 
-vim.keymap.set("n", "<leader>ld", ts_builtin.lsp_definitions, { silent = true })
-vim.keymap.set("n", "<leader>li", ts_builtin.lsp_implementations, { silent = true })
-vim.keymap.set("n", "<leader>lr", ts_builtin.lsp_references, { silent = true })
-vim.keymap.set("n", "<leader>ls", ts_builtin.lsp_workspace_symbols, { silent = true })
-vim.keymap.set("n", "<leader>lt", ts_builtin.lsp_type_definitions, { silent = true })
-
 vim.keymap.set("n", "<leader>gc", ts_builtin.git_commits, { silent = true })
 vim.keymap.set("n", "<leader>gb", ts_builtin.git_bcommits, { silent = true })
 vim.keymap.set("n", "<leader>gs", ts_builtin.git_status, { silent = true })
