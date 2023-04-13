@@ -28,12 +28,19 @@ local flags = { debounce_text_changes = 150 }
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- support crates and LSP
-vim.api.nvim_set_keymap(
-  "n",
-  "K",
-  [[<cmd>lua require("utils").show_documentation()<CR>]],
-  { noremap = true, silent = true }
-)
+local function show_documentation()
+  local filetype = vim.bo.filetype
+  if vim.tbl_contains({ "vim", "help" }, filetype) then
+    vim.cmd("h " .. vim.fn.expand("<cword>"))
+  elseif vim.tbl_contains({ "man" }, filetype) then
+    vim.cmd("Man " .. vim.fn.expand("<cword>"))
+  elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
+    require("crates").show_popup()
+  else
+    vim.lsp.buf.hover()
+  end
+end
+vim.keymap.set("n", "K", show_documentation, { silent = true })
 
 -- bindings
 local on_attach = function(client, bufnr)
