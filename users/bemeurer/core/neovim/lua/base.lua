@@ -231,4 +231,4 @@ keymap.set("", "<leader>s?", "z=")
 keymap.set("", "<Leader>m", "mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm")
 
 ---- Toggle paste mode on and off
-keymap.set("", "<leader>pp", ":setlocal paste!<cr>")
+keymap.set("n", "<leader>pp", ":setlocal paste!<cr>")
