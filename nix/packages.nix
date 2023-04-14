@@ -1,16 +1,15 @@
 { self, ... }:
 
-system:
+localSystem:
 
 let
-  inherit (self.pkgs.${system}) lib linkFarm;
+  inherit (self.pkgs.${localSystem}) lib linkFarm;
 
   nixosDrvs = lib.mapAttrs (_: nixos: nixos.config.system.build.toplevel) self.nixosConfigurations;
   homeDrvs = lib.mapAttrs (_: home: home.activationPackage) self.homeConfigurations;
   darwinDrvs = lib.mapAttrs (_: darwin: darwin.system) self.darwinConfigurations;
 
-  hostDrvs' = nixosDrvs // homeDrvs // darwinDrvs;
-  hostDrvs = lib.mapAttrs (_: drv: drv // { allowSubstitutes = true; }) hostDrvs';
+  hostDrvs = nixosDrvs // homeDrvs // darwinDrvs;
 
   structuredHostDrvs = lib.mapAttrsRecursiveCond
     (hostAttr: !(hostAttr ? "type" && (lib.elem hostAttr.type [ "darwin" "homeManager" "nixos" ])))
@@ -26,5 +25,10 @@ let
       values
     )
     structuredHostDrvs;
+
+  defaultHostFarm =
+    if builtins.hasAttr localSystem structuredHostFarms
+    then { default = self.packages.${localSystem}.${localSystem}; }
+    else { };
 in
-structuredHostFarms
+structuredHostFarms // defaultHostFarm

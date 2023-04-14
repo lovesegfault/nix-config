@@ -43,7 +43,6 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "flake-utils";
     };
 
     impermanence.url = "github:nix-community/impermanence";
@@ -76,42 +75,28 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, ... }@inputs:
+    let
+      forAllSystems = nixpkgs.lib.genAttrs [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ];
+    in
     {
       hosts = import ./nix/hosts.nix;
 
-      deploy = import ./nix/deploy.nix inputs;
-
-      overlays = import ./nix/overlay.nix inputs;
-
-      darwinConfigurations = import ./nix/darwin.nix inputs;
-
-      homeConfigurations = import ./nix/home-manager.nix inputs;
-
-      nixosConfigurations = import ./nix/nixos.nix inputs;
-    }
-    // flake-utils.lib.eachSystem [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ] (localSystem: {
-      checks = import ./nix/checks.nix inputs localSystem;
-
-      devShells.default = import ./nix/dev-shell.nix inputs localSystem;
-
-      packages =
-        let
-          hostDrvs = import ./nix/host-drvs.nix inputs localSystem;
-          default =
-            if builtins.hasAttr "${localSystem}" hostDrvs
-            then { default = self.packages.${localSystem}.${localSystem}; }
-            else { };
-        in
-        hostDrvs // default;
-
-      pkgs = import nixpkgs {
+      pkgs = forAllSystems (localSystem: import nixpkgs {
         inherit localSystem;
-        overlays = [
-          self.overlays.default
-        ];
+        overlays = [ self.overlays.default ];
         config.allowUnfree = true;
         config.allowAliases = true;
-      };
-    });
+      });
+
+      checks = forAllSystems (import ./nix/checks.nix inputs);
+      devShells = forAllSystems (import ./nix/dev-shell.nix inputs);
+      overlays = import ./nix/overlay.nix inputs;
+      packages = forAllSystems (import ./nix/packages.nix inputs);
+
+      deploy = import ./nix/deploy.nix inputs;
+      darwinConfigurations = import ./nix/darwin.nix inputs;
+      homeConfigurations = import ./nix/home-manager.nix inputs;
+      nixosConfigurations = import ./nix/nixos.nix inputs;
+    };
 }

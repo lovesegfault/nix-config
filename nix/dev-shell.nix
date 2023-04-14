@@ -1,44 +1,45 @@
 { self, ... }:
 
-system:
+localSystem:
 
-with self.pkgs.${system};
+with self.pkgs.${localSystem};
+{
+  default = mkShell {
+    name = "nix-config";
 
-mkShell {
-  name = "nix-config";
+    nativeBuildInputs = [
+      # Nix
+      agenix
+      cachix
+      deploy-rs.deploy-rs
+      nix-build-uncached
+      nixpkgs-fmt
+      nil
+      statix
 
-  nativeBuildInputs = [
-    # Nix
-    agenix
-    cachix
-    deploy-rs.deploy-rs
-    nix-build-uncached
-    nixpkgs-fmt
-    nil
-    statix
+      # Lua
+      stylua
+      (luajit.withPackages (p: with p; [ luacheck ]))
+      lua-language-server
 
-    # Lua
-    stylua
-    (luajit.withPackages (p: with p; [ luacheck ]))
-    lua-language-server
+      # Shell
+      shellcheck
+      shfmt
 
-    # Shell
-    shellcheck
-    shfmt
+      # GitHub Actions
+      act
+      actionlint
+      python3Packages.pyflakes
+      shellcheck
 
-    # GitHub Actions
-    act
-    actionlint
-    python3Packages.pyflakes
-    shellcheck
+      # Misc
+      jq
+      pre-commit
+      rage
+    ];
 
-    # Misc
-    jq
-    pre-commit
-    rage
-  ];
-
-  shellHook = ''
-    ${self.checks.${system}.pre-commit-check.shellHook}
-  '';
+    shellHook = ''
+      ${self.checks.${localSystem}.pre-commit-check.shellHook}
+    '';
+  };
 }
