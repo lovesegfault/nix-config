@@ -1,6 +1,7 @@
 { config, lib, nixos-hardware, pkgs, ... }: {
   imports = [
-    nixos-hardware.nixosModules.common-cpu-intel-cpu-only
+    nixos-hardware.nixosModules.common-cpu-intel-kaby-lake
+
 
     ../../core
 
@@ -90,7 +91,10 @@
     };
   };
 
-  hardware.enableRedistributableFirmware = true;
+  hardware = {
+    opengl.enable = true;
+    enableRedistributableFirmware = true;
+  };
 
   home-manager.users.bemeurer = {
     imports = [
