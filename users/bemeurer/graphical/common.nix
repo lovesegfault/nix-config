@@ -39,6 +39,7 @@ let
     modifier = "Mod1";
 
     window = {
+      titlebar = false;
       border = 0;
       commands = [
         {
