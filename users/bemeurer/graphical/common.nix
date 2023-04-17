@@ -48,6 +48,11 @@ let
         }
         {
           command = "floating enable, sticky enable";
+          criteria.title = ".*Lock Screen.*";
+          criteria.class = "1Password";
+        }
+        {
+          command = "floating enable, sticky enable";
           criteria.title = ".*Sharing Indicator.*";
         }
         {
