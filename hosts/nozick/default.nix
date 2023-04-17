@@ -195,7 +195,11 @@
   };
 
   virtualisation = {
-    containers.storage.settings.storage.driver = "zfs";
+    containers.storage.settings.storage = {
+      driver = "zfs";
+      graphroot = "/var/lib/containers/storage";
+      runroot = "/run/containers/storage";
+    };
     oci-containers = {
       backend = "podman";
       containers.ddns = {
