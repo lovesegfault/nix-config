@@ -29,7 +29,7 @@
     kernel.sysctl."vm.swappiness" = 1;
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    tmpOnTmpfs = true;
+    tmp.useTmpfs = true;
   };
 
   console = {

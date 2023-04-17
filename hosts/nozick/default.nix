@@ -50,7 +50,7 @@
         ];
       };
     };
-    tmpOnTmpfs = true;
+    tmp.useTmpfs = true;
     zfs.requestEncryptionCredentials = [ ];
   };
 

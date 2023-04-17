@@ -26,7 +26,7 @@
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" ];
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.zfs.latestCompatibleLinuxPackages;
-    tmpOnTmpfs = true;
+    tmp.useTmpfs = true;
     zfs = {
       extraPools = [ "tank" ];
       requestEncryptionCredentials = false;

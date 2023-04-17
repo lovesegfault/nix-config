@@ -17,7 +17,7 @@
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "nowatchdog" ];
-    tmpOnTmpfs = true;
+    tmp.useTmpfs = true;
   };
 
   console = {
