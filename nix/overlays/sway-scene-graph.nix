@@ -1,13 +1,25 @@
 final: prev:
 {
-  wlroots_0_17 = final.wlroots_0_16.overrideAttrs (old: {
-    version = "unstable-2023-03-26";
+  wayland_1_22 = final.wayland.overrideAttrs (old: rec {
+    version = "1.22.0";
+
+    src = final.fetchFromGitLab {
+      domain = "gitlab.freedesktop.org";
+      owner = "wayland";
+      repo = "wayland";
+      rev = version;
+      hash = "sha256-Y1ePN+FVOigDsnPBnDKkhYnQrm+Obwf/YcCKr/clErw=";
+    };
+  });
+
+  wlroots_0_17 = (final.wlroots_0_16.overrideAttrs (old: {
+    version = "unstable-2023-04-16";
     src = final.fetchFromGitLab {
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "59d2743c0cc4bb77527449fccfe1fba03357457c";
-      hash = "sha256-yivhyQeWLTwHxUISio2P8u0S9Vkp5Lhc7UlNONA1DaQ=";
+      rev = "eac2eaa6a97872d0eaab3b7725528d1ad65c80e2";
+      hash = "sha256-xwjColWIWQGhywPTUcii8Syvk99bnAf+2f6+ti8369Y=";
     };
     nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ final.hwdata ];
     buildInputs = (old.buildInputs or [ ]) ++ [
@@ -15,15 +27,17 @@ final: prev:
       final.libliftoff
     ];
     mesonFlags = (old.mesonFlags or [ ]) ++ [ "-Dwerror=false" ];
-  });
+  })).override { wayland = final.wayland_1_22; };
 
   sway-unwrapped = (prev.sway-unwrapped.overrideAttrs (old: {
-    version = "scene-graph-2023-03-03";
+    version = "scene-graph-2023-04-16";
     src = final.fetchFromGitHub {
       owner = "Nefsen402";
       repo = "sway";
-      rev = "71cf46491af766dc98a0d4082d7a0c22e3980632";
-      hash = "sha256-hi5kruKcBHFkluzsafrypu/d5x4n7SAJd8NwtVbAiu4=";
+      rev = "3b3a500ed71be9bf6b2b252b24920d1d02c9ee36";
+      hash = "sha256-vV+z5BqHyCWlsA4q4d1g/UPuURGmUMFg36LXbJTLORU=";
     };
+
+    nativeBuildInputs = with final; (old.nativeBuildInputs or [ ]) ++ [ bash-completion fish ];
   })).override { wlroots_0_16 = final.wlroots_0_17; };
 }
