@@ -17,6 +17,9 @@
     ./zsh.nix
   ];
 
+  # XXX: Manually enabled in the graphic module
+  dconf.enable = false;
+
   home = {
     username = "bemeurer";
     stateVersion = "23.05";
