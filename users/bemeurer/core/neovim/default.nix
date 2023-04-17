@@ -1,17 +1,15 @@
 { lib, pkgs, ... }: {
-  home = {
-    sessionVariables = rec {
-      EDITOR = "nvim";
-      VISUAL = EDITOR;
-    };
-    shellAliases = { vi = "nvim"; vim = "nvim"; };
-  };
-
   programs = {
     git.extraConfig.core.editor = "nvim";
 
     neovim = {
       enable = true;
+
+      defaultEditor = true;
+      withPython3 = false;
+      vimdiffAlias = true;
+      vimAlias = true;
+      viAlias = true;
 
       plugins = with pkgs.vimPlugins; [
         # ui
