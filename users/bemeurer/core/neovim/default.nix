@@ -44,6 +44,8 @@
         tmux-nvim # tmux integration (copy buffer, navigation)
         vim-visual-multi # multiple cursors
         whitespace-nvim # highlight and strip trailing whitespace
+        nix-develop-nvim # run nix shell/develop within neovim
+        leap-nvim # easy motions
 
         # completion
         cmp-buffer # completion source for buffer words
