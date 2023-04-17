@@ -13,17 +13,19 @@
       slurp
       swaybg
       swayidle
-      swaylock
       wl-clipboard
       wofi
       xwayland
     ];
   };
 
-  programs.swaylock.settings = {
-    indicator-caps-lock = true;
-    scaling = "fill";
-    show-failed-attempts = true;
+  programs.swaylock = {
+    enable = true;
+    settings = {
+      indicator-caps-lock = true;
+      scaling = "fill";
+      show-failed-attempts = true;
+    };
   };
 
   services.swayidle = {

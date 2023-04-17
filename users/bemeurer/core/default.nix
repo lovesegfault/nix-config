@@ -19,7 +19,7 @@
 
   home = {
     username = "bemeurer";
-    stateVersion = "22.11";
+    stateVersion = "23.05";
     packages = with pkgs; [
       bandwhich
       colorcheck
