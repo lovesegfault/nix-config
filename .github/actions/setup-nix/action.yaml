@@ -25,7 +25,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: DeterminateSystems/nix-installer-action@v1
+    - uses: DeterminateSystems/nix-installer-action@v2
       with:
         nix-package-url: "https://nix-config.cachix.org/serve/j26m73q2svl04nmvxksjwwns4rgb8x4w/nix-2.13.3-x86_64-linux.tar.xz"
         extra-conf: |
