@@ -11,7 +11,7 @@
 
         fish_vi_key_bindings insert
         # quickly open text file
-        bind -M insert \co 'fzf | xargs -r $VISUAL'
+        bind -M insert \co 'fzf | xargs -r $EDITOR'
       '')
     ];
     plugins = [
