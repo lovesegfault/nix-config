@@ -13,7 +13,6 @@ null_ls.setup({
     null_ls.builtins.diagnostics.checkmake,
     null_ls.builtins.diagnostics.chktex,
     null_ls.builtins.diagnostics.cppcheck,
-    null_ls.builtins.diagnostics.editorconfig_checker,
     null_ls.builtins.diagnostics.luacheck,
     null_ls.builtins.diagnostics.ruff,
     null_ls.builtins.diagnostics.shellcheck,
