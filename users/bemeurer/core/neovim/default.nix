@@ -30,6 +30,8 @@
 
         # lsp
         lsp_signature-nvim # function signature pop-ups
+        ltex_extra-nvim # ltex LSP configuration
+        null-ls-nvim # inject LSP diagnostics, code actions
         nvim-lightbulb # lightbulb sign when LSP actions are available
         nvim-lsp-notify # notifications for lsp progress
         nvim-lspconfig # LSP
@@ -60,8 +62,6 @@
         cmp-treesitter # completion source for tree-sitter
         crates-nvim # crates.io dependency version info
         lspkind-nvim # pictograms for lsp completion items
-        ltex_extra # ltex LSP configuration
-        null-ls-nvim # inject LSP diagnostics, code actions
         nvim-autopairs # automatic pairing of delimiters
         nvim-cmp # completion engine
 
