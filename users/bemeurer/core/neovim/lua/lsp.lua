@@ -1,5 +1,6 @@
 local nvim_lsp = require("lspconfig")
 
+-- null_ls setup
 local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
@@ -71,7 +72,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "[d", vim.lsp.diagnostic.goto_prev, opts)
   vim.keymap.set("n", "]d", vim.lsp.diagnostic.goto_next, opts)
 
-  require("fidget").setup()
+  require("lsp-notify").setup()
 
   if client.server_capabilities.documentSymbolProvider then
     require("nvim-navic").attach(client, bufnr)

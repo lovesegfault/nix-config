@@ -26,11 +26,12 @@
         trouble-nvim # list for showing LSP diagnostics
         true-zen-nvim # distraction-free writing
         which-key-nvim # popups for keybindings for commands
+        nvim-notify # fancy notifications
 
         # lsp
-        fidget-nvim # ui for nvim-lsp progress
         lsp_signature-nvim # function signature pop-ups
         nvim-lightbulb # lightbulb sign when LSP actions are available
+        nvim-lsp-notify # notifications for lsp progress
         nvim-lspconfig # LSP
 
         # tooling

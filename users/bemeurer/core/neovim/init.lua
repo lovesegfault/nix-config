@@ -1,6 +1,9 @@
 -- enable experimental lua loader
 vim.loader.enable()
 
+-- register nvim-notify
+vim.notify = require("notify")
+
 -- base configuration, independent of plugins (keymaps, etc)
 require("base")
 
@@ -89,6 +92,7 @@ telescope.setup({
 })
 telescope.load_extension("file_browser")
 telescope.load_extension("frecency")
+telescope.load_extension("notify")
 
 local ts_builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>fb", ts_builtin.buffers, { silent = true })
