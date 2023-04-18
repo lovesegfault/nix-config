@@ -1,15 +1,15 @@
 -- enable experimental lua loader
 vim.loader.enable()
 
--- register nvim-notify
-vim.notify = require("notify")
-
 -- base configuration, independent of plugins (keymaps, etc)
 require("base")
 
 -- ayu colorscheme
 vim.o.background = "dark"
 require("ayu").colorscheme()
+
+-- register nvim-notify
+vim.notify = require("notify")
 
 -- modularized / complex configs
 require("completion")
