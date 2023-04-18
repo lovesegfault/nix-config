@@ -79,8 +79,6 @@ local on_attach = function(client, bufnr)
     require("nvim-navic").attach(client, bufnr)
   end
 
-  require("lsp_signature").on_attach({}, bufnr)
-
   require("nvim-lightbulb").setup({
     autocmd = { enabled = true },
     ignore = { "null-ls" },

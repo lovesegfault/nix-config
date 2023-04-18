@@ -29,7 +29,6 @@
         nvim-notify # fancy notifications
 
         # lsp
-        lsp_signature-nvim # function signature pop-ups
         ltex_extra-nvim # ltex LSP configuration
         null-ls-nvim # inject LSP diagnostics, code actions
         nvim-lightbulb # lightbulb sign when LSP actions are available
