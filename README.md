@@ -47,7 +47,7 @@ $ deploy .#myHost
 For macOS hosts using `nix-darwin`:
 
 ```console 
-$ darwin-rebuild --impure --flake ~/src/nix-config#poincare switch
+$ darwin-rebuild --flake ~/src/nix-config#poincare switch
 ```
 
 #### Home Manager
