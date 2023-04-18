@@ -41,6 +41,7 @@
         suda-vim # sudo write
         telescope-frecency-nvim
         telescope-nvim
+        telescope-file-browser-nvim
         tmux-nvim # tmux integration (copy buffer, navigation)
         vim-visual-multi # multiple cursors
         whitespace-nvim # highlight and strip trailing whitespace

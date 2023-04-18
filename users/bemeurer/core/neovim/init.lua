@@ -79,11 +79,15 @@ vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = tr
 local telescope = require("telescope")
 telescope.setup({
   extensions = {
+    file_browser = {
+      hijack_netrw = true,
+    },
     frecency = {
       auto_validate = false,
     },
   },
 })
+telescope.load_extension("file_browser")
 telescope.load_extension("frecency")
 
 local ts_builtin = require("telescope.builtin")
