@@ -226,6 +226,13 @@ keymap.set("", "<leader>sp", "[s")
 keymap.set("", "<leader>sa", "zg")
 keymap.set("", "<leader>s?", "z=")
 
+-- terminal -------------------------------------------------------------------
+keymap.set("t", "<esc>", "<C-\\><C-N>", { silent = true })
+keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j", { silent = true })
+keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k", { silent = true })
+keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h", { silent = true })
+keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", { silent = true })
+
 -- misc -----------------------------------------------------------------------
 ---- Remove the Windows ^M - when the encodings gets messed up
 keymap.set("", "<Leader>m", "mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm")
