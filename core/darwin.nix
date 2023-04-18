@@ -26,6 +26,9 @@
     variables = {
       SHELL = lib.getExe pkgs.zsh;
     };
+    postBuild = ''
+      ln -sv ${pkgs.path} $out/nixpkgs
+    '';
   };
 
   homebrew = {
@@ -57,8 +60,5 @@
   system = {
     stateVersion = 4;
     defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
-    activationScripts.postActivation.text = ''
-      ln -sv ${pkgs.path} /run/current-system/nixpkgs
-    '';
   };
 }

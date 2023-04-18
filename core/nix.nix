@@ -27,20 +27,19 @@
     };
 
     distributedBuilds = true;
-    nixPath = [
-      "nixpkgs=/run/current-system/nixpkgs"
-    ];
     extraOptions = ''
       !include tokens.conf
     '';
   } // lib.optionalAttrs (hostType == "nixos") {
     daemonCPUSchedPolicy = "batch";
     daemonIOSchedPriority = 5;
+    nixPath = [ "nixpkgs=/run/current-system/nixpkgs" ];
     optimise = {
       automatic = true;
       dates = [ "03:00" ];
     };
   } // lib.optionalAttrs (hostType == "darwin") {
+    nixPath = [ "nixpkgs=/run/current-system/sw/nixpkgs" ];
     daemonIOLowPriority = true;
   };
 }
