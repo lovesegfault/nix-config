@@ -44,7 +44,6 @@
       "Noizio" = 928871589;
       "Numbers" = 409203825;
       "Pages" = 409201541;
-      "Soulver 3" = 1508732804;
       "Speedtest" = 1153157709;
       "The Clock" = 488764545;
       "The Unarchiver" = 425424353;
