@@ -49,7 +49,7 @@ let
         {
           command = "floating enable, sticky enable";
           criteria.title = ".*Lock Screen.*";
-          criteria.class = "1Password";
+          criteria.app_id = "1Password";
         }
         {
           command = "floating enable, sticky enable";
