@@ -306,11 +306,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1681893229,
-        "narHash": "sha256-fHMQgd1wcdI/2Oic67n1GZFY1ybgkzyTiF27vRbL/s0=",
+        "lastModified": 1682014490,
+        "narHash": "sha256-mrTFkf7AYlcwHWWj82W1fV87Y36k4UgFRlYdEBEpt+M=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "936d97a0578f7e1a6e8ba6273654f5147b6a5886",
+        "rev": "a1c5d01a40ca65335925974741020fe8b217b7bd",
         "type": "github"
       },
       "original": {
