@@ -14,17 +14,26 @@
       swaybg
       swayidle
       wl-clipboard
-      wofi
       xwayland
     ];
   };
 
-  programs.swaylock = {
-    enable = true;
-    settings = {
-      indicator-caps-lock = true;
-      scaling = "fill";
-      show-failed-attempts = true;
+  programs = {
+    swaylock = {
+      enable = true;
+      settings = {
+        indicator-caps-lock = true;
+        scaling = "fill";
+        show-failed-attempts = true;
+      };
+    };
+    wofi = {
+      enable = true;
+      settings = {
+        allow_images = true;
+        allow_markup = true;
+        term = "foot";
+      };
     };
   };
 

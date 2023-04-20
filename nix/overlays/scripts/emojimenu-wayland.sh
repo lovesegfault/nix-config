@@ -7,7 +7,6 @@ set -euo pipefail
 emoji="$(
 	wofi \
 		--cache-file="$XDG_CACHE_HOME/wofi/emojimenu" \
-		-d "allow_markup=false" \
 		-p emoji \
 		--show dmenu <"${emoji_list}" | cut -f1 -d" "
 )"
