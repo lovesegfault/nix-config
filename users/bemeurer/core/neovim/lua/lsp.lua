@@ -3,24 +3,6 @@ local nvim_lsp = require("lspconfig")
 -- notifications
 require("lsp-notify").setup()
 
--- null_ls setup
-local null_ls = require("null-ls")
-null_ls.setup({
-  sources = {
-    null_ls.builtins.code_actions.gitsigns,
-    null_ls.builtins.code_actions.statix,
-    null_ls.builtins.diagnostics.actionlint,
-    null_ls.builtins.diagnostics.checkmake,
-    null_ls.builtins.diagnostics.chktex,
-    null_ls.builtins.diagnostics.cppcheck,
-    null_ls.builtins.diagnostics.luacheck,
-    null_ls.builtins.diagnostics.ruff,
-    null_ls.builtins.diagnostics.shellcheck,
-    null_ls.builtins.diagnostics.statix,
-    null_ls.builtins.formatting.shfmt,
-  },
-})
-
 local flags = { debounce_text_changes = 150 }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -80,7 +62,6 @@ local on_attach = function(client, bufnr)
 
   require("nvim-lightbulb").setup({
     autocmd = { enabled = true },
-    ignore = { "null-ls" },
   })
 end
 

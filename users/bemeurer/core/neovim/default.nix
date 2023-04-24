@@ -31,7 +31,6 @@
 
         # lsp
         ltex_extra-nvim # ltex LSP configuration
-        null-ls-nvim # inject LSP diagnostics, code actions
         nvim-lightbulb # lightbulb sign when LSP actions are available
         nvim-lsp-notify # notifications for lsp progress
         nvim-lspconfig # LSP
