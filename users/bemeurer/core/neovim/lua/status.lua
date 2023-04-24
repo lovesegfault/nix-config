@@ -1,5 +1,4 @@
 local lualine = require("lualine")
-local navic = require("nvim-navic")
 
 local sections = {
   diagnostics = {
@@ -24,14 +23,6 @@ local sections = {
     "filetype",
     icon_only = true,
   },
-  navic = {
-    function()
-      return navic.get_location()
-    end,
-    cond = function()
-      return navic.is_available()
-    end,
-  },
 }
 
 lualine.setup({
@@ -46,7 +37,7 @@ lualine.setup({
   },
   sections = {
     lualine_a = { "mode" },
-    lualine_b = { sections.filetype, sections.filename, sections.navic },
+    lualine_b = { sections.filetype, sections.filename, "navic" },
     lualine_c = { sections.diagnostics },
     lualine_x = { "searchcount", sections.diff, "branch" },
     lualine_y = { "encoding", "fileformat" },
