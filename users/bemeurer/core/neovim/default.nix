@@ -73,10 +73,6 @@
         luasnip # snippet engine
 
         # syntax
-        gentoo-syntax
-        lalrpop-vim
-        vim-nix
-        vim-polyglot
         (nvim-treesitter.withPlugins
           (_:
             with builtins;
