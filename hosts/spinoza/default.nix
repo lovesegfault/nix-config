@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ../../core
 
@@ -112,6 +112,7 @@
       fileSystems = [ "/nix/state" ];
       interval = "weekly";
     };
+    fstrim.enable = lib.mkForce false;
     geoclue2 = {
       enable = true;
       enable3G = false;
