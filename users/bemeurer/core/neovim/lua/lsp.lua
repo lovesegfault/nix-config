@@ -7,6 +7,9 @@ local flags = { debounce_text_changes = 150 }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+-- navic
+require("nvim-navic").setup({ lsp = { auto_attach = true } })
+
 -- support crates and LSP
 local function show_documentation()
   local filetype = vim.bo.filetype
@@ -23,7 +26,7 @@ end
 vim.keymap.set("n", "K", show_documentation, { silent = true })
 
 -- bindings
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
   vim.bo[bufnr].formatexpr = "v:lua.vim.lsp.formatexpr()"
@@ -55,10 +58,6 @@ local on_attach = function(client, bufnr)
   end, opts)
   vim.keymap.set("n", "[d", vim.lsp.diagnostic.goto_prev, opts)
   vim.keymap.set("n", "]d", vim.lsp.diagnostic.goto_next, opts)
-
-  if client.server_capabilities.documentSymbolProvider then
-    require("nvim-navic").attach(client, bufnr)
-  end
 
   require("nvim-lightbulb").setup({
     autocmd = { enabled = true },
