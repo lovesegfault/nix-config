@@ -28,6 +28,8 @@ let
 
       in
       {
+        alacritty = applyHost prev.alacritty;
+
         foot = applyGraphite (applyHost prev.foot);
         neovim-unwrapped = applyGraphite (applyHost prev.neovim-unwrapped);
         sway-unwrapped = applyGraphite (applyHost prev.sway-unwrapped);
