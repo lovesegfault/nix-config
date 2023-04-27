@@ -11,10 +11,12 @@
       expireDuplicatesFirst = true;
       extended = true;
       ignoreDups = true;
+      ignoreSpace = true;
       path = "${config.xdg.dataHome}/zsh/history";
       save = 10000;
       share = true;
     };
+    historySubstringSearch.enable = true;
     envExtra = ''
       export LESSHISTFILE="${config.xdg.dataHome}/less_history"
       export CARGO_HOME="${config.xdg.cacheHome}/cargo"
@@ -29,12 +31,6 @@
       bindkey "$${terminfo[khome]}" beginning-of-line
       bindkey "$${terminfo[kend]}" end-of-line
       bindkey "$${terminfo[kdch1]}" delete-char
-      bindkey '\eOA' history-substring-search-up
-      bindkey '\eOB' history-substring-search-down
-      bindkey "^[[A" history-substring-search-up
-      bindkey "^[[B" history-substring-search-down
-      bindkey "$$terminfo[kcuu1]" history-substring-search-up
-      bindkey "$$terminfo[kcud1]" history-substring-search-down
       bindkey "^[[1;5C" forward-word
       bindkey "^[[1;3C" forward-word
       bindkey "^[[1;5D" backward-word
@@ -70,17 +66,6 @@
           repo = "zsh-autopair";
           rev = "34a8bca0c18fcf3ab1561caef9790abffc1d3d49";
           sha256 = "1h0vm2dgrmb8i2pvsgis3lshc5b0ad846836m62y8h3rdb3zmpy1";
-        };
-      }
-      {
-        # https://github.com/zsh-users/zsh-history-substring-search
-        name = "zsh-history-substring-search";
-        file = "zsh-history-substring-search.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "zsh-users";
-          repo = "zsh-history-substring-search";
-          rev = "0f80b8eb3368b46e5e573c1d91ae69eb095db3fb";
-          sha256 = "0y8va5kc2ram38hbk2cibkk64ffrabfv1sh4xm7pjspsba9n5p1y";
         };
       }
     ];
