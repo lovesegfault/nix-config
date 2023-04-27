@@ -39,5 +39,11 @@ final: prev:
     };
 
     nativeBuildInputs = with final; (old.nativeBuildInputs or [ ]) ++ [ bash-completion fish ];
+
+    # Our version of sway already has this patch upstream, so we filter it out.
+    patches = builtins.filter
+      (p: !p ? name || p.name != "LIBINPUT_CONFIG_ACCEL_PROFILE_CUSTOM.patch")
+      (old.patches or [ ]);
+
   })).override { wlroots_0_16 = final.wlroots_0_17; };
 }
