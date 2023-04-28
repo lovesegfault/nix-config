@@ -14,14 +14,16 @@
     libnotify
     qalculate-gtk
     xdg-utils
-  ] ++ (builtins.filter (lib.meta.availableOn hostPlatform) [
+  ] ++ lib.filter (lib.meta.availableOn stdenv.hostPlatform) [
     discord
     iterm2
     ledger-live-desktop
     plexamp
     signal-desktop
     thunderbird
-  ]);
+  ] ++ lib.optionals (stdenv.hostPlatform == "x86_64-linux") [
+    spotify
+  ];
 
   programs.alacritty.enable = true;
 
