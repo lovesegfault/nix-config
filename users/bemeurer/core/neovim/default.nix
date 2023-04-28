@@ -100,7 +100,7 @@
           )
         )
       ]
-      ++ lib.optional (lib.elem pkgs.stdenv.hostPlatform.system pkgs.tabnine.meta.platforms) cmp-tabnine
+      ++ lib.optional (lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.tabnine) cmp-tabnine
       ;
     };
   };
