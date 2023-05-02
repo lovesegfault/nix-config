@@ -60,17 +60,6 @@
       setw -g monitor-activity on
       set -g visual-activity off
 
-      fg="#CBCCC6"
-      bg="#212732"
-      status_bg="#34455A"
-      border_fg="#70748C"
-      border_active_fg="#FECB6E"
-      status_left_bg="#FFA759"
-      set -g status-style "bg=$status_bg,fg=$fg"
-      set -g pane-border-style "bg=$bg,fg=$border_fg"
-      set -g pane-active-border-style "bg=$bg,fg=$border_active_fg"
-      set -g window-status-current-style "fg=$border_active_fg"
-      set -g window-status-style "fg=$fg"
       set -g status-right '%a | %Y-%m-%d | %H:%M'
     '';
   };
