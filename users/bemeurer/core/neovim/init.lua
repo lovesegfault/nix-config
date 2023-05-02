@@ -32,7 +32,7 @@ require("true-zen").setup({ modes = { ataraxis = { minimum_writing_area = { widt
 
 -- bufdelete
 require("bufdelete")
-vim.keymap.set("n", "<leader>bd", "<cmd>Bdelete<cr>", { silent = true })
+vim.keymap.set("n", "<leader>bd", "<cmd>Bdelete<cr>", { desc = "Delete buffer", silent = true })
 
 -- dashboard
 require("dashboard").setup({
@@ -71,12 +71,37 @@ require("nvim-treesitter.configs").setup({
 
 -- trouble
 require("trouble").setup()
-vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { desc = "Toggle Trouble", silent = true, noremap = true })
+vim.keymap.set(
+  "n",
+  "<leader>xw",
+  "<cmd>TroubleToggle workspace_diagnostics<cr>",
+  { desc = "Toggle Trouble workspace workspace_diagnostics", silent = true, noremap = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>xd",
+  "<cmd>TroubleToggle document_diagnostics<cr>",
+  { desc = "Toggle Trouble document diagnostics", silent = true, noremap = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>xl",
+  "<cmd>TroubleToggle loclist<cr>",
+  { desc = "Toggle Trouble location list", silent = true, noremap = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>xq",
+  "<cmd>TroubleToggle quickfix<cr>",
+  { desc = "Toggle Trouble quickfix list", silent = true, noremap = true }
+)
+vim.keymap.set(
+  "n",
+  "gR",
+  "<cmd>TroubleToggle lsp_references<cr>",
+  { desc = "Toggle Trouble LSP references", silent = true, noremap = true }
+)
 
 -- telescope
 local telescope = require("telescope")
@@ -95,17 +120,52 @@ telescope.load_extension("frecency")
 telescope.load_extension("notify")
 
 local ts_builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>fb", ts_builtin.buffers, { silent = true })
-vim.keymap.set("n", "<leader>fc", ts_builtin.current_buffer_fuzzy_find, { silent = true })
+vim.keymap.set(
+  "n",
+  "<leader>fb",
+  ts_builtin.buffers,
+  { desc = "Lists open buffers in current neovim instance", silent = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>fc",
+  ts_builtin.current_buffer_fuzzy_find,
+  { desc = "Live fuzzy search inside of the currently open buffer", silent = true }
+)
 vim.keymap.set("n", "<leader>ff", function()
   telescope.extensions.frecency.frecency({ workspace = "CWD" })
-end, { silent = true })
-vim.keymap.set("n", "<leader>fl", ts_builtin.live_grep, { silent = true })
-vim.keymap.set("n", "<leader>fg", ts_builtin.git_files, { silent = true })
+end, { desc = "Search for files", silent = true })
+vim.keymap.set(
+  "n",
+  "<leader>fl",
+  ts_builtin.live_grep,
+  { desc = "Search for a string and get results live as you type", silent = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>fg",
+  ts_builtin.git_files,
+  { desc = "Fuzzy search for files tracked by Git", silent = true }
+)
 
-vim.keymap.set("n", "<leader>gc", ts_builtin.git_commits, { silent = true })
-vim.keymap.set("n", "<leader>gb", ts_builtin.git_bcommits, { silent = true })
-vim.keymap.set("n", "<leader>gs", ts_builtin.git_status, { silent = true })
+vim.keymap.set(
+  "n",
+  "<leader>gc",
+  ts_builtin.git_commits,
+  { desc = "Lists commits for current directory with diff preview", silent = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>gb",
+  ts_builtin.git_bcommits,
+  { desc = "Lists commits for current buffer with diff preview", silent = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>gs",
+  ts_builtin.git_status,
+  { desc = "Lists git status for current directory", silent = true }
+)
 
 -- which-key
 vim.o.timeout = true
@@ -117,4 +177,4 @@ local whitespace = require("whitespace-nvim")
 whitespace.setup({
   ignored_filetypes = { "TelescopePrompt", "Trouble", "dashboard", "help" },
 })
-vim.keymap.set("n", "<leader>tw", whitespace.trim, { silent = true })
+vim.keymap.set("n", "<leader>tw", whitespace.trim, { desc = "Trim leading/trailing whitespace", silent = true })
