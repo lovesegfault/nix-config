@@ -2,6 +2,7 @@
 , home-manager
 , agenix
 , impermanence
+, lanzaboote
 , nix-index-database
 , nixos-hardware
 , nixpkgs
@@ -28,7 +29,7 @@ let
       specialArgs = {
         hostAddress = address;
         hostType = type;
-        inherit agenix home-manager impermanence nix-index-database nixos-hardware stylix;
+        inherit agenix home-manager impermanence lanzaboote nix-index-database nixos-hardware stylix;
       };
     };
 in

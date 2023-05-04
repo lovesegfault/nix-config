@@ -19,6 +19,7 @@
   ];
 
   boot = {
+    bootspec.enable = true;
     extraModprobeConfig = ''
       options cfg80211 ieee80211_regdom="US"
     '';
@@ -31,11 +32,16 @@
       };
       systemd.enable = true;
     };
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/etc/secureboot";
+    };
+    loader.systemd-boot.enable = lib.mkForce false;
     plymouth.enable = true;
     resumeDevice = "/dev/cryptroot/swap";
   };
 
-  environment.systemPackages = with pkgs; [ cntr wireguard-tools powertop ];
+  environment.systemPackages = with pkgs; [ cntr wireguard-tools powertop sbctl ];
 
   fileSystems = {
     "/" = {

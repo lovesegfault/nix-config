@@ -40,12 +40,22 @@
       flake = false;
     };
 
+    flake-utils.url = "github:numtide/flake-utils";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     impermanence.url = "github:nix-community/impermanence";
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
+    };
 
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
@@ -71,8 +81,6 @@
     };
 
     templates.url = "github:NixOS/templates";
-
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
