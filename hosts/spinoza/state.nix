@@ -4,7 +4,6 @@
   environment.persistence."/nix/state" = {
     hideMounts = true;
     directories = [
-      "/etc/secureboot"
       "/var/cache/powertop"
       "/var/lib/bluetooth"
       "/var/lib/boltd"

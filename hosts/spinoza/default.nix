@@ -3,6 +3,7 @@
     ../../core
 
     ../../hardware/nixos-aarch64-builder
+    ../../hardware/secureboot.nix
     ../../hardware/thinkpad-z13.nix
     ../../hardware/yubikey.nix
 
@@ -19,7 +20,6 @@
   ];
 
   boot = {
-    bootspec.enable = true;
     extraModprobeConfig = ''
       options cfg80211 ieee80211_regdom="US"
     '';
@@ -32,16 +32,11 @@
       };
       systemd.enable = true;
     };
-    lanzaboote = {
-      enable = true;
-      pkiBundle = "/etc/secureboot";
-    };
-    loader.systemd-boot.enable = lib.mkForce false;
     plymouth.enable = true;
     resumeDevice = "/dev/cryptroot/swap";
   };
 
-  environment.systemPackages = with pkgs; [ cntr wireguard-tools powertop sbctl ];
+  environment.systemPackages = with pkgs; [ cntr wireguard-tools powertop ];
 
   fileSystems = {
     "/" = {
