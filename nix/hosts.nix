@@ -55,6 +55,13 @@ let
       hostPlatform = "aarch64-darwin";
       pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMYvFEyV+nebaTfrwAULWDmCk0L6O+1OyZc43JnizcIB";
     };
+    riemann = {
+      type = "nixos";
+      address = "100.67.173.60";
+      hostPlatform = "aarch64-linux";
+      pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOof4536ylMfznpkKbH/kqiuCOs2hCLXMBnF9md462sW";
+      remoteBuild = true;
+    };
     spinoza = {
       type = "nixos";
       address = "100.68.240.30";
@@ -64,7 +71,7 @@ let
     };
   };
 
-  inherit (builtins) attrNames concatMap listToAttrs filter;
+  inherit (builtins) attrNames concatMap listToAttrs;
 
   filterAttrs = pred: set:
     listToAttrs (concatMap (name: let value = set.${name}; in if pred name value then [{ inherit name value; }] else [ ]) (attrNames set));
