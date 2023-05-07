@@ -27,7 +27,8 @@
     };
 
     deploy-rs = {
-      url = "github:serokell/deploy-rs";
+      # FIXME: Remove commit pin once nix 2.15 support is fixed
+      url = "github:serokell/deploy-rs/c17d71fadf9a124ad6dd6af91944dbc2f0a60496";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "flake-compat";
