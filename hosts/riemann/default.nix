@@ -41,30 +41,30 @@
       mutableConfig = true;
       configFile = ./klipper.cfg;
     };
-    # moonraker = {
-    #   enable = true;
-    #   address = "0.0.0.0";
-    #   allowSystemControl = true;
-    #   settings = {
-    #     authorization = {
-    #       cors_domains = [
-    #         "*://my.mainsail.xyz"
-    #         "*://*.lan"
-    #         "*://*.local"
-    #         "*://*.meurer.org"
-    #       ];
-    #       trusted_clients = [
-    #         "10.0.0.0/8"
-    #         "127.0.0.0/8"
-    #         "192.168.0.0/16"
-    #         "FE80::/10"
-    #         "::1/128"
-    #       ];
-    #     };
-    #     history = { };
-    #     announcements.subscriptions = [ "mainsail" ];
-    #   };
-    # };
+    moonraker = {
+      enable = true;
+      address = "0.0.0.0";
+      allowSystemControl = true;
+      settings = {
+        authorization = {
+          cors_domains = [
+            "*://my.mainsail.xyz"
+            "*://*.lan"
+            "*://*.local"
+            "*://*.meurer.org"
+          ];
+          trusted_clients = [
+            "10.0.0.0/8"
+            "127.0.0.0/8"
+            "192.168.0.0/16"
+            "FE80::/10"
+            "::1/128"
+          ];
+        };
+        history = { };
+        announcements.subscriptions = [ "mainsail" ];
+      };
+    };
   };
 
   system.build.firmware = {
