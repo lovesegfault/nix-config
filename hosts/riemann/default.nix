@@ -105,6 +105,8 @@
     };
   };
 
+  systemd.oomd.enable = false;
+
   swapDevices = lib.mkDefault [{
     device = "/swap";
     size = 2048;
