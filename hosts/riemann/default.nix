@@ -7,6 +7,9 @@
 
     ../../hardware/nixos-aarch64-builder
 
+    ../../services/nginx.nix
+    ../../services/oauth2.nix
+
     ../../users/bemeurer
   ];
 
@@ -59,6 +62,7 @@
             "192.168.0.0/16"
             "FE80::/10"
             "::1/128"
+            "100.64.0.0/10" # tailscale
           ];
         };
         history = { };
@@ -117,4 +121,10 @@
 
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.passwordFile = config.age.secrets.rootPassword.path;
+
+  users.users.klipper = {
+    isSystemUser = true;
+    group = "klipper";
+  };
+  users.groups.klipper.members = [ "moonraker" ];
 }
