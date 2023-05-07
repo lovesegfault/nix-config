@@ -43,6 +43,8 @@
       enable = true;
       mutableConfig = true;
       configFile = ./klipper.cfg;
+      user = "klipper";
+      group = "klipper";
     };
     moonraker = {
       enable = true;
