@@ -36,10 +36,11 @@
   services = {
     # XXX: dbus-broker seems broken on the RPi4 kernel
     dbus.implementation = lib.mkForce "dbus";
-    # klipper = {
-    #   enable = true;
-    #   mutableConfig = true;
-    # };
+    klipper = {
+      enable = true;
+      mutableConfig = true;
+      configFile = ./klipper.cfg;
+    };
     # moonraker = {
     #   enable = true;
     #   address = "0.0.0.0";
