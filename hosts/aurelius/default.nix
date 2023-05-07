@@ -19,7 +19,7 @@
 
   boot.blacklistedKernelModules = [ "i2c_gpio" "spi_gpio" "goodix" ];
 
-  fileSystems = lib.mkForce {
+  fileSystems = {
     "/boot/firmware" = {
       device = "/dev/disk/by-label/FIRMWARE";
       fsType = "vfat";
@@ -33,14 +33,16 @@
   hardware.raspberry-pi."4" = {
     audio.enable = true;
     dwc2.enable = true;
-    fkms-3d.enable = true;
   };
 
   location.provider = "geoclue2";
 
   networking = {
     hostName = "aurelius";
-    wireless.enable = true;
+    wireless.iwd = {
+      enable = true;
+      settings.General.Country = "US";
+    };
   };
 
   services = {
