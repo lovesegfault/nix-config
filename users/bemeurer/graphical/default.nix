@@ -21,7 +21,7 @@
     plexamp
     signal-desktop
     thunderbird
-  ] ++ lib.optionals (stdenv.hostPlatform == "x86_64-linux") [
+  ] ++ lib.optionals (stdenv.hostPlatform.system == "x86_64-linux") [
     spotify
   ];
 
