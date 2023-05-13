@@ -19,6 +19,7 @@
     iterm2
     ledger-live-desktop
     plexamp
+    prusa-slicer
     signal-desktop
     thunderbird
   ] ++ lib.optionals (stdenv.hostPlatform.system == "x86_64-linux") [
