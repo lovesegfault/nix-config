@@ -34,7 +34,10 @@
     wireless.iwd.enable = true;
   };
 
-  security.polkit.enable = true;
+  security = {
+    acme.certs."mainsail.riemann.meurer.org" = { };
+    polkit.enable = true;
+  };
 
   services = {
     # XXX: dbus-broker seems broken on the RPi4 kernel
@@ -49,6 +52,11 @@
     mainsail = {
       enable = true;
       hostName = "mainsail.riemann.meurer.org";
+      nginx = {
+        useACMEHost = "mainsail.riemann.meurer.org";
+        kTLS = true;
+        forceSSL = true;
+      };
     };
     moonraker = {
       enable = true;
@@ -75,6 +83,7 @@
         announcements.subscriptions = [ "mainsail" ];
       };
     };
+    oauth2_proxy.nginx.virtualHosts = [ config.services.mainsail.hostName ];
   };
 
   system.build.firmware = {
