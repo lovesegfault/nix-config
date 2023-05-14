@@ -42,7 +42,6 @@
         device = "nodev";
         efiSupport = true;
         enable = true;
-        version = 2;
         mirroredBoots = [
           { devices = [ "/dev/disk/by-uuid/3C46-FB41" ]; path = "/boot"; }
           # { devices = [ "/dev/disk/by-uuid/3C1E-F6BC" ]; path = "/boot-1"; }
