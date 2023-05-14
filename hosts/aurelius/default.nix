@@ -31,7 +31,6 @@
   };
 
   hardware.raspberry-pi."4" = {
-    audio.enable = true;
     dwc2.enable = true;
   };
 
