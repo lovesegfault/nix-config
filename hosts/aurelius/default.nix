@@ -14,7 +14,7 @@
     ../../users/bemeurer
 
     # ./sway.nix
-    ./hyperpixel4.nix
+    # ./hyperpixel4.nix
   ];
 
   boot.blacklistedKernelModules = [ "i2c_gpio" "spi_gpio" "goodix" ];
