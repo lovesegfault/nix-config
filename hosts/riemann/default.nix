@@ -46,6 +46,10 @@
       user = "klipper";
       group = "klipper";
     };
+    mainsail = {
+      enable = true;
+      hostName = "mainsail.riemann.meurer.org";
+    };
     moonraker = {
       enable = true;
       address = "0.0.0.0";
