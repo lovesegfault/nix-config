@@ -13,6 +13,9 @@
     ../../users/bemeurer
   ];
 
+  # This host does not use impermanence
+  environment.persistence."/nix/state".enable = false;
+
   fileSystems = {
     "/boot/firmware" = {
       device = "/dev/disk/by-label/FIRMWARE";
