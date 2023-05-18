@@ -19,6 +19,7 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.darwin.follows = "darwin";
+      inputs.home-manager.follows = "home-manager";
     };
 
     darwin = {
@@ -28,11 +29,9 @@
 
     deploy-rs = {
       url = "github:serokell/deploy-rs";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "flake-compat";
-        utils.follows = "flake-utils";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.utils.follows = "flake-utils";
     };
 
     flake-compat = {
