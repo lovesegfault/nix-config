@@ -26,6 +26,7 @@
     packages = with pkgs; [ terminus_font ];
   };
 
+  environment.systemPackages = with pkgs; [ iw ];
   environment.variables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
 
   hardware = {
