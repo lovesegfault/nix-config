@@ -29,7 +29,6 @@ runs:
       with:
         nix-package-url: "https://nix-config.cachix.org/serve/x15ddvgysszk30r3wk9q2x69nw5wjrna/nix-2.15.1-x86_64-linux.tar.xz"
         extra-conf: |
-          auto-allocate-uids = true
           always-allow-substitutes = true
           builders-use-substitutes = true
           experimental-features = nix-command flakes recursive-nix
