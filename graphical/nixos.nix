@@ -36,6 +36,7 @@
   };
 
   stylix.targets.plymouth.enable = false;
+  stylix.targets.gnome.enable = true;
 
   xdg.portal = {
     enable = true;
