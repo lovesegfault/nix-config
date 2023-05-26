@@ -22,7 +22,12 @@ require("crates").setup()
 require("dap")
 require("gitsigns").setup()
 require("guess-indent").setup()
-require("indent_blankline").setup({ char = "▏", show_current_context = true, show_current_context_start = true })
+require("indent_blankline").setup({
+  char = "▏",
+  show_current_context = true,
+  show_current_context_start = true,
+  filetype_exclude = { "lspinfo", "packer", "checkhealth", "help", "man", "dashboard", "" },
+})
 require("leap").add_default_mappings()
 require("numb").setup()
 require("nvim-autopairs").setup({ map_cr = true, map_complete = true })
