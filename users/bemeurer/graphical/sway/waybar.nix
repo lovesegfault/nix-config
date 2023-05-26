@@ -32,10 +32,10 @@
         format-source-muted = "";
         format-icons = {
           headphones = "";
-          handsfree = "";
-          headset = "";
+          handsfree = "󰋎";
+          headset = "󰋎";
           phone = "";
-          portable = "";
+          portable = "";
           car = "";
           default = [ "" "" "" ];
         };
@@ -52,8 +52,8 @@
       };
       network = {
         format-wifi = "{essid} ({signalStrength}%) ";
-        format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
-        format-linked = "{ifname} (No IP) ";
+        format-ethernet = "{ifname}: {ipaddr}/{cidr} 󰈀";
+        format-linked = "{ifname} (No IP) 󰌘";
         format-disconnected = "Disconnected ⚠";
         format-alt = "{ifname}: {ipaddr}/{cidr}";
       };
@@ -65,7 +65,7 @@
       backlight = {
         device = "intel_backlight";
         format = "{percent}% {icon}";
-        format-icons = [ "" "" ];
+        format-icons = [ "󱩎" "󱩏" "󱩐" "󱩑" "󱩒" "󱩓" "󱩔" "󱩕" "󱩖" "󰛨" ];
         on-scroll-up = "${pkgs.brillo}/bin/brillo -e -A 0.5";
         on-scroll-down = "${pkgs.brillo}/bin/brillo -e -U 0.5";
       };
@@ -77,14 +77,14 @@
           critical = 15;
         };
         format = "{capacity}% {icon}";
-        format-charging = "{capacity}% ";
+        format-charging = "{capacity}% 󰂄";
         format-plugged = "{capacity}% ";
         format-alt = "{time} {icon}";
         format-icons = [ " " " " " " " " " " ];
       };
       clock = {
         tooltip-format = "{calendar}";
-        format = "{:%F | %H:%M | %Z}";
+        format = "{:󰃭 %F | 󰥔 %H:%M | 󰇧 %Z}";
       };
       tray = {
         icon-size = lib.mkDefault 20;
