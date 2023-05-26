@@ -6,8 +6,8 @@ final: prev:
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "17b10746b44e847e6f6b55d5f9d40d536d10c96c";
-      hash = "sha256-fZJ/uBgHqsrj0jVhb0hG8KJs7ZF1tHEU1pCAY9AZqJo=";
+      rev = "4d634276a47e524165bc8a7f62a56d88bf404a75";
+      hash = "sha256-hv51P3JRKz1ClSr4IPK4OJYxwC6TjkhgpnBGKWbMTNE=";
     };
     nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ final.hwdata ];
     buildInputs = (old.buildInputs or [ ]) ++ [
@@ -22,8 +22,8 @@ final: prev:
     src = final.fetchFromGitHub {
       owner = "Nefsen402";
       repo = "sway";
-      rev = "01587db619375753cd925c0c2259b79c8a370f87";
-      hash = "sha256-IC1zgvpDjdu5ND0gdpWA+uTMGTcU+UBqU+cnSjLU//M=";
+      rev = "748607ecb842c44368920f415d3cbd70d252fe8d";
+      hash = "sha256-FTgOdYxiUQMERsTEq40K0s74uQKWJ3tanDoKKMxqkig=";
     };
 
     nativeBuildInputs = with final; (old.nativeBuildInputs or [ ]) ++ [ bash-completion fish ];
