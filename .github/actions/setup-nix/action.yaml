@@ -25,7 +25,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: DeterminateSystems/nix-installer-action@v2
+    - uses: DeterminateSystems/nix-installer-action@v3
       with:
         nix-package-url: "https://nix-config.cachix.org/serve/x15ddvgysszk30r3wk9q2x69nw5wjrna/nix-2.15.1-x86_64-linux.tar.xz"
         extra-conf: |
@@ -33,9 +33,6 @@ runs:
           builders-use-substitutes = true
           experimental-features = nix-command flakes recursive-nix
         github-token: ${{ inputs.github-token }}
-    - name: add-new-nix-env-path
-      shell: bash
-      run: echo "$HOME/.nix-profile/bin" >> "$GITHUB_PATH"
     - uses: cachix/cachix-action@v12
       if: ${{ inputs.cachix == 'true' }}
       with:
