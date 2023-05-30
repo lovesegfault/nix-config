@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ lib, pkgs, ... }: {
   programs.sway.enable = true;
 
   home-manager.users.bemeurer = {
@@ -31,6 +31,10 @@
             max_render_time = "3";
           };
         };
+        startup = [
+          { command = "${lib.getExe pkgs.ponymix} -t source mute"; }
+          { command = "${lib.getExe pkgs.ponymix} -t sink mute"; }
+        ];
       };
       extraConfig = ''
         bindswitch --locked --reload lid:on output eDP-1 disable
