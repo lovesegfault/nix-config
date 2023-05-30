@@ -33,9 +33,6 @@ runs:
           builders-use-substitutes = true
           experimental-features = nix-command flakes recursive-nix
         github-token: ${{ inputs.github-token }}
-    - name: add-new-nix-env-path
-      shell: bash
-      run: echo "$HOME/.nix-profile/bin" >> "$GITHUB_PATH"
     - uses: cachix/cachix-action@v12
       if: ${{ inputs.cachix == 'true' }}
       with:
