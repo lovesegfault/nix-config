@@ -6,15 +6,14 @@ final: prev:
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "4d634276a47e524165bc8a7f62a56d88bf404a75";
-      hash = "sha256-hv51P3JRKz1ClSr4IPK4OJYxwC6TjkhgpnBGKWbMTNE=";
+      rev = "95062904c7acc38d2175744ceda399c5b5a12adf";
+      hash = "sha256-virCNkfz7ID5Sh1KG8S5qCbmvh+2ymSyR6Fafetl9K0=";
     };
     nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ final.hwdata ];
     buildInputs = (old.buildInputs or [ ]) ++ [
       final.libdisplay-info
       final.libliftoff
     ];
-    mesonFlags = (old.mesonFlags or [ ]) ++ [ "-Dwerror=false" ];
   })).override { };
 
   sway-unwrapped = (prev.sway-unwrapped.overrideAttrs (old: {
