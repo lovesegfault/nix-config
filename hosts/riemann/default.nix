@@ -49,6 +49,7 @@
       enable = true;
       mutableConfig = true;
       configFile = ./klipper.cfg;
+      logFile = "/var/lib/klipper/klipper.log";
       user = "klipper";
       group = "klipper";
     };
