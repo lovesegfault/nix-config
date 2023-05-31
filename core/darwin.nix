@@ -45,11 +45,6 @@
     };
   };
 
-  nix = {
-    gc.automatic = true;
-    settings.trusted-users = [ "root" "bemeurer" ];
-  };
-
   programs.fish.loginShellInit = "fish_add_path --move --prepend --path $HOME/.nix-profile/bin /run/wrappers/bin /etc/profiles/per-user/$USER/bin /run/current-system/sw/bin /nix/var/nix/profiles/default/bin";
 
   services.nix-daemon = {

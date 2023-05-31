@@ -18,7 +18,7 @@
 
   nix = {
     gc.automatic = true;
-    settings.trusted-users = [ "root" "bemeurer" ];
+    settings.trusted-users = [ "bemeurer" ];
   };
 
   users.users.bemeurer = {
