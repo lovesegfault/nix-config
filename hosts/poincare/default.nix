@@ -18,7 +18,10 @@
 
   nix = {
     gc.automatic = true;
-    settings.trusted-users = [ "bemeurer" ];
+    settings = {
+      system-features = [ "big-parallel" "gccarch-armv8-a" ];
+      trusted-users = [ "bemeurer" ];
+    };
   };
 
   users.users.bemeurer = {
