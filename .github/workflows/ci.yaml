@@ -58,6 +58,29 @@ jobs:
           echo "hosts=$(cat "$TMP/hosts.json")" >> "$GITHUB_OUTPUT"
           echo "systems=$(cat "$TMP/systems.json")" >> "$GITHUB_OUTPUT"
 
+  build-nix:
+    name: build-nix (${{ matrix.system.hostPlatform }})
+    runs-on: ${{ matrix.system.ghSystem }}
+    needs: get-hosts
+    strategy:
+      fail-fast: false
+      matrix:
+        system: ${{ fromJson(needs.get-hosts.outputs.systems) }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          lfs: false
+      - uses: ./.github/actions/setup-nix
+        with:
+          aarch64-builder: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
+          aarch64-builder-key: ${{ secrets.AARCH64_BUILDER_KEY }}
+          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: build-nix
+        run: |
+          nix run nixpkgs\#nix-build-uncached -- \
+            --keep-going \
+            -A "packages.${{ matrix.system.hostPlatform }}.nixBinaryTarball"
+
   build-shell:
     name: build-shell (${{ matrix.system.hostPlatform }})
     runs-on: ${{ matrix.system.ghSystem }}

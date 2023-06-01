@@ -56,6 +56,13 @@
       inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
     };
 
+    # XXX: https://github.com/NixOS/nix/pull/8047
+    nix = {
+      url = "github:lovesegfault/nix/always-allow-substitutes-backport";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
+    };
+
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
