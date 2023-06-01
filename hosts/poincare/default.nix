@@ -9,6 +9,10 @@
 
   environment.variables.JAVA_HOME = "$(/usr/libexec/java_home)";
 
+  homebrew.casks = [
+    { name = "docker"; greedy = true; }
+  ];
+
   home-manager.users.bemeurer = { config, ... }: {
     home.sessionPath = [
       "${config.home.homeDirectory}/.toolbox/bin"
