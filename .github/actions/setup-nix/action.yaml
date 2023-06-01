@@ -28,7 +28,7 @@ runs:
     - uses: DeterminateSystems/nix-installer-action@v3
       with:
         nix-installer-tag: "v0.9.1"
-        nix-package-url: "https://nix-config.cachix.org/serve/x15ddvgysszk30r3wk9q2x69nw5wjrna/nix-2.15.1-x86_64-linux.tar.xz"
+        nix-package-url: "https://nix-config.cachix.org/serve/j4qfjhmimrrccpdkgnbskx9lgffqnmx7/nix-2.16.0-x86_64-linux.tar.xz"
         extra-conf: |
           accept-flake-config = true
           always-allow-substitutes = true
