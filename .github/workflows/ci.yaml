@@ -26,7 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       hosts: ${{ steps.get-hosts.outputs.hosts }}
-      systems: ${{ steps.get-hosts.outputs.systems }}
+      nix-systems: ${{ steps.get-hosts.outputs.hostPlatforms }}
+      gh-systems: ${{ steps.get-hosts.outputs.ghSystems }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -48,56 +49,116 @@ jobs:
             | map(select(.ghSystem != null))
           ' > "$TMP/hosts.json"
 
-          # shellcheck disable=SC2002
-          cat "$TMP/hosts.json" | jq -c '
+          jq -c '
             map({hostPlatform, ghSystem})
             | unique_by(.hostPlatform)
             | sort_by(.ghSystem)
-          ' > "$TMP/systems.json"
+          ' \
+          < "$TMP/hosts.json" \
+          > "$TMP/hostPlatforms.json"
 
-          echo "hosts=$(cat "$TMP/hosts.json")" >> "$GITHUB_OUTPUT"
-          echo "systems=$(cat "$TMP/systems.json")" >> "$GITHUB_OUTPUT"
+          jq -c <<EOF >"$TMP/ghSystems.json"
+          {
+            "ubuntu-latest": "x86_64-linux",
+            "macos-latest": "x86_64-darwin"
+          }
+          EOF
 
+          {
+            echo "hosts=$(cat "$TMP/hosts.json")"
+            echo "hostPlatforms=$(cat "$TMP/hostPlatforms.json")"
+            echo "ghSystems=$(cat "$TMP/ghSystems.json")"
+          } >> "$GITHUB_OUTPUT"
+
+  # XXX:: We use a super ugly hack due to jobs not being able to handle
+  # outputs+matrix
+  # c.f. https://github.com/community/community/discussions/17245
   build-nix:
     name: build-nix (${{ matrix.system.hostPlatform }})
     runs-on: ${{ matrix.system.ghSystem }}
-    needs: get-hosts
+    needs: [ get-hosts ]
+    outputs:
+      package-url: ${{ steps.build-nix.outputs.package-url }}
     strategy:
       fail-fast: false
       matrix:
-        system: ${{ fromJson(needs.get-hosts.outputs.systems) }}
+        system: ${{ fromJson(needs.get-hosts.outputs.nix-systems) }}
     steps:
       - uses: actions/checkout@v3
         with:
           lfs: false
       - uses: ./.github/actions/setup-nix
         with:
-          aarch64-builder: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
-          aarch64-builder-key: ${{ secrets.AARCH64_BUILDER_KEY }}
           cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: build-nix
+        id: build-nix
         run: |
-          nix run nixpkgs\#nix-build-uncached -- \
-            --keep-going \
-            -A "packages.${{ matrix.system.hostPlatform }}.nixBinaryTarball"
+          nix build -L --print-out-paths .#packages.${{ matrix.system.hostPlatform }}.nixBinaryTarball
+          storePath="$(realpath ./result | xargs basename)"
+          narHash="$(cut -f1 -d'-' <<< "$storePath")"
+          narLen="$(printf "%s" "$narHash" | wc -c)"
+          if [[ $narLen != 32 ]]; then
+            echo "Incorrect nar hash length of $narLen"
+            echo "storePath=$storePath"
+            echo "narHash=$narHash"
+            exit 1
+          fi
+          tarball="$(basename ./result/nix-*.tar.xz)"
+          tarballUrl="https://nix-config.cachix.org/serve/$narHash/$tarball"
+          echo "package-url=$tarballUrl" >> "$GITHUB_OUTPUT"
+      - uses: cloudposse/github-action-matrix-outputs-write@main
+        id: out
+        with:
+          matrix-step-name: ${{ github.job }}
+          matrix-key: ${{ matrix.system.hostPlatform }}
+          outputs: |-
+            packageUrl: ${{ steps.build-nix.outputs.package-url }}
+
+  nix-matrix:
+    runs-on: ubuntu-latest
+    needs: [ build-nix ]
+    outputs:
+      url-matrix: "${{ steps.read-matrix.outputs.result }}"
+    steps:
+      - uses: cloudposse/github-action-matrix-outputs-read@main
+        id: read-matrix
+        with:
+          matrix-step-name: build-nix
 
   build-shell:
     name: build-shell (${{ matrix.system.hostPlatform }})
     runs-on: ${{ matrix.system.ghSystem }}
-    needs: get-hosts
+    needs: [ get-hosts, nix-matrix ]
     strategy:
       fail-fast: false
       matrix:
-        system: ${{ fromJson(needs.get-hosts.outputs.systems) }}
+        system: ${{ fromJson(needs.get-hosts.outputs.nix-systems) }}
     steps:
       - uses: actions/checkout@v3
         with:
           lfs: false
+      - name: get-nix-package-url
+        id: get-nix
+        env:
+          GH_SYSTEM: "${{ matrix.system.ghSystem }}"
+          SYSTEM_MAP: "${{ needs.get-hosts.outputs.gh-systems }}"
+          URL_MATRIX: "${{ needs.nix-matrix.outputs.url-matrix }}"
+        run: |
+          # shellcheck disable=2034
+          NIX_SYSTEM="$(jq -r '.[$ENV.GH_SYSTEM]' <<< "$SYSTEM_MAP")"
+          export NIX_SYSTEM
+          packageUrl="$(jq -r '.packageUrl[$ENV.NIX_SYSTEM]' <<< "$URL_MATRIX")"
+          if ! curl --output /dev/null --silent --head --fail "$packageUrl"; then
+            echo "It seems like the parsed Nix binary tarball does not exist: '$packageUrl'"
+            exit 1
+          fi
+          echo "package-url=$packageUrl" >> "$GITHUB_OUTPUT"
       - uses: ./.github/actions/setup-nix
         with:
           aarch64-builder: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
           aarch64-builder-key: ${{ secrets.AARCH64_BUILDER_KEY }}
           cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          nix-package-url: ${{ steps.get-nix.outputs.package-url }}
       - name: build-shell
         run: |
           nix run nixpkgs\#nix-build-uncached -- \
@@ -107,7 +168,7 @@ jobs:
   build-host:
     name: build-${{ matrix.host.name }}
     runs-on: ${{ matrix.host.ghSystem }}
-    needs: get-hosts
+    needs: [ get-hosts, nix-matrix ]
     strategy:
       fail-fast: false
       matrix:
@@ -116,11 +177,28 @@ jobs:
       - uses: actions/checkout@v3
         with:
           lfs: false
+      - name: get-nix-package-url
+        id: get-nix
+        env:
+          GH_SYSTEM: "${{ matrix.host.ghSystem }}"
+          SYSTEM_MAP: "${{ needs.get-hosts.outputs.gh-systems }}"
+          URL_MATRIX: "${{ needs.nix-matrix.outputs.url-matrix }}"
+        run: |
+          # shellcheck disable=2034
+          NIX_SYSTEM="$(jq -r '.[$ENV.GH_SYSTEM]' <<< "$SYSTEM_MAP")"
+          export NIX_SYSTEM
+          packageUrl="$(jq -r '.packageUrl[$ENV.NIX_SYSTEM]' <<< "$URL_MATRIX")"
+          if ! curl --output /dev/null --silent --head --fail "$packageUrl"; then
+            echo "It seems like the parsed Nix binary tarball does not exist: '$packageUrl'"
+            exit 1
+          fi
+          echo "package-url=$packageUrl" >> "$GITHUB_OUTPUT"
       - uses: ./.github/actions/setup-nix
         with:
           aarch64-builder: ${{ matrix.host.hostPlatform == 'aarch64-linux' }}
           aarch64-builder-key: ${{ secrets.AARCH64_BUILDER_KEY }}
           cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          nix-package-url: ${{ steps.get-nix.outputs.package-url }}
       - name: build-host
         run: |
           nix run nixpkgs#nix-build-uncached -- \
