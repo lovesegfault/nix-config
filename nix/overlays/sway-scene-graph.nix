@@ -1,13 +1,13 @@
 final: prev:
 {
   wlroots_0_17 = (final.wlroots_0_16.overrideAttrs (old: {
-    version = "unstable-2023-04-16";
+    version = "unstable-2023-06-03";
     src = final.fetchFromGitLab {
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "95062904c7acc38d2175744ceda399c5b5a12adf";
-      hash = "sha256-virCNkfz7ID5Sh1KG8S5qCbmvh+2ymSyR6Fafetl9K0=";
+      rev = "b61d5922f1d0910a848deb100570ad8587aea38d";
+      hash = "sha256-yxq/U9zL1ssFZtgT27A96UKteCiKb3zSmbA/dokK76U=";
     };
     nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ final.hwdata ];
     buildInputs = (old.buildInputs or [ ]) ++ [
@@ -21,8 +21,8 @@ final: prev:
     src = final.fetchFromGitHub {
       owner = "Nefsen402";
       repo = "sway";
-      rev = "748607ecb842c44368920f415d3cbd70d252fe8d";
-      hash = "sha256-FTgOdYxiUQMERsTEq40K0s74uQKWJ3tanDoKKMxqkig=";
+      rev = "58df2d60a23cd093edb9800531f52be6b7ba3209";
+      hash = "sha256-Wbqi2KOuKVsSGEahYwBMzW4EjLYuC/zJTzBw0xNvKcQ=";
     };
 
     nativeBuildInputs = with final; (old.nativeBuildInputs or [ ]) ++ [ bash-completion fish ];
