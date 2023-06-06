@@ -13,7 +13,7 @@
   boot = {
     initrd.availableKernelModules = [ "nvme" "thinkpad_acpi" "thunderbolt" "xhci_pci" ];
     blacklistedKernelModules = [ "sp5100_tco" ];
-    kernelModules = [ "cpufreq_conservative" "cpufreq_ondemand" "kvm-amd" "thinkpad_acpi" ];
+    kernelModules = [ "kvm-amd" "thinkpad_acpi" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "nowatchdog" ];
@@ -51,8 +51,8 @@
     tlp = {
       enable = true;
       settings = {
-        CPU_SCALING_GOVERNOR_ON_AC = "ondemand";
-        CPU_SCALING_GOVERNOR_ON_BAT = "conservative";
+        CPU_SCALING_GOVERNOR_ON_AC = "schedutil";
+        CPU_SCALING_GOVERNOR_ON_BAT = "schedutil";
 
         PLATFORM_PROFILE_ON_AC = "performance";
         PLATFORM_PROFILE_ON_BAT = "low-power";
