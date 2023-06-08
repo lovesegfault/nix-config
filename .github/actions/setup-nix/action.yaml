@@ -36,7 +36,7 @@ runs:
           accept-flake-config = true
           always-allow-substitutes = true
           builders-use-substitutes = true
-          experimental-features = nix-command flakes recursive-nix
+          experimental-features = nix-command flakes
         github-token: ${{ inputs.github-token }}
     - uses: cachix/cachix-action@v12
       if: ${{ inputs.cachix == 'true' }}

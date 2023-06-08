@@ -10,7 +10,6 @@
       build-users-group = "nixbld";
       builders-use-substitutes = true;
       trusted-users = [ "root" "@wheel" ];
-      system-features = [ "recursive-nix" ];
       sandbox = hostType == "nixos";
       substituters = [
         "https://nix-config.cachix.org"
@@ -22,7 +21,7 @@
       ];
       cores = 0;
       max-jobs = "auto";
-      experimental-features = [ "nix-command" "flakes" "recursive-nix" ];
+      experimental-features = [ "nix-command" "flakes" ];
       connect-timeout = 5;
       http-connections = 0;
       flake-registry = "/etc/nix/registry.json";
