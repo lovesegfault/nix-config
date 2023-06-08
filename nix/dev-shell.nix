@@ -12,9 +12,10 @@ with self.pkgs.${localSystem};
       agenix
       cachix
       deploy-rs.deploy-rs
-      nix-build-uncached
-      nixpkgs-fmt
       nil
+      nix-build-uncached
+      nix-eval-jobs
+      nixpkgs-fmt
       statix
 
       # Lua
