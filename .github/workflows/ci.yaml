@@ -89,6 +89,8 @@ jobs:
           lfs: false
       - uses: ./.github/actions/setup-nix
         with:
+          aarch64-builder: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
+          aarch64-builder-key: ${{ secrets.AARCH64_BUILDER_KEY }}
           cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: build-nix
         id: build-nix
