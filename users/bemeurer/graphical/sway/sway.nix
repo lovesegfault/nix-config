@@ -59,7 +59,7 @@
       export WLR_RENDERER=vulkan
     '';
 
-    systemdIntegration = true;
+    systemd.enable = true;
     wrapperFeatures.gtk = true;
   };
 }
