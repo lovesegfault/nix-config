@@ -80,21 +80,20 @@
               (drv:
                 !elem
                   drv.pname
-                  (map (v: "tree-sitter-${v}-grammar") [
+                  ((map (v: "tree-sitter-${v}-grammar") [
                     "bash"
                     "c-sharp"
-                    "cpp"
-                    "cuda"
+                    "comment"
                     "erlang"
                     "gdscript"
                     "java"
                     "kotlin"
-                    "ql-dbscheme"
+                    "ocaml"
+                    "ql_dbscheme"
                     "ruby"
                     "scala"
                     "smithy"
-                    "sql"
-                  ])
+                  ]) ++ [ "nvim-treesitter-grammar-ocaml_interface" ])
               )
               pkgs.tree-sitter.allGrammars
           )
