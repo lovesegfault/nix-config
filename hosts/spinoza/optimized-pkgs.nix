@@ -1,5 +1,5 @@
 let
-  optimizedOverlayForHost = { hostCFlags ? [ ], hostRustflags ? [ ] }:
+  optimizedOverlayForHost = { hostCFlags ? [ ], hostRustflags ? [ ], hostGoFlags ? [ ] }:
     final: prev:
       let
         inherit (prev.lib) concatStringsSep optionalAttrs pipe;
@@ -10,24 +10,26 @@ let
           else if isList old then concatStringsSep " " (old ++ new)
           else (concatStringsSep " " new);
 
-        applyFlags = { cflags ? null, rustflags ? null }: pkg:
+        applyFlags = { cflags ? [ ], rustflags ? [ ], goflags ? { } }: pkg:
           pkg.overrideAttrs (old:
-            (optionalAttrs (cflags != null) {
+            (optionalAttrs (cflags != [ ]) {
               NIX_CFLAGS_COMPILE = appendFlags cflags (old.NIX_CFLAGS_COMPILE or null);
               NIX_CFLAGS_LINK = appendFlags cflags (old.NIX_CFLAGS_LINK or null);
             })
-            // (optionalAttrs (rustflags != null) {
+            // (optionalAttrs (rustflags != [ ]) {
               CARGO_BUILD_RUSTFLAGS = appendFlags rustflags (old.CARGO_BUILD_RUSTFLAGS or null);
             })
+            // goflags
           );
 
-        applyHost = applyFlags { cflags = hostCFlags; rustflags = hostRustflags; };
+        applyHost = applyFlags { cflags = hostCFlags; goflags = hostGoFlags; rustflags = hostRustflags; };
         applyGraphite = applyFlags { cflags = [ "-fgraphite-identity" "-floop-nest-optimize" ]; };
         # FIXME: Broken: https://github.com/NixOS/nixpkgs/pull/188544
         # applyLTO = applyFlags { cflags = [ "-flto=auto" "-fuse-linker-plugin" ]; };
       in
       {
         alacritty = applyHost prev.alacritty;
+        tailscale = applyHost prev.tailscale;
 
         foot = pipe prev.foot [ applyHost applyGraphite ];
         neovim-unwrapped = pipe prev.neovim-unwrapped [ applyHost applyGraphite ];
@@ -41,7 +43,6 @@ let
       };
 in
 optimizedOverlayForHost {
-  hostRustflags = [ "-Ctarget-cpu=znver3" ];
   hostCFlags = [
     "-march=znver3"
     # XXX: I don't trust shadow stack support yet. Wait for Linux 6.4+
@@ -50,4 +51,6 @@ optimizedOverlayForHost {
     "--param=l1-cache-size=32"
     "--param=l2-cache-size=512"
   ];
+  hostGoFlags = { GOAMD64 = "v3"; };
+  hostRustflags = [ "-Ctarget-cpu=znver3" ];
 }
