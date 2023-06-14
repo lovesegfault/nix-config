@@ -24,11 +24,14 @@ let
 
         applyHost = applyFlags { cflags = hostCFlags; goflags = hostGoFlags; rustflags = hostRustflags; };
         applyGraphite = applyFlags { cflags = [ "-fgraphite-identity" "-floop-nest-optimize" ]; };
-        # FIXME: Broken: https://github.com/NixOS/nixpkgs/pull/188544
-        # applyLTO = applyFlags { cflags = [ "-flto=auto" "-fuse-linker-plugin" ]; };
+        applyLTO = applyFlags {
+          # FIXME: Broken: https://github.com/NixOS/nixpkgs/pull/188544
+          cflags = [ "-flto=auto" "-fuse-linker-plugin" ];
+          rustflags = [ "-Clinker-plugin-lto" "-Clto" "-Ccodegen-units=1" ];
+        };
       in
       {
-        alacritty = applyHost prev.alacritty;
+        alacritty = pipe prev.alacritty [ applyHost applyLTO ];
         tailscale = applyHost prev.tailscale;
 
         foot = pipe prev.foot [ applyHost applyGraphite ];
