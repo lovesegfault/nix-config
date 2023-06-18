@@ -221,11 +221,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1686692834,
-        "narHash": "sha256-EFjJ/r4iYVKO+XdL15g9bzOKbCExTGeqNEVHSn0H7/E=",
+        "lastModified": 1687095371,
+        "narHash": "sha256-ZszSc/rytJKEQgO6Xflzj+CVXykgnvchpOr1kS8ld+4=",
         "owner": "nix-community",
         "repo": "lanzaboote",
-        "rev": "823ad6b70bf09b91c3a9dd9a64678ec80ba3c1ee",
+        "rev": "9044916b9e37f44b6cc29b586673f2109c67a4f8",
         "type": "github"
       },
       "original": {
