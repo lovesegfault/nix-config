@@ -19,7 +19,7 @@
     enableBrokenCiphersForSSE = false;
     hostName = "nextcloud.meurer.org";
     https = true;
-    package = pkgs.nextcloud26;
+    package = pkgs.nextcloud27;
     config = {
       adminpassFile = config.age.secrets.nextcloud.path;
       dbhost = "/run/postgresql";
