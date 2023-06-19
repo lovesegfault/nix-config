@@ -101,6 +101,14 @@
     };
   };
 
+  systemd.network.links.can = {
+    matchConfig = {
+      Property = "ID_SERIAL_SHORT=002A00195542501920393839";
+      Type = "can";
+    };
+    linkConfig.TransmitQueueLength = 1024;
+  };
+
   systemd.network.networks = {
     can = {
       matchConfig = {
@@ -111,8 +119,6 @@
         BitRate = 1000000;
         RestartSec = 1;
       };
-      # FIXME: https://github.com/NixOS/nixpkgs/pull/230256
-      # linkConfig.TransmitQueueLength = 1024;
     };
     lan = {
       DHCP = "yes";
