@@ -3,8 +3,8 @@ final: prev: {
     src = prev.fetchFromGitHub {
       owner = "klipper3d";
       repo = "klipper";
-      rev = "0245073c550bba95f071893c68120dbe2a5d8219";
-      hash = "sha256-nkof4GQ/5D1NS0+w4H/iZdgQnF8PbwjQdIYedymu9I4=";
+      rev = "d32a83345518f4bb632bef9ca2de669b35f0e555";
+      hash = "sha256-XpAUv4NVERVGxV4lk6u15lIIce8ZrYf9uN3fdL5xolI=";
     };
 
     buildInputs = [ (final.python3.withPackages (p: with p; [ can cffi pyserial greenlet jinja2 markupsafe numpy ])) ];
