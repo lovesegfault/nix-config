@@ -6,8 +6,8 @@ final: prev:
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "38d451bcb59d6160e8c90e99879e3608b43d5a0a";
-      hash = "sha256-snLp8XiCWtGfxrD82HghASNQLkpvWKakpj+hVbmQvZI=";
+      rev = "71b57b8d27e2817ebcaa6471e22251203c370554";
+      hash = "sha256-yYFlQsHD/TU0l6pS0t9tSHh7w+LFAUclJMpSyiA+Wnw=";
     };
     nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ final.hwdata ];
     buildInputs = (old.buildInputs or [ ]) ++ [
