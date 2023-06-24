@@ -83,6 +83,7 @@
             "100.64.0.0/10" # tailscale
           ];
         };
+        octoprint_compat = { };
         history = { };
         announcements.subscriptions = [ "mainsail" ];
       };
