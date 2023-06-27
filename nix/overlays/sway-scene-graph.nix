@@ -32,5 +32,5 @@ final: prev:
       (p: !p ? name || p.name != "LIBINPUT_CONFIG_ACCEL_PROFILE_CUSTOM.patch")
       (old.patches or [ ]);
 
-  })).override { wlroots_0_16 = final.wlroots_0_17; };
+  })).override { wlroots = final.wlroots_0_17; };
 }
