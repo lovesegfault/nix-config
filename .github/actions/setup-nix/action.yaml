@@ -24,6 +24,11 @@ inputs:
   nix-package-url:
     description: "The Nix package to install"
     required: false
+  magic-cache:
+    description: "Whether to enable the magic-nix-cache"
+    required: true
+    default: true
+    type: boolean
 
 runs:
   using: "composite"
@@ -69,3 +74,5 @@ runs:
         )
         echo "${builder_cfg[*]}" |
           sudo tee /etc/nix/machines > /dev/null
+    - uses: DeterminateSystems/magic-nix-cache-action@main
+      if: ${{ inputs.magic-cache == 'true' }}
