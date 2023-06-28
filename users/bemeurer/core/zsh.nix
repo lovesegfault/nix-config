@@ -3,7 +3,6 @@
     enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
-    enableSyntaxHighlighting = true;
     enableVteIntegration = pkgs.stdenv.isLinux;
     autocd = true;
     dotDir = ".config/zsh";
@@ -17,6 +16,7 @@
       share = true;
     };
     historySubstringSearch.enable = true;
+    syntaxHighlighting.enable = true;
     envExtra = ''
       export LESSHISTFILE="${config.xdg.dataHome}/less_history"
       export CARGO_HOME="${config.xdg.cacheHome}/cargo"
