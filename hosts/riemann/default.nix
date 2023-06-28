@@ -102,16 +102,13 @@
     };
   };
 
-  systemd.network.links.can = {
-    matchConfig = {
-      Property = "ID_SERIAL_SHORT=002A00195542501920393839";
-      Type = "can";
-    };
-    linkConfig.TransmitQueueLength = 1024;
+  systemd.network.links."10-can" = {
+    matchConfig.Type = "can";
+    linkConfig.TransmitQueueLength = 2048;
   };
 
   systemd.network.networks = {
-    can = {
+    "10-can" = {
       matchConfig = {
         Property = "ID_SERIAL_SHORT=002A00195542501920393839";
         Type = "can";
@@ -121,14 +118,14 @@
         RestartSec = 1;
       };
     };
-    lan = {
+    "10-lan" = {
       DHCP = "yes";
       linkConfig.RequiredForOnline = "no";
       matchConfig.MACAddress = "dc:a6:32:b8:bb:aa";
       dhcpV4Config.RouteMetric = 10;
       dhcpV6Config.RouteMetric = 10;
     };
-    wifi = {
+    "10-wifi" = {
       DHCP = "yes";
       matchConfig.MACAddress = "dc:a6:32:b8:bb:ab";
       dhcpV4Config.RouteMetric = 40;
