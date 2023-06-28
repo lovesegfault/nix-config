@@ -7,7 +7,6 @@
 
   environment = {
     shells = with pkgs; [ fish zsh ];
-    shellAliases.tailscale = "/Applications/Tailscale.app/Contents/MacOS/Tailscale";
     systemPackages = with pkgs; [
       coreutils
       findutils
@@ -39,17 +38,20 @@
       upgrade = true;
     };
     taps = [ "homebrew/core" ];
-    brews = [ "git" "mas" ];
-    masApps = {
-      "Tailscale" = 1475387142;
-    };
+    brews = [ "git" ];
   };
 
   programs.fish.loginShellInit = "fish_add_path --move --prepend --path $HOME/.nix-profile/bin /run/wrappers/bin /etc/profiles/per-user/$USER/bin /run/current-system/sw/bin /nix/var/nix/profiles/default/bin";
 
-  services.nix-daemon = {
-    enable = true;
-    logFile = "/var/log/nix-daemon.log";
+  services = {
+    nix-daemon = {
+      enable = true;
+      logFile = "/var/log/nix-daemon.log";
+    };
+    tailscale = {
+      enable = true;
+      domain = "meurer.org";
+    };
   };
 
   system = {
