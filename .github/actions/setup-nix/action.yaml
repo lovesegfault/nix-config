@@ -33,15 +33,14 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: DeterminateSystems/nix-installer-action@v3
+    - uses: DeterminateSystems/nix-installer-action@v4
       with:
-        nix-installer-tag: "v0.9.1"
+        nix-installer-tag: "v0.10.0"
         nix-package-url: ${{ inputs.nix-package-url }}
         extra-conf: |
           accept-flake-config = true
           always-allow-substitutes = true
           builders-use-substitutes = true
-          experimental-features = nix-command flakes
         github-token: ${{ inputs.github-token }}
     - uses: cachix/cachix-action@v12
       if: ${{ inputs.cachix == 'true' }}
@@ -74,5 +73,5 @@ runs:
         )
         echo "${builder_cfg[*]}" |
           sudo tee /etc/nix/machines > /dev/null
-    - uses: DeterminateSystems/magic-nix-cache-action@main
+    - uses: DeterminateSystems/magic-nix-cache-action@v2
       if: ${{ inputs.magic-cache == 'true' }}
