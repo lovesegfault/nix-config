@@ -25,7 +25,6 @@
       { name = "nextcloud"; greedy = true; }
       { name = "parallels"; greedy = true; }
       { name = "plexamp"; greedy = true; }
-      { name = "quip"; greedy = true; }
       { name = "raycast"; greedy = true; }
       { name = "roon"; greedy = true; }
       { name = "shottr"; greedy = true; }
