@@ -50,6 +50,7 @@
         ".config/op"
         ".config/pipewire"
         ".config/Plexamp"
+        ".config/PrusaSlicer"
         ".config/Signal"
         ".config/spotify"
         ".config/TabNine"
