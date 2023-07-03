@@ -48,10 +48,7 @@
       enable = true;
       logFile = "/var/log/nix-daemon.log";
     };
-    tailscale = {
-      enable = true;
-      domain = "meurer.org";
-    };
+    tailscale.enable = true;
   };
 
   system = {
