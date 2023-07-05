@@ -31,7 +31,6 @@
       kalker
       mosh
       neofetch
-      rclone
       ripgrep
       rsync
     ];
