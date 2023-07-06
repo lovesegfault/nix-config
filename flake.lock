@@ -283,11 +283,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1687097842,
-        "narHash": "sha256-NPAaRZx5foWLgIPfEaiEZMr9JIlEQhLEVEXpx09341Q=",
+        "lastModified": 1688662462,
+        "narHash": "sha256-9TWWkhCWZQMQiZ8nzsVZNUh3r++xbT75iCozpYM8a+w=",
         "owner": "Mic92",
         "repo": "nix-index-database",
-        "rev": "c8210cb3fcde6860255b54ddba74dc177e6232cd",
+        "rev": "4d5a3eec1dc9dbc5c2718ea955a0928f1a3567fd",
         "type": "github"
       },
       "original": {
