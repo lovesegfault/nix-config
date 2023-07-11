@@ -37,7 +37,6 @@
       autoUpdate = true;
       upgrade = true;
     };
-    taps = [ "homebrew/core" ];
     brews = [ "git" ];
   };
 

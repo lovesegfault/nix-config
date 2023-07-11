@@ -2,7 +2,6 @@
   homebrew = {
     taps = [
       "1password/tap"
-      "homebrew/cask"
     ];
     brews = [ "mas" ];
     casks = [
