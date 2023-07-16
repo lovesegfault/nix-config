@@ -28,20 +28,22 @@
     },
     "base16": {
       "inputs": {
-        "fromYaml": "fromYaml"
+        "nixpkgs": [
+          "stylix",
+          "nixpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1687651793,
-        "narHash": "sha256-AjV/f/grsR4y6t0aUviXxjeLAEYmpE/4XE08IIPhHag=",
+        "lastModified": 1658847131,
+        "narHash": "sha256-X6Mml7cT0YR3WCD5fkUhpRVV5ZPcwdcDsND8r8xMqTE=",
         "owner": "SenchoPens",
         "repo": "base16.nix",
-        "rev": "f493d8a8a6b4c1d814790e2189f26d4bcf433185",
+        "rev": "6b404cda2e04ca3cf5ca7b877af9c469e1386acb",
         "type": "github"
       },
       "original": {
         "owner": "SenchoPens",
         "repo": "base16.nix",
-        "rev": "f493d8a8a6b4c1d814790e2189f26d4bcf433185",
         "type": "github"
       }
     },
@@ -143,22 +145,6 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "fromYaml": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1685846909,
-        "narHash": "sha256-ibxtG018Qq2Qjxir4Hai3Gr1hOOa+ad4V0EbFaHOj9Y=",
-        "owner": "SenchoPens",
-        "repo": "fromYaml",
-        "rev": "706176e156923d963ead81fe6bfba041f057cc65",
-        "type": "github"
-      },
-      "original": {
-        "owner": "SenchoPens",
-        "repo": "fromYaml",
         "type": "github"
       }
     },
@@ -434,11 +420,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1689347170,
-        "narHash": "sha256-3IO+37XkKKGILEFw60VeG7P+3za47SNXD3wIXzpNTlU=",
+        "lastModified": 1688822895,
+        "narHash": "sha256-QLs226av5K1v4gQYqxAWQs8nzrlN58p1KoSc9NRME/w=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "0087f554ffe5293a2db7444145b1c54ee338399f",
+        "rev": "ba5565d6989954ad3846245a5b4b122e4dba76d0",
         "type": "github"
       },
       "original": {
