@@ -1,5 +1,6 @@
-{ hostType, lib, ... }: {
+{ hostType, lib, pkgs, ... }: {
   nix = {
+    package = pkgs.nix-always-substitute;
     settings = {
       accept-flake-config = true;
       # XXX: Causes annoying "cannot link ... to ...: File exists" errors on Darwin

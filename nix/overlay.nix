@@ -19,6 +19,8 @@ localOverlays // {
   default = lib.composeManyExtensions ([
     agenix.overlays.default
     deploy-rs.overlay
-    nix.overlays.default
+    (final: prev: {
+      nix-always-substitute = nix.packages.${final.stdenv.hostPlatform.system}.nix;
+    })
   ] ++ (lib.attrValues localOverlays));
 }
