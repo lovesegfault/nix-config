@@ -28,6 +28,7 @@
 
   programs.alacritty.enable = true;
 
+  stylix.targets.kde.enable = false;
   stylix.fonts = {
     sansSerif = {
       package = pkgs.ibm-plex;
