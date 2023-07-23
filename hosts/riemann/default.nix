@@ -5,7 +5,7 @@
 
     ../../core
 
-    ../../hardware/nixos-aarch64-builder
+    # ../../hardware/nixos-aarch64-builder
 
     ../../services/nginx.nix
     ../../services/oauth2.nix
