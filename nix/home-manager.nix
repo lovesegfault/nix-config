@@ -1,8 +1,9 @@
 { self
+, base16-schemes
 , home-manager
+, impermanence
 , nix-index-database
 , nixpkgs
-, impermanence
 , stylix
 , templates
 , ...
@@ -50,7 +51,11 @@ let
       modules = [ (genModules hostName attrs) ];
       extraSpecialArgs = {
         hostType = type;
-        inherit impermanence nix-index-database stylix;
+        inherit
+          base16-schemes
+          impermanence
+          nix-index-database
+          stylix;
       };
     };
 in

@@ -1,4 +1,4 @@
-{ pkgs, hostType, impermanence, nix-index-database, stylix, ... }: {
+{ pkgs, base16-schemes, hostType, impermanence, nix-index-database, stylix, ... }: {
   imports = [
     (
       if hostType == "nixos" then ./nixos.nix
@@ -32,7 +32,12 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {
-      inherit hostType impermanence nix-index-database stylix;
+      inherit
+        base16-schemes
+        hostType
+        impermanence
+        nix-index-database
+        stylix;
     };
   };
 
@@ -43,7 +48,7 @@
   };
 
   stylix = {
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/ayu-dark.yaml";
+    base16Scheme = "${base16-schemes}/ayu-dark.yaml";
     # We need this otherwise the autoimport clashes with our manual import.
     homeManagerIntegration.autoImport = false;
     # XXX: We fetchurl from the repo because flakes don't support git-lfs assets

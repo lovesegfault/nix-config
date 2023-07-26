@@ -1,6 +1,7 @@
 { self
-, home-manager
 , agenix
+, base16-schemes
+, home-manager
 , impermanence
 , lanzaboote
 , nix-index-database
@@ -29,7 +30,15 @@ let
       specialArgs = {
         hostAddress = address;
         hostType = type;
-        inherit agenix home-manager impermanence lanzaboote nix-index-database nixos-hardware stylix;
+        inherit
+          agenix
+          base16-schemes
+          home-manager
+          impermanence
+          lanzaboote
+          nix-index-database
+          nixos-hardware
+          stylix;
       };
     };
 in

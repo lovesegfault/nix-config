@@ -20,6 +20,11 @@
       inputs.home-manager.follows = "home-manager";
     };
 
+    base16-schemes = {
+      url = "github:tinted-theming/base16-schemes";
+      flake = false;
+    };
+
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";

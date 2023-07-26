@@ -1,4 +1,5 @@
 { self
+, base16-schemes
 , darwin
 , home-manager
 , impermanence
@@ -27,7 +28,12 @@ let
       ];
       specialArgs = {
         hostType = type;
-        inherit home-manager impermanence nix-index-database stylix;
+        inherit
+          base16-schemes
+          home-manager
+          impermanence
+          nix-index-database
+          stylix;
       };
     };
 in
