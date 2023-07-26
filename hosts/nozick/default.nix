@@ -157,7 +157,7 @@
     plex.enable = true;
     smartd.enable = true;
     sshguard.enable = true;
-    syncthing.folders = {
+    syncthing.settings.folders = {
       music = {
         devices = [ "bohr" "fourier" "jung" ];
         path = "/mnt/music";

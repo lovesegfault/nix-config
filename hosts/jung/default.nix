@@ -125,7 +125,7 @@
     nginx.resolver.addresses = [ "127.0.0.1:5335" ];
     fwupd.enable = true;
     smartd.enable = true;
-    syncthing.folders = {
+    syncthing.settings.folders = {
       music = {
         devices = [ "bohr" "fourier" "nozick" ];
         path = "/mnt/music";

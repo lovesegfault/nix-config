@@ -90,7 +90,7 @@
     fwupd.enable = true;
     roon-bridge.enable = true;
     smartd.enable = true;
-    syncthing.folders = {
+    syncthing.settings.folders = {
       music = {
         devices = [ "fourier" "jung" "nozick" ];
         path = "/mnt/music";

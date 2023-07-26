@@ -108,7 +108,7 @@
     fstrim.enable = true;
     fwupd.enable = true;
     smartd.enable = true;
-    syncthing.folders = {
+    syncthing.settings.folders = {
       music = {
         devices = [ "bohr" "jung" "nozick" ];
         path = "/srv/music";
