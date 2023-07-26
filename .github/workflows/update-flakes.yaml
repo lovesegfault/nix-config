@@ -39,7 +39,6 @@ jobs:
       - uses: ./.github/actions/setup-nix
         with:
           cachix: false
-          magic-cache: false
       - run: git config --global user.email "hatesegfault@protonmail.ch"
       - run: git config --global user.name "hatesegfault"
       - uses: cpcloud/flake-update-action@v1.0.4

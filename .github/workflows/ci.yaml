@@ -35,7 +35,6 @@ jobs:
       - uses: ./.github/actions/setup-nix
         with:
           cachix: false
-          magic-cache: false
       - id: get-hosts
         run: |
           TMP="$(mktemp -d)"
