@@ -70,8 +70,6 @@
     };
   };
 
-  stylix.targets.kde.enable = false;
-
   systemd.user.services = {
     polkit-gnome = {
       Unit = {

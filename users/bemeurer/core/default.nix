@@ -1,4 +1,4 @@
-{ hostType, impermanence, nix-index-database, pkgs, stylix, ... }: {
+{ hostType, impermanence, lib, nix-index-database, pkgs, stylix, ... }: {
   imports = [
     impermanence.nixosModules.home-manager.impermanence
     nix-index-database.hmModules.nix-index
@@ -65,6 +65,7 @@
     };
     targets.gnome.enable = hostType == "nixos";
     targets.gtk.enable = hostType == "nixos";
+    targets.kde.enable = lib.mkDefault false;
   };
 
   systemd.user.startServices = "sd-switch";
