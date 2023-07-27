@@ -1,7 +1,7 @@
 { hostType, lib, pkgs, ... }: {
   fonts = {
     fontDir.enable = hostType == "darwin";
-    fonts = with pkgs; [
+    packages = with pkgs; [
       # FIXME: Make nix-darwin stop exploding when there are repeated fonts
       # dejavu_fonts
       # noto-fonts-extra
@@ -11,7 +11,7 @@
       unifont
     ];
   } // lib.optionalAttrs (hostType == "nixos") {
-    enableDefaultFonts = false;
+    enableDefaultPackages = false;
     enableGhostscriptFonts = false;
     fontconfig = {
       localConf = ''
