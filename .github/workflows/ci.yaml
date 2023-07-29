@@ -38,7 +38,7 @@ jobs:
       - id: get-hosts
         run: |
           TMP="$(mktemp -d)"
-          nix eval --json -f ./nix/hosts.nix all | jq -c '
+          nix eval --json -f ./nix/hosts.nix | jq -c '
             to_entries
             | map({name: .key} + .value)
             | map_values(

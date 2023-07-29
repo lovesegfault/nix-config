@@ -17,7 +17,7 @@ if hostType == "nixos" || hostType == "darwin" then {
     home.uid = config.users.users.bemeurer.uid;
   };
 }
-else if hostType == "homeManager" then {
+else if hostType == "home-manager" then {
   imports = [
     ./core
     ./dev

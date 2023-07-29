@@ -42,4 +42,4 @@ let
       };
     };
 in
-lib.mapAttrs genConfiguration (self.hosts.nixos or { })
+lib.mapAttrs genConfiguration (lib.filterAttrs (_: host: host.type == "nixos") self.hosts)
