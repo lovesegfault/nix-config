@@ -22,7 +22,7 @@
 
   nix = {
     gc.automatic = true;
-    # linux-builder.enable = true;
+    linux-builder.enable = true;
     settings = {
       system-features = [ "big-parallel" "gccarch-armv8-a" ];
       trusted-users = [ "bemeurer" ];
