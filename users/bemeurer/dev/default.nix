@@ -10,7 +10,7 @@
     packages = with pkgs; [
       git-lfs
       nix-update
-      nixpkgs-review
+      (lib.hiPrio nixpkgs-review)
       tmate
       upterm
     ];
