@@ -403,11 +403,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1691256628,
-        "narHash": "sha256-M0YXHemR3zbyhM7PvJa5lzGhWVf6kM/fpZ4cWe/VIhI=",
+        "lastModified": 1691397944,
+        "narHash": "sha256-4fa4bX3kPYKpEssgrFRxRCPVXczidArDeSWaUMSzQAU=",
         "owner": "cachix",
         "repo": "pre-commit-hooks.nix",
-        "rev": "3139c4d1f7732cab89f06492bdd4677b877e3785",
+        "rev": "e5588ddffd4c3578547a86ef40ec9a6fbdae2986",
         "type": "github"
       },
       "original": {
