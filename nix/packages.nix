@@ -17,6 +17,10 @@ let
 
   compatHostsFarm = linkFarm "hosts-${localSystem}" (lib.mapAttrsToList (name: path: { inherit name path; }) compatHostDrvs);
 in
-compatHostDrvs // (lib.optionalAttrs (compatHosts != { }) { all = compatHostsFarm; }) // {
+compatHostDrvs
+// (lib.optionalAttrs (compatHosts != { }) {
+  all = compatHostsFarm;
+  default = compatHostsFarm;
+}) // {
   nixBinaryTarball = nix.hydraJobs.binaryTarball.${localSystem};
 }
