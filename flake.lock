@@ -480,11 +480,11 @@
     },
     "templates": {
       "locked": {
-        "lastModified": 1678524284,
-        "narHash": "sha256-3tk4RHKrIbz2tNVyW2WOrgZBe26jhfBiz7bzb7b8p5I=",
+        "lastModified": 1691421369,
+        "narHash": "sha256-Agfum0ykpUxUUS4AKYPVSWF+NeHPWay2o1TTNH0BFXA=",
         "owner": "NixOS",
         "repo": "templates",
-        "rev": "0edaa0637331e9d8acca5c8ec67936a2c8b8749b",
+        "rev": "0fb94bf87144b18e42765693c3e15ac5f17eeab0",
         "type": "github"
       },
       "original": {
