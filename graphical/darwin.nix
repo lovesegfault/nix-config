@@ -55,7 +55,7 @@
   services.skhd = {
     enable = true;
     skhdConfig = ''
-      cmd - return : alacritty
+      cmd - return : kitty -1 -d ~
     '';
   };
 
