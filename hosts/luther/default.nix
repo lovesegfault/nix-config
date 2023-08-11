@@ -4,34 +4,34 @@
   home = {
     uid = 22314791;
     packages = with pkgs; [ rustup ];
+    shellAliases = {
+      bre = "brazil-runtime-exec";
+      brc = "brazil-recursive-cmd";
+      bws = "brazil ws";
+      bb = "brazil-build";
+    };
+    sessionPath = [
+      "$HOME/.toolbox/bin"
+      "/apollo/env/bt-rust/bin"
+    ];
   };
 
   programs = {
     bash = {
       bashrcExtra = ''
         if [ -f /etc/bashrc ]; then
-        . /etc/bashrc
+          . /etc/bashrc
         fi
       '';
       profileExtra = ''
-        if [ -f /etc/bashrc ]; then
-        . /etc/bashrc
+        if [ -f /etc/profile ]; then
+          . /etc/profile
         fi
-        export PATH="$PATH:$HOME/.toolbox/bin:/apollo/env/bt-rust/bin"
       '';
     };
-    fish.shellInit = ''
-      fish_add_path --append --path "$HOME/.toolbox/bin"
-      fish_add_path --append --path "/apollo/env/bt-rust/bin"
-    '';
     git.userEmail = lib.mkForce "bemeurer@amazon.com";
-    zsh = {
-      initExtraBeforeCompInit = ''
-        fpath+=("$HOME/.zsh/completion")
-      '';
-      initExtra = ''
-        export PATH="$PATH:$HOME/.toolbox/bin:/apollo/env/bt-rust/bin"
-      '';
-    };
+    zsh.initExtraBeforeCompInit = ''
+      fpath+=("$HOME/.zsh/completion" "$HOME/.brazil_completion/zsh_completion")
+    '';
   };
 }
