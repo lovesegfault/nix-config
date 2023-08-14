@@ -14,7 +14,6 @@
       plugins = with pkgs.vimPlugins; [
         # ui
         bufferline-nvim # bufferline
-        dashboard-nvim # nice init screen
         dressing-nvim # improve the default vim.ui interfaces
         gitsigns-nvim # git status sign decorations
         indent-blankline-nvim # indentation guides

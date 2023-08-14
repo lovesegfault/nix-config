@@ -39,26 +39,6 @@ require("true-zen").setup({ modes = { ataraxis = { minimum_writing_area = { widt
 require("bufdelete")
 vim.keymap.set("n", "<leader>bd", "<cmd>Bdelete<cr>", { desc = "Delete buffer", silent = true })
 
--- dashboard
-require("dashboard").setup({
-  theme = "hyper",
-  config = {
-    week_header = {
-      enable = true,
-    },
-    shortcut = {
-      {
-        icon = " ",
-        icon_hl = "@variable",
-        desc = "Files",
-        group = "Label",
-        action = "Telescope frecency",
-        key = "f",
-      },
-    },
-  },
-})
-
 -- todo-comments
 local todo_comments = require("todo-comments")
 todo_comments.setup()
