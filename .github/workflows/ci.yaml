@@ -202,10 +202,15 @@ jobs:
           cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
           nix-package-url: ${{ steps.get-nix.outputs.package-url }}
       - name: build-host
-        run: |
-          nix run nixpkgs#nix-build-uncached -- \
-            --keep-going \
-            -A packages.${{ matrix.host.hostPlatform }}.${{ matrix.host.name }}
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 720
+          max_attempts: 3
+          retry_on: error
+          command: |
+            nix run nixpkgs#nix-build-uncached -- \
+              --keep-going \
+              -A packages.${{ matrix.host.hostPlatform }}.${{ matrix.host.name }}
 
   check:
     runs-on: ubuntu-latest
