@@ -90,6 +90,8 @@ jobs:
       - uses: actions/checkout@v3
         with:
           lfs: false
+          sparse-checkout: |
+            .github
       - uses: ./.github/actions/setup-nix
         with:
           aarch64-builder: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
@@ -98,7 +100,9 @@ jobs:
       - name: build-nix
         id: build-nix
         run: |
-          nix build -L --print-out-paths .#packages.${{ matrix.system.hostPlatform }}.nixBinaryTarball
+          flakeUri="github:${GITHUB_REPOSITORY}/${GITHUB_SHA}"
+          flakeAttr="packages.${{ matrix.system.hostPlatform }}.nixBinaryTarball"
+          nix build -L --print-out-paths "${flakeUri}#${flakeAttr}"
           storePath="$(realpath ./result | xargs basename)"
           narHash="$(cut -f1 -d'-' <<< "$storePath")"
           narLen="$(printf "%s" "$narHash" | wc -c)"
