@@ -1,7 +1,10 @@
 local nvim_lsp = require("lspconfig")
 
 -- notifications
-require("lsp-notify").setup()
+-- Breaks diffmode: https://github.com/mrded/nvim-lsp-notify/issues/10
+if not vim.api.nvim_win_get_option(0, "diff") then
+  require("lsp-notify").setup()
+end
 
 local flags = { debounce_text_changes = 150 }
 
