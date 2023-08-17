@@ -3,7 +3,7 @@
 
   home = {
     uid = 22314791;
-    packages = with pkgs; [ rustup rust-analyzer ];
+    packages = with pkgs; [ rustup (lib.hiPrio rust-analyzer) ];
     shellAliases = {
       bre = "brazil-runtime-exec";
       brc = "brazil-recursive-cmd";
