@@ -9,7 +9,12 @@ vim.o.background = "dark"
 require("ayu").colorscheme()
 
 -- register nvim-notify
-vim.notify = require("notify")
+local notify = require("notify")
+notify.setup({
+  timeout = 2000,
+})
+vim.notify = notify
+vim.keymap.set("n", "<C-d>", notify.dismiss, { desc = "Dismiss notifications", silent = true })
 
 -- modularized / complex configs
 require("completion")
