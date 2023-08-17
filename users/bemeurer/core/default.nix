@@ -40,6 +40,7 @@
       l = "ls";
       la = "ls --all";
       ls = "exa --binary --header --long --classify";
+      man = "batman";
     };
   };
 
@@ -49,7 +50,10 @@
       settings.auto_sync = false;
       flags = [ "--disable-up-arrow" ];
     };
-    bat.enable = true;
+    bat = {
+      enable = true;
+      extraPackages = with pkgs.bat-extras; [ batman ];
+    };
     fzf.enable = true;
     gpg.enable = true;
     nix-index.enable = true;
