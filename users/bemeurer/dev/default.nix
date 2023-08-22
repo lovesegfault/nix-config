@@ -14,7 +14,6 @@
       tmate
       upterm
     ];
-    shellAliases.gco = lib.mkForce "git cz commit";
   };
 
   programs = {
