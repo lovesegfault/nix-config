@@ -98,6 +98,8 @@
     wireless.iwd.enable = true;
   };
 
+  nix.settings.max-substitution-jobs = 32;
+
   nixpkgs.overlays = [ (import ./optimized-pkgs.nix) ];
 
   security.pam.loginLimits = [

@@ -81,6 +81,7 @@
       options = "-d";
     };
     settings.system-features = [ "benchmark" "nixos-test" "big-parallel" "kvm" ];
+    settings.max-substitution-jobs = 32;
   };
 
   security.pam.loginLimits = [

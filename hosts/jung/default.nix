@@ -92,11 +92,12 @@
   };
 
   nix = {
-    settings.system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-znver3" ];
     gc = {
       automatic = true;
       dates = "02:30";
     };
+    settings.max-substitution-jobs = 32;
+    settings.system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-znver3" ];
   };
 
   powerManagement.cpuFreqGovernor = "performance";
