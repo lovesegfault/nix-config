@@ -36,6 +36,7 @@
       '';
     };
     kernelModules = [ "kvm-intel" ];
+    kernelParams = [ "i915.enable_guc=2" ];
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {
