@@ -21,6 +21,7 @@
     ./nextcloud.nix
     ./rtorrent.nix
     ./state.nix
+    ./transmission.nix
   ];
 
   age.secrets = {
