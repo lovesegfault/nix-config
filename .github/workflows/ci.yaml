@@ -9,7 +9,7 @@ jobs:
   lints:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           lfs: false
       - uses: ./.github/actions/setup-nix
@@ -29,7 +29,7 @@ jobs:
       nix-systems: ${{ steps.get-hosts.outputs.hostPlatforms }}
       gh-systems: ${{ steps.get-hosts.outputs.ghSystems }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           lfs: false
           sparse-checkout: |
@@ -87,7 +87,7 @@ jobs:
       matrix:
         system: ${{ fromJson(needs.get-hosts.outputs.nix-systems) }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           lfs: false
           sparse-checkout: |
@@ -143,7 +143,7 @@ jobs:
       matrix:
         system: ${{ fromJson(needs.get-hosts.outputs.nix-systems) }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           lfs: false
       - name: get-nix-package-url
@@ -183,7 +183,7 @@ jobs:
       matrix:
         host: ${{ fromJson(needs.get-hosts.outputs.hosts) }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           lfs: false
       - name: get-nix-package-url
