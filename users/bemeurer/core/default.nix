@@ -26,7 +26,7 @@
     packages = with pkgs; [
       bandwhich
       colorcheck
-      exa
+      eza
       fd
       kalker
       mosh
@@ -39,7 +39,7 @@
       cls = "clear";
       l = "ls";
       la = "ls --all";
-      ls = "exa --binary --header --long --classify";
+      ls = "eza --binary --header --long --classify";
       man = "batman";
     };
   };
