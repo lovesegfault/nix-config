@@ -188,7 +188,7 @@
   ];
 
   systemd.network.networks.eth = {
-    matchConfig.MACAddress = "90:1b:0e:db:06:2f";
+    matchConfig.MACAddress = "4c:52:62:21:98:ff";
     DHCP = "yes";
   };
 
