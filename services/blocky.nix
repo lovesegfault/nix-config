@@ -89,10 +89,6 @@ with config.networking;
       ];
     };
 
-    systemd.services.postgresql.postStart = lib.mkAfter ''
-      $PSQL -tAc 'GRANT pg_read_all_data TO grafana'
-    '';
-
     prometheus.scrapeConfigs = [{
       job_name = "blocky";
       scrape_interval = "15s";
@@ -128,15 +124,20 @@ with config.networking;
     unbound.settings.server.port = "5335";
   };
 
-  systemd.services.blocky = {
-    after = [ "unbound.service" "postgresql.service" ];
-    requires = [ "unbound.service" ];
-    serviceConfig = {
-      DynamicUser = lib.mkForce false;
-      User = "blocky";
-      Group = "blocky";
-      Restart = "on-failure";
-      RestartSec = "1";
+  systemd.services = {
+    postgresql.postStart = lib.mkAfter ''
+      $PSQL -tAc 'GRANT pg_read_all_data TO grafana'
+    '';
+    blocky = {
+      after = [ "unbound.service" "postgresql.service" ];
+      requires = [ "unbound.service" ];
+      serviceConfig = {
+        DynamicUser = lib.mkForce false;
+        User = "blocky";
+        Group = "blocky";
+        Restart = "on-failure";
+        RestartSec = "1";
+      };
     };
   };
 
