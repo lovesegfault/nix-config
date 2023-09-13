@@ -15,6 +15,7 @@
       download-dir = "/mnt/downloads";
       incomplete-dir = "/mnt/incomplete";
       rpc-bind-address = "0.0.0.0";
+      rpc-whitelist = "100.*.*.*";
     };
   };
 }
