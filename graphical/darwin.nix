@@ -14,7 +14,6 @@
       { name = "balenaetcher"; greedy = true; }
       { name = "bartender"; greedy = true; }
       { name = "daisydisk"; greedy = true; }
-      { name = "dash"; greedy = true; }
       { name = "firefox"; greedy = true; }
       { name = "google-chrome"; greedy = true; }
       { name = "ksdiff"; greedy = true; }
