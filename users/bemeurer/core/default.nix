@@ -67,9 +67,11 @@
       url = "https://media.githubusercontent.com/media/lovesegfault/nix-config/bda48ceaf8112a8b3a50da782bf2e65a2b5c4708/users/bemeurer/assets/walls/plants-00.jpg";
       hash = "sha256-n8EQgzKEOIG6Qq7og7CNqMMFliWM5vfi2zNILdpmUfI=";
     };
-    targets.gnome.enable = hostType == "nixos";
-    targets.gtk.enable = hostType == "nixos";
-    targets.kde.enable = lib.mkDefault false;
+    targets = {
+      gnome.enable = hostType == "nixos";
+      gtk.enable = hostType == "nixos";
+      kde.enable = lib.mkDefault false;
+    };
   };
 
   systemd.user.startServices = "sd-switch";

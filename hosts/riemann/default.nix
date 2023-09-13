@@ -102,34 +102,36 @@
     };
   };
 
-  systemd.network.links."10-can" = {
-    matchConfig.Type = "can";
-    linkConfig.TransmitQueueLength = 2048;
-  };
+  systemd.network = {
+    links."10-can" = {
+      matchConfig.Type = "can";
+      linkConfig.TransmitQueueLength = 2048;
+    };
 
-  systemd.network.networks = {
-    "10-can" = {
-      matchConfig = {
-        Property = "ID_SERIAL_SHORT=002A00195542501920393839";
-        Type = "can";
+    networks = {
+      "10-can" = {
+        matchConfig = {
+          Property = "ID_SERIAL_SHORT=002A00195542501920393839";
+          Type = "can";
+        };
+        canConfig = {
+          BitRate = 1000000;
+          RestartSec = 1;
+        };
       };
-      canConfig = {
-        BitRate = 1000000;
-        RestartSec = 1;
+      "10-lan" = {
+        DHCP = "yes";
+        linkConfig.RequiredForOnline = "no";
+        matchConfig.MACAddress = "dc:a6:32:b8:bb:aa";
+        dhcpV4Config.RouteMetric = 10;
+        dhcpV6Config.RouteMetric = 10;
       };
-    };
-    "10-lan" = {
-      DHCP = "yes";
-      linkConfig.RequiredForOnline = "no";
-      matchConfig.MACAddress = "dc:a6:32:b8:bb:aa";
-      dhcpV4Config.RouteMetric = 10;
-      dhcpV6Config.RouteMetric = 10;
-    };
-    "10-wifi" = {
-      DHCP = "yes";
-      matchConfig.MACAddress = "dc:a6:32:b8:bb:ab";
-      dhcpV4Config.RouteMetric = 40;
-      dhcpV6Config.RouteMetric = 40;
+      "10-wifi" = {
+        DHCP = "yes";
+        matchConfig.MACAddress = "dc:a6:32:b8:bb:ab";
+        dhcpV4Config.RouteMetric = 40;
+        dhcpV6Config.RouteMetric = 40;
+      };
     };
   };
 
@@ -143,11 +145,16 @@
   time.timeZone = "America/New_York";
 
   age.secrets.rootPassword.file = ./password.age;
-  users.users.root.passwordFile = config.age.secrets.rootPassword.path;
 
-  users.users.klipper = {
-    isSystemUser = true;
-    group = "klipper";
+  users = {
+    users = {
+      root.passwordFile = config.age.secrets.rootPassword.path;
+      klipper = {
+        isSystemUser = true;
+        group = "klipper";
+      };
+    };
+    groups.klipper.members = [ "moonraker" ];
   };
-  users.groups.klipper.members = [ "moonraker" ];
+
 }

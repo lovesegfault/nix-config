@@ -7,18 +7,22 @@
     ./sd-image.nix
   ];
 
-  boot.loader.grub.enable = false;
-  boot.loader.generic-extlinux-compatible.enable = false;
-  boot.loader.raspberryPi.enable = true;
-  boot.loader.raspberryPi.version = 4;
-  boot.loader.raspberryPi.firmwareConfig = ''
-    dtparam=audio=on
-    arm_boost=1
-  '';
-
-  boot.kernelPackages = pkgs.linuxPackages_rpi4;
-
-  boot.consoleLogLevel = lib.mkDefault 7;
+  boot = {
+    loader = {
+      grub.enable = false;
+      generic-extlinux-compatible.enable = false;
+      raspberryPi = {
+        enable = true;
+        version = 4;
+        firmwareConfig = ''
+          dtparam=audio=on
+          arm_boost=1
+        '';
+      };
+    };
+    kernelPackages = pkgs.linuxPackages_rpi4;
+    consoleLogLevel = lib.mkDefault 7;
+  };
 
   sdImage = {
     firmwareSize = 512;
