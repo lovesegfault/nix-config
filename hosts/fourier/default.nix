@@ -151,7 +151,7 @@
   };
 
   age.secrets.rootPassword.file = ./password.age;
-  users.users.root.passwordFile = config.age.secrets.rootPassword.path;
+  users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
 
   virtualisation = {
     containers.containersConf.settings.engine.helper_binaries_dir = [ "${pkgs.netavark}/bin" ];

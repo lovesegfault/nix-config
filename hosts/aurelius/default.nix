@@ -79,5 +79,5 @@
   };
 
   age.secrets.rootPassword.file = ./password.age;
-  users.users.root.passwordFile = config.age.secrets.rootPassword.path;
+  users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
 }

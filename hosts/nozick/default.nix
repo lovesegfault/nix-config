@@ -196,7 +196,7 @@
   time.timeZone = "Etc/UTC";
 
   users = {
-    users.root.passwordFile = config.age.secrets.rootPassword.path;
+    users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
     groups.media.members = [ "bemeurer" "plex" config.services.syncthing.user ];
   };
 

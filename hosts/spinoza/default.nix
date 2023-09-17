@@ -186,5 +186,5 @@
   swapDevices = [{ device = "/dev/disk/by-uuid/898fb6e1-bba3-40ce-8f79-8deb2e2d4f37"; }];
 
   age.secrets.rootPassword.file = ./password.age;
-  users.users.root.passwordFile = config.age.secrets.rootPassword.path;
+  users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
 }

@@ -27,7 +27,7 @@ with lib;
     shell = pkgs.zsh;
     uid = 8888;
 
-    passwordFile = config.age.secrets.bemeurerPassword.path;
+    hashedPasswordFile = config.age.secrets.bemeurerPassword.path;
   };
 
   programs._1password-gui.polkitPolicyOwners = [ "bemeurer" ];

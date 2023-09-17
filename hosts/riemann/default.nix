@@ -148,7 +148,7 @@
 
   users = {
     users = {
-      root.passwordFile = config.age.secrets.rootPassword.path;
+      root.hashedPasswordFile = config.age.secrets.rootPassword.path;
       klipper = {
         isSystemUser = true;
         group = "klipper";
