@@ -48,7 +48,7 @@
     klipper = {
       enable = true;
       mutableConfig = true;
-      configFile = ./klipper.cfg;
+      mutableConfigFolder = "/var/lib/moonraker/config";
       logFile = "/var/lib/klipper/klipper.log";
       user = "klipper";
       group = "klipper";
@@ -87,6 +87,7 @@
         history = { };
         announcements.subscriptions = [ "mainsail" ];
       };
+      group = "klipper";
     };
     oauth2_proxy.nginx.virtualHosts = [ config.services.mainsail.hostName ];
   };
