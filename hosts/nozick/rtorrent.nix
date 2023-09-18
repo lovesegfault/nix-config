@@ -15,6 +15,7 @@
       configText = ''
         log.add_output = "rpc_events", "log"
 
+        throttle.max_downloads.global.set = 16
         throttle.max_uploads.set = 128
         throttle.max_uploads.global.set = 4096
         throttle.min_peers.normal.set = 16
