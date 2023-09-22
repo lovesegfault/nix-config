@@ -88,6 +88,17 @@
         history = { };
         announcements.subscriptions = [ "mainsail" ];
         file_manager.enable_object_processing = true;
+        update_manager = {
+          enable_system_updates = false;
+        };
+        "update_manager KAMP" = {
+          type = "git_repo";
+          channel = "dev";
+          path = "/var/lib/moonraker/kamp";
+          origin = "https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging.git";
+          primary_branch = "main";
+          is_system_service = false;
+        };
       };
       group = "klipper";
     };
@@ -105,40 +116,41 @@
     };
   };
 
-  systemd.network = {
-    links."10-can" = {
-      matchConfig.Type = "can";
-      linkConfig.TransmitQueueLength = 2048;
-    };
-
-    networks = {
-      "10-can" = {
-        matchConfig = {
-          Property = "ID_SERIAL_SHORT=002A00195542501920393839";
-          Type = "can";
+  systemd = {
+    network = {
+      links."10-can" = {
+        matchConfig.Type = "can";
+        linkConfig.TransmitQueueLength = 2048;
+      };
+      networks = {
+        "10-can" = {
+          matchConfig = {
+            Property = "ID_SERIAL_SHORT=002A00195542501920393839";
+            Type = "can";
+          };
+          canConfig = {
+            BitRate = 1000000;
+            RestartSec = 1;
+          };
         };
-        canConfig = {
-          BitRate = 1000000;
-          RestartSec = 1;
+        "10-lan" = {
+          DHCP = "yes";
+          linkConfig.RequiredForOnline = "no";
+          matchConfig.MACAddress = "dc:a6:32:b8:bb:aa";
+          dhcpV4Config.RouteMetric = 10;
+          dhcpV6Config.RouteMetric = 10;
+        };
+        "10-wifi" = {
+          DHCP = "yes";
+          matchConfig.MACAddress = "dc:a6:32:b8:bb:ab";
+          dhcpV4Config.RouteMetric = 40;
+          dhcpV6Config.RouteMetric = 40;
         };
       };
-      "10-lan" = {
-        DHCP = "yes";
-        linkConfig.RequiredForOnline = "no";
-        matchConfig.MACAddress = "dc:a6:32:b8:bb:aa";
-        dhcpV4Config.RouteMetric = 10;
-        dhcpV6Config.RouteMetric = 10;
-      };
-      "10-wifi" = {
-        DHCP = "yes";
-        matchConfig.MACAddress = "dc:a6:32:b8:bb:ab";
-        dhcpV4Config.RouteMetric = 40;
-        dhcpV6Config.RouteMetric = 40;
-      };
     };
+    oomd.enable = false;
+    services.moonraker.path = [ pkgs.git ];
   };
-
-  systemd.oomd.enable = false;
 
   swapDevices = lib.mkDefault [{
     device = "/swap";
