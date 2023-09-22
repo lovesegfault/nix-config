@@ -87,6 +87,7 @@
         octoprint_compat = { };
         history = { };
         announcements.subscriptions = [ "mainsail" ];
+        file_manager.enable_object_processing = true;
       };
       group = "klipper";
     };
