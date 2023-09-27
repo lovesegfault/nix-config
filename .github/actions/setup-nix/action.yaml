@@ -30,7 +30,7 @@ runs:
   steps:
     - uses: DeterminateSystems/nix-installer-action@v4
       with:
-        nix-installer-tag: "v0.10.0"
+        nix-installer-tag: "v0.12.0"
         nix-package-url: ${{ inputs.nix-package-url }}
         extra-conf: |
           accept-flake-config = true
