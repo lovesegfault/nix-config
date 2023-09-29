@@ -33,6 +33,7 @@ runs:
         nix-installer-tag: "v0.12.0"
         nix-package-url: ${{ inputs.nix-package-url }}
         extra-conf: |
+          auto-optimise-store = true
           accept-flake-config = true
           always-allow-substitutes = true
           builders-use-substitutes = true
