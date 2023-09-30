@@ -12,14 +12,22 @@ let
 
         applyFlags = { cflags ? [ ], rustflags ? [ ], goflags ? { } }: pkg:
           pkg.overrideAttrs (old:
-            (optionalAttrs (cflags != [ ]) {
-              NIX_CFLAGS_COMPILE = appendFlags cflags (old.NIX_CFLAGS_COMPILE or null);
-              NIX_CFLAGS_LINK = appendFlags cflags (old.NIX_CFLAGS_LINK or null);
-            })
+            goflags
             // (optionalAttrs (rustflags != [ ]) {
               CARGO_BUILD_RUSTFLAGS = appendFlags rustflags (old.CARGO_BUILD_RUSTFLAGS or null);
             })
-            // goflags
+            // (optionalAttrs (cflags != [ ]))
+              (if (old ? env.NIX_CFLAGS_COMPILE) then {
+                env.NIX_CFLAGS_COMPILE = appendFlags cflags old.env.NIX_CFLAGS_COMPILE;
+              } else {
+                NIX_CFLAGS_COMPILE = appendFlags cflags (old.NIX_CFLAGS_COMPILE or null);
+              })
+            // (optionalAttrs (cflags != [ ]))
+              (if (old ? env.NIX_CFLAGS_LINK) then {
+                env.NIX_CFLAGS_LINK = appendFlags cflags old.env.NIX_CFLAGS_LINK;
+              } else {
+                NIX_CFLAGS_LINK = appendFlags cflags (old.NIX_CFLAGS_LINK or null);
+              })
           );
 
         applyHost = applyFlags { cflags = hostCFlags; goflags = hostGoFlags; rustflags = hostRustflags; };
