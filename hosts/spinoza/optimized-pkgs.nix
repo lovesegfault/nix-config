@@ -30,31 +30,13 @@ let
               })
           );
 
-        replaceBinutils = pkg:
-          (pkg.overrideAttrs (old: {
-            AR = "${final.libgcc.out}/bin/gcc-ar";
-            NM = "${final.libgcc.out}/bin/gcc-nm";
-            RANLIB = "${final.libgcc.out}/bin/gcc-ranlib";
-            LD = "${final.gcc12.out}/bin/ld.gold";
-          })).override {
-            stdenv = final.gcc12Stdenv;
-          }
-        ;
-
         applyHost = applyFlags { cflags = hostCFlags; goflags = hostGoFlags; rustflags = hostRustflags; };
         applyGraphite = applyFlags { cflags = [ "-fgraphite-identity" "-floop-nest-optimize" ]; };
-        applyLTO = pkg: replaceBinutils (applyFlags
-          {
-            # FIXME: Broken: https://github.com/NixOS/nixpkgs/pull/188544
-            cflags = [
-              "-flto=auto"
-              "-fuse-linker-plugin"
-              "-fuse-ld=gold"
-              "--plugin=${final.libgcc.out}/libexec/gcc/x86_64-unknown-linux-gnu/${final.libgcc.version}/liblto_plugin.so"
-            ];
-            rustflags = [ "-Clinker-plugin-lto" "-Clto" "-Ccodegen-units=1" ];
-          }
-          pkg);
+        applyLTO = applyFlags {
+          # FIXME: Broken: https://github.com/NixOS/nixpkgs/pull/188544
+          cflags = [ "-flto=auto" "-fuse-linker-plugin" ];
+          rustflags = [ "-Clinker-plugin-lto" "-Clto" "-Ccodegen-units=1" ];
+        };
       in
       {
         alacritty = pipe prev.alacritty [ applyHost applyLTO ];
