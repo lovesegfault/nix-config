@@ -29,7 +29,6 @@
       { name = "signal"; greedy = true; }
       { name = "spotify"; greedy = true; }
       { name = "stats"; greedy = true; }
-      { name = "topnotch"; greedy = true; }
       { name = "visual-studio-code"; greedy = true; }
       { name = "zoom"; greedy = true; }
       { name = "zulip"; greedy = true; }
