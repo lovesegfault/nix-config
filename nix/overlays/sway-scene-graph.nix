@@ -1,13 +1,13 @@
 final: prev:
 {
   wlroots_0_17 = (final.wlroots_0_16.overrideAttrs (old: {
-    version = "unstable-2023-07-28";
+    version = "unstable-2023-10-03";
     src = final.fetchFromGitLab {
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "7bf6c1fc6c824bb2e031d464000ae41c86c459e5";
-      hash = "sha256-5aSH5zY7NBXNNftexHWgk4K8ksevKxh3ugITrZEImak=";
+      rev = "1b0694b79481643cb456d03e1be50a1b4f6ca591";
+      hash = "sha256-3yudCZTkisn8FSwMGid3VWcbDsYZtA6XHrxdA6hRdcM=";
     };
     nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ final.hwdata ];
     buildInputs = (old.buildInputs or [ ]) ++ [
@@ -17,7 +17,7 @@ final: prev:
   })).override { };
 
   sway-unwrapped = (prev.sway-unwrapped.overrideAttrs (old: {
-    version = "scene-graph-2023-07-24";
+    version = "scene-graph-2023-08-21";
     src = final.fetchFromGitHub {
       owner = "Nefsen402";
       repo = "sway";
