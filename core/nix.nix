@@ -1,13 +1,10 @@
-{ hostType, lib, pkgs, ... }: {
+{ hostType, lib, ... }: {
   nix = {
-    package = pkgs.nix-always-substitute;
     settings = {
       accept-flake-config = true;
       # XXX: Causes annoying "cannot link ... to ...: File exists" errors on Darwin
       auto-optimise-store = hostType == "nixos";
       allowed-users = [ "@wheel" ];
-      # c.f. https://github.com/NixOS/nix/pull/8047
-      always-allow-substitutes = true;
       build-users-group = "nixbld";
       builders-use-substitutes = true;
       trusted-users = [ "root" "@wheel" ];

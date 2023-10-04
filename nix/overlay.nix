@@ -1,6 +1,5 @@
 { agenix
 , deploy-rs
-, nix
 , nixpkgs
 , ...
 }:
@@ -19,8 +18,5 @@ localOverlays // {
   default = lib.composeManyExtensions ([
     agenix.overlays.default
     deploy-rs.overlay
-    (final: prev: {
-      nix-always-substitute = nix.packages.${final.stdenv.hostPlatform.system}.nix;
-    })
   ] ++ (lib.attrValues localOverlays));
 }
