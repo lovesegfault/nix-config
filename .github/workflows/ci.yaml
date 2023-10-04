@@ -14,7 +14,6 @@ env:
     auto-optimise-store = true
     accept-flake-config = true
     builders-use-substitutes = true
-    extra-experimental-features = flakes nix-command recursive-nix
     max-jobs = auto
   aarch64-host: "aarch64.nixos.community"
   aarch64-ssh-config: |-
