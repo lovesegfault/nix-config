@@ -1,10 +1,19 @@
 name: ci
+
 on:
   push:
     branches:
       - master
       - try
   pull_request:
+
+env:
+  nix-installer-tag: "v0.12.0"
+  nix-conf: |
+    auto-optimise-store = true
+    accept-flake-config = true
+    builders-use-substitutes = true
+
 jobs:
   lints:
     runs-on: ubuntu-latest
@@ -12,9 +21,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: false
-      - uses: ./.github/actions/setup-nix
+      - uses: DeterminateSystems/nix-installer-action@v4
         with:
-          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          nix-installer-tag: ${{ env.nix-installer-tag }}
+          extra-conf: ${{ env.nix-conf }}
+      - uses: cachix/cachix-action@v12
+        with:
+          name: nix-config
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: parse
         run: nix-instantiate --json --parse ./**/*.nix
       - name: lints
@@ -29,19 +43,14 @@ jobs:
       nix-systems: ${{ steps.get-hosts.outputs.hostPlatforms }}
       gh-systems: ${{ steps.get-hosts.outputs.ghSystems }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@v4
         with:
-          lfs: false
-          sparse-checkout: |
-            .github
-            nix/hosts.nix
-      - uses: ./.github/actions/setup-nix
-        with:
-          cachix: false
+          nix-installer-tag: ${{ env.nix-installer-tag }}
+          extra-conf: ${{ env.nix-conf }}
       - id: get-hosts
         run: |
           TMP="$(mktemp -d)"
-          nix eval --json -f ./nix/hosts.nix | jq -c '
+          nix eval --json "github:${GITHUB_REPOSITORY}/${GITHUB_SHA}#hosts" | jq -c '
             to_entries
             | map({name: .key} + .value)
             | map_values(
@@ -87,9 +96,14 @@ jobs:
           lfs: false
           sparse-checkout: |
             .github
-      - uses: ./.github/actions/setup-nix
+      - uses: DeterminateSystems/nix-installer-action@v4
         with:
-          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          nix-installer-tag: ${{ env.nix-installer-tag }}
+          extra-conf: ${{ env.nix-conf }}
+      - uses: cachix/cachix-action@v12
+        with:
+          name: nix-config
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - uses: ./.github/actions/setup-aarch64-ssh
         if: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
         with:
@@ -126,9 +140,14 @@ jobs:
           lfs: false
           sparse-checkout: |
             .github
-      - uses: ./.github/actions/setup-nix
+      - uses: DeterminateSystems/nix-installer-action@v4
         with:
-          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          nix-installer-tag: ${{ env.nix-installer-tag }}
+          extra-conf: ${{ env.nix-conf }}
+      - uses: cachix/cachix-action@v12
+        with:
+          name: nix-config
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - uses: ./.github/actions/setup-aarch64-ssh
         if: ${{ matrix.host.hostPlatform == 'aarch64-linux' }}
         with:

@@ -9,16 +9,11 @@ jobs:
     outputs:
       matrix: ${{ steps.get-flakes.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          lfs: false
-      - uses: ./.github/actions/setup-nix
-        with:
-          cachix: false
+      - uses: DeterminateSystems/nix-installer-action@v4
       - id: get-flakes
         run: |
           get_flake_inputs() {
-            nix flake metadata --json \
+            nix flake metadata --json "github:${GITHUB_REPOSITORY}/${GITHUB_SHA}" \
               | jq -c '
                   .locks.nodes.root.inputs
                   | {flake: keys}'
@@ -36,9 +31,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: false
-      - uses: ./.github/actions/setup-nix
-        with:
-          cachix: false
+      - uses: DeterminateSystems/nix-installer-action@v4
       - run: git config --global user.email "hatesegfault@protonmail.ch"
       - run: git config --global user.name "hatesegfault"
       - uses: cpcloud/flake-update-action@v1.0.4
