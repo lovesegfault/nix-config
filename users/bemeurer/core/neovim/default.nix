@@ -23,12 +23,13 @@
         neovim-ayu # colorscheme
         numb-nvim # peek lines in non-obtrusive way
         nvim-navic # status/bufferline component to show LSP context
+        nvim-notify # fancy notifications
         nvim-web-devicons # file icons for trouble-nvim
+        rainbow-delimiters-nvim # rainbow parens with indent-blankline integration
         todo-comments-nvim # highlight, list and search todo comments
         trouble-nvim # list for showing LSP diagnostics
         true-zen-nvim # distraction-free writing
         which-key-nvim # popups for keybindings for commands
-        nvim-notify # fancy notifications
 
         # lsp
         ltex_extra-nvim # ltex LSP configuration
