@@ -89,20 +89,27 @@ jobs:
             .github
       - uses: ./.github/actions/setup-nix
         with:
-          aarch64-builder: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
-          aarch64-builder-key: ${{ secrets.AARCH64_BUILDER_KEY }}
           cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - uses: ./.github/actions/setup-aarch64-ssh
+        if: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
+        with:
+          ssh-key: ${{ secrets.AARCH64_BUILDER_KEY }}
       - name: setup-nix-fast-build
         run: nix profile install "github:${GITHUB_REPOSITORY}/${GITHUB_SHA}#nix-fast-build"
       - name: build-shell
         run: |
           flake="github:${GITHUB_REPOSITORY}/${GITHUB_SHA}"
           attr="devShells.${{ matrix.system.hostPlatform }}.default.inputDerivation"
-          nix-fast-build \
-            --no-nom \
-            --skip-cached \
-            --systems "${{ matrix.system.hostPlatform }}" \
-            --flake "${flake}#${attr}"
+          declare -a args=(
+            "--no-nom"
+            "--skip-cached"
+            "--systems=${{ matrix.system.hostPlatform }}"
+            "--flake=${flake}#${attr}"
+          )
+          if [[ "${{ matrix.system.hostPlatform }}" == "aarch64-linux" ]]; then
+            args+=("--remote=aarch64.nixos.community")
+          fi
+          nix run "${flake}#nix-fast-build" -- "${args[@]}"
 
   build-host:
     name: build-${{ matrix.host.name }}
@@ -120,9 +127,11 @@ jobs:
             .github
       - uses: ./.github/actions/setup-nix
         with:
-          aarch64-builder: ${{ matrix.host.hostPlatform == 'aarch64-linux' }}
-          aarch64-builder-key: ${{ secrets.AARCH64_BUILDER_KEY }}
           cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - uses: ./.github/actions/setup-aarch64-ssh
+        if: ${{ matrix.host.hostPlatform == 'aarch64-linux' }}
+        with:
+          ssh-key: ${{ secrets.AARCH64_BUILDER_KEY }}
       - name: setup-nix-fast-build
         run: nix profile install "github:${GITHUB_REPOSITORY}/${GITHUB_SHA}#nix-fast-build"
       - name: build-host
@@ -134,11 +143,16 @@ jobs:
           command: |
             flake="github:${GITHUB_REPOSITORY}/${GITHUB_SHA}"
             attr="packages.${{ matrix.host.hostPlatform }}.${{ matrix.host.name }}"
-            nix-fast-build \
-              --no-nom \
-              --skip-cached \
-              --systems "${{ matrix.host.hostPlatform }}" \
-              --flake "${flake}#${attr}"
+            declare -a args=(
+              "--no-nom"
+              "--skip-cached"
+              "--systems=${{ matrix.host.hostPlatform }}"
+              "--flake=${flake}#${attr}"
+            )
+            if [[ "${{ matrix.host.hostPlatform }}" == "aarch64-linux" ]]; then
+              args+=("--remote=aarch64.nixos.community")
+            fi
+            nix run "${flake}#nix-fast-build" -- "${args[@]}"
 
   check:
     runs-on: ubuntu-latest
