@@ -14,7 +14,7 @@ with self.pkgs.${system};
       nativeBuildInputs = [ nix ];
     }
     ''
-      nix-instantiate --readonly-mode --json --parse "$src"/**/*.nix
+      nix-instantiate --readonly-mode --store dummy:// --json --parse "$src"/**/*.nix
       touch "$out"
     '';
   pre-commit-check = pre-commit-hooks.lib.${system}.run
