@@ -33,7 +33,6 @@
         # lsp
         ltex_extra-nvim # ltex LSP configuration
         nvim-lightbulb # lightbulb sign when LSP actions are available
-        nvim-lsp-notify # notifications for lsp progress
         nvim-lspconfig # LSP
 
         # tooling

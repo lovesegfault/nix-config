@@ -11,7 +11,7 @@ require("ayu").colorscheme()
 -- register nvim-notify
 local notify = require("notify")
 notify.setup({
-  timeout = 2000,
+  timeout = 1500,
 })
 vim.notify = notify
 vim.keymap.set("n", "<C-d>", notify.dismiss, { desc = "Dismiss notifications", silent = true })
