@@ -17,6 +17,7 @@ with self.pkgs.${localSystem};
       nix-eval-jobs
       nixpkgs-fmt
       statix
+      self.packages.${localSystem}.nix-fast-build
 
       # Lua
       stylua
