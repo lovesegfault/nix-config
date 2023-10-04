@@ -2,7 +2,6 @@
   description = "lovesegfault's NixOS config";
 
   nixConfig = {
-    extra-experimental-features = [ "recursive-nix" ];
     extra-trusted-substituters = [
       "https://nix-config.cachix.org"
       "https://nix-community.cachix.org"
