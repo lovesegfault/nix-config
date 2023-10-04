@@ -46,6 +46,8 @@
       flake = false;
     };
 
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
@@ -60,6 +62,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "flake-compat";
+        flake-parts.follows = "flake-parts";
         flake-utils.follows = "flake-utils";
         pre-commit-hooks-nix.follows = "pre-commit-hooks";
       };
@@ -71,6 +74,14 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "flake-compat";
+      };
+    };
+
+    nix-fast-build = {
+      url = "github:Mic92/nix-fast-build";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
       };
     };
 

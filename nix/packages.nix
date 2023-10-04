@@ -1,4 +1,4 @@
-{ self, nix, ... }:
+{ self, nix, nix-fast-build, ... }:
 
 localSystem:
 
@@ -22,5 +22,6 @@ compatHostDrvs
   all = compatHostsFarm;
   default = compatHostsFarm;
 }) // {
+  inherit (nix-fast-build.packages.${localSystem}) nix-fast-build;
   nixBinaryTarball = nix.hydraJobs.binaryTarball.${localSystem};
 }

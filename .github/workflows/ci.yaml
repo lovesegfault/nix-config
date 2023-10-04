@@ -168,6 +168,8 @@ jobs:
           aarch64-builder-key: ${{ secrets.AARCH64_BUILDER_KEY }}
           cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
           nix-package-url: ${{ steps.get-nix.outputs.package-url }}
+      - name: setup-nix-fast-build
+        run: nix profile install "github:${GITHUB_REPOSITORY}/${GITHUB_SHA}#nix-fast-build"
       - name: build-shell
         run: |
           nix run nixpkgs\#nix-build-uncached -- \
@@ -208,6 +210,8 @@ jobs:
           aarch64-builder-key: ${{ secrets.AARCH64_BUILDER_KEY }}
           cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
           nix-package-url: ${{ steps.get-nix.outputs.package-url }}
+      - name: setup-nix-fast-build
+        run: nix profile install "github:${GITHUB_REPOSITORY}/${GITHUB_SHA}#nix-fast-build"
       - name: build-host
         uses: nick-fields/retry@v2
         with:
