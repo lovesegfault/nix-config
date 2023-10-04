@@ -177,6 +177,7 @@ jobs:
           flake="github:${GITHUB_REPOSITORY}/${GITHUB_SHA}"
           attr="devShells.${{ matrix.system.hostPlatform }}.default.inputDerivation"
           nix-fast-build \
+            --no-nom \
             --skip-cached \
             --systems "${{ matrix.system.hostPlatform }}" \
             --flake "${flake}#${attr}"
@@ -229,6 +230,7 @@ jobs:
             flake="github:${GITHUB_REPOSITORY}/${GITHUB_SHA}"
             attr="packages.${{ matrix.host.hostPlatform }}.${{ matrix.host.name }}"
             nix-fast-build \
+              --no-nom \
               --skip-cached \
               --systems "${{ matrix.host.hostPlatform }}" \
               --flake "${flake}#${attr}"
