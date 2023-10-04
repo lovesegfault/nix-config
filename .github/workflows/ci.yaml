@@ -119,19 +119,20 @@ jobs:
           chmod 0600 ~/.ssh/*
       - name: build-shell
         run: |
-          attr='devShells.${{ matrix.system.hostPlatform }}.default.inputDerivation'
           declare -a args=(
-            "--no-nom"
-            "--skip-cached"
+            '--no-nom'
+            '--skip-cached'
             '--systems=${{ matrix.system.hostPlatform }}'
-            "--flake=${{ env.flake }}#${attr}"
           )
-          if [[ "${{ matrix.system.hostPlatform }}" == "aarch64-linux" ]]; then
+          if [[ '${{ matrix.system.hostPlatform }}' == 'aarch64-linux' ]]; then
             args+=(
-              "--remote=aarch64.nixos.community"
-              "--option" "accept-flake-config" "true"
+              '--remote=${{ env.aarch64-host }}'
+              '--option' 'accept-flake-config' 'true'
             )
           fi
+          args+=(
+            '--flake=${{ env.flake }}#devShells.${{ matrix.system.hostPlatform }}.default.inputDerivation'
+          )
           nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
 
   build-host:
@@ -166,19 +167,20 @@ jobs:
           max_attempts: 3
           retry_on: error
           command: |
-            attr="packages.${{ matrix.host.hostPlatform }}.${{ matrix.host.name }}"
             declare -a args=(
-              "--no-nom"
-              "--skip-cached"
+              '--no-nom'
+              '--skip-cached'
               '--systems=${{ matrix.host.hostPlatform }}'
-              "--flake=${{ env.flake }}#${attr}"
             )
-            if [[ "${{ matrix.host.hostPlatform }}" == "aarch64-linux" ]]; then
+            if [[ '${{ matrix.host.hostPlatform }}' == 'aarch64-linux' ]]; then
               args+=(
-                "--remote=aarch64.nixos.community"
-                "--option" "accept-flake-config" "true"
+                '--remote=${{ env.aarch64-host }}'
+                '--option' 'accept-flake-config' 'true'
               )
             fi
+            args+=(
+              '--flake=${{ env.flake }}#packages.${{ matrix.host.hostPlatform }}.${{ matrix.host.name }}'
+            )
             nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
 
   check:
