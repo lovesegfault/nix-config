@@ -21,9 +21,6 @@ inputs:
   github-token:
     description: "A GitHub token for making authenticated requests"
     default: ${{ github.token }}
-  nix-package-url:
-    description: "The Nix package to install"
-    required: false
 
 runs:
   using: "composite"
@@ -31,11 +28,9 @@ runs:
     - uses: DeterminateSystems/nix-installer-action@v4
       with:
         nix-installer-tag: "v0.12.0"
-        nix-package-url: ${{ inputs.nix-package-url }}
         extra-conf: |
           auto-optimise-store = true
           accept-flake-config = true
-          always-allow-substitutes = true
           builders-use-substitutes = true
         github-token: ${{ inputs.github-token }}
     - uses: cachix/cachix-action@v12
