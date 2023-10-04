@@ -8,11 +8,20 @@ on:
   pull_request:
 
 env:
+  flake: "github:${{ github.repository }}/${{ github.sha }}"
   nix-installer-tag: "v0.12.0"
   nix-conf: |
     auto-optimise-store = true
     accept-flake-config = true
     builders-use-substitutes = true
+  aarch64-host: "aarch64.nixos.community"
+  aarch64-ssh-config: |
+    Host aarch64.nixos.community 147.28.143.250
+        User lovesegfault
+        IdentitiesOnly yes
+        IdentityFile ~/.ssh/id_ed25519
+  aarch64-ssh-known-host: |
+    aarch64-build-box,aarch64.nixos.community,147.75.77.190 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUTz5i9u5H2FHNAmZJyoJfIGyUm/HfGhfwnc142L3ds
 
 jobs:
   lints:
@@ -50,7 +59,7 @@ jobs:
       - id: get-hosts
         run: |
           TMP="$(mktemp -d)"
-          nix eval --json "github:${GITHUB_REPOSITORY}/${GITHUB_SHA}#hosts" | jq -c '
+          nix eval --json '${{ env.flake }}#hosts' | jq -c '
             to_entries
             | map({name: .key} + .value)
             | map_values(
@@ -91,11 +100,6 @@ jobs:
       matrix:
         system: ${{ fromJson(needs.get-hosts.outputs.nix-systems) }}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          lfs: false
-          sparse-checkout: |
-            .github
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
           nix-installer-tag: ${{ env.nix-installer-tag }}
@@ -104,19 +108,22 @@ jobs:
         with:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - uses: ./.github/actions/setup-aarch64-ssh
+      - name: setup-aarch64-ssh
         if: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
-        with:
-          ssh-key: ${{ secrets.AARCH64_BUILDER_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo '${{ env.aarch64-ssh-config }}' > ~/.ssh/config
+          echo '${{ env.aarch64-ssh-known-host }}' >> ~/.ssh/known_hosts
+          echo '${{ secrets.AARCH64_BUILDER_KEY }}' > ~/.ssh/id_ed25519
+          chmod 0600 ~/.ssh/*
       - name: build-shell
         run: |
-          flake="github:${GITHUB_REPOSITORY}/${GITHUB_SHA}"
-          attr="devShells.${{ matrix.system.hostPlatform }}.default.inputDerivation"
+          attr='devShells.${{ matrix.system.hostPlatform }}.default.inputDerivation'
           declare -a args=(
             "--no-nom"
             "--skip-cached"
-            "--systems=${{ matrix.system.hostPlatform }}"
-            "--flake=${flake}#${attr}"
+            '--systems=${{ matrix.system.hostPlatform }}'
+            "--flake=${{ env.flake }}#${attr}"
           )
           if [[ "${{ matrix.system.hostPlatform }}" == "aarch64-linux" ]]; then
             args+=(
@@ -124,7 +131,7 @@ jobs:
               "--option" "accept-flake-config" "true"
             )
           fi
-          nix run "${flake}#nix-fast-build" -- "${args[@]}"
+          nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
 
   build-host:
     name: build-${{ matrix.host.name }}
@@ -135,11 +142,6 @@ jobs:
       matrix:
         host: ${{ fromJson(needs.get-hosts.outputs.hosts) }}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          lfs: false
-          sparse-checkout: |
-            .github
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
           nix-installer-tag: ${{ env.nix-installer-tag }}
@@ -148,10 +150,14 @@ jobs:
         with:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - uses: ./.github/actions/setup-aarch64-ssh
+      - name: setup-aarch64-ssh
         if: ${{ matrix.host.hostPlatform == 'aarch64-linux' }}
-        with:
-          ssh-key: ${{ secrets.AARCH64_BUILDER_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo '${{ env.aarch64-ssh-config }}' > ~/.ssh/config
+          echo '${{ env.aarch64-ssh-known-host }}' >> ~/.ssh/known_hosts
+          echo '${{ secrets.AARCH64_BUILDER_KEY }}' > ~/.ssh/id_ed25519
+          chmod 0600 ~/.ssh/*
       - name: build-host
         uses: nick-fields/retry@v2
         with:
@@ -159,13 +165,12 @@ jobs:
           max_attempts: 3
           retry_on: error
           command: |
-            flake="github:${GITHUB_REPOSITORY}/${GITHUB_SHA}"
             attr="packages.${{ matrix.host.hostPlatform }}.${{ matrix.host.name }}"
             declare -a args=(
               "--no-nom"
               "--skip-cached"
-              "--systems=${{ matrix.host.hostPlatform }}"
-              "--flake=${flake}#${attr}"
+              '--systems=${{ matrix.host.hostPlatform }}'
+              "--flake=${{ env.flake }}#${attr}"
             )
             if [[ "${{ matrix.host.hostPlatform }}" == "aarch64-linux" ]]; then
               args+=(
@@ -173,7 +178,7 @@ jobs:
                 "--option" "accept-flake-config" "true"
               )
             fi
-            nix run "${flake}#nix-fast-build" -- "${args[@]}"
+            nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
 
   check:
     runs-on: ubuntu-latest
