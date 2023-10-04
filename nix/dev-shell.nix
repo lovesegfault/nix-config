@@ -13,7 +13,6 @@ with self.pkgs.${localSystem};
       cachix
       deploy-rs.deploy-rs
       nil
-      nix-build-uncached
       nix-eval-jobs
       nixpkgs-fmt
       statix

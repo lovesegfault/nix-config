@@ -172,9 +172,12 @@ jobs:
         run: nix profile install "github:${GITHUB_REPOSITORY}/${GITHUB_SHA}#nix-fast-build"
       - name: build-shell
         run: |
-          nix run nixpkgs\#nix-build-uncached -- \
-            --keep-going \
-            -A "devShells.${{ matrix.system.hostPlatform }}.default.inputDerivation"
+          flake="github:${GITHUB_REPOSITORY}/${GITHUB_SHA}"
+          attr="devShells.${{ matrix.system.hostPlatform }}.default.inputDerivation"
+          nix-fast-build \
+            --skip-cached \
+            --systems "${{ matrix.system.hostPlatform }}" \
+            --flake "${flake}#${attr}"
 
   build-host:
     name: build-${{ matrix.host.name }}
@@ -219,9 +222,12 @@ jobs:
           max_attempts: 3
           retry_on: error
           command: |
-            nix run nixpkgs#nix-build-uncached -- \
-              --keep-going \
-              -A packages.${{ matrix.host.hostPlatform }}.${{ matrix.host.name }}
+            flake="github:${GITHUB_REPOSITORY}/${GITHUB_SHA}"
+            attr="packages.${{ matrix.host.hostPlatform }}.${{ matrix.host.name }}"
+            nix-fast-build \
+              --skip-cached \
+              --systems "${{ matrix.host.hostPlatform }}" \
+              --flake "${flake}#${attr}"
 
   check:
     runs-on: ubuntu-latest
