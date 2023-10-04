@@ -73,31 +73,7 @@
         luasnip # snippet engine
 
         # syntax
-        (nvim-treesitter.withPlugins
-          (_:
-            with builtins;
-            filter
-              (drv:
-                !elem
-                  drv.pname
-                  ((map (v: "tree-sitter-${v}-grammar") [
-                    "bash"
-                    "c-sharp"
-                    "comment"
-                    "erlang"
-                    "gdscript"
-                    "java"
-                    "kotlin"
-                    "ocaml"
-                    "ql_dbscheme"
-                    "ruby"
-                    "scala"
-                    "smithy"
-                  ]) ++ [ "nvim-treesitter-grammar-ocaml_interface" ])
-              )
-              pkgs.tree-sitter.allGrammars
-          )
-        )
+        nvim-treesitter.withAllGrammars
       ]
       ++ lib.optional (lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.tabnine) cmp-tabnine
       ;
