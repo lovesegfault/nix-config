@@ -9,7 +9,7 @@ on:
 
 env:
   flake: "github:${{ github.repository }}/${{ github.sha }}"
-  nix-installer-tag: "v0.12.0"
+  nix-installer-tag: "v0.13.1"
   nix-conf: |-
     auto-optimise-store = true
     accept-flake-config = true
