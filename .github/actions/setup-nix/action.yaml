@@ -10,14 +10,6 @@ inputs:
   cachix-auth-token:
     description: "Auth token for cachix"
     required: false
-  aarch64-builder:
-    description: "Whether to setup the aarch64 builder"
-    required: true
-    default: false
-    type: boolean
-  aarch64-builder-key:
-    description: "SSH key for the aarch64 builder"
-    required: false
   github-token:
     description: "A GitHub token for making authenticated requests"
     default: ${{ github.token }}
@@ -38,29 +30,3 @@ runs:
       with:
         name: nix-config
         authToken: ${{ inputs.cachix-auth-token }}
-    - name: setup-aarch64-builder
-      if: ${{ inputs.aarch64-builder == 'true' }}
-      env:
-        AARCH64_BUILDER_KEY: ${{ inputs.aarch64-builder-key }}
-      shell: bash
-      run: |
-        sudo mkdir -p /etc/ssh
-        echo "$AARCH64_BUILDER_KEY" |
-          sudo tee /etc/ssh/nixos-aarch64-builder > /dev/null
-        sudo chmod 0600 /etc/ssh/nixos-aarch64-builder
-
-        echo 'aarch64-build-box,aarch64.nixos.community,147.75.77.190 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUTz5i9u5H2FHNAmZJyoJfIGyUm/HfGhfwnc142L3ds' |
-          sudo tee -a /etc/ssh/ssh_known_hosts > /dev/null
-
-        builder_cfg=(
-          ssh-ng://lovesegfault@aarch64.nixos.community
-          aarch64-linux
-          /etc/ssh/nixos-aarch64-builder
-          64
-          1
-          big-parallel
-          -
-          c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU1VVHo1aTl1NUgyRkhOQW1aSnlvSmZJR3lVbS9IZkdoZnduYzE0MkwzZHMgcm9vdEBuaXhvcwo=
-        )
-        echo "${builder_cfg[*]}" |
-          sudo tee /etc/nix/machines > /dev/null
