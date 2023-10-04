@@ -94,8 +94,6 @@ jobs:
         if: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
         with:
           ssh-key: ${{ secrets.AARCH64_BUILDER_KEY }}
-      - name: setup-nix-fast-build
-        run: nix profile install "github:${GITHUB_REPOSITORY}/${GITHUB_SHA}#nix-fast-build"
       - name: build-shell
         run: |
           flake="github:${GITHUB_REPOSITORY}/${GITHUB_SHA}"
@@ -107,7 +105,10 @@ jobs:
             "--flake=${flake}#${attr}"
           )
           if [[ "${{ matrix.system.hostPlatform }}" == "aarch64-linux" ]]; then
-            args+=("--remote=aarch64.nixos.community")
+            args+=(
+              "--remote=aarch64.nixos.community"
+              "--option" "accept-flake-config" "true"
+            )
           fi
           nix run "${flake}#nix-fast-build" -- "${args[@]}"
 
@@ -132,8 +133,6 @@ jobs:
         if: ${{ matrix.host.hostPlatform == 'aarch64-linux' }}
         with:
           ssh-key: ${{ secrets.AARCH64_BUILDER_KEY }}
-      - name: setup-nix-fast-build
-        run: nix profile install "github:${GITHUB_REPOSITORY}/${GITHUB_SHA}#nix-fast-build"
       - name: build-host
         uses: nick-fields/retry@v2
         with:
@@ -150,7 +149,10 @@ jobs:
               "--flake=${flake}#${attr}"
             )
             if [[ "${{ matrix.host.hostPlatform }}" == "aarch64-linux" ]]; then
-              args+=("--remote=aarch64.nixos.community")
+              args+=(
+                "--remote=aarch64.nixos.community"
+                "--option" "accept-flake-config" "true"
+              )
             fi
             nix run "${flake}#nix-fast-build" -- "${args[@]}"
 
