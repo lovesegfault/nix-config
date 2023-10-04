@@ -68,15 +68,6 @@
       };
     };
 
-    # XXX: https://github.com/NixOS/nix/pull/8047
-    nix = {
-      url = "github:lovesegfault/nix/always-allow-substitutes-backport";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "flake-compat";
-      };
-    };
-
     nix-fast-build = {
       url = "github:Mic92/nix-fast-build";
       inputs = {
