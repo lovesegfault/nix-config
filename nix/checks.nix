@@ -38,4 +38,4 @@ with self.pkgs.${system};
         stylua.enable = true;
       };
     };
-} // (deploy-rs.lib.deployChecks self.deploy)
+}
