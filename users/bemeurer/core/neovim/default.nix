@@ -6,7 +6,9 @@
       enable = true;
 
       defaultEditor = true;
+      withNodeJs = false;
       withPython3 = false;
+      withRuby = false;
       vimdiffAlias = true;
       vimAlias = true;
       viAlias = true;
