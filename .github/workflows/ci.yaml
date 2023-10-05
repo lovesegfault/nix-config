@@ -9,7 +9,6 @@ on:
 
 env:
   flake: "github:${{ github.repository }}/${{ github.sha }}"
-  nix-installer-tag: "v0.13.1"
   nix-conf: |-
     auto-optimise-store = true
     accept-flake-config = true
@@ -30,7 +29,6 @@ jobs:
     steps:
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
-          nix-installer-tag: ${{ env.nix-installer-tag }}
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v12
         with:
@@ -53,7 +51,6 @@ jobs:
     steps:
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
-          nix-installer-tag: ${{ env.nix-installer-tag }}
           extra-conf: ${{ env.nix-conf }}
       - id: get-hosts
         run: |
@@ -101,7 +98,6 @@ jobs:
     steps:
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
-          nix-installer-tag: ${{ env.nix-installer-tag }}
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v12
         with:
@@ -144,7 +140,6 @@ jobs:
     steps:
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
-          nix-installer-tag: ${{ env.nix-installer-tag }}
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v12
         with:
