@@ -7,7 +7,7 @@ system:
 
 with self.pkgs.${system};
 
-lib.recurseIntoAttrs {
+{
   parse-nix = runCommandNoCC "parse-nix"
     {
       src = lib.cleanSource self;

@@ -17,9 +17,9 @@ let
 
   compatHostsFarm = linkFarm "hosts-${localSystem}" (lib.mapAttrsToList (name: path: { inherit name path; }) compatHostDrvs);
 in
-lib.recurseIntoAttrs (compatHostDrvs
-  // (lib.optionalAttrs (compatHosts != { }) {
+compatHostDrvs
+// (lib.optionalAttrs (compatHosts != { }) {
   default = compatHostsFarm;
 }) // {
   inherit (nix-fast-build.packages.${localSystem}) nix-fast-build;
-})
+}

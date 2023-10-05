@@ -108,14 +108,13 @@
 
   outputs = { self, nixpkgs, ... }@inputs:
     let
-      inherit (nixpkgs.lib) genAttrs recurseIntoAttrs;
-      allSystems = [
+      inherit (nixpkgs.lib) genAttrs;
+      forAllSystems = genAttrs [
         "aarch64-darwin"
         "aarch64-linux"
         "x86_64-darwin"
         "x86_64-linux"
       ];
-      forAllSystems = f: recurseIntoAttrs (genAttrs allSystems f);
     in
     {
       hosts = import ./nix/hosts.nix;
