@@ -13,9 +13,10 @@ with self.pkgs.${localSystem};
       cachix
       deploy-rs.deploy-rs
       nil
+      nix-tree
       nixpkgs-fmt
-      statix
       self.packages.${localSystem}.nix-fast-build
+      statix
 
       # Lua
       stylua
