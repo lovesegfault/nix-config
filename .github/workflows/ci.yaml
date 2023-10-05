@@ -27,7 +27,7 @@ jobs:
   flake-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v4
+      - uses: DeterminateSystems/nix-installer-action@v5
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v12
@@ -49,7 +49,7 @@ jobs:
       nix-systems: ${{ steps.get-hosts.outputs.hostPlatforms }}
       gh-systems: ${{ steps.get-hosts.outputs.ghSystems }}
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v4
+      - uses: DeterminateSystems/nix-installer-action@v5
         with:
           extra-conf: ${{ env.nix-conf }}
       - id: get-hosts
@@ -96,7 +96,7 @@ jobs:
       matrix:
         system: ${{ fromJson(needs.get-hosts.outputs.nix-systems) }}
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v4
+      - uses: DeterminateSystems/nix-installer-action@v5
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v12
@@ -138,7 +138,7 @@ jobs:
       matrix:
         host: ${{ fromJson(needs.get-hosts.outputs.hosts) }}
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v4
+      - uses: DeterminateSystems/nix-installer-action@v5
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v12
