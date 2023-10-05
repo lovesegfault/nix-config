@@ -3,7 +3,7 @@
 localSystem:
 
 with self.pkgs.${localSystem};
-{
+lib.recurseIntoAttrs {
   default = mkShell {
     name = "nix-config";
 
