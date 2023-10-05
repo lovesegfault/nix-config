@@ -95,6 +95,9 @@ jobs:
       fail-fast: false
       matrix:
         system: ${{ fromJson(needs.get-hosts.outputs.nix-systems) }}
+    env:
+      aarch64-ssh-key: ${{ secrets.AARCH64_BUILDER_KEY }}
+      system: ${{ matrix.system.hostPlatform }}
     steps:
       - uses: DeterminateSystems/nix-installer-action@v5
         with:
@@ -104,28 +107,29 @@ jobs:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: setup-aarch64-ssh
-        if: ${{ matrix.system.hostPlatform == 'aarch64-linux' }}
+        if: ${{ env.system == 'aarch64-linux' }}
         run: |
           mkdir -p ~/.ssh
           echo '${{ env.aarch64-ssh-config }}' > ~/.ssh/config
           echo '${{ env.aarch64-ssh-known-host }}' >> ~/.ssh/known_hosts
-          echo '${{ secrets.AARCH64_BUILDER_KEY }}' > ~/.ssh/id_ed25519
+          echo '${{ env.aarch64-ssh-key }}' > ~/.ssh/id_ed25519
           chmod 0600 ~/.ssh/*
       - name: build-shell
+        if: ${{ env.system != 'aarch64-linux' || env.aarch64-ssh-key != '' }}
         run: |
           declare -a args=(
             '--no-nom'
             '--skip-cached'
-            '--systems=${{ matrix.system.hostPlatform }}'
+            '--systems=${{ env.system }}'
           )
-          if [[ '${{ matrix.system.hostPlatform }}' == 'aarch64-linux' ]]; then
+          if [[ '${{ env.system }}' == 'aarch64-linux' ]]; then
             args+=(
               '--remote=${{ env.aarch64-host }}'
               '--option' 'accept-flake-config' 'true'
             )
           fi
           args+=(
-            '--flake=${{ env.flake }}#devShells.${{ matrix.system.hostPlatform }}.default.inputDerivation'
+            '--flake=${{ env.flake }}#devShells.${{ env.system }}.default.inputDerivation'
           )
           nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
 
@@ -137,6 +141,9 @@ jobs:
       fail-fast: false
       matrix:
         host: ${{ fromJson(needs.get-hosts.outputs.hosts) }}
+    env:
+      aarch64-ssh-key: ${{ secrets.AARCH64_BUILDER_KEY }}
+      system: ${{ matrix.host.hostPlatform }}
     steps:
       - uses: DeterminateSystems/nix-installer-action@v5
         with:
@@ -146,14 +153,15 @@ jobs:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: setup-aarch64-ssh
-        if: ${{ matrix.host.hostPlatform == 'aarch64-linux' }}
+        if: ${{ env.system == 'aarch64-linux' }}
         run: |
           mkdir -p ~/.ssh
           echo '${{ env.aarch64-ssh-config }}' > ~/.ssh/config
           echo '${{ env.aarch64-ssh-known-host }}' >> ~/.ssh/known_hosts
-          echo '${{ secrets.AARCH64_BUILDER_KEY }}' > ~/.ssh/id_ed25519
+          echo '${{ env.aarch64-ssh-key }}' > ~/.ssh/id_ed25519
           chmod 0600 ~/.ssh/*
       - name: build-host
+        if: ${{ env.system != 'aarch64-linux' || env.aarch64-ssh-key != '' }}
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 720
@@ -163,16 +171,16 @@ jobs:
             declare -a args=(
               '--no-nom'
               '--skip-cached'
-              '--systems=${{ matrix.host.hostPlatform }}'
+              '--systems=${{ env.system }}'
             )
-            if [[ '${{ matrix.host.hostPlatform }}' == 'aarch64-linux' ]]; then
+            if [[ '${{ env.system }}' == 'aarch64-linux' ]]; then
               args+=(
                 '--remote=${{ env.aarch64-host }}'
                 '--option' 'accept-flake-config' 'true'
               )
             fi
             args+=(
-              '--flake=${{ env.flake }}#packages.${{ matrix.host.hostPlatform }}.${{ matrix.host.name }}'
+              '--flake=${{ env.flake }}#packages.${{ env.system }}.${{ matrix.host.name }}'
             )
             nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
 
