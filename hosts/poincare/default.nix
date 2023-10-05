@@ -22,8 +22,7 @@
 
   nix = {
     gc.automatic = true;
-    # FIXME: Re-enable whenever this starts getting cached again
-    linux-builder.enable = false;
+    linux-builder.enable = true;
     settings = {
       max-substitution-jobs = 20;
       system-features = [ "big-parallel" "gccarch-armv8-a" ];
