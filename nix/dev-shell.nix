@@ -13,7 +13,6 @@ with self.pkgs.${localSystem};
       cachix
       deploy-rs.deploy-rs
       nil
-      nix-eval-jobs
       nixpkgs-fmt
       statix
       self.packages.${localSystem}.nix-fast-build
