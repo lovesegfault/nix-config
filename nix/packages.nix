@@ -22,5 +22,8 @@ compatHostDrvs
   all = compatHostsFarm;
   default = compatHostsFarm;
 }) // {
-  inherit (nix-fast-build.packages.${localSystem}) nix-fast-build;
+  nix-fast-build = nix-fast-build.packages.${localSystem}.nix-fast-build.overrideAttrs (_: {
+    preFixup = null;
+    shellHook = null;
+  });
 }
