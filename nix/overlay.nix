@@ -14,9 +14,9 @@ let
       (builtins.readDir ./overlays);
 
 in
-lib.recurseIntoAttrs (localOverlays // {
+localOverlays // {
   default = lib.composeManyExtensions ([
     agenix.overlays.default
     deploy-rs.overlay
   ] ++ (lib.attrValues localOverlays));
-})
+}
