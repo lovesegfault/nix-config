@@ -42,6 +42,25 @@ jobs:
             --skip-cached \
             --systems='x86_64-linux' \
             --flake='${{ env.flake }}#checks.x86_64-linux'
+  flake-show:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: DeterminateSystems/nix-installer-action@v5
+        with:
+          extra-conf: ${{ env.nix-conf }}
+      - uses: cachix/cachix-action@v12
+        with:
+          name: nix-config
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          extraPullNames: nix-community
+      - name: nix-flake-show
+        run: |
+          # FIXME: Remove allow-import-from-derivation once these are merged:
+          # https://github.com/nix-community/home-manager/pull/4539
+          # https://github.com/danth/stylix/pull/158
+          nix flake show \
+            --option allow-import-from-derivation true \
+            '${{ env.flake }}'
   get-attrs:
     runs-on: ubuntu-latest
     outputs:
@@ -152,7 +171,7 @@ jobs:
 
   check:
     runs-on: ubuntu-latest
-    needs: [ flake-check, build ]
+    needs: [ flake-check, flake-show, build ]
     if: always()
     steps:
       - uses: re-actors/alls-green@release/v1
