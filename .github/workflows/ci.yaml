@@ -34,6 +34,7 @@ jobs:
         with:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          extraPullNames: nix-community
       - name: nix-flake-check
         run: |
           nix run '${{ env.flake }}#nix-fast-build' -- \
@@ -128,6 +129,7 @@ jobs:
         with:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          extraPullNames: nix-community
       - name: setup-aarch64-ssh
         if: ${{ env.system == 'aarch64-linux' }}
         run: |
