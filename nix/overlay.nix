@@ -1,4 +1,5 @@
-{ agenix
+{ self
+, agenix
 , deploy-rs
 , nixpkgs
 , ...
@@ -18,5 +19,8 @@ localOverlays // {
   default = lib.composeManyExtensions ([
     agenix.overlays.default
     deploy-rs.overlay
+    (final: prev: {
+      inherit (self.packages.${final.stdenv.hostPlatform.system}) nix-fast-build;
+    })
   ] ++ (lib.attrValues localOverlays));
 }

@@ -3,7 +3,7 @@
 
   home = {
     uid = 22314791;
-    packages = with pkgs; [ rustup (lib.hiPrio rust-analyzer) cargo-nextest ];
+    packages = with pkgs; [ rustup (lib.hiPrio rust-analyzer) cargo-nextest nix-fast-build ];
     shellAliases = {
       bre = "brazil-runtime-exec";
       brc = "brazil-recursive-cmd";
