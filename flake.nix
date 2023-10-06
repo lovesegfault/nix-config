@@ -106,8 +106,7 @@
 
   outputs = { self, nixpkgs, ... }@inputs:
     let
-      inherit (nixpkgs.lib) genAttrs;
-      forAllSystems = genAttrs [
+      forAllSystems = nixpkgs.lib.genAttrs [
         "aarch64-darwin"
         "aarch64-linux"
         "x86_64-darwin"
