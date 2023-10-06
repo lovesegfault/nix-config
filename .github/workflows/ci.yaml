@@ -82,7 +82,6 @@ jobs:
             | map_values(
                 if .hostPlatform  == "x86_64-linux" then . + {runsOn: "ubuntu-latest"}
                 elif .hostPlatform == "aarch64-linux" then . + {runsOn: "ubuntu-latest"}
-                elif .hostPlatform == "aarch64-darwin" then . + {runsOn: "macos-latest-xlarge"}
                 elif .hostPlatform == "x86_64-darwin" then . + {runsOn: "macos-latest"}
                 else . + {runsOn: null} end)
             | map(select(.runsOn != null))
