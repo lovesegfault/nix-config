@@ -3,7 +3,6 @@
     taps = [
       "1password/tap"
     ];
-    brews = [ "mas" ];
     casks = [
       { name = "1password"; greedy = true; }
       { name = "1password-cli"; greedy = true; }
