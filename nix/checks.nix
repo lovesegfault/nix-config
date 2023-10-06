@@ -23,6 +23,7 @@ with self.pkgs.${system};
       hooks = {
         actionlint.enable = true;
         luacheck.enable = true;
+        nil.enable = true;
         nixpkgs-fmt.enable = true;
         shellcheck = {
           enable = true;
