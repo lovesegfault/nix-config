@@ -13,6 +13,7 @@ with self.pkgs.${localSystem};
       cachix
       deploy-rs.deploy-rs
       nil
+      nix-melt
       nix-tree
       nixpkgs-fmt
       self.packages.${localSystem}.nix-fast-build
