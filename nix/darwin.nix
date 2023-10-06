@@ -6,7 +6,6 @@
 , nix-index-database
 , nixpkgs
 , stylix
-, templates
 , ...
 }:
 let
@@ -22,7 +21,6 @@ let
           nix.registry = {
             nixpkgs.flake = nixpkgs;
             p.flake = nixpkgs;
-            templates.flake = templates;
           };
         }
       ];

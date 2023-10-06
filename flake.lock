@@ -451,8 +451,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "pre-commit-hooks": "pre-commit-hooks",
-        "stylix": "stylix",
-        "templates": "templates"
+        "stylix": "stylix"
       }
     },
     "rust-overlay": {
@@ -519,21 +518,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "templates": {
-      "locked": {
-        "lastModified": 1691421369,
-        "narHash": "sha256-Agfum0ykpUxUUS4AKYPVSWF+NeHPWay2o1TTNH0BFXA=",
-        "owner": "NixOS",
-        "repo": "templates",
-        "rev": "0fb94bf87144b18e42765693c3e15ac5f17eeab0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "templates",
         "type": "github"
       }
     },

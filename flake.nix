@@ -102,8 +102,6 @@
         flake-compat.follows = "flake-compat";
       };
     };
-
-    templates.url = "github:NixOS/templates";
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
