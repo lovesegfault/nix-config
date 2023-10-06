@@ -10,7 +10,7 @@
   environment.variables.JAVA_HOME = "$(/usr/libexec/java_home)";
 
   homebrew.casks = [
-    { name = "docker"; greedy = true; }
+    { name = "podman-desktop"; greedy = true; }
   ];
 
   home-manager.users.bemeurer = { config, ... }: {
