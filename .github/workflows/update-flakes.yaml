@@ -7,29 +7,27 @@ on:
 permissions: {}
 
 jobs:
-  get-flakes:
+  get-flake-inputs:
     runs-on: ubuntu-latest
     outputs:
-      flake-inputs: ${{ steps.get-flakes.outputs.flake-inputs }}
+      flake-inputs: ${{ steps.get-flake-inputs.outputs.flake-inputs }}
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v5
-      - id: get-flakes
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+          sparse-checkout: flake.lock
+      - id: get-flake-inputs
         run: |
-          get_flake_inputs() {
-            nix flake metadata --json "github:${GITHUB_REPOSITORY}/${GITHUB_SHA}" \
-              | jq -c '
-                  .locks.nodes.root.inputs
-                  | {flake: keys}'
-          }
+          flake_inputs="$(jq -c '.nodes.root.inputs | {flake: keys}' flake.lock)"
 
-          echo "flake-inputs=$(get_flake_inputs)" >> "$GITHUB_OUTPUT"
+          echo "flake-inputs=${flake_inputs}" >> "$GITHUB_OUTPUT"
   update-flake:
     name: update-${{ matrix.flake }}
     runs-on: ubuntu-latest
-    needs: get-flakes
+    needs: get-flake-inputs
     strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.get-flakes.outputs.flake-inputs) }}
+      matrix: ${{ fromJson(needs.get-flake-inputs.outputs.flake-inputs) }}
     steps:
       - uses: actions/checkout@v4
         with:
