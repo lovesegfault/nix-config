@@ -65,42 +65,50 @@ jobs:
   get-attrs:
     runs-on: ubuntu-latest
     outputs:
-      attrs: ${{ steps.get-attrs.outputs.attrs }}
+      build: ${{ steps.get-attrs.outputs.build }}
+      eval: ${{ steps.get-attrs.outputs.eval }}
     env:
-      aarch64-ssh-key: ${{ secrets.AARCH64_BUILDER_KEY }}
+      has_aarch64_ssh_key: ${{ secrets.AARCH64_BUILDER_KEY != '' }}
     steps:
       - uses: DeterminateSystems/nix-installer-action@v5
         with:
           extra-conf: ${{ env.nix-conf }}
       - id: get-attrs
         run: |
+          function summary() {
+            printf '%s\n' "${*}" >> "$GITHUB_STEP_SUMMARY"
+          }
+
+          summary "# CI"
+          nix profile install '${{ env.flake }}#pkgs.x86_64-linux.jq'
           TMP="$(mktemp -d)"
           # host packages
           nix eval --json '${{ env.flake }}#hosts' | jq -c '
             to_entries
-            | map({name: .key} + .value)
-            | map_values(
-                if .hostPlatform  == "x86_64-linux" then . + {runsOn: "ubuntu-latest"}
-                elif .hostPlatform == "aarch64-linux" then . + {runsOn: "ubuntu-latest"}
-                elif .hostPlatform == "x86_64-darwin" then . + {runsOn: "macos-latest"}
-                else . + {runsOn: null} end)
-            | map(select(.runsOn != null))
             | map({
-                name,
-                runsOn,
-                hostPlatform,
-                attr: "${{ env.flake }}#packages.\(.hostPlatform).\(.name)"
-              })
+                name: .key,
+                evalOnly: false,
+                hostPlatform: .value.hostPlatform,
+                attr: "packages.\(.value.hostPlatform).\(.key)"
+            })
+            | map(
+                if .hostPlatform  == "x86_64-linux" then .runsOn="ubuntu-latest"
+                elif .hostPlatform == "aarch64-linux" then .runsOn="ubuntu-latest"
+                elif .hostPlatform == "x86_64-darwin" then .runsOn="macos-latest"
+                else .evalOnly=true | .runsOn="ubuntu-latest"
+                end
+            )
           ' >"$TMP/hostAttrs.json"
 
-          # check that we can build aarch64-linux hosts
-          if [[ -z "${aarch64-ssh-key}" ]]; then
-            echo "::warning title=Incomplete CI run::Not all attributes will be built since no AArch64 SSH key is available"
+          # handle not being able to build aarch64-linux attrs when the ssh key
+          # is missing
+          if [[ "${has_aarch64_ssh_key}" != 'true' ]]; then
+            summary \
+              "- ⚠️ AArch64 builder SSH key is unavailable, all \`aarch64-linux\` attrs will be eval-only"
             old_host_attrs="$(<"$TMP/hostAttrs.json")"
-            jq -c '
-                map(select(.hostPlatform != "aarch64-linux"))
-            ' <<<"$old_host_attrs" \
-              >"$TMP/hostAttrs.json"
+            jq -c \
+              'map(if .hostPlatform == "aarch64-linux" then .evalOnly=true end)' \
+              <<<"$old_host_attrs" >"$TMP/hostAttrs.json"
           fi
 
           # dev shells
@@ -108,27 +116,72 @@ jobs:
             unique_by(.hostPlatform)
             | sort_by(.runsOn)
             | map(
-                .attr = "${{ env.flake }}#devShells.\(.hostPlatform).default.inputDerivation"
-                | .name = "shell-\(.hostPlatform)"
+                .attr = "devShells.\(.hostPlatform).default.inputDerivation"
+                | .name = "devShell-\(.hostPlatform)"
               )
-          ' <"$TMP/hostAttrs.json" \
-            >"$TMP/shellAttrs.json"
+          ' "$TMP/hostAttrs.json" >"$TMP/shellAttrs.json"
 
-          # join attrs
-          jq -c -s add "$TMP/hostAttrs.json" "$TMP/shellAttrs.json" > "$TMP/attrs.json"
+          # join shell and host attrs
+          jq -c -s add "$TMP/hostAttrs.json" "$TMP/shellAttrs.json" >"$TMP/attrs.json"
+
+          # warn about eval-only attrs
+          read -r -a evalOnlyAttrs < \
+            <(jq -c -r 'map(select(.evalOnly) | .name) | @sh' "$TMP/attrs.json" | tr -d \')
+          if [[ "${#evalOnlyAttrs[@]}" -ne 0 ]]; then
+            printf -v attrs "\`%s\`, " "${evalOnlyAttrs[@]}"
+            summary \
+              "- ⚠️ The following attributes will only be evaluated: ${attrs%, }"
+          fi
+
+          # add all to-build attrs to the summary
+          read -r -a buildAttrs < \
+            <(jq -c -r 'map(select(.evalOnly | not) | .name) | @sh' "$TMP/attrs.json" | tr -d \')
+          if [[ "${#buildAttrs[@]}" -ne 0 ]]; then
+            printf -v attrs "\`%s\`, " "${buildAttrs[@]}"
+            summary \
+              "- ✅ The following attributes will be built: ${attrs%, }"
+          fi
 
           # check for dupes
           duplicate_count="$(jq -r '
-            group_by([.name, .attr])
-            | map(select(length>1))
-            | length
-          ' < "$TMP/attrs.json")"
+            group_by([.name, .attr]) | map(select(length>1)) | length
+            ' "$TMP/attrs.json")"
           if [[ "$duplicate_count" -ne 0 ]]; then
-            echo "::error title=Duplicate attrs::Duplicate entries in attrs.json: \`$(cat "$TMP/attrs.json")\`"
+            summary \
+              "- ‼️ Duplicate entries in \`attrs.json\`: \`$(cat "$TMP/attrs.json")\`"
             exit 1
           fi
 
-          echo "attrs=$(<"$TMP/attrs.json")" >> "$GITHUB_OUTPUT"
+          # split build and evalOnly attrs
+          jq -c 'map(select(.evalOnly))' <"$TMP/attrs.json" >"$TMP/eval.json"
+          jq -c 'map(select(.evalOnly | not))' <"$TMP/attrs.json" >"$TMP/build.json"
+
+          echo "build=$(<"$TMP/build.json")" >>"$GITHUB_OUTPUT"
+          echo "eval=$(<"$TMP/eval.json")" >>"$GITHUB_OUTPUT"
+
+  eval:
+    name: eval ${{ matrix.attrs.name }}
+    runs-on: ${{ matrix.attrs.runsOn }}
+    needs: [ get-attrs ]
+    strategy:
+      fail-fast: false
+      matrix:
+        attrs: ${{ fromJson(needs.get-attrs.outputs.eval) }}
+    env:
+      system: ${{ matrix.attrs.hostPlatform }}
+    steps:
+      - uses: DeterminateSystems/nix-installer-action@v5
+        with:
+          extra-conf: ${{ env.nix-conf }}
+      - uses: cachix/cachix-action@v12
+        with:
+          name: nix-config
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          extraPullNames: nix-community
+      - name: eval
+        if: ${{ matrix.attrs.evalOnly }}
+        run: |
+          nix eval --raw '${{ env.flake }}#${{ matrix.attrs.attr }}'
 
   build:
     name: build ${{ matrix.attrs.name }}
@@ -137,7 +190,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        attrs: ${{ fromJson(needs.get-attrs.outputs.attrs) }}
+        attrs: ${{ fromJson(needs.get-attrs.outputs.build) }}
     env:
       aarch64-ssh-key: ${{ secrets.AARCH64_BUILDER_KEY }}
       system: ${{ matrix.attrs.hostPlatform }}
@@ -158,7 +211,7 @@ jobs:
           echo '${{ env.aarch64-ssh-known-host }}' >> ~/.ssh/known_hosts
           echo '${{ env.aarch64-ssh-key }}' > ~/.ssh/id_ed25519
           chmod 0600 ~/.ssh/*
-      - name: nix-build
+      - name: build
         run: |
           declare -a args=(
             '--no-nom'
@@ -168,14 +221,15 @@ jobs:
             '--retries=3'
           )
           [[ '${{ env.system }}' == 'aarch64-linux' ]] && args+=('--remote=${{ env.aarch64-host }}')
-          args+=('--flake=${{ matrix.attrs.attr }}')
+          args+=('--flake=${{ env.flake }}#${{ matrix.attrs.attr }}')
           nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
 
   check:
     runs-on: ubuntu-latest
-    needs: [ flake-check, flake-show, build ]
+    needs: [ flake-check, flake-show, build, eval ]
     if: always()
     steps:
       - uses: re-actors/alls-green@release/v1
         with:
           jobs: ${{ toJSON(needs) }}
+          allowed-skips: eval
