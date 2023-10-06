@@ -9,7 +9,6 @@
     stylix.nixosModules.stylix
     ./resolved.nix
     ./tmux.nix
-    ./xdg.nix
   ];
 
   boot.kernelParams = [ "log_buf_len=10M" ];
