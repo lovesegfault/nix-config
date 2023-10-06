@@ -164,6 +164,7 @@ jobs:
             '--skip-cached'
             '--systems=${{ env.system }}'
             '--option' 'accept-flake-config' 'true'
+            '--retries=3'
           )
           [[ '${{ env.system }}' == 'aarch64-linux' ]] && args+=('--remote=${{ env.aarch64-host }}')
           args+=('--flake=${{ matrix.attrs.attr }}')
