@@ -22,4 +22,5 @@ compatHostDrvs
   default = compatHostsFarm;
 }) // {
   inherit (nix-fast-build.packages.${localSystem}) nix-fast-build;
+  inherit (self.pkgs.${localSystem}) nix-eval-jobs;
 }

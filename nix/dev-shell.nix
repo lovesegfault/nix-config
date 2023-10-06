@@ -16,6 +16,7 @@ with self.pkgs.${localSystem};
       nix-melt
       nix-tree
       nixpkgs-fmt
+      self.packages.${localSystem}.nix-eval-jobs
       self.packages.${localSystem}.nix-fast-build
       statix
 
