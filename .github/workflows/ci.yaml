@@ -7,6 +7,8 @@ on:
       - try
   pull_request:
 
+permissions: {}
+
 env:
   flake: "github:${{ github.repository }}/${{ github.sha }}"
   nix-conf: |-
