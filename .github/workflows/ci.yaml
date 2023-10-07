@@ -55,13 +55,7 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: nix-community
       - name: nix-flake-show
-        run: |
-          # FIXME: Remove allow-import-from-derivation once these are merged:
-          # https://github.com/nix-community/home-manager/pull/4539
-          # https://github.com/danth/stylix/pull/158
-          nix flake show \
-            --option allow-import-from-derivation true \
-            '${{ env.flake }}'
+        run: nix flake show '${{ env.flake }}'
   get-attrs:
     runs-on: ubuntu-latest
     outputs:
