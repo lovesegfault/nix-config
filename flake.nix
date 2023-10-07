@@ -95,7 +95,8 @@
     };
 
     stylix = {
-      url = "github:danth/stylix";
+      # FIXME: https://github.com/danth/stylix/pull/158
+      url = "github:lovesegfault/stylix/bat-avoid-ifd";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
