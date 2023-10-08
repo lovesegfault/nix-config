@@ -71,6 +71,8 @@
       gnome.enable = hostType == "nixos";
       gtk.enable = hostType == "nixos";
       kde.enable = lib.mkDefault false;
+      # XXX: IFD
+      xresources.enable = false;
     };
   };
 
