@@ -35,7 +35,6 @@ let
       };
     };
 in
-lib.recurseIntoAttrs
-  (lib.mapAttrs
-    genConfiguration
-    (lib.filterAttrs (_: host: host.type == "darwin") self.hosts))
+lib.mapAttrs
+  genConfiguration
+  (lib.filterAttrs (_: host: host.type == "darwin") self.hosts)
