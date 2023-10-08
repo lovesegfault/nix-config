@@ -1,19 +1,12 @@
 { lib, pkgs, ... }: {
-  imports = [ ../../users/bemeurer ];
+  imports = [
+    ../../users/bemeurer
+    ../../users/bemeurer/dev/aws.nix
+  ];
 
   home = {
     uid = 22314791;
     packages = with pkgs; [ rustup (lib.hiPrio rust-analyzer) cargo-nextest nix-fast-build ];
-    shellAliases = {
-      bre = "brazil-runtime-exec";
-      brc = "brazil-recursive-cmd";
-      bws = "brazil ws";
-      bb = "brazil-build";
-    };
-    sessionPath = [
-      "$HOME/.toolbox/bin"
-      "/apollo/env/bt-rust/bin"
-    ];
   };
 
   programs = {
@@ -30,8 +23,5 @@
       '';
     };
     git.userEmail = lib.mkForce "bemeurer@amazon.com";
-    zsh.initExtraBeforeCompInit = ''
-      fpath+=("$HOME/.zsh/completion" "$HOME/.brazil_completion/zsh_completion")
-    '';
   };
 }

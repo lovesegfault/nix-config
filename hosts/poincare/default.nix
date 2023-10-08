@@ -14,8 +14,8 @@
   ];
 
   home-manager.users.bemeurer = { config, ... }: {
+    imports = [ ../../users/bemeurer/dev/aws.nix ];
     home.sessionPath = [
-      "${config.home.homeDirectory}/.toolbox/bin"
       "${config.home.homeDirectory}/.local/bin"
     ];
   };
