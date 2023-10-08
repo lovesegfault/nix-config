@@ -37,12 +37,7 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: nix-community
       - name: nix-flake-check
-        run: |
-          nix run '${{ env.flake }}#nix-fast-build' -- \
-            --no-nom \
-            --skip-cached \
-            --systems='x86_64-linux' \
-            --flake='${{ env.flake }}#checks.x86_64-linux'
+        run: nix flake check '${{ env.flake }}'
   flake-show:
     runs-on: ubuntu-latest
     steps:
