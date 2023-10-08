@@ -57,7 +57,6 @@ let
       };
     };
 in
-lib.recurseIntoAttrs
-  (lib.mapAttrs
-    genConfiguration
-    (lib.filterAttrs (_: host: host.type == "home-manager") self.hosts))
+lib.mapAttrs
+  genConfiguration
+  (lib.filterAttrs (_: host: host.type == "home-manager") self.hosts)
