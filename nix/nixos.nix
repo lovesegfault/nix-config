@@ -40,7 +40,6 @@ let
       };
     };
 in
-lib.recurseIntoAttrs
-  (lib.mapAttrs
-    genConfiguration
-    (lib.filterAttrs (_: host: host.type == "nixos") self.hosts))
+lib.mapAttrs
+  genConfiguration
+  (lib.filterAttrs (_: host: host.type == "nixos") self.hosts)
