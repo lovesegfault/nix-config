@@ -17,7 +17,7 @@ let
       profiles.system.path = activate.nixos nixosCfg;
     };
 in
-lib.recuseIntoAttrs {
+{
   # XXX: auto-rollback is too noisy since any service failing will cause it to
   # go haywire.
   autoRollback = false;
