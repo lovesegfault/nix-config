@@ -1,4 +1,5 @@
 local lualine = require("lualine")
+local lsp_progress = require("lsp-progress")
 
 local sections = {
   diagnostics = {
@@ -25,6 +26,7 @@ local sections = {
   },
 }
 
+lsp_progress.setup()
 lualine.setup({
   options = {
     theme = "ayu_dark",
@@ -38,7 +40,7 @@ lualine.setup({
   sections = {
     lualine_a = { "mode" },
     lualine_b = { sections.filetype, sections.filename, "navic" },
-    lualine_c = { sections.diagnostics },
+    lualine_c = { sections.diagnostics, lsp_progress.progress },
     lualine_x = { "searchcount", sections.diff, "branch" },
     lualine_y = { "encoding", "fileformat" },
     lualine_z = { "location", "progress" },
@@ -51,4 +53,12 @@ lualine.setup({
     lualine_y = {},
     lualine_z = {},
   },
+})
+
+-- listen lsp-progress event and refresh lualine
+vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
+vim.api.nvim_create_autocmd("User", {
+  group = "lualine_augroup",
+  pattern = "LspProgressStatusUpdated",
+  callback = require("lualine").refresh,
 })
