@@ -14,6 +14,7 @@ with self.pkgs.${hostPlatform};
       deploy-rs.deploy-rs
       nil
       nix-melt
+      nix-output-monitor
       nix-tree
       nixpkgs-fmt
       self.packages.${hostPlatform}.nix-eval-jobs
