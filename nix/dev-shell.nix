@@ -1,8 +1,8 @@
 { self, ... }:
 
-localSystem:
+hostPlatform:
 
-with self.pkgs.${localSystem};
+with self.pkgs.${hostPlatform};
 {
   default = mkShell {
     name = "nix-config";
@@ -16,8 +16,8 @@ with self.pkgs.${localSystem};
       nix-melt
       nix-tree
       nixpkgs-fmt
-      self.packages.${localSystem}.nix-eval-jobs
-      self.packages.${localSystem}.nix-fast-build
+      self.packages.${hostPlatform}.nix-eval-jobs
+      self.packages.${hostPlatform}.nix-fast-build
       statix
 
       # Lua
@@ -42,7 +42,7 @@ with self.pkgs.${localSystem};
     ];
 
     shellHook = ''
-      ${self.checks.${localSystem}.pre-commit-check.shellHook}
+      ${self.checks.${hostPlatform}.pre-commit-check.shellHook}
     '';
   };
 }
