@@ -94,9 +94,8 @@
       };
     };
 
-    # XXX: https://github.com/danth/stylix/issues/159
     stylix = {
-      url = "github:lovesegfault/stylix/no-ifd";
+      url = "github:danth/stylix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
