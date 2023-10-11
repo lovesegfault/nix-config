@@ -73,12 +73,15 @@ cmp.setup({
     { name = "nvim_lsp" },
     { name = "nvim_lsp_signature_help" },
     { name = "luasnip" },
-    { name = "cmp_tabnine" },
-    { name = "treesitter" },
     { name = "nvim_lua" },
+    { name = "treesitter" },
     { name = "buffer" },
-    { name = "path" },
+    { name = "tmux" },
+    { name = "async_path" },
     { name = "latex_symbols" },
+  },
+  experimental = {
+    ghost_text = true,
   },
 })
 

@@ -53,6 +53,7 @@
         leap-nvim # easy motions
 
         # completion
+        cmp-async-path # completion source for paths
         cmp-buffer # completion source for buffer words
         cmp-cmdline # completion for vim's command line
         cmp-latex-symbols # completion source for latex symbols
@@ -61,6 +62,7 @@
         cmp-nvim-lua # completion source for nvim's lua API
         cmp-path # completion source for paths
         cmp-treesitter # completion source for tree-sitter
+        cmp-tmux # completion source for tmux
         crates-nvim # crates.io dependency version info
         lspkind-nvim # pictograms for lsp completion items
         nvim-autopairs # automatic pairing of delimiters
@@ -76,9 +78,7 @@
 
         # syntax
         nvim-treesitter.withAllGrammars
-      ]
-      ++ lib.optional (lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.tabnine) cmp-tabnine
-      ;
+      ];
     };
   };
 
