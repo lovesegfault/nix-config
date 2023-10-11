@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   programs = {
     git.extraConfig.core.editor = "nvim";
 
@@ -7,15 +7,11 @@
 
       defaultEditor = true;
       withNodeJs = false;
-      withPython3 = true;
+      withPython3 = false;
       withRuby = false;
       vimdiffAlias = true;
       vimAlias = true;
       viAlias = true;
-
-      extraPackages = with pkgs; [
-        universal-ctags
-      ];
 
       plugins = with pkgs.vimPlugins; [
         # ui
@@ -57,17 +53,32 @@
         leap-nvim # easy motions
 
         # completion
-        coq_nvim # completion engine
+        cmp-buffer # completion source for buffer words
+        cmp-cmdline # completion for vim's command line
+        cmp-latex-symbols # completion source for latex symbols
+        cmp-nvim-lsp # completion source for LSP
+        cmp-nvim-lsp-signature-help # completion fn signature info
+        cmp-nvim-lua # completion source for nvim's lua API
+        cmp-path # completion source for paths
+        cmp-treesitter # completion source for tree-sitter
         crates-nvim # crates.io dependency version info
         lspkind-nvim # pictograms for lsp completion items
         nvim-autopairs # automatic pairing of delimiters
+        nvim-cmp # completion engine
 
         # debugging
         nvim-dap
 
+        # snippets
+        cmp_luasnip # completion source for snippets
+        friendly-snippets
+        luasnip # snippet engine
+
         # syntax
         nvim-treesitter.withAllGrammars
-      ];
+      ]
+      ++ lib.optional (lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.tabnine) cmp-tabnine
+      ;
     };
   };
 
