@@ -1,8 +1,7 @@
 local nvim_lsp = require("lspconfig")
+local coq = require("coq")
 
 local flags = { debounce_text_changes = 150 }
-
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- navic
 require("nvim-navic").setup({ lsp = { auto_attach = true } })
@@ -64,10 +63,10 @@ end
 -- Enable the following language servers
 local servers = { "clangd", "pyright", "texlab", "ruff_lsp" }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup({ on_attach = on_attach, capabilities = capabilities, flags = flags })
+  nvim_lsp[lsp].setup(coq.lsp_ensure_capabilities({ on_attach = on_attach, flags = flags }))
 end
 
-nvim_lsp["ltex"].setup({
+nvim_lsp["ltex"].setup(coq.lsp_ensure_capabilities({
   on_attach = function(client, bufnr)
     on_attach(client, bufnr)
     require("ltex_extra").setup({
@@ -77,42 +76,33 @@ nvim_lsp["ltex"].setup({
       log_level = "none",
     })
   end,
-  capabilities = capabilities,
   flags = flags,
-})
+}))
 
-nvim_lsp["lua_ls"].setup({
+nvim_lsp["lua_ls"].setup(coq.lsp_ensure_capabilities({
   on_attach = on_attach,
-  capabilities = capabilities,
   flags = flags,
   cmd = { "lua-language-server" },
   settings = {
     Lua = {
       runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = "LuaJIT",
-        -- Setup your lua path
-        -- path = runtime_path,
       },
       diagnostics = {
-        -- Get the language server to recognize the `vim` global
         globals = { "vim" },
       },
       workspace = {
-        -- Make the server aware of Neovim runtime files
         library = vim.api.nvim_get_runtime_file("", true),
       },
-      -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {
         enable = false,
       },
     },
   },
-})
+}))
 
-nvim_lsp["nil_ls"].setup({
+nvim_lsp["nil_ls"].setup(coq.lsp_ensure_capabilities({
   on_attach = on_attach,
-  capabilities = capabilities,
   flags = flags,
   settings = {
     ["nil"] = {
@@ -121,15 +111,14 @@ nvim_lsp["nil_ls"].setup({
       },
     },
   },
-})
+}))
 
-require("rust-tools").setup({
+require("rust-tools").setup(coq.lsp_ensure_capabilities({
   server = {
     on_attach = on_attach,
-    capabilities = capabilities,
     flags = flags,
   },
-})
+}))
 
 -- Map :Format to vim.lsp.buf.formatting()
 vim.cmd([[ command! Format execute "lua vim.lsp.buf.format({ async = true })" ]])

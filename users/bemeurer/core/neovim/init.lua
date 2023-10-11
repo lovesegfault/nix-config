@@ -24,8 +24,15 @@ notify.setup({
 vim.notify = notify
 vim.keymap.set("n", "<C-d>", notify.dismiss, { desc = "Dismiss notifications", silent = true })
 
+-- coq_nvim for completion
+vim.g.coq_settings = {
+  auto_start = "shut-up",
+  display = { pum = { kind_context = { "", "" }, source_context = { "", "" } } },
+  keymap = { jump_to_mark = "<c-m>" },
+}
+require("coq")
+
 -- modularized / complex configs
-require("completion")
 require("lsp")
 require("status")
 
