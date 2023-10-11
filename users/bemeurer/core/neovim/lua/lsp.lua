@@ -66,7 +66,7 @@ local on_attach = function(_, bufnr)
 end
 
 -- Enable the following language servers
-local servers = { "clangd", "pyright", "texlab", "ruff_lsp" }
+local servers = { "clangd", "pyright", "texlab", "ruff_lsp", "rust_analyzer" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup({ on_attach = on_attach, capabilities = capabilities, flags = flags })
 end
@@ -124,14 +124,6 @@ nvim_lsp["nil_ls"].setup({
         command = { "nixpkgs-fmt" },
       },
     },
-  },
-})
-
-require("rust-tools").setup({
-  server = {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = flags,
   },
 })
 
