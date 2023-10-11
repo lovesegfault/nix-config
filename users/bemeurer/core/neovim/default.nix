@@ -29,7 +29,6 @@
         nvim-navic # status/bufferline component to show LSP context
         nvim-notify # fancy notifications
         nvim-web-devicons # file icons for trouble-nvim
-        rainbow-delimiters-nvim # rainbow parens with indent-blankline integration
         todo-comments-nvim # highlight, list and search todo comments
         trouble-nvim # list for showing LSP diagnostics
         true-zen-nvim # distraction-free writing
