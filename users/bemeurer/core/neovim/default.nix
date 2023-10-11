@@ -26,6 +26,7 @@
         lualine-nvim # statusline
         neovim-ayu # colorscheme
         numb-nvim # peek lines in non-obtrusive way
+        nvim-highlight-colors # highlight color codes
         nvim-navic # status/bufferline component to show LSP context
         nvim-notify # fancy notifications
         nvim-web-devicons # file icons for trouble-nvim
