@@ -37,7 +37,6 @@
         nvim-lspconfig # LSP
         lsp-progress-nvim # Progress indicator for statusbar
         lsp_signature-nvim # Show function signature when you type
-        lsp-inlayhints-nvim # Inlay type hints, won't be needed after 0.10.0
 
         # tooling
         bufdelete-nvim # delete buffers without losing window layout
