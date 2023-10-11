@@ -1,8 +1,9 @@
 local nvim_lsp = require("lspconfig")
 
-local flags = { debounce_text_changes = 150 }
-
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+nvim_lsp.util.default_config = vim.tbl_deep_extend("force", nvim_lsp.util.default_config, {
+  capabilities = require("cmp_nvim_lsp").default_capabilities(),
+  flags = { debounce_text_changes = 150 },
+})
 
 -- navic
 require("nvim-navic").setup({ lsp = { auto_attach = true } })
@@ -68,7 +69,7 @@ end
 -- Enable the following language servers
 local servers = { "clangd", "pyright", "texlab", "ruff_lsp", "rust_analyzer" }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup({ on_attach = on_attach, capabilities = capabilities, flags = flags })
+  nvim_lsp[lsp].setup({ on_attach = on_attach })
 end
 
 nvim_lsp["ltex"].setup({
@@ -81,14 +82,10 @@ nvim_lsp["ltex"].setup({
       log_level = "none",
     })
   end,
-  capabilities = capabilities,
-  flags = flags,
 })
 
 nvim_lsp["lua_ls"].setup({
   on_attach = on_attach,
-  capabilities = capabilities,
-  flags = flags,
   cmd = { "lua-language-server" },
   settings = {
     Lua = {
@@ -116,8 +113,6 @@ nvim_lsp["lua_ls"].setup({
 
 nvim_lsp["nil_ls"].setup({
   on_attach = on_attach,
-  capabilities = capabilities,
-  flags = flags,
   settings = {
     ["nil"] = {
       formatting = {
