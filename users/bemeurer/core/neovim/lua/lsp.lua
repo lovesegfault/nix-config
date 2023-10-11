@@ -67,7 +67,7 @@ local on_attach = function(_, bufnr)
 end
 
 -- Enable the following language servers
-local servers = { "clangd", "pyright", "texlab", "ruff_lsp", "rust_analyzer" }
+local servers = { "clangd", "pyright", "texlab", "ruff_lsp" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup({ on_attach = on_attach })
 end
@@ -120,6 +120,10 @@ nvim_lsp["nil_ls"].setup({
       },
     },
   },
+})
+
+require("rust-tools").setup({
+  server = { on_attach = on_attach },
 })
 
 -- Map :Format to vim.lsp.buf.formatting()

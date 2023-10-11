@@ -42,6 +42,7 @@
         bufdelete-nvim # delete buffers without losing window layout
         guess-indent-nvim # automatic indentation style detection
         nvim-surround # add/change/delete surrounding delimiter pairs with ease
+        rust-tools-nvim
         suda-vim # sudo write
         telescope-frecency-nvim
         telescope-nvim
