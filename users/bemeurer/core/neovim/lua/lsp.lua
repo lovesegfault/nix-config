@@ -59,6 +59,10 @@ local on_attach = function(_, bufnr)
   require("nvim-lightbulb").setup({
     autocmd = { enabled = true },
   })
+  require("lsp_signature").on_attach({
+    bind = true,
+    handler_opts = { border = "rounded" },
+  }, bufnr)
 end
 
 -- Enable the following language servers

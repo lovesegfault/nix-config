@@ -36,6 +36,7 @@
         nvim-lightbulb # lightbulb sign when LSP actions are available
         nvim-lspconfig # LSP
         lsp-progress-nvim # Progress indicator for statusbar
+        lsp_signature-nvim # Show function signature when you type
 
         # tooling
         bufdelete-nvim # delete buffers without losing window layout
@@ -58,7 +59,6 @@
         cmp-cmdline # completion for vim's command line
         cmp-latex-symbols # completion source for latex symbols
         cmp-nvim-lsp # completion source for LSP
-        cmp-nvim-lsp-signature-help # completion fn signature info
         cmp-nvim-lua # completion source for nvim's lua API
         cmp-path # completion source for paths
         cmp-treesitter # completion source for tree-sitter
