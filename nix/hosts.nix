@@ -1,13 +1,31 @@
 let
+  hasSuffix = suffix: content:
+    let
+      inherit (builtins) stringLength substring;
+      lenContent = stringLength content;
+      lenSuffix = stringLength suffix;
+    in
+    lenContent >= lenSuffix
+    && substring (lenContent - lenSuffix) lenContent content == suffix
+  ;
+
   mkHost =
-    { type, hostPlatform, address ? null, pubkey ? null, remoteBuild ? true, homeDirectory ? null }:
+    { type
+    , hostPlatform
+    , address ? null
+    , pubkey ? null
+    , homeDirectory ? null
+    , remoteBuild ? true
+    }:
     if type == "nixos" then
       assert address != null && pubkey != null;
+      assert (hasSuffix "linux" hostPlatform);
       {
         inherit type hostPlatform address pubkey remoteBuild;
       }
     else if type == "darwin" then
       assert pubkey != null;
+      assert (hasSuffix "darwin" hostPlatform);
       {
         inherit type hostPlatform pubkey;
       }
