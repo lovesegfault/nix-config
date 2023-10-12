@@ -16,23 +16,24 @@ let
     , pubkey ? null
     , homeDirectory ? null
     , remoteBuild ? true
+    , large ? false
     }:
     if type == "nixos" then
       assert address != null && pubkey != null;
       assert (hasSuffix "linux" hostPlatform);
       {
-        inherit type hostPlatform address pubkey remoteBuild;
+        inherit type hostPlatform address pubkey remoteBuild large;
       }
     else if type == "darwin" then
       assert pubkey != null;
       assert (hasSuffix "darwin" hostPlatform);
       {
-        inherit type hostPlatform pubkey;
+        inherit type hostPlatform pubkey large;
       }
     else if type == "home-manager" then
       assert homeDirectory != null;
       {
-        inherit type hostPlatform homeDirectory;
+        inherit type hostPlatform homeDirectory large;
       }
     else throw "unknown host type '${type}'";
 in
@@ -99,5 +100,6 @@ in
     address = "100.68.240.30";
     hostPlatform = "x86_64-linux";
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDUZPmPTATZ4nBWstPqlUiguvxr26XWAE9BGPVNNRBR5";
+    large = true;
   };
 }
