@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ config, pkgs, ... }: {
   age.secrets.github-runner-token.file = ./github-runner.age;
   services.github-runner = {
     enable = true;
@@ -7,5 +7,6 @@
     tokenFile = config.age.secrets.github-runner-token.path;
     url = "https://github.com/lovesegfault/nix-config";
     nodeRuntimes = [ "node16" "node20" ];
+    extraLabels = [ pkgs.stdenv.hostPlatform.system ];
   };
 }
