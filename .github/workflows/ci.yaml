@@ -189,7 +189,7 @@ jobs:
       matrix:
         attrs: ${{ fromJson(needs.get-attrs.outputs.build) }}
     env:
-      self-hosted: ${{ !contains(matrix.attrs.runsOn, 'self-hosted') }}
+      self-hosted: ${{ contains(matrix.attrs.runsOn, 'self-hosted') }}
       aarch64-ssh-key: ${{ secrets.AARCH64_BUILDER_KEY }}
       system: ${{ matrix.attrs.hostPlatform }}
     steps:
