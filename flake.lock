@@ -172,22 +172,6 @@
         "type": "github"
       }
     },
-    "base16-xresources": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1696726575,
-        "narHash": "sha256-btDlG5hF+CRM4NWJ7dRwQJYy0GTAYsg9B56kJ9uUeUk=",
-        "owner": "tinted-theming",
-        "repo": "base16-xresources",
-        "rev": "98d029dbb19fbc7e8c3e3b3fba0d4f946b5da760",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tinted-theming",
-        "repo": "base16-xresources",
-        "type": "github"
-      }
-    },
     "crane": {
       "inputs": {
         "flake-compat": [
@@ -617,7 +601,6 @@
         "base16-kitty": "base16-kitty",
         "base16-tmux": "base16-tmux",
         "base16-vim": "base16-vim",
-        "base16-xresources": "base16-xresources",
         "flake-compat": [
           "flake-compat"
         ],
@@ -629,11 +612,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1696958573,
-        "narHash": "sha256-x4dtbfTFZzuBo6Qut8q5+S4X1Lk5fz117ecnpimY41U=",
+        "lastModified": 1697094532,
+        "narHash": "sha256-SvTC0wNCGpoUBvo9//IoTv5NQjozY0Y5ViTziRO+vt8=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "eb007b79bd66bf057a5f8bdcd3af1096ccae3ff8",
+        "rev": "feceaa9d81725c0ca28ab46326b6dd1310a10dea",
         "type": "github"
       },
       "original": {
