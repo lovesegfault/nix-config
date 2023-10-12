@@ -83,7 +83,7 @@ jobs:
             })
             | map(
                 if .large then
-                  if .hostPlatform == "x86_64-linux" then .runsOn=["x86_64-linux", "large"]
+                  if .hostPlatform == "x86_64-linux" then .runsOn=["self-hosted", "x86_64-linux"]
                   else .evalOnly=true | .runsOn="ubuntu-latest"
                   end
                 else
