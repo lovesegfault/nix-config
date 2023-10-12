@@ -10,13 +10,13 @@ with self.pkgs.${hostPlatform};
     nativeBuildInputs = [
       # Nix
       agenix
-      cachix
       deploy-rs.deploy-rs
       nil
       nix-melt
       nix-output-monitor
       nix-tree
       nixpkgs-fmt
+      self.packages.${hostPlatform}.cachix
       self.packages.${hostPlatform}.nix-eval-jobs
       self.packages.${hostPlatform}.nix-fast-build
       statix
