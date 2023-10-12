@@ -10,12 +10,13 @@ on:
 permissions: {}
 
 env:
-  flake: "github:${{ github.repository }}/${{ github.sha }}"
+  flake: github:${{ github.repository }}/${{ github.sha }}
   nix-conf: |-
     accept-flake-config = true
     builders-use-substitutes = true
     max-jobs = auto
-  aarch64-host: "aarch64.nixos.community"
+  cachix-install: nix profile install 'github:${{ github.repository }}/${{ github.sha }}#cachix'
+  aarch64-host: aarch64.nixos.community
   aarch64-ssh-config: |-
     Host aarch64.nixos.community 147.28.143.250
         User lovesegfault
@@ -188,11 +189,12 @@ jobs:
       matrix:
         attrs: ${{ fromJson(needs.get-attrs.outputs.build) }}
     env:
+      self-hosted: ${{ !contains(matrix.attrs.runsOn, 'self-hosted') }}
       aarch64-ssh-key: ${{ secrets.AARCH64_BUILDER_KEY }}
       system: ${{ matrix.attrs.hostPlatform }}
     steps:
       - uses: DeterminateSystems/nix-installer-action@v5
-        if: ${{ !contains(matrix.attrs.runsOn, 'self-hosted') }}
+        if: ${{ env.self-hosted != 'true' }}
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v12
@@ -200,6 +202,8 @@ jobs:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: nix-community
+          skipAddingSubstituter: ${{ env.self-hosted }}
+          installCommand: ${{ env.self-hosted == 'true' && 'true' || env.cachix-install }}
       - name: setup-aarch64-ssh
         if: ${{ env.system == 'aarch64-linux' && !contains(matrix.attrs.runsOn, 'self-hosted') }}
         run: |
