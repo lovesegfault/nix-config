@@ -65,6 +65,8 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v5
         with:
           extra-conf: ${{ env.nix-conf }}
+      - id: install-jq
+        run: nix profile install '${{ env.flake }}#pkgs.x86_64-linux.jq'
       - id: get-attrs
         run: |
           function summary() {
@@ -72,7 +74,6 @@ jobs:
           }
 
           summary "# CI"
-          nix profile install '${{ env.flake }}#pkgs.x86_64-linux.jq'
           TMP="$(mktemp -d)"
           # host packages
           nix eval --json '${{ env.flake }}#hosts' | jq -c '
