@@ -78,13 +78,20 @@ jobs:
                 name: .key,
                 evalOnly: false,
                 hostPlatform: .value.hostPlatform,
+                large: .value.large,
                 attr: "packages.\(.value.hostPlatform).\(.key)"
             })
             | map(
-                if .hostPlatform  == "x86_64-linux" then .runsOn="ubuntu-latest"
-                elif .hostPlatform == "aarch64-linux" then .runsOn="ubuntu-latest"
-                elif .hostPlatform == "x86_64-darwin" then .runsOn="macos-latest"
-                else .evalOnly=true | .runsOn="ubuntu-latest"
+                if .large then
+                  if .hostPlatform == "x86_64-linux" then .runsOn=["x86_64-linux", "large"]
+                  else .evalOnly=true | .runsOn="ubuntu-latest"
+                  end
+                else
+                  if .hostPlatform  == "x86_64-linux" then .runsOn="ubuntu-latest"
+                  elif .hostPlatform == "aarch64-linux" then .runsOn="ubuntu-latest"
+                  elif .hostPlatform == "x86_64-darwin" then .runsOn="macos-latest"
+                  else .evalOnly=true | .runsOn="ubuntu-latest"
+                  end
                 end
             )
           ' >"$TMP/hostAttrs.json"
