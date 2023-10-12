@@ -37,6 +37,7 @@ jobs:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: nix-community
+          installCommand: ${{ env.cachix-install }}
       - name: nix-flake-check
         run: nix flake check '${{ env.flake }}'
   flake-show:
@@ -50,6 +51,7 @@ jobs:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: nix-community
+          installCommand: ${{ env.cachix-install }}
       - name: nix-flake-show
         run: nix flake show '${{ env.flake }}'
   get-attrs:
@@ -83,16 +85,10 @@ jobs:
                 attr: "packages.\(.value.hostPlatform).\(.key)"
             })
             | map(
-                if .large then
-                  if .hostPlatform == "x86_64-linux" then .runsOn=["self-hosted", "x86_64-linux"]
-                  else .evalOnly=true | .runsOn="ubuntu-latest"
-                  end
-                else
-                  if .hostPlatform  == "x86_64-linux" then .runsOn="ubuntu-latest"
-                  elif .hostPlatform == "aarch64-linux" then .runsOn="ubuntu-latest"
-                  elif .hostPlatform == "x86_64-darwin" then .runsOn="macos-latest"
-                  else .evalOnly=true | .runsOn="ubuntu-latest"
-                  end
+                if .hostPlatform  == "x86_64-linux" then .runsOn="ubuntu-latest"
+                elif .hostPlatform == "aarch64-linux" then .runsOn="ubuntu-latest"
+                elif .hostPlatform == "x86_64-darwin" then .runsOn="macos-latest"
+                else .evalOnly=true | .runsOn="ubuntu-latest"
                 end
             )
           ' >"$TMP/hostAttrs.json"
@@ -175,6 +171,7 @@ jobs:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: nix-community
+          installCommand: ${{ env.cachix-install }}
       - name: eval
         if: ${{ matrix.attrs.evalOnly }}
         run: |
@@ -189,30 +186,20 @@ jobs:
       matrix:
         attrs: ${{ fromJson(needs.get-attrs.outputs.build) }}
     env:
-      self-hosted: ${{ contains(matrix.attrs.runsOn, 'self-hosted') }}
       aarch64-ssh-key: ${{ secrets.AARCH64_BUILDER_KEY }}
       system: ${{ matrix.attrs.hostPlatform }}
     steps:
       - uses: DeterminateSystems/nix-installer-action@v5
-        if: ${{ env.self-hosted != 'true' }}
         with:
           extra-conf: ${{ env.nix-conf }}
-      - uses: cachix/cachix-action@6a2e08b5ebf7a9f285ff57b1870a4262b06e0bee
-        if: ${{ env.self-hosted != 'true' }}
+      - uses: cachix/cachix-action@v12
         with:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: nix-community
           installCommand: ${{ env.cachix-install }}
-      - uses: cachix/cachix-action@6a2e08b5ebf7a9f285ff57b1870a4262b06e0bee
-        if: ${{ env.self-hosted == 'true' }}
-        with:
-          name: nix-config
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          skipAddingSubstituter: true
-          installCommand: true
       - name: setup-aarch64-ssh
-        if: ${{ env.system == 'aarch64-linux' && !contains(matrix.attrs.runsOn, 'self-hosted') }}
+        if: ${{ env.system == 'aarch64-linux' }}
         run: |
           mkdir -p ~/.ssh
           echo '${{ env.aarch64-ssh-config }}' > ~/.ssh/config
