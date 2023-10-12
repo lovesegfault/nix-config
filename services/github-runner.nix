@@ -8,5 +8,6 @@
     url = "https://github.com/lovesegfault/nix-config";
     nodeRuntimes = [ "node16" "node20" ];
     extraLabels = [ pkgs.stdenv.hostPlatform.system ];
+    extraPackages = with pkgs; [ cachix ];
   };
 }
