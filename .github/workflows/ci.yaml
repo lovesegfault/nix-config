@@ -198,12 +198,19 @@ jobs:
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@6a2e08b5ebf7a9f285ff57b1870a4262b06e0bee
+        if: ${{ env.self-hosted != 'true' }}
         with:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          extraPullNames: ${{ env.self-hosted == 'true' && null || 'nix-community' }}
-          skipAddingSubstituter: ${{ env.self-hosted }}
-          installCommand: ${{ env.self-hosted == 'true' && 'true' || env.cachix-install }}
+          extraPullNames: nix-community
+          installCommand: ${{ env.cachix-install }}
+      - uses: cachix/cachix-action@6a2e08b5ebf7a9f285ff57b1870a4262b06e0bee
+        if: ${{ env.self-hosted == 'true' }}
+        with:
+          name: nix-config
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          skipAddingSubstituter: true
+          installCommand: true
       - name: setup-aarch64-ssh
         if: ${{ env.system == 'aarch64-linux' && !contains(matrix.attrs.runsOn, 'self-hosted') }}
         run: |
