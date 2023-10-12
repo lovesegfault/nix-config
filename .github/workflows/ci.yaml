@@ -192,6 +192,7 @@ jobs:
       system: ${{ matrix.attrs.hostPlatform }}
     steps:
       - uses: DeterminateSystems/nix-installer-action@v5
+        if: ${{ !contains(matrix.attrs.runsOn, 'self-hosted') }}
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v12
@@ -200,7 +201,7 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: nix-community
       - name: setup-aarch64-ssh
-        if: ${{ env.system == 'aarch64-linux' }}
+        if: ${{ env.system == 'aarch64-linux' && !contains(matrix.attrs.runsOn, 'self-hosted') }}
         run: |
           mkdir -p ~/.ssh
           echo '${{ env.aarch64-ssh-config }}' > ~/.ssh/config
