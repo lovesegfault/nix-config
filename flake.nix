@@ -119,8 +119,11 @@
       pkgs = forAllSystems (localSystem: import nixpkgs {
         inherit localSystem;
         overlays = [ self.overlays.default ];
-        config.allowUnfree = true;
-        config.allowAliases = true;
+        config = {
+          permittedInsecurePackages = [ "nodejs-16.20.2" ];
+          allowUnfree = true;
+          allowAliases = true;
+        };
       });
 
       checks = forAllSystems (import ./nix/checks.nix inputs);
