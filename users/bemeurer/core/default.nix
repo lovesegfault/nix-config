@@ -30,6 +30,7 @@
       kalker
       mosh
       neofetch
+      nix-closure-size
       ripgrep
       rsync
       truecolor-check

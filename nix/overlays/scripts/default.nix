@@ -104,6 +104,12 @@ in
     fake.external = [ "beet" ];
   };
 
+  nix-closure-size = writeShellApp {
+    name = "nix-closure-size";
+    inputs = with final; [ coreutils gawk ];
+    fake.external = [ "nix-store" ];
+  };
+
   screenocr = writeShellApp {
     name = "screenocr";
     inputs = with final; [ coreutils findutils grim slurp tesseract5 wl-clipboard ];
