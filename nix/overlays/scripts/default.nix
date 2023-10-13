@@ -1,14 +1,9 @@
 final: _:
 let
-  emoji_json = final.fetchurl {
-    name = "emojis.json";
-    url = "https://raw.githubusercontent.com/github/gemoji/ed57eb86fd5215ff7f1bc68e12eaeee90133f359/db/emoji.json";
-    hash = "sha256-vIRB+0ICtH8ZvyWhUPqc4VU5po+G+z8bTMrfCLBPPdM=";
-  };
-
-  emoji_list = final.runCommand "emoji_list.txt"
+  emoji_json = final.__inputs.gemoji + "/db/emoji.json";
+  emoji_list = final.runCommandNoCC "emoji_list.txt"
     { nativeBuildInputs = with final; [ jq gnused ]; } ''
-    cat ${emoji_json} | jq -r '.[] | "\(.emoji) \t   \(.description)"' | sed -e 's,\\t,\t,g' > $out
+    jq -r '.[] | "\(.emoji) \t   \(.description)"' '${emoji_json}' | sed -e 's,\\t,\t,g' > $out
   '';
 
   writeShellApp = args:

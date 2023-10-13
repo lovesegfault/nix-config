@@ -319,6 +319,22 @@
         "type": "github"
       }
     },
+    "gemoji": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1680094608,
+        "narHash": "sha256-vs/ltvNzctK6mlKy+fxeVANfiQqueLBr3OvblyRNGvo=",
+        "owner": "github",
+        "repo": "gemoji",
+        "rev": "5476a66d2794e0d1551b1f96e449afc72e9f7bec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "github",
+        "repo": "gemoji",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -555,6 +571,7 @@
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
+        "gemoji": "gemoji",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",

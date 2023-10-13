@@ -55,6 +55,11 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
+    gemoji = {
+      url = "github:github/gemoji";
+      flake = false;
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
