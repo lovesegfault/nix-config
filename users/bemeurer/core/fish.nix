@@ -15,15 +15,7 @@
       '')
     ];
     plugins = [
-      {
-        name = "autopair.fish";
-        src = pkgs.fetchFromGitHub {
-          owner = "jorgebucaran";
-          repo = "autopair.fish";
-          rev = "1.0.4";
-          hash = "sha256-s1o188TlwpUQEN3X5MxUlD/2CFCpEkWu83U9O+wg3VU=";
-        };
-      }
+      { name = "autopair"; inherit (pkgs.fishPlugins.autopair) src; }
     ];
   };
 }
