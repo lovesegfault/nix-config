@@ -25,7 +25,6 @@
     stateVersion = "23.05";
     packages = with pkgs; [
       bandwhich
-      colorcheck
       eza
       fd
       kalker
@@ -33,6 +32,7 @@
       neofetch
       ripgrep
       rsync
+      truecolor-check
     ];
     shellAliases = {
       cat = "bat";

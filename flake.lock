@@ -563,7 +563,8 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "pre-commit-hooks": "pre-commit-hooks",
-        "stylix": "stylix"
+        "stylix": "stylix",
+        "truecolor-check": "truecolor-check"
       }
     },
     "rust-overlay": {
@@ -659,6 +660,22 @@
         "owner": "numtide",
         "repo": "treefmt-nix",
         "type": "github"
+      }
+    },
+    "truecolor-check": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1595671275,
+        "narHash": "sha256-6xAPv96Pcws2vo2QWZxGVJKsTJpvQuarnJViPvN/JuA=",
+        "ref": "refs/heads/master",
+        "rev": "94d8b2be62657e96488038b0e547e3009ed87d40",
+        "revCount": 3,
+        "type": "git",
+        "url": "https://gist.github.com/fdeaf79e921c2f413f44b6f613f6ad53.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://gist.github.com/fdeaf79e921c2f413f44b6f613f6ad53.git"
       }
     }
   },

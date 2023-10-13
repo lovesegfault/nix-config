@@ -27,6 +27,11 @@
       flake = false;
     };
 
+    truecolor-check = {
+      url = "git+https://gist.github.com/fdeaf79e921c2f413f44b6f613f6ad53.git";
+      flake = false;
+    };
+
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
