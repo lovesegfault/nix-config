@@ -27,6 +27,7 @@
       bandwhich
       eza
       fd
+      fzf
       kalker
       mosh
       neofetch
@@ -55,7 +56,6 @@
       enable = true;
       extraPackages = with pkgs.bat-extras; [ batman ];
     };
-    fzf.enable = true;
     gpg.enable = true;
     nix-index.enable = true;
     zoxide.enable = true;
