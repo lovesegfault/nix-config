@@ -40,7 +40,7 @@
       bindkey -rpM viins '^[^['
       KEYTIMEOUT=1
 
-      ${pkgs.any-nix-shell}/bin/any-nix-shell zsh | source /dev/stdin
+      ${pkgs.nix-your-shell}/bin/nix-your-shell zsh | source /dev/stdin
       # 1Password CLI
       if [ -e "$HOME/.config/op/plugins.sh" ]; then
         source "$HOME/.config/op/plugins.sh"

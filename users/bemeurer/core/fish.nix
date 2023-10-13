@@ -7,7 +7,7 @@
         set -g fish_greeting
       '')
       (lib.mkAfter ''
-        ${pkgs.any-nix-shell}/bin/any-nix-shell fish | source
+        ${pkgs.nix-your-shell}/bin/nix-your-shell fish | source
 
         fish_vi_key_bindings insert
         # quickly open text file
