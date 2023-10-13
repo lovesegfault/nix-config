@@ -120,7 +120,6 @@
         inherit localSystem;
         overlays = [ self.overlays.default ];
         config = {
-          permittedInsecurePackages = [ "nodejs-16.20.2" ];
           allowUnfree = true;
           allowAliases = true;
         };
