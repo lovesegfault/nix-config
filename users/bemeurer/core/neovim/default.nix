@@ -78,6 +78,7 @@
 
         # syntax
         nvim-treesitter.withAllGrammars
+        nvim-treesitter-textobjects
       ];
     };
   };
