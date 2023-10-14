@@ -236,6 +236,3 @@ keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", { silent = true })
 -- misc -----------------------------------------------------------------------
 ---- Remove the Windows ^M - when the encodings gets messed up
 keymap.set("", "<Leader>m", "mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm")
-
----- Toggle paste mode on and off
-keymap.set("n", "<leader>pp", ":setlocal paste!<cr>")
