@@ -92,7 +92,7 @@ jobs:
                 else .evalOnly=true | .runsOn="ubuntu-latest"
                 end
             )
-            | map(select(.large) | .evalOnly=true)
+            | map(if .large then .evalOnly=true end)
           ' >"$TMP/hostAttrs.json"
 
           # handle not being able to build aarch64-linux attrs when the ssh key
