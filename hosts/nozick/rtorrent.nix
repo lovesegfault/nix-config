@@ -15,6 +15,7 @@
       configText = ''
         log.add_output = "rpc_events", "log"
 
+        throttle.max_downloads.set = 16
         throttle.max_downloads.global.set = 16
         throttle.max_uploads.set = 128
         throttle.max_uploads.global.set = 4096
@@ -31,7 +32,7 @@
         network.tos.set = throughput
         network.http.dns_cache_timeout.set = 0
 
-        schedule2 = watch_directory_emp,10,10,"load.start_verbose=/mnt/emp-staging/watch/*.torrent,d.directory.set=/mnt/emp-staging"
+        schedule2 = watch_directory_emp,10,10,"load.normal=/mnt/emp/watch/*.torrent,d.directory.set=/mnt/emp"
         schedule2 = watch_directory_movies,10,10,"load.start_verbose=/mnt/movies/watch/*.torrent,d.directory.set=/mnt/movies"
         schedule2 = watch_directory_redacted,10,10,"load.start_verbose=/mnt/redacted/watch/*.torrent,d.directory.set=/mnt/redacted"
         schedule2 = watch_directory_shows,10,10,"load.start_verbose=/mnt/shows/watch/*.torrent,d.directory.set=/mnt/shows"
