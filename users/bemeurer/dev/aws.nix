@@ -10,6 +10,9 @@
       "${config.home.homeDirectory}/.toolbox/bin"
       "/apollo/env/bt-rust/bin"
     ];
+    sessionVariables = {
+      BRAZIL_PLATFORM_OVERRIDE = "AL2_x86_64";
+    };
   };
 
   programs.zsh.initExtraBeforeCompInit = ''
