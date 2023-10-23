@@ -72,6 +72,7 @@
       gnome.enable = hostType == "nixos";
       gtk.enable = hostType == "nixos";
       kde.enable = lib.mkDefault false;
+      xfce.enable = lib.mkDefault false;
     };
   };
 
