@@ -6,7 +6,13 @@
 
   home = {
     uid = 22314791;
-    packages = with pkgs; [ rustup (lib.hiPrio rust-analyzer) cargo-nextest nix-fast-build ];
+    packages = with pkgs; [
+      (lib.hiPrio rust-analyzer)
+      cargo-nextest
+      nix-fast-build
+      openssh
+      rustup
+    ];
   };
 
   programs = {
