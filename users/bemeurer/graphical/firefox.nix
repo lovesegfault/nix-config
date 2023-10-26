@@ -8,7 +8,7 @@
           then pkgs.firefox-bin
           else pkgs.firefox;
       in
-      ff.override { cfg.enableTridactylNative = true; };
+      ff.override { nativeMessagingHosts = [ pkgs.tridactyl-native ]; };
   };
 
   xdg.mimeApps.defaultApplications = {
