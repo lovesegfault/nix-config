@@ -1,9 +1,6 @@
 { config, lib, pkgs, ... }: {
   boot = {
-    bootspec = {
-      enable = true;
-      enableValidation = true;
-    };
+    bootspec.enable = true;
     lanzaboote = {
       enable = true;
       pkiBundle = "/etc/secureboot";
