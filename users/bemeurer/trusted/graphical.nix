@@ -8,6 +8,8 @@ in
     SSH_AUTH_SOCK = "\${SSH_AUTH_SOCK:-\"$HOME/.1password/agent.sock\"}";
   };
 
+  programs.git.extraConfig.gpg.ssh.program = "${pkgs._1password-gui}/share/1password/op-ssh-sign";
+
   systemd.user.services._1password = {
     Unit = {
       Description = "1Password";
