@@ -63,11 +63,6 @@
         brightness-night = lib.mkDefault 0.4;
       };
     };
-    udiskie = {
-      enable = true;
-      automount = false;
-      tray = "auto";
-    };
   };
 
   systemd.user.services = {
