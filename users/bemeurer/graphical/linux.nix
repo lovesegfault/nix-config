@@ -23,12 +23,6 @@
       spawn
     ];
 
-    pointerCursor = {
-      package = pkgs.gnome.adwaita-icon-theme;
-      name = "Adwaita";
-      gtk.enable = true;
-    };
-
     sessionVariables = {
       MOZ_DBUS_REMOTE = 1;
       MOZ_USE_XINPUT2 = 1;
