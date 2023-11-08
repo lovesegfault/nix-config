@@ -424,11 +424,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1699457738,
-        "narHash": "sha256-E6NOMSqXmm3KZfOwHRd8mB5/KcIj0dXYn1waXAoH17s=",
+        "lastModified": 1699459690,
+        "narHash": "sha256-0qS0X7KaQ6fjNG3UexNFK1Up9esZEGjevVHHbxjuk9E=",
         "owner": "Mic92",
         "repo": "nix-fast-build",
-        "rev": "482a10dbd20a3134b01c439973ed00ffcc8eafd1",
+        "rev": "77c764981a9738aadb55b80e3e0891e6f2572477",
         "type": "github"
       },
       "original": {
