@@ -47,9 +47,9 @@ let
           criteria.title = "Picture-in-Picture";
         }
         {
-          command = "floating enable, sticky enable";
+          command = "floating enable, sticky enable, resize set width 800 800";
           criteria.title = ".*Lock Screen.*";
-          criteria.app_id = "1Password";
+          criteria.class = "1Password";
         }
         {
           command = "floating enable, sticky enable";
