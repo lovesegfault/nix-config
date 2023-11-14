@@ -21,8 +21,8 @@ final: prev:
     src = final.fetchFromGitHub {
       owner = "Nefsen402";
       repo = "sway";
-      rev = "5f93f26623d440b75f4a1d176c8f2cd31495db09";
-      hash = "sha256-q5qo+mpOguHqh+C4PC1cOGYWQtkvYGyMKfR39/HoOUk=";
+      rev = "eed47a5e06ceab9bdaa596464697c1db7e8e86b3";
+      hash = "sha256-U1GCnuOesRwnSj4AE4OtDFXQMrCOheAmPh5pKz/FXyY=";
     };
 
     nativeBuildInputs = with final; (old.nativeBuildInputs or [ ]) ++ [ bash-completion fish ];
