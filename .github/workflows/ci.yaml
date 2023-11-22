@@ -29,7 +29,7 @@ jobs:
   flake-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v7
+      - uses: DeterminateSystems/nix-installer-action@v8
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v12
@@ -43,7 +43,7 @@ jobs:
   flake-show:
     runs-on: ubuntu-latest
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v7
+      - uses: DeterminateSystems/nix-installer-action@v8
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v12
@@ -62,7 +62,7 @@ jobs:
     env:
       has_aarch64_ssh_key: ${{ secrets.AARCH64_BUILDER_KEY != '' }}
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v7
+      - uses: DeterminateSystems/nix-installer-action@v8
         with:
           extra-conf: ${{ env.nix-conf }}
       - id: install-jq
@@ -165,7 +165,7 @@ jobs:
     env:
       system: ${{ matrix.attrs.hostPlatform }}
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v7
+      - uses: DeterminateSystems/nix-installer-action@v8
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v12
@@ -191,7 +191,7 @@ jobs:
       aarch64-ssh-key: ${{ secrets.AARCH64_BUILDER_KEY }}
       system: ${{ matrix.attrs.hostPlatform }}
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v7
+      - uses: DeterminateSystems/nix-installer-action@v8
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v12
