@@ -35,14 +35,14 @@
       bind bspace previous-window
       bind enter next-layout
 
-      bind v split-window -h -c "#{pane_current_path}"
-      bind s split-window -v -c "#{pane_current_path}"
-      bind h select-pane -L
-      bind j select-pane -D
-      bind k select-pane -U
-      bind l select-pane -R
-      bind \ split-window -h -c "#{pane_current_path}"
-      bind - split-window -v -c "#{pane_current_path}"
+      bind v  split-window -h -c "#{pane_current_path}"
+      bind s  split-window -v -c "#{pane_current_path}"
+      bind h  select-pane -L
+      bind j  select-pane -D
+      bind k  select-pane -U
+      bind l  select-pane -R
+      bind \\ split-window -h -c "#{pane_current_path}"
+      bind -  split-window -v -c "#{pane_current_path}"
 
       bind C-o rotate-window
 
