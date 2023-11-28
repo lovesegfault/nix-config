@@ -26,6 +26,7 @@
 
     users.bemeurer = {
       directories = [
+        ".cache/cargo"
         ".cache/chromium"
         ".cache/direnv"
         ".cache/lollypop"
