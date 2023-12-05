@@ -17,6 +17,7 @@
       { name = "google-chrome"; greedy = true; }
       { name = "ksdiff"; greedy = true; }
       { name = "lunar"; greedy = true; }
+      { name = "macs-fan-control"; greedy = true; }
       { name = "macupdater"; greedy = true; }
       { name = "mullvadvpn"; greedy = true; }
       { name = "nextcloud"; greedy = true; }
@@ -27,7 +28,6 @@
       { name = "shottr"; greedy = true; }
       { name = "signal"; greedy = true; }
       { name = "spotify"; greedy = true; }
-      { name = "stats"; greedy = true; }
       { name = "topnotch"; greedy = true; }
       { name = "visual-studio-code"; greedy = true; }
       { name = "zoom"; greedy = true; }
