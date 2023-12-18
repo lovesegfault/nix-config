@@ -38,7 +38,7 @@ jobs:
           extra-conf: accept-flake-config = true
       - run: git config --global user.email "hatesegfault@protonmail.ch"
       - run: git config --global user.name "hatesegfault"
-      - uses: cpcloud/flake-update-action@v2.0.0
+      - uses: cpcloud/flake-update-action@v2.0.1
         with:
           dependency: ${{ matrix.flake }}
           pull-request-token: ${{ secrets.PAT }}
