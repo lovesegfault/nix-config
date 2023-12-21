@@ -1,6 +1,6 @@
 final: prev:
 {
-  wlroots_0_17 = (final.wlroots_0_16.overrideAttrs (old: {
+  wlroots_0_18 = (final.wlroots_0_16.overrideAttrs (old: {
     version = "unstable-2023-11-21";
     src = final.fetchFromGitLab {
       domain = "gitlab.freedesktop.org";
@@ -32,5 +32,5 @@ final: prev:
       (p: !p ? name || p.name != "LIBINPUT_CONFIG_ACCEL_PROFILE_CUSTOM.patch")
       (old.patches or [ ]);
 
-  })).override { wlroots = final.wlroots_0_17; };
+  })).override { wlroots_0_16 = final.wlroots_0_18; };
 }
