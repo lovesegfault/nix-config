@@ -74,64 +74,8 @@ let
     "application/vnd.ms-xpsdocument" = "org.gnome.Evince.desktop";
     "application/illustrator" = "org.gnome.Evince.desktop";
   };
-  imageDefaults = {
-    "image/gif" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/jpeg" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/jpg" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/pjpeg" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/png" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/tiff" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/webp" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-3fr" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-adobe-dng" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-arw" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-bay" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-bmp" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-canon-cr2" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-canon-crw" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-cap" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-cr2" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-crw" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-dcr" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-dcraw" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-dcs" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-dng" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-drf" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-eip" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-erf" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-fff" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-fuji-raf" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-iiq" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-k25" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-kdc" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-mef" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-minolta-mrw" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-mos" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-mrw" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-nef" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-nikon-nef" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-nrw" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-olympus-orf" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-orf" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-panasonic-raw" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-pef" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-pentax-pef" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-png" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-ptx" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-pxn" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-r3d" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-raf" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-raw" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-rw2" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-rwl" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-rwz" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-sigma-x3f" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-sony-arw" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-sony-sr2" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-sony-srf" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-sr2" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-srf" = "org.gnome.Shotwell-Viewer.desktop";
-    "image/x-x3f" = "org.gnome.Shotwell-Viewer.desktop";
+  otherDefaults = {
+    "x-scheme-handler/prusaslicer" = "PrusaSlicerURLProtocol.desktop";
   };
 in
 {
@@ -139,5 +83,6 @@ in
     audioDefaults
     // chatDefaults
     // documentDefaults
-    // imageDefaults;
+    // otherDefaults
+  ;
 }
