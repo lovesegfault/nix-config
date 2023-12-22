@@ -31,6 +31,7 @@
       !include tokens.conf
     '';
   } // lib.optionalAttrs (hostType == "nixos") {
+    channel.enable = false;
     daemonCPUSchedPolicy = "batch";
     daemonIOSchedPriority = 5;
     nixPath = [ "nixpkgs=/run/current-system/nixpkgs" ];
