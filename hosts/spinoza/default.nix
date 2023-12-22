@@ -98,7 +98,11 @@
     wireless.iwd.enable = true;
   };
 
-  nix.settings.max-substitution-jobs = 32;
+  nix = {
+    daemonCPUSchedPolicy = lib.mkForce "idle";
+    daemonIOSchedClass = lib.mkForce "idle";
+    settings.max-substitution-jobs = 32;
+  };
 
   nixpkgs.overlays = [ (import ./optimized-pkgs.nix) ];
 
