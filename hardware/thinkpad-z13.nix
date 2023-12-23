@@ -16,7 +16,7 @@
     kernelModules = [ "kvm-amd" "thinkpad_acpi" ];
     kernel.sysctl = { "vm.swappiness" = 1; };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "nowatchdog" ];
+    kernelParams = [ "nowatchdog" "amd_prefcore=enable" "preempt=full" ];
     tmp.useTmpfs = true;
   };
 
