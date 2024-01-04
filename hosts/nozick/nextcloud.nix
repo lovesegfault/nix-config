@@ -24,8 +24,8 @@
         adminpassFile = config.age.secrets.nextcloud.path;
         dbhost = "/run/postgresql";
         dbtype = "pgsql";
-        defaultPhoneRegion = "US";
       };
+      extraOptions.default_phone_region = "US";
     };
 
     nginx.virtualHosts."nextcloud.meurer.org" = {
