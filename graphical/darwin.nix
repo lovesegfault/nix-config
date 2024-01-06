@@ -32,9 +32,9 @@
       { name = "visual-studio-code"; greedy = true; }
       { name = "zoom"; greedy = true; }
       { name = "zulip"; greedy = true; }
+      { name = "geekbench"; greedy = true; }
     ];
     masApps = {
-      "Geekbench 5" = 1478447657;
       "Kaleidoscope" = 1575557335;
       "Keynote" = 409183694;
       "LanguageTool" = 1534275760;
