@@ -22,10 +22,11 @@
       max-jobs = "auto";
       experimental-features = [
         "auto-allocate-uids"
-        "configurable-impure-env"
         "flakes"
         "nix-command"
         "repl-flake"
+      ] ++ lib.optionals (hostType != "darwin") [
+        "configurable-impure-env"
       ];
       connect-timeout = 5;
       http-connections = 0;
