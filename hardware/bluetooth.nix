@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -7,6 +7,8 @@
       General = {
         JustWorksRepairing = "always";
         MultiProfile = "multiple";
+        Experimental = true;
+        KernelExperimental = true;
       };
     };
   };
