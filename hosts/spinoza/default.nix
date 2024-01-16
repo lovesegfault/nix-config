@@ -57,19 +57,19 @@
     "/nix/state" = {
       device = "/dev/disk/by-uuid/8b6542d9-5407-418f-80ca-2dacd06655cb";
       fsType = "btrfs";
-      options = [ "defaults" "noatime" "discard=async" "compress=zstd" "subvol=nix/state" ];
+      options = [ "defaults" "noatime" "discard=async" "compress=lzo" "subvol=nix/state" ];
       neededForBoot = true;
     };
     "/nix/store" = {
       device = "/dev/disk/by-uuid/8b6542d9-5407-418f-80ca-2dacd06655cb";
       fsType = "btrfs";
-      options = [ "defaults" "noatime" "discard=async" "compress=zstd" "subvol=nix/store" ];
+      options = [ "defaults" "noatime" "discard=async" "compress=lzo" "subvol=nix/store" ];
       neededForBoot = true;
     };
     "/nix/var" = {
       device = "/dev/disk/by-uuid/8b6542d9-5407-418f-80ca-2dacd06655cb";
       fsType = "btrfs";
-      options = [ "defaults" "noatime" "discard=async" "subvol=nix/var" ];
+      options = [ "defaults" "noatime" "discard=async" "compress=lzo" "subvol=nix/var" ];
       neededForBoot = true;
     };
   };
