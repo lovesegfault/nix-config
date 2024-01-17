@@ -53,7 +53,7 @@
   services.skhd = {
     enable = true;
     skhdConfig = ''
-      cmd - return : kitty -1 -d ~
+      cmd - return : open --new -a kitty.app --args -1 -d ~
     '';
   };
 
