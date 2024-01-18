@@ -28,7 +28,7 @@ with self.pkgs.${system};
           enable = true;
           name = "nix-parse";
           description = "Parses all Nix files";
-          entry = "${nix}/bin/nix-instantiate --readonly-mode --store dummy:// --json --parse";
+          entry = "${nixVersions.unstable}/bin/nix-instantiate --readonly-mode --store dummy:// --json --parse";
           files = "\\.nix$";
         };
       };
