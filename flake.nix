@@ -16,9 +16,10 @@
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
-        nixpkgs.follows = "nixpkgs";
         darwin.follows = "darwin";
         home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
       };
     };
 
@@ -40,8 +41,8 @@
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs = {
-        nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "flake-compat";
+        nixpkgs.follows = "nixpkgs";
         utils.follows = "flake-utils";
       };
     };
@@ -53,7 +54,10 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
 
     gemoji = {
       url = "github:github/gemoji";
@@ -70,10 +74,10 @@
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs = {
-        nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "flake-compat";
         flake-parts.follows = "flake-parts";
         flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
         pre-commit-hooks-nix.follows = "pre-commit-hooks";
       };
     };
@@ -81,8 +85,8 @@
     nix-fast-build = {
       url = "github:Mic92/nix-fast-build";
       inputs = {
-        nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
       };
     };
 
@@ -98,20 +102,22 @@
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
         flake-compat.follows = "flake-compat";
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
       };
     };
 
     stylix = {
       url = "github:danth/stylix";
       inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
         flake-compat.follows = "flake-compat";
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
       };
     };
+
+    systems.url = "github:nix-systems/default";
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
