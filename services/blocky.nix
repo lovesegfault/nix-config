@@ -84,7 +84,6 @@ with config.networking;
         }
         {
           name = "grafana";
-          ensureDBOwnership = true;
         }
       ];
     };
