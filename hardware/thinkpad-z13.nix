@@ -91,7 +91,6 @@
     };
     sleep.extraConfig = ''
       HibernateMode=shutdown
-      HibernateDelaySec=10s
     '';
     tmpfiles.rules = [ "w /sys/power/image_size - - - - 0" ];
   };
