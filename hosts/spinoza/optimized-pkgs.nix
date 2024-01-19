@@ -48,7 +48,7 @@ let
         sway-unwrapped = pipe prev.sway-unwrapped [ applyHost applyGraphite ];
         waybar = pipe prev.waybar [ applyHost applyGraphite ];
         wireplumber = pipe prev.wireplumber [ applyHost applyGraphite ];
-        wlroots = pipe prev.wlroots [ applyHost applyGraphite ];
+        wlroots-unstable = pipe prev.wlroots-unstable [ applyHost applyGraphite ];
 
         pipewire-optimized = pipe final.pipewire [ applyHost applyGraphite ];
         systemd-optimized = pipe final.systemd [ applyHost applyGraphite ];
