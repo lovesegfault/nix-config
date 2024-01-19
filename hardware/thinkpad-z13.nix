@@ -76,9 +76,23 @@
     xserver.dpi = 250;
   };
 
-  systemd.sleep.extraConfig = ''
-    HibernateMode=shutdown
-  '';
-
-  systemd.tmpfiles.rules = [ "w /sys/power/image_size - - - - 0" ];
+  systemd = {
+    services.ath11k_hibernate = {
+      description = "load/unload ath11k to prevent hibernation issues";
+      before = [ "hibernate.target" "suspend-then-hibernate.target" "hybrid-sleep.target" ];
+      unitConfig.StopWhenUnneeded = true;
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = "-${pkgs.kmod}/bin/modprobe -a -r ath11k_pci ath11k";
+        ExecStop = "-${pkgs.kmod}/bin/modprobe -a ath11k_pci ath11k";
+      };
+      wantedBy = [ "hibernate.target" "suspend-then-hibernate.target" "hybrid-sleep.target" ];
+    };
+    sleep.extraConfig = ''
+      HibernateMode=shutdown
+      HibernateDelaySec=10s
+    '';
+    tmpfiles.rules = [ "w /sys/power/image_size - - - - 0" ];
+  };
 }

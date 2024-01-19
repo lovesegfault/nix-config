@@ -132,8 +132,11 @@
       hwRender = true;
     };
     logind = {
-      lidSwitch = "suspend";
+      lidSwitch = "suspend-then-hibernate";
+      lidSwitchDocked = "suspend-then-hibernate";
       lidSwitchExternalPower = "ignore";
+      powerKey = "suspend-then-hibernate";
+      powerKeyLongPress = "reboot";
     };
     udev.packages = with pkgs; [ logitech-udev-rules ];
     udisks2.enable = true;
