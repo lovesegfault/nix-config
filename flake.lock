@@ -481,11 +481,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1706781693,
-        "narHash": "sha256-a0PuIeh+hUXXWWQWQ1wFWyNsCiUUCFKVXSUiHpyxlVQ=",
+        "lastModified": 1706782449,
+        "narHash": "sha256-8hEkOJDqR+7gJvXzwIM/VhR9iQzZyrNeh68u+Et2TzA=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "83ce5906a5b9a798ef2e653ddc12491c1b9e9929",
+        "rev": "cc65e27670abccced5997d4a93c4c930aef6fd0b",
         "type": "github"
       },
       "original": {
