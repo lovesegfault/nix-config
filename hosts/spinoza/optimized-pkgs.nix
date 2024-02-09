@@ -50,7 +50,6 @@ let
         wlroots-unstable = pipe prev.wlroots-unstable [ applyHost applyGraphite ];
 
         pipewire-optimized = pipe final.pipewire [ applyHost applyGraphite ];
-        systemd-optimized = pipe final.systemd [ applyHost applyGraphite ];
       };
 in
 optimizedOverlayForHost {
