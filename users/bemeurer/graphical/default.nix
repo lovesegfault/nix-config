@@ -9,24 +9,24 @@
     ./mpv.nix
   ];
 
-  home.packages = with pkgs; [
-    element-desktop
-    libnotify
-    qalculate-gtk
-    xdg-utils
-  ] ++ lib.filter (lib.meta.availableOn stdenv.hostPlatform) [
+  home.packages = with pkgs; lib.filter (lib.meta.availableOn stdenv.hostPlatform) [
     discord
+    element-desktop
     iterm2
     ledger-live-desktop
+    libnotify
     plexamp
+    qalculate-gtk
     signal-desktop
     thunderbird
   ] ++ lib.optionals (stdenv.hostPlatform.system == "x86_64-linux") [
     prusa-slicer
     spotify
+  ] ++ lib.optionals stdenv.hostPlatform.isLinux [
+    xdg-utils
   ];
 
-  programs.alacritty.enable = true;
+  programs.alacritty.enable = pkgs.stdenv.hostPlatform.isLinux;
 
   stylix.fonts = {
     sansSerif = {
