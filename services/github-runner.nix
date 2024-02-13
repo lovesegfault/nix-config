@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
   age.secrets.github-runner-token.file = ./github-runner.age;
-  services.github-runner = {
+  services.github-runners.${config.networking.hostName} = {
     enable = true;
     ephemeral = true;
     replace = true;
