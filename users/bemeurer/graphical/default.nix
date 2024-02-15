@@ -26,7 +26,7 @@
     xdg-utils
   ];
 
-  programs.alacritty.enable = pkgs.stdenv.hostPlatform.isLinux;
+  programs.alacritty.enable = true;
 
   stylix.fonts = {
     sansSerif = {
