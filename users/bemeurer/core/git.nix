@@ -15,7 +15,7 @@
     extraConfig = {
       diff = {
         colorMoved = "default";
-        age.textconv = "${pkgs.rage}/bin/rage -i ~/.ssh/bemeurer --decrypt";
+        age.textconv = "${pkgs.rage}/bin/rage -i <(op read op://Personal/bemeurer/'private key') --decrypt";
       };
       difftool.prompt = true;
       github.user = "lovesegfault";
