@@ -41,7 +41,7 @@
       cls = "clear";
       l = "ls";
       la = "ls --all";
-      ls = "eza --binary --header --long --classify";
+      ls = "eza --binary --header --long";
       man = "batman";
     };
   };
