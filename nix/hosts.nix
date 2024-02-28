@@ -73,11 +73,6 @@ in
     hostPlatform = "x86_64-linux";
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHws1wwXYHDmU+Bjcbw8IZv2V+fbxaTDQc44XoUQ604t";
   };
-  luther = mkHost {
-    type = "home-manager";
-    hostPlatform = "aarch64-linux";
-    homeDirectory = "/home/bemeurer";
-  };
   nozick = mkHost {
     type = "nixos";
     address = "100.124.29.84";
@@ -88,6 +83,11 @@ in
     type = "darwin";
     hostPlatform = "aarch64-darwin";
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMYvFEyV+nebaTfrwAULWDmCk0L6O+1OyZc43JnizcIB";
+  };
+  popper = mkHost {
+    type = "home-manager";
+    hostPlatform = "aarch64-linux";
+    homeDirectory = "/home/bemeurer";
   };
   riemann = mkHost {
     type = "nixos";
