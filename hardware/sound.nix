@@ -1,7 +1,22 @@
-{ lib, pkgs, ... }: {
-  environment.etc = {
-    "pipewire/pipewire.conf.d/99-allowed-rates.conf".text = builtins.toJSON {
-      "context.properties"."default.clock.allowed-rates" = [
+{ config, lib, ... }: {
+  environment.systemPackages = [ config.services.pipewire.package ];
+
+  hardware.pulseaudio.enable = lib.mkForce false;
+
+  security.rtkit.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    jack.enable = true;
+    pulse.enable = true;
+    wireplumber.enable = true;
+
+    extraConfig = {
+      client."99-resample"."stream.properties"."resample.quality" = 15;
+      client-rt."99-resample"."stream.properties"."resample.quality" = 15;
+      pipewire-pulse."99-resample"."stream.properties"."resample.quality" = 15;
+      pipewire."99-allowed-rates"."context.properties"."default.clock.allowed-rates" = [
         44100
         48000
         88200
@@ -14,29 +29,6 @@
         768000
       ];
     };
-    "pipewire/pipewire-pulse.conf.d/99-resample.conf".text = builtins.toJSON {
-      "stream.properties"."resample.quality" = 15;
-    };
-    "pipewire/client.conf.d/99-resample.conf".text = builtins.toJSON {
-      "stream.properties"."resample.quality" = 15;
-    };
-    "pipewire/client-rt.conf.d/99-resample.conf".text = builtins.toJSON {
-      "stream.properties"."resample.quality" = 15;
-    };
-  };
-
-  environment.systemPackages = with pkgs; [ pulseaudio ];
-
-  hardware.pulseaudio.enable = lib.mkForce false;
-
-  security.rtkit.enable = true;
-
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    jack.enable = true;
-    pulse.enable = true;
-    wireplumber.enable = true;
   };
 
   sound.enable = true;
