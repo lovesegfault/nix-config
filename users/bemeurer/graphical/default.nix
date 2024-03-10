@@ -6,7 +6,6 @@
       else throw "Unknown hostType '${hostType}' for users/bemeurer/graphical"
     )
     ./kitty.nix
-    ./mpv.nix
   ];
 
   home.packages = with pkgs; lib.filter (lib.meta.availableOn stdenv.hostPlatform) [

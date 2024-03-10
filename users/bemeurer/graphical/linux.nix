@@ -4,6 +4,7 @@
     ./common.nix
     ./firefox.nix
     ./mime.nix
+    ./mpv.nix
   ];
 
   dconf.enable = lib.mkForce true;
