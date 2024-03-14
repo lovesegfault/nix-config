@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: false
-      - uses: DeterminateSystems/nix-installer-action@v9
+      - uses: DeterminateSystems/nix-installer-action@v10
         with:
           nix-installer-branch: main
           extra-conf: accept-flake-config = true
