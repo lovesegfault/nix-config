@@ -48,7 +48,7 @@
   };
 
   services = {
-    gpg-agent.pinentryFlavor = "gnome3";
+    gpg-agent.pinentryPackage = pkgs.pinentry-gnome3;
     gammastep = {
       enable = true;
       provider = "geoclue2";
