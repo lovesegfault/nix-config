@@ -17,7 +17,7 @@
       hicolor-icon-theme
       lollypop
       pavucontrol
-      pinentry-gnome
+      pinentry-gnome3
       qgnomeplatform
       qt5.qtwayland
       qt6.qtwayland
