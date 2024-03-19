@@ -1,10 +1,10 @@
 { config, pkgs, ... }: {
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
     enableCompletion = true;
     enableVteIntegration = pkgs.stdenv.isLinux;
     autocd = true;
+    autosuggestion.enable = true;
     dotDir = ".config/zsh";
     history = {
       expireDuplicatesFirst = true;
