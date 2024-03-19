@@ -24,7 +24,6 @@
       { name = "mullvadvpn"; greedy = true; }
       { name = "nextcloud"; greedy = true; }
       { name = "parallels"; greedy = true; }
-      { name = "plexamp"; greedy = true; }
       { name = "raycast"; greedy = true; }
       { name = "roon"; greedy = true; }
       { name = "shottr"; greedy = true; }

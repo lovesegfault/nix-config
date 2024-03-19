@@ -14,7 +14,6 @@
     iterm2
     ledger-live-desktop
     libnotify
-    plexamp
     qalculate-gtk
     signal-desktop
     thunderbird

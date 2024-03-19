@@ -2,7 +2,6 @@
   imports = [
     nixos-hardware.nixosModules.common-cpu-intel-kaby-lake
 
-
     ../../core
 
     ../../hardware/fast-networking.nix
@@ -10,6 +9,7 @@
     ../../hardware/zfs.nix
 
     ../../services/grafana.nix
+    ../../services/jellyfin.nix
     ../../services/nginx.nix
     ../../services/oauth2.nix
     ../../services/prometheus.nix
@@ -156,7 +156,6 @@
     openssh.extraConfig = ''
       MaxStartups 40:30:120
     '';
-    plex.enable = true;
     smartd.enable = true;
     sshguard.enable = true;
     syncthing.settings.folders = {
@@ -196,7 +195,7 @@
 
   users = {
     users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
-    groups.media.members = [ "bemeurer" "plex" config.services.syncthing.user ];
+    groups.media.members = [ "bemeurer" config.services.syncthing.user ];
   };
 
   virtualisation = {
