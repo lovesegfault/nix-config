@@ -1,23 +1,23 @@
 final: prev:
 {
   wlroots-unstable = (final.wlroots_0_17.overrideAttrs (old: {
-    version = "unstable-2024-02-29";
+    version = "unstable-2024-03-18";
     src = final.fetchFromGitLab {
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "889150f8660a3e802d377670e57f3951c9266510";
-      hash = "sha256-5QrJ7e3xXAetmAOMlOhi5KgbmshDkzuLODSRgSQ8+tc=";
+      rev = "873e8e455892fbd6e85a8accd7e689e8e1a9c776";
+      hash = "sha256-5zX0ILonBFwAmx7NZYX9TgixDLt3wBVfgx6M24zcxMY=";
     };
   })).override { };
 
   sway-unwrapped = (prev.sway-unwrapped.overrideAttrs (old: {
-    version = "unstable-2024-02-29";
+    version = "unstable-2024-03-18";
     src = final.fetchFromGitHub {
       owner = "swaywm";
       repo = "sway";
-      rev = "0b84d82b9aad05010479140774ac5ee1fea8ea97";
-      hash = "sha256-kg8OPIDUQDaOqmi8PaKY7n2PcrBCpYn0XfFu3jrrs64=";
+      rev = "5a7477cb8f568ce4aeb852215ad40899f18f3d91";
+      hash = "sha256-56CRUjaebyERr1JGTQFWnrET04gFg9p20GZcixgWoVY=";
     };
 
     nativeBuildInputs = with final; (old.nativeBuildInputs or [ ]) ++ [ bash-completion fish ];
