@@ -25,7 +25,7 @@
         dbhost = "/run/postgresql";
         dbtype = "pgsql";
       };
-      extraOptions.default_phone_region = "US";
+      settings.default_phone_region = "US";
     };
 
     nginx.virtualHosts."nextcloud.meurer.org" = {
