@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ../../core
 
@@ -28,7 +28,9 @@
       config = { ... }: {
         imports = [ ../../core/nix.nix ];
         _module.args.hostType = "nixos";
-        virtualisation.host.pkgs = lib.mkForce (pkgs.extend (final: _: { nix = final.nixVersions.unstable; }));
+        virtualisation.host.pkgs = lib.mkForce (pkgs.extend (final: _: {
+          nix = final.nixVersions.nix_2_20;
+        }));
       };
       maxJobs = 4;
       protocol = "ssh-ng";
