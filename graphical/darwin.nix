@@ -18,6 +18,7 @@
       { name = "google-chrome"; greedy = true; }
       { name = "ksdiff"; greedy = true; }
       { name = "languagetool"; greedy = true; }
+      { name = "launchcontrol"; greedy = true; }
       { name = "lunar"; greedy = true; }
       { name = "macs-fan-control"; greedy = true; }
       { name = "macupdater"; greedy = true; }
