@@ -40,7 +40,7 @@
       bindkey "''${terminfo[kcud1]}" history-substring-search-down
       bindkey '^[[B' history-substring-search-down
 
-      ${pkgs.nix-your-shell}/bin/nix-your-shell zsh | source /dev/stdin
+      ${pkgs.nix-your-shell}/bin/nix-your-shell --nom zsh | source /dev/stdin
 
       bindkey "''${terminfo[khome]}" beginning-of-line
       bindkey "''${terminfo[kend]}" end-of-line

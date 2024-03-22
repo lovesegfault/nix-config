@@ -9,7 +9,6 @@
     };
     packages = with pkgs; [
       git-lfs
-      nix-output-monitor
       (lib.hiPrio nixpkgs-review)
       nix-update
       tmate
