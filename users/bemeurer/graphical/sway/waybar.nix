@@ -84,7 +84,7 @@
       };
       clock = {
         tooltip-format = "{calendar}";
-        format = "{:󰃭 %F | 󰥔 %H:%M | 󰇧 %Z}";
+        format = "󰃭 {:%F | 󰥔 %H:%M | 󰇧 %Z}";
       };
       tray = {
         icon-size = lib.mkDefault 20;
