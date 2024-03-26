@@ -21,6 +21,12 @@
         if [ -f /etc/bashrc ]; then
           . /etc/bashrc
         fi
+        CONST_SSH_SOCK="$HOME/.ssh/ssh-auth-sock"
+        if [ ! -z ''${SSH_AUTH_SOCK+x} ] && [ "$SSH_AUTH_SOCK" != "$CONST_SSH_SOCK" ]; then
+          rm -f "$CONST_SSH_SOCK"
+          ln -sf "$SSH_AUTH_SOCK" "$CONST_SSH_SOCK"
+          export SSH_AUTH_SOCK="$CONST_SSH_SOCK"
+        fi
       '';
       profileExtra = ''
         if [ -f /etc/profile ]; then
@@ -29,5 +35,13 @@
       '';
     };
     git.userEmail = lib.mkForce "bemeurer@amazon.com";
+    zsh.initExtra = ''
+      CONST_SSH_SOCK="$HOME/.ssh/ssh-auth-sock"
+      if [ ! -z ''${SSH_AUTH_SOCK+x} ] && [ "$SSH_AUTH_SOCK" != "$CONST_SSH_SOCK" ]; then
+        rm -f "$CONST_SSH_SOCK"
+        ln -sf "$SSH_AUTH_SOCK" "$CONST_SSH_SOCK"
+        export SSH_AUTH_SOCK="$CONST_SSH_SOCK"
+      fi
+    '';
   };
 }
