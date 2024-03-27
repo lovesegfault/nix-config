@@ -50,7 +50,6 @@ let
         wlroots-unstable = pipe prev.wlroots-unstable [ applyHost applyGraphite ];
 
         pipewire-optimized = pipe final.pipewire [ applyHost applyGraphite ];
-        nix-unstable-optimized = pipe final.nixVersions.nix_2_20 [ applyHost applyGraphite ];
       };
 in
 optimizedOverlayForHost {

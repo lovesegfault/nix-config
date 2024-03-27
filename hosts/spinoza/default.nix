@@ -105,7 +105,8 @@
     daemonCPUSchedPolicy = lib.mkForce "idle";
     daemonIOSchedClass = lib.mkForce "idle";
     settings.max-substitution-jobs = 32;
-    package = lib.mkForce pkgs.nix-unstable-optimized;
+    # FIXME: Re-introduce with 2.21.1
+    # package = lib.mkForce pkgs.nix-unstable-optimized;
   };
 
   nixpkgs.overlays = [ (import ./optimized-pkgs.nix) ];
