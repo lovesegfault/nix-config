@@ -5,6 +5,7 @@ with config.networking;
 
   services.oauth2_proxy = {
     enable = true;
+    nginx.domain = "auth.${hostName}.meurer.org";
     cookie.domain = ".${hostName}.meurer.org";
     email.domains = [ "meurer.org" ];
     keyFile = config.age.secrets.oauth2.path;
