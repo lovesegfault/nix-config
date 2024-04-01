@@ -25,7 +25,7 @@ in
 localOverlays // {
   default = lib.composeManyExtensions ([
     agenix.overlays.default
-    deploy-rs.overlay
+    deploy-rs.overlays.default
     (final: prev: {
       inherit (self.packages.${final.stdenv.hostPlatform.system}) nix-fast-build;
     })
