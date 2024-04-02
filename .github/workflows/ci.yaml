@@ -13,6 +13,7 @@ env:
   flake: github:${{ github.repository }}/${{ github.sha }}
   nix-conf: |-
     accept-flake-config = true
+    always-allow-substitutes = true
     builders-use-substitutes = true
     max-jobs = auto
   cachix-install: nix profile install 'github:${{ github.repository }}/${{ github.sha }}#cachix'
@@ -21,9 +22,11 @@ env:
     Host aarch64.nixos.community 147.28.143.250
         User lovesegfault
         IdentitiesOnly yes
-        IdentityFile ~/.ssh/id_ed25519
+        IdentityFile ~/.ssh/aarch64-builder-ed25519
   aarch64-ssh-known-host: |-
     aarch64-build-box,aarch64.nixos.community,147.75.77.190 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUTz5i9u5H2FHNAmZJyoJfIGyUm/HfGhfwnc142L3ds
+  aarch64-machine-config: |-
+    ssh-ng://lovesegfault@aarch64.nixos.community aarch64-linux /etc/nix/ssh/aarch64-builder-ed25519 64 1 big-parallel - c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU1VVHo1aTl1NUgyRkhOQW1aSnlvSmZJR3lVbS9IZkdoZnduYzE0MkwzZHMgcm9vdEBuaXhvcwo=
 
 jobs:
   flake-check:
@@ -89,7 +92,8 @@ jobs:
             | map(
                 if .hostPlatform  == "x86_64-linux" then .runsOn="ubuntu-latest"
                 elif .hostPlatform == "aarch64-linux" then .runsOn="ubuntu-latest"
-                elif .hostPlatform == "x86_64-darwin" then .runsOn="macos-latest"
+                elif .hostPlatform == "x86_64-darwin" then .runsOn="macos-13"
+                elif .hostPlatform == "aarch64-darwin" then .runsOn="macos-14"
                 else .evalOnly=true | .runsOn="ubuntu-latest"
                 end
             )
@@ -202,14 +206,23 @@ jobs:
           extraPullNames: nix-community
           installCommand: ${{ env.cachix-install }}
       - name: setup-aarch64-ssh
-        if: ${{ env.system == 'aarch64-linux' }}
+        if: ${{ env.system == 'aarch64-linux' || env.system == 'aarch64-darwin' }}
         run: |
           mkdir -p ~/.ssh
-          echo '${{ env.aarch64-ssh-config }}' > ~/.ssh/config
-          echo '${{ env.aarch64-ssh-known-host }}' >> ~/.ssh/known_hosts
-          echo '${{ env.aarch64-ssh-key }}' > ~/.ssh/id_ed25519
+          sudo mkdir -p /etc/nix/ssh
+
+          echo '${{ env.aarch64-ssh-config }}' | tee ~/.ssh/config | sudo tee /etc/nix/ssh/config
+          echo '${{ env.aarch64-ssh-known-host }}' | tee -a ~/.ssh/known_hosts | sudo tee -a /etc/nix/ssh/known_hosts
+
+          echo '${{ env.aarch64-ssh-key }}' > ~/.ssh/aarch64-builder-ed25519
+          echo '${{ env.aarch64-ssh-key }}' | sudo tee /etc/nix/ssh/aarch64-builder-ed25519 >> /dev/null
+
           chmod 0600 ~/.ssh/*
-      - name: build
+          sudo chmod 0600 /etc/nix/ssh/*
+
+          echo '${{ env.aarch64-machine-config }}' | sudo tee -a /etc/nix/machines
+      - name: nix-fast-build
+        if: ${{ env.system != 'aarch64-darwin' }}
         run: |
           declare -a args=(
             '--no-nom'
@@ -218,9 +231,15 @@ jobs:
             '--option' 'accept-flake-config' 'true'
             '--retries=3'
           )
+          # Add the remote builder for aarch64-linux builds
           [[ '${{ env.system }}' == 'aarch64-linux' ]] && args+=('--remote=${{ env.aarch64-host }}')
+
           args+=('--flake=${{ env.flake }}#${{ matrix.attrs.attr }}')
           nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
+      - name: nix-build
+        if: ${{ env.system == 'aarch64-darwin' }}
+        run: |
+          nix build --keep-going '${{ env.flake }}#${{ matrix.attrs.attr }}'
 
   check:
     runs-on: ubuntu-latest
