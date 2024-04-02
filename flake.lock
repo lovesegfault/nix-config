@@ -332,11 +332,11 @@
     "gemoji": {
       "flake": false,
       "locked": {
-        "lastModified": 1680094608,
-        "narHash": "sha256-vs/ltvNzctK6mlKy+fxeVANfiQqueLBr3OvblyRNGvo=",
+        "lastModified": 1712080367,
+        "narHash": "sha256-7QhTthdaL6IBg7UAx5bW6dXjYPNCGh6kZcQsVLxF9QE=",
         "owner": "github",
         "repo": "gemoji",
-        "rev": "5476a66d2794e0d1551b1f96e449afc72e9f7bec",
+        "rev": "0eca75db9301421efc8710baf7a7576793ae452a",
         "type": "github"
       },
       "original": {
