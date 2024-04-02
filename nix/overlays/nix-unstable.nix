@@ -17,6 +17,7 @@ in
   prefetch-yarn-deps = prev.prefetch-yarn-deps.override { nix-prefetch-git = final.nix-prefetch-git-stable; };
 
   nixVersions = prev.nixVersions // {
+    unstable = final.nixVersions.nix_2_21;
     nix_2_21 = prev.nixVersions.nix_2_21.overrideAttrs (_: rec {
       version = "2.21.1";
       src = final.fetchFromGitHub {
