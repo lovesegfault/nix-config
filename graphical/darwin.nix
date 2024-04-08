@@ -52,7 +52,7 @@
   services.skhd = {
     enable = true;
     skhdConfig = ''
-      cmd - return : open --new -a kitty.app --args -1 -d ~
+      cmd - return : open --new -a alacritty.app --args --working-directory="$HOME"
     '';
   };
 
