@@ -1,9 +1,6 @@
-{ self
-, deploy-rs
-, nixpkgs
-, ...
-}:
+{ inputs, ... }:
 let
+  inherit (inputs) self deploy-rs nixpkgs;
   inherit (nixpkgs) lib;
 
   genNode = hostName: nixosCfg:
