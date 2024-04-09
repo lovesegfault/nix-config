@@ -1,13 +1,9 @@
-{ self, ... }:
-
-hostPlatform:
-
-with self.pkgs.${hostPlatform};
+{ config, self', pkgs, ... }:
 {
-  default = mkShell {
+  default = pkgs.mkShell {
     name = "nix-config";
 
-    nativeBuildInputs = [
+    nativeBuildInputs = with pkgs; [
       # Nix
       agenix
       deploy-rs.deploy-rs
@@ -16,9 +12,8 @@ with self.pkgs.${hostPlatform};
       nix-output-monitor
       nix-tree
       nixpkgs-fmt
-      self.packages.${hostPlatform}.cachix
-      self.packages.${hostPlatform}.nix-eval-jobs
-      self.packages.${hostPlatform}.nix-fast-build
+      self'.packages.cachix
+      self'.packages.nix-fast-build
       statix
 
       # Lua
@@ -41,9 +36,8 @@ with self.pkgs.${hostPlatform};
       pre-commit
       rage
     ];
-
     shellHook = ''
-      ${self.checks.${hostPlatform}.pre-commit-check.shellHook}
+      ${config.pre-commit.installationScript}
     '';
   };
 }
