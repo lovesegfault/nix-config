@@ -119,7 +119,7 @@
     flake-parts.lib.mkFlake { inherit inputs; }
       (toplevel@{ lib, withSystem, ... }:
         let
-          localModules = import ./modules toplevel;
+          localModules = import ./flake-modules toplevel;
         in
         {
           imports = [
