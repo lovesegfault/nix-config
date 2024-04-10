@@ -42,6 +42,12 @@
       };
     };
 
+    ez-configs = {
+      url = "github:ehllie/ez-configs";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -123,6 +129,7 @@
         in
         {
           imports = [
+            inputs.ez-configs.flakeModule
             inputs.git-hooks.flakeModule
             inputs.treefmt.flakeModule
           ] ++ (lib.attrValues localModules);
@@ -174,11 +181,16 @@
 
             hosts = import ./nix/hosts.nix;
 
-            darwinConfigurations = import ./nix/darwin.nix toplevel;
-            homeConfigurations = import ./nix/home-manager.nix toplevel;
-            nixosConfigurations = import ./nix/nixos.nix toplevel;
+            # darwinConfigurations = import ./nix/darwin.nix toplevel;
+            # homeConfigurations = import ./nix/home-manager.nix toplevel;
+            # nixosConfigurations = import ./nix/nixos.nix toplevel;
 
-            deploy = import ./nix/deploy.nix toplevel;
+            ez-configs = {
+              root = ./.;
+              globalArgs = { inherit inputs; };
+            };
+
+            # deploy = import ./nix/deploy.nix toplevel;
           };
         });
 }
