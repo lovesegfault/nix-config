@@ -1,6 +1,11 @@
 final: _:
 let
-  emoji_json = final.__inputs.gemoji + "/db/emoji.json";
+  emoji_json = (final.fetchFromGitHub {
+    owner = "github";
+    repo = "gemoji";
+    rev = "0eca75db9301421efc8710baf7a7576793ae452a";
+    hash = "sha256-7QhTthdaL6IBg7UAx5bW6dXjYPNCGh6kZcQsVLxF9QE=";
+  }) + "/db/emoji.json";
   emoji_list = final.runCommandNoCC "emoji_list.txt"
     { nativeBuildInputs = with final; [ jq gnused ]; } ''
     jq -r '.[] | "\(.emoji) \t   \(.description)"' '${emoji_json}' | sed -e 's,\\t,\t,g' > $out
