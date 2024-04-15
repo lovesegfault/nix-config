@@ -122,27 +122,40 @@
   };
 
   outputs = inputs@{ self, flake-parts, ... }:
+    let
+      nixpkgsForSystem = localSystem: import inputs.nixpkgs {
+        inherit localSystem;
+        overlays = [ self.overlays.default ];
+        config = {
+          allowUnfree = true;
+          allowAliases = true;
+        };
+      };
+
+      flakeModules = import ./flake-modules { inherit (inputs.nixpkgs) lib; };
+    in
     flake-parts.lib.mkFlake { inherit inputs; }
-      (toplevel@{ lib, withSystem, ... }:
+      ({ lib, withSystem, ... }:
         let
-          localModules = import ./flake-modules toplevel;
+          systems = [ "aarch64-darwin" "aarch64-linux" "x86_64-linux" ];
         in
         {
+          inherit systems;
+
           imports = [
             inputs.ez-configs.flakeModule
             inputs.git-hooks.flakeModule
             inputs.treefmt.flakeModule
-          ] ++ (lib.attrValues localModules);
-          systems = [ "aarch64-darwin" "aarch64-linux" "x86_64-linux" ];
+          ] ++ (lib.attrValues flakeModules);
+
+          ezConfigs = {
+            root = ./.;
+            darwin.specialArgs = { inherit inputs; };
+            home.extraSpecialArgs = { inherit inputs; };
+          };
+
           perSystem = ctx@{ config, self', inputs', pkgs, system, ... }: {
-            _module.args.pkgs = import inputs.nixpkgs {
-              localSystem = system;
-              overlays = [ self.overlays.default ];
-              config = {
-                allowUnfree = true;
-                allowAliases = true;
-              };
-            };
+            _module.args.pkgs = nixpkgsForSystem system;
 
             devShells = import ./nix/dev-shell.nix ctx;
 
@@ -177,20 +190,9 @@
           };
 
           flake = {
-            flakeModules = localModules;
-
-            hosts = import ./nix/hosts.nix;
-
-            # darwinConfigurations = import ./nix/darwin.nix toplevel;
-            # homeConfigurations = import ./nix/home-manager.nix toplevel;
-            # nixosConfigurations = import ./nix/nixos.nix toplevel;
-
-            ez-configs = {
-              root = ./.;
-              globalArgs = { inherit inputs; };
-            };
-
-            # deploy = import ./nix/deploy.nix toplevel;
+            inherit flakeModules;
+            # NOTE: This slows down eval, but is nice for debugging
+            # nixpkgs = lib.genAttrs systems nixpkgsForSystem;
           };
         });
 }

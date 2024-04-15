@@ -1,0 +1,5 @@
+{ ezModules, ... }: {
+  imports = [
+    ezModules.core
+  ];
+}

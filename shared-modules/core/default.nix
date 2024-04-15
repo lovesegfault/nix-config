@@ -1,4 +1,4 @@
-{ config, inputs, lib, pkgs, ... }:
+toplevel@{ config, inputs, lib, pkgs, ... }:
 let
   cfg = config.nix-config.core;
 in
@@ -7,17 +7,15 @@ with lib;
   options.nix-config.core = {
     enable = mkEnableOption "core nix-config options";
     aspell.enable = mkOption {
-      default = true;
-      example = false;
       description = "Whether to enable aspell configuration.";
       type = types.bool;
+      default = true;
+      example = false;
     };
   };
 
   config = mkIf cfg.enable (mkMerge [
     {
-      imports = [ ./nix.nix ];
-
       documentation = {
         enable = true;
         doc.enable = true;
@@ -58,13 +56,14 @@ with lib;
         add-extra-dicts pt_BR.rws
       '';
     })
-    (mkIf (config ? home-manager) {
+    (import ./nix.nix toplevel)
+    (mkIf (inputs ? home-manager) {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
       };
     })
-    (mkIf (config ? stylix) {
+    (mkIf (inputs ? stylix) {
       stylix = {
         base16Scheme = "${inputs.base16-schemes}/ayu-dark.yaml";
         # We need this otherwise the autoimport clashes with our manual import.

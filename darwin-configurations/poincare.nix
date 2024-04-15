@@ -1,13 +1,10 @@
-{ ezModules, lib, pkgs, ... }: {
+{ ezModules, inputs, lib, pkgs, ... }: {
   imports = [
-    ezModules.core
-
-    ../../graphical
-
-    ../../users/bemeurer
+    # ../users/bemeurer
   ];
 
   nix-config.core.enable = true;
+  nix-config.graphical.enable = true;
 
   environment.variables.JAVA_HOME = "$(/usr/libexec/java_home)";
 
@@ -15,12 +12,12 @@
     { name = "podman-desktop"; greedy = true; }
   ];
 
-  home-manager.users.bemeurer = { config, ... }: {
-    imports = [ ../../users/bemeurer/dev/aws.nix ];
-    home.sessionPath = [
-      "${config.home.homeDirectory}/.local/bin"
-    ];
-  };
+  # home-manager.users.bemeurer = { config, ... }: {
+  #   imports = [ ../users/bemeurer/dev/aws.nix ];
+  #   home.sessionPath = [
+  #     "${config.home.homeDirectory}/.local/bin"
+  #   ];
+  # };
 
   nix = {
     gc.automatic = true;
@@ -28,8 +25,8 @@
       enable = true;
       ephemeral = true;
       config = { ... }: {
-        imports = [ ../../core/nix.nix ];
-        _module.args.hostType = "nixos";
+        _module.args = { inherit inputs; };
+        imports = [ ../shared-modules/core/nix.nix ];
         virtualisation.host.pkgs = lib.mkForce (pkgs.extend (final: _: {
           nix = final.nixVersions.unstable;
         }));
@@ -43,6 +40,8 @@
       trusted-users = [ "bemeurer" ];
     };
   };
+
+  nixpkgs.hostPlatform = "aarch64-darwin";
 
   users.users.bemeurer = {
     uid = 504;
