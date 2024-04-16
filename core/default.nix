@@ -22,10 +22,9 @@
       "/share/zsh"
     ];
     systemPackages = with pkgs; [
-      man-pages
       neovim
       rsync
-    ];
+    ] ++ (lib.optional (hostType != "darwin") man-pages);
   };
 
   home-manager = {
