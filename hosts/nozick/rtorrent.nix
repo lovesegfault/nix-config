@@ -32,10 +32,15 @@
         network.tos.set = throughput
         network.http.dns_cache_timeout.set = 0
 
-        schedule2 = watch_directory_emp,10,10,"load.normal=/mnt/emp-staging/watch/*.torrent,d.directory.set=/mnt/emp-staging"
-        schedule2 = watch_directory_movies,10,10,"load.start_verbose=/mnt/movies/watch/*.torrent,d.directory.set=/mnt/movies"
-        schedule2 = watch_directory_redacted,10,10,"load.start_verbose=/mnt/redacted/watch/*.torrent,d.directory.set=/mnt/redacted"
-        schedule2 = watch_directory_shows,10,10,"load.start_verbose=/mnt/shows/watch/*.torrent,d.directory.set=/mnt/shows"
+        schedule2 = watch_directory_emp,10,10,"load.normal=/mnt/emp-staging/watch/*.torrent,d.directory.set=/mnt/emp-staging,d.custom1.set=/mnt/emp"
+
+        schedule2 = watch_directory_movies,10,10,"load.start_verbose=/mnt/movies/watch/*.torrent,d.directory.set=/mnt/downloads,d.custom1.set=/mnt/movies"
+        schedule2 = watch_directory_redacted,10,10,"load.start_verbose=/mnt/redacted/watch/*.torrent,d.directory.set=/mnt/downloads,d.custom1=/mnt/redacted"
+        schedule2 = watch_directory_shows,10,10,"load.start_verbose=/mnt/shows/watch/*.torrent,d.directory.set=/mnt/downloads,d.custom1=/mnt/shows"
+
+        method.insert = d.data_path, simple, "if=(d.is_multi_file), (cat,(d.directory),/), (cat,(d.directory),/,(d.name))"
+        method.insert = d.move_to_complete, simple, "d.directory.set=$argument.1=; execute=mkdir,-p,$argument.1=; execute=mv,-u,$argument.0=,$argument.1=; d.save_full_session="
+        method.set_key = event.download.finished,move_complete,"d.move_to_complete=$d.data_path=,$d.custom1="
       '';
     };
     nginx.virtualHosts."flood.nozick.meurer.org" = {
