@@ -32,7 +32,7 @@
         network.tos.set = throughput
         network.http.dns_cache_timeout.set = 0
 
-        schedule2 = watch_directory_emp,10,10,"load.normal=/mnt/emp-staging/watch/*.torrent,d.directory.set=/mnt/emp-staging,d.custom1.set=/mnt/emp"
+        schedule2 = watch_directory_emp,10,10,"load.normal=/mnt/emp-staging/watch/*.torrent,d.directory.set=/mnt/emp-staging,d.custom1.set=/mnt/emp-complete"
 
         schedule2 = watch_directory_movies,10,10,"load.start_verbose=/mnt/movies/watch/*.torrent,d.directory.set=/mnt/downloads,d.custom1.set=/mnt/movies"
         schedule2 = watch_directory_redacted,10,10,"load.start_verbose=/mnt/redacted/watch/*.torrent,d.directory.set=/mnt/downloads,d.custom1=/mnt/redacted"
