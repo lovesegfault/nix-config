@@ -35,6 +35,7 @@
       nix-output-monitor
       ripgrep
       rsync
+      truecolor-check
     ];
     shellAliases = {
       cat = "bat";
