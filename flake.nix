@@ -139,9 +139,7 @@
 
             devShells = import ./nix/dev-shell.nix ctx;
 
-            packages = {
-              inherit (pkgs) cachix jq nix-fast-build;
-            };
+            packages = import ./nix/packages.nix toplevel ctx;
 
             pre-commit = {
               check.enable = true;
