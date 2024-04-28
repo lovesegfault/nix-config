@@ -25,7 +25,6 @@
         "configurable-impure-env"
         "flakes"
         "nix-command"
-        "repl-flake"
       ];
       connect-timeout = 5;
       http-connections = 0;
