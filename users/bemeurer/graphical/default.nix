@@ -17,6 +17,7 @@
     qalculate-gtk
     signal-desktop
     thunderbird
+    zulip
   ] ++ lib.optionals (stdenv.hostPlatform.system == "x86_64-linux") [
     prusa-slicer
     spotify
