@@ -1,10 +1,10 @@
 final: prev:
 let
-  useUnstableNixFor = name:
-    { inherit name; value = prev.${name}.override { nix = final.nixVersions.unstable; }; };
-  useUnstableNix = names: builtins.listToAttrs (map useUnstableNixFor names);
+  useLatestNixFor = name:
+    { inherit name; value = prev.${name}.override { nix = final.nixVersions.latest; }; };
+  useLatestNix = names: builtins.listToAttrs (map useLatestNixFor names);
 in
-(useUnstableNix [
+(useLatestNix [
   "agenix"
   "nix-direnv"
   "nix-update"
@@ -12,7 +12,7 @@ in
 ]) // {
   # Workaround for electron depending on nix-prefetch-git at build-time via
   # prefetch-yarn-deps
-  nix-prefetch-git = prev.nix-prefetch-git.override { nix = final.nixVersions.unstable; };
+  nix-prefetch-git = prev.nix-prefetch-git.override { nix = final.nixVersions.latest; };
   nix-prefetch-git-stable = prev.nix-prefetch-git;
   prefetch-yarn-deps = prev.prefetch-yarn-deps.override { nix-prefetch-git = final.nix-prefetch-git-stable; };
 }

@@ -29,7 +29,7 @@
         imports = [ ../../core/nix.nix ];
         _module.args.hostType = "nixos";
         virtualisation.host.pkgs = lib.mkForce (pkgs.extend (final: _: {
-          nix = final.nixVersions.unstable;
+          nix = final.nixVersions.latest;
         }));
       };
       maxJobs = 4;
