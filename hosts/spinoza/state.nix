@@ -65,6 +65,8 @@
         ".local/share/nvim"
         ".local/share/TabNine"
         ".local/share/zsh"
+        ".local/share/steam"
+        ".local/share/Steam"
         ".mozilla"
         ".thunderbird"
         "doc"

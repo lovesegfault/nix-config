@@ -37,7 +37,7 @@
       include /etc/sway/config.d/*
     '';
 
-    extraOptions = [ "--unsupported-gpu" ];
+    extraOptions = [ "--unsupported-gpu" "-Dlegacy-wl-drm" ];
 
     extraSessionCommands = ''
       export LIBSEAT_BACKEND="logind"
