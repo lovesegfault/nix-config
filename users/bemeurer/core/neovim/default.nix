@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ pkgs, ... }: {
   programs = {
     git.extraConfig.core.editor = "nvim";
 
@@ -12,6 +12,11 @@
       vimdiffAlias = true;
       vimAlias = true;
       viAlias = true;
+
+      extraLuaPackages = luaPkgs: with luaPkgs; [
+        # required for luasnip
+        jsregexp
+      ];
 
       plugins = with pkgs.vimPlugins; [
         # ui
