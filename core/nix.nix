@@ -46,6 +46,6 @@
     };
   } // lib.optionalAttrs (hostType == "darwin") {
     nixPath = [ "nixpkgs=/run/current-system/sw/nixpkgs" ];
-    daemonIOLowPriority = true;
+    daemonIOLowPriority = false;
   };
 }
