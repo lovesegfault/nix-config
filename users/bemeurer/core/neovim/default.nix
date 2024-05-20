@@ -37,10 +37,9 @@
         which-key-nvim # popups for keybindings for commands
 
         # lsp
-        ltex_extra-nvim # ltex LSP configuration
         nvim-lspconfig # LSP
+        ltex_extra-nvim # ltex LSP configuration
         lsp-progress-nvim # Progress indicator for statusbar
-        lsp_signature-nvim # Show function signature when you type
         rustaceanvim # nonstandard LSP features for rust-analyzer
 
         # tooling

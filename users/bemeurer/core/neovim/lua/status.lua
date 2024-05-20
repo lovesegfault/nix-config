@@ -26,7 +26,7 @@ local sections = {
   },
 }
 
-lsp_progress.setup()
+lsp_progress.setup({})
 lualine.setup({
   options = {
     theme = "ayu_dark",
