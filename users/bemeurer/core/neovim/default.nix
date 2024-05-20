@@ -42,12 +42,12 @@
         nvim-lspconfig # LSP
         lsp-progress-nvim # Progress indicator for statusbar
         lsp_signature-nvim # Show function signature when you type
+        rustaceanvim # nonstandard LSP features for rust-analyzer
 
         # tooling
         bufdelete-nvim # delete buffers without losing window layout
         guess-indent-nvim # automatic indentation style detection
         nvim-surround # add/change/delete surrounding delimiter pairs with ease
-        rust-tools-nvim
         vim-suda # sudo write
         telescope-frecency-nvim
         telescope-nvim

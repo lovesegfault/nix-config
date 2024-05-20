@@ -122,9 +122,9 @@ nvim_lsp["nil_ls"].setup({
   },
 })
 
-require("rust-tools").setup({
+vim.g.rustaceanvim = {
   server = { on_attach = on_attach },
-})
+}
 
 -- Map :Format to vim.lsp.buf.formatting()
 vim.cmd([[ command! Format execute "lua vim.lsp.buf.format({ async = true })" ]])
