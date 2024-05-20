@@ -48,8 +48,7 @@
         guess-indent-nvim # automatic indentation style detection
         nvim-surround # add/change/delete surrounding delimiter pairs with ease
         rust-tools-nvim
-        # FIXME: Re-add this as vim-suda after https://github.com/NixOS/nixpkgs/pull/312245
-        # suda-vim # sudo write
+        vim-suda # sudo write
         telescope-frecency-nvim
         telescope-nvim
         telescope-file-browser-nvim
