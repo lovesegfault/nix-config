@@ -41,6 +41,7 @@
         ltex_extra-nvim # ltex LSP configuration
         lsp-progress-nvim # Progress indicator for statusbar
         rustaceanvim # nonstandard LSP features for rust-analyzer
+        inlay-hints-nvim # inlay hint easy config
 
         # tooling
         bufdelete-nvim # delete buffers without losing window layout
