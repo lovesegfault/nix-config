@@ -56,10 +56,6 @@ local on_attach = function(_, bufnr)
   end, opts)
   vim.keymap.set("n", "[d", vim.lsp.diagnostic.goto_prev, opts)
   vim.keymap.set("n", "]d", vim.lsp.diagnostic.goto_next, opts)
-
-  require("nvim-lightbulb").setup({
-    autocmd = { enabled = true },
-  })
   require("lsp_signature").on_attach({
     bind = true,
     handler_opts = { border = "rounded" },

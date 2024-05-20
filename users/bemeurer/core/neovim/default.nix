@@ -38,7 +38,6 @@
 
         # lsp
         ltex_extra-nvim # ltex LSP configuration
-        nvim-lightbulb # lightbulb sign when LSP actions are available
         nvim-lspconfig # LSP
         lsp-progress-nvim # Progress indicator for statusbar
         lsp_signature-nvim # Show function signature when you type
