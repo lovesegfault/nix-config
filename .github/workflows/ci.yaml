@@ -35,7 +35,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v11
         with:
           extra-conf: ${{ env.nix-conf }}
-      - uses: cachix/cachix-action@v14
+      - uses: cachix/cachix-action@v15
         with:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -49,7 +49,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v11
         with:
           extra-conf: ${{ env.nix-conf }}
-      - uses: cachix/cachix-action@v14
+      - uses: cachix/cachix-action@v15
         with:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -172,7 +172,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v11
         with:
           extra-conf: ${{ env.nix-conf }}
-      - uses: cachix/cachix-action@v14
+      - uses: cachix/cachix-action@v15
         with:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -198,7 +198,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v11
         with:
           extra-conf: ${{ env.nix-conf }}
-      - uses: cachix/cachix-action@v14
+      - uses: cachix/cachix-action@v15
         with:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
