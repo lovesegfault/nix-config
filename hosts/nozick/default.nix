@@ -152,7 +152,7 @@
         };
       };
     };
-    oauth2_proxy.nginx.virtualHosts = [ "stash.nozick.meurer.org" ];
+    oauth2-proxy.nginx.virtualHosts."stash.nozick.meurer.org" = { };
     openssh.extraConfig = ''
       MaxStartups 40:30:120
     '';

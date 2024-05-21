@@ -29,6 +29,6 @@ with config.networking;
       kTLS = true;
       locations."/".proxyPass = "http://${config.services.syncthing.guiAddress}";
     };
-    oauth2_proxy.nginx.virtualHosts = [ "syncthing.${hostName}.meurer.org" ];
+    oauth2-proxy.nginx.virtualHosts."syncthing.${hostName}.meurer.org" = { };
   };
 }

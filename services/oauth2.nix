@@ -6,7 +6,7 @@ with config.networking;
   security.acme.certs."auth.${hostName}.meurer.org" = { };
 
   services = {
-    oauth2_proxy = {
+    oauth2-proxy = {
       enable = true;
       nginx.domain = "auth.${hostName}.meurer.org";
       cookie.domain = ".${hostName}.meurer.org";

@@ -50,7 +50,7 @@
       locations."/".proxyPass = "http://127.0.0.1:4200";
     };
 
-    oauth2_proxy.nginx.virtualHosts = [ "flood.nozick.meurer.org" ];
+    oauth2-proxy.nginx.virtualHosts."flood.nozick.meurer.org" = { };
   };
 
   systemd.services = {

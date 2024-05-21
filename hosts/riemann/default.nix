@@ -102,7 +102,7 @@
       };
       group = "klipper";
     };
-    oauth2_proxy.nginx.virtualHosts = [ config.services.mainsail.hostName ];
+    oauth2-proxy.nginx.virtualHosts.${config.services.mainsail.hostName} = { };
   };
 
   system.build.firmware = {

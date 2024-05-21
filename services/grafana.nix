@@ -46,6 +46,6 @@ with config.networking;
         proxyWebsockets = true;
       };
     };
-    oauth2_proxy.nginx.virtualHosts = [ "grafana.${hostName}.meurer.org" ];
+    oauth2-proxy.nginx.virtualHosts."grafana.${hostName}.meurer.org" = { };
   };
 }
