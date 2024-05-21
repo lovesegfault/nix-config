@@ -19,7 +19,7 @@
       autoUpdateApps.enable = true;
       hostName = "nextcloud.meurer.org";
       https = true;
-      package = pkgs.nextcloud28;
+      package = pkgs.nextcloud29;
       config = {
         adminpassFile = config.age.secrets.nextcloud.path;
         dbhost = "/run/postgresql";
