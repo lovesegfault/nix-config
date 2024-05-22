@@ -98,7 +98,14 @@
     hostId = "a8766d75";
     hostName = "spinoza";
     wireguard.enable = true;
-    wireless.iwd.enable = true;
+    wireless.iwd = {
+      enable = true;
+      settings.Rank = {
+        BandModifier2_4GHz = 1.0;
+        BandModifier5GHz = 2.0;
+        BandModifier6GHz = 3.0;
+      };
+    };
   };
 
   nix = {
