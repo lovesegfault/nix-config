@@ -9,7 +9,6 @@
 
     ../../graphical
     ../../graphical/trusted.nix
-    ../../graphical/steam.nix
 
     ../../services/virt-manager.nix
     ../../services/podman.nix

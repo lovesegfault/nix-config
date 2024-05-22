@@ -27,11 +27,6 @@
 
   programs.alacritty.enable = true;
 
-  programs.mangohud = {
-    enable = true;
-    enableSessionWide = true;
-  };
-
   stylix.fonts = {
     sansSerif = {
       package = pkgs.ibm-plex;
