@@ -56,8 +56,8 @@ local on_attach = function(_, bufnr)
   vim.keymap.set("n", "<leader>f", function()
     vim.lsp.buf.format({ async = true })
   end, opts)
-  vim.keymap.set("n", "[d", vim.lsp.diagnostic.goto_prev, opts)
-  vim.keymap.set("n", "]d", vim.lsp.diagnostic.goto_next, opts)
+  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 end
 
 -- Enable the following language servers
