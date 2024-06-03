@@ -12,12 +12,13 @@
       { name = "appcleaner"; greedy = true; }
       { name = "balenaetcher"; greedy = true; }
       { name = "bartender"; greedy = true; }
+      { name = "chatgpt"; greedy = true; }
       { name = "daisydisk"; greedy = true; }
       { name = "firefox"; greedy = true; }
       { name = "geekbench"; greedy = true; }
       { name = "google-chrome"; greedy = true; }
-      { name = "keymapp"; greedy = true; }
       { name = "jitsi-meet"; greedy = true; }
+      { name = "keymapp"; greedy = true; }
       { name = "languagetool"; greedy = true; }
       { name = "launchcontrol"; greedy = true; }
       { name = "lunar"; greedy = true; }
