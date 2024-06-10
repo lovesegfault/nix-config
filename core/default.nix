@@ -47,6 +47,7 @@
   };
 
   stylix = {
+    enable = true;
     base16Scheme = "${base16-schemes}/ayu-dark.yaml";
     # We need this otherwise the autoimport clashes with our manual import.
     homeManagerIntegration.autoImport = false;

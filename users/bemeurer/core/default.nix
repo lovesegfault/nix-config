@@ -63,6 +63,7 @@
   };
 
   stylix = {
+    enable = true;
     base16Scheme = "${base16-schemes}/ayu-dark.yaml";
     # XXX: We fetchurl from the repo because flakes don't support git-lfs assets
     image = pkgs.fetchurl {
