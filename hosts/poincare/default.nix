@@ -7,7 +7,10 @@
     ../../users/bemeurer
   ];
 
-  environment.variables.JAVA_HOME = "$(/usr/libexec/java_home)";
+  environment = {
+    variables.JAVA_HOME = "$(/usr/libexec/java_home)";
+    systemPackages = [ (lib.hiPrio pkgs.opensshWithKerberos) ];
+  };
 
   homebrew.casks = [
     { name = "podman-desktop"; greedy = true; }
