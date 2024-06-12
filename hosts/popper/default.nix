@@ -10,7 +10,7 @@
       (lib.hiPrio rust-analyzer)
       cargo-nextest
       nix-fast-build
-      openssh
+      opensshWithKerberos
       rustup
     ];
   };
