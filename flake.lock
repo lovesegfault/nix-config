@@ -617,15 +617,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1718546905,
-        "narHash": "sha256-FmtNOW6Ng11TTgsXkQLqBcIE0j2SmlydHXu/DnWlS4k=",
-        "owner": "danth",
+        "lastModified": 1718632174,
+        "narHash": "sha256-Mf+qZqHAQ9FDPfrd+MgUZLkDNuKhE0QfSeAsmOBs6qo=",
+        "owner": "lovesegfault",
         "repo": "stylix",
-        "rev": "80e8e1e2f613bdc8749461899f0959312eb4a54e",
+        "rev": "eef4b3ece6f892c97ee1e1b3ae7db50d3b5c6ed8",
         "type": "github"
       },
       "original": {
-        "owner": "danth",
+        "owner": "lovesegfault",
+        "ref": "fix-darwin",
         "repo": "stylix",
         "type": "github"
       }
