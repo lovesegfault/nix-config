@@ -1,18 +1,16 @@
 { hostType, lib, pkgs, ... }:
-let
-  fontPackages = with pkgs; [
-    dejavu_fonts
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
-    noto-fonts-extra
-    unifont
-  ];
-in
 {
-  fonts = lib.optionalAttrs (hostType == "nixos")
+  fonts = {
+    packages = with pkgs; [
+      dejavu_fonts
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-extra
+      unifont
+    ];
+  } // lib.optionalAttrs (hostType == "nixos")
     {
-      packages = fontPackages;
       enableDefaultPackages = false;
       enableGhostscriptFonts = false;
       fontconfig = {
@@ -41,10 +39,7 @@ in
           </fontconfig>
         '';
       };
-    } // lib.optionalAttrs (hostType == "darwin") {
-    fonts = fontPackages;
-    fontDir.enable = true;
-  };
+    };
 
   stylix.fonts = {
     sansSerif = {
