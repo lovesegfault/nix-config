@@ -1,7 +1,8 @@
-{ agenix, config, lib, pkgs, home-manager, impermanence, lanzaboote, nix-index-database, stylix, ... }:
+{ agenix, config, disko, lib, pkgs, home-manager, impermanence, lanzaboote, nix-index-database, stylix, ... }:
 {
   imports = [
     agenix.nixosModules.age
+    disko.nixosModules.disko
     home-manager.nixosModules.home-manager
     impermanence.nixosModules.impermanence
     lanzaboote.nixosModules.lanzaboote
