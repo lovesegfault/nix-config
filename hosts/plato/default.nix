@@ -111,9 +111,15 @@
 
   powerManagement.cpuFreqGovernor = "performance";
 
-  systemd.network.networks.eth = {
-    matchConfig.MACAddress = "58:11:22:c4:49:a9";
-    DHCP = "yes";
+  systemd.network.networks = {
+    eth0 = {
+      matchConfig.MACAddress = "58:11:22:c4:49:a9";
+      DHCP = "yes";
+    };
+    eth1 = {
+      matchConfig.MACAddress = "6c:b3:11:08:50:54";
+      DHCP = "yes";
+    };
   };
 
   time.timeZone = "Etc/UTC";
