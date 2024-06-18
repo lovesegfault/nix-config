@@ -22,6 +22,7 @@ let
           inherit (inputs)
             agenix
             base16-schemes
+            disko
             home-manager
             impermanence
             lanzaboote

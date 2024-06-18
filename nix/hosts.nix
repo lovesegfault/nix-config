@@ -79,6 +79,12 @@ in
     hostPlatform = "x86_64-linux";
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBEzb5JCgcXJZHDkY09vBAvIF34JabI+ZBpGqJDy6KbI";
   };
+  plato = mkHost {
+    type = "nixos";
+    address = "100.101.152.88";
+    hostPlatform = "x86_64-linux";
+    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDMExNPuG3+sl9qozno4cTmPEJSH8GGhoaReQsnpFaih";
+  };
   poincare = mkHost {
     type = "darwin";
     hostPlatform = "aarch64-darwin";
