@@ -29,12 +29,10 @@
       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
       source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
-
       source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
       source ${pkgs.zsh-autopair.src}/zsh-autopair.plugin.zsh
-
       source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+
       bindkey "''${terminfo[kcuu1]}" history-substring-search-up
       bindkey '^[[A' history-substring-search-up
       bindkey "''${terminfo[kcud1]}" history-substring-search-down
@@ -50,6 +48,14 @@
       bindkey "^[[1;5D" backward-word
       bindkey "^[[1;3D" backward-word
       bindkey -s "^O" 'fzf | xargs -r $EDITOR^M'
+
+
+      local CONST_SSH_SOCK="$HOME/.ssh/ssh-auth-sock"
+      if [ ! -z ''${SSH_AUTH_SOCK+x} ] && [ "$SSH_AUTH_SOCK" != "$CONST_SSH_SOCK" ]; then
+        rm -f "$CONST_SSH_SOCK"
+        ln -sf "$SSH_AUTH_SOCK" "$CONST_SSH_SOCK"
+        export SSH_AUTH_SOCK="$CONST_SSH_SOCK"
+      fi
     '';
     sessionVariables = {
       RPROMPT = "";
