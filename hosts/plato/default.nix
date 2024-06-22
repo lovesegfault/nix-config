@@ -55,6 +55,7 @@
 
   hardware.enableRedistributableFirmware = true;
 
+  home-manager.verbose = true;
   home-manager.users.bemeurer = {
     imports = [
       ../../users/bemeurer/music
