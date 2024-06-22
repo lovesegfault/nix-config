@@ -10,6 +10,10 @@
     ../../hardware/no-mitigations.nix
     ../../hardware/zfs.nix
 
+    ../../services/nginx.nix
+    ../../services/oauth2.nix
+    ../../services/unbound.nix
+
     ../../users/bemeurer
 
     ./disko.nix
@@ -61,9 +65,8 @@
     hostId = "e4c9bd10";
     hostName = "plato";
     firewall = {
-      allowedTCPPorts = [ 32400 ];
-      allowedUDPPorts = [ 32400 ];
-      logRefusedConnections = false;
+      # allowedTCPPorts = [ 32400 ];
+      # allowedUDPPorts = [ 32400 ];
     };
   };
 
@@ -85,7 +88,7 @@
   };
 
   security = {
-    # acme.certs."stash.nozick.meurer.org" = { };
+    acme.certs."stash.${config.networking.hostName}.meurer.org" = { };
     pam.loginLimits = [
       { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
       { domain = "*"; type = "-"; item = "nofile"; value = "1048576"; }
@@ -98,6 +101,22 @@
       enable = true;
       servers = [ "time.nist.gov" "time.cloudflare.com" "time.google.com" "tick.usnogps.navy.mil" ];
     };
+    nginx = {
+      resolver.addresses = [ "127.0.0.1:53" ];
+      resolver.ipv6 = false;
+      virtualHosts = {
+        "stash.${config.networking.hostName}.meurer.org" = {
+          useACMEHost = "stash.${config.networking.hostName}.meurer.org";
+          kTLS = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:9999";
+            proxyWebsockets = true;
+          };
+        };
+      };
+    };
+    oauth2-proxy.nginx.virtualHosts."stash.${config.networking.hostName}.meurer.org" = { };
     smartd.enable = true;
     sshguard.enable = true;
     zfs = {
@@ -125,4 +144,20 @@
   time.timeZone = "Etc/UTC";
 
   users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
+
+  virtualisation = {
+    containers = {
+      containersConf.settings.containers.annotations = [ "run.oci.keep_original_groups=1" ];
+      storage.settings.storage = {
+        driver = "zfs";
+        graphroot = "/var/lib/containers/storage";
+        runroot = "/run/containers/storage";
+      };
+    };
+    oci-containers.backend = "podman";
+    podman = {
+      enable = true;
+      extraPackages = with pkgs; [ zfs ];
+    };
+  };
 }

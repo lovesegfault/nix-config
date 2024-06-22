@@ -15,7 +15,7 @@ let
     "hosts/nozick/ddns.age" = [ nozick plato ];
     "hosts/nozick/nextcloud.age" = [ nozick plato ];
     "services/acme.age" = [ bohr fourier jung nozick plato riemann ];
-    "services/oauth2.age" = [ bohr fourier jung nozick riemann ];
+    "services/oauth2.age" = [ bohr fourier jung nozick plato riemann ];
     "services/pihole.age" = [ ];
     "services/github-runner.age" = [ jung ];
     "users/bemeurer/password.age" = attrValues hosts;
