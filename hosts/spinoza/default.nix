@@ -77,7 +77,7 @@
   hardware = {
     sane.enable = true;
     ledger.enable = true;
-    opengl.extraPackages = with pkgs; [
+    graphics.extraPackages = with pkgs; [
       libvdpau-va-gl
       vaapiVdpau
     ];

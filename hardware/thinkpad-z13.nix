@@ -33,7 +33,7 @@
     brillo.enable = true;
     enableRedistributableFirmware = true;
     i2c.enable = true;
-    opengl.enable = true;
+    graphics.enable = true;
   };
 
   nix.settings.system-features = [

@@ -81,7 +81,7 @@
 
   hardware = {
     enableRedistributableFirmware = true;
-    opengl.enable = true;
+    graphics.enable = true;
   };
 
   home-manager.users.bemeurer = {
