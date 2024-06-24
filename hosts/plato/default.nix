@@ -117,6 +117,7 @@
         };
       };
     };
+    fwupd.enable = true;
     oauth2-proxy.nginx.virtualHosts."stash.${config.networking.hostName}.meurer.org" = { };
     smartd.enable = true;
     sshguard.enable = true;
