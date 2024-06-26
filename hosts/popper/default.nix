@@ -7,7 +7,6 @@
   home = {
     uid = 22314791;
     packages = with pkgs; [
-      (lib.hiPrio rust-analyzer)
       cargo-nextest
       nix-fast-build
       opensshWithKerberos
