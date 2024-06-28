@@ -1,13 +1,13 @@
 final: prev:
 {
   wlroots-unstable = (final.wlroots_0_17.overrideAttrs (old: {
-    version = "unstable-2024-06-05";
+    version = "unstable-2024-06-27";
     src = final.fetchFromGitLab {
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "385c9ade5f7a8ce9e5c13f762d56e6bd1c8d1b0a";
-      hash = "sha256-kSBRbhuuBEAl9vD1Bucvth3b2TGVbQtVw9bMWO1Axk8=";
+      rev = "85875c47d9234c2ad61bf3af97fca133fe3ffa78";
+      hash = "sha256-w2mx2x9aQHgWv1PM5SWk7Qhb9rzBLpncMbCEPd2uKpk=";
     };
 
     buildInputs = (old.buildInputs or [ ]) ++ [
@@ -16,12 +16,12 @@ final: prev:
   })).override { };
 
   sway-unwrapped = (prev.sway-unwrapped.overrideAttrs (old: {
-    version = "unstable-2024-06-10";
+    version = "unstable-2024-06-27";
     src = final.fetchFromGitHub {
       owner = "swaywm";
       repo = "sway";
-      rev = "cc342107690631cf1ff003fed0b1cdb072491c63";
-      hash = "sha256-RzPlJSWeMIKV6mZAcQMooERJmjYCogfGT/NPYlJM7yM=";
+      rev = "cdde0165dad94e4522f8f6f040e9d30145fbb14f";
+      hash = "sha256-xVkPZkrxFOB+cQAvkJCgfplaHAEp5Tv9M/Dj24Vh5Ys=";
     };
 
     nativeBuildInputs = with final; (old.nativeBuildInputs or [ ]) ++ [ bash-completion fish ];
