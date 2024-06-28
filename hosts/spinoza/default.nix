@@ -189,9 +189,9 @@
 
   stylix.fonts.sizes = {
     desktop = 16;
-    applications = 14;
-    terminal = 12;
-    popups = 16;
+    applications = 16;
+    terminal = 18;
+    popups = 20;
   };
 
   systemd.user.services.geoclue-agent.after = [
