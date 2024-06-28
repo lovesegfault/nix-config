@@ -5,6 +5,7 @@
     hideMounts = true;
     directories = [
       "/var/cache/powertop"
+      "/var/lib/alsa"
       "/var/lib/bluetooth"
       "/var/lib/boltd"
       "/var/lib/fprint"
