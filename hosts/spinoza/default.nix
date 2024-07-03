@@ -139,10 +139,6 @@
       enableModemGPS = false;
       submitData = true;
     };
-    kmscon = {
-      enable = true;
-      hwRender = true;
-    };
     logind = {
       lidSwitch = "suspend";
       lidSwitchDocked = "suspend";
