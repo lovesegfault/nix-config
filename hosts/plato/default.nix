@@ -120,7 +120,14 @@
     fwupd.enable = true;
     oauth2-proxy.nginx.virtualHosts."stash.${config.networking.hostName}.meurer.org" = { };
     smartd.enable = true;
-    sshguard.enable = true;
+    sshguard = {
+      enable = true;
+      attack_threshold = 20;
+      blocktime = 180;
+      detection_time = 3600;
+      blacklist_threshold = 100;
+
+    };
     zfs = {
       autoScrub.pools = [ "zroot" "zdata" ];
       autoSnapshot = {
