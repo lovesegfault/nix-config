@@ -103,7 +103,7 @@
       settings.Rank = {
         BandModifier2_4GHz = 1.0;
         BandModifier5GHz = 2.0;
-        BandModifier6GHz = 3.0;
+        BandModifier6GHz = 4.0;
       };
     };
   };
