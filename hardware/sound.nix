@@ -30,6 +30,4 @@
       ];
     };
   };
-
-  sound.enable = true;
 }
