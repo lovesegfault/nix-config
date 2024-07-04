@@ -1,4 +1,4 @@
-{ config, ... }: {
+{
   age.identityPaths = [ "/nix/state/etc/ssh/ssh_host_ed25519_key" ];
 
   environment.persistence."/nix/state" = {
@@ -6,6 +6,7 @@
       "/var/lib/chrony"
       "/var/lib/containers"
       "/var/lib/fwupd"
+      "/var/lib/fail2ban"
       "/var/lib/nixos"
       "/var/lib/sshguard"
       "/var/lib/tailscale"

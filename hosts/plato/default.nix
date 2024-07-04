@@ -69,6 +69,7 @@
       # allowedTCPPorts = [ 32400 ];
       # allowedUDPPorts = [ 32400 ];
     };
+    nftables.enable = true;
   };
 
   nix = {
@@ -97,6 +98,12 @@
     ];
   };
 
+  environment.etc."fail2ban/filter.d/fwdrop.conf".text = ''
+    [Definition]
+    failregex = ^.*refused connection: IN=.*SRC=<ADDR> DST=.*$
+    journalmatch = _TRANSPORT=kernel
+  '';
+
   services = {
     chrony = {
       enable = true;
@@ -117,17 +124,29 @@
         };
       };
     };
+    fail2ban = {
+      enable = true;
+      bantime = "6min";
+      ignoreIP = [ "127.0.0.1/8" "100.64.0.0/10" ];
+      banaction = "nftables[type=allports]";
+      bantime-increment = {
+        enable = true;
+        formula = "ban.Time * math.exp(float(ban.Count+1)*banFactor)/math.exp(1*banFactor)";
+        maxtime = "1week";
+        rndtime = "10m";
+        overalljails = true;
+      };
+      extraPackages = [ pkgs.ipset pkgs.nftables ];
+      jails.fwdrop.settings = {
+        enabled = true;
+        filter = "fwdrop";
+        findtime = "1h";
+        maxretry = "3";
+      };
+    };
     fwupd.enable = true;
     oauth2-proxy.nginx.virtualHosts."stash.${config.networking.hostName}.meurer.org" = { };
     smartd.enable = true;
-    sshguard = {
-      enable = true;
-      attack_threshold = 20;
-      blocktime = 180;
-      detection_time = 3600;
-      blacklist_threshold = 100;
-
-    };
     zfs = {
       autoScrub.pools = [ "zroot" "zdata" ];
       autoSnapshot = {
