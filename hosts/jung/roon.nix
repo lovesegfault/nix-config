@@ -9,7 +9,5 @@
     openFirewall = true;
   };
 
-  sound.enable = true;
-
   users.groups.media.members = [ config.services.roon-server.user ];
 }
