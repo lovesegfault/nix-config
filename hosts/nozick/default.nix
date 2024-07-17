@@ -1,6 +1,7 @@
 { config, lib, nixos-hardware, pkgs, ... }: {
   imports = [
-    nixos-hardware.nixosModules.common-cpu-intel-kaby-lake
+    nixos-hardware.nixosModules.common-cpu-intel
+    nixos-hardware.nixosModules.common-gpu-intel-kaby-lake
 
     ../../core
 
