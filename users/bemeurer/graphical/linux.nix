@@ -11,8 +11,8 @@
 
   home = {
     packages = with pkgs; [
+      adwaita-icon-theme
       gammastep
-      gnome.adwaita-icon-theme
       gnome.evince
       hicolor-icon-theme
       lollypop

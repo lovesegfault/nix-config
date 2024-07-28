@@ -38,7 +38,7 @@
   stylix = {
     cursor = {
       name = "Adwaita";
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
     };
     targets.plymouth.enable = false;
     targets.gnome.enable = true;
