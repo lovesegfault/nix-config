@@ -17,6 +17,5 @@
         proxyWebsockets = true;
       };
     };
-    oauth2-proxy.nginx.virtualHosts."jellyfin.${hostName}.meurer.org" = { };
   };
 }
