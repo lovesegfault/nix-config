@@ -34,7 +34,6 @@ jobs:
           lfs: false
       - uses: DeterminateSystems/nix-installer-action@v13
         with:
-          nix-installer-branch: main
           extra-conf: accept-flake-config = true
       - run: git config --global user.email "hatesegfault@protonmail.ch"
       - run: git config --global user.name "hatesegfault"
