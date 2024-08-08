@@ -4,10 +4,12 @@
   nixConfig = {
     extra-trusted-substituters = [
       "https://nix-config.cachix.org"
+      "https://vim-config.cachix.org"
       "https://nix-community.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
+      "vim-config.cachix.org-1:lebqx8RjL8pKLZIjCURKN91CB60vISuKpJboWSmjRJM="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
   };
@@ -118,7 +120,7 @@
 
     systems.url = "github:nix-systems/default";
 
-    treefmt = {
+    treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -127,6 +129,17 @@
       url = "git+https://gist.github.com/fdeaf79e921c2f413f44b6f613f6ad53.git";
       flake = false;
     };
+
+    lovesegfault-vim-config = {
+      url = "github:lovesegfault/vim-config";
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        flake-parts.follows = "flake-parts";
+        git-hooks.follows = "git-hooks";
+        nixpkgs.follows = "nixpkgs";
+        treefmt-nix.follows = "treefmt-nix";
+      };
+    };
   };
 
   outputs = inputs@{ self, flake-parts, ... }:
@@ -134,7 +147,7 @@
       (toplevel@{ withSystem, ... }: {
         imports = [
           inputs.git-hooks.flakeModule
-          inputs.treefmt.flakeModule
+          inputs.treefmt-nix.flakeModule
         ];
         systems = [ "aarch64-darwin" "aarch64-linux" "x86_64-linux" ];
         perSystem = ctx@{ config, self', inputs', pkgs, system, ... }: {

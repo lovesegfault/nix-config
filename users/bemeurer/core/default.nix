@@ -9,7 +9,7 @@
     ./fish.nix
     ./git.nix
     ./htop.nix
-    ./neovim
+    ./neovim.nix
     ./ssh.nix
     ./starship.nix
     ./tmux.nix

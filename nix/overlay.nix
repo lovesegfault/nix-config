@@ -21,6 +21,7 @@ localOverlays // {
   default = lib.composeManyExtensions ([
     inputs.agenix.overlays.default
     inputs.deploy-rs.overlays.default
+    inputs.lovesegfault-vim-config.overlays.default
     (final: prev: {
       inherit (inputs.nix-fast-build.packages.${final.stdenv.hostPlatform.system}) nix-fast-build;
     })
