@@ -16,6 +16,10 @@
         else if pkgs.stdenv.hostPlatform.isx86_64 then "AL2_x86_64"
         else null;
     };
+    packages = with pkgs; [
+      awscli2
+      ssm-session-manager-plugin
+    ];
   };
 
   programs.zsh.initExtraBeforeCompInit = ''
