@@ -108,4 +108,9 @@ in
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDUZPmPTATZ4nBWstPqlUiguvxr26XWAE9BGPVNNRBR5";
     large = true;
   };
+  trotsky = mkHost {
+    type = "home-manager";
+    hostPlatform = "x86_64-linux";
+    homeDirectory = "/home/bemeurer";
+  };
 }

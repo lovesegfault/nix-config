@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   home = {
     shellAliases = {
       bre = "brazil-runtime-exec";
@@ -12,8 +12,8 @@
     ];
     sessionVariables = {
       BRAZIL_PLATFORM_OVERRIDE =
-        if pkgs.stdenv.hostPlatform.isAarch64 then "AL2_aarch64"
-        else if pkgs.stdenv.hostPlatform.isx86_64 then "AL2_x86_64"
+        if pkgs.stdenv.hostPlatform.isAarch64 then lib.mkDefault "AL2_aarch64"
+        else if pkgs.stdenv.hostPlatform.isx86_64 then lib.mkDefault "AL2_x86_64"
         else null;
     };
     packages = with pkgs; [
