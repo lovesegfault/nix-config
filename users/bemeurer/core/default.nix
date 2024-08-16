@@ -24,7 +24,6 @@
     username = "bemeurer";
     stateVersion = "23.05";
     packages = with pkgs; [
-      bandwhich
       eza
       fd
       fzf
