@@ -8,7 +8,6 @@
       agenix
       deploy-rs.deploy-rs
       nil
-      nix-melt
       nix-output-monitor
       nix-tree
       nixpkgs-fmt
