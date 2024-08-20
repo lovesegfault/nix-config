@@ -110,7 +110,7 @@ in
   };
   trotsky = mkHost {
     type = "home-manager";
-    hostPlatform = "x86_64-linux";
+    hostPlatform = "aarch64-linux";
     homeDirectory = "/home/bemeurer";
   };
 }
