@@ -1,7 +1,7 @@
 { config, pkgs, ... }: with config.networking; {
   environment.persistence."/nix/state".directories = [
     {
-      directory = config.services.weechat.root;
+      directory = "/var/lib/weechat";
       user = config.systemd.services.weechat.serviceConfig.User;
       group = config.systemd.services.weechat.serviceConfig.Group;
     }
@@ -22,18 +22,32 @@
         root = pkgs.glowing-bear;
       };
     };
-    weechat.enable = true;
     # for libera.chat port scanning...
     fail2ban.ignoreIP = [ "irc.libera.chat" ];
   };
 
-  programs.screen = {
-    enable = true;
-    screenrc = ''
-      multiuser on
-      acladd normal_user
-      truecolor on
-    '';
+  systemd.services.weechat = {
+    environment.WEECHAT_HOME = "/var/lib/weechat";
+    serviceConfig = {
+      User = "weechat";
+      Group = "weechat";
+      RemainAfterExit = "yes";
+      Type = "forking";
+      ExecStart = "${pkgs.tmux}/bin/tmux -S /var/lib/weechat/tmux new -d -s weechat ${pkgs.weechat}/bin/weechat";
+      ExecStop = "${pkgs.tmux}/bin/tmux -S /var/lib/weechat/tmux kill-session -t weechat";
+    };
+
+    wantedBy = [ "multi-user.target" ];
+    wants = [ "network.target" ];
   };
 
+  users = {
+    groups.weechat = { };
+    users.weechat = {
+      createHome = true;
+      group = "weechat";
+      home = "/var/lib/weechat";
+      isNormalUser = true;
+    };
+  };
 }
