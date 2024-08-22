@@ -13,6 +13,7 @@
     ../../services/nginx.nix
     ../../services/oauth2.nix
     ../../services/unbound.nix
+    ../../services/weechat.nix
 
     ../../users/bemeurer
 
