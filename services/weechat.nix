@@ -7,6 +7,15 @@
     }
   ];
 
+  environment.systemPackages = [
+    (pkgs.writeShellApplication {
+      name = "weechat-attach";
+      text = ''
+        sudo --user=weechat tmux -S /var/lib/weechat/tmux attach
+      '';
+    })
+  ];
+
   security.acme.certs."irc.${hostName}.meurer.org" = { };
 
   services = {
