@@ -10,7 +10,7 @@
       vim-tmux-navigator
     ];
     secureSocket = false;
-    terminal = "tmux-256color";
+    terminal = "tmux-direct";
     historyLimit = 30000;
     keyMode = "vi";
     prefix = "C-a";
