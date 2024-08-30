@@ -221,7 +221,6 @@ jobs:
 
           echo '${{ env.aarch64-machine-config }}' | sudo tee -a /etc/nix/machines
       - name: nix-fast-build
-        if: ${{ env.system != 'aarch64-darwin' }}
         run: |
           declare -a args=(
             '--no-nom'
@@ -235,10 +234,6 @@ jobs:
 
           args+=('--flake=${{ env.flake }}#${{ matrix.attrs.attr }}')
           nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
-      - name: nix-build
-        if: ${{ env.system == 'aarch64-darwin' }}
-        run: |
-          nix build --keep-going '${{ env.flake }}#${{ matrix.attrs.attr }}'
 
   check:
     runs-on: ubuntu-latest
