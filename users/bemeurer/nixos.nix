@@ -14,6 +14,7 @@ with lib;
       ++ optionals config.networking.networkmanager.enable [ "networkmanager" ]
       ++ optionals config.programs.sway.enable [ "input" "video" ]
       ++ optionals config.services.unbound.enable [ "unbound" ]
+      ++ optionals config.services.transmission.enable [ "transmission" ]
       ++ optionals config.virtualisation.docker.enable [ "docker" ]
       ++ optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
       ++ optionals config.virtualisation.kvmgt.enable [ "kvm" ]

@@ -19,6 +19,7 @@
 
     ./disko.nix
     ./state.nix
+    ./transmission.nix
   ];
 
   age.secrets = {
