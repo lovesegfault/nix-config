@@ -1,7 +1,7 @@
 final: prev:
 {
   wlroots-unstable = (final.wlroots_0_17.overrideAttrs (old: {
-    version = "unstable-2024-09-02";
+    version = "unstable-2024-08-13";
     src = final.fetchFromGitLab {
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
@@ -16,12 +16,12 @@ final: prev:
   })).override { };
 
   sway-unwrapped = (prev.sway-unwrapped.overrideAttrs (old: {
-    version = "unstable-2024-09-02";
+    version = "unstable-2024-08-11";
     src = final.fetchFromGitHub {
       owner = "swaywm";
       repo = "sway";
-      rev = "be840f730e747a24106c8366ecb89e6b982cfa38";
-      hash = "sha256-+sxX1U7MM1gPVEMwbWAbm2YD9dmm+o6k+GJlmls3kTM=";
+      rev = "b44015578a3d53cdd9436850202d4405696c1f52";
+      hash = "sha256-gTsZWtvyEMMgR4vj7Ef+nb+wcXkwGivGfnhnBIfPHOA=";
     };
 
     nativeBuildInputs = with final; (old.nativeBuildInputs or [ ]) ++ [ bash-completion fish ];
