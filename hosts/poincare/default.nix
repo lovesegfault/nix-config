@@ -26,7 +26,7 @@
   nix = {
     gc.automatic = true;
     linux-builder = {
-      enable = true;
+      enable = false;
       ephemeral = true;
       config = { ... }: {
         imports = [ ../../core/nix.nix ];
