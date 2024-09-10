@@ -187,11 +187,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1725975477,
-        "narHash": "sha256-sBnXxmYBb0S85Vkny97z2TFLd5SJW5o0k6KQNwpSLb0=",
+        "lastModified": 1726007501,
+        "narHash": "sha256-4MhYqhyNhsZw5gc4Hetu9LoA7Dy7qQMcuymxKwZDTNM=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "5b2d8e9a47c3e17514650d1ce7d5e907114db82b",
+        "rev": "4c96bd694bab9bd872bb2e1b738133342e77966d",
         "type": "github"
       },
       "original": {
