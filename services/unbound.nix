@@ -13,7 +13,7 @@
       }];
       exporters.unbound = {
         enable = true;
-        controlInterface = "/run/unbound/unbound.ctl";
+        unbound.host = "unix:///run/unbound/unbound.ctl";
         user = "unbound";
       };
     };
