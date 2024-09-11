@@ -8,7 +8,6 @@
         syntax-theme = "Nord";
       };
     };
-    package = pkgs.gitFull;
     lfs.enable = true;
     userEmail = "bernardo@meurer.org";
     userName = "Bernardo Meurer";
