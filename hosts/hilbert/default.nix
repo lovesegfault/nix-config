@@ -12,6 +12,9 @@
       opensshWithKerberos
       rustup
     ];
+    sessionVariables = {
+      TERMINFO_DIRS = "${pkgs.ncurses.outPath}/share/terminfo:/usr/share/terminfo";
+    };
   };
 
   programs = {
