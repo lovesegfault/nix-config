@@ -13,6 +13,10 @@
     ../../users/bemeurer
   ];
 
+  boot.kernelParams = [
+    "console=ttyS1,115200n8"
+  ];
+
   # This host does not use impermanence
   environment.persistence."/nix/state".enable = false;
 
