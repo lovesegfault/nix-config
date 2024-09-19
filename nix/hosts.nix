@@ -97,7 +97,7 @@ in
   };
   riemann = mkHost {
     type = "nixos";
-    address = "100.67.173.60";
+    address = "100.116.110.74";
     hostPlatform = "aarch64-linux";
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC2gbNVSmk+N93wP0bdPrHsXAsJtKEFVf0TPZLCc0Vk+";
   };
