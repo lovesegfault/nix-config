@@ -116,6 +116,7 @@
           is_system_service = false;
         };
       };
+      user = "klipper";
       group = "klipper";
     };
     oauth2-proxy.nginx.virtualHosts.${config.services.mainsail.hostName} = { };
@@ -185,7 +186,7 @@
         group = "klipper";
       };
     };
-    groups.klipper.members = [ "moonraker" ];
+    groups.klipper = { };
   };
 
 }
