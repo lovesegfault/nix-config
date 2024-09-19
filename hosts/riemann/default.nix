@@ -28,11 +28,12 @@
 
   fileSystems = {
     "/boot/firmware" = {
-      device = "/dev/disk/by-label/FIRMWARE";
+      device = "/dev/disk/by-uuid/2178-694E";
       fsType = "vfat";
+      options = [ "noauto" ];
     };
     "/" = {
-      device = "/dev/disk/by-label/NIXOS_SD";
+      device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
       fsType = "ext4";
     };
   };
