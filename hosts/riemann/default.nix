@@ -37,6 +37,8 @@
     };
   };
 
+  hardware.enableRedistributableFirmware = true;
+
   networking = {
     hostName = "riemann";
     wireless.iwd.enable = true;
