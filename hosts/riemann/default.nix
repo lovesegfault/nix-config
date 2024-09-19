@@ -1,6 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, nixos-hardware, pkgs, ... }:
 {
   imports = [
+    nixos-hardware.nixosModules.raspberry-pi-4
+
     ../../core
 
     # ../../hardware/nixos-aarch64-builder
@@ -12,8 +14,12 @@
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+    # kernelPackages = pkgs.linuxPackages_latest;
+    # initrd.availableKernelModules = [
+    #   "xhci_pci"
+    #   "usbhid"
+    #   "usb_storage"
+    # ];
     kernelParams = [ "console=ttyS1,115200n8" ];
     loader = {
       # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
@@ -28,17 +34,19 @@
 
   fileSystems = {
     "/boot/firmware" = {
-      device = "/dev/disk/by-uuid/2178-694E";
+      device = "/dev/disk/by-label/FIRMWARE";
       fsType = "vfat";
       options = [ "noauto" ];
     };
     "/" = {
-      device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
+      device = "/dev/disk/by-label/NIXOS_SD";
       fsType = "ext4";
     };
   };
 
-  hardware.enableRedistributableFirmware = true;
+  hardware.raspberry-pi."4" = {
+    dwc2.enable = true;
+  };
 
   networking = {
     hostName = "riemann";
