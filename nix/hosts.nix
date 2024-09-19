@@ -99,7 +99,7 @@ in
     type = "nixos";
     address = "100.67.173.60";
     hostPlatform = "aarch64-linux";
-    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBVnZEN2lrfEbE5/ANYahELbhJn95e01Ubpt9umOI4lW";
+    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC2gbNVSmk+N93wP0bdPrHsXAsJtKEFVf0TPZLCc0Vk+";
   };
   spinoza = mkHost {
     type = "nixos";

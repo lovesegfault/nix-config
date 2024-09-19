@@ -1,8 +1,6 @@
-{ config, lib, nixos-hardware, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   imports = [
-    nixos-hardware.nixosModules.raspberry-pi-4
-
     ../../core
 
     # ../../hardware/nixos-aarch64-builder
@@ -13,9 +11,17 @@
     ../../users/bemeurer
   ];
 
-  boot.kernelParams = [
-    "console=ttyS1,115200n8"
-  ];
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+    kernelParams = [ "console=ttyS1,115200n8" ];
+    loader = {
+      # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
+      grub.enable = false;
+      # Enables the generation of /boot/extlinux/extlinux.conf
+      generic-extlinux-compatible.enable = true;
+    };
+  };
 
   # This host does not use impermanence
   environment.persistence."/nix/state".enable = false;
@@ -29,11 +35,6 @@
       device = "/dev/disk/by-label/NIXOS_SD";
       fsType = "ext4";
     };
-  };
-
-  hardware.raspberry-pi."4" = {
-    apply-overlays-dtmerge.enable = true;
-    dwc2.enable = true;
   };
 
   networking = {
