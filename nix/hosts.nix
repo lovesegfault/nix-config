@@ -38,13 +38,6 @@ let
     else throw "unknown host type '${type}'";
 in
 {
-  aurelius = mkHost {
-    type = "nixos";
-    address = "100.69.178.40";
-    hostPlatform = "aarch64-linux";
-    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILRlfGCSK2w34ckIGoRHaZ01CbF/7Zk4VNmyokkvg7cF";
-    remoteBuild = false;
-  };
   bohr = mkHost {
     type = "nixos";
     address = "100.123.20.11";

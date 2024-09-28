@@ -11,7 +11,7 @@ let
     listToAttrs (map (name: { inherit name; value = all.${name}.pubkey; }) withPubkey);
 
   secrets = with hosts; {
-    "hardware/nixos-aarch64-builder/key.age" = [ aurelius jung riemann spinoza ];
+    "hardware/nixos-aarch64-builder/key.age" = [ jung riemann spinoza ];
     "hosts/nozick/ddns.age" = [ nozick plato ];
     "hosts/nozick/nextcloud.age" = [ nozick plato ];
     "services/acme.age" = [ bohr fourier jung nozick plato riemann ];
