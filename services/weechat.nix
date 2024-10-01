@@ -51,7 +51,6 @@
       createHome = true;
       group = "weechat";
       home = "/var/lib/weechat";
-      isNormalUser = true;
     };
   };
 }
