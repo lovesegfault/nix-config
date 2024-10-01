@@ -1,6 +1,10 @@
 {
-  fileSystems."/nix/state".neededForBoot = true;
-  fileSystems."/nix".neededForBoot = true;
+  fileSystems = {
+    "/nix/state".neededForBoot = true;
+    "/nix".neededForBoot = true;
+    "/mnt/emp-next".options = [ "nofail" ];
+    "/mnt/emp-staging".options = [ "nofail" ];
+  };
 
   disko.devices =
     let
