@@ -11,6 +11,7 @@
       nix-fast-build
       opensshWithKerberos
       rustup
+      ncurses
     ];
     sessionVariables = {
       TERMINFO_DIRS = "${pkgs.ncurses.outPath}/share/terminfo:/usr/share/terminfo";
