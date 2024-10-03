@@ -13,10 +13,6 @@
       rustup
     ];
     sessionVariables = {
-      BRAZIL_PLATFORM_OVERRIDE =
-        if pkgs.stdenv.hostPlatform.isAarch64 then "AL2023_aarch64"
-        else if pkgs.stdenv.hostPlatform.isx86_64 then "AL2023_x86_64"
-        else null;
       TERMINFO_DIRS = "${pkgs.ncurses.outPath}/share/terminfo:/usr/share/terminfo";
     };
   };
