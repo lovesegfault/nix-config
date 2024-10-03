@@ -125,7 +125,6 @@
   ];
 
   services = {
-    automatic-timezoned.enable = true;
     btrfs.autoScrub = {
       enable = true;
       fileSystems = [ "/nix/state" ];
@@ -146,6 +145,7 @@
       powerKey = "hibernate";
       powerKeyLongPress = "reboot";
     };
+    tzupdate.enable = true;
     udev.packages = with pkgs; [ logitech-udev-rules ];
     udisks2.enable = true;
     usbmuxd.enable = true;
