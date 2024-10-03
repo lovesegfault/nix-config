@@ -17,7 +17,7 @@
     };
     file = {
       ".ssh/config".enable = false;
-      ".terminfo".source = pkgs.ncurses.outPath;
+      ".terminfo".source = pkgs.ncurses.outPath + "/share/terminfo";
     };
   };
 
