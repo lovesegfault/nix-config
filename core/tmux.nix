@@ -21,6 +21,7 @@
 
       set -as terminal-features ",alacritty*:RGB,foot*:RGB,xterm-kitty*:RGB"
       set -as terminal-features ",alacritty*:hyperlinks,foot*:hyperlinks,xterm-kitty*:hyperlinks"
+      set -as terminal-features ",alacritty*:usstyle,foot*:usstyle,xterm-kitty*:usstyle"
 
       # automatically renumber windows
       set -g renumber-windows on
