@@ -14,9 +14,6 @@
       opensshWithKerberos
       rustup
     ];
-    sessionVariables = {
-      TERMINFO_DIRS = "${pkgs.ncurses.outPath}/share/terminfo:/usr/share/terminfo";
-    };
     file = {
       ".ssh/config".enable = false;
       ".terminfo".source = pkgs.ncurses.outPath + "/share/terminfo";
