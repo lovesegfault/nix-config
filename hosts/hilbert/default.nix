@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   imports = [
     ../../users/bemeurer
     ../../users/bemeurer/dev/aws.nix
@@ -34,5 +34,10 @@
       '';
     };
     git.userEmail = lib.mkForce "bemeurer@amazon.com";
+    zsh.initExtraFirst = ''
+      if [[ "$ZSH_VERSION" != "${config.programs.zsh.package.version}" ]];
+        exec "${config.programs.zsh.package}/bin/zsh"
+      fi
+    '';
   };
 }
