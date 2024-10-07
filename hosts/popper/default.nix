@@ -31,6 +31,5 @@
       '';
     };
     git.userEmail = lib.mkForce "bemeurer@amazon.com";
-    tmux.terminal = lib.mkForce "tmux-256color";
   };
 }
