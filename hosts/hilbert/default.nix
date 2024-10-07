@@ -35,7 +35,7 @@
     };
     git.userEmail = lib.mkForce "bemeurer@amazon.com";
     zsh.initExtraFirst = ''
-      if [[ "$ZSH_VERSION" != "${config.programs.zsh.package.version}" ]];
+      if [[ "$ZSH_VERSION" != "${config.programs.zsh.package.version}" ]]; then
         exec "${config.programs.zsh.package}/bin/zsh"
       fi
     '';
