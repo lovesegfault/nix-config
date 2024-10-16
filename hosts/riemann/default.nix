@@ -105,7 +105,7 @@
         announcements.subscriptions = [ "mainsail" ];
         file_manager.enable_object_processing = true;
         update_manager = {
-          enable_system_updates = false;
+          enable_system_updates = [ false ];
         };
         "update_manager KAMP" = {
           type = "git_repo";
