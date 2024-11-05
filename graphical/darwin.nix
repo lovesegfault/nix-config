@@ -24,7 +24,6 @@
       { name = "lunar"; greedy = true; }
       { name = "macs-fan-control"; greedy = true; }
       { name = "macupdater"; greedy = true; }
-      { name = "mullvadvpn"; greedy = true; }
       { name = "nextcloud"; greedy = true; }
       { name = "parallels"; greedy = true; }
       { name = "raycast"; greedy = true; }
