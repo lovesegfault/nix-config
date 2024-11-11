@@ -1,27 +1,35 @@
 final: prev:
 {
+  wayland-protocols-unstable = final.wayland-protocols.overrideAttrs (old: rec {
+    version = "1.38";
+    src = final.fetchurl {
+      url = "https://gitlab.freedesktop.org/wayland/${old.pname}/-/releases/${version}/downloads/${old.pname}-${version}.tar.xz";
+      hash = "sha256-/xcpLAUVnSsgzmys/kLX4xooGY+hQpp2mwOvfDhYHb4=";
+    };
+  });
+
   wlroots-unstable = (final.wlroots_0_17.overrideAttrs (old: {
-    version = "unstable-2024-08-13";
+    version = "unstable-2024-11-11";
     src = final.fetchFromGitLab {
       domain = "gitlab.freedesktop.org";
       owner = "wlroots";
       repo = "wlroots";
-      rev = "2c64f36e8886d1f26daeb2a4ee79f3f9dd3d4c85";
-      hash = "sha256-elHu3d82STGB+pTGPj1K9eOyWGsotqUX4e0ZQ+db4Rg=";
+      rev = "85e2b662f195bb2999cb906d691f4ab8580b20dd";
+      hash = "sha256-NL1uCmUB8hN6yFAZc2FU67BSB4WgIw7iPMaMysTHluc=";
     };
 
     buildInputs = (old.buildInputs or [ ]) ++ [
       final.lcms2
     ];
-  })).override { };
+  })).override { wayland-protocols = final.wayland-protocols-unstable; };
 
   sway-unwrapped = (prev.sway-unwrapped.overrideAttrs (old: {
-    version = "unstable-2024-08-11";
+    version = "unstable-2024-11-11";
     src = final.fetchFromGitHub {
       owner = "swaywm";
       repo = "sway";
-      rev = "b44015578a3d53cdd9436850202d4405696c1f52";
-      hash = "sha256-gTsZWtvyEMMgR4vj7Ef+nb+wcXkwGivGfnhnBIfPHOA=";
+      rev = "fdc4318ac66d257d21e8f3b953e341d5e80a1ddc";
+      hash = "sha256-uYawl7FhqgQaSsqh20VVwM3FwRfiGAp4lvVvPBz0mMA=";
     };
 
     nativeBuildInputs = with final; (old.nativeBuildInputs or [ ]) ++ [ bash-completion fish ];
