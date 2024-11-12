@@ -40,4 +40,6 @@ in
     };
     oauth2-proxy.nginx.virtualHosts."transmission.${hostName}.meurer.org" = { };
   };
+
+  systemd.services.transmission.after = [ "zfs-mount.service" ];
 }
