@@ -90,8 +90,8 @@
             documents = { type = "zfs_fs"; mountpoint = "/mnt/documents"; };
             downloads = { type = "zfs_fs"; mountpoint = "/mnt/downloads"; };
             emp = { type = "zfs_fs"; mountpoint = "/mnt/emp"; };
-            # emp-next = { type = "zfs_fs"; options.mountpoint = "legacy"; mountpoint = "/mnt/emp-next"; };
-            # emp-staging = { type = "zfs_fs"; options.mountpoint = "legacy"; mountpoint = "/mnt/emp-staging"; };
+            emp-next = { type = "zfs_fs"; mountpoint = "/mnt/emp-next"; };
+            emp-staging = { type = "zfs_fs"; mountpoint = "/mnt/emp-staging"; };
             emp-watch = { type = "zfs_fs"; mountpoint = "/mnt/emp-watch"; };
             movies = { type = "zfs_fs"; mountpoint = "/mnt/movies"; };
             music = { type = "zfs_fs"; mountpoint = "/mnt/music"; };
