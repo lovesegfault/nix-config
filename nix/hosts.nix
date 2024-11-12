@@ -38,12 +38,6 @@ let
     else throw "unknown host type '${type}'";
 in
 {
-  fourier = mkHost {
-    type = "nixos";
-    address = "100.77.107.1";
-    hostPlatform = "x86_64-linux";
-    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJEc036Z0umFUeSgksRgBWhcEeqiVhuXNQZTipZVRMn";
-  };
   goethe = mkHost {
     type = "home-manager";
     hostPlatform = "x86_64-linux";

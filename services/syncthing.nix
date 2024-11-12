@@ -12,7 +12,6 @@ with config.networking;
       enable = true;
       settings = {
         devices = {
-          fourier.id = "3X4DU22-5YRJF6K-VZCJJNE-5NPVKFJ-LYKWFDD-GYICDKZ-B7MDN73-4BXTMAT";
           jung.id = "GXCBSO2-RQAR3CC-ACW6JWB-IAZHQZO-XZWSYKL-SYB2GNS-T4R5QO2-Q76BXAV";
         };
         gui = {
