@@ -111,7 +111,7 @@
     smartd.enable = true;
     syncthing.settings.folders = {
       music = {
-        devices = [ "bohr" "jung" ];
+        devices = [ "jung" ];
         path = "/srv/music";
         type = "receiveonly";
       };

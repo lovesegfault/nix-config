@@ -38,12 +38,6 @@ let
     else throw "unknown host type '${type}'";
 in
 {
-  bohr = mkHost {
-    type = "nixos";
-    address = "100.123.20.11";
-    hostPlatform = "x86_64-linux";
-    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBTh+kYOeeYoBuxvA00nGojfBHUQlXW3iF7aRIw9VbY1";
-  };
   fourier = mkHost {
     type = "nixos";
     address = "100.77.107.1";

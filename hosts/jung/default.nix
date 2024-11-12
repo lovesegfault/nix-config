@@ -133,7 +133,7 @@
     smartd.enable = true;
     syncthing.settings.folders = {
       music = {
-        devices = [ "bohr" "fourier" ];
+        devices = [ "fourier" ];
         path = "/mnt/music";
         type = "receiveonly";
       };
