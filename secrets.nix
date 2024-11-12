@@ -12,10 +12,8 @@ let
 
   secrets = with hosts; {
     "hardware/nixos-aarch64-builder/key.age" = [ jung riemann spinoza ];
-    "hosts/nozick/ddns.age" = [ nozick plato ];
-    "hosts/nozick/nextcloud.age" = [ nozick plato ];
-    "services/acme.age" = [ bohr fourier jung nozick plato riemann ];
-    "services/oauth2.age" = [ bohr fourier jung nozick plato riemann ];
+    "services/acme.age" = [ bohr fourier jung plato riemann ];
+    "services/oauth2.age" = [ bohr fourier jung plato riemann ];
     "services/pihole.age" = [ ];
     "services/github-runner.age" = [ jung ];
     "users/bemeurer/password.age" = attrValues hosts;

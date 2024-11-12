@@ -66,12 +66,6 @@ in
     hostPlatform = "x86_64-linux";
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHws1wwXYHDmU+Bjcbw8IZv2V+fbxaTDQc44XoUQ604t";
   };
-  nozick = mkHost {
-    type = "nixos";
-    address = "100.124.29.84";
-    hostPlatform = "x86_64-linux";
-    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBEzb5JCgcXJZHDkY09vBAvIF34JabI+ZBpGqJDy6KbI";
-  };
   plato = mkHost {
     type = "nixos";
     address = "100.101.152.88";
