@@ -16,11 +16,17 @@
     { name = "podman-desktop"; greedy = true; }
   ];
 
-  home-manager.users.bemeurer = { config, ... }: {
+  home-manager.users.bemeurer = { config, pkgs, ... }: {
     imports = [ ../../users/bemeurer/dev/aws.nix ];
-    home.sessionPath = [
-      "${config.home.homeDirectory}/.local/bin"
-    ];
+    home = {
+      packages = with pkgs; [
+        cargo-nextest
+        rustup
+      ];
+      sessionPath = [
+        "${config.home.homeDirectory}/.local/bin"
+      ];
+    };
   };
 
   nix = {
