@@ -162,12 +162,19 @@
 
   systemd.network.networks = {
     eth0 = {
+      enable = false;
       matchConfig.MACAddress = "58:11:22:c4:49:a9";
       DHCP = "yes";
     };
     eth1 = {
       matchConfig.MACAddress = "6c:b3:11:08:50:54";
-      DHCP = "yes";
+      DHCP = "ipv4";
+      address = [
+        "2a01:4f8:2b02:310::2/64 "
+      ];
+      routes = [
+        { Gateway = "fe80::1"; }
+      ];
     };
   };
 
