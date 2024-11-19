@@ -1,7 +1,7 @@
 name: update-flakes
 on:
   schedule:
-    - cron:  '*/120 * * * *'
+    - cron:  '0 */4 * * *'
   workflow_dispatch:
 
 permissions: {}
@@ -14,12 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          lfs: false
           sparse-checkout: flake.lock
       - id: get-flake-inputs
         run: |
           flake_inputs="$(jq -c '.nodes.root.inputs | {flake: keys}' flake.lock)"
-
           echo "flake-inputs=${flake_inputs}" >> "$GITHUB_OUTPUT"
   update-flake:
     name: update-${{ matrix.flake }}
@@ -35,13 +33,13 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
           extra-conf: accept-flake-config = true
-      - run: git config --global user.email "hatesegfault@protonmail.ch"
+      - run: git config --global user.email "bernardo+hatesegfault@meurer.org"
       - run: git config --global user.name "hatesegfault"
       - uses: cpcloud/flake-update-action@v2.0.1
         with:
           dependency: ${{ matrix.flake }}
           pull-request-token: ${{ secrets.PAT }}
-          pull-request-author: hatesegfault <hatesegfault@protonmail.ch>
+          pull-request-author: hatesegfault <bernardo+hatesegfault@meurer.org>
           delete-branch: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pull-request-branch-prefix: update-
