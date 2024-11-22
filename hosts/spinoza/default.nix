@@ -108,15 +108,7 @@
     };
   };
 
-  nix = {
-    daemonCPUSchedPolicy = lib.mkForce "idle";
-    daemonIOSchedClass = lib.mkForce "idle";
-    settings.max-substitution-jobs = 32;
-    # FIXME: Re-introduce with 2.21.1
-    # package = lib.mkForce pkgs.nix-unstable-optimized;
-  };
-
-  nixpkgs.overlays = [ (import ./optimized-pkgs.nix) ];
+  nix.settings.max-substitution-jobs = 32;
 
   security.pam.loginLimits = [
     { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
@@ -180,8 +172,6 @@
   };
 
   security.sudo.wheelNeedsPassword = true;
-
-  services.pipewire.package = pkgs.pipewire-optimized;
 
   stylix.fonts.sizes = {
     desktop = 16;
