@@ -81,7 +81,6 @@ in
     address = "100.68.240.30";
     hostPlatform = "x86_64-linux";
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDUZPmPTATZ4nBWstPqlUiguvxr26XWAE9BGPVNNRBR5";
-    large = true;
   };
   trotsky = mkHost {
     type = "home-manager";
