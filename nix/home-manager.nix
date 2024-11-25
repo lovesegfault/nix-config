@@ -55,7 +55,7 @@ let
         extraSpecialArgs = {
           hostType = type;
           inherit (inputs)
-            base16-schemes
+            tinted-schemes
             impermanence
             nix-index-database
             stylix

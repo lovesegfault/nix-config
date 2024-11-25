@@ -29,7 +29,7 @@ let
           hostType = type;
           inherit (inputs)
             agenix
-            base16-schemes
+            tinted-schemes
             disko
             home-manager
             impermanence

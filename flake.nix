@@ -25,8 +25,10 @@
       };
     };
 
-    base16-schemes = {
-      url = "github:tinted-theming/base16-schemes";
+    base16.url = "github:SenchoPens/base16.nix";
+
+    tinted-schemes = {
+      url = "github:tinted-theming/schemes";
       flake = false;
     };
 
@@ -109,10 +111,12 @@
     };
 
     stylix = {
-      # FIXME: Rollback to danth/stylix once merged
-      url = "github:lovesegfault/stylix/fix-darwin";
+      # FIXME: rollback to danth/stylix once tmux is fixed
+      url = "github:lovesegfault/stylix/flake-update";
       inputs = {
+        base16.follows = "base16";
         flake-compat.follows = "flake-compat";
+        flake-utils.follows = "flake-utils";
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
       };

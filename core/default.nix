@@ -1,6 +1,6 @@
 {
   pkgs,
-  base16-schemes,
+  tinted-schemes,
   hostType,
   impermanence,
   nix-index-database,
@@ -47,7 +47,7 @@
     useUserPackages = true;
     extraSpecialArgs = {
       inherit
-        base16-schemes
+        tinted-schemes
         hostType
         impermanence
         nix-index-database
@@ -64,7 +64,7 @@
 
   stylix = {
     enable = true;
-    base16Scheme = "${base16-schemes}/ayu-dark.yaml";
+    base16Scheme = "${tinted-schemes}/base16/ayu-dark.yaml";
     # We need this otherwise the autoimport clashes with our manual import.
     homeManagerIntegration.autoImport = false;
     # XXX: We fetchurl from the repo because flakes don't support git-lfs assets

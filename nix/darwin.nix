@@ -21,7 +21,7 @@ let
         specialArgs = {
           hostType = type;
           inherit (inputs)
-            base16-schemes
+            tinted-schemes
             home-manager
             impermanence
             nix-index-database
