@@ -186,11 +186,9 @@
               check.enable = true;
               settings.hooks = {
                 actionlint.enable = true;
-                luacheck.enable = true;
                 nil.enable = true;
                 shellcheck.enable = true;
                 statix.enable = true;
-                stylua.enable = true;
                 treefmt.enable = true;
               };
             };

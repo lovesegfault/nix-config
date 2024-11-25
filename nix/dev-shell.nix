@@ -22,11 +22,6 @@
         config.treefmt.build.wrapper
         statix
 
-        # Lua
-        stylua
-        (luajit.withPackages (p: with p; [ luacheck ]))
-        lua-language-server
-
         # Shell
         shellcheck
         shfmt
