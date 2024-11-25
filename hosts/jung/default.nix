@@ -1,4 +1,10 @@
-{ config, nixos-hardware, pkgs, ... }: {
+{
+  config,
+  nixos-hardware,
+  pkgs,
+  ...
+}:
+{
   imports = with nixos-hardware.nixosModules; [
     common-cpu-amd
     common-cpu-amd-pstate
@@ -26,7 +32,13 @@
   ];
 
   boot = {
-    initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "sd_mod" "dm-snapshot" ];
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "ahci"
+      "sd_mod"
+      "dm-snapshot"
+    ];
     kernel.sysctl."vm.swappiness" = 1;
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest;
@@ -55,7 +67,12 @@
     "/" = {
       device = "tmpfs";
       fsType = "tmpfs";
-      options = [ "defaults" "noatime" "size=20%" "mode=755" ];
+      options = [
+        "defaults"
+        "noatime"
+        "size=20%"
+        "mode=755"
+      ];
     };
     "/boot" = {
       device = "/dev/disk/by-uuid/FDA7-5E38";
@@ -64,18 +81,27 @@
     "/nix" = {
       device = "/dev/disk/by-uuid/4610a590-b6b8-4a8f-82a3-9ec7592911eb";
       fsType = "ext4";
-      options = [ "defaults" "noatime" ];
+      options = [
+        "defaults"
+        "noatime"
+      ];
       neededForBoot = true;
     };
     "/mnt/music" = {
       device = "/dev/disk/by-uuid/90bcbccf-f8a0-47a7-b542-1c1a66de20e3";
       fsType = "ext4";
-      options = [ "defaults" "noatime" ];
+      options = [
+        "defaults"
+        "noatime"
+      ];
     };
     "/mnt/music-opus" = {
       device = "/dev/disk/by-uuid/b6dc070f-5758-4bfe-8bfd-68b55da44ef1";
       fsType = "ext4";
-      options = [ "defaults" "noatime" ];
+      options = [
+        "defaults"
+        "noatime"
+      ];
     };
   };
 
@@ -102,15 +128,36 @@
       dates = "02:30";
     };
     settings.max-substitution-jobs = 32;
-    settings.system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-znver3" ];
+    settings.system-features = [
+      "nixos-test"
+      "benchmark"
+      "big-parallel"
+      "kvm"
+      "gccarch-znver3"
+    ];
   };
 
   powerManagement.cpuFreqGovernor = "performance";
 
   security.pam.loginLimits = [
-    { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
-    { domain = "*"; type = "-"; item = "nofile"; value = "1048576"; }
-    { domain = "*"; type = "-"; item = "nproc"; value = "unlimited"; }
+    {
+      domain = "*";
+      type = "-";
+      item = "memlock";
+      value = "unlimited";
+    }
+    {
+      domain = "*";
+      type = "-";
+      item = "nofile";
+      value = "1048576";
+    }
+    {
+      domain = "*";
+      type = "-";
+      item = "nproc";
+      value = "unlimited";
+    }
   ];
 
   services = {
@@ -123,7 +170,12 @@
     };
     chrony = {
       enable = true;
-      servers = [ "time.nist.gov" "time.cloudflare.com" "time.google.com" "tick.usnogps.navy.mil" ];
+      servers = [
+        "time.nist.gov"
+        "time.cloudflare.com"
+        "time.google.com"
+        "tick.usnogps.navy.mil"
+      ];
       extraConfig = ''
         allow 10.0.0.0/24
       '';
@@ -161,13 +213,16 @@
     };
   };
 
-  swapDevices = [{ device = "/dev/disk/by-uuid/a66412e6-ff55-4053-b436-d066319ed922"; }];
+  swapDevices = [ { device = "/dev/disk/by-uuid/a66412e6-ff55-4053-b436-d066319ed922"; } ];
 
   time.timeZone = "America/New_York";
 
   users.groups.media = {
     gid = 999;
-    members = [ "bemeurer" config.services.syncthing.user ];
+    members = [
+      "bemeurer"
+      config.services.syncthing.user
+    ];
   };
 
   age.secrets.rootPassword.file = ./password.age;

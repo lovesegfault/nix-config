@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   imports = [
     ../../core
 
@@ -13,40 +14,54 @@
   };
 
   homebrew.casks = [
-    { name = "podman-desktop"; greedy = true; }
+    {
+      name = "podman-desktop";
+      greedy = true;
+    }
   ];
 
-  home-manager.users.bemeurer = { config, pkgs, ... }: {
-    imports = [ ../../users/bemeurer/dev/aws.nix ];
-    home = {
-      packages = with pkgs; [
-        cargo-nextest
-        rustup
-      ];
-      sessionPath = [
-        "${config.home.homeDirectory}/.local/bin"
-      ];
+  home-manager.users.bemeurer =
+    { config, pkgs, ... }:
+    {
+      imports = [ ../../users/bemeurer/dev/aws.nix ];
+      home = {
+        packages = with pkgs; [
+          cargo-nextest
+          rustup
+        ];
+        sessionPath = [
+          "${config.home.homeDirectory}/.local/bin"
+        ];
+      };
     };
-  };
 
   nix = {
     gc.automatic = true;
     linux-builder = {
       enable = true;
       ephemeral = true;
-      config = { ... }: {
-        imports = [ ../../core/nix.nix ];
-        _module.args.hostType = "nixos";
-        virtualisation.host.pkgs = lib.mkForce (pkgs.extend (final: _: {
-          nix = final.nixVersions.latest;
-        }));
-      };
+      config =
+        { ... }:
+        {
+          imports = [ ../../core/nix.nix ];
+          _module.args.hostType = "nixos";
+          virtualisation.host.pkgs = lib.mkForce (
+            pkgs.extend (
+              final: _: {
+                nix = final.nixVersions.latest;
+              }
+            )
+          );
+        };
       maxJobs = 4;
       protocol = "ssh-ng";
     };
     settings = {
       max-substitution-jobs = 20;
-      system-features = [ "big-parallel" "gccarch-armv8-a" ];
+      system-features = [
+        "big-parallel"
+        "gccarch-armv8-a"
+      ];
       trusted-users = [ "bemeurer" ];
     };
   };

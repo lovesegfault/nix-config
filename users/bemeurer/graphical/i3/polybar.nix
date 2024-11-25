@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   services.polybar = {
     enable = true;
     package = pkgs.polybar.override {
@@ -19,7 +20,15 @@
         alert = "#FF3333";
       in
       {
-        colors = { inherit background background-alt foreground foreground-alt alert; };
+        colors = {
+          inherit
+            background
+            background-alt
+            foreground
+            foreground-alt
+            alert
+            ;
+        };
 
         "bar/top" = rec {
           width = "100%";

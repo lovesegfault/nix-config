@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   imports = [
     ../../core
 
@@ -36,13 +42,22 @@
     resumeDevice = "/dev/cryptroot/swap";
   };
 
-  environment.systemPackages = with pkgs; [ cntr wireguard-tools powertop ];
+  environment.systemPackages = with pkgs; [
+    cntr
+    wireguard-tools
+    powertop
+  ];
 
   fileSystems = {
     "/" = {
       device = "tmpfs";
       fsType = "tmpfs";
-      options = [ "defaults" "noatime" "size=20%" "mode=755" ];
+      options = [
+        "defaults"
+        "noatime"
+        "size=20%"
+        "mode=755"
+      ];
     };
     "/boot" = {
       device = "/dev/disk/by-uuid/D506-6330";
@@ -51,25 +66,48 @@
     "/mnt/music-opus" = {
       device = "/dev/disk/by-uuid/8b6542d9-5407-418f-80ca-2dacd06655cb";
       fsType = "btrfs";
-      options = [ "defaults" "noatime" "discard=async" "subvol=music-opus" ];
+      options = [
+        "defaults"
+        "noatime"
+        "discard=async"
+        "subvol=music-opus"
+      ];
       neededForBoot = true;
     };
     "/nix/state" = {
       device = "/dev/disk/by-uuid/8b6542d9-5407-418f-80ca-2dacd06655cb";
       fsType = "btrfs";
-      options = [ "defaults" "noatime" "discard=async" "compress=lzo" "subvol=nix/state" ];
+      options = [
+        "defaults"
+        "noatime"
+        "discard=async"
+        "compress=lzo"
+        "subvol=nix/state"
+      ];
       neededForBoot = true;
     };
     "/nix/store" = {
       device = "/dev/disk/by-uuid/8b6542d9-5407-418f-80ca-2dacd06655cb";
       fsType = "btrfs";
-      options = [ "defaults" "noatime" "discard=async" "compress=lzo" "subvol=nix/store" ];
+      options = [
+        "defaults"
+        "noatime"
+        "discard=async"
+        "compress=lzo"
+        "subvol=nix/store"
+      ];
       neededForBoot = true;
     };
     "/nix/var" = {
       device = "/dev/disk/by-uuid/8b6542d9-5407-418f-80ca-2dacd06655cb";
       fsType = "btrfs";
-      options = [ "defaults" "noatime" "discard=async" "compress=lzo" "subvol=nix/var" ];
+      options = [
+        "defaults"
+        "noatime"
+        "discard=async"
+        "compress=lzo"
+        "subvol=nix/var"
+      ];
       neededForBoot = true;
     };
   };
@@ -111,9 +149,24 @@
   nix.settings.max-substitution-jobs = 32;
 
   security.pam.loginLimits = [
-    { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
-    { domain = "*"; type = "-"; item = "nofile"; value = "1048576"; }
-    { domain = "*"; type = "-"; item = "nproc"; value = "unlimited"; }
+    {
+      domain = "*";
+      type = "-";
+      item = "memlock";
+      value = "unlimited";
+    }
+    {
+      domain = "*";
+      type = "-";
+      item = "nofile";
+      value = "1048576";
+    }
+    {
+      domain = "*";
+      type = "-";
+      item = "nproc";
+      value = "unlimited";
+    }
   ];
 
   services = {
@@ -186,7 +239,7 @@
     "NetworkManager-wait-online.service"
   ];
 
-  swapDevices = [{ device = "/dev/disk/by-uuid/898fb6e1-bba3-40ce-8f79-8deb2e2d4f37"; }];
+  swapDevices = [ { device = "/dev/disk/by-uuid/898fb6e1-bba3-40ce-8f79-8deb2e2d4f37"; } ];
 
   age.secrets.rootPassword.file = ./password.age;
   users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;

@@ -1,4 +1,11 @@
-{ config, lib, nixos-hardware, pkgs, ... }: {
+{
+  config,
+  lib,
+  nixos-hardware,
+  pkgs,
+  ...
+}:
+{
   imports = [
     nixos-hardware.nixosModules.common-cpu-amd
     nixos-hardware.nixosModules.common-cpu-amd-pstate
@@ -28,7 +35,12 @@
 
   boot = {
     initrd = {
-      availableKernelModules = [ "xhci_pci" "ahci" "nvme" "sd_mod" ];
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "nvme"
+        "sd_mod"
+      ];
       systemd = {
         enable = true;
         services.rollback = {
@@ -94,9 +106,24 @@
   security = {
     acme.certs."stash.${config.networking.hostName}.meurer.org" = { };
     pam.loginLimits = [
-      { domain = "*"; type = "-"; item = "memlock"; value = "unlimited"; }
-      { domain = "*"; type = "-"; item = "nofile"; value = "1048576"; }
-      { domain = "*"; type = "-"; item = "nproc"; value = "unlimited"; }
+      {
+        domain = "*";
+        type = "-";
+        item = "memlock";
+        value = "unlimited";
+      }
+      {
+        domain = "*";
+        type = "-";
+        item = "nofile";
+        value = "1048576";
+      }
+      {
+        domain = "*";
+        type = "-";
+        item = "nproc";
+        value = "unlimited";
+      }
     ];
   };
 
@@ -109,7 +136,12 @@
   services = {
     chrony = {
       enable = true;
-      servers = [ "time.nist.gov" "time.cloudflare.com" "time.google.com" "tick.usnogps.navy.mil" ];
+      servers = [
+        "time.nist.gov"
+        "time.cloudflare.com"
+        "time.google.com"
+        "tick.usnogps.navy.mil"
+      ];
     };
     nginx = {
       resolver.addresses = [ "127.0.0.1:53" ];
@@ -129,7 +161,10 @@
     fail2ban = {
       enable = true;
       bantime = "6min";
-      ignoreIP = [ "127.0.0.1/8" "100.64.0.0/10" ];
+      ignoreIP = [
+        "127.0.0.1/8"
+        "100.64.0.0/10"
+      ];
       banaction = "nftables[type=allports]";
       bantime-increment = {
         enable = true;
@@ -138,7 +173,10 @@
         rndtime = "10m";
         overalljails = true;
       };
-      extraPackages = [ pkgs.ipset pkgs.nftables ];
+      extraPackages = [
+        pkgs.ipset
+        pkgs.nftables
+      ];
       jails.fwdrop.settings = {
         enabled = true;
         filter = "fwdrop";
@@ -150,7 +188,10 @@
     oauth2-proxy.nginx.virtualHosts."stash.${config.networking.hostName}.meurer.org" = { };
     smartd.enable = true;
     zfs = {
-      autoScrub.pools = [ "zroot" "zdata" ];
+      autoScrub.pools = [
+        "zroot"
+        "zdata"
+      ];
       autoSnapshot = {
         enable = true;
         flags = "-k -p --utc";

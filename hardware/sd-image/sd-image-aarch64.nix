@@ -1,6 +1,11 @@
 # To build, use:
 # nix-build nixos -I nixos-config=nixos/modules/installer/sd-card/sd-image-aarch64.nix -A config.system.build.sdImage
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -16,7 +21,11 @@
     # The serial ports listed here are:
     # - ttyS0: for Tegra (Jetson TX1)
     # - ttyAMA0: for QEMU's -machine virt
-    kernelParams = [ "console=ttyS0,115200n8" "console=ttyAMA0,115200n8" "console=tty0" ];
+    kernelParams = [
+      "console=ttyS0,115200n8"
+      "console=ttyAMA0,115200n8"
+      "console=tty0"
+    ];
   };
 
   sdImage = {

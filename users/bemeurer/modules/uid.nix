@@ -9,9 +9,11 @@ with lib;
     };
   };
   config = {
-    assertions = [{
-      assertion = config.home.uid != "";
-      message = "UID could not be determined";
-    }];
+    assertions = [
+      {
+        assertion = config.home.uid != "";
+        message = "UID could not be determined";
+      }
+    ];
   };
 }

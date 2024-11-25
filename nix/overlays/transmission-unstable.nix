@@ -40,19 +40,23 @@ final: prev: {
 
     postInstall =
       let
-        apparmorRules = with final; apparmorRulesFromClosure { name = "transmission-daemon"; } ([
-          curl
-          libdeflate
-          libevent
-          libnatpmp
-          libpsl
-          miniupnpc
-          openssl
-          pcre
-          zlib
-        ]
-        ++ lib.optionals true [ systemd ]
-        ++ lib.optionals stdenv.hostPlatform.isLinux [ inotify-tools ]);
+        apparmorRules =
+          with final;
+          apparmorRulesFromClosure { name = "transmission-daemon"; } (
+            [
+              curl
+              libdeflate
+              libevent
+              libnatpmp
+              libpsl
+              miniupnpc
+              openssl
+              pcre
+              zlib
+            ]
+            ++ lib.optionals true [ systemd ]
+            ++ lib.optionals stdenv.hostPlatform.isLinux [ inotify-tools ]
+          );
       in
       ''
         mkdir $apparmor
@@ -76,7 +80,6 @@ final: prev: {
         EOF
         install -Dm0444 -t $out/share/icons ../icons/transmission.ico
       '';
-
 
   });
 }

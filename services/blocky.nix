@@ -1,4 +1,10 @@
-{ config, hostAddress, lib, pkgs, ... }:
+{
+  config,
+  hostAddress,
+  lib,
+  pkgs,
+  ...
+}:
 with config.networking;
 {
   imports = [
@@ -7,8 +13,14 @@ with config.networking;
   ];
 
   networking.firewall = {
-    allowedTCPPorts = [ 53 5335 ];
-    allowedUDPPorts = [ 53 5335 ];
+    allowedTCPPorts = [
+      53
+      5335
+    ];
+    allowedUDPPorts = [
+      53
+      5335
+    ];
   };
 
   environment.systemPackages = with pkgs; [ blocky ];
@@ -88,29 +100,35 @@ with config.networking;
       ];
     };
 
-    prometheus.scrapeConfigs = [{
-      job_name = "blocky";
-      scrape_interval = "15s";
-      static_configs = [{ targets = [ "127.0.0.1:4000" ]; }];
-    }];
+    prometheus.scrapeConfigs = [
+      {
+        job_name = "blocky";
+        scrape_interval = "15s";
+        static_configs = [ { targets = [ "127.0.0.1:4000" ]; } ];
+      }
+    ];
 
     grafana = {
       declarativePlugins = with pkgs.grafanaPlugins; [ grafana-piechart-panel ];
       settings.panels.disable_sanitize_html = true;
       provision.datasources.settings = {
         apiVersion = 1;
-        datasources = [{
-          name = "Blocky Query Log";
-          type = "postgres";
-          url = "/run/postgresql";
-          database = "blocky";
-          user = "grafana";
-          orgId = 1;
-        }];
-        deleteDatasources = [{
-          name = "Blocky Query Log";
-          orgId = 1;
-        }];
+        datasources = [
+          {
+            name = "Blocky Query Log";
+            type = "postgres";
+            url = "/run/postgresql";
+            database = "blocky";
+            user = "grafana";
+            orgId = 1;
+          }
+        ];
+        deleteDatasources = [
+          {
+            name = "Blocky Query Log";
+            orgId = 1;
+          }
+        ];
       };
     };
 
@@ -128,7 +146,10 @@ with config.networking;
       $PSQL -tAc 'GRANT pg_read_all_data TO grafana'
     '';
     blocky = {
-      after = [ "unbound.service" "postgresql.service" ];
+      after = [
+        "unbound.service"
+        "postgresql.service"
+      ];
       requires = [ "unbound.service" ];
       serviceConfig = {
         DynamicUser = lib.mkForce false;

@@ -1,4 +1,16 @@
-{ agenix, config, disko, lib, pkgs, home-manager, impermanence, lanzaboote, nix-index-database, stylix, ... }:
+{
+  agenix,
+  config,
+  disko,
+  lib,
+  pkgs,
+  home-manager,
+  impermanence,
+  lanzaboote,
+  nix-index-database,
+  stylix,
+  ...
+}:
 {
   imports = [
     agenix.nixosModules.age
@@ -67,8 +79,14 @@
   systemd = {
     network.wait-online.anyInterface = true;
     services.tailscaled = {
-      after = [ "network-online.target" "systemd-resolved.service" ];
-      wants = [ "network-online.target" "systemd-resolved.service" ];
+      after = [
+        "network-online.target"
+        "systemd-resolved.service"
+      ];
+      wants = [
+        "network-online.target"
+        "systemd-resolved.service"
+      ];
     };
   };
 

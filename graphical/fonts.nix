@@ -1,16 +1,22 @@
-{ hostType, lib, pkgs, ... }:
 {
-  fonts = {
-    packages = with pkgs; [
-      dejavu_fonts
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-      noto-fonts-extra
-      unifont
-    ];
-  } // lib.optionalAttrs (hostType == "nixos")
+  hostType,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  fonts =
     {
+      packages = with pkgs; [
+        dejavu_fonts
+        noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-cjk-serif
+        noto-fonts-extra
+        unifont
+      ];
+    }
+    // lib.optionalAttrs (hostType == "nixos") {
       enableDefaultPackages = false;
       enableGhostscriptFonts = false;
       fontconfig = {

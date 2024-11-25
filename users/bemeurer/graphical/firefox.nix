@@ -1,12 +1,14 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   programs.firefox = {
     enable = true;
     package =
       let
         ff =
-          if lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.firefox-bin
-          then pkgs.firefox-bin
-          else pkgs.firefox;
+          if lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.firefox-bin then
+            pkgs.firefox-bin
+          else
+            pkgs.firefox;
       in
       ff.override { nativeMessagingHosts = [ pkgs.tridactyl-native ]; };
   };

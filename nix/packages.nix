@@ -1,5 +1,10 @@
 { config, ... }:
-{ inputs', pkgs, system, ... }:
+{
+  inputs',
+  pkgs,
+  system,
+  ...
+}:
 
 let
   inherit (config) flake;
@@ -11,15 +16,16 @@ let
   hostDrvs = nixosDrvs // homeDrvs // darwinDrvs;
 
   compatHosts = lib.filterAttrs (_: host: host.hostPlatform == system) flake.hosts;
-  compatHostDrvs = lib.mapAttrs
-    (name: _: hostDrvs.${name})
-    compatHosts;
+  compatHostDrvs = lib.mapAttrs (name: _: hostDrvs.${name}) compatHosts;
 
-  compatHostsFarm = linkFarm "hosts-${system}" (lib.mapAttrsToList (name: path: { inherit name path; }) compatHostDrvs);
+  compatHostsFarm = linkFarm "hosts-${system}" (
+    lib.mapAttrsToList (name: path: { inherit name path; }) compatHostDrvs
+  );
 in
 compatHostDrvs
 // (lib.optionalAttrs (compatHosts != { }) {
   default = compatHostsFarm;
-}) // {
+})
+// {
   inherit (pkgs) cachix jq nix-fast-build;
 }

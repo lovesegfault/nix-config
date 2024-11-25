@@ -2,7 +2,10 @@
 with config.networking;
 {
   environment.persistence."/nix/state".directories = [
-    { directory = "/var/lib/syncthing"; inherit (config.services.syncthing) user group; }
+    {
+      directory = "/var/lib/syncthing";
+      inherit (config.services.syncthing) user group;
+    }
   ];
 
   security.acme.certs."syncthing.${hostName}.meurer.org" = { };

@@ -1,4 +1,12 @@
-{ home-manager, lib, nix-index-database, pkgs, stylix, ... }: {
+{
+  home-manager,
+  lib,
+  nix-index-database,
+  pkgs,
+  stylix,
+  ...
+}:
+{
   imports = [
     home-manager.darwinModules.home-manager
     nix-index-database.darwinModules.nix-index
@@ -6,7 +14,10 @@
   ];
 
   environment = {
-    shells = with pkgs; [ fish zsh ];
+    shells = with pkgs; [
+      fish
+      zsh
+    ];
     systemPackages = with pkgs; [
       coreutils
       findutils

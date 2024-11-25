@@ -1,4 +1,6 @@
-{ config, pkgs, ... }: with config.networking; {
+{ config, pkgs, ... }:
+with config.networking;
+{
   environment.persistence."/nix/state".directories = [
     {
       directory = config.services.weechat.root;

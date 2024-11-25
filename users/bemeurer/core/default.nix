@@ -1,4 +1,14 @@
-{ base16-schemes, hostType, impermanence, lib, nix-index-database, pkgs, stylix, ... }: {
+{
+  base16-schemes,
+  hostType,
+  impermanence,
+  lib,
+  nix-index-database,
+  pkgs,
+  stylix,
+  ...
+}:
+{
   imports = [
     impermanence.nixosModules.home-manager.impermanence
     nix-index-database.hmModules.nix-index
@@ -23,20 +33,23 @@
   home = {
     username = "bemeurer";
     stateVersion = "23.05";
-    packages = with pkgs; [
-      eza
-      fd
-      fzf
-      kalker
-      neofetch
-      nix-closure-size
-      nix-output-monitor
-      ripgrep
-      rsync
-      truecolor-check
-    ] ++ lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) [
-      mosh
-    ];
+    packages =
+      with pkgs;
+      [
+        eza
+        fd
+        fzf
+        kalker
+        neofetch
+        nix-closure-size
+        nix-output-monitor
+        ripgrep
+        rsync
+        truecolor-check
+      ]
+      ++ lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) [
+        mosh
+      ];
     shellAliases = {
       cat = "bat";
       cls = "clear";

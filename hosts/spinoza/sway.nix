@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   programs.sway.enable = true;
 
   home-manager.users.bemeurer = {

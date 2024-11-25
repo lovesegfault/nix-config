@@ -1,7 +1,11 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-  _1pQuick = "exec --no-startup-id ${pkgs.spawn}/bin/spawn ${lib.getExe
-  pkgs._1password-gui} --quick-access";
+  _1pQuick = "exec --no-startup-id ${pkgs.spawn}/bin/spawn ${lib.getExe pkgs._1password-gui} --quick-access";
 in
 {
   home.sessionVariables = {

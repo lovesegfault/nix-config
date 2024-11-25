@@ -1,29 +1,37 @@
-{ hostType, pkgs, ... }: {
+{ hostType, pkgs, ... }:
+{
   imports = [
     (
-      if hostType == "nixos" || hostType == "homeManager" then ./linux.nix
-      else if hostType == "darwin" then ./darwin.nix
-      else throw "Unknown hostType '${hostType}' for users/bemeurer/graphical"
+      if hostType == "nixos" || hostType == "homeManager" then
+        ./linux.nix
+      else if hostType == "darwin" then
+        ./darwin.nix
+      else
+        throw "Unknown hostType '${hostType}' for users/bemeurer/graphical"
     )
     ./kitty.nix
   ];
 
-  home.packages = with pkgs; lib.filter (lib.meta.availableOn stdenv.hostPlatform) [
-    discord
-    element-desktop
-    iterm2
-    ledger-live-desktop
-    libnotify
-    qalculate-gtk
-    signal-desktop
-    thunderbird
-    zulip
-  ] ++ lib.optionals (stdenv.hostPlatform.system == "x86_64-linux") [
-    prusa-slicer
-    spotify
-  ] ++ lib.optionals stdenv.hostPlatform.isLinux [
-    xdg-utils
-  ];
+  home.packages =
+    with pkgs;
+    lib.filter (lib.meta.availableOn stdenv.hostPlatform) [
+      discord
+      element-desktop
+      iterm2
+      ledger-live-desktop
+      libnotify
+      qalculate-gtk
+      signal-desktop
+      thunderbird
+      zulip
+    ]
+    ++ lib.optionals (stdenv.hostPlatform.system == "x86_64-linux") [
+      prusa-slicer
+      spotify
+    ]
+    ++ lib.optionals stdenv.hostPlatform.isLinux [
+      xdg-utils
+    ];
 
   programs.alacritty.enable = true;
 

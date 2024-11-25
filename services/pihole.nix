@@ -8,8 +8,14 @@ with config.networking;
   ];
 
   networking.firewall = {
-    allowedTCPPorts = [ 53 5335 ];
-    allowedUDPPorts = [ 53 5335 ];
+    allowedTCPPorts = [
+      53
+      5335
+    ];
+    allowedUDPPorts = [
+      53
+      5335
+    ];
   };
 
   security.acme.certs."pihole.${hostName}.meurer.org" = { };

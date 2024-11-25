@@ -3,8 +3,11 @@ let
   inherit (inputs) self darwin nixpkgs;
   inherit (nixpkgs) lib;
 
-  genConfiguration = hostname: { hostPlatform, type, ... }:
-    withSystem hostPlatform ({ pkgs, system, ... }:
+  genConfiguration =
+    hostname:
+    { hostPlatform, type, ... }:
+    withSystem hostPlatform (
+      { pkgs, system, ... }:
       darwin.lib.darwinSystem {
         inherit pkgs system;
         modules = [
@@ -22,10 +25,10 @@ let
             home-manager
             impermanence
             nix-index-database
-            stylix;
+            stylix
+            ;
         };
-      });
+      }
+    );
 in
-lib.mapAttrs
-  genConfiguration
-  (lib.filterAttrs (_: host: host.type == "darwin") self.hosts)
+lib.mapAttrs genConfiguration (lib.filterAttrs (_: host: host.type == "darwin") self.hosts)

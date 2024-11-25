@@ -1,4 +1,5 @@
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
   programs.rofi = {
     enable = true;
     terminal = lib.getExe config.programs.kitty.package;

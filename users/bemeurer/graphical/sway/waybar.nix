@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   systemd.user.services.waybar.Service.Restart = lib.mkForce "always";
   programs.waybar = {
     enable = true;
@@ -6,7 +7,10 @@
     settings.main = {
       gtk-layer-shell = true;
       layer = "top";
-      modules-left = [ "sway/workspaces" "sway/mode" ];
+      modules-left = [
+        "sway/workspaces"
+        "sway/mode"
+      ];
       modules-center = [ "clock" ];
       modules-right = [
         "pulseaudio"
@@ -21,7 +25,9 @@
         all-outputs = true;
         format = "{name}";
       };
-      "sway/mode" = { format = ''<span style="italic">{}</span>''; };
+      "sway/mode" = {
+        format = ''<span style="italic">{}</span>'';
+      };
 
       pulseaudio = {
         format = "{volume}% {icon} {format_source}";
@@ -37,7 +43,11 @@
           phone = "";
           portable = "";
           car = "";
-          default = [ "" "" "" ];
+          default = [
+            ""
+            ""
+            ""
+          ];
         };
         on-click = "${pkgs.ponymix}/bin/ponymix -t sink toggle";
         on-scroll-up = "${pkgs.ponymix}/bin/ponymix increase 1";
@@ -60,12 +70,27 @@
       temperature = {
         critical-threshold = lib.mkDefault 90;
         format = "{temperatureC}°C {icon}";
-        format-icons = [ "" "" "" ];
+        format-icons = [
+          ""
+          ""
+          ""
+        ];
       };
       backlight = {
         device = "intel_backlight";
         format = "{percent}% {icon}";
-        format-icons = [ "󱩎" "󱩏" "󱩐" "󱩑" "󱩒" "󱩓" "󱩔" "󱩕" "󱩖" "󰛨" ];
+        format-icons = [
+          "󱩎"
+          "󱩏"
+          "󱩐"
+          "󱩑"
+          "󱩒"
+          "󱩓"
+          "󱩔"
+          "󱩕"
+          "󱩖"
+          "󰛨"
+        ];
         on-scroll-up = "${pkgs.brillo}/bin/brillo -e -A 0.5";
         on-scroll-down = "${pkgs.brillo}/bin/brillo -e -U 0.5";
       };
@@ -80,7 +105,13 @@
         format-charging = "{capacity}% 󰂄";
         format-plugged = "{capacity}% ";
         format-alt = "{time} {icon}";
-        format-icons = [ " " " " " " " " " " ];
+        format-icons = [
+          " "
+          " "
+          " "
+          " "
+          " "
+        ];
       };
       clock = {
         tooltip-format = "{calendar}";

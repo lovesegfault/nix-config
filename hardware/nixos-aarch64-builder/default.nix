@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   age.secrets.nixosAarch64BuilderKey.file = ./key.age;
 
   nix = {
@@ -24,9 +25,11 @@
     '';
 
     knownHosts.aarch64-build-box = {
-      extraHostNames = [ "aarch64.nixos.community" "147.75.77.190" ];
-      publicKey =
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUTz5i9u5H2FHNAmZJyoJfIGyUm/HfGhfwnc142L3ds";
+      extraHostNames = [
+        "aarch64.nixos.community"
+        "147.75.77.190"
+      ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUTz5i9u5H2FHNAmZJyoJfIGyUm/HfGhfwnc142L3ds";
     };
   };
 }

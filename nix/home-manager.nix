@@ -3,8 +3,11 @@ let
   inherit (inputs) self home-manager nixpkgs;
   inherit (nixpkgs) lib;
 
-  genModules = hostName: { homeDirectory, ... }:
-    { config, pkgs, ... }: {
+  genModules =
+    hostName:
+    { homeDirectory, ... }:
+    { config, pkgs, ... }:
+    {
       imports = [ (../hosts + "/${hostName}") ];
       nix.registry = {
         nixpkgs.flake = nixpkgs;
@@ -18,15 +21,17 @@ let
         ];
       };
 
-      programs.fish.plugins = [{
-        name = "nix-env";
-        src = pkgs.fetchFromGitHub {
-          owner = "lilyball";
-          repo = "nix-env.fish";
-          rev = "7b65bd228429e852c8fdfa07601159130a818cfa";
-          hash = "sha256-RG/0rfhgq6aEKNZ0XwIqOaZ6K5S4+/Y5EEMnIdtfPhk";
-        };
-      }];
+      programs.fish.plugins = [
+        {
+          name = "nix-env";
+          src = pkgs.fetchFromGitHub {
+            owner = "lilyball";
+            repo = "nix-env.fish";
+            rev = "7b65bd228429e852c8fdfa07601159130a818cfa";
+            hash = "sha256-RG/0rfhgq6aEKNZ0XwIqOaZ6K5S4+/Y5EEMnIdtfPhk";
+          };
+        }
+      ];
 
       xdg = {
         dataFile.nixpkgs.source = nixpkgs;
@@ -39,8 +44,11 @@ let
       };
     };
 
-  genConfiguration = hostName: { hostPlatform, type, ... }@attrs:
-    withSystem hostPlatform ({ pkgs, ... }:
+  genConfiguration =
+    hostName:
+    { hostPlatform, type, ... }@attrs:
+    withSystem hostPlatform (
+      { pkgs, ... }:
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ (genModules hostName attrs) ];
@@ -50,10 +58,10 @@ let
             base16-schemes
             impermanence
             nix-index-database
-            stylix;
+            stylix
+            ;
         };
-      });
+      }
+    );
 in
-lib.mapAttrs
-  genConfiguration
-  (lib.filterAttrs (_: host: host.type == "home-manager") self.hosts)
+lib.mapAttrs genConfiguration (lib.filterAttrs (_: host: host.type == "home-manager") self.hosts)

@@ -3,8 +3,16 @@
 let
   inherit (inputs.nixpkgs) lib;
 
-  genConfiguration = hostname: { address, hostPlatform, type, ... }:
-    withSystem hostPlatform ({ pkgs, ... }:
+  genConfiguration =
+    hostname:
+    {
+      address,
+      hostPlatform,
+      type,
+      ...
+    }:
+    withSystem hostPlatform (
+      { pkgs, ... }:
       lib.nixosSystem {
         modules = [
           (../hosts + "/${hostname}")
@@ -28,10 +36,10 @@ let
             lanzaboote
             nix-index-database
             nixos-hardware
-            stylix;
+            stylix
+            ;
         };
-      });
+      }
+    );
 in
-lib.mapAttrs
-  genConfiguration
-  (lib.filterAttrs (_: host: host.type == "nixos") inputs.self.hosts)
+lib.mapAttrs genConfiguration (lib.filterAttrs (_: host: host.type == "nixos") inputs.self.hosts)

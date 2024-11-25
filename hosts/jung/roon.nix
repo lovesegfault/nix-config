@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   networking.firewall = {
     allowedTCPPorts = [ 55000 ];
     allowedUDPPorts = [ 55000 ];

@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   imports = [
     ../../users/bemeurer
     ../../users/bemeurer/dev/aws.nix

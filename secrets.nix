@@ -1,5 +1,11 @@
 let
-  inherit (builtins) attrNames attrValues filter mapAttrs listToAttrs;
+  inherit (builtins)
+    attrNames
+    attrValues
+    filter
+    mapAttrs
+    listToAttrs
+    ;
 
   bemeurer = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQgTWfmR/Z4Szahx/uahdPqvEP/e/KQ1dKUYLenLuY2";
 
@@ -8,12 +14,26 @@ let
       all = import ./nix/hosts.nix;
       withPubkey = filter (a: all.${a} ? pubkey) (attrNames all);
     in
-    listToAttrs (map (name: { inherit name; value = all.${name}.pubkey; }) withPubkey);
+    listToAttrs (
+      map (name: {
+        inherit name;
+        value = all.${name}.pubkey;
+      }) withPubkey
+    );
 
   secrets = with hosts; {
-    "hardware/nixos-aarch64-builder/key.age" = [ jung spinoza ];
-    "services/acme.age" = [ jung plato ];
-    "services/oauth2.age" = [ jung plato ];
+    "hardware/nixos-aarch64-builder/key.age" = [
+      jung
+      spinoza
+    ];
+    "services/acme.age" = [
+      jung
+      plato
+    ];
+    "services/oauth2.age" = [
+      jung
+      plato
+    ];
     "services/pihole.age" = [ ];
     "services/github-runner.age" = [ jung ];
     "users/bemeurer/password.age" = attrValues hosts;
@@ -21,14 +41,16 @@ let
 
   secrets' = mapAttrs (_: v: { publicKeys = [ bemeurer ] ++ v; }) secrets;
 
-  allHostSecret = secretName:
+  allHostSecret =
+    secretName:
     listToAttrs (
-      map
-        (host: {
-          name = "hosts/${host}/${secretName}.age";
-          value.publicKeys = [ bemeurer hosts.${host} ];
-        })
-        (attrNames hosts)
+      map (host: {
+        name = "hosts/${host}/${secretName}.age";
+        value.publicKeys = [
+          bemeurer
+          hosts.${host}
+        ];
+      }) (attrNames hosts)
     );
 in
 secrets' // allHostSecret "password"

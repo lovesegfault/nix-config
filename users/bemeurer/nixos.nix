@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 {
   age.secrets.bemeurerPassword.file = ./password.age;
@@ -9,10 +14,18 @@ with lib;
     createHome = true;
     description = "Bernardo Meurer";
     group = "bemeurer";
-    extraGroups = [ "wheel" "dialout" "audio" ]
+    extraGroups =
+      [
+        "wheel"
+        "dialout"
+        "audio"
+      ]
       ++ optionals config.hardware.i2c.enable [ "i2c" ]
       ++ optionals config.networking.networkmanager.enable [ "networkmanager" ]
-      ++ optionals config.programs.sway.enable [ "input" "video" ]
+      ++ optionals config.programs.sway.enable [
+        "input"
+        "video"
+      ]
       ++ optionals config.services.unbound.enable [ "unbound" ]
       ++ optionals config.services.transmission.enable [ "transmission" ]
       ++ optionals config.virtualisation.docker.enable [ "docker" ]
@@ -33,12 +46,14 @@ with lib;
   programs._1password-gui.polkitPolicyOwners = [ "bemeurer" ];
 
   home-manager.users.bemeurer = {
-    imports = optionals config.programs.sway.enable [
-      ./graphical
-      ./graphical/sway
-    ] ++ optionals config.services.xserver.windowManager.i3.enable [
-      ./graphical
-      ./graphical/i3
-    ];
+    imports =
+      optionals config.programs.sway.enable [
+        ./graphical
+        ./graphical/sway
+      ]
+      ++ optionals config.services.xserver.windowManager.i3.enable [
+        ./graphical
+        ./graphical/i3
+      ];
   };
 }

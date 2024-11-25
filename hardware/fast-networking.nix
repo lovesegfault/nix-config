@@ -31,6 +31,9 @@
       "net.netfilter.nf_conntrack_tcp_timeout_established" = 600;
       "net.netfilter.nf_conntrack_tcp_timeout_time_wait" = 1;
     };
-    kernelModules = [ "tls" "tcp_bbr" ];
+    kernelModules = [
+      "tls"
+      "tcp_bbr"
+    ];
   };
 }

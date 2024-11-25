@@ -1,9 +1,21 @@
-{ pkgs, base16-schemes, hostType, impermanence, nix-index-database, stylix, ... }: {
+{
+  pkgs,
+  base16-schemes,
+  hostType,
+  impermanence,
+  nix-index-database,
+  stylix,
+  ...
+}:
+{
   imports = [
     (
-      if hostType == "nixos" then ./nixos.nix
-      else if hostType == "darwin" then ./darwin.nix
-      else throw "Unknown hostType '${hostType}' for core"
+      if hostType == "nixos" then
+        ./nixos.nix
+      else if hostType == "darwin" then
+        ./darwin.nix
+      else
+        throw "Unknown hostType '${hostType}' for core"
     )
     ./aspell.nix
     ./nix.nix
@@ -21,10 +33,13 @@
       "/share/fish"
       "/share/zsh"
     ];
-    systemPackages = with pkgs; [
-      neovim
-      rsync
-    ] ++ (lib.optional (hostType != "darwin") man-pages);
+    systemPackages =
+      with pkgs;
+      [
+        neovim
+        rsync
+      ]
+      ++ (lib.optional (hostType != "darwin") man-pages);
   };
 
   home-manager = {
@@ -36,7 +51,8 @@
         hostType
         impermanence
         nix-index-database
-        stylix;
+        stylix
+        ;
     };
   };
 

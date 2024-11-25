@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   services.screen-locker = {
     enable = true;
     inactiveInterval = 5;

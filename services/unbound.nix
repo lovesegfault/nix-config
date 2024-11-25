@@ -1,16 +1,27 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   environment.persistence."/nix/state".directories = [
-    { directory = "/var/lib/unbound"; inherit (config.services.unbound) user group; }
+    {
+      directory = "/var/lib/unbound";
+      inherit (config.services.unbound) user group;
+    }
   ];
 
   services = {
     resolved.enable = lib.mkForce false;
     prometheus = {
-      scrapeConfigs = [{
-        job_name = "unbound";
-        scrape_interval = "30s";
-        static_configs = [{ targets = [ "127.0.0.1:9167" ]; }];
-      }];
+      scrapeConfigs = [
+        {
+          job_name = "unbound";
+          scrape_interval = "30s";
+          static_configs = [ { targets = [ "127.0.0.1:9167" ]; } ];
+        }
+      ];
       exporters.unbound = {
         enable = true;
         unbound.host = "unix:///run/unbound/unbound.ctl";
@@ -43,7 +54,10 @@
           harden-large-queries = true;
           harden-short-bufsize = true;
           infra-cache-slabs = 8;
-          interface = [ "0.0.0.0" "::" ];
+          interface = [
+            "0.0.0.0"
+            "::"
+          ];
           key-cache-slabs = 8;
           msg-cache-size = "256m";
           msg-cache-slabs = 8;

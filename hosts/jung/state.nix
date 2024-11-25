@@ -1,14 +1,26 @@
-{ config, ... }: {
+{ config, ... }:
+{
   age.identityPaths = [ "/nix/state/etc/ssh/ssh_host_ed25519_key" ];
 
   environment.persistence."/nix/state" = {
     directories = [
-      { directory = "/var/lib/chrony"; user = "chrony"; group = "chrony"; }
+      {
+        directory = "/var/lib/chrony";
+        user = "chrony";
+        group = "chrony";
+      }
       "/var/lib/fwupd"
-      { directory = "/var/lib/hqplayer"; user = "hqplayer"; group = "hqplayer"; }
+      {
+        directory = "/var/lib/hqplayer";
+        user = "hqplayer";
+        group = "hqplayer";
+      }
       "/var/lib/iwd"
       "/var/lib/nixos"
-      { directory = "/var/lib/roon-server"; inherit (config.services.roon-server) user group; }
+      {
+        directory = "/var/lib/roon-server";
+        inherit (config.services.roon-server) user group;
+      }
       "/var/lib/tailscale"
       "/var/log"
     ];
@@ -38,8 +50,14 @@
         "opt"
         "src"
         "tmp"
-        { directory = ".gnupg"; mode = "0700"; }
-        { directory = ".ssh"; mode = "0700"; }
+        {
+          directory = ".gnupg";
+          mode = "0700";
+        }
+        {
+          directory = ".ssh";
+          mode = "0700";
+        }
       ];
       files = [
         ".config/cachix/cachix.dhall"

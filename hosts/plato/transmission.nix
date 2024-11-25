@@ -5,7 +5,10 @@ let
 in
 {
   environment.persistence."/nix/state".directories = [
-    { directory = cfg.home; inherit (cfg) user group; }
+    {
+      directory = cfg.home;
+      inherit (cfg) user group;
+    }
   ];
 
   security.acme.certs."transmission.${hostName}.meurer.org" = { };

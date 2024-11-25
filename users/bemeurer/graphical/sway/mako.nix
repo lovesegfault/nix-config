@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   services.mako =
     let
       homeIcons = "${config.home.homeDirectory}/.nix-profile/share/icons/hicolor";

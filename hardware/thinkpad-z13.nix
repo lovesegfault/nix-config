@@ -1,4 +1,5 @@
-{ nixos-hardware, pkgs, ... }: {
+{ nixos-hardware, pkgs, ... }:
+{
   imports = with nixos-hardware.nixosModules; [
     common-cpu-amd
     common-cpu-amd-pstate
@@ -11,12 +12,26 @@
   ];
 
   boot = {
-    initrd.availableKernelModules = [ "nvme" "thinkpad_acpi" "thunderbolt" "xhci_pci" ];
+    initrd.availableKernelModules = [
+      "nvme"
+      "thinkpad_acpi"
+      "thunderbolt"
+      "xhci_pci"
+    ];
     blacklistedKernelModules = [ "sp5100_tco" ];
-    kernelModules = [ "kvm-amd" "thinkpad_acpi" ];
-    kernel.sysctl = { "vm.swappiness" = 1; };
+    kernelModules = [
+      "kvm-amd"
+      "thinkpad_acpi"
+    ];
+    kernel.sysctl = {
+      "vm.swappiness" = 1;
+    };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "nowatchdog" "amd_prefcore=enable" "preempt=full" ];
+    kernelParams = [
+      "nowatchdog"
+      "amd_prefcore=enable"
+      "preempt=full"
+    ];
     tmp.useTmpfs = true;
   };
 
@@ -60,8 +75,14 @@
         PLATFORM_PROFILE_ON_AC = "performance";
         PLATFORM_PROFILE_ON_BAT = "balanced";
 
-        DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE = [ "bluetooth" "wifi" ];
-        DEVICES_TO_ENABLE_ON_AC = [ "bluetooth" "wifi" ];
+        DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE = [
+          "bluetooth"
+          "wifi"
+        ];
+        DEVICES_TO_ENABLE_ON_AC = [
+          "bluetooth"
+          "wifi"
+        ];
 
         DISK_IOSCHED = [ "none" ];
 
@@ -79,7 +100,11 @@
   systemd = {
     services.ath11k_hibernate = {
       description = "load/unload ath11k to prevent hibernation issues";
-      before = [ "hibernate.target" "suspend-then-hibernate.target" "hybrid-sleep.target" ];
+      before = [
+        "hibernate.target"
+        "suspend-then-hibernate.target"
+        "hybrid-sleep.target"
+      ];
       unitConfig.StopWhenUnneeded = true;
       serviceConfig = {
         Type = "oneshot";
@@ -87,7 +112,11 @@
         ExecStart = "-${pkgs.kmod}/bin/modprobe -a -r ath11k_pci ath11k";
         ExecStop = "-${pkgs.kmod}/bin/modprobe -a ath11k_pci ath11k";
       };
-      wantedBy = [ "hibernate.target" "suspend-then-hibernate.target" "hybrid-sleep.target" ];
+      wantedBy = [
+        "hibernate.target"
+        "suspend-then-hibernate.target"
+        "hybrid-sleep.target"
+      ];
     };
     sleep.extraConfig = ''
       HibernateMode=shutdown

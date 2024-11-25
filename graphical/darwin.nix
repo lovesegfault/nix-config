@@ -4,37 +4,130 @@
       "1password/tap"
     ];
     casks = [
-      { name = "1password"; greedy = true; }
-      { name = "1password-cli"; greedy = true; }
-      { name = "aldente"; greedy = true; }
-      { name = "alt-tab"; greedy = true; }
-      { name = "amethyst"; greedy = true; }
-      { name = "appcleaner"; greedy = true; }
-      { name = "balenaetcher"; greedy = true; }
-      { name = "bartender"; greedy = true; }
-      { name = "chatgpt"; greedy = true; }
-      { name = "daisydisk"; greedy = true; }
-      { name = "firefox"; greedy = true; }
-      { name = "geekbench"; greedy = true; }
-      { name = "google-chrome"; greedy = true; }
-      { name = "jitsi-meet"; greedy = true; }
-      { name = "keymapp"; greedy = true; }
-      { name = "languagetool"; greedy = true; }
-      { name = "launchcontrol"; greedy = true; }
-      { name = "lunar"; greedy = true; }
-      { name = "macs-fan-control"; greedy = true; }
-      { name = "macupdater"; greedy = true; }
-      { name = "nextcloud"; greedy = true; }
-      { name = "parallels"; greedy = true; }
-      { name = "raycast"; greedy = true; }
-      { name = "roon"; greedy = true; }
-      { name = "shottr"; greedy = true; }
-      { name = "signal"; greedy = true; }
-      { name = "spotify"; greedy = true; }
-      { name = "topnotch"; greedy = true; }
-      { name = "visual-studio-code"; greedy = true; }
-      { name = "zoom"; greedy = true; }
-      { name = "zulip"; greedy = true; }
+      {
+        name = "1password";
+        greedy = true;
+      }
+      {
+        name = "1password-cli";
+        greedy = true;
+      }
+      {
+        name = "aldente";
+        greedy = true;
+      }
+      {
+        name = "alt-tab";
+        greedy = true;
+      }
+      {
+        name = "amethyst";
+        greedy = true;
+      }
+      {
+        name = "appcleaner";
+        greedy = true;
+      }
+      {
+        name = "balenaetcher";
+        greedy = true;
+      }
+      {
+        name = "bartender";
+        greedy = true;
+      }
+      {
+        name = "chatgpt";
+        greedy = true;
+      }
+      {
+        name = "daisydisk";
+        greedy = true;
+      }
+      {
+        name = "firefox";
+        greedy = true;
+      }
+      {
+        name = "geekbench";
+        greedy = true;
+      }
+      {
+        name = "google-chrome";
+        greedy = true;
+      }
+      {
+        name = "jitsi-meet";
+        greedy = true;
+      }
+      {
+        name = "keymapp";
+        greedy = true;
+      }
+      {
+        name = "languagetool";
+        greedy = true;
+      }
+      {
+        name = "launchcontrol";
+        greedy = true;
+      }
+      {
+        name = "lunar";
+        greedy = true;
+      }
+      {
+        name = "macs-fan-control";
+        greedy = true;
+      }
+      {
+        name = "macupdater";
+        greedy = true;
+      }
+      {
+        name = "nextcloud";
+        greedy = true;
+      }
+      {
+        name = "parallels";
+        greedy = true;
+      }
+      {
+        name = "raycast";
+        greedy = true;
+      }
+      {
+        name = "roon";
+        greedy = true;
+      }
+      {
+        name = "shottr";
+        greedy = true;
+      }
+      {
+        name = "signal";
+        greedy = true;
+      }
+      {
+        name = "spotify";
+        greedy = true;
+      }
+      {
+        name = "topnotch";
+        greedy = true;
+      }
+      {
+        name = "visual-studio-code";
+        greedy = true;
+      }
+      {
+        name = "zoom";
+        greedy = true;
+      }
+      {
+        name = "zulip";
+        greedy = true;
+      }
     ];
     masApps = {
       "Kaleidoscope" = 1575557335;

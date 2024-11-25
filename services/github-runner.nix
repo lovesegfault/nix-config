@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   age.secrets.github-runner-token.file = ./github-runner.age;
   services.github-runners.${config.networking.hostName} = {
     enable = true;

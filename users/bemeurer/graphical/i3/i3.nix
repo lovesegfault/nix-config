@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
@@ -50,7 +56,10 @@
       terminal = "${lib.getExe config.programs.kitty.package} -1";
 
       window.commands = [
-        { command = "floating enable"; criteria.class = "feh"; }
+        {
+          command = "floating enable";
+          criteria.class = "feh";
+        }
       ];
     };
 

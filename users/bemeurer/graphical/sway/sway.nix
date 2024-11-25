@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   wayland.windowManager.sway = {
     enable = true;
 
@@ -29,7 +35,10 @@
       terminal = lib.getExe pkgs.foot;
 
       window.commands = [
-        { command = "floating enable"; criteria.app_id = "imv"; }
+        {
+          command = "floating enable";
+          criteria.app_id = "imv";
+        }
       ];
     };
 

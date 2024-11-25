@@ -142,55 +142,71 @@
     };
   };
 
-  outputs = inputs@{ self, flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; }
-      (toplevel@{ withSystem, ... }: {
+  outputs =
+    inputs@{ self, flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      toplevel@{ withSystem, ... }:
+      {
         imports = [
           inputs.git-hooks.flakeModule
           inputs.treefmt-nix.flakeModule
         ];
-        systems = [ "aarch64-darwin" "aarch64-linux" "x86_64-linux" ];
-        perSystem = ctx@{ config, self', inputs', pkgs, system, ... }: {
-          _module.args.pkgs = import inputs.nixpkgs {
-            localSystem = system;
-            overlays = [ self.overlays.default ];
-            config = {
-              allowUnfree = true;
-              allowAliases = true;
-              permittedInsecurePackages = [
-                "jitsi-meet-1.0.8043"
-              ];
+        systems = [
+          "aarch64-darwin"
+          "aarch64-linux"
+          "x86_64-linux"
+        ];
+        perSystem =
+          ctx@{
+            config,
+            self',
+            inputs',
+            pkgs,
+            system,
+            ...
+          }:
+          {
+            _module.args.pkgs = import inputs.nixpkgs {
+              localSystem = system;
+              overlays = [ self.overlays.default ];
+              config = {
+                allowUnfree = true;
+                allowAliases = true;
+                permittedInsecurePackages = [
+                  "jitsi-meet-1.0.8043"
+                ];
+              };
             };
-          };
 
-          devShells = import ./nix/dev-shell.nix ctx;
+            devShells = import ./nix/dev-shell.nix ctx;
 
-          packages = import ./nix/packages.nix toplevel ctx;
+            packages = import ./nix/packages.nix toplevel ctx;
 
-          pre-commit = {
-            check.enable = true;
-            settings.hooks = {
-              actionlint.enable = true;
-              luacheck.enable = true;
-              nil.enable = true;
-              shellcheck.enable = true;
-              statix.enable = true;
-              stylua.enable = true;
-              treefmt.enable = true;
+            pre-commit = {
+              check.enable = true;
+              settings.hooks = {
+                actionlint.enable = true;
+                luacheck.enable = true;
+                nil.enable = true;
+                shellcheck.enable = true;
+                statix.enable = true;
+                stylua.enable = true;
+                treefmt.enable = true;
+              };
             };
-          };
 
-          treefmt = {
-            projectRootFile = "flake.nix";
-            programs = {
-              nixpkgs-fmt.enable = true;
-              shfmt = {
-                enable = true;
-                indent_size = 0;
+            treefmt = {
+              projectRootFile = "flake.nix";
+              flakeCheck = false; # Covered by git-hooks check
+              programs = {
+                nixfmt.enable = true;
+                shfmt = {
+                  enable = true;
+                  indent_size = 0;
+                };
               };
             };
           };
-        };
 
         flake = {
           hosts = import ./nix/hosts.nix;
@@ -203,5 +219,6 @@
 
           overlays = import ./nix/overlay.nix toplevel;
         };
-      });
+      }
+    );
 }

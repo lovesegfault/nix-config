@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   programs.fish = {
     enable = true;
     interactiveShellInit = lib.mkMerge [
@@ -15,7 +16,10 @@
       '')
     ];
     plugins = [
-      { name = "autopair"; inherit (pkgs.fishPlugins.autopair) src; }
+      {
+        name = "autopair";
+        inherit (pkgs.fishPlugins.autopair) src;
+      }
     ];
   };
 }

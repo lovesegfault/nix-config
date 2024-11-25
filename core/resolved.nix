@@ -1,8 +1,12 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   networking = {
     firewall = {
       allowedTCPPorts = [ 5355 ];
-      allowedUDPPorts = [ 5353 5355 ];
+      allowedUDPPorts = [
+        5353
+        5355
+      ];
     };
     networkmanager.dns = "systemd-resolved";
   };

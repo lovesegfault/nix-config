@@ -1,7 +1,15 @@
-{ config, ... }: with config.networking; {
+{ config, ... }:
+with config.networking;
+{
   environment.persistence."/nix/state".directories = with config.services.jellyfin; [
-    { directory = cacheDir; inherit user group; }
-    { directory = dataDir; inherit user group; }
+    {
+      directory = cacheDir;
+      inherit user group;
+    }
+    {
+      directory = dataDir;
+      inherit user group;
+    }
   ];
 
   security.acme.certs."jellyfin.${hostName}.meurer.org" = { };

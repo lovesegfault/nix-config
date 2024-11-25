@@ -1,4 +1,5 @@
-{ lib, modulesPath, ... }: {
+{ lib, modulesPath, ... }:
+{
   imports = [ (modulesPath + "/virtualisation/google-compute-image.nix") ];
 
   hardware.enableRedistributableFirmware = true;
