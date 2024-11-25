@@ -62,7 +62,6 @@ jobs:
     outputs:
       build: ${{ steps.get-attrs.outputs.build }}
       eval: ${{ steps.get-attrs.outputs.eval }}
-      hasEval: ${{ steps.get-attrs.outputs.hasEval }}
     env:
       has_aarch64_ssh_key: ${{ secrets.AARCH64_BUILDER_KEY != '' }}
     steps:
@@ -167,13 +166,6 @@ jobs:
           echo "build=$(<"$TMP/build.json")" >>"$GITHUB_OUTPUT"
           echo "eval=$(<"$TMP/eval.json")" >>"$GITHUB_OUTPUT"
 
-          evalOnlyAttrCount="$(jq length <"$TMP/eval.json")"
-          if [[ $evalOnlyAttrCount -eq 0 ]]; then
-            echo "hasEval=false" >>"$GITHUB_OUTPUT"
-          else
-            echo "hasEval=true" >>"$GITHUB_OUTPUT"
-          fi
-
   eval:
     name: eval ${{ matrix.attrs.name }}
     runs-on: ${{ matrix.attrs.runsOn }}
@@ -184,7 +176,7 @@ jobs:
         attrs: ${{ fromJson(needs.get-attrs.outputs.eval) }}
     env:
       system: ${{ matrix.attrs.hostPlatform }}
-    if: ${{ needs.get-attrs.outputs.hasEval == true }}
+    if: ${{ fromJson(needs.get-attrs.outputs.eval)[0] != null }}
     steps:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
