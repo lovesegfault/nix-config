@@ -70,12 +70,6 @@ in
     hostPlatform = "aarch64-linux";
     homeDirectory = "/home/bemeurer";
   };
-  riemann = mkHost {
-    type = "nixos";
-    address = "100.116.110.74";
-    hostPlatform = "aarch64-linux";
-    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC2gbNVSmk+N93wP0bdPrHsXAsJtKEFVf0TPZLCc0Vk+";
-  };
   spinoza = mkHost {
     type = "nixos";
     address = "100.68.240.30";

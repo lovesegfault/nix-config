@@ -11,9 +11,9 @@ let
     listToAttrs (map (name: { inherit name; value = all.${name}.pubkey; }) withPubkey);
 
   secrets = with hosts; {
-    "hardware/nixos-aarch64-builder/key.age" = [ jung riemann spinoza ];
-    "services/acme.age" = [ jung plato riemann ];
-    "services/oauth2.age" = [ jung plato riemann ];
+    "hardware/nixos-aarch64-builder/key.age" = [ jung spinoza ];
+    "services/acme.age" = [ jung plato ];
+    "services/oauth2.age" = [ jung plato ];
     "services/pihole.age" = [ ];
     "services/github-runner.age" = [ jung ];
     "users/bemeurer/password.age" = attrValues hosts;
