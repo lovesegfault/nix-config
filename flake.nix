@@ -111,8 +111,7 @@
     };
 
     stylix = {
-      # FIXME: rollback to danth/stylix once tmux is fixed
-      url = "github:lovesegfault/stylix/flake-update";
+      url = "github:danth/stylix";
       inputs = {
         base16.follows = "base16";
         flake-compat.follows = "flake-compat";

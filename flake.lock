@@ -673,16 +673,15 @@
         "tinted-tmux": "tinted-tmux"
       },
       "locked": {
-        "lastModified": 1732558777,
+        "lastModified": 1732608183,
         "narHash": "sha256-T5k5ill+PNIEW6KuS4CpUacMtZNJe2J2q5eBOF4xWuU=",
-        "owner": "lovesegfault",
+        "owner": "danth",
         "repo": "stylix",
-        "rev": "f0646ac15e8cbc7eedf00001f8246b6ed85bcc4d",
+        "rev": "7689e621f87bce7b6ab1925dfd70ad1f4c80f334",
         "type": "github"
       },
       "original": {
-        "owner": "lovesegfault",
-        "ref": "flake-update",
+        "owner": "danth",
         "repo": "stylix",
         "type": "github"
       }
