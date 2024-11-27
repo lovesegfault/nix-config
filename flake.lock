@@ -179,11 +179,11 @@
     "flake-compat": {
       "flake": false,
       "locked": {
-        "lastModified": 1732721812,
-        "narHash": "sha256-a5VfXXrzS/BG1vfnDh26W1Y73jc0Igbq5VC0xWs4gT4=",
+        "lastModified": 1732722421,
+        "narHash": "sha256-HRJ/18p+WoXpWJkcdsk9St5ZiukCqSDgbOGFa8Okehg=",
         "owner": "edolstra",
         "repo": "flake-compat",
-        "rev": "e3408d6ab25eb340bcfd131e36aed6ba262a4e9b",
+        "rev": "9ed2ac151eada2306ca8c418ebd97807bb08f6ac",
         "type": "github"
       },
       "original": {
