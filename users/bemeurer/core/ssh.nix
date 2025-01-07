@@ -7,9 +7,6 @@
       PermitLocalCommand yes
       CanonicalDomains meurer.org.beta.tailscale.net
 
-    Match canonical Host aarch64.nixos.community,147.28.143.250
-      User lovesegfault
-
     Match canonical Host *.meurer.org,*.meurer.org.beta.tailscale.net
       ForwardAgent yes
 

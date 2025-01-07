@@ -15,7 +15,6 @@
 
     ../../hardware/efi.nix
     ../../hardware/fast-networking.nix
-    ../../hardware/nixos-aarch64-builder
 
     ../../services/blocky.nix
     ../../services/github-runner.nix

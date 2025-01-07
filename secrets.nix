@@ -22,10 +22,6 @@ let
     );
 
   secrets = with hosts; {
-    "hardware/nixos-aarch64-builder/key.age" = [
-      jung
-      spinoza
-    ];
     "services/acme.age" = [
       jung
       plato

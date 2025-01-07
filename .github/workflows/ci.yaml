@@ -17,16 +17,6 @@ env:
     builders-use-substitutes = true
     max-jobs = auto
   cachix-install: nix profile install 'github:${{ github.repository }}/${{ github.sha }}#cachix'
-  aarch64-host: aarch64.nixos.community
-  aarch64-ssh-config: |-
-    Host aarch64.nixos.community 147.28.143.250
-        User lovesegfault
-        IdentitiesOnly yes
-        IdentityFile ~/.ssh/aarch64-builder-ed25519
-  aarch64-ssh-known-host: |-
-    aarch64-build-box,aarch64.nixos.community,147.75.77.190 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUTz5i9u5H2FHNAmZJyoJfIGyUm/HfGhfwnc142L3ds
-  aarch64-machine-config: |-
-    ssh-ng://lovesegfault@aarch64.nixos.community aarch64-linux /etc/nix/ssh/aarch64-builder-ed25519 64 1 big-parallel - c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU1VVHo1aTl1NUgyRkhOQW1aSnlvSmZJR3lVbS9IZkdoZnduYzE0MkwzZHMgcm9vdEBuaXhvcwo=
 
 jobs:
   flake-check:
@@ -62,8 +52,6 @@ jobs:
     outputs:
       build: ${{ steps.get-attrs.outputs.build }}
       eval: ${{ steps.get-attrs.outputs.eval }}
-    env:
-      has_aarch64_ssh_key: ${{ secrets.AARCH64_BUILDER_KEY != '' }}
     steps:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
@@ -90,7 +78,6 @@ jobs:
             })
             | map(
                 if .hostPlatform  == "x86_64-linux" then .runsOn="ubuntu-latest"
-                elif .hostPlatform == "aarch64-linux" then .runsOn="ubuntu-latest"
                 elif .hostPlatform == "x86_64-darwin" then .runsOn="macos-13"
                 elif .hostPlatform == "aarch64-darwin" then .runsOn="macos-14"
                 else .evalOnly=true | .runsOn="ubuntu-latest"
@@ -98,17 +85,6 @@ jobs:
             )
             | map(if .large then .evalOnly=true end)
           ' >"$TMP/hostAttrs.json"
-
-          # handle not being able to build aarch64-linux attrs when the ssh key
-          # is missing
-          if [[ "${has_aarch64_ssh_key}" != 'true' ]]; then
-            summary \
-              "- ⚠️ AArch64 builder SSH key is unavailable, all \`aarch64-linux\` attrs will be eval-only"
-            old_host_attrs="$(<"$TMP/hostAttrs.json")"
-            jq -c \
-              'map(if .hostPlatform == "aarch64-linux" then .evalOnly=true end)' \
-              <<<"$old_host_attrs" >"$TMP/hostAttrs.json"
-          fi
 
           # dev shells
           jq -c '
@@ -201,7 +177,6 @@ jobs:
       matrix:
         attrs: ${{ fromJson(needs.get-attrs.outputs.build) }}
     env:
-      aarch64-ssh-key: ${{ secrets.AARCH64_BUILDER_KEY }}
       system: ${{ matrix.attrs.hostPlatform }}
     steps:
       - uses: DeterminateSystems/nix-installer-action@v16
@@ -213,22 +188,6 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: vim-config,nix-community
           installCommand: ${{ env.cachix-install }}
-      - name: setup-aarch64-ssh
-        if: ${{ env.system == 'aarch64-linux' || env.system == 'aarch64-darwin' }}
-        run: |
-          mkdir -p ~/.ssh
-          sudo mkdir -p /etc/nix/ssh
-
-          echo '${{ env.aarch64-ssh-config }}' | tee ~/.ssh/config | sudo tee /etc/nix/ssh/config
-          echo '${{ env.aarch64-ssh-known-host }}' | tee -a ~/.ssh/known_hosts | sudo tee -a /etc/nix/ssh/known_hosts
-
-          echo '${{ env.aarch64-ssh-key }}' > ~/.ssh/aarch64-builder-ed25519
-          echo '${{ env.aarch64-ssh-key }}' | sudo tee /etc/nix/ssh/aarch64-builder-ed25519 >> /dev/null
-
-          chmod 0600 ~/.ssh/*
-          sudo chmod 0600 /etc/nix/ssh/*
-
-          echo '${{ env.aarch64-machine-config }}' | sudo tee -a /etc/nix/machines
       - name: nix-fast-build
         run: |
           declare -a args=(
@@ -238,8 +197,6 @@ jobs:
             '--option' 'accept-flake-config' 'true'
             '--retries=3'
           )
-          # Add the remote builder for aarch64-linux builds
-          [[ '${{ env.system }}' == 'aarch64-linux' ]] && args+=('--remote=${{ env.aarch64-host }}')
 
           args+=('--flake=${{ env.flake }}#${{ matrix.attrs.attr }}')
           nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"

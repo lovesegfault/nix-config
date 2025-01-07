@@ -8,7 +8,6 @@
   imports = [
     ../../core
 
-    ../../hardware/nixos-aarch64-builder
     ../../hardware/secureboot.nix
     ../../hardware/thinkpad-z13.nix
     ../../hardware/yubikey.nix
