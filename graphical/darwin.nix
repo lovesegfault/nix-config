@@ -151,7 +151,7 @@
   services.skhd = {
     enable = true;
     skhdConfig = ''
-      cmd - return : open --new -a alacritty.app --args --working-directory="$HOME"
+      cmd - return : open --new -a ghostty.app
     '';
   };
 
