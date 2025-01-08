@@ -7,6 +7,7 @@
 {
   imports = [
     ../../users/bemeurer
+    ../../users/bemeurer/core/terminfo-hack.nix
     ../../users/bemeurer/dev/aws.nix
   ];
 
@@ -20,7 +21,6 @@
       opensshWithKerberos
       rustup
     ];
-    file.".terminfo".source = pkgs.ncurses.outPath + "/share/terminfo";
   };
 
   programs = {

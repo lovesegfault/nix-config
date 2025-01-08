@@ -2,6 +2,7 @@
 {
   imports = [
     ../../users/bemeurer
+    ../../users/bemeurer/core/terminfo-hack.nix
     ../../users/bemeurer/dev/aws.nix
   ];
 
@@ -15,10 +16,7 @@
       opensshWithKerberos
       rustup
     ];
-    file = {
-      ".ssh/config".enable = false;
-      ".terminfo".source = pkgs.ncurses.outPath + "/share/terminfo";
-    };
+    file.".ssh/config".enable = false;
   };
 
   programs = {
