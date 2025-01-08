@@ -33,7 +33,17 @@
       xdg-utils
     ];
 
-  programs.alacritty.enable = true;
+  programs = {
+    alacritty.enable = true;
+    ghostty = {
+      enable = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+      # FIXME: Remove this hack when the nixpkgs pkg works again
+      package = if pkgs.stdenv.hostPlatform.isDarwin then pkgs.hello else pkgs.ghostty;
+    };
+  };
 
   stylix.fonts = {
     sansSerif = {

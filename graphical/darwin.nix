@@ -53,6 +53,10 @@
         greedy = true;
       }
       {
+        name = "ghostty";
+        greedy = true;
+      }
+      {
         name = "google-chrome";
         greedy = true;
       }
