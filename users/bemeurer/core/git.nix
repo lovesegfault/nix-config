@@ -13,10 +13,7 @@
     userEmail = "bernardo@meurer.org";
     userName = "Bernardo Meurer";
     extraConfig = {
-      diff = {
-        colorMoved = "default";
-        age.textconv = "${pkgs.rage}/bin/rage -i <(op read op://Personal/bemeurer/'private key') --decrypt";
-      };
+      diff.colorMoved = "default";
       difftool.prompt = true;
       github.user = "lovesegfault";
       init.defaultBranch = "main";
