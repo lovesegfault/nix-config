@@ -16,7 +16,6 @@ env:
     always-allow-substitutes = true
     builders-use-substitutes = true
     max-jobs = auto
-  cachix-install: nix profile install 'github:${{ github.repository }}/${{ github.sha }}#cachix'
 
 jobs:
   flake-check:
@@ -30,7 +29,6 @@ jobs:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: vim-config,nix-community
-          installCommand: ${{ env.cachix-install }}
       - name: nix-flake-check
         run: nix flake check '${{ env.flake }}'
   flake-show:
@@ -44,7 +42,6 @@ jobs:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: vim-config,nix-community
-          installCommand: ${{ env.cachix-install }}
       - name: nix-flake-show
         run: nix flake show '${{ env.flake }}'
   get-attrs:
@@ -160,7 +157,6 @@ jobs:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: vim-config,nix-community
-          installCommand: ${{ env.cachix-install }}
       - name: eval
         if: ${{ matrix.attrs.evalOnly }}
         run: |
@@ -185,7 +181,6 @@ jobs:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: vim-config,nix-community
-          installCommand: ${{ env.cachix-install }}
       - name: nix-fast-build
         run: |
           declare -a args=(

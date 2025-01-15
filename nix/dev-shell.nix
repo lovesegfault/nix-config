@@ -17,7 +17,7 @@
         nil
         nix-output-monitor
         nix-tree
-        self'.packages.cachix
+        cachix
         self'.packages.nix-fast-build
         config.treefmt.build.wrapper
         statix
