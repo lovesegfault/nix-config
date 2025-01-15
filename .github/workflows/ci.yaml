@@ -50,6 +50,9 @@ jobs:
       build: ${{ steps.get-attrs.outputs.build }}
       eval: ${{ steps.get-attrs.outputs.eval }}
     steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: nix/hosts.nix
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
           extra-conf: ${{ env.nix-conf }}
@@ -62,7 +65,7 @@ jobs:
           summary "# CI"
           TMP="$(mktemp -d)"
           # host packages
-          nix eval --json '${{ env.flake }}#hosts' | jq -c '
+          nix eval --json -f nix/hosts.nix | jq -c '
             to_entries
             | map({
                 name: .key,
