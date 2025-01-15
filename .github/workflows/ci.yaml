@@ -19,7 +19,10 @@ env:
 
 jobs:
   flake-check:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
     steps:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
@@ -32,7 +35,10 @@ jobs:
       - name: nix-flake-check
         run: nix flake check '${{ env.flake }}'
   flake-show:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
     steps:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
@@ -75,7 +81,7 @@ jobs:
             | map(
                 if .hostPlatform  == "x86_64-linux" then .runsOn="ubuntu-latest"
                 elif .hostPlatform == "x86_64-darwin" then .runsOn="macos-13"
-                elif .hostPlatform == "aarch64-darwin" then .runsOn="macos-14"
+                elif .hostPlatform == "aarch64-darwin" then .runsOn="macos-latest"
                 else .evalOnly=true | .runsOn="ubuntu-latest"
                 end
             )
