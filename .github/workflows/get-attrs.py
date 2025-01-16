@@ -12,9 +12,9 @@ from typing import List, Self
 IN_GITHUB_ACTIONS = "GITHUB_ACTIONS" in os.environ
 
 GITHUB_PLATFORMS = {
-    "x86_64-linux": "ubuntu-latest",
+    "x86_64-linux": "ubuntu-24.04",
     "x86_64-darwin": "macos-13",
-    "aarch64-darwin": "macos-latest",
+    "aarch64-darwin": "macos-15",
 }
 
 
