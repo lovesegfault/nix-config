@@ -22,7 +22,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest ]
+        os: [ ubuntu-24.04, macos-15 ]
     steps:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
@@ -38,7 +38,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest ]
+        os: [ ubuntu-24.04, macos-15 ]
     steps:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
@@ -51,7 +51,7 @@ jobs:
       - name: nix-flake-show
         run: nix flake show '${{ env.flake }}'
   get-attrs:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       build: ${{ steps.get-attrs.outputs.build }}
       eval: ${{ steps.get-attrs.outputs.eval }}
@@ -124,7 +124,7 @@ jobs:
           nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
 
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [ flake-check, flake-show, build, eval ]
     if: always()
     steps:
