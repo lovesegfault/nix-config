@@ -29,6 +29,7 @@
         # GitHub Actions
         act
         actionlint
+        python3
         python3Packages.pyflakes
         shellcheck
 

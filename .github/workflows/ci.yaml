@@ -58,91 +58,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          sparse-checkout: nix/hosts.nix
+          sparse-checkout: |
+            nix/hosts.nix
+            .github/workflows/get-attrs.py
       - uses: nixbuild/nix-quick-install-action@v29
       - id: get-attrs
         run: |
-          function summary() {
-            printf '%s\n' "${*}" >> "$GITHUB_STEP_SUMMARY"
-          }
-
-          summary "# CI"
-          TMP="$(mktemp -d)"
-          # host packages
-          nix eval --json -f nix/hosts.nix | jq -c '
-            to_entries
-            | map({
-                name: .key,
-                evalOnly: false,
-                hostPlatform: .value.hostPlatform,
-                large: .value.large,
-                attr: "packages.\(.value.hostPlatform).\(.key)"
-            })
-            | map(
-                if .hostPlatform  == "x86_64-linux" then .runsOn="ubuntu-latest"
-                elif .hostPlatform == "x86_64-darwin" then .runsOn="macos-13"
-                elif .hostPlatform == "aarch64-darwin" then .runsOn="macos-latest"
-                else .evalOnly=true | .runsOn="ubuntu-latest"
-                end
-            )
-            | map(if .large then .evalOnly=true end)
-          ' >"$TMP/hostAttrs.json"
-
-          # dev shells
-          jq -c '
-            unique_by(.hostPlatform)
-            | sort_by(.runsOn)
-            | map(
-                .attr = "devShells.\(.hostPlatform).default.inputDerivation"
-                | .name = "devShell-\(.hostPlatform)"
-              )
-          ' "$TMP/hostAttrs.json" >"$TMP/shellAttrs.json"
-
-          # join shell and host attrs
-          jq -c -s add "$TMP/hostAttrs.json" "$TMP/shellAttrs.json" >"$TMP/attrs.json"
-
-          # warn about eval-only attrs
-          read -r -a evalOnlyAttrs < \
-            <(jq -c -r 'map(select(.evalOnly) | .name) | @sh' "$TMP/attrs.json" | tr -d \')
-          if [[ "${#evalOnlyAttrs[@]}" -ne 0 ]]; then
-            printf -v attrs "\`%s\`, " "${evalOnlyAttrs[@]}"
-            summary \
-              "- ⚠️ The following attributes will only be evaluated: ${attrs%, }"
-          fi
-
-          # add all to-build attrs to the summary
-          read -r -a buildAttrs < \
-            <(jq -c -r 'map(select(.evalOnly | not) | .name) | @sh' "$TMP/attrs.json" | tr -d \')
-          if [[ "${#buildAttrs[@]}" -ne 0 ]]; then
-            printf -v attrs "\`%s\`, " "${buildAttrs[@]}"
-            summary \
-              "- ✅ The following attributes will be built: ${attrs%, }"
-          fi
-
-          # check for dupes
-          duplicate_count="$(jq -r '
-            group_by([.name, .attr]) | map(select(length>1)) | length
-            ' "$TMP/attrs.json")"
-          if [[ "$duplicate_count" -ne 0 ]]; then
-            summary \
-              "- ‼️ Duplicate entries in \`attrs.json\`: \`$(cat "$TMP/attrs.json")\`"
-            exit 1
-          fi
-
-          # split build and evalOnly attrs
-          jq -c 'map(select(.evalOnly))' <"$TMP/attrs.json" >"$TMP/eval.json"
-          jq -c 'map(select(.evalOnly | not))' <"$TMP/attrs.json" >"$TMP/build.json"
-
-          echo "eval.json"
-          cat "$TMP/eval.json"
-          echo "---------"
-
-          echo "build.json"
-          cat "$TMP/build.json"
-          echo "---------"
-
-          echo "build=$(<"$TMP/build.json")" >>"$GITHUB_OUTPUT"
-          echo "eval=$(<"$TMP/eval.json")" >>"$GITHUB_OUTPUT"
+          ./.github/workflows/get-attrs.py
 
   eval:
     name: eval ${{ matrix.attrs.name }}
