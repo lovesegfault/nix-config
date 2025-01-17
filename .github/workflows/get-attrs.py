@@ -1,15 +1,12 @@
 #!/usr/bin/env python3
 
-import dataclasses
 import itertools
 import json
 import os
 import subprocess
 import sys
 from pathlib import Path
-from typing import List, Self
-
-IN_GITHUB_ACTIONS = "GITHUB_ACTIONS" in os.environ
+from typing import Callable, Iterable, List, Self, Sequence
 
 GITHUB_PLATFORMS = {
     "x86_64-linux": "ubuntu-24.04",
@@ -22,54 +19,55 @@ def main():
     summary = Summary()
     summary.write("# CI")
 
-    hosts = parse_hosts_file()
-    devShells = [
-        DevShell.from_platform(p) for p in set([h.hostPlatform for h in hosts])
-    ]
+    flake = Flake.from_hosts_file()
 
-    evalOnlyAttrs = [x for x in itertools.chain(hosts, devShells) if x.evalOnly]
-    if evalOnlyAttrs:
-        evalNames = [a.name for a in evalOnlyAttrs]
+    if flake.evalOnly:
+        evalNames = ",".join([a.name for a in flake.evalOnly])
         summary.write(
-            f"- ⚠️ The following attributes will only be evaluated: {','.join(evalNames)}"
+            f"- ⚠️ The following attributes will only be evaluated: {evalNames}"
         )
+    if flake.buildables:
+        buildNames = ",".join([a.name for a in flake.buildables])
+        summary.write(f"- ✅ The following attributes will be built: {buildNames}")
 
-    buildAttrs = [x for x in itertools.chain(hosts, devShells) if not x.evalOnly]
-    if buildAttrs:
-        buildNames = [a.name for a in buildAttrs]
-        summary.write(
-            f"- ✅ The following attributes will be built: {','.join(buildNames)}"
-        )
-
-    # check for duplicates
-    seen = set()
-    dupes = []
-    for x in itertools.chain(evalOnlyAttrs, buildAttrs):
-        if x.attr in seen:
-            dupes.append(x.attr)
-        else:
-            seen.add(x.attr)
-    if dupes:
-        msg = f"- ‼️ Duplicate attributes found: {','.join(dupes)}"
+    duplicates = find_duplicates_by(lambda x: x.attr, flake.all())
+    if duplicates:
+        duplicateAttrs = ",".join(duplicates)
+        msg = f"- ‼️ Duplicate attributes found: {duplicateAttrs}"
         summary.write(msg)
         raise RuntimeError(msg)
 
     output = Output()
-
-    def json_list(attrList) -> str:
-        return json.dumps([dataclasses.asdict(x) for x in attrList])
-
-    output.write("build", json_list(buildAttrs))
-    output.write("eval", json_list(evalOnlyAttrs))
+    output.write_kv("build", json.dumps([o.__dict__ for o in flake.buildables]))
+    output.write_kv("eval", json.dumps([o.__dict__ for o in flake.evalOnly]))
 
 
-class Summary:
-    def __init__(self) -> None:
-        if IN_GITHUB_ACTIONS:
-            summaryFile = os.environ.get("GITHUB_STEP_SUMMARY")
-            if summaryFile is None:
-                raise RuntimeError("did not find GITHUB_STEP_SUMMARY in environment")
-            self.file = open(summaryFile, "a")
+def partition[T](
+    pred: Callable[[T], bool], iterable: Iterable[T]
+) -> tuple[Iterable[T], Iterable[T]]:
+    t1, t2 = itertools.tee(iterable)
+    return filter(pred, t2), itertools.filterfalse(pred, t1)
+
+
+def find_duplicates_by[I, G](by: Callable[[I], G], iterable: Iterable[I]) -> List[G]:
+    seen = set()
+    dupes = []
+    for i in iterable:
+        grouped_by = by(i)
+        if grouped_by in seen:
+            dupes.append(grouped_by)
+        else:
+            seen.add(grouped_by)
+    return dupes
+
+
+class ActionsWriter:
+    def __init__(self, outputFileEnvVar: str) -> None:
+        if "GITHUB_ACTIONS" in os.environ:
+            outputFile = os.environ.get(outputFileEnvVar)
+            if outputFile is None:
+                raise RuntimeError(f"did not find {outputFileEnvVar} in environment")
+            self.file = open(outputFile, "a")
         else:
             self.file = sys.stdout
 
@@ -81,108 +79,104 @@ class Summary:
         self.file.flush()
 
 
-class Output:
+class Summary(ActionsWriter):
     def __init__(self) -> None:
-        if IN_GITHUB_ACTIONS:
-            outputFile = os.environ.get("GITHUB_OUTPUT")
-            if outputFile is None:
-                raise RuntimeError("did not find GITHUB_OUTPUT in environment")
-            self.file = open(outputFile, "a")
-        else:
-            self.file = sys.stdout
-
-    def __exit__(self) -> None:
-        self.file.close()
-
-    def write(self, key: str, data: str) -> None:
-        self.file.write(f"{key}={data}\n")
-        self.file.flush()
-
-    pass
+        super().__init__("GITHUB_STEP_SUMMARY")
 
 
-@dataclasses.dataclass()
-class DevShell:
+class Output(ActionsWriter):
+    def __init__(self) -> None:
+        super().__init__("GITHUB_OUTPUT")
+
+    def write_kv(self, key: str, value: str) -> None:
+        super().write(f"{key}={value}")
+
+
+class Buildable:
     name: str
+    hostPlatform: str
+
     attr: str
     evalOnly: bool
     runsOn: str
 
-    @classmethod
-    def from_platform(cls, hostPlatform: str) -> Self:
+    def __init__(
+        self, name: str, hostPlatform: str, attr: str, large: bool = False
+    ) -> None:
+        self.name = name
+        self.hostPlatform = hostPlatform
+        self.attr = attr
+
+        if self.hostPlatform in GITHUB_PLATFORMS:
+            self.runsOn = GITHUB_PLATFORMS[self.hostPlatform]
+            self.evalOnly = large
+        else:
+            self.runsOn = GITHUB_PLATFORMS["x86_64-linux"]
+            self.evalOnly = True
+
+    def toJSON(self) -> str:
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True)
+
+
+class DevShell(Buildable):
+    def __init__(self, hostPlatform: str) -> None:
         name = f"devShell-{hostPlatform}"
         attr = f"devShells.{hostPlatform}.default.inputDerivation"
-        if hostPlatform in GITHUB_PLATFORMS:
-            evalOnly = False
-            runsOn = GITHUB_PLATFORMS[hostPlatform]
-        else:
-            evalOnly = True
-            runsOn = "ubuntu-latest"
-        return cls(name, attr, evalOnly, runsOn)
+        super().__init__(name, hostPlatform, attr)
 
 
-@dataclasses.dataclass()
-class HostConfig:
-    name: str
-    kind: str
-    hostPlatform: str
-    large: bool
-    address: str | None = None
-    pubkey: str | None = None
-    remoteBuild: bool = False
-    homeDirectory: str | None = None
+class Host(Buildable):
+    def __init__(self, name: str, hostPlatform: str, large: bool) -> None:
+        attr = f"packages.{hostPlatform}.{name}"
+        super().__init__(name, hostPlatform, attr, large)
 
-    evalOnly: bool = False
-    runsOn: str = "ubuntu-latest"
-    attr: str = "."
+
+class Flake:
+    buildables: Sequence[Buildable]
+    evalOnly: Sequence[Buildable]
+
+    def __init__(self, hosts: List[Host]) -> None:
+        devShells = [DevShell(p) for p in set([h.hostPlatform for h in hosts])]
+        evalOnly, buildables = map(
+            list, partition(lambda a: a.evalOnly, itertools.chain(hosts, devShells))
+        )
+        self.buildables = buildables
+        self.evalOnly = evalOnly
+
+    def all(self) -> Iterable[Buildable]:
+        return itertools.chain(self.buildables, self.evalOnly)
 
     @classmethod
-    def from_json(cls, name: str, data: dict) -> Self:
-        data["kind"] = data.pop("type")
-        data["name"] = name
-        cfg = cls(**data)
+    def from_hosts_file(cls) -> Self:
+        hosts_path = Flake.find_hosts_file()
+        raw = subprocess.run(
+            ["nix", "eval", "--json", "-f", hosts_path],
+            capture_output=True,
+            check=True,
+            text=True,
+        ).stdout
+        parsed = json.loads(raw)
+        hosts = []
+        for name, cfg in parsed.items():
+            hosts.append(Host(name, cfg["hostPlatform"], cfg["large"]))
 
-        if cfg.large:
-            cfg.evalOnly = True
+        return cls(hosts)
 
-        if cfg.hostPlatform in GITHUB_PLATFORMS:
-            cfg.runsOn = GITHUB_PLATFORMS[cfg.hostPlatform]
-        else:
-            cfg.evalOnly = True
-
-        cfg.attr = f"packages.{cfg.hostPlatform}.{cfg.name}"
-
-        return cfg
-
-
-def find_hosts_file() -> Path:
-    script_dir = Path(__file__).absolute().parent
-    toplevel = subprocess.run(
-        ["git", "rev-parse", "--show-toplevel"],
-        cwd=script_dir,
-        capture_output=True,
-        check=True,
-        text=True,
-    )
-    toplevel = Path(toplevel.stdout.strip())
-    hosts_path = toplevel / "nix" / "hosts.nix"
-
-    if not hosts_path.exists():
-        raise RuntimeError(f"did not find host definition in {hosts_path}")
-
-    return hosts_path
-
-
-def parse_hosts_file() -> List[HostConfig]:
-    hosts_path = find_hosts_file()
-    raw = subprocess.run(
-        ["nix", "eval", "--json", "-f", hosts_path],
-        capture_output=True,
-        check=True,
-        text=True,
-    ).stdout
-    parsed = json.loads(raw)
-    return [HostConfig.from_json(name, config) for name, config in parsed.items()]
+    @staticmethod
+    def find_hosts_file() -> Path:
+        script_dir = Path(__file__).absolute().parent
+        toplevel = subprocess.run(
+            ["git", "rev-parse", "--show-toplevel"],
+            cwd=script_dir,
+            capture_output=True,
+            check=True,
+            text=True,
+        )
+        toplevel = Path(toplevel.stdout.strip())
+        hosts_path = toplevel / "nix" / "hosts.nix"
+        if not hosts_path.exists():
+            raise RuntimeError(f"did not find host definition in {hosts_path}")
+        return hosts_path
 
 
 if __name__ == "__main__":
