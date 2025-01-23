@@ -55,6 +55,7 @@ jobs:
     outputs:
       build: ${{ steps.get-attrs.outputs.build }}
       eval: ${{ steps.get-attrs.outputs.eval }}
+      darwin-hosts: ${{ steps.get-attrs.outputs.darwin-hosts }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -66,6 +67,7 @@ jobs:
         run: ./.github/workflows/get-attrs.py
   eval:
     name: eval ${{ matrix.attrs.name }}
+    if: ${{ fromJson(needs.get-attrs.outputs.eval)[0] != null }}
     runs-on: ${{ matrix.attrs.runsOn }}
     needs: [ get-attrs ]
     strategy:
@@ -74,7 +76,6 @@ jobs:
         attrs: ${{ fromJson(needs.get-attrs.outputs.eval) }}
     env:
       system: ${{ matrix.attrs.hostPlatform }}
-    if: ${{ fromJson(needs.get-attrs.outputs.eval)[0] != null }}
     steps:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
@@ -85,9 +86,70 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: vim-config,nix-community
       - name: eval
-        if: ${{ matrix.attrs.evalOnly }}
         run: |
           nix eval --raw '${{ env.flake }}#${{ matrix.attrs.attr }}'
+  build-linux-builder:
+    name: build linux-builder for ${{ matrix.attrs.name }}
+    if: ${{ fromJson(needs.get-attrs.outputs.darwin-hosts)[0] != null }}
+    runs-on: ${{ matrix.attrs.equivalentLinuxRunner }}
+    needs: [ get-attrs ]
+    strategy:
+      fail-fast: false
+      matrix:
+        attrs: ${{ fromJson(needs.get-attrs.outputs.darwin-hosts) }}
+    env:
+      system: ${{ matrix.attrs.equivalentLinuxPlatform }}
+    steps:
+      - uses: DeterminateSystems/nix-installer-action@v16
+        with:
+          extra-conf: ${{ env.nix-conf }}
+      - uses: cachix/cachix-action@v15
+        with:
+          name: nix-config
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          extraPullNames: vim-config,nix-community
+      - name: nix-fast-build
+        run: |
+          declare -a args=(
+            '--no-nom'
+            '--skip-cached'
+            '--systems=${{ env.system }}'
+            '--option' 'accept-flake-config' 'true'
+            '--retries=3'
+            '--flake=${{ env.flake }}#${{ matrix.attrs.linuxBuilderAttr }}'
+          )
+          nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
+  build-darwin-host:
+    name: build ${{ matrix.attrs.name }}
+    if: ${{ fromJson(needs.get-attrs.outputs.darwin-hosts)[0] != null }}
+    runs-on: ${{ matrix.attrs.runsOn }}
+    needs: [ get-attrs, build-linux-builder ]
+    strategy:
+      fail-fast: false
+      matrix:
+        attrs: ${{ fromJson(needs.get-attrs.outputs.darwin-hosts) }}
+    env:
+      system: ${{ matrix.attrs.hostPlatform }}
+    steps:
+      - uses: DeterminateSystems/nix-installer-action@v16
+        with:
+          extra-conf: ${{ env.nix-conf }}
+      - uses: cachix/cachix-action@v15
+        with:
+          name: nix-config
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          extraPullNames: vim-config,nix-community
+      - name: nix-fast-build
+        run: |
+          declare -a args=(
+            '--no-nom'
+            '--skip-cached'
+            '--systems=${{ env.system }}'
+            '--option' 'accept-flake-config' 'true'
+            '--retries=3'
+            '--flake=${{ env.flake }}#${{ matrix.attrs.attr }}'
+          )
+          nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
   build:
     name: build ${{ matrix.attrs.name }}
     runs-on: ${{ matrix.attrs.runsOn }}
@@ -115,16 +177,15 @@ jobs:
             '--systems=${{ env.system }}'
             '--option' 'accept-flake-config' 'true'
             '--retries=3'
+            '--flake=${{ env.flake }}#${{ matrix.attrs.attr }}'
           )
-
-          args+=('--flake=${{ env.flake }}#${{ matrix.attrs.attr }}')
           nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
   check:
     runs-on: ubuntu-24.04
-    needs: [ flake-check, flake-show, build, eval ]
+    needs: [ flake-check, flake-show, build, eval, build-linux-builder, build-darwin-host ]
     if: always()
     steps:
       - uses: re-actors/alls-green@release/v1
         with:
           jobs: ${{ toJSON(needs) }}
-          allowed-skips: eval
+          allowed-skips: eval, build-linux-builder, build-darwin-host
