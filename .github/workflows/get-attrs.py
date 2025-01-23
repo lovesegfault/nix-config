@@ -6,7 +6,7 @@ import os
 import subprocess
 import sys
 from pathlib import Path
-from typing import Callable, Iterable, List, Self, Sequence
+from typing import Callable, Iterable, List, Optional, Self, Sequence
 
 GITHUB_PLATFORMS = {
     "x86_64-linux": "ubuntu-24.04",
@@ -38,9 +38,22 @@ def main():
         summary.write(msg)
         raise RuntimeError(msg)
 
+    darwinHosts, buildables = partition(
+        lambda drv: drv.isDarwinHost(), flake.buildables
+    )
+
     output = Output()
-    output.write_kv("build", json.dumps([o.__dict__ for o in flake.buildables]))
-    output.write_kv("eval", json.dumps([o.__dict__ for o in flake.evalOnly]))
+    indent = 4 if output.is_stdout else None
+
+    output.write_kv(
+        "eval", json.dumps([o.__dict__ for o in flake.evalOnly], indent=indent)
+    )
+    output.write_kv(
+        "build", json.dumps([o.__dict__ for o in buildables], indent=indent)
+    )
+    output.write_kv(
+        "darwin-hosts", json.dumps([o.__dict__ for o in darwinHosts], indent=indent)
+    )
 
 
 def partition[T](
@@ -63,14 +76,18 @@ def find_duplicates_by[I, G](by: Callable[[I], G], iterable: Iterable[I]) -> Lis
 
 
 class ActionsWriter:
+    is_stdout: bool
+
     def __init__(self, outputFileEnvVar: str) -> None:
         if "GITHUB_ACTIONS" in os.environ:
             outputFile = os.environ.get(outputFileEnvVar)
             if outputFile is None:
                 raise RuntimeError(f"did not find {outputFileEnvVar} in environment")
             self.file = open(outputFile, "a")
+            self.is_stdout = False
         else:
             self.file = sys.stdout
+            self.is_stdout = True
 
     def __exit__(self) -> None:
         self.file.close()
@@ -101,6 +118,9 @@ class Derivation:
     buildable: bool
     runsOn: str
 
+    equivalentLinuxPlatform: Optional[str] = None
+    equivalentLinuxRunner: Optional[str] = None
+
     def __init__(
         self, name: str, hostPlatform: str, attr: str, large: bool = False
     ) -> None:
@@ -115,8 +135,15 @@ class Derivation:
             self.runsOn = GITHUB_PLATFORMS["x86_64-linux"]
             self.buildable = False
 
+        if self.hostPlatform.endswith("darwin"):
+            self.equivalentLinuxPlatform = self.hostPlatform.replace("darwin", "linux")
+            self.equivalentLinuxRunner = GITHUB_PLATFORMS[self.equivalentLinuxPlatform]
+
     def toJSON(self) -> str:
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True)
+
+    def isDarwinHost(self) -> bool:
+        return isinstance(self, Host) and self.hostPlatform.endswith("darwin")
 
 
 class DevShell(Derivation):
@@ -127,9 +154,13 @@ class DevShell(Derivation):
 
 
 class Host(Derivation):
+    linuxBuilderAttr: Optional[str] = None
+
     def __init__(self, name: str, hostPlatform: str, large: bool) -> None:
         attr = f"packages.{hostPlatform}.{name}"
         super().__init__(name, hostPlatform, attr, large)
+        if self.isDarwinHost():
+            self.linuxBuilderAttr = f"darwinConfigurations.{name}.config.nix.linux-builder.package.nixosConfig.system.build.toplevel"
 
 
 class Flake:
