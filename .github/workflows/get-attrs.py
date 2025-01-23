@@ -93,7 +93,7 @@ class Output(ActionsWriter):
         super().write(f"{key}={value}")
 
 
-class Buildable:
+class Derivation:
     name: str
     hostPlatform: str
 
@@ -119,22 +119,22 @@ class Buildable:
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True)
 
 
-class DevShell(Buildable):
+class DevShell(Derivation):
     def __init__(self, hostPlatform: str) -> None:
         name = f"devShell-{hostPlatform}"
         attr = f"devShells.{hostPlatform}.default.inputDerivation"
         super().__init__(name, hostPlatform, attr)
 
 
-class Host(Buildable):
+class Host(Derivation):
     def __init__(self, name: str, hostPlatform: str, large: bool) -> None:
         attr = f"packages.{hostPlatform}.{name}"
         super().__init__(name, hostPlatform, attr, large)
 
 
 class Flake:
-    buildables: Sequence[Buildable]
-    evalOnly: Sequence[Buildable]
+    buildables: Sequence[Derivation]
+    evalOnly: Sequence[Derivation]
 
     def __init__(self, hosts: List[Host]) -> None:
         devShells = [DevShell(p) for p in set([h.hostPlatform for h in hosts])]
@@ -144,7 +144,7 @@ class Flake:
         self.buildables = buildables
         self.evalOnly = evalOnly
 
-    def all(self) -> Iterable[Buildable]:
+    def all(self) -> Iterable[Derivation]:
         return itertools.chain(self.buildables, self.evalOnly)
 
     @classmethod
