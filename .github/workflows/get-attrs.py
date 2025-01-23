@@ -98,7 +98,7 @@ class Derivation:
     hostPlatform: str
 
     attr: str
-    evalOnly: bool
+    buildable: bool
     runsOn: str
 
     def __init__(
@@ -110,10 +110,10 @@ class Derivation:
 
         if self.hostPlatform in GITHUB_PLATFORMS:
             self.runsOn = GITHUB_PLATFORMS[self.hostPlatform]
-            self.evalOnly = large
+            self.buildable = not large
         else:
             self.runsOn = GITHUB_PLATFORMS["x86_64-linux"]
-            self.evalOnly = True
+            self.buildable = False
 
     def toJSON(self) -> str:
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True)
@@ -138,8 +138,8 @@ class Flake:
 
     def __init__(self, hosts: List[Host]) -> None:
         devShells = [DevShell(p) for p in set([h.hostPlatform for h in hosts])]
-        evalOnly, buildables = map(
-            list, partition(lambda a: a.evalOnly, itertools.chain(hosts, devShells))
+        buildables, evalOnly = map(
+            list, partition(lambda a: a.buildable, itertools.chain(hosts, devShells))
         )
         self.buildables = buildables
         self.evalOnly = evalOnly
