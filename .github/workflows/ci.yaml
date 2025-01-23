@@ -16,6 +16,7 @@ env:
     always-allow-substitutes = true
     builders-use-substitutes = true
     max-jobs = auto
+  nix-fast-build-args: --no-nom --skip-cached --retries=3 --option accept-flake-config true
 
 jobs:
   flake-check:
@@ -109,16 +110,8 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: vim-config,nix-community
       - name: nix-fast-build
-        run: |
-          declare -a args=(
-            '--no-nom'
-            '--skip-cached'
-            '--systems=${{ env.system }}'
-            '--option' 'accept-flake-config' 'true'
-            '--retries=3'
-            '--flake=${{ env.flake }}#${{ matrix.attrs.linuxBuilderAttr }}'
-          )
-          nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
+        run: nix run '${{ env.flake }}#nix-fast-build' -- ${{ env.nix-fast-build-args }} --systems=${{ env.system }} --flake='${{ env.flake }}#${{ matrix.attrs.linuxBuilderAttr }}'
+
   build-darwin-host:
     name: build ${{ matrix.attrs.name }}
     if: ${{ fromJson(needs.get-attrs.outputs.darwin-hosts)[0] != null }}
@@ -140,16 +133,7 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: vim-config,nix-community
       - name: nix-fast-build
-        run: |
-          declare -a args=(
-            '--no-nom'
-            '--skip-cached'
-            '--systems=${{ env.system }}'
-            '--option' 'accept-flake-config' 'true'
-            '--retries=3'
-            '--flake=${{ env.flake }}#${{ matrix.attrs.attr }}'
-          )
-          nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
+        run: nix run '${{ env.flake }}#nix-fast-build' -- ${{ env.nix-fast-build-args }} --systems=${{ env.system }} --flake='${{ env.flake }}#${{ matrix.attrs.attr }}'
   build:
     name: build ${{ matrix.attrs.name }}
     runs-on: ${{ matrix.attrs.runsOn }}
@@ -170,16 +154,7 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: vim-config,nix-community
       - name: nix-fast-build
-        run: |
-          declare -a args=(
-            '--no-nom'
-            '--skip-cached'
-            '--systems=${{ env.system }}'
-            '--option' 'accept-flake-config' 'true'
-            '--retries=3'
-            '--flake=${{ env.flake }}#${{ matrix.attrs.attr }}'
-          )
-          nix run '${{ env.flake }}#nix-fast-build' -- "${args[@]}"
+        run: nix run '${{ env.flake }}#nix-fast-build' -- ${{ env.nix-fast-build-args }} --systems=${{ env.system }} --flake='${{ env.flake }}#${{ matrix.attrs.attr }}'
   check:
     runs-on: ubuntu-24.04
     needs: [ flake-check, flake-show, build, eval, build-linux-builder, build-darwin-host ]
