@@ -25,7 +25,7 @@
           };
         };
         output = {
-          "Samsung Display Corp. 0x4167 Unknown" = {
+          "Lenovo Group Limited 0x4145 Unknown" = {
             mode = "2880x1800@60Hz";
             position = "0,0";
             scale = "1";
@@ -47,8 +47,7 @@
       '';
     };
 
-    programs.waybar.settings.main.temperature.hwmon-path =
-      "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon2/temp1_input";
+    programs.waybar.settings.main.temperature.hwmon-path = "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon2/temp1_input";
 
     services.gammastep.settings.general = {
       brightness-day = 1.0;
