@@ -180,7 +180,8 @@
       enable3G = false;
       enableCDMA = false;
       enableModemGPS = false;
-      submitData = true;
+      submitData = false;
+      geoProviderUrl = "https://beacondb.net/v1/geolocate";
     };
     logind = {
       lidSwitch = "suspend";
