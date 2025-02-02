@@ -35,6 +35,8 @@ jobs:
           extraPullNames: vim-config,nix-community
       - name: nix-flake-check
         run: nix flake check '${{ env.flake }}'
+      - name: ls-cache
+        run: ls -la ~/.cache/nix
   flake-show:
     runs-on: ${{ matrix.os }}
     strategy:
