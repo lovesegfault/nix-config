@@ -28,6 +28,11 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
           extra-conf: ${{ env.nix-conf }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/nix
+          key: cache-nix-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: cache-nix-${{ runner.os }}
       - uses: cachix/cachix-action@v15
         with:
           name: nix-config
@@ -35,8 +40,6 @@ jobs:
           extraPullNames: vim-config,nix-community
       - name: nix-flake-check
         run: nix flake check '${{ env.flake }}'
-      - name: ls-cache
-        run: ls -la ~/.cache/nix
   flake-show:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -46,6 +49,11 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
           extra-conf: ${{ env.nix-conf }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/nix
+          key: cache-nix-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: cache-nix-${{ runner.os }}
       - uses: cachix/cachix-action@v15
         with:
           name: nix-config
@@ -83,6 +91,11 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
           extra-conf: ${{ env.nix-conf }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/nix
+          key: cache-nix-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: cache-nix-${{ runner.os }}
       - uses: cachix/cachix-action@v15
         with:
           name: nix-config
@@ -106,6 +119,11 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
           extra-conf: ${{ env.nix-conf }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/nix
+          key: cache-nix-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: cache-nix-${{ runner.os }}
       - uses: cachix/cachix-action@v15
         with:
           name: nix-config
@@ -129,6 +147,11 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
           extra-conf: ${{ env.nix-conf }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/nix
+          key: cache-nix-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: cache-nix-${{ runner.os }}
       - uses: cachix/cachix-action@v15
         with:
           name: nix-config
@@ -150,6 +173,11 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
           extra-conf: ${{ env.nix-conf }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/nix
+          key: cache-nix-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: cache-nix-${{ runner.os }}
       - uses: cachix/cachix-action@v15
         with:
           name: nix-config
