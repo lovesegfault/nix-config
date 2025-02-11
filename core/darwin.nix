@@ -55,10 +55,7 @@
   programs.fish.loginShellInit = "fish_add_path --move --prepend --path $HOME/.nix-profile/bin /run/wrappers/bin /etc/profiles/per-user/$USER/bin /run/current-system/sw/bin /nix/var/nix/profiles/default/bin";
 
   services = {
-    nix-daemon = {
-      enable = true;
-      logFile = "/var/log/nix-daemon.log";
-    };
+    nix-daemon.logFile = "/var/log/nix-daemon.log";
     tailscale.enable = true;
   };
 
