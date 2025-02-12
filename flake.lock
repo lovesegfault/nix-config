@@ -668,7 +668,7 @@
         "nixpkgs": "nixpkgs",
         "stylix": "stylix",
         "systems": "systems_2",
-        "tinted-schemes": "tinted-schemes",
+        "tinted-schemes": "tinted-schemes_2",
         "treefmt-nix": "treefmt-nix_2",
         "truecolor-check": "truecolor-check"
       }
@@ -720,15 +720,16 @@
         "systems": "systems",
         "tinted-foot": "tinted-foot",
         "tinted-kitty": "tinted-kitty",
+        "tinted-schemes": "tinted-schemes",
         "tinted-tmux": "tinted-tmux",
         "tinted-zed": "tinted-zed"
       },
       "locked": {
-        "lastModified": 1739215427,
-        "narHash": "sha256-1yIsiPwwxXal7+wkWogjPhsM5BjRlK61lAHQtlX8s04=",
+        "lastModified": 1739309576,
+        "narHash": "sha256-IMK19j1b2VH44lUad2/3BSski9T4ecrCHFlkjKWQV2o=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "4af2686c1c62176d0ce28c4d55e813ae5ed52b6f",
+        "rev": "d8289c3f0e5995863921ea207392c122f5d59f6d",
         "type": "github"
       },
       "original": {
@@ -802,6 +803,22 @@
       }
     },
     "tinted-schemes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1737565458,
+        "narHash": "sha256-y+9cvOA6BLKT0WfebDsyUpUa/YxKow9hTjBp6HpQv68=",
+        "owner": "tinted-theming",
+        "repo": "schemes",
+        "rev": "ae31625ba47aeaa4bf6a98cf11a8d4886f9463d9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tinted-theming",
+        "repo": "schemes",
+        "type": "github"
+      }
+    },
+    "tinted-schemes_2": {
       "flake": false,
       "locked": {
         "lastModified": 1737565458,
