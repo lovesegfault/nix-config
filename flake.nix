@@ -51,6 +51,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    ez-configs = {
+      url = "github:ehllie/ez-configs";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -151,14 +159,22 @@
       toplevel@{ withSystem, ... }:
       {
         imports = [
+          inputs.ez-configs.flakeModule
           inputs.git-hooks.flakeModule
           inputs.treefmt-nix.flakeModule
         ];
+
         systems = [
           "aarch64-darwin"
           "aarch64-linux"
           "x86_64-linux"
         ];
+
+        ezConfigs = {
+          root = ./.;
+          globalArgs = { inherit inputs; };
+        };
+
         perSystem =
           ctx@{
             config,
