@@ -184,12 +184,12 @@
     smartd.enable = true;
     syncthing.settings.folders = {
       music = {
-        devices = [ ];
+        devices = [ "plato" ];
         path = "/mnt/music";
         type = "receiveonly";
       };
       opus = {
-        devices = [ ];
+        devices = [ "plato" ];
         path = "/mnt/music-opus";
         type = "receiveonly";
       };

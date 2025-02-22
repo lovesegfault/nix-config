@@ -16,6 +16,7 @@ with config.networking;
       settings = {
         devices = {
           jung.id = "GXCBSO2-RQAR3CC-ACW6JWB-IAZHQZO-XZWSYKL-SYB2GNS-T4R5QO2-Q76BXAV";
+          plato.id = "45XG3LH-TLUOK3W-2X2O22E-ZIKAPSP-PF3SPFF-NDIU3AR-P3LGU7T-SP32DAS";
         };
         gui = {
           insecureSkipHostcheck = true;

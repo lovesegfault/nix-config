@@ -187,6 +187,22 @@
     fwupd.enable = true;
     oauth2-proxy.nginx.virtualHosts."stash.${config.networking.hostName}.meurer.org" = { };
     smartd.enable = true;
+    syncthing.settings.folders = {
+      music = {
+        devices = [
+          "jung"
+        ];
+        path = "/mnt/music";
+        type = "sendonly";
+      };
+      opus = {
+        devices = [
+          "jung"
+        ];
+        path = "/mnt/music-opus";
+        type = "sendonly";
+      };
+    };
     zfs = {
       autoScrub.pools = [
         "zroot"
