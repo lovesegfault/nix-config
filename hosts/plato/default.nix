@@ -237,7 +237,13 @@
 
   time.timeZone = "Etc/UTC";
 
-  users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
+  users = {
+    users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
+    groups.media.members = [
+      "bemeurer"
+      config.services.syncthing.user
+    ];
+  };
 
   virtualisation = {
     containers = {
