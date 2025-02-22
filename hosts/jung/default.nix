@@ -188,11 +188,6 @@
         path = "/mnt/music";
         type = "receiveonly";
       };
-      opus = {
-        devices = [ "plato" ];
-        path = "/mnt/music-opus";
-        type = "receiveonly";
-      };
     };
     unbound.settings.server.access-control = [ "10.0.0.0/24 allow" ];
   };

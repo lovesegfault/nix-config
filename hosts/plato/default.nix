@@ -195,13 +195,6 @@
         path = "/mnt/music";
         type = "sendonly";
       };
-      opus = {
-        devices = [
-          "jung"
-        ];
-        path = "/mnt/music-opus";
-        type = "sendonly";
-      };
     };
     zfs = {
       autoScrub.pools = [
