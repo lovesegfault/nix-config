@@ -20,6 +20,7 @@
     ../../services/nginx.nix
     ../../services/oauth2.nix
     ../../services/unbound.nix
+    ../../services/syncthing.nix
 
     ../../users/bemeurer
 
