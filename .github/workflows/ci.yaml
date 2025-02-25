@@ -20,10 +20,17 @@ env:
 
 jobs:
   flake-check:
-    runs-on: ${{ matrix.os }}
+    name: flake check (${{ matrix.systems.platform }})
+    runs-on: ${{ matrix.systems.os }}
     strategy:
       matrix:
-        os: [ ubuntu-24.04, ubuntu-22.04-arm, macos-15 ]
+        systems:
+          - os: ubuntu-24.04
+            platform: x86_64-linux
+          - os: ubuntu-22.04-arm
+            platform: aarch64-linux
+          - os: macos-15
+            platform: aarch64-darwin
     steps:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
@@ -36,10 +43,17 @@ jobs:
       - name: nix-flake-check
         run: nix flake check '${{ env.flake }}'
   flake-show:
-    runs-on: ${{ matrix.os }}
+    name: flake show (${{ matrix.systems.platform }})
+    runs-on: ${{ matrix.systems.os }}
     strategy:
       matrix:
-        os: [ ubuntu-24.04, ubuntu-22.04-arm, macos-15 ]
+        systems:
+          - os: ubuntu-24.04
+            platform: x86_64-linux
+          - os: ubuntu-22.04-arm
+            platform: aarch64-linux
+          - os: macos-15
+            platform: aarch64-darwin
     steps:
       - uses: DeterminateSystems/nix-installer-action@v16
         with:
@@ -67,7 +81,7 @@ jobs:
       - id: get-attrs
         run: ./.github/workflows/get-attrs.py
   eval:
-    name: eval ${{ matrix.attrs.name }}
+    name: eval ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
     if: ${{ fromJson(needs.get-attrs.outputs.eval)[0] != null }}
     runs-on: ${{ matrix.attrs.runsOn }}
     needs: [ get-attrs ]
@@ -90,7 +104,7 @@ jobs:
         run: |
           nix eval --raw '${{ env.flake }}#${{ matrix.attrs.attr }}'
   build-linux-builder:
-    name: build linux-builder for ${{ matrix.attrs.name }}
+    name: build linux-builder for ${{ matrix.attrs.name }} (${{ matrix.attrs.equivalentLinuxPlatform }})
     if: ${{ fromJson(needs.get-attrs.outputs.darwin-hosts)[0] != null }}
     runs-on: ${{ matrix.attrs.equivalentLinuxRunner }}
     needs: [ get-attrs ]
@@ -113,7 +127,7 @@ jobs:
         run: nix run '${{ env.flake }}#nix-fast-build' -- ${{ env.nix-fast-build-args }} --systems=${{ env.system }} --flake='${{ env.flake }}#${{ matrix.attrs.linuxBuilderAttr }}'
 
   build-darwin-host:
-    name: build ${{ matrix.attrs.name }}
+    name: build ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
     if: ${{ fromJson(needs.get-attrs.outputs.darwin-hosts)[0] != null }}
     runs-on: ${{ matrix.attrs.runsOn }}
     needs: [ get-attrs, build-linux-builder ]
@@ -135,7 +149,7 @@ jobs:
       - name: nix-fast-build
         run: nix run '${{ env.flake }}#nix-fast-build' -- ${{ env.nix-fast-build-args }} --systems=${{ env.system }} --flake='${{ env.flake }}#${{ matrix.attrs.attr }}'
   build:
-    name: build ${{ matrix.attrs.name }}
+    name: build ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
     runs-on: ${{ matrix.attrs.runsOn }}
     needs: [ get-attrs ]
     strategy:

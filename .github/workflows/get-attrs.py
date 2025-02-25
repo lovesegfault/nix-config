@@ -148,7 +148,7 @@ class Derivation:
 
 class DevShell(Derivation):
     def __init__(self, hostPlatform: str) -> None:
-        name = f"devShell-{hostPlatform}"
+        name = "devShell"
         attr = f"devShells.{hostPlatform}.default.inputDerivation"
         super().__init__(name, hostPlatform, attr)
 
