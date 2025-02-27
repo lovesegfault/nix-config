@@ -45,15 +45,19 @@ with lib;
 
   programs._1password-gui.polkitPolicyOwners = [ "bemeurer" ];
 
-  home-manager.users.bemeurer = {
-    imports =
-      optionals config.programs.sway.enable [
-        ./graphical
-        ./graphical/sway
-      ]
-      ++ optionals config.services.xserver.windowManager.i3.enable [
-        ./graphical
-        ./graphical/i3
-      ];
-  };
+  home-manager.users.bemeurer =
+    { lib, ... }:
+    {
+      imports =
+        optionals config.programs.sway.enable [
+          ./graphical
+          ./graphical/sway
+        ]
+        ++ optionals config.services.xserver.windowManager.i3.enable [
+          ./graphical
+          ./graphical/i3
+        ];
+      # c.f. https://github.com/danth/stylix/issues/865
+      nixpkgs.overlays = lib.mkForce null;
+    };
 }

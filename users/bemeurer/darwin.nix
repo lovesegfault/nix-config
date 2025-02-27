@@ -1,12 +1,16 @@
 { pkgs, ... }:
 {
-  home-manager.users.bemeurer = {
-    imports = [
-      ./graphical
-      ./trusted
-    ];
-    programs.git.extraConfig.gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-  };
+  home-manager.users.bemeurer =
+    { lib, ... }:
+    {
+      imports = [
+        ./graphical
+        ./trusted
+      ];
+      # c.f. https://github.com/danth/stylix/issues/865
+      nixpkgs.overlays = lib.mkForce null;
+      programs.git.extraConfig.gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+    };
 
   users.users.bemeurer = {
     createHome = true;
