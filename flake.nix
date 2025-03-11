@@ -176,7 +176,7 @@
                 allowUnfree = true;
                 allowAliases = true;
                 permittedInsecurePackages = [
-                  "jitsi-meet-1.0.8043"
+                  "electron-32.3.3"
                 ];
               };
             };
