@@ -498,11 +498,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1741738011,
-        "narHash": "sha256-lBSO62ykjy7U86l+SpdsrIXJ2jKldAukTRrIkEUPKhY=",
+        "lastModified": 1741910881,
+        "narHash": "sha256-VT3BaxYcDRHNYGl/8AzxzriytgJb697wjeVrpfi6yiA=",
         "owner": "lovesegfault",
         "repo": "vim-config",
-        "rev": "2bd9188b4b7b3d128250e27e4e5b4ae10545ef0a",
+        "rev": "db8307eebc944c191756942c13689728d4c152f0",
         "type": "github"
       },
       "original": {
