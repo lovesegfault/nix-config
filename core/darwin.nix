@@ -62,6 +62,6 @@
   system = {
     stateVersion = 4;
     defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
-    includeUninstaller = false;
+    tools.darwin-uninstaller.enable = false;
   };
 }
