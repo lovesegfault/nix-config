@@ -13,7 +13,6 @@
 
     extraConfig = {
       client."99-resample"."stream.properties"."resample.quality" = 15;
-      client-rt."99-resample"."stream.properties"."resample.quality" = 15;
       pipewire-pulse."99-resample"."stream.properties"."resample.quality" = 15;
       pipewire."99-allowed-rates"."context.properties"."default.clock.allowed-rates" = [
         44100
