@@ -67,7 +67,9 @@
   };
 
   users.users.bemeurer = {
-    uid = 504;
+    uid = 503;
     gid = 20;
   };
+
+  ids.gids.nixbld = 350;
 }
