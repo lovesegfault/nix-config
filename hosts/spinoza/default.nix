@@ -226,11 +226,14 @@
 
   security.sudo.wheelNeedsPassword = true;
 
-  stylix.fonts.sizes = {
-    desktop = 16;
-    applications = 16;
-    terminal = 18;
-    popups = 20;
+  stylix = {
+    cursor.size = 16;
+    fonts.sizes = {
+      desktop = 16;
+      applications = 16;
+      terminal = 18;
+      popups = 20;
+    };
   };
 
   systemd.user.services.geoclue-agent.after = [
