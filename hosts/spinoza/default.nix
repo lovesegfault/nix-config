@@ -190,7 +190,6 @@
       powerKey = "hibernate";
       powerKeyLongPress = "reboot";
     };
-    tzupdate.enable = true;
     udev.packages = with pkgs; [ logitech-udev-rules ];
     udisks2.enable = true;
     usbmuxd.enable = true;
