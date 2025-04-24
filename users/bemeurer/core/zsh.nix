@@ -20,7 +20,7 @@
       export LESSHISTFILE="${config.xdg.dataHome}/less_history"
       export CARGO_HOME="${config.xdg.cacheHome}/cargo"
     '';
-    initExtra = ''
+    initContent = ''
       # 1Password CLI
       if [ -e "$HOME/.config/op/plugins.sh" ]; then
         source "$HOME/.config/op/plugins.sh"
