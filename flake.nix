@@ -15,6 +15,8 @@
   };
 
   inputs = {
+    self.lfs = true;
+
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
