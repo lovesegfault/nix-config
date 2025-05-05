@@ -9,13 +9,15 @@
     in
     {
       enable = true;
-      defaultTimeout = 30 * 1000; # millis
-      iconPath = "${homeIcons}:${systemIcons}:${homePixmaps}:${systemPixmaps}";
-      icons = true;
-      maxIconSize = 96;
-      maxVisible = 3;
-      sort = "-time";
-      width = 500;
+      settings = {
+        icons = true;
+        icon-path = "${homeIcons}:${systemIcons}:${homePixmaps}:${systemPixmaps}";
+        default-timeout = 30 * 1000; # millis
+        max-icon-size = 96;
+        max-visible = 3;
+        sort = "-time";
+        width = 500;
+      };
     };
 
   systemd.user.services.mako = {
