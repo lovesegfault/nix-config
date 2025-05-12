@@ -25,8 +25,6 @@
       };
     };
 
-    base16.url = "github:SenchoPens/base16.nix";
-
     tinted-schemes = {
       url = "github:tinted-theming/schemes";
       flake = false;
@@ -113,7 +111,6 @@
     stylix = {
       url = "github:danth/stylix";
       inputs = {
-        base16.follows = "base16";
         flake-compat.follows = "flake-compat";
         flake-utils.follows = "flake-utils";
         home-manager.follows = "home-manager";
