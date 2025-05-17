@@ -22,6 +22,7 @@
       libnotify
       qalculate-gtk
       signal-desktop
+      sioyek
       zulip
     ]
     ++ lib.optionals (stdenv.hostPlatform.system == "x86_64-linux") [
