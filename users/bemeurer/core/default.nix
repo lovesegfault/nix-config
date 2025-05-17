@@ -12,7 +12,7 @@
   imports = [
     impermanence.nixosModules.home-manager.impermanence
     nix-index-database.hmModules.nix-index
-    stylix.homeManagerModules.stylix
+    stylix.homeModules.stylix
 
     ./bash.nix
     ./btop.nix
