@@ -112,7 +112,6 @@
       url = "github:danth/stylix";
       inputs = {
         flake-compat.follows = "flake-compat";
-        flake-utils.follows = "flake-utils";
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
       };
