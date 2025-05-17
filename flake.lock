@@ -231,7 +231,6 @@
       "inputs": {
         "nixpkgs-lib": [
           "stylix",
-          "nur",
           "nixpkgs"
         ]
       },
@@ -653,7 +652,10 @@
     },
     "nur": {
       "inputs": {
-        "flake-parts": "flake-parts_2",
+        "flake-parts": [
+          "stylix",
+          "flake-parts"
+        ],
         "nixpkgs": [
           "stylix",
           "nixpkgs"
@@ -731,9 +733,7 @@
         "flake-compat": [
           "flake-compat"
         ],
-        "flake-utils": [
-          "flake-utils"
-        ],
+        "flake-parts": "flake-parts_2",
         "git-hooks": "git-hooks_2",
         "gnome-shell": "gnome-shell",
         "home-manager": [
@@ -751,11 +751,11 @@
         "tinted-zed": "tinted-zed"
       },
       "locked": {
-        "lastModified": 1747406390,
-        "narHash": "sha256-rDUCzrFPKCOrwJ0Pg9Mo6+8q/7EcSTstl+SotwDL3tA=",
+        "lastModified": 1747440440,
+        "narHash": "sha256-4ivmspXhGLSDF/0avY+E3qP2uVBYVG0C0MQ+ZDI+uCw=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "0e5b1613bd9285700c99e5ecf0a4e31da8cb5e04",
+        "rev": "4d68f1f761285a6236e7d45efa227d6f4af09c80",
         "type": "github"
       },
       "original": {
