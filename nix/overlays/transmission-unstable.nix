@@ -1,12 +1,12 @@
 final: prev: {
   transmission_4 = prev.transmission_4.overrideAttrs (old: {
-    version = "unstable-2024-11-12";
+    version = "unstable-2025-05-10";
 
     src = final.fetchFromGitHub {
       owner = "transmission";
       repo = "transmission";
-      rev = "7e4b4f10a1f90885c0bebb168eedffe153f1cf53";
-      hash = "sha256-yk3alFUU3kO9FgBIZIYmHQ2MsECzQ2IsJO2ROX6/X/o=";
+      rev = "0fd35eb07032fb9a03dea23469f2d8e3abd43000";
+      hash = "sha256-esLFl1WUusesksOrgf12cSNyzjzSCn7gqAqn9c5zs0w=";
       fetchSubmodules = true;
     };
 
@@ -32,10 +32,6 @@ final: prev: {
         cmake/FindRapidJSON.cmake
       # Upstream uses different config file name.
       substituteInPlace CMakeLists.txt --replace 'find_package(UtfCpp)' 'find_package(utf8cpp)'
-
-      # Use gettext even on Darwin
-      substituteInPlace libtransmission/utils.h \
-        --replace-fail '#if defined(HAVE_GETTEXT) && !defined(__APPLE__)' '#if defined(HAVE_GETTEXT)'
     '';
 
     postInstall =
