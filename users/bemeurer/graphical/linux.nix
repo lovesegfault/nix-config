@@ -42,7 +42,7 @@
   qt.enable = true;
 
   services = {
-    gpg-agent.pinentryPackage = pkgs.pinentry-gnome3;
+    gpg-agent.pinentry.package = pkgs.pinentry-gnome3;
     gammastep = {
       enable = true;
       provider = "geoclue2";
