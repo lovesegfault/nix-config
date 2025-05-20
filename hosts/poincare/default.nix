@@ -71,5 +71,7 @@
     gid = 20;
   };
 
+  system.primaryUser = "bemeurer";
+
   ids.gids.nixbld = 350;
 }
