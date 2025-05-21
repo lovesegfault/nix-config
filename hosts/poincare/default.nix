@@ -33,6 +33,7 @@
           "${config.home.homeDirectory}/.local/bin"
         ];
       };
+      services.ollama.enable = true;
     };
 
   nix = {
