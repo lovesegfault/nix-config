@@ -134,7 +134,6 @@
       }
     ];
     masApps = {
-      "Kaleidoscope" = 1575557335;
       "Keynote" = 409183694;
       "Noizio" = 928871589;
       "Numbers" = 409203825;
