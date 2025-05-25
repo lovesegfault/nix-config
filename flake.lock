@@ -861,11 +861,11 @@
     "tinted-schemes_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1748086520,
-        "narHash": "sha256-x0FyEwweWuV2a9j+29BKrYWqxJNmyDEzsx8YMdSKTbk=",
+        "lastModified": 1748180480,
+        "narHash": "sha256-7n0XiZiEHl2zRhDwZd/g+p38xwEoWtT0/aESwTMXWG4=",
         "owner": "tinted-theming",
         "repo": "schemes",
-        "rev": "9aa38a41f02e46e37e60b42d0719efb8454a40b2",
+        "rev": "87d652edd26f5c0c99deda5ae13dfb8ece2ffe31",
         "type": "github"
       },
       "original": {
