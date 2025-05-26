@@ -41,6 +41,10 @@
         greedy = true;
       }
       {
+        name = "claude";
+        greedy = true;
+      }
+      {
         name = "daisydisk";
         greedy = true;
       }
