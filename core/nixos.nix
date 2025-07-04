@@ -75,7 +75,6 @@
       ln -sv ${pkgs.path} $out/nixpkgs
     '';
     rebuild.enableNg = true;
-    switch.enableNg = true;
     stateVersion = "23.05";
   };
 
