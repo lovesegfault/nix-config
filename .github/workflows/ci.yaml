@@ -32,7 +32,7 @@ jobs:
           - os: macos-15
             platform: aarch64-darwin
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v17
+      - uses: DeterminateSystems/nix-installer-action@v18
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v16
@@ -55,7 +55,7 @@ jobs:
           - os: macos-15
             platform: aarch64-darwin
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v17
+      - uses: DeterminateSystems/nix-installer-action@v18
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v16
@@ -92,7 +92,7 @@ jobs:
     env:
       system: ${{ matrix.attrs.hostPlatform }}
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v17
+      - uses: DeterminateSystems/nix-installer-action@v18
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v16
@@ -115,7 +115,7 @@ jobs:
     env:
       system: ${{ matrix.attrs.equivalentLinuxPlatform }}
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v17
+      - uses: DeterminateSystems/nix-installer-action@v18
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v16
@@ -138,7 +138,7 @@ jobs:
     env:
       system: ${{ matrix.attrs.hostPlatform }}
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v17
+      - uses: DeterminateSystems/nix-installer-action@v18
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v16
@@ -159,7 +159,7 @@ jobs:
     env:
       system: ${{ matrix.attrs.hostPlatform }}
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v17
+      - uses: DeterminateSystems/nix-installer-action@v18
         with:
           extra-conf: ${{ env.nix-conf }}
       - uses: cachix/cachix-action@v16
