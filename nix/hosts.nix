@@ -94,9 +94,4 @@ in
     hostPlatform = "x86_64-linux";
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDUZPmPTATZ4nBWstPqlUiguvxr26XWAE9BGPVNNRBR5";
   };
-  trotsky = mkHost {
-    type = "home-manager";
-    hostPlatform = "aarch64-linux";
-    homeDirectory = "/home/bemeurer";
-  };
 }
