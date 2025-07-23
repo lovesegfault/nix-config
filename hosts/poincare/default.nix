@@ -8,33 +8,10 @@
     ../../users/bemeurer
   ];
 
-  environment = {
-    variables.JAVA_HOME = "$(/usr/libexec/java_home)";
-    systemPackages = [ (lib.hiPrio pkgs.opensshWithKerberos) ];
+  networking = {
+    computerName = "poincare";
+    hostName = "poincare";
   };
-
-  homebrew.casks = [
-    {
-      name = "podman-desktop";
-      greedy = true;
-    }
-  ];
-
-  home-manager.users.bemeurer =
-    { config, pkgs, ... }:
-    {
-      imports = [ ../../users/bemeurer/dev/aws.nix ];
-      home = {
-        packages = with pkgs; [
-          cargo-nextest
-          rustup
-        ];
-        sessionPath = [
-          "${config.home.homeDirectory}/.local/bin"
-        ];
-      };
-      services.ollama.enable = true;
-    };
 
   nix = {
     gc.automatic = true;
@@ -68,7 +45,7 @@
   };
 
   users.users.bemeurer = {
-    uid = 503;
+    uid = 502;
     gid = 20;
   };
 
