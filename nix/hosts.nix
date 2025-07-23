@@ -61,11 +61,6 @@ in
     hostPlatform = "x86_64-linux";
     homeDirectory = "/home/bemeurer";
   };
-  hilbert = mkHost {
-    type = "home-manager";
-    hostPlatform = "x86_64-linux";
-    homeDirectory = "/home/bemeurer";
-  };
   jung = mkHost {
     type = "nixos";
     address = "100.80.1.112";
