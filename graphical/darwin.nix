@@ -69,10 +69,6 @@
         greedy = true;
       }
       {
-        name = "keymapp";
-        greedy = true;
-      }
-      {
         name = "languagetool";
         greedy = true;
       }
@@ -93,10 +89,6 @@
         greedy = true;
       }
       {
-        name = "nextcloud";
-        greedy = true;
-      }
-      {
         name = "parallels";
         greedy = true;
       }
@@ -106,10 +98,6 @@
       }
       {
         name = "roon";
-        greedy = true;
-      }
-      {
-        name = "shottr";
         greedy = true;
       }
       {
