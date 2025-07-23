@@ -110,11 +110,7 @@
 
     stylix = {
       url = "github:danth/stylix";
-      inputs = {
-        flake-compat.follows = "flake-compat";
-        home-manager.follows = "home-manager";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     systems.url = "github:nix-systems/default";
