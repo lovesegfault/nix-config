@@ -47,7 +47,8 @@ let
       solutions.default = {
         interpreter = "${final.bash}/bin/bash";
         scripts = [ "bin/${args.name}" ];
-      } // solutions;
+      }
+      // solutions;
     };
 in
 {

@@ -211,7 +211,8 @@ in
           libfaketime
           mtools
           util-linux
-        ] ++ lib.optional config.sdImage.compressImage zstd;
+        ]
+        ++ lib.optional config.sdImage.compressImage zstd;
 
         inherit (config.sdImage) imageName compressImage;
 
