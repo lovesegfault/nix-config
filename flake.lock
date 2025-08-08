@@ -805,11 +805,11 @@
     "tinted-schemes_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1754563794,
-        "narHash": "sha256-F5nmLro01w6uN7yIigw3d3R8EqKEzOB0i/ySVzmFJYA=",
+        "lastModified": 1754664340,
+        "narHash": "sha256-mpOzHOsADgh17tGekyuXxUbUEqXVv4An1vTDvx5pXOI=",
         "owner": "tinted-theming",
         "repo": "schemes",
-        "rev": "a4dc01bf442ec87fdaec71a9546346df7dc423fd",
+        "rev": "6486b6b01cbc5421a9f4a64f726ef4ad97a5b09e",
         "type": "github"
       },
       "original": {
