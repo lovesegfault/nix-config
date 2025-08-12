@@ -12,7 +12,7 @@ jobs:
     outputs:
       flake-inputs: ${{ steps.get-flake-inputs.outputs.flake-inputs }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           sparse-checkout: flake.lock
       - id: get-flake-inputs
@@ -27,7 +27,7 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.get-flake-inputs.outputs.flake-inputs) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           lfs: false
       - uses: DeterminateSystems/nix-installer-action@v19
