@@ -83,6 +83,11 @@ in
     hostPlatform = "aarch64-darwin";
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMYvFEyV+nebaTfrwAULWDmCk0L6O+1OyZc43JnizcIB";
   };
+  popper = mkHost {
+    type = "home-manager";
+    hostPlatform = "x86_64-linux";
+    homeDirectory = "/root";
+  };
   spinoza = mkHost {
     type = "nixos";
     address = "100.68.240.30";
