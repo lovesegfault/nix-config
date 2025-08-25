@@ -40,6 +40,7 @@
         fd
         fzf
         neofetch
+        nh
         nix-closure-size
         nix-output-monitor
         ripgrep
