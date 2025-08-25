@@ -17,6 +17,7 @@
     packages = with pkgs; [
       nixVersions.latest
     ];
+    sessionPath = [ "${config.home.homeDirectory}/.npm-global/bin" ];
   };
 
   programs = {
