@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   self',
   pkgs,
   ...
@@ -13,7 +14,6 @@
       [
         # Nix
         agenix
-        deploy-rs.deploy-rs
         nil
         nix-output-monitor
         nix-tree
@@ -38,7 +38,9 @@
         pre-commit
         rage
       ]
-      ++ (builtins.attrValues config.treefmt.build.programs);
+      ++ (builtins.attrValues config.treefmt.build.programs)
+      # FIXME: deploy-rs references deprecated apple_sdk...
+      ++ (lib.optional (!pkgs.stdenv.hostPlatform.isDarwin) deploy-rs.deploy-rs);
 
     shellHook = ''
       ${config.pre-commit.installationScript}
