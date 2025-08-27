@@ -39,7 +39,7 @@
         eza
         fd
         fzf
-        neofetch
+        macchina
         nh
         nix-closure-size
         nix-output-monitor
