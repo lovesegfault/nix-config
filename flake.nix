@@ -3,9 +3,9 @@
 
   nixConfig = {
     extra-trusted-substituters = [
-      "https://nix-config.cachix.org"
-      "https://vim-config.cachix.org"
-      "https://nix-community.cachix.org"
+      "https://nix-config.cachix.org?priority=1"
+      "https://vim-config.cachix.org?priority=2"
+      "https://nix-community.cachix.org?priority=3"
     ];
     extra-trusted-public-keys = [
       "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
