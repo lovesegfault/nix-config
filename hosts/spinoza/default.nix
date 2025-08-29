@@ -183,12 +183,14 @@
       submitData = false;
       geoProviderUrl = "https://beacondb.net/v1/geolocate";
     };
-    logind = {
-      lidSwitch = "suspend";
-      lidSwitchDocked = "suspend";
-      lidSwitchExternalPower = "ignore";
-      powerKey = "hibernate";
-      powerKeyLongPress = "reboot";
+    logind.settings = {
+      Login = {
+        HandleLidSwitch = "suspend";
+        HandleLidSwitchDocked = "suspend";
+        HandleLidSwitchExternalPower = "ignore";
+        HandlePowerKey = "hibernate";
+        HandlePowerKeyLongPress = "reboot";
+      };
     };
     udev.packages = with pkgs; [ logitech-udev-rules ];
     udisks2.enable = true;
