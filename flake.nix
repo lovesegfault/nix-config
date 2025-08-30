@@ -1,12 +1,13 @@
 {
   description = "lovesegfault's NixOS config";
 
-  nixConfig = {
-    extra-trusted-substituters = [
+  nixConfig = rec {
+    extra-substituters = [
       "https://nix-config.cachix.org?priority=1"
       "https://vim-config.cachix.org?priority=2"
       "https://nix-community.cachix.org?priority=3"
     ];
+    extra-trusted-substituters = extra-substituters;
     extra-trusted-public-keys = [
       "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
       "vim-config.cachix.org-1:lebqx8RjL8pKLZIjCURKN91CB60vISuKpJboWSmjRJM="
