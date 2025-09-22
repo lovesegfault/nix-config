@@ -11,11 +11,6 @@ permissions: {}
 
 env:
   flake: github:${{ github.repository }}/${{ github.sha }}
-  nix-conf: |-
-    accept-flake-config = true
-    always-allow-substitutes = true
-    builders-use-substitutes = true
-    max-jobs = auto
   nix-fast-build-args: --no-nom --skip-cached --retries=3 --option accept-flake-config true
 
 jobs:
@@ -23,7 +18,7 @@ jobs:
     name: flake check (${{ matrix.systems.platform }})
     runs-on: ${{ matrix.systems.os }}
     strategy:
-      matrix:
+      matrix: &systems_matrix
         systems:
           - os: ubuntu-24.04
             platform: x86_64-linux
@@ -32,39 +27,32 @@ jobs:
           - os: macos-15
             platform: aarch64-darwin
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v20
+      - uses: &nix_install DeterminateSystems/nix-installer-action@v20
         with:
-          extra-conf: ${{ env.nix-conf }}
-      - uses: cachix/cachix-action@v16
+          extra-conf: |
+            accept-flake-config = true
+            always-allow-substitutes = true
+            builders-use-substitutes = true
+            max-jobs = auto
+      - uses: &cachix_install cachix/cachix-action@v16
         with:
           name: nix-config
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: vim-config,nix-community
       - name: nix-flake-check
         run: nix flake check '${{ env.flake }}'
+
   flake-show:
     name: flake show (${{ matrix.systems.platform }})
     runs-on: ${{ matrix.systems.os }}
     strategy:
-      matrix:
-        systems:
-          - os: ubuntu-24.04
-            platform: x86_64-linux
-          - os: ubuntu-22.04-arm
-            platform: aarch64-linux
-          - os: macos-15
-            platform: aarch64-darwin
+      matrix: *systems_matrix
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v20
-        with:
-          extra-conf: ${{ env.nix-conf }}
-      - uses: cachix/cachix-action@v16
-        with:
-          name: nix-config
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          extraPullNames: vim-config,nix-community
+      - uses: *nix_install
+      - uses: *cachix_install
       - name: nix-flake-show
         run: nix flake show '${{ env.flake }}'
+
   get-attrs:
     runs-on: ubuntu-24.04
     outputs:
@@ -80,6 +68,7 @@ jobs:
       - uses: nixbuild/nix-quick-install-action@v33
       - id: get-attrs
         run: ./.github/workflows/get-attrs.py
+
   eval:
     name: eval ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
     if: ${{ fromJson(needs.get-attrs.outputs.eval)[0] != null }}
@@ -92,17 +81,12 @@ jobs:
     env:
       system: ${{ matrix.attrs.hostPlatform }}
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v20
-        with:
-          extra-conf: ${{ env.nix-conf }}
-      - uses: cachix/cachix-action@v16
-        with:
-          name: nix-config
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          extraPullNames: vim-config,nix-community
+      - uses: *nix_install
+      - uses: *cachix_install
       - name: eval
         run: |
           nix eval --raw '${{ env.flake }}#${{ matrix.attrs.attr }}'
+
   build-linux-builder:
     name: build linux-builder for ${{ matrix.attrs.name }} (${{ matrix.attrs.equivalentLinuxPlatform }})
     if: ${{ fromJson(needs.get-attrs.outputs.darwin-hosts)[0] != null }}
@@ -115,14 +99,8 @@ jobs:
     env:
       system: ${{ matrix.attrs.equivalentLinuxPlatform }}
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v20
-        with:
-          extra-conf: ${{ env.nix-conf }}
-      - uses: cachix/cachix-action@v16
-        with:
-          name: nix-config
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          extraPullNames: vim-config,nix-community
+      - uses: *nix_install
+      - uses: *cachix_install
       - name: nix-fast-build
         run: nix run '${{ env.flake }}#nix-fast-build' -- ${{ env.nix-fast-build-args }} --systems=${{ env.system }} --flake='${{ env.flake }}#${{ matrix.attrs.linuxBuilderAttr }}'
 
@@ -138,16 +116,11 @@ jobs:
     env:
       system: ${{ matrix.attrs.hostPlatform }}
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v20
-        with:
-          extra-conf: ${{ env.nix-conf }}
-      - uses: cachix/cachix-action@v16
-        with:
-          name: nix-config
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          extraPullNames: vim-config,nix-community
-      - name: nix-fast-build
+      - uses: *nix_install
+      - uses: *cachix_install
+      - name: &nix_build_host nix-fast-build
         run: nix run '${{ env.flake }}#nix-fast-build' -- ${{ env.nix-fast-build-args }} --systems=${{ env.system }} --flake='${{ env.flake }}#${{ matrix.attrs.attr }}'
+
   build:
     name: build ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
     runs-on: ${{ matrix.attrs.runsOn }}
@@ -159,16 +132,10 @@ jobs:
     env:
       system: ${{ matrix.attrs.hostPlatform }}
     steps:
-      - uses: DeterminateSystems/nix-installer-action@v20
-        with:
-          extra-conf: ${{ env.nix-conf }}
-      - uses: cachix/cachix-action@v16
-        with:
-          name: nix-config
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          extraPullNames: vim-config,nix-community
-      - name: nix-fast-build
-        run: nix run '${{ env.flake }}#nix-fast-build' -- ${{ env.nix-fast-build-args }} --systems=${{ env.system }} --flake='${{ env.flake }}#${{ matrix.attrs.attr }}'
+      - uses: *nix_install
+      - uses: *cachix_install
+      - name: *nix_build_host
+
   check:
     runs-on: ubuntu-24.04
     needs: [ flake-check, flake-show, build, eval, build-linux-builder, build-darwin-host ]
