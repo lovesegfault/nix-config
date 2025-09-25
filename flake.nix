@@ -186,7 +186,8 @@
             pre-commit = {
               check.enable = true;
               settings.hooks = {
-                actionlint.enable = true;
+                # FIXME: https://github.com/rhysd/actionlint/issues/133
+                # actionlint.enable = true;
                 nil.enable = true;
                 shellcheck.enable = true;
                 statix.enable = true;
