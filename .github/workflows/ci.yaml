@@ -77,7 +77,7 @@ jobs:
           sparse-checkout: |
             nix/hosts.nix
             .github/workflows/get-attrs.py
-      - uses: nixbuild/nix-quick-install-action@v33
+      - uses: nixbuild/nix-quick-install-action@v34
       - id: get-attrs
         run: ./.github/workflows/get-attrs.py
   eval:
