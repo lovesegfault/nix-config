@@ -84,11 +84,6 @@
       };
     };
 
-    nh = {
-      url = "github:nix-community/nh";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-fast-build = {
       url = "github:Mic92/nix-fast-build";
       inputs = {

@@ -462,26 +462,6 @@
         "type": "github"
       }
     },
-    "nh": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1759134674,
-        "narHash": "sha256-7NaMOQpxRFjjUGOLZmoAwb/5dDQQTFn3NuzfZHJZzJ8=",
-        "owner": "nix-community",
-        "repo": "nh",
-        "rev": "f3920fd9354902815db2b51c7b3c698f65b62e95",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nh",
-        "type": "github"
-      }
-    },
     "nix-fast-build": {
       "inputs": {
         "flake-parts": [
@@ -662,7 +642,6 @@
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
         "lovesegfault-vim-config": "lovesegfault-vim-config",
-        "nh": "nh",
         "nix-fast-build": "nix-fast-build",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
