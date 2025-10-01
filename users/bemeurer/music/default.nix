@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    beets-unstable
+    beets
     checkart
     fixart
     mediainfo
