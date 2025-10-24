@@ -7,5 +7,5 @@
     EDITOR = "nvim";
     VISUAL = "nvim";
   };
-  programs.git.extraConfig.core.editor = "nvim";
+  programs.git.settings.core.editor = "nvim";
 }

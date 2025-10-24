@@ -1,24 +1,28 @@
-{ lib, pkgs, ... }:
 {
-  programs.git = {
-    enable = true;
+  programs = {
     delta = {
       enable = true;
+      enableGitIntegration = true;
       options = {
         navigate = true;
         syntax-theme = "Nord";
       };
     };
-    lfs.enable = true;
-    userEmail = "bernardo@meurer.org";
-    userName = "Bernardo Meurer";
-    extraConfig = {
-      diff.colorMoved = "default";
-      difftool.prompt = true;
-      github.user = "lovesegfault";
-      init.defaultBranch = "main";
-      merge.conflictstyle = "diff3";
-      mergetool.prompt = true;
+    git = {
+      enable = true;
+      lfs.enable = true;
+      settings = {
+        user = {
+          email = "bernardo@meurer.org";
+          name = "Bernardo Meurer";
+        };
+        diff.colorMoved = "default";
+        difftool.prompt = true;
+        github.user = "lovesegfault";
+        init.defaultBranch = "main";
+        merge.conflictstyle = "diff3";
+        mergetool.prompt = true;
+      };
     };
   };
 

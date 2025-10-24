@@ -3,7 +3,7 @@
     ./gpg.nix
   ];
 
-  programs.git.extraConfig = {
+  programs.git.settings = {
     commit.gpgsign = true;
     gpg.format = "ssh";
     gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";

@@ -9,7 +9,7 @@
       ];
       # c.f. https://github.com/danth/stylix/issues/865
       nixpkgs.overlays = lib.mkForce null;
-      programs.git.extraConfig.gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+      programs.git.settings.gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
     };
 
   users.users.bemeurer = {
