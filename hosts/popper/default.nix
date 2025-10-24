@@ -32,7 +32,7 @@
         fi
       '';
     };
-    git.userEmail = lib.mkForce "beme@anthropic.com";
+    git.settings.user.email = lib.mkForce "beme@anthropic.com";
     zsh.initContent = lib.mkOrder 0 ''
       if [[ "$ZSH_VERSION" != "${config.programs.zsh.package.version}" ]]; then
         exec "${config.programs.zsh.package}/bin/zsh"
