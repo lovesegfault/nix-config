@@ -33,7 +33,13 @@
         fi
       '';
     };
-    git.settings.user.email = lib.mkForce "beme@anthropic.com";
+    git.settings = {
+      user.email = lib.mkForce "beme@anthropic.com";
+      gpg = lib.mkForce {
+        format = "ssh";
+      };
+      commit.gpgsign = true;
+    };
     zsh.initContent = lib.mkOrder 0 ''
       if [[ "$ZSH_VERSION" != "${config.programs.zsh.package.version}" ]]; then
         exec "${config.programs.zsh.package}/bin/zsh"
