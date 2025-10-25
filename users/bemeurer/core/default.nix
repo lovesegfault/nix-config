@@ -39,6 +39,7 @@
         eza
         fd
         fzf
+        jq
         macchina
         nh
         nix-closure-size
