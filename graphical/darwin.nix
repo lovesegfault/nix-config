@@ -69,7 +69,7 @@
         greedy = true;
       }
       {
-        name = "languagetool";
+        name = "languagetool-desktop";
         greedy = true;
       }
       {
