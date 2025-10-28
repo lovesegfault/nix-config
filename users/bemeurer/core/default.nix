@@ -32,7 +32,7 @@
 
   home = {
     username = "bemeurer";
-    stateVersion = "23.05";
+    stateVersion = "25.11";
     packages =
       with pkgs;
       [
