@@ -51,7 +51,7 @@ with config.networking;
         prometheus.enable = true;
         queryLog = {
           type = "postgresql";
-          target = "postgres://blocky/blocky?host=/run/postgresql";
+          target = "postgresql:///blocky?host=/run/postgresql&user=blocky&sslmode=disable";
           logRetentionDays = 90;
         };
         ports = {
