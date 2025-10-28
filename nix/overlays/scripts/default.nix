@@ -70,8 +70,6 @@ in
     ];
     execer = [
       "cannot:${final.wofi}/bin/wofi"
-      # FIXME: This is a lie, but I don't know how to get resholve to relax
-      # otherwise
       "cannot:${final.spawn}/bin/spawn"
     ];
   };
@@ -85,8 +83,6 @@ in
     ];
     execer = [
       "cannot:${final.rofi}/bin/rofi"
-      # FIXME: This is a lie, but I don't know how to get resholve to relax
-      # otherwise
       "cannot:${final.spawn}/bin/spawn"
     ];
   };
