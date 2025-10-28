@@ -51,7 +51,7 @@ with config.networking;
         prometheus.enable = true;
         queryLog = {
           type = "postgresql";
-          target = "postgres://blocky?host=/run/postgresql";
+          target = "postgres://blocky/blocky?host=/run/postgresql";
           logRetentionDays = 90;
         };
         ports = {
@@ -98,6 +98,8 @@ with config.networking;
             jsonData = {
               database = "blocky";
               sslmode = "disable";
+              postgresVersion = 1700; # PostgreSQL 17
+              timescaledb = false;
             };
             orgId = 1;
           }
