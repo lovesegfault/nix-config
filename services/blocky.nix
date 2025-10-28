@@ -94,8 +94,11 @@ with config.networking;
             name = "Blocky Query Log";
             type = "postgres";
             url = "/run/postgresql";
-            database = "blocky";
             user = "grafana";
+            jsonData = {
+              database = "blocky";
+              sslmode = "disable";
+            };
             orgId = 1;
           }
         ];
