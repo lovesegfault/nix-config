@@ -142,6 +142,12 @@ with config.networking;
         Group = "blocky";
         Restart = "on-failure";
         RestartSec = "1";
+        # Allow Unix socket connections to PostgreSQL
+        RestrictAddressFamilies = [
+          "AF_UNIX"
+          "AF_INET"
+          "AF_INET6"
+        ];
       };
     };
   };
