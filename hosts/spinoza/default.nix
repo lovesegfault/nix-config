@@ -115,8 +115,8 @@
     sane.enable = true;
     ledger.enable = true;
     graphics.extraPackages = with pkgs; [
+      libva-vdpau-driver
       libvdpau-va-gl
-      vaapiVdpau
     ];
   };
 
