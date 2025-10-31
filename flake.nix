@@ -81,6 +81,7 @@
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
         pre-commit-hooks-nix.follows = "git-hooks";
+        rust-overlay.follows = "rust-overlay";
       };
     };
 
@@ -107,6 +108,11 @@
         flake-compat.follows = "flake-compat";
         nixpkgs.follows = "nixpkgs";
       };
+    };
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     stylix = {
