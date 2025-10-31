@@ -2,7 +2,7 @@ final: _:
 let
   emoji_json = final.__inputs.gemoji + "/db/emoji.json";
   emoji_list =
-    final.runCommandNoCC "emoji_list.txt"
+    final.runCommand "emoji_list.txt"
       {
         nativeBuildInputs = with final; [
           jq
