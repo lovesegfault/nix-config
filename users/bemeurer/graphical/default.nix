@@ -16,7 +16,6 @@
     with pkgs;
     lib.filter (lib.meta.availableOn stdenv.hostPlatform) [
       discord
-      element-desktop
       iterm2
       ledger-live-desktop
       libnotify
@@ -30,6 +29,7 @@
       thunderbird
     ]
     ++ lib.optionals stdenv.hostPlatform.isLinux [
+      element-desktop
       xdg-utils
       sioyek
     ];

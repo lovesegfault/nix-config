@@ -49,6 +49,10 @@
         greedy = true;
       }
       {
+        name = "element";
+        greedy = true;
+      }
+      {
         name = "firefox";
         greedy = true;
       }
