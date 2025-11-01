@@ -16,6 +16,28 @@
       save = 10000;
       share = true;
     };
+    plugins = [
+      {
+        name = "vi-mode";
+        src = pkgs.zsh-vi-mode;
+        file = "share/zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      }
+      {
+        name = "fast-syntax-highlighting";
+        src = pkgs.zsh-fast-syntax-highlighting;
+        file = "share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh";
+      }
+      {
+        name = "autopair";
+        inherit (pkgs.zsh-autopair) src;
+        file = "zsh-autopair.plugin.zsh";
+      }
+      {
+        name = "history-substring-search";
+        src = pkgs.zsh-history-substring-search;
+        file = "share/zsh-history-substring-search/zsh-history-substring-search.zsh";
+      }
+    ];
     envExtra = ''
       export LESSHISTFILE="${config.xdg.dataHome}/less_history"
       export CARGO_HOME="${config.xdg.cacheHome}/cargo"
@@ -25,14 +47,6 @@
       if [ -e "$HOME/.config/op/plugins.sh" ]; then
         source "$HOME/.config/op/plugins.sh"
       fi
-
-      local ZVM_INIT_MODE=sourcing
-      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-
-      source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
-      source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-      source ${pkgs.zsh-autopair.src}/zsh-autopair.plugin.zsh
-      source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
       bindkey "''${terminfo[kcuu1]}" history-substring-search-up
       bindkey '^[[A' history-substring-search-up
