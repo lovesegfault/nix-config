@@ -113,6 +113,10 @@
         greedy = true;
       }
       {
+        name = "tailscale-app";
+        greedy = true;
+      }
+      {
         name = "topnotch";
         greedy = true;
       }
