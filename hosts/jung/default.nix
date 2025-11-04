@@ -42,6 +42,7 @@
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest;
     tmp.useTmpfs = true;
+    swraid.enable = true;
   };
 
   environment.etc."mdadm.conf".text = ''
