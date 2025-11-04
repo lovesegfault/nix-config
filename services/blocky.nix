@@ -9,7 +9,7 @@ with config.networking;
 {
   imports = [
     ./unbound.nix
-    ./postgresql.nix
+    ./mysql.nix
   ];
 
   networking.firewall = {
@@ -50,8 +50,8 @@ with config.networking;
         caching.maxTime = -1;
         prometheus.enable = true;
         queryLog = {
-          type = "postgresql";
-          target = "postgresql:///blocky?host=/run/postgresql&user=blocky&sslmode=disable";
+          type = "mysql";
+          target = "blocky@unix(/run/mysqld/mysqld.sock)/blocky?charset=utf8mb4&parseTime=True&loc=Local";
           logRetentionDays = 90;
         };
         ports = {
@@ -63,15 +63,20 @@ with config.networking;
       };
     };
 
-    postgresql = {
+    mysql = {
       ensureDatabases = [ "blocky" ];
       ensureUsers = [
         {
           name = "blocky";
-          ensureDBOwnership = true;
+          ensurePermissions = {
+            "blocky.*" = "ALL PRIVILEGES";
+          };
         }
         {
           name = "grafana";
+          ensurePermissions = {
+            "blocky.*" = "SELECT";
+          };
         }
       ];
     };
@@ -133,7 +138,7 @@ with config.networking;
     blocky = {
       after = [
         "unbound.service"
-        "postgresql.service"
+        "mysql.service"
       ];
       requires = [ "unbound.service" ];
       serviceConfig = {
