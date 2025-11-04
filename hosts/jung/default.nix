@@ -2,6 +2,7 @@
   config,
   nixos-hardware,
   pkgs,
+  utils,
   ...
 }:
 {
@@ -92,6 +93,7 @@
       options = [
         "defaults"
         "noatime"
+        "nofail"
       ];
     };
     "/mnt/music-opus" = {
@@ -100,6 +102,7 @@
       options = [
         "defaults"
         "noatime"
+        "nofail"
       ];
     };
   };
@@ -206,6 +209,25 @@
       dhcpV6Config.RouteMetric = 40;
     };
   };
+
+  systemd.services =
+    let
+      mountPoints = [
+        "/mnt/music"
+        "/mnt/music-opus"
+      ];
+      mountPointUnits = builtins.map (x: "${utils.escapeSystemdPath x}.mount") mountPoints;
+    in
+    {
+      syncthing.unitConfig = {
+        Requires = mountPointUnits;
+        After = mountPointUnits;
+      };
+      roon-server.unitConfig = {
+        Requires = mountPointUnits;
+        After = mountPointUnits;
+      };
+    };
 
   swapDevices = [ { device = "/dev/disk/by-uuid/a66412e6-ff55-4053-b436-d066319ed922"; } ];
 
