@@ -881,11 +881,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1762352490,
-        "narHash": "sha256-hOP4GxAmeXI43U1lIrKbWI2k35M1/T/i8iJrO9m/GzY=",
+        "lastModified": 1762366246,
+        "narHash": "sha256-3xc/f/ZNb5ma9Fc9knIzEwygXotA+0BZFQ5V5XovSOQ=",
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "rev": "4ef3dfdbb5ddfb9e39999a2f2b0c2637277859d4",
+        "rev": "a82c779ca992190109e431d7d680860e6723e048",
         "type": "github"
       },
       "original": {
