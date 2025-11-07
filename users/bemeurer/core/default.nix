@@ -22,6 +22,7 @@
     ./neovim.nix
     ./ssh.nix
     ./starship.nix
+    ./television.nix
     ./tmux.nix
     ./xdg.nix
     ./zsh.nix

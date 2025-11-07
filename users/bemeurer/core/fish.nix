@@ -11,8 +11,6 @@
         ${pkgs.nix-your-shell}/bin/nix-your-shell --nom fish | source
 
         fish_vi_key_bindings insert
-        # quickly open text file
-        bind -M insert \co 'fzf | xargs -r $EDITOR'
       '')
     ];
     plugins = [
