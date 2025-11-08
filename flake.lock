@@ -545,6 +545,21 @@
         "type": "github"
       }
     },
+    "nixos-unified": {
+      "locked": {
+        "lastModified": 1761760408,
+        "narHash": "sha256-4HmMWMeHnjUnL81REfExzLR+Cj7+Nmu7dQM45oTWw84=",
+        "owner": "srid",
+        "repo": "nixos-unified",
+        "rev": "1f8ab18330354d2305a0d793da58a6ef83e2857c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "srid",
+        "repo": "nixos-unified",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1762111121,
@@ -648,6 +663,7 @@
         "nix-fast-build": "nix-fast-build",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
+        "nixos-unified": "nixos-unified",
         "nixpkgs": "nixpkgs",
         "rust-overlay": "rust-overlay",
         "stylix": "stylix",
