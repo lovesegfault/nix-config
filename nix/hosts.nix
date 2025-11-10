@@ -61,6 +61,12 @@ in
     hostPlatform = "x86_64-linux";
     homeDirectory = "/home/bemeurer";
   };
+  hegel = mkHost {
+    type = "nixos";
+    address = "100.109.168.118";
+    hostPlatform = "x86_64-linux";
+    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICctAz65JB0S4+wGAIcgXFpYdo5QaWMU9CijTX8CQZVn";
+  };
   hilbert = mkHost {
     type = "home-manager";
     hostPlatform = "x86_64-linux";
