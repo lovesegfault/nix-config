@@ -1,19 +1,19 @@
+{ pkgs, ... }:
 {
   boot.blacklistedKernelModules = [ "nouveau" ];
 
+  services.xserver.videoDrivers = [ "nvidia" ];
+
   hardware = {
+    graphics.enable = true;
+    nvidia-container-toolkit.enable = true;
     nvidia = {
       modesetting.enable = true;
       nvidiaPersistenced = true;
-    };
-    opengl = {
-      enable = true;
-      driSupport32Bit = true;
+      nvidiaSettings = false;
+      open = true;
     };
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-
   virtualisation.docker.enableNvidia = true;
-  virtualisation.podman.enableNvidia = true;
 }

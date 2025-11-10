@@ -15,6 +15,7 @@
     ../../hardware/efi.nix
     ../../hardware/fast-networking.nix
     ../../hardware/no-mitigations.nix
+    ../../hardware/nvidia.nix
     ../../hardware/secureboot.nix
 
     ../../users/bemeurer
