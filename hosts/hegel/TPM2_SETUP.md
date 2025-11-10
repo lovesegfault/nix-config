@@ -60,16 +60,24 @@ The credstore LUKS volume currently requires a passphrase. Enroll TPM2 for autom
 
 ```bash
 # Add TPM2 key to LUKS keyslot (will prompt for existing passphrase)
-# PCR 7: Secure Boot state
-# PCR 15: Initrd-only enforcement (prevents decryption after leaving initrd)
+# PCR 7: Secure Boot state (auto-captures current value)
+# PCR 15: Initrd-only enforcement (explicitly set to all zeros - its state at boot)
+# Important: PCR 15 must be explicitly set to zeros, not captured from running system
 sudo systemd-cryptenroll /dev/zvol/zroot/credstore \
   --tpm2-device=auto \
-  --tpm2-pcrs=7+15
+  --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000
 
 # Verify enrollment
 sudo cryptsetup luksDump /dev/zvol/zroot/credstore
 # Should show a systemd-tpm2 token
 ```
+
+**Why explicit PCR 15 value?**
+- PCR 15 starts at `0x0000...` (zeroed) at boot
+- After credstore unlocks, `tpm2-measure-pcr` extends PCR 15 to a non-zero value
+- If you enroll from a running system, PCR 15 is already extended
+- Must explicitly specify `0x0000...` so TPM expects the boot-time state
+- Otherwise TPM will expect the current extended value and unlock will fail
 
 ### 3. Test Automatic Unlock
 
@@ -135,10 +143,11 @@ If automatic unlock stops working:
    # Remove old TPM2 token
    sudo systemd-cryptenroll /dev/zvol/zroot/credstore --wipe-slot=tpm2
 
-   # Add new TPM2 token with current PCR state
+   # Add new TPM2 token with correct PCR values
+   # PCR 15 must be explicitly set to zeros (not captured from running system)
    sudo systemd-cryptenroll /dev/zvol/zroot/credstore \
      --tpm2-device=auto \
-     --tpm2-pcrs=7+15
+     --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000
    ```
 3. Reboot to test
 
@@ -165,12 +174,16 @@ For stricter firmware/bootloader binding (with more update friction):
 ```bash
 sudo systemd-cryptenroll /dev/zvol/zroot/credstore \
   --tpm2-device=auto \
-  --tpm2-pcrs=0+2+7+15
+  --tpm2-pcrs=0+2+7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000
 ```
 
 **Additional PCRs:**
-- **0**: Firmware code
-- **2**: Boot applications (UEFI)
+- **0**: Firmware code (auto-captured)
+- **2**: Boot applications/UEFI (auto-captured)
+- **7**: Secure Boot state (auto-captured)
+- **15**: Initrd-only enforcement (explicitly set to zeros)
+
+**Note:** Only PCR 15 needs explicit value; others auto-capture current state.
 
 **Trade-off**: Firmware/bootloader updates will require re-enrollment.
 
@@ -181,7 +194,7 @@ Require both TPM2 + PIN for unlock:
 ```bash
 sudo systemd-cryptenroll /dev/zvol/zroot/credstore \
   --tpm2-device=auto \
-  --tpm2-pcrs=7+15 \
+  --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000 \
   --tpm2-with-pin=yes
 ```
 
