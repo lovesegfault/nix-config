@@ -60,9 +60,11 @@ The credstore LUKS volume currently requires a passphrase. Enroll TPM2 for autom
 
 ```bash
 # Add TPM2 key to LUKS keyslot (will prompt for existing passphrase)
+# PCR 7: Secure Boot state
+# PCR 15: Initrd-only enforcement (prevents decryption after leaving initrd)
 sudo systemd-cryptenroll /dev/zvol/zroot/credstore \
   --tpm2-device=auto \
-  --tpm2-pcrs=7
+  --tpm2-pcrs=7+15
 
 # Verify enrollment
 sudo cryptsetup luksDump /dev/zvol/zroot/credstore
@@ -136,29 +138,41 @@ If automatic unlock stops working:
    # Add new TPM2 token with current PCR state
    sudo systemd-cryptenroll /dev/zvol/zroot/credstore \
      --tpm2-device=auto \
-     --tpm2-pcrs=7
+     --tpm2-pcrs=7+15
    ```
 3. Reboot to test
 
 ## Advanced Configuration
 
-### Stricter PCR Policy
+### Current PCR Policy
 
-For enhanced security, bind to more PCRs:
+The system uses **PCR 7+15** for optimal security:
+
+**PCR 7: Secure Boot State**
+- Ensures credstore only unlocks when Secure Boot is enabled
+- Prevents tampering with boot chain
+
+**PCR 15: Initrd-Only Enforcement**
+- TPM seals key to PCR 15 in initial (zeroed) state
+- `tpm2-measure-pcr=yes` extends PCR 15 **after** first unlock
+- Once extended, PCR 15 ≠ initial state → TPM refuses subsequent unlocks
+- **Prevents "oddlama-style attacks"**: Even with root access on running system, credstore cannot be decrypted outside initrd
+
+### Alternative: Additional PCRs
+
+For stricter firmware/bootloader binding (with more update friction):
 
 ```bash
 sudo systemd-cryptenroll /dev/zvol/zroot/credstore \
   --tpm2-device=auto \
-  --tpm2-pcrs=0,2,7,12
+  --tpm2-pcrs=0+2+7+15
 ```
 
-**PCRs:**
+**Additional PCRs:**
 - **0**: Firmware code
 - **2**: Boot applications (UEFI)
-- **7**: Secure Boot state
-- **12**: Kernel command line
 
-**Trade-off**: Kernel updates will require re-enrollment.
+**Trade-off**: Firmware/bootloader updates will require re-enrollment.
 
 ### Add PIN Requirement
 
@@ -167,7 +181,7 @@ Require both TPM2 + PIN for unlock:
 ```bash
 sudo systemd-cryptenroll /dev/zvol/zroot/credstore \
   --tpm2-device=auto \
-  --tpm2-pcrs=7 \
+  --tpm2-pcrs=7+15 \
   --tpm2-with-pin=yes
 ```
 
@@ -176,8 +190,9 @@ Edit `/root/src/nix-config/hosts/hegel/boot.nix`:
 crypttabExtraOpts = [
   "tpm2-device=auto"
   "tpm2-measure-pcr=yes"
-  "tpm2-pcrs=7"
+  "tpm2-pcrs=7+15"
   "tpm2-pin=yes"  # Add this line
+  "x-initrd.attach"
 ];
 ```
 
@@ -188,10 +203,15 @@ Enable verbose logging in `/root/src/nix-config/hosts/hegel/boot.nix`:
 ```nix
 boot.kernelParams = [
   "rd.systemd.log_level=debug"
-  "rd.systemd.debug_shell"
+  "rd.systemd.debug_shell"  # WARNING: Security risk - as dangerous as init=/bin/sh
 ];
 boot.initrd.systemd.emergencyAccess = true;
 ```
+
+**⚠️ SECURITY WARNING**: `rd.systemd.debug_shell` provides unauthenticated root access during boot.
+- Only enable temporarily for debugging
+- **DELETE any signed lanzaboote stubs** containing this option after debugging
+- Remove old stubs: `sudo rm /boot/EFI/Linux/*-debug*.efi`
 
 Emergency shell will be available on **tty9** (Ctrl+Alt+F9).
 
@@ -200,14 +220,32 @@ Emergency shell will be available on **tty9** (Ctrl+Alt+F9).
 ### What TPM2 Protects Against
 
 - **Offline disk theft**: Key sealed to specific hardware
-- **Boot tampering**: PCR measurements verify boot chain integrity
+- **Boot tampering (PCR 7)**: Secure Boot PCR measurements verify boot chain integrity
 - **Evil maid attacks**: Changes to boot process prevent unlock
+- **Oddlama-style attacks (PCR 15)**: Credstore cannot be decrypted after leaving initrd
+  - Even with root access on running system, TPM refuses to unseal key
+  - PCR 15 extended after first unlock makes key permanently unavailable until reboot
 
 ### What TPM2 Does NOT Protect Against
 
-- **Running system compromise**: Key already unsealed in memory
-- **Physical hardware attacks**: TPM can be attacked with physical access
+- **Physical hardware attacks**: TPM can be attacked with sophisticated physical access
 - **Cold boot attacks**: Memory may retain keys briefly after power off
+- **Bootkit before Secure Boot**: Attacks that compromise firmware before measurement
+
+### PCR 15 Protection Explained
+
+**Without PCR 15** (only PCR 7):
+- Credstore can be unlocked anytime TPM is available
+- Root user on running system could decrypt credstore
+- Stolen memory dumps might reveal enough to decrypt
+
+**With PCR 15** (current configuration):
+1. Boot starts: PCR 15 = `00000...` (zeroed state)
+2. TPM unseals key (PCR 7+15 match policy)
+3. systemd unlocks credstore
+4. `tpm2-measure-pcr` extends PCR 15 → now `abc123...`
+5. TPM **refuses** subsequent unlock attempts (PCR 15 ≠ `00000...`)
+6. Result: Credstore accessible only during initrd phase, never after
 
 ### Best Practices
 

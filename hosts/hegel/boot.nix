@@ -177,12 +177,16 @@
       luks.devices.credstore = {
         device = "/dev/zvol/zroot/credstore";
         # TPM2 automatic unlock with PCR binding
+        # PCR 7: Secure Boot state - prevents unlock if Secure Boot disabled
+        # PCR 15: System identity - extended by tpm2-measure-pcr after unlock
+        #         Prevents decryption outside initrd (oddlama attack mitigation)
+        #         After first unlock, PCR 15 ≠ initial state → TPM refuses subsequent unlocks
         crypttabExtraOpts = [
           "tpm2-device=auto" # Use available TPM2 device
-          "tpm2-measure-pcr=yes" # Measure to PCR for attestation
-          "tpm2-pcrs=7" # Bind to PCR 7 (Secure Boot state)
+          "tpm2-measure-pcr=yes" # Extends PCR 15 AFTER unlock (makes key unusable for re-unlock)
+          "tpm2-pcrs=7+15" # Bind to Secure Boot state + initrd-only enforcement
           "x-initrd.attach" # Mark as initrd-only device
-          # Note: After install, run: systemd-cryptenroll to add TPM2 key
+          # Note: After rebuild, re-enroll with: systemd-cryptenroll /dev/zvol/zroot/credstore --tpm2-device=auto --tpm2-pcrs=7+15
         ];
       };
 
