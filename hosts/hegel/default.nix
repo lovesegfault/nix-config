@@ -20,6 +20,7 @@
 
     ../../users/bemeurer
 
+    ./boot.nix
     ./disko.nix
     ./state.nix
     # ./kexec
@@ -30,29 +31,7 @@
   };
 
   boot = {
-    initrd = {
-      availableKernelModules = [
-        "xhci_pci"
-        "ahci"
-        "nvme"
-        "sd_mod"
-      ];
-      systemd = {
-        enable = true;
-        services.rollback = {
-          description = "Rollback root filesystem to a pristine state on boot";
-          wantedBy = [ "initrd.target" ];
-          after = [ "zfs-import-zroot.service" ];
-          before = [ "sysroot.mount" ];
-          path = with pkgs; [ zfs_unstable ];
-          unitConfig.DefaultDependencies = "no";
-          serviceConfig.Type = "oneshot";
-          script = ''
-            zfs rollback -r zroot/local/root@blank && echo "  >> >> rollback complete << <<"
-          '';
-        };
-      };
-    };
+    # initrd configuration moved to ./boot.nix for TPM2 + ZFS unlocking
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest;
     lanzaboote.pkiBundle = lib.mkForce "/var/lib/sbctl";

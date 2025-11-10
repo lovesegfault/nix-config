@@ -51,14 +51,53 @@
         };
         options.ashift = "12";
         datasets = {
+          # Credential store zvol: unencrypted zvol with TPM2-backed LUKS
+          # Contains the raw encryption key for zroot/local
+          credstore = {
+            type = "zfs_volume";
+            size = "100M";
+            content = {
+              type = "luks";
+              name = "credstore";
+              settings = {
+                # No passwordFile - disko-install will prompt interactively
+                allowDiscards = true;
+              };
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                # Not mounted in main system, only in initrd
+                # Hook runs after filesystem is formatted, before next dataset
+                postCreateHook = ''
+                  echo "==> Setting up ZFS encryption key in credential store..."
+
+                  # credstore is already unlocked and formatted at this point
+                  # Mount at /etc/credstore to match runtime path in boot.nix
+                  mkdir -p /etc/credstore
+                  mount /dev/mapper/credstore /etc/credstore
+
+                  # Generate 256-bit random key for ZFS encryption
+                  head -c 32 /dev/urandom > /etc/credstore/zfs-sysroot.mount
+                  chmod 600 /etc/credstore/zfs-sysroot.mount
+
+                  echo "==> Created ZFS encryption key: /etc/credstore/zfs-sysroot.mount"
+                  echo "==> This key will be used to unlock zroot/local"
+
+                  # Leave it mounted so the key is accessible when creating encrypted datasets
+                  # disko will handle cleanup
+                '';
+              };
+            };
+          };
+
+          # Encrypted parent dataset (key stored in credstore)
           "local" = {
             type = "zfs_fs";
             options = {
               mountpoint = "none";
               encryption = "aes-256-gcm";
-              keyformat = "passphrase";
-              #keylocation = "file:///tmp/secret.key";
-              keylocation = "prompt";
+              keyformat = "raw"; # Changed from passphrase to raw key
+              keylocation = "file:///etc/credstore/zfs-sysroot.mount"; # Key from credstore
             };
           };
           "local/state" = rec {

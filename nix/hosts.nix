@@ -65,7 +65,7 @@ in
     type = "nixos";
     address = "100.109.168.118";
     hostPlatform = "x86_64-linux";
-    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICctAz65JB0S4+wGAIcgXFpYdo5QaWMU9CijTX8CQZVn";
+    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbG3jf2G3BJCIiL51Kfa9gfXGLiyU71IwW0siMQtf+7";
   };
   hilbert = mkHost {
     type = "home-manager";
