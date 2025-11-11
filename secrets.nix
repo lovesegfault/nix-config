@@ -23,14 +23,15 @@ let
 
   secrets = with hosts; {
     "services/acme.age" = [
+      hegel
       jung
       plato
     ];
     "services/oauth2.age" = [
+      hegel
       jung
       plato
     ];
-    "services/pihole.age" = [ ];
     "services/github-runner.age" = [ jung ];
     "users/bemeurer/password.age" = attrValues hosts;
   };
