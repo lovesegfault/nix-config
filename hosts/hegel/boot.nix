@@ -86,8 +86,11 @@
           zfs-load-key-zroot = {
             description = "Load ZFS encryption key from TPM2-backed credential store";
 
-            unitConfig.DefaultDependencies = false;
-            unitConfig.RequiresMountsFor = "/etc/credstore";
+            unitConfig = {
+              DefaultDependencies = false;
+              RequiresMountsFor = "/etc/credstore";
+              StopWhenUnneeded = true;
+            };
 
             # Must wait for both pool import and credstore mount
             requires = [ "import-zroot-bare.service" ];
@@ -102,6 +105,9 @@
               "initrd.target"
             ];
             requiredBy = [ "initrd.target" ];
+
+            # Ensure this service stops before we try to unmount credstore
+            conflicts = [ "initrd-switch-root.target" ];
 
             serviceConfig = {
               Type = "oneshot";
