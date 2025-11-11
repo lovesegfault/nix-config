@@ -54,10 +54,16 @@
       package = pkgs.ibm-plex;
       name = "IBM Plex Serif";
     };
-    monospace = {
-      package = pkgs.nerd-fonts.hack;
-      name = "Hack Nerd Font";
-    };
+    monospace =
+      if hostType == "darwin" then
+        {
+          name = "Berkeley Mono Variable";
+        }
+      else
+        {
+          package = pkgs.nerd-fonts.hack;
+          name = "Hack Nerd Font";
+        };
     emoji = {
       package = pkgs.noto-fonts-color-emoji;
       name = "Noto Color Emoji";
