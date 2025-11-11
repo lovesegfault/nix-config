@@ -158,7 +158,10 @@
             wantedBy = [ "initrd-fs.target" ];
             after = [ "systemd-cryptsetup@credstore.service" ];
             requires = [ "systemd-cryptsetup@credstore.service" ];
-            before = [ "initrd-switch-root.target" ];
+            before = [
+              "initrd-switch-root.target"
+              "systemd-cryptsetup@credstore.service" # Stop before cryptsetup stops
+            ];
             conflicts = [ "initrd-switch-root.target" ];
             unitConfig.DefaultDependencies = false;
           }
