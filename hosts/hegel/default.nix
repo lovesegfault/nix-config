@@ -70,6 +70,7 @@
       options = "-d";
     };
     settings = {
+      max-jobs = lib.mkForce 8;
       max-substitution-jobs = 32;
       system-features = [
         "benchmark"
