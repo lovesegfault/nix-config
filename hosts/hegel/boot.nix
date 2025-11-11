@@ -64,8 +64,8 @@
               serviceConfig = {
                 Type = "oneshot";
                 RemainAfterExit = true;
-                # Export pool when service stops
-                ExecStop = "${config.boot.zfs.package}/bin/zpool export zroot || true";
+                # Note: Pool is NOT exported - real root is on this pool!
+                # Pool stays imported for the running system to use
               };
 
               path = [ config.boot.zfs.package ];
