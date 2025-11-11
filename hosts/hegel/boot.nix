@@ -43,8 +43,13 @@
               # Disable default dependencies for precise ordering control
               unitConfig.DefaultDependencies = false;
 
-              # Wait for ZFS module and physical disks
-              after = [ "modprobe@zfs.service" ] ++ devices;
+              # Wait for ZFS module, udev, and physical disks
+              # After=udev ensures: startup after udev ready, shutdown before udev stops
+              after = [
+                "modprobe@zfs.service"
+                "systemd-udevd.service"
+              ]
+              ++ devices;
               requires = [ "modprobe@zfs.service" ];
 
               # Must complete before LUKS unlock attempts (startup)
@@ -163,7 +168,10 @@
             type = "ext4";
             options = "defaults";
             wantedBy = [ "initrd-fs.target" ];
-            after = [ "systemd-cryptsetup@credstore.service" ];
+            after = [
+              "systemd-cryptsetup@credstore.service"
+              "systemd-udevd.service" # After udev during startup, before udev during shutdown
+            ];
             requires = [ "systemd-cryptsetup@credstore.service" ];
             before = [ "initrd-switch-root.target" ];
             conflicts = [ "initrd-switch-root.target" ];
