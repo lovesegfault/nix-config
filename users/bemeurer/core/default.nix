@@ -36,20 +36,12 @@
     stateVersion = "25.11";
     packages =
       with pkgs;
-      [
-        eza
-        fd
-        fzf
-        jq
-        nh
+      lib.filter (lib.meta.availableOn stdenv.hostPlatform) [
+        mosh
         nix-closure-size
         nix-output-monitor
-        ripgrep
         rsync
         truecolor-check
-      ]
-      ++ lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) [
-        mosh
       ];
     shellAliases = {
       cat = "bat";
@@ -71,9 +63,18 @@
       enable = true;
       extraPackages = with pkgs.bat-extras; [ batman ];
     };
+    eza.enable = true;
     fastfetch.enable = true;
+    fd.enable = true;
+    fzf.enable = true;
     gpg.enable = true;
+    jq.enable = true;
+    nh = {
+      enable = true;
+      flake = "git+https://github.com/lovesegfault/nix-config";
+    };
     nix-index.enable = true;
+    ripgrep.enable = true;
     zoxide.enable = true;
   };
 
