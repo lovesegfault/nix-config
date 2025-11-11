@@ -47,13 +47,20 @@
               after = [ "modprobe@zfs.service" ] ++ devices;
               requires = [ "modprobe@zfs.service" ];
 
-              # Must complete before LUKS unlock attempts
+              # Must complete before LUKS unlock attempts (startup)
+              # Must stop before cryptsetup closes during shutdown
               wants = [ "cryptsetup-pre.target" ] ++ devices;
-              before = [ "cryptsetup-pre.target" ];
+              before = [
+                "cryptsetup-pre.target"
+                "systemd-cryptsetup@credstore.service"
+              ];
+              conflicts = [ "initrd-switch-root.target" ];
 
               serviceConfig = {
                 Type = "oneshot";
                 RemainAfterExit = true;
+                # Export pool when service stops
+                ExecStop = "${config.boot.zfs.package}/bin/zpool export zroot || true";
               };
 
               path = [ config.boot.zfs.package ];
