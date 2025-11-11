@@ -1,7 +1,7 @@
 { config, ... }:
 {
   boot = {
-    initrd.kernelModules = [
+    kernelModules = [
       "nvidia"
       "nvidia_modeset"
       "nvidia-uvm"
