@@ -101,6 +101,7 @@ with config.networking;
             url = "/run/mysqld/mysqld.sock";
             user = "grafana";
             orgId = 1;
+            jsonData.database = "blocky";
           }
         ];
         deleteDatasources = [
