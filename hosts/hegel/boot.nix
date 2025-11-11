@@ -226,13 +226,12 @@
       ];
     };
 
-    # TEMPORARY: Enable for debugging hung stop job
     kernelParams = [
-      "rd.systemd.debug_shell"
-      "systemd.log_level=debug"
+      # "rd.systemd.debug_shell"
+      # "systemd.log_level=debug"
       # "systemd.log_target=console"
     ];
-    initrd.systemd.emergencyAccess = true;
+    #initrd.systemd.emergencyAccess = true;
   };
 
   # Add TPM2 tools for manual enrollment and testing
