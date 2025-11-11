@@ -41,7 +41,6 @@
         fd
         fzf
         jq
-        macchina
         nh
         nix-closure-size
         nix-output-monitor
@@ -72,6 +71,7 @@
       enable = true;
       extraPackages = with pkgs.bat-extras; [ batman ];
     };
+    fastfetch.enable = true;
     gpg.enable = true;
     nix-index.enable = true;
     zoxide.enable = true;
