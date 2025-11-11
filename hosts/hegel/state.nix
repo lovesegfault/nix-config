@@ -4,6 +4,11 @@
   environment.persistence."/nix/state" = {
     hideMounts = true;
     directories = [
+      {
+        directory = "/var/lib/chrony";
+        user = "chrony";
+        group = "chrony";
+      }
       "/var/lib/containers"
       "/var/lib/fwupd"
       "/var/lib/libvirt"
