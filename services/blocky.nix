@@ -123,13 +123,6 @@ with config.networking;
   };
 
   systemd.services = {
-    # XXX: I do not remember why this was here, but at some point it started
-    # failing because $PSQL was gone from the postStart script. Upon commenting
-    # this out, things seem to work fine, but i'm leaving this here for future
-    # me (or you?).
-    # postgresql.postStart = lib.mkAfter ''
-    #   $PSQL -tAc 'GRANT pg_read_all_data TO grafana'
-    # '';
     blocky = {
       after = [
         "unbound.service"
