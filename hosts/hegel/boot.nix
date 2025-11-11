@@ -158,11 +158,9 @@
             wantedBy = [ "initrd-fs.target" ];
             after = [ "systemd-cryptsetup@credstore.service" ];
             requires = [ "systemd-cryptsetup@credstore.service" ];
-            before = [
-              "initrd-switch-root.target"
-              "systemd-cryptsetup@credstore.service" # Stop before cryptsetup stops
-            ];
+            before = [ "initrd-switch-root.target" ];
             conflicts = [ "initrd-switch-root.target" ];
+            # Note: Requires relationship already ensures mount stops before cryptsetup during shutdown
             unitConfig.DefaultDependencies = false;
           }
         ];
@@ -213,12 +211,12 @@
       ];
     };
 
-    # Optional: Enable for debugging boot issues
-    # kernelParams = [
-    #   "rd.systemd.log_level=debug"
-    #   "rd.systemd.debug_shell"
-    # ];
-    # initrd.systemd.emergencyAccess = true;
+    # TEMPORARY: Enable for debugging hung stop job
+    kernelParams = [
+      "systemd.log_level=debug"
+      "systemd.log_target=console"
+    ];
+    initrd.systemd.emergencyAccess = true;
   };
 
   # Add TPM2 tools for manual enrollment and testing
