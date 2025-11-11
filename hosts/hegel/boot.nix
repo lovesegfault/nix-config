@@ -12,12 +12,7 @@
       systemd = {
         enable = true; # Required for custom boot ordering
 
-        # Configure systemd manager in initrd
-        settings.Manager = {
-          # Set shorter timeout for stop jobs to prevent hanging
-          # Affects cryptsetup@credstore.service and other stop jobs
-          DefaultTimeoutStopSec = "30s";
-        };
+        # Note: No Manager timeout needed - proper udev ordering prevents hangs
 
         services = {
           # Disable default ZFS import service to use our custom bare import
@@ -101,7 +96,6 @@
             unitConfig = {
               DefaultDependencies = false;
               RequiresMountsFor = "/etc/credstore";
-              StopWhenUnneeded = true;
             };
 
             # Must wait for both pool import and credstore mount
@@ -175,24 +169,11 @@
             requires = [ "systemd-cryptsetup@credstore.service" ];
             before = [ "initrd-switch-root.target" ];
             conflicts = [ "initrd-switch-root.target" ];
-            # Note: Requires relationship already ensures mount stops before cryptsetup during shutdown
             unitConfig.DefaultDependencies = false;
           }
         ];
 
-        # Manage shutdown conflicts to prevent hanging
-        # Stop and unmount credstore before switching to real root
-        targets.initrd-switch-root = {
-          conflicts = [
-            "etc-credstore.mount"
-            "systemd-cryptsetup@credstore.service"
-          ];
-          # Wait for these to stop before proceeding
-          after = [
-            "etc-credstore.mount"
-            "systemd-cryptsetup@credstore.service"
-          ];
-        };
+        # Note: Shutdown ordering handled by After=systemd-udevd.service and Conflicts on individual units
       };
 
       # Configure TPM2-backed LUKS device for credential store
@@ -226,12 +207,13 @@
       ];
     };
 
-    kernelParams = [
-      # "rd.systemd.debug_shell"
-      # "systemd.log_level=debug"
-      # "systemd.log_target=console"
-    ];
-    #initrd.systemd.emergencyAccess = true;
+    # Optional: Enable for debugging boot issues
+    # WARNING: rd.systemd.debug_shell is a security risk (unauthenticated root access)
+    # kernelParams = [
+    #   "systemd.log_level=debug"
+    #   "systemd.log_target=console"
+    # ];
+    # initrd.systemd.emergencyAccess = true;
   };
 
   # Add TPM2 tools for manual enrollment and testing
