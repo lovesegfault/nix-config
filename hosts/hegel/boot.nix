@@ -228,8 +228,9 @@
 
     # TEMPORARY: Enable for debugging hung stop job
     kernelParams = [
+      "rd.systemd.debug_shell"
       "systemd.log_level=debug"
-      "systemd.log_target=console"
+      # "systemd.log_target=console"
     ];
     initrd.systemd.emergencyAccess = true;
   };
