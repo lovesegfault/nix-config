@@ -1,8 +1,4 @@
 let
-  chatDefaults = {
-    "x-scheme-handler/mailto" = "thunderbird.desktop";
-    "message/rfc822" = "thunderbird.desktop";
-  };
   documentDefaults = {
     "application/vnd.comicbook-rar" = "org.gnome.Evince.desktop";
     "application/vnd.comicbook+zip" = "org.gnome.Evince.desktop";
@@ -41,5 +37,5 @@ let
   };
 in
 {
-  xdg.mimeApps.defaultApplications = chatDefaults // documentDefaults;
+  xdg.mimeApps.defaultApplications = documentDefaults;
 }
