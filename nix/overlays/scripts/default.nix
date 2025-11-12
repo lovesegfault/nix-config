@@ -141,21 +141,6 @@ in
     fake.external = [ "nix-store" ];
   };
 
-  screenocr = writeShellApp {
-    name = "screenocr";
-    inputs = with final; [
-      coreutils
-      findutils
-      grim
-      slurp
-      tesseract5
-      wl-clipboard
-    ];
-    execer = [
-      "cannot:${final.tesseract5}/bin/tesseract"
-    ];
-  };
-
   screenshot = writeShellApp {
     name = "screenshot";
     inputs = with final; [
