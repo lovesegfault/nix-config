@@ -25,7 +25,6 @@
       libnotify
       qalculate-gtk
       signal-desktop
-      zulip
     ]
     ++ lib.optionals (stdenv.hostPlatform.system == "x86_64-linux") [
       prusa-slicer

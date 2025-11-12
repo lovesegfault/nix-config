@@ -124,10 +124,6 @@
         name = "zoom";
         greedy = true;
       }
-      {
-        name = "zulip";
-        greedy = true;
-      }
     ];
     masApps = {
       "Keynote" = 409183694;
