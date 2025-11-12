@@ -55,7 +55,6 @@
     }
     // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
       sioyek.enable = true;
-      element-desktop.enable = true;
     };
 
   stylix.fonts = {
