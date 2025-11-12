@@ -21,10 +21,6 @@
         greedy = true;
       }
       {
-        name = "amethyst";
-        greedy = true;
-      }
-      {
         name = "appcleaner";
         greedy = true;
       }
