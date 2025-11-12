@@ -27,13 +27,14 @@
 
   services = {
     dbus.packages = with pkgs; [ dconf ];
-    gnome.at-spi2-core.enable = true;
-    xserver.enable = true;
     displayManager.gdm = {
       enable = true;
       autoSuspend = true;
       wayland = true;
     };
+    gnome.at-spi2-core.enable = true;
+    speechd.enable = false;
+    xserver.enable = true;
   };
 
   stylix = {
