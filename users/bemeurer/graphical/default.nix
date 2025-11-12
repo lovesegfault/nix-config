@@ -22,7 +22,6 @@
     with pkgs;
     lib.filter (lib.meta.availableOn stdenv.hostPlatform) [
       iterm2
-      ledger-live-desktop
       libnotify
       qalculate-gtk
       signal-desktop
