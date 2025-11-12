@@ -74,11 +74,7 @@ let
     "application/vnd.ms-xpsdocument" = "org.gnome.Evince.desktop";
     "application/illustrator" = "org.gnome.Evince.desktop";
   };
-  otherDefaults = {
-    "x-scheme-handler/prusaslicer" = "PrusaSlicerURLProtocol.desktop";
-  };
 in
 {
-  xdg.mimeApps.defaultApplications =
-    audioDefaults // chatDefaults // documentDefaults // otherDefaults;
+  xdg.mimeApps.defaultApplications = audioDefaults // chatDefaults // documentDefaults;
 }

@@ -27,7 +27,6 @@
       signal-desktop
     ]
     ++ lib.optionals (stdenv.hostPlatform.system == "x86_64-linux") [
-      prusa-slicer
       spotify
     ]
     ++ lib.optionals stdenv.hostPlatform.isLinux [
