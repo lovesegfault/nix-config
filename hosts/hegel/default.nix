@@ -64,10 +64,6 @@
   networking = {
     hostId = "65618eec";
     hostName = "hegel";
-    firewall = {
-      # allowedTCPPorts = [ 32400 ];
-      # allowedUDPPorts = [ 32400 ];
-    };
     nftables.enable = true;
   };
 
@@ -77,6 +73,7 @@
       options = "-d";
     };
     settings = {
+      download-buffer-size = 268435456; # 256MiB
       max-jobs = lib.mkForce 12;
       max-substitution-jobs = 32;
       system-features = [
