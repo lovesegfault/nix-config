@@ -65,10 +65,6 @@
         greedy = true;
       }
       {
-        name = "jitsi-meet";
-        greedy = true;
-      }
-      {
         name = "languagetool-desktop";
         greedy = true;
       }
