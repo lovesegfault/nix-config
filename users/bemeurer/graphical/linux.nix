@@ -16,7 +16,6 @@
       evince
       gammastep
       hicolor-icon-theme
-      lollypop
       pavucontrol
       pinentry-gnome3
       qgnomeplatform
