@@ -85,10 +85,6 @@
         greedy = true;
       }
       {
-        name = "parallels";
-        greedy = true;
-      }
-      {
         name = "raycast";
         greedy = true;
       }
