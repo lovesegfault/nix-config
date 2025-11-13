@@ -28,9 +28,9 @@
 
     ../../users/bemeurer
 
-    ./boot.nix
     ./disko.nix
     ./state.nix
+    ./tpm-decrypt.nix
   ];
 
   boot = {
