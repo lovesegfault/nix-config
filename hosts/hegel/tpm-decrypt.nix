@@ -125,7 +125,7 @@
 #   - After any PCR 7-affecting changes
 #
 # NOTE: Firmware/BIOS updates do NOT require re-enrollment since we only
-#       bind to PCR 7 (Secure Boot), not PCR 0/2 (firmware/bootloader)
+#       bind to PCR 7 (Secure Boot), not PCR 0 (firmware) or PCR 2 (OptionROMs)
 #
 # How to re-enroll:
 #   1. Boot with passphrase (TPM2 will fail, fallback works)
