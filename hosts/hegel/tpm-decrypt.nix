@@ -1,10 +1,11 @@
 {
   config,
+  lib,
   pkgs,
   utils,
   ...
 }:
-# TPM2-Based ZFS Auto-Unlock for Hegel
+# TPM2-Based ZFS Auto-Unlock for ${poolName}
 #
 # This implements automatic ZFS pool unlocking using TPM2 with passphrase fallback.
 # The credstore (credential store) zvol contains the ZFS encryption key and is
@@ -145,9 +146,163 @@
 #   - After debugging, DISABLE and rebuild (security risk!)
 #
 # ============================================================================
+# DISKO STRUCTURE REQUIREMENTS
+# ============================================================================
+#
+# This module requires the following disko structure:
+#   - Exactly ONE zpool containing a credstore zvol
+#   - Credstore must be: type=zfs_volume, content.type=luks
+#   - At least ONE encrypted dataset (zfs_fs with encryption option)
+#   - Encrypted dataset keylocation must use file:// URI (mount point derived from path)
+#
+# ============================================================================
 # CONFIGURATION
 # ============================================================================
+let
+  # Discover which zpool contains the credstore zvol for TPM2 unlock
+  diskoConfig = config.disko.devices;
+
+  poolsWithCredstore = lib.filterAttrs (
+    _poolName: pool:
+    lib.any (
+      dsName:
+      let
+        ds = pool.datasets.${dsName};
+      in
+      ds.type or "" == "zfs_volume" && ds.content.type or "" == "luks"
+    ) (builtins.attrNames pool.datasets)
+  ) (diskoConfig.zpool or { });
+
+  poolNames = builtins.attrNames poolsWithCredstore;
+
+  # Assert exactly one pool has credstore
+  poolName =
+    lib.throwIf (builtins.length poolNames == 0)
+      "tpm-decrypt.nix: No zpool found with credstore zvol (zfs_volume with luks content)"
+      (
+        lib.throwIf (builtins.length poolNames > 1)
+          "tpm-decrypt.nix: Found ${toString (builtins.length poolNames)} pools with credstore, expected exactly 1: ${lib.concatStringsSep ", " poolNames}"
+          (builtins.head poolNames)
+      );
+
+  poolConfig = poolsWithCredstore.${poolName};
+
+  # Find the credstore dataset
+  credstoreDatasetName = lib.findFirst (
+    dsName:
+    let
+      ds = poolConfig.datasets.${dsName};
+    in
+    ds.type or "" == "zfs_volume" && ds.content.type or "" == "luks"
+  ) (throw "No credstore zvol found in pool ${poolName}") (builtins.attrNames poolConfig.datasets);
+
+  credstoreConfig = poolConfig.datasets.${credstoreDatasetName};
+  credstoreLuksName = credstoreConfig.content.name;
+
+  # Find the encrypted parent dataset
+  encryptedDatasetName = lib.findFirst (
+    dsName:
+    let
+      ds = poolConfig.datasets.${dsName};
+    in
+    ds.type or "" == "zfs_fs" && (ds.options.encryption or "") != ""
+  ) (throw "No encrypted dataset found in pool ${poolName}") (builtins.attrNames poolConfig.datasets);
+
+  encryptedDataset = "${poolName}/${encryptedDatasetName}";
+
+  # Extract mount point and credential file name from keylocation
+  # Example: "file:///etc/credstore/zfs-sysroot.mount" → mountpoint="/etc/credstore", filename="zfs-sysroot.mount"
+  keylocation = poolConfig.datasets.${encryptedDatasetName}.options.keylocation or "";
+
+  keylocationPath =
+    lib.throwIf (!(lib.hasPrefix "file://" keylocation))
+      "Encrypted dataset keylocation must start with 'file://', found: ${keylocation}"
+      (lib.removePrefix "file://" keylocation);
+
+  credstoreMountpoint = dirOf keylocationPath;
+  credentialFileName = baseNameOf keylocationPath;
+
+  # Find disk containing the pool
+  diskName = lib.findFirst (
+    dName:
+    let
+      disk = diskoConfig.disk.${dName};
+    in
+    lib.any (
+      partName:
+      let
+        part = disk.content.partitions.${partName};
+      in
+      part.content.type or "" == "zfs" && part.content.pool or "" == poolName
+    ) (builtins.attrNames (disk.content.partitions or { }))
+  ) (throw "No disk found containing pool ${poolName}") (builtins.attrNames diskoConfig.disk);
+
+  diskConfig = diskoConfig.disk.${diskName};
+
+  # Find ZFS partition name
+  zfsPartName =
+    lib.findFirst
+      (
+        partName:
+        let
+          part = diskConfig.content.partitions.${partName};
+        in
+        part.content.type or "" == "zfs" && part.content.pool or "" == poolName
+      )
+      (throw "No ZFS partition found for pool ${poolName}")
+      (builtins.attrNames diskConfig.content.partitions);
+
+  # Calculate partition number from position in attrset
+  partNames = builtins.attrNames diskConfig.content.partitions;
+  partIndex = lib.lists.findFirstIndex (n: n == zfsPartName) null partNames;
+  partNumber = toString (partIndex + 1); # Partitions are 1-indexed
+
+  devicePath = "${diskConfig.device}-part${partNumber}";
+
+  # Construct device paths
+  credstoreZvolPath = "/dev/zvol/${poolName}/${credstoreDatasetName}";
+  credstoreMappedPath = "/dev/mapper/${credstoreLuksName}";
+in
 {
+  assertions = [
+    {
+      assertion = builtins.length poolNames == 1;
+      message = ''
+        tpm-decrypt.nix: Expected exactly 1 zpool with credstore zvol.
+        Found ${toString (builtins.length poolNames)}: ${lib.concatStringsSep ", " poolNames}
+
+        A credstore is a zfs_volume with LUKS encryption that stores the ZFS key.
+        Only one pool should have this structure.
+      '';
+    }
+    {
+      assertion = credstoreConfig.type == "zfs_volume";
+      message = ''
+        tpm-decrypt.nix: credstore must be type 'zfs_volume', found '${credstoreConfig.type}'.
+        The credstore must be a zvol to appear as /dev/zvol/${poolName}/${credstoreDatasetName}.
+      '';
+    }
+    {
+      assertion = credstoreConfig.content.type == "luks";
+      message = ''
+        tpm-decrypt.nix: credstore must have LUKS encryption.
+        Found content type: ${credstoreConfig.content.type or "none"}
+      '';
+    }
+    {
+      assertion = lib.hasPrefix "file://" keylocation;
+      message = ''
+        tpm-decrypt.nix: Encrypted dataset '${encryptedDatasetName}' has invalid keylocation.
+        Found: ${keylocation}
+        Expected: file:///<path>/<filename>
+
+        The keylocation must be a file:// URI pointing to where the key will be stored.
+        The credstore will be mounted at the directory portion of this path.
+        Example: file:///etc/credstore/zfs-sysroot.mount
+      '';
+    }
+  ];
+
   boot = {
     initrd = {
       systemd = {
@@ -155,29 +310,29 @@
 
         services = {
           # Disable default ZFS import service to use our custom bare import
-          zfs-import-zroot.enable = false;
+          "zfs-import-${poolName}".enable = false;
 
           # Fix ordering: create-needed-for-boot-dirs needs to wait for key loading
           create-needed-for-boot-dirs = {
-            after = [ "zfs-load-key-zroot.service" ];
-            requires = [ "zfs-load-key-zroot.service" ];
+            after = [ "zfs-load-key-${poolName}.service" ];
+            requires = [ "zfs-load-key-${poolName}.service" ];
           };
 
           # Critical: Configure udevd ordering (from discourse thread)
           # Ensures udevd completes before cryptsetup attempts to unlock
           # Prevents race where cryptsetup starts before device events settle
-          systemd-udevd.before = [ "systemd-cryptsetup@credstore.service" ];
+          systemd-udevd.before = [ "systemd-cryptsetup@${credstoreLuksName}.service" ];
 
           # Import pool bare (-N) to make zvols available before LUKS unlock
-          import-zroot-bare =
+          "import-${poolName}-bare" =
             let
               # Properly escape device paths for systemd unit names
               devices = map (p: utils.escapeSystemdPath p + ".device") [
-                "/dev/disk/by-id/nvme-Samsung_SSD_9100_PRO_2TB_S7YCNJ0Y506219W-part3"
+                devicePath
               ];
             in
             {
-              description = "Import zroot pool bare for credential zvol access";
+              description = "Import ${poolName} pool bare for credential zvol access";
 
               # Disable default dependencies for precise ordering control
               unitConfig.DefaultDependencies = false;
@@ -196,7 +351,7 @@
               wants = [ "cryptsetup-pre.target" ] ++ devices;
               before = [
                 "cryptsetup-pre.target"
-                "systemd-cryptsetup@credstore.service"
+                "systemd-cryptsetup@${credstoreLuksName}.service"
               ];
               conflicts = [ "initrd-switch-root.target" ];
 
@@ -217,7 +372,7 @@
                   exit_code=$?
                   if [ "$exit_code" != 0 ]; then
                     echo "Import failed, attempting to export pool..." >&2
-                    zpool export zroot 2>/dev/null || true
+                    zpool export ${poolName} 2>/dev/null || true
                   fi
                 }
                 trap cleanup EXIT
@@ -225,31 +380,31 @@
                 # Import without mounting (-N flag)
                 # -N: Don't mount any datasets (makes zvols available as block devices)
                 # -f: Force import (may show as in-use from install environment)
-                zpool import -N -f zroot
+                zpool import -N -f ${poolName}
 
                 # Security: Validate encryption root before proceeding
-                encroot="$(zfs get -H -o value encryptionroot zroot/local)"
-                if [ "$encroot" != "zroot/local" ]; then
-                  echo "ERROR: zroot/local has invalid encryptionroot $encroot" >&2
+                encroot="$(zfs get -H -o value encryptionroot ${encryptedDataset})"
+                if [ "$encroot" != "${encryptedDataset}" ]; then
+                  echo "ERROR: ${encryptedDataset} has invalid encryptionroot $encroot" >&2
                   exit 1
                 fi
 
-                echo "Successfully imported zroot pool (bare mode)"
+                echo "Successfully imported ${poolName} pool (bare mode)"
               '';
             };
           # Load ZFS encryption key from TPM2-backed credential store
-          zfs-load-key-zroot = {
+          "zfs-load-key-${poolName}" = {
             description = "Load ZFS encryption key from TPM2-backed credential store";
 
             unitConfig = {
               DefaultDependencies = false;
-              RequiresMountsFor = "/etc/credstore";
+              RequiresMountsFor = credstoreMountpoint;
             };
 
             # Must wait for both pool import and credstore mount
-            requires = [ "import-zroot-bare.service" ];
+            requires = [ "import-${poolName}-bare.service" ];
             after = [
-              "import-zroot-bare.service"
+              "import-${poolName}-bare.service"
               "etc-credstore.mount"
             ];
 
@@ -267,14 +422,14 @@
               Type = "oneshot";
               RemainAfterExit = true;
               # Use systemd credentials for secure key access
-              ImportCredential = "zfs-sysroot.mount";
+              ImportCredential = credentialFileName;
             };
 
             path = [ config.boot.zfs.package ];
 
             script = ''
               # Load key from credential directory (automatically decrypted by systemd)
-              zfs load-key -L file://"''${CREDENTIALS_DIRECTORY}"/zfs-sysroot.mount zroot/local
+              zfs load-key -L file://"''${CREDENTIALS_DIRECTORY}"/${credentialFileName} ${encryptedDataset}
               echo "Successfully loaded ZFS encryption key"
             '';
           };
@@ -285,8 +440,8 @@
             wantedBy = [ "initrd.target" ];
 
             # Must wait for ZFS key to be loaded
-            requires = [ "zfs-load-key-zroot.service" ];
-            after = [ "zfs-load-key-zroot.service" ];
+            requires = [ "zfs-load-key-${poolName}.service" ];
+            after = [ "zfs-load-key-${poolName}.service" ];
             before = [ "sysroot.mount" ];
 
             path = [ config.boot.zfs.package ];
@@ -296,7 +451,7 @@
             serviceConfig.Type = "oneshot";
 
             script = ''
-              zfs rollback -r zroot/local/root@blank && \
+              zfs rollback -r ${poolName}/${encryptedDatasetName}/root@blank && \
                 echo "  >> >> rollback complete << <<"
             '';
           };
@@ -305,16 +460,16 @@
         # Explicitly define credstore mount unit (not via fstab)
         mounts = [
           {
-            where = "/etc/credstore";
-            what = "/dev/mapper/credstore";
+            where = credstoreMountpoint;
+            what = credstoreMappedPath;
             type = "ext4";
             options = "defaults";
             wantedBy = [ "initrd-fs.target" ];
             after = [
-              "systemd-cryptsetup@credstore.service"
+              "systemd-cryptsetup@${credstoreLuksName}.service"
               "systemd-udevd.service" # After udev during startup, before udev during shutdown
             ];
-            requires = [ "systemd-cryptsetup@credstore.service" ];
+            requires = [ "systemd-cryptsetup@${credstoreLuksName}.service" ];
             before = [ "initrd-switch-root.target" ];
             conflicts = [ "initrd-switch-root.target" ];
             unitConfig.DefaultDependencies = false;
@@ -323,8 +478,8 @@
       };
 
       # Configure TPM2-backed LUKS device for credential store
-      luks.devices.credstore = {
-        device = "/dev/zvol/zroot/credstore";
+      luks.devices.${credstoreLuksName} = {
+        device = credstoreZvolPath;
         # TPM2 automatic unlock with PCR binding
         # PCR 7: Secure Boot state - prevents unlock if Secure Boot disabled
         # PCR 15: System identity - extended by tpm2-measure-pcr after unlock
