@@ -527,7 +527,6 @@ in
           "tpm2-device=auto" # Use available TPM2 device
           "tpm2-measure-pcr=yes" # Extends PCR 15 AFTER unlock (makes key unusable for re-unlock)
           "tpm2-pcrs=7+15" # Bind to Secure Boot state + initrd-only enforcement
-          "x-initrd.attach" # Mark as initrd-only device
         ];
       };
 
