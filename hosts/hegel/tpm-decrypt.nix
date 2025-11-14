@@ -16,15 +16,15 @@
 # ============================================================================
 #
 # Boot Sequence:
-#   1. modprobe@zfs.service           - Load ZFS kernel module
-#   2. systemd-udevd.service          - Device management (settles before cryptsetup)
-#   3. import-zroot-bare.service      - zpool import -N zroot (bare mode)
-#   4. cryptsetup-pre.target          - Synchronization point
-#   5. systemd-cryptsetup@credstore   - TPM2 auto-unlock LUKS zvol
-#   6. etc-credstore.mount            - Mount credential filesystem
-#   7. zfs-load-key-zroot.service     - Load ZFS key from credstore
-#   8. rollback.service               - Impermanence rollback
-#   9. sysroot.mount                  - Mount root filesystem
+#   1. modprobe@zfs.service                    - Load ZFS kernel module
+#   2. systemd-udevd.service                   - Device management (settles before cryptsetup)
+#   3. import-{poolName}-bare.service          - zpool import -N {poolName} (bare mode)
+#   4. cryptsetup-pre.target                   - Synchronization point
+#   5. systemd-cryptsetup@{luksName}           - TPM2 auto-unlock LUKS zvol
+#   6. {credstoreMountUnit}                    - Mount credential filesystem
+#   7. zfs-load-key-{poolName}.service         - Load ZFS key from credstore
+#   8. rollback.service                        - Impermanence rollback
+#   9. sysroot.mount                           - Mount root filesystem
 #
 # Components:
 #   - credstore zvol: 100M unencrypted ZFS volume with TPM2-backed LUKS encryption
@@ -59,6 +59,13 @@
 #   - Result: Credstore accessible only during initrd, never after
 #   - Prevents attacks where root user on running system decrypts credstore
 #
+#   CRITICAL: This security assumes only trusted initrds can produce valid PCR 7.
+#   - PCR 7 measures Secure Boot policy (which keys are trusted)
+#   - Signing initrds with debug shells breaks this security model
+#   - Disabling Secure Boot changes PCR 7 → TPM refuses unlock ✓
+#   - Enrolling other vendor keys (Microsoft, etc.) is FINE - they change PCR 7
+#     but still represent a trusted boot path
+#
 # Fallback: LUKS passphrase prompt if TPM2 fails
 #
 # What TPM2 Protects Against:
@@ -83,7 +90,7 @@
 #    tpm2_getcap properties-fixed
 #
 # 2. Enroll TPM2 Key (CRITICAL - Note the explicit PCR 15 value):
-#    sudo systemd-cryptenroll /dev/zvol/zroot/credstore \
+#    sudo systemd-cryptenroll /dev/zvol/{poolName}/{credstoreDatasetName} \
 #      --tpm2-device=auto \
 #      --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000
 #
@@ -95,32 +102,35 @@
 #    - Otherwise unlock will fail (PCR mismatch)
 #
 # 3. Verify Enrollment:
-#    sudo cryptsetup luksDump /dev/zvol/zroot/credstore
+#    sudo cryptsetup luksDump /dev/zvol/{poolName}/{credstoreDatasetName}
 #    # Should show systemd-tpm2 token with PCRs 7,15
 #
 # 4. Test:
 #    sudo reboot
 #    # Should boot automatically without password prompt
 #
-# 5. Verify PCR 15 Protection:
+# 5. Verify PCR 15 Protection (AFTER successful boot):
 #    tpm2_pcrread sha256:15
 #    # Should show non-zero value (extended after unlock)
-#    sudo cryptsetup luksOpen /dev/zvol/zroot/credstore test
-#    # Should fail - TPM refuses to unseal outside initrd
+#    sudo systemd-cryptsetup attach test /dev/zvol/{poolName}/{credstoreDatasetName} - tpm2-device=auto,tpm2-measure-pcr=yes,tpm2-pcrs=7+15
+#    # Should fail - TPM refuses to unseal outside initrd (PCR 15 mismatch)
 #
 # ============================================================================
 # RE-ENROLLMENT AFTER UPDATES
 # ============================================================================
 #
 # When to re-enroll:
-#   - Firmware/BIOS updates
-#   - Secure Boot policy changes
-#   - After PCR-affecting system changes
+#   - Secure Boot policy changes (enrolling/removing signing keys)
+#   - Secure Boot being disabled/re-enabled
+#   - After any PCR 7-affecting changes
+#
+# NOTE: Firmware/BIOS updates do NOT require re-enrollment since we only
+#       bind to PCR 7 (Secure Boot), not PCR 0/2 (firmware/bootloader)
 #
 # How to re-enroll:
 #   1. Boot with passphrase (TPM2 will fail, fallback works)
-#   2. sudo systemd-cryptenroll /dev/zvol/zroot/credstore --wipe-slot=tpm2
-#   3. sudo systemd-cryptenroll /dev/zvol/zroot/credstore \
+#   2. sudo systemd-cryptenroll /dev/zvol/{poolName}/{credstoreDatasetName} --wipe-slot=tpm2
+#   3. sudo systemd-cryptenroll /dev/zvol/{poolName}/{credstoreDatasetName} \
 #        --tpm2-device=auto \
 #        --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000
 #   4. Reboot to test
@@ -137,8 +147,8 @@
 # ZFS key load fails:
 #   - Boot to emergency shell (enable emergencyAccess below)
 #   - Check: mount | grep credstore
-#   - Check: ls -la /etc/credstore/zfs-sysroot.mount
-#   - Manual: zfs load-key -L file:///etc/credstore/zfs-sysroot.mount zroot/local
+#   - Check: ls -la {credstoreMountpoint}/{credentialFileName}
+#   - Manual: zfs load-key -L {keylocation} {encryptedDataset}
 #
 # Debug boot issues:
 #   - Temporarily enable debug options below (see WARNING)
@@ -222,6 +232,11 @@ let
   credstoreMountpoint = dirOf keylocationPath;
   credentialFileName = baseNameOf keylocationPath;
 
+  # Generate systemd mount unit name from mount point
+  # /etc/credstore → etc-credstore.mount
+  credstoreMountUnit =
+    (utils.escapeSystemdPath (lib.removePrefix "/" credstoreMountpoint)) + ".mount";
+
   # Find disk containing the pool
   diskName = lib.findFirst (
     dName:
@@ -299,6 +314,29 @@ in
         The keylocation must be a file:// URI pointing to where the key will be stored.
         The credstore will be mounted at the directory portion of this path.
         Example: file:///etc/credstore/zfs-sysroot.mount
+      '';
+    }
+    {
+      assertion = lib.elem credstoreMountpoint [
+        "/etc/credstore"
+        "/run/credstore"
+        "/usr/lib/credstore"
+        "/etc/credstore.encrypted"
+      ];
+      message = ''
+        tpm-decrypt.nix: credstore mount point must be a systemd credential directory.
+        Found: ${credstoreMountpoint} (derived from ${keylocation})
+
+        systemd's ImportCredential looks for credentials in these directories:
+          - /etc/credstore/
+          - /run/credstore/
+          - /usr/lib/credstore/
+          - /etc/credstore.encrypted/
+
+        Current keylocation: ${keylocation}
+        Recommended: file:///etc/credstore/<filename>
+
+        See: https://systemd.io/CREDENTIALS/
       '';
     }
   ];
@@ -405,7 +443,7 @@ in
             requires = [ "import-${poolName}-bare.service" ];
             after = [
               "import-${poolName}-bare.service"
-              "etc-credstore.mount"
+              credstoreMountUnit
             ];
 
             # Must complete before mounting root
