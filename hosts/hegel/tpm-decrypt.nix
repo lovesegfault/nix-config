@@ -513,6 +513,18 @@ in
             unitConfig.DefaultDependencies = false;
           }
         ];
+
+        # Ensure cryptsetup service stops before switching to real root
+        targets.initrd-switch-root = {
+          conflicts = [
+            credstoreMountUnit
+            "systemd-cryptsetup@${credstoreLuksName}.service"
+          ];
+          after = [
+            credstoreMountUnit
+            "systemd-cryptsetup@${credstoreLuksName}.service"
+          ];
+        };
       };
 
       # Configure TPM2-backed LUKS device for credential store
