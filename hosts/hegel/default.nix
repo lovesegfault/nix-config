@@ -36,6 +36,9 @@
   boot = {
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [
+      "rfkill.default_state=0" # disable wifi, bluetooth, etc. by default
+    ];
     lanzaboote.pkiBundle = lib.mkForce "/var/lib/sbctl";
     tmp.useTmpfs = true;
     zfs.package = pkgs.zfs_unstable;
