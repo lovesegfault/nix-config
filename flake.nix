@@ -77,10 +77,8 @@
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs = {
-        flake-compat.follows = "flake-compat";
-        flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
-        pre-commit-hooks-nix.follows = "git-hooks";
+        pre-commit.follows = "git-hooks";
       };
     };
 
@@ -89,6 +87,7 @@
       inputs = {
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
+        treefmt-nix.follows = "treefmt-nix";
       };
     };
 
@@ -111,7 +110,12 @@
 
     stylix = {
       url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        tinted-schemes.follows = "tinted-schemes";
+      };
     };
 
     systems.url = "github:nix-systems/default";
@@ -134,6 +138,7 @@
         git-hooks.follows = "git-hooks";
         nixpkgs.follows = "nixpkgs";
         treefmt-nix.follows = "treefmt-nix";
+        systems.follows = "systems";
       };
     };
   };
