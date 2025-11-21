@@ -72,7 +72,7 @@ jobs:
       eval: ${{ steps.get-attrs.outputs.eval }}
       darwin-hosts: ${{ steps.get-attrs.outputs.darwin-hosts }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           sparse-checkout: |
             nix/hosts.nix
