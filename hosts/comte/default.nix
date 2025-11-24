@@ -28,7 +28,7 @@
   };
 
   console = {
-    font = "ter-v28n";
+    font = "ter-v24n";
     keyMap = "us";
     packages = with pkgs; [ terminus_font ];
   };
@@ -36,7 +36,7 @@
   hardware.enableRedistributableFirmware = true;
 
   networking = {
-    hostId = "ec27a696";
+    hostId = "ec21dbce";
     nftables.enable = true;
   };
 
@@ -50,7 +50,7 @@
         "nixos-test"
         "big-parallel"
         "kvm"
-        "gccarch-znver4"
+        "gccarch-znver5"
       ];
     };
   };
@@ -85,7 +85,7 @@
   systemd.network.networks = {
     ens130 = {
       DHCP = "yes";
-      matchConfig.MACAddress = "0e:79:31:e8:35:27";
+      matchConfig.MACAddress = "0e:1d:c4:0e:55:87";
     };
   };
 
