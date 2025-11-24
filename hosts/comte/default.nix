@@ -85,7 +85,7 @@
   systemd.network.networks = {
     ens130 = {
       DHCP = "yes";
-      matchConfig.MACAddress = "0e:1d:c4:0e:55:87";
+      name = "ens130";
     };
   };
 
