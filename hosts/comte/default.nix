@@ -35,6 +35,11 @@
 
   hardware.enableRedistributableFirmware = true;
 
+  home-manager.users.bemeurer = {
+    imports = [ ../../users/bemeurer/trusted ];
+    programs.git.settings.user.email = lib.mkForce "beme@anthropic.com";
+  };
+
   networking = {
     hostId = "ec21dbce";
     nftables.enable = true;
