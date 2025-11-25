@@ -54,6 +54,7 @@
 
   security = {
     pam.services.sudo.u2fAuth = true;
+    polkit.enable = true;
     sudo = {
       enable = true;
       wheelNeedsPassword = lib.mkDefault false;
