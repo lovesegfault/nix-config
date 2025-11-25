@@ -65,5 +65,9 @@
     gsw = "git switch";
     gswc = "${gsw} -c";
     gswcf = "${gsw} -C";
+    gwt = "git worktree";
+    gwta = "${gwt} add";
+    gwtl = "${gwt} list";
+    gwtr = "${gwt} remove";
   };
 }
