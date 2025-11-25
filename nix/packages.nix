@@ -28,4 +28,5 @@ compatHostDrvs
 })
 // {
   inherit (pkgs) nix-fast-build;
+  neovim = pkgs.neovim-bemeurer;
 }

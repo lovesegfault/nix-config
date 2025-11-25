@@ -4,6 +4,7 @@
   impermanence,
   lib,
   nix-index-database,
+  nixvim,
   pkgs,
   stylix,
   ...
@@ -12,6 +13,7 @@
   imports = [
     impermanence.nixosModules.home-manager.impermanence
     nix-index-database.homeModules.nix-index
+    nixvim.homeModules.nixvim
     stylix.homeModules.stylix
 
     ./bash.nix
@@ -19,7 +21,7 @@
     ./fish.nix
     ./git.nix
     ./htop.nix
-    ./neovim.nix
+    ../neovim
     ./ssh.nix
     ./starship.nix
     ./television.nix

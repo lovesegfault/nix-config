@@ -25,6 +25,7 @@ let
             home-manager
             impermanence
             nix-index-database
+            nixvim
             stylix
             ;
         };

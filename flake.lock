@@ -388,43 +388,6 @@
         "type": "github"
       }
     },
-    "lovesegfault-vim-config": {
-      "inputs": {
-        "flake-compat": [
-          "flake-compat"
-        ],
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "git-hooks": [
-          "git-hooks"
-        ],
-        "nix-github-actions": "nix-github-actions",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "nixvim": "nixvim",
-        "systems": [
-          "systems"
-        ],
-        "treefmt-nix": [
-          "treefmt-nix"
-        ]
-      },
-      "locked": {
-        "lastModified": 1764101675,
-        "narHash": "sha256-oHacbYN5vgbu8VT5VdgN7nW91mtY2JY5oSLWkYJAWPE=",
-        "owner": "lovesegfault",
-        "repo": "vim-config",
-        "rev": "1cd0d1f78c3006f4c85bc90ada70fbdfb5afef65",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lovesegfault",
-        "repo": "vim-config",
-        "type": "github"
-      }
-    },
     "nix-fast-build": {
       "inputs": {
         "flake-parts": [
@@ -448,27 +411,6 @@
       "original": {
         "owner": "Mic92",
         "repo": "nix-fast-build",
-        "type": "github"
-      }
-    },
-    "nix-github-actions": {
-      "inputs": {
-        "nixpkgs": [
-          "lovesegfault-vim-config",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1737420293,
-        "narHash": "sha256-F1G5ifvqTpJq7fdkT34e/Jy9VCyzd5XfJ9TO8fHhJWE=",
-        "owner": "nix-community",
-        "repo": "nix-github-actions",
-        "rev": "f4158fa080ef4503c8f4c820967d946c2af31ec9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nix-github-actions",
         "type": "github"
       }
     },
@@ -541,27 +483,22 @@
     "nixvim": {
       "inputs": {
         "flake-parts": [
-          "lovesegfault-vim-config",
           "flake-parts"
         ],
         "nixpkgs": [
-          "lovesegfault-vim-config",
           "nixpkgs"
         ],
-        "nuschtosSearch": [
-          "lovesegfault-vim-config"
-        ],
+        "nuschtosSearch": [],
         "systems": [
-          "lovesegfault-vim-config",
           "systems"
         ]
       },
       "locked": {
-        "lastModified": 1763680973,
-        "narHash": "sha256-DmCv1FN3Ejw1piid3nwBj6L62oVohy7/FU7mHXBfS2s=",
+        "lastModified": 1764065466,
+        "narHash": "sha256-tH0yk53OPuT+D/Vlb6IXtZYJ9zb/TfHcTIm7P3eWRNA=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "d73eb6f14221f12b6009b63b1bd6749f73d37f9a",
+        "rev": "b67ff4d1b29b590ab6865bc9eac785c28006f228",
         "type": "github"
       },
       "original": {
@@ -608,11 +545,11 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
-        "lovesegfault-vim-config": "lovesegfault-vim-config",
         "nix-fast-build": "nix-fast-build",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "nixvim": "nixvim",
         "stylix": "stylix",
         "systems": "systems",
         "tinted-schemes": "tinted-schemes",

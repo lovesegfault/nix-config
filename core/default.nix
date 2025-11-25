@@ -4,6 +4,7 @@
   hostType,
   impermanence,
   nix-index-database,
+  nixvim,
   stylix,
   ...
 }:
@@ -51,6 +52,7 @@
         hostType
         impermanence
         nix-index-database
+        nixvim
         stylix
         ;
     };
