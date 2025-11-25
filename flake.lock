@@ -264,22 +264,6 @@
         "type": "github"
       }
     },
-    "gemoji": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1712080367,
-        "narHash": "sha256-7QhTthdaL6IBg7UAx5bW6dXjYPNCGh6kZcQsVLxF9QE=",
-        "owner": "github",
-        "repo": "gemoji",
-        "rev": "0eca75db9301421efc8710baf7a7576793ae452a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "github",
-        "repo": "gemoji",
-        "type": "github"
-      }
-    },
     "git-hooks": {
       "inputs": {
         "flake-compat": [
@@ -620,7 +604,6 @@
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
-        "gemoji": "gemoji",
         "git-hooks": "git-hooks",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
@@ -633,8 +616,7 @@
         "stylix": "stylix",
         "systems": "systems",
         "tinted-schemes": "tinted-schemes",
-        "treefmt-nix": "treefmt-nix",
-        "truecolor-check": "truecolor-check"
+        "treefmt-nix": "treefmt-nix"
       }
     },
     "rust-overlay": {
@@ -812,22 +794,6 @@
         "owner": "numtide",
         "repo": "treefmt-nix",
         "type": "github"
-      }
-    },
-    "truecolor-check": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1595671275,
-        "narHash": "sha256-6xAPv96Pcws2vo2QWZxGVJKsTJpvQuarnJViPvN/JuA=",
-        "ref": "refs/heads/master",
-        "rev": "94d8b2be62657e96488038b0e547e3009ed87d40",
-        "revCount": 3,
-        "type": "git",
-        "url": "https://gist.github.com/fdeaf79e921c2f413f44b6f613f6ad53.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://gist.github.com/fdeaf79e921c2f413f44b6f613f6ad53.git"
       }
     }
   },

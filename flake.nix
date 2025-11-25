@@ -62,11 +62,6 @@
       inputs.systems.follows = "systems";
     };
 
-    gemoji = {
-      url = "github:github/gemoji";
-      flake = false;
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -123,11 +118,6 @@
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    truecolor-check = {
-      url = "git+https://gist.github.com/fdeaf79e921c2f413f44b6f613f6ad53.git";
-      flake = false;
     };
 
     lovesegfault-vim-config = {

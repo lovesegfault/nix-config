@@ -1,6 +1,9 @@
 final: _:
 let
-  emoji_json = final.__inputs.gemoji + "/db/emoji.json";
+  emoji_json = final.fetchurl {
+    url = "https://raw.githubusercontent.com/github/gemoji/0eca75db9301421efc8710baf7a7576793ae452a/db/emoji.json";
+    hash = "sha256-sXSuKusyG1L2Stuf9BL5ZqfzOIOdeAeE3RXcrXAsLdY=";
+  };
   emoji_list =
     final.runCommand "emoji_list.txt"
       {
