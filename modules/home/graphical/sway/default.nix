@@ -9,10 +9,10 @@ let
 in
 {
   imports = with self.homeModules; [
-    graphical-linux-sway-foot
-    graphical-linux-sway-mako
-    graphical-linux-sway-sway
-    graphical-linux-sway-waybar
+    graphical-sway-foot
+    graphical-sway-mako
+    graphical-sway-sway
+    graphical-sway-waybar
   ];
 
   home = {

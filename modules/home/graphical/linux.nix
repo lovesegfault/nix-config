@@ -9,11 +9,11 @@ let
 in
 {
   imports = with self.homeModules; [
-    graphical-linux-chromium
-    graphical-linux-common
-    graphical-linux-firefox
-    graphical-linux-mime
-    graphical-linux-mpv
+    graphical-chromium
+    graphical-common
+    graphical-firefox
+    graphical-mime
+    graphical-mpv
   ];
 
   dconf.enable = lib.mkForce true;
