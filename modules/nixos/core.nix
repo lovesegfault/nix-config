@@ -64,7 +64,7 @@ in
       ln -sv ${pkgs.path} $out/nixpkgs
     '';
     rebuild.enableNg = true;
-    stateVersion = "25.11";
+    stateVersion = lib.mkDefault "25.11";
   };
 
   systemd = {

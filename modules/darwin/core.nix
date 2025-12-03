@@ -64,7 +64,7 @@ in
   };
 
   system = {
-    stateVersion = 6;
+    stateVersion = lib.mkDefault 6;
     defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
     tools.darwin-uninstaller.enable = false;
   };
