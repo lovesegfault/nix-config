@@ -10,11 +10,11 @@ let
 in
 {
   imports = with self.homeModules; [
-    graphical-linux-i3-dunst
-    graphical-linux-i3-i3
-    graphical-linux-i3-polybar
-    graphical-linux-i3-rofi
-    graphical-linux-i3-screen-locker
+    graphical-i3-dunst
+    graphical-i3-i3
+    graphical-i3-polybar
+    graphical-i3-rofi
+    graphical-i3-screen-locker
   ];
 
   home.packages = with pkgs; [
