@@ -1,33 +1,34 @@
 # Shared home-manager configuration for all platforms
 # External modules (impermanence, nix-index-database, nixvim, stylix) are imported in configurations/
 {
+  flake,
   lib,
   osConfig ? null,
   pkgs,
   ...
 }:
 let
+  inherit (flake) self;
   # When integrated with NixOS/Darwin, osConfig is the parent system config
   # When standalone, osConfig is null
   isIntegrated = osConfig != null;
 in
 {
-  imports = [
-    ../shared/theme.nix
-    ./bash.nix
-    ./btop.nix
-    ./custom
-    ./fish.nix
-    ./git.nix
-    ./htop.nix
-    ./neovim
-    ./ssh.nix
-    ./starship.nix
-    ./television.nix
-    ./tmux.nix
-    ./xdg.nix
-    ./zsh.nix
-    ./dev
+  imports = with self.homeModules; [
+    bash
+    btop
+    custom
+    dev
+    fish
+    git
+    htop
+    neovim
+    ssh
+    starship
+    television
+    tmux
+    xdg
+    zsh
   ];
 
   # XXX: Manually enabled in the graphic module

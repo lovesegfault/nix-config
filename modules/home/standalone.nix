@@ -12,15 +12,15 @@ let
 in
 {
   imports = [
-    # External input modules (shared across all standalone home-manager hosts)
     inputs.nix-index-database.homeModules.nix-index
     inputs.nixvim.homeModules.nixvim
     inputs.stylix.homeModules.stylix
-
-    # Shared modules
-    ../shared/nixpkgs.nix
-    ../shared/registry.nix
-  ];
+  ]
+  ++ (with self.homeModules; [
+    nixpkgs
+    registry
+    theme
+  ]);
 
   home.sessionVariables.NIX_PATH = "nixpkgs=${config.xdg.dataHome}/nixpkgs";
 

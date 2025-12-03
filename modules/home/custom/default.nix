@@ -1,5 +1,4 @@
+{ flake, ... }:
 {
-  imports = [
-    ./uid.nix
-  ];
+  imports = with flake.self.homeModules; [ custom-uid ];
 }

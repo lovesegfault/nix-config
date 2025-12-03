@@ -1,16 +1,20 @@
 {
   config,
+  flake,
   lib,
   pkgs,
   ...
 }:
+let
+  inherit (flake) self;
+in
 {
-  imports = [
-    ./dunst.nix
-    ./i3.nix
-    ./polybar.nix
-    ./rofi.nix
-    ./screen-locker.nix
+  imports = with self.homeModules; [
+    graphical-linux-i3-dunst
+    graphical-linux-i3-i3
+    graphical-linux-i3-polybar
+    graphical-linux-i3-rofi
+    graphical-linux-i3-screen-locker
   ];
 
   home.packages = with pkgs; [

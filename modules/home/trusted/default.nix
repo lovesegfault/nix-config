@@ -1,7 +1,6 @@
+{ flake, ... }:
 {
-  imports = [
-    ./gpg.nix
-  ];
+  imports = with flake.self.homeModules; [ trusted-gpg ];
 
   programs.git.settings = {
     commit.gpgsign = true;

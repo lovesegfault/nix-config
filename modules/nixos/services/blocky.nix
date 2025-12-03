@@ -1,16 +1,18 @@
 {
   config,
+  flake,
   lib,
   pkgs,
   ...
 }:
 let
+  inherit (flake) self;
   inherit (config.networking) hostName tailscaleAddress;
 in
 {
-  imports = [
-    ./unbound.nix
-    ./mysql.nix
+  imports = with self.nixosModules; [
+    services-mysql
+    services-unbound
   ];
 
   networking.firewall = {
