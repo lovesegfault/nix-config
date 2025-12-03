@@ -1,9 +1,10 @@
 # Auto-discovered module exports
-# Modules are discovered recursively from modules/{nixos,darwin,home}/
+# Modules are discovered recursively from modules/{nixos,darwin,home,shared,flake-parts}/
 # Naming convention:
 #   - top-level files: foo.nix -> foo
 #   - subdirectory files: subdir/foo.nix -> subdir-foo
 #   - directories with default.nix: subdir/ -> subdir (imports default.nix)
+# Shared modules are exposed under all outputs (nixos, darwin, home)
 { inputs, self, ... }:
 let
   inherit (inputs.nixpkgs) lib;
@@ -44,26 +45,20 @@ let
         acc // processEntry name type
       ) { } contents;
     in
-    # Filter out default from top-level (it's handled specially)
-    lib.filterAttrs (n: _: n != prefix && n != "${prefix}-default" && n != "default") modules;
+    modules;
 
   # Discover modules for each category
   nixosModulesDiscovered = discoverModules ../../modules/nixos "";
   darwinModulesDiscovered = discoverModules ../../modules/darwin "";
   homeModulesDiscovered = discoverModules ../../modules/home "";
+  sharedModulesDiscovered = discoverModules ../../modules/shared "";
+  flakeModulesDiscovered = discoverModules ../../modules/flake-parts "";
 in
 {
   flake = {
-    nixosModules = nixosModulesDiscovered // {
-      default = self + "/modules/nixos";
-    };
-
-    darwinModules = darwinModulesDiscovered // {
-      default = self + "/modules/darwin";
-    };
-
-    homeModules = homeModulesDiscovered // {
-      default = self + "/modules/home";
-    };
+    flakeModules = flakeModulesDiscovered;
+    nixosModules = sharedModulesDiscovered // nixosModulesDiscovered;
+    darwinModules = sharedModulesDiscovered // darwinModulesDiscovered;
+    homeModules = sharedModulesDiscovered // homeModulesDiscovered;
   };
 }

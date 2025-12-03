@@ -1,18 +1,20 @@
 { flake, pkgs, ... }:
 let
-  inherit (flake.inputs) nixos-hardware;
+  inherit (flake) inputs self;
 in
 {
-  imports = [
-    nixos-hardware.nixosModules.common-cpu-amd
-    nixos-hardware.nixosModules.common-cpu-amd-pstate
-    nixos-hardware.nixosModules.common-gpu-amd
-    nixos-hardware.nixosModules.common-pc-laptop-ssd
-
-    ./bluetooth.nix
-    ./efi.nix
-    ./sound.nix
-  ];
+  imports =
+    (with inputs.nixos-hardware.nixosModules; [
+      common-cpu-amd
+      common-cpu-amd-pstate
+      common-gpu-amd
+      common-pc-laptop-ssd
+    ])
+    ++ (with self.nixosModules; [
+      hardware-bluetooth
+      hardware-efi
+      hardware-sound
+    ]);
 
   boot = {
     initrd.availableKernelModules = [

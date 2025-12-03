@@ -12,10 +12,11 @@ in
     inputs.stylix.darwinModules.stylix
 
     # Internal modules
-    ./core.nix
+    self.darwinModules.core
   ];
 
   # Home-manager integration
+  # Note: stylix.homeModules.stylix is auto-imported via stylix.homeManagerIntegration
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -23,7 +24,6 @@ in
     sharedModules = [
       inputs.nix-index-database.homeModules.nix-index
       inputs.nixvim.homeModules.nixvim
-      inputs.stylix.homeModules.stylix
       self.homeModules.default
     ];
   };

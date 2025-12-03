@@ -1,10 +1,20 @@
-# Darwin core system configuration
-# External module imports (home-manager, stylix, etc.) are in configurations/darwin/*/default.nix
-{ lib, pkgs, ... }:
 {
-  imports = [
-    ./nix.nix
-    ../shared/default.nix
+  flake,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  inherit (flake) self;
+in
+{
+  imports = with self.darwinModules; [
+    aspell
+    common
+    nix
+    nixpkgs
+    registry
+    theme
   ];
 
   environment = {

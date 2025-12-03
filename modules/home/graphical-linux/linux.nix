@@ -1,11 +1,19 @@
-{ lib, pkgs, ... }:
 {
-  imports = [
-    ./chromium.nix
-    ./common.nix
-    ./firefox.nix
-    ./mime.nix
-    ./mpv.nix
+  flake,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  inherit (flake) self;
+in
+{
+  imports = with self.homeModules; [
+    graphical-linux-chromium
+    graphical-linux-common
+    graphical-linux-firefox
+    graphical-linux-mime
+    graphical-linux-mpv
   ];
 
   dconf.enable = lib.mkForce true;

@@ -1,10 +1,18 @@
-{ lib, pkgs, ... }:
 {
-  imports = [
-    ./foot.nix
-    ./mako.nix
-    ./sway.nix
-    ./waybar.nix
+  flake,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  inherit (flake) self;
+in
+{
+  imports = with self.homeModules; [
+    graphical-linux-sway-foot
+    graphical-linux-sway-mako
+    graphical-linux-sway-sway
+    graphical-linux-sway-waybar
   ];
 
   home = {

@@ -1,31 +1,31 @@
-# NixOS core system configuration
-# External module imports (agenix, disko, home-manager, etc.) are in configurations/nixos/*/default.nix
 {
   config,
+  flake,
   lib,
   pkgs,
   ...
 }:
+let
+  inherit (flake) self;
+in
 {
-  imports = [
-    ./nix.nix
-    ./resolved.nix
-    ./tmux.nix
-    ../shared/default.nix
+  imports = with self.nixosModules; [
+    aspell
+    common
+    nix
+    nixpkgs
+    registry
+    resolved
+    theme
+    tmux
   ];
 
-  # Add man-pages and ghostty terminfo (NixOS only)
   environment.systemPackages = with pkgs; [
     man-pages
     ghostty.terminfo
   ];
 
   boot.kernelParams = [ "log_buf_len=10M" ];
-
-  documentation = {
-    dev.enable = true;
-    man.generateCaches = true;
-  };
 
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -38,12 +38,6 @@
     useDHCP = false;
     useNetworkd = true;
     wireguard.enable = true;
-  };
-
-  programs = {
-    command-not-found.enable = false;
-    mosh.enable = true;
-    zsh.enableGlobalCompInit = false;
   };
 
   security = {

@@ -15,13 +15,15 @@ in
     inputs.nix-index-database.nixosModules.nix-index
     inputs.stylix.nixosModules.stylix
 
-    # Internal modules
-    ./agenix-rekey.nix
-    ./core.nix
-    ./tailscale-address.nix
-  ];
+  ]
+  ++ (with self.nixosModules; [
+    agenix-rekey
+    core
+    tailscale-address
+  ]);
 
   # Home-manager integration
+  # Note: stylix.homeModules.stylix is auto-imported via stylix.homeManagerIntegration
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -30,7 +32,6 @@ in
       inputs.impermanence.homeManagerModules.impermanence
       inputs.nix-index-database.homeModules.nix-index
       inputs.nixvim.homeModules.nixvim
-      inputs.stylix.homeModules.stylix
       self.homeModules.default
     ];
   };
