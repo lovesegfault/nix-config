@@ -84,6 +84,9 @@ in
 
   hardware.enableRedistributableFirmware = true;
 
+  # agenix-rekey host pubkey
+  age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbG3jf2G3BJCIiL51Kfa9gfXGLiyU71IwW0siMQtf+7";
+
   networking = {
     hostId = "65618eec";
     hostName = "hegel";
@@ -177,7 +180,7 @@ in
     ];
   };
 
-  age.secrets.rootPassword.file = ./password.age;
+  age.secrets.rootPassword.rekeyFile = ../../../secrets/hegel-root-password.age;
   users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
 
   virtualisation = {

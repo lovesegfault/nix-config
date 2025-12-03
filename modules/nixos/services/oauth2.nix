@@ -1,7 +1,7 @@
 { config, ... }:
 with config.networking;
 {
-  age.secrets.oauth2.file = ./oauth2.age;
+  age.secrets.oauth2.rekeyFile = ../../../secrets/oauth2.age;
 
   security.acme.certs."auth.${hostName}.meurer.org" = { };
 
