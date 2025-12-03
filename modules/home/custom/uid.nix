@@ -10,8 +10,8 @@
   config = {
     assertions = [
       {
-        assertion = config.home.uid != "";
-        message = "UID could not be determined";
+        assertion = config.home.uid != 0;
+        message = "home.uid must be set to a non-zero value";
       }
     ];
   };
