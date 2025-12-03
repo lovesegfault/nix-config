@@ -1,10 +1,10 @@
 # nix-config [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org) [![ci](https://github.com/lovesegfault/nix-config/actions/workflows/ci.yaml/badge.svg)](https://github.com/lovesegfault/nix-config/actions/workflows/ci.yaml)
 
-This repository holds my NixOS configuration. It is fully reproducible, flakes
-based, and uses the [nixos-unified] framework for consistent configuration
-across NixOS, nix-darwin, and home-manager.
+This repository holds my Nix configurations. It uses the [nixos-unified]
+framework for consistent configuration across NixOS, nix-darwin, and
+home-manager.
 
-For the configurations' entry points see the individual [configurations], as
+For the configurations' entry points, see the individual [configurations], as
 well as [flake.nix]. For adding overlays see [overlays](#adding-overlays).
 
 Hostnames are picked from my [hostname list][hostnames].
@@ -24,60 +24,44 @@ Hostnames are picked from my [hostname list][hostnames].
 │   ├── shared/             # Shared NixOS+Darwin modules
 │   └── flake-parts/        # Flake-level configuration
 ├── overlays/               # Nixpkgs overlays
-├── lib/                    # Library functions and data
-└── packages/               # Custom packages
+└── secrets/                # Encrypted secrets (agenix-rekey)
 ```
 
 ## Usage
 
 ### Deploying
 
-#### NixOS
-
-To activate the current host:
+The unified `activate` command works for all configuration types:
 
 ```console
 $ nix run .#activate
 ```
 
-To activate a specific host:
+This auto-detects your hostname and activates the appropriate configuration.
 
-```console
-$ nix run .#activate <hostname>
-```
+#### Alternative methods
 
-Or using the traditional method:
-
+**NixOS:**
 ```console
 $ sudo nixos-rebuild --flake .#<hostname> switch
 ```
 
-#### Darwin
-
-For macOS hosts using nix-darwin:
-
+**Darwin:**
 ```console
-$ nix run .#activate
+$ darwin-rebuild --flake .#<hostname> switch
 ```
 
-Or:
-
-```console
-$ darwin-rebuild --flake .#poincare switch
-```
-
-#### Home Manager
-
-For standalone home-manager hosts:
-
-```console
-$ nix run .#activate
-```
-
-Or:
-
+**Home Manager:**
 ```console
 $ home-manager --flake .#<hostname> switch
+```
+
+### Updating inputs
+
+To update the primary flake inputs (nixpkgs, home-manager, nix-darwin):
+
+```console
+$ nix run .#update
 ```
 
 ### Adding overlays

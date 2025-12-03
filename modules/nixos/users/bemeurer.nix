@@ -5,7 +5,6 @@
   pkgs,
   ...
 }:
-with lib;
 {
   # Link home-manager user to NixOS user
   home-manager.users.bemeurer.home = {
@@ -26,18 +25,18 @@ with lib;
       "dialout"
       "audio"
     ]
-    ++ optionals config.hardware.i2c.enable [ "i2c" ]
-    ++ optionals config.networking.networkmanager.enable [ "networkmanager" ]
-    ++ optionals config.programs.sway.enable [
+    ++ lib.optionals config.hardware.i2c.enable [ "i2c" ]
+    ++ lib.optionals config.networking.networkmanager.enable [ "networkmanager" ]
+    ++ lib.optionals config.programs.sway.enable [
       "input"
       "video"
     ]
-    ++ optionals config.services.unbound.enable [ "unbound" ]
-    ++ optionals config.services.transmission.enable [ "transmission" ]
-    ++ optionals config.virtualisation.docker.enable [ "docker" ]
-    ++ optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
-    ++ optionals config.virtualisation.kvmgt.enable [ "kvm" ]
-    ++ optionals config.virtualisation.podman.enable [ "podman" ];
+    ++ lib.optionals config.services.unbound.enable [ "unbound" ]
+    ++ lib.optionals config.services.transmission.enable [ "transmission" ]
+    ++ lib.optionals config.virtualisation.docker.enable [ "docker" ]
+    ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
+    ++ lib.optionals config.virtualisation.kvmgt.enable [ "kvm" ]
+    ++ lib.optionals config.virtualisation.podman.enable [ "podman" ];
     isNormalUser = true;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQgTWfmR/Z4Szahx/uahdPqvEP/e/KQ1dKUYLenLuY2 bemeurer.personal"

@@ -1,5 +1,7 @@
 { config, ... }:
-with config.networking;
+let
+  inherit (config.networking) hostName;
+in
 {
   age.secrets.oauth2.rekeyFile = ../../../secrets/oauth2.age;
 

@@ -22,10 +22,4 @@ in
     uid = 22314791;
     stateVersion = "25.11";
   };
-
-  # Nix registry
-  nix.registry = {
-    nixpkgs.flake = inputs.nixpkgs;
-    p.flake = inputs.nixpkgs;
-  };
 }

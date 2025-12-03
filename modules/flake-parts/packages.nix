@@ -1,8 +1,10 @@
 # Package definitions - exports host configurations for CI builds
+# Merges with nixos-unified's packages (activate, update) via config.packages
 { inputs, self, ... }:
 {
   perSystem =
     {
+      config,
       pkgs,
       lib,
       system,
@@ -44,6 +46,7 @@
       );
     in
     {
+      # Host configurations as packages (for CI)
       packages =
         compatHostDrvs
         // (lib.optionalAttrs (compatHostDrvs != { }) {

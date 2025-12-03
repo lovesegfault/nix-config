@@ -11,8 +11,17 @@ in
     ./tailscale-address.nix
   ];
 
-  # Apply our overlays to nixpkgs
-  nixpkgs.overlays = [ self.overlays.default ];
+  # Apply our overlays and config to nixpkgs
+  nixpkgs = {
+    overlays = [ self.overlays.default ];
+    config.allowUnfree = true;
+  };
+
+  # Nix registry - expose nixpkgs as both 'nixpkgs' and 'p' (short alias)
+  nix.registry = {
+    nixpkgs.flake = inputs.nixpkgs;
+    p.flake = inputs.nixpkgs;
+  };
 
   # Home-manager integration
   home-manager = {

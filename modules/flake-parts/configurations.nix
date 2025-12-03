@@ -1,72 +1,43 @@
-# Explicit configuration wiring for nixos-unified
-# This module defines all NixOS, Darwin, and home-manager configurations
+# Configuration wiring using nixos-unified helpers
+# Uses mkLinuxSystem/mkMacosSystem/mkHomeConfiguration for standardized setup
 {
-  inputs,
   self,
-  withSystem,
+  inputs,
   ...
 }:
 let
-  # Helper to create a NixOS system
-  mkNixosSystem =
-    hostname: hostPlatform:
-    withSystem hostPlatform (
-      { pkgs, ... }:
-      inputs.nixpkgs.lib.nixosSystem {
-        inherit pkgs;
-        modules = [ (self + "/configurations/nixos/${hostname}") ];
-        specialArgs = {
-          flake = { inherit inputs self; };
-        };
-      }
-    );
+  inherit (self.nixos-unified.lib) mkLinuxSystem mkMacosSystem mkHomeConfiguration;
 
-  # Helper to create a Darwin system
-  mkDarwinSystem =
-    hostname: hostPlatform:
-    withSystem hostPlatform (
-      { pkgs, system, ... }:
-      inputs.nix-darwin.lib.darwinSystem {
-        inherit pkgs system;
-        modules = [ (self + "/configurations/darwin/${hostname}") ];
-        specialArgs = {
-          flake = { inherit inputs self; };
-        };
-      }
-    );
+  # We use home-manager = false because we have our own customized home-manager setup
+  # in modules/nixos/default.nix and modules/darwin/default.nix
+  mkNixos = mkLinuxSystem { home-manager = false; };
+  mkDarwin = mkMacosSystem { home-manager = false; };
 
-  # Helper to create a home-manager configuration
-  mkHomeConfig =
-    hostname: hostPlatform:
-    withSystem hostPlatform (
-      { pkgs, ... }:
-      inputs.home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ (self + "/configurations/home/${hostname}") ];
-        extraSpecialArgs = {
-          flake = { inherit inputs self; };
-        };
-      }
-    );
+  # Helper to get pkgs for a given system
+  pkgsFor = system: import inputs.nixpkgs { inherit system; };
+
+  # Wrapper for mkHomeConfiguration that takes hostname and system
+  mkHome =
+    hostname: system: mkHomeConfiguration (pkgsFor system) (self + "/configurations/home/${hostname}");
 in
 {
   flake = {
     nixosConfigurations = {
-      comte = mkNixosSystem "comte" "x86_64-linux";
-      hegel = mkNixosSystem "hegel" "x86_64-linux";
-      jung = mkNixosSystem "jung" "x86_64-linux";
-      plato = mkNixosSystem "plato" "x86_64-linux";
-      spinoza = mkNixosSystem "spinoza" "x86_64-linux";
+      comte = mkNixos (self + "/configurations/nixos/comte");
+      hegel = mkNixos (self + "/configurations/nixos/hegel");
+      jung = mkNixos (self + "/configurations/nixos/jung");
+      plato = mkNixos (self + "/configurations/nixos/plato");
+      spinoza = mkNixos (self + "/configurations/nixos/spinoza");
     };
 
     darwinConfigurations = {
-      poincare = mkDarwinSystem "poincare" "aarch64-darwin";
+      poincare = mkDarwin (self + "/configurations/darwin/poincare");
     };
 
     homeConfigurations = {
-      goethe = mkHomeConfig "goethe" "x86_64-linux";
-      hilbert = mkHomeConfig "hilbert" "x86_64-linux";
-      popper = mkHomeConfig "popper" "x86_64-linux";
+      goethe = mkHome "goethe" "x86_64-linux";
+      hilbert = mkHome "hilbert" "x86_64-linux";
+      popper = mkHome "popper" "x86_64-linux";
     };
   };
 }

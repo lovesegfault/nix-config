@@ -33,12 +33,6 @@ in
     sessionPath = [ "${config.home.homeDirectory}/.npm-global/bin" ];
   };
 
-  # Nix registry
-  nix.registry = {
-    nixpkgs.flake = inputs.nixpkgs;
-    p.flake = inputs.nixpkgs;
-  };
-
   programs = {
     bash = {
       bashrcExtra = ''

@@ -4,7 +4,9 @@
   pkgs,
   ...
 }:
-with config.networking;
+let
+  inherit (config.networking) hostName tailscaleAddress;
+in
 {
   imports = [
     ./unbound.nix
@@ -136,7 +138,7 @@ with config.networking;
         Group = "blocky";
         Restart = "on-failure";
         RestartSec = "1";
-        # Allow Unix socket connections to PostgreSQL
+        # Allow Unix socket connections to MySQL
         RestrictAddressFamilies = [
           "AF_UNIX"
           "AF_INET"
