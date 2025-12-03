@@ -11,11 +11,6 @@ let
 in
 {
   imports = [
-    # External input modules
-    inputs.nix-index-database.homeModules.nix-index
-    inputs.nixvim.homeModules.nixvim
-    inputs.stylix.homeModules.stylix
-
     # Internal modules via flake outputs
     self.homeModules.default
     self.homeModules.standalone
@@ -24,10 +19,9 @@ in
 
   # Home settings
   home = {
-    username = lib.mkForce "argocd";
+    username = "argocd";
     homeDirectory = "/root";
     uid = 999;
-    stateVersion = "25.11";
     file.".ssh/config".enable = false;
     packages = with pkgs; [ nixVersions.latest ];
   };

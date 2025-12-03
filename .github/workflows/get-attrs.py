@@ -5,7 +5,6 @@ import json
 import os
 import subprocess
 import sys
-from pathlib import Path
 from typing import Callable, Iterable, List, Optional, Self, Sequence
 
 GITHUB_PLATFORMS = {
@@ -20,7 +19,7 @@ def main():
     summary = Summary()
     summary.write("# CI")
 
-    flake = Flake.from_hosts_file()
+    flake = Flake.from_flake_eval()
 
     if flake.evalOnly:
         evalNames = ",".join([a.name for a in flake.evalOnly])
@@ -156,10 +155,12 @@ class DevShell(Derivation):
 class Host(Derivation):
     linuxBuilderAttr: Optional[str] = None
 
-    def __init__(self, name: str, hostPlatform: str, large: bool) -> None:
+    def __init__(
+        self, name: str, hostPlatform: str, large: bool, isDarwin: bool = False
+    ) -> None:
         attr = f"packages.{hostPlatform}.{name}"
         super().__init__(name, hostPlatform, attr, large)
-        if self.isDarwinHost():
+        if isDarwin:
             self.linuxBuilderAttr = f"darwinConfigurations.{name}.config.nix.linux-builder.package.nixosConfig.system.build.toplevel"
 
 
@@ -179,36 +180,24 @@ class Flake:
         return itertools.chain(self.buildables, self.evalOnly)
 
     @classmethod
-    def from_hosts_file(cls) -> Self:
-        hosts_path = Flake.find_hosts_file()
-        raw = subprocess.run(
-            ["nix", "eval", "--json", "-f", hosts_path],
-            capture_output=True,
-            check=True,
-            text=True,
-        ).stdout
-        parsed = json.loads(raw)
-        hosts = []
-        for name, cfg in parsed.items():
-            hosts.append(Host(name, cfg["hostPlatform"], cfg["large"]))
-
-        return cls(hosts)
-
-    @staticmethod
-    def find_hosts_file() -> Path:
-        script_dir = Path(__file__).absolute().parent
-        toplevel = subprocess.run(
-            ["git", "rev-parse", "--show-toplevel"],
-            cwd=script_dir,
+    def from_flake_eval(cls) -> Self:
+        """Discover all hosts with a single nix eval call."""
+        result = subprocess.run(
+            ["nix", "eval", "--json", ".#ci-metadata.hosts"],
             capture_output=True,
             check=True,
             text=True,
         )
-        toplevel = Path(toplevel.stdout.strip())
-        hosts_path = toplevel / "nix" / "hosts.nix"
-        if not hosts_path.exists():
-            raise RuntimeError(f"did not find host definition in {hosts_path}")
-        return hosts_path
+        host_list = json.loads(result.stdout)
+
+        hosts: List[Host] = []
+        for info in host_list:
+            isDarwin = info["type"] == "darwin"
+            hosts.append(
+                Host(info["name"], info["hostPlatform"], info["large"], isDarwin)
+            )
+
+        return cls(hosts)
 
 
 if __name__ == "__main__":
