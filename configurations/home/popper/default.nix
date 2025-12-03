@@ -32,12 +32,6 @@ in
     packages = with pkgs; [ nixVersions.latest ];
   };
 
-  # Nix registry
-  nix.registry = {
-    nixpkgs.flake = inputs.nixpkgs;
-    p.flake = inputs.nixpkgs;
-  };
-
   programs = {
     bash = {
       bashrcExtra = ''

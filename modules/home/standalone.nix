@@ -8,10 +8,22 @@
   ...
 }:
 let
-  inherit (flake) inputs;
+  inherit (flake) inputs self;
 in
 {
+  # Apply our overlays and config to nixpkgs
+  nixpkgs = {
+    overlays = [ self.overlays.default ];
+    config.allowUnfree = true;
+  };
+
   home.sessionVariables.NIX_PATH = "nixpkgs=${config.xdg.dataHome}/nixpkgs";
+
+  # Nix registry - expose nixpkgs as both 'nixpkgs' and 'p' (short alias)
+  nix.registry = {
+    nixpkgs.flake = inputs.nixpkgs;
+    p.flake = inputs.nixpkgs;
+  };
 
   programs = {
     home-manager.enable = true;

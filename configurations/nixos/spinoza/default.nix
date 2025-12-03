@@ -26,7 +26,7 @@ in
     self.nixosModules.hardware-secureboot
     self.nixosModules.hardware-thinkpad-z13
     self.nixosModules.hardware-yubikey
-    self.nixosModules.graphical-default
+    self.nixosModules.graphical
     self.nixosModules.graphical-trusted
     self.nixosModules.services-virt-manager
     self.nixosModules.services-podman
@@ -46,12 +46,6 @@ in
 
   # Platform
   nixpkgs.hostPlatform = "x86_64-linux";
-
-  # Nix registry
-  nix.registry = {
-    nixpkgs.flake = inputs.nixpkgs;
-    p.flake = inputs.nixpkgs;
-  };
 
   # Host-specific configuration
   boot = {

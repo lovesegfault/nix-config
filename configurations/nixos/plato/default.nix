@@ -53,12 +53,6 @@ in
   # Platform
   nixpkgs.hostPlatform = "x86_64-linux";
 
-  # Nix registry
-  nix.registry = {
-    nixpkgs.flake = inputs.nixpkgs;
-    p.flake = inputs.nixpkgs;
-  };
-
   # Host-specific configuration
   age.secrets.rootPassword.rekeyFile = ../../../secrets/plato-root-password.age;
 

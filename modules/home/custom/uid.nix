@@ -1,9 +1,8 @@
 { config, lib, ... }:
-with lib;
 {
   options = {
-    home.uid = mkOption {
-      type = types.int;
+    home.uid = lib.mkOption {
+      type = lib.types.int;
       example = 1000;
       description = "The user's uid.";
     };

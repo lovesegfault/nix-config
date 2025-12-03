@@ -1,4 +1,8 @@
-# NixOS configuration for comte
+# AWS EC2 instance (AMD Zen 5) used as a remote builder.
+# Key differences from physical hosts:
+#   - Uses amazon-image.nix for EC2-specific configuration
+#   - networking.hostName is set dynamically by EC2, not in this config
+#   - age.rekey.localStorageDir is explicit because hostname isn't known at eval time
 {
   flake,
   config,
@@ -46,12 +50,6 @@ in
 
   # Platform
   nixpkgs.hostPlatform = "x86_64-linux";
-
-  # Nix registry
-  nix.registry = {
-    nixpkgs.flake = inputs.nixpkgs;
-    p.flake = inputs.nixpkgs;
-  };
 
   # Host-specific configuration
   boot = {

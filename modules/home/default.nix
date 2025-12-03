@@ -1,20 +1,19 @@
 # Shared home-manager configuration for all platforms
 # External modules (impermanence, nix-index-database, nixvim, stylix) are imported in configurations/
 {
-  flake,
   lib,
   osConfig ? null,
   pkgs,
   ...
 }:
 let
-  inherit (flake) inputs;
   # When integrated with NixOS/Darwin, osConfig is the parent system config
   # When standalone, osConfig is null
   isIntegrated = osConfig != null;
 in
 {
   imports = [
+    ../shared/theme.nix
     ./bash.nix
     ./btop.nix
     ./custom
@@ -82,21 +81,12 @@ in
     zoxide.enable = true;
   };
 
-  stylix = {
-    enable = true;
-    base16Scheme = "${inputs.tinted-schemes}/base16/ayu-dark.yaml";
-    # XXX: We fetchurl from the repo because flakes don't support git-lfs assets
-    image = pkgs.fetchurl {
-      url = "https://media.githubusercontent.com/media/lovesegfault/nix-config/bda48ceaf8112a8b3a50da782bf2e65a2b5c4708/users/bemeurer/assets/walls/plants-00.jpg";
-      hash = "sha256-n8EQgzKEOIG6Qq7og7CNqMMFliWM5vfi2zNILdpmUfI=";
-    };
-    targets = {
-      # Only enable GNOME/GTK when integrated with NixOS (not standalone home-manager)
-      gnome.enable = isIntegrated && pkgs.stdenv.isLinux;
-      gtk.enable = isIntegrated && pkgs.stdenv.isLinux;
-      kde.enable = lib.mkDefault false;
-      xfce.enable = lib.mkDefault false;
-    };
+  stylix.targets = {
+    # Only enable GNOME/GTK when integrated with NixOS (not standalone home-manager)
+    gnome.enable = isIntegrated && pkgs.stdenv.isLinux;
+    gtk.enable = isIntegrated && pkgs.stdenv.isLinux;
+    kde.enable = lib.mkDefault false;
+    xfce.enable = lib.mkDefault false;
   };
 
   systemd.user.startServices = "sd-switch";

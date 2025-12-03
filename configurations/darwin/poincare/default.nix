@@ -18,7 +18,7 @@ in
     # Internal modules via flake outputs
     self.darwinModules.default
     self.darwinModules.users-bemeurer
-    self.darwinModules.graphical-default
+    self.darwinModules.graphical
   ];
 
   # Host-specific home-manager user config
@@ -31,9 +31,6 @@ in
 
   # Platform
   nixpkgs.hostPlatform = "aarch64-darwin";
-
-  # Nix registry
-  nix.registry.p.flake = inputs.nixpkgs;
 
   # Host-specific configuration
   networking = {
