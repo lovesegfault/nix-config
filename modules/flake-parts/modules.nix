@@ -4,6 +4,7 @@
   flake = {
     nixosModules = {
       default = self + "/modules/nixos/default.nix";
+      agenix-rekey = self + "/modules/nixos/agenix-rekey.nix";
       core = self + "/modules/nixos/core.nix";
       nix = self + "/modules/nixos/nix.nix";
       resolved = self + "/modules/nixos/resolved.nix";

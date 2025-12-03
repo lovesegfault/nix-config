@@ -141,6 +141,9 @@ in
     };
   };
 
+  # agenix-rekey host pubkey
+  age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDUZPmPTATZ4nBWstPqlUiguvxr26XWAE9BGPVNNRBR5";
+
   hardware = {
     sane.enable = true;
     ledger.enable = true;
@@ -265,6 +268,6 @@ in
 
   swapDevices = [ { device = "/dev/disk/by-uuid/898fb6e1-bba3-40ce-8f79-8deb2e2d4f37"; } ];
 
-  age.secrets.rootPassword.file = ./password.age;
+  age.secrets.rootPassword.rekeyFile = ../../../secrets/spinoza-root-password.age;
   users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
 }

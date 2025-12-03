@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-  age.secrets.acme.file = ./acme.age;
+  age.secrets.acme.rekeyFile = ../../../secrets/acme.age;
 
   environment.persistence."/nix/state".directories = [
     {

@@ -2,6 +2,7 @@
 { ... }:
 {
   imports = [
+    ./agenix-rekey.nix
     ./configurations.nix
     ./dev-shell.nix
     ./modules.nix

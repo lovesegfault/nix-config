@@ -13,7 +13,7 @@ with lib;
     inherit (config.users.users.bemeurer) uid;
   };
 
-  age.secrets.bemeurerPassword.file = ./bemeurer.age;
+  age.secrets.bemeurerPassword.rekeyFile = ../../../secrets/bemeurer-password.age;
 
   users.groups.bemeurer.gid = config.users.users.bemeurer.uid;
 

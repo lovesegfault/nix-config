@@ -68,6 +68,12 @@ in
 
   hardware.enableRedistributableFirmware = true;
 
+  # agenix-rekey host pubkey (localStorageDir override since hostName is not set)
+  age.rekey = {
+    hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdXiTjpN4zgnC8x9d0LLhWwKLohHkPchuORcus0zWAa";
+    localStorageDir = self + "/secrets/rekeyed/comte";
+  };
+
   networking = {
     hostId = "ec21dbce";
     nftables.enable = true;
@@ -118,6 +124,6 @@ in
 
   time.timeZone = "America/New_York";
 
-  age.secrets.rootPassword.file = ./password.age;
+  age.secrets.rootPassword.rekeyFile = ../../../secrets/comte-root-password.age;
   users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
 }

@@ -124,6 +124,9 @@ in
     };
   };
 
+  # agenix-rekey host pubkey
+  age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHws1wwXYHDmU+Bjcbw8IZv2V+fbxaTDQc44XoUQ604t";
+
   hardware = {
     enableRedistributableFirmware = true;
     graphics.enable = true;
@@ -231,7 +234,7 @@ in
     ];
   };
 
-  age.secrets.rootPassword.file = ./password.age;
+  age.secrets.rootPassword.rekeyFile = ../../../secrets/jung-root-password.age;
   users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
 
   virtualisation = {

@@ -6,6 +6,7 @@ let
 in
 {
   imports = [
+    ./agenix-rekey.nix
     ./core.nix
     ./tailscale-address.nix
   ];

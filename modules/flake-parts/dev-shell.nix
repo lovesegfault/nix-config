@@ -22,7 +22,7 @@
           with pkgs;
           [
             # Nix
-            agenix
+            config.agenix-rekey.package
             nil
             nix-output-monitor
             nix-tree

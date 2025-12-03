@@ -60,7 +60,7 @@ in
   };
 
   # Host-specific configuration
-  age.secrets.rootPassword.file = ./password.age;
+  age.secrets.rootPassword.rekeyFile = ../../../secrets/plato-root-password.age;
 
   boot = {
     initrd = {
@@ -95,6 +95,9 @@ in
     dig
     smartmontools
   ];
+
+  # agenix-rekey host pubkey
+  age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDMExNPuG3+sl9qozno4cTmPEJSH8GGhoaReQsnpFaih";
 
   hardware.enableRedistributableFirmware = true;
 
