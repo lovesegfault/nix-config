@@ -3,6 +3,8 @@
 {
   imports = [
     ./aspell.nix
+    ./nixpkgs.nix
+    ./registry.nix
     ./theme.nix
   ];
 

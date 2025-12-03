@@ -5,11 +5,6 @@ let
 in
 {
   imports = [
-    # External input modules
-    inputs.nix-index-database.homeModules.nix-index
-    inputs.nixvim.homeModules.nixvim
-    inputs.stylix.homeModules.stylix
-
     # Internal modules via flake outputs
     self.homeModules.default
     self.homeModules.standalone
@@ -20,6 +15,5 @@ in
     username = "bemeurer";
     homeDirectory = "/home/bemeurer";
     uid = 22314791;
-    stateVersion = "25.11";
   };
 }

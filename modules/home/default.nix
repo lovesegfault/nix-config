@@ -34,8 +34,7 @@ in
   dconf.enable = false;
 
   home = {
-    username = "bemeurer";
-    stateVersion = "25.11";
+    stateVersion = lib.mkDefault "25.11";
     packages = lib.filter (lib.meta.availableOn pkgs.stdenv.hostPlatform) (
       with pkgs;
       [

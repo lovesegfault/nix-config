@@ -6,22 +6,20 @@ let
 in
 {
   imports = [
+    # External input modules (shared across all NixOS hosts)
+    inputs.agenix.nixosModules.default
+    inputs.disko.nixosModules.default
+    inputs.home-manager.nixosModules.home-manager
+    inputs.impermanence.nixosModules.impermanence
+    inputs.lanzaboote.nixosModules.lanzaboote
+    inputs.nix-index-database.nixosModules.nix-index
+    inputs.stylix.nixosModules.stylix
+
+    # Internal modules
     ./agenix-rekey.nix
     ./core.nix
     ./tailscale-address.nix
   ];
-
-  # Apply our overlays and config to nixpkgs
-  nixpkgs = {
-    overlays = [ self.overlays.default ];
-    config.allowUnfree = true;
-  };
-
-  # Nix registry - expose nixpkgs as both 'nixpkgs' and 'p' (short alias)
-  nix.registry = {
-    nixpkgs.flake = inputs.nixpkgs;
-    p.flake = inputs.nixpkgs;
-  };
 
   # Home-manager integration
   home-manager = {

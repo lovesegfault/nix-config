@@ -10,11 +10,6 @@ let
 in
 {
   imports = [
-    # External input modules
-    inputs.home-manager.darwinModules.home-manager
-    inputs.nix-index-database.darwinModules.nix-index
-    inputs.stylix.darwinModules.stylix
-
     # Internal modules via flake outputs
     self.darwinModules.default
     self.darwinModules.users-bemeurer

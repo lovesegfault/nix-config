@@ -16,15 +16,6 @@ let
 in
 {
   imports = [
-    # External input modules
-    inputs.agenix.nixosModules.default
-    inputs.disko.nixosModules.default
-    inputs.home-manager.nixosModules.home-manager
-    inputs.impermanence.nixosModules.impermanence
-    inputs.lanzaboote.nixosModules.lanzaboote
-    inputs.nix-index-database.nixosModules.nix-index
-    inputs.stylix.nixosModules.stylix
-
     # Hardware modules from nixos-hardware
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate

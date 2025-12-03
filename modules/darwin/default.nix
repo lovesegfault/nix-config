@@ -6,20 +6,14 @@ let
 in
 {
   imports = [
+    # External input modules (shared across all Darwin hosts)
+    inputs.home-manager.darwinModules.home-manager
+    inputs.nix-index-database.darwinModules.nix-index
+    inputs.stylix.darwinModules.stylix
+
+    # Internal modules
     ./core.nix
   ];
-
-  # Apply our overlays and config to nixpkgs
-  nixpkgs = {
-    overlays = [ self.overlays.default ];
-    config.allowUnfree = true;
-  };
-
-  # Nix registry - expose nixpkgs as both 'nixpkgs' and 'p' (short alias)
-  nix.registry = {
-    nixpkgs.flake = inputs.nixpkgs;
-    p.flake = inputs.nixpkgs;
-  };
 
   # Home-manager integration
   home-manager = {

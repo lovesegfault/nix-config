@@ -7,6 +7,7 @@
 
     # Our modules
     ./agenix-rekey.nix
+    ./ci-metadata.nix
     ./configurations.nix
     ./dev-shell.nix
     ./modules.nix

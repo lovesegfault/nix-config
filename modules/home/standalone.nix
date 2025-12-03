@@ -11,19 +11,18 @@ let
   inherit (flake) inputs self;
 in
 {
-  # Apply our overlays and config to nixpkgs
-  nixpkgs = {
-    overlays = [ self.overlays.default ];
-    config.allowUnfree = true;
-  };
+  imports = [
+    # External input modules (shared across all standalone home-manager hosts)
+    inputs.nix-index-database.homeModules.nix-index
+    inputs.nixvim.homeModules.nixvim
+    inputs.stylix.homeModules.stylix
+
+    # Shared modules
+    ../shared/nixpkgs.nix
+    ../shared/registry.nix
+  ];
 
   home.sessionVariables.NIX_PATH = "nixpkgs=${config.xdg.dataHome}/nixpkgs";
-
-  # Nix registry - expose nixpkgs as both 'nixpkgs' and 'p' (short alias)
-  nix.registry = {
-    nixpkgs.flake = inputs.nixpkgs;
-    p.flake = inputs.nixpkgs;
-  };
 
   programs = {
     home-manager.enable = true;
