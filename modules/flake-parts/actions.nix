@@ -58,11 +58,12 @@ let
   # Reusable step definitions
   steps = {
     checkout = {
-      uses = "actions/checkout@v6";
+      uses = "actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8"; # v6
+      "with".persist-credentials = false;
     };
 
     nixInstaller = {
-      uses = "DeterminateSystems/nix-installer-action@v21";
+      uses = "DeterminateSystems/nix-installer-action@c5a866b6ab867e88becbed4467b93592bce69f8a"; # v21
       "with".extra-conf = ''
         accept-flake-config = true
         always-allow-substitutes = true
@@ -72,7 +73,7 @@ let
     };
 
     nixCache = {
-      uses = "actions/cache@v4";
+      uses = "actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830"; # v4
       "with" = {
         path = "~/.cache/nix";
         key = "nix-eval-\${{ runner.os }}-\${{ runner.arch }}-\${{ hashFiles('flake.lock') }}";
@@ -81,7 +82,7 @@ let
     };
 
     cachix = {
-      uses = "cachix/cachix-action@v16";
+      uses = "cachix/cachix-action@0fc020193b5a1fa3ac4575aa3a7d3aa6a35435ad"; # v16
       "with" = {
         name = "nix-config";
         authToken = "\${{ secrets.CACHIX_AUTH_TOKEN }}";
@@ -214,7 +215,7 @@ in
           "if" = "always()";
           steps = [
             {
-              uses = "re-actors/alls-green@release/v1";
+              uses = "re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe"; # release/v1
               "with" = {
                 jobs = "\${{ toJSON(needs) }}";
                 allowed-skips = "build-linux-builder, build-darwin-host";
