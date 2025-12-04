@@ -18,6 +18,16 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    # CI workflow generation
+    actions-nix = {
+      url = "github:nialov/actions.nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        git-hooks.follows = "git-hooks";
+      };
+    };
+
     # nixos-unified for unified configuration management
     nixos-unified.url = "github:srid/nixos-unified";
 
