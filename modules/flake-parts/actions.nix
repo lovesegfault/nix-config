@@ -8,17 +8,10 @@
 let
   # Platform mappings: Nix system -> GitHub runner
   platforms = {
-    x86_64-linux = {
-      os = "ubuntu-24.04";
-      arch = "X64";
-    };
-    aarch64-linux = {
-      os = "ubuntu-22.04-arm";
-      arch = "ARM64";
-    };
+    x86_64-linux.os = "ubuntu-24.04";
+    aarch64-linux.os = "ubuntu-22.04-arm";
     aarch64-darwin = {
       os = "macos-15";
-      arch = "ARM64";
       equivalentLinux = "aarch64-linux";
     };
   };
