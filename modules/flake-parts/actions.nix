@@ -133,7 +133,7 @@ let
       inherit (platforms.${p}) os;
     }) hostPlatforms;
 
-  flakeRef = "git+file://.";
+  flakeRef = "git+file:.";
 in
 {
   imports = [ inputs.actions-nix.flakeModules.default ];
@@ -159,12 +159,6 @@ in
 
       permissions = { };
 
-      env = {
-        flake = flakeRef;
-        nix-conf = nixConf;
-        nix-fast-build-args = nfbArgs;
-      };
-
       jobs = {
         # Flake check on all platforms
         flake-check = {
@@ -174,11 +168,11 @@ in
           steps = setupSteps ++ [
             {
               name = "nix flake check";
-              run = "nix flake check '\${{ env.flake }}'";
+              run = "nix flake check '${flakeRef}'";
             }
             {
               name = "nix flake show";
-              run = "nix flake show '\${{ env.flake }}'";
+              run = "nix flake show '${flakeRef}'";
             }
           ];
         };
@@ -194,7 +188,7 @@ in
           steps = setupSteps ++ [
             {
               name = "nix-fast-build";
-              run = "nix run '\${{ env.flake }}#nix-fast-build' -- \${{ env.nix-fast-build-args }} --flake='\${{ env.flake }}#\${{ matrix.attrs.attr }}'";
+              run = "nix run '${flakeRef}#nix-fast-build' -- ${nfbArgs} --flake='${flakeRef}#\${{ matrix.attrs.attr }}'";
             }
           ];
         };
@@ -211,7 +205,7 @@ in
           steps = setupSteps ++ [
             {
               name = "nix-fast-build";
-              run = "nix run '\${{ env.flake }}#nix-fast-build' -- \${{ env.nix-fast-build-args }} --flake='\${{ env.flake }}#\${{ matrix.attrs.linuxBuilderAttr }}'";
+              run = "nix run '${flakeRef}#nix-fast-build' -- ${nfbArgs} --flake='${flakeRef}#\${{ matrix.attrs.linuxBuilderAttr }}'";
             }
           ];
         };
@@ -229,7 +223,7 @@ in
           steps = setupSteps ++ [
             {
               name = "nix-fast-build";
-              run = "nix run '\${{ env.flake }}#nix-fast-build' -- \${{ env.nix-fast-build-args }} --flake='\${{ env.flake }}#\${{ matrix.attrs.attr }}'";
+              run = "nix run '${flakeRef}#nix-fast-build' -- ${nfbArgs} --flake='${flakeRef}#\${{ matrix.attrs.attr }}'";
             }
           ];
         };

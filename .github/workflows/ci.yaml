@@ -1,12 +1,3 @@
-env:
-  flake: git+file://.
-  nix-conf: |-
-    accept-flake-config = true
-    always-allow-substitutes = true
-    builders-use-substitutes = true
-    max-jobs = auto
-  nix-fast-build-args: --no-nom --skip-cached --retries=3 --option accept-flake-config
-    true
 jobs:
   build:
     name: build ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
@@ -32,8 +23,9 @@ jobs:
         extraPullNames: nix-community
         name: nix-config
     - name: nix-fast-build
-      run: nix run '${{ env.flake }}#nix-fast-build' -- ${{ env.nix-fast-build-args
-        }} --flake='${{ env.flake }}#${{ matrix.attrs.attr }}'
+      run: nix run 'git+file:.#nix-fast-build' -- --no-nom --skip-cached --retries=3
+        --option accept-flake-config true --flake='git+file:.#${{ matrix.attrs.attr
+        }}'
     strategy:
       fail-fast: false
       matrix:
@@ -98,8 +90,9 @@ jobs:
         extraPullNames: nix-community
         name: nix-config
     - name: nix-fast-build
-      run: nix run '${{ env.flake }}#nix-fast-build' -- ${{ env.nix-fast-build-args
-        }} --flake='${{ env.flake }}#${{ matrix.attrs.attr }}'
+      run: nix run 'git+file:.#nix-fast-build' -- --no-nom --skip-cached --retries=3
+        --option accept-flake-config true --flake='git+file:.#${{ matrix.attrs.attr
+        }}'
     strategy:
       fail-fast: false
       matrix:
@@ -136,8 +129,9 @@ jobs:
         extraPullNames: nix-community
         name: nix-config
     - name: nix-fast-build
-      run: nix run '${{ env.flake }}#nix-fast-build' -- ${{ env.nix-fast-build-args
-        }} --flake='${{ env.flake }}#${{ matrix.attrs.linuxBuilderAttr }}'
+      run: nix run 'git+file:.#nix-fast-build' -- --no-nom --skip-cached --retries=3
+        --option accept-flake-config true --flake='git+file:.#${{ matrix.attrs.linuxBuilderAttr
+        }}'
     strategy:
       fail-fast: false
       matrix:
@@ -187,9 +181,9 @@ jobs:
         extraPullNames: nix-community
         name: nix-config
     - name: nix flake check
-      run: nix flake check '${{ env.flake }}'
+      run: nix flake check 'git+file:.'
     - name: nix flake show
-      run: nix flake show '${{ env.flake }}'
+      run: nix flake show 'git+file:.'
     strategy:
       matrix:
         systems:
