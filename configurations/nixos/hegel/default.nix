@@ -49,7 +49,7 @@ in
   # Host-specific configuration
   boot = {
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_6_17; # FIXME: move back to _latest once zfs supports it
     kernelParams = [ "rfkill.default_state=0" ];
     lanzaboote.pkiBundle = lib.mkForce "/var/lib/sbctl";
     tmp.useTmpfs = true;
