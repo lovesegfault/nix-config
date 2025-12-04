@@ -155,6 +155,7 @@ in
         cancel-in-progress = "\${{ github.event_name == 'pull_request' }}";
       };
 
+      # Minimal permissions for security - this workflow only needs to read code
       permissions = { };
 
       jobs = {
