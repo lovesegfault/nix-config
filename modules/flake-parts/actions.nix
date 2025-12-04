@@ -62,9 +62,6 @@ let
   # This includes: NixOS hosts, home-manager hosts (both Linux and darwin)
   directBuildHosts = nixosHosts ++ homeHosts;
 
-  # All hosts combined
-  allHosts = nixosHosts ++ darwinHosts ++ homeHosts;
-
   # Common Nix configuration
   nixConf = ''
     accept-flake-config = true
@@ -117,6 +114,7 @@ let
   # Platforms to run flake check/show on (derived from all hosts)
   checkPlatforms =
     let
+      allHosts = nixosHosts ++ darwinHosts ++ homeHosts;
       hostPlatforms = lib.unique (map (h: h.hostPlatform) allHosts);
     in
     map (p: {
