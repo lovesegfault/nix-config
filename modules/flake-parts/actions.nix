@@ -48,6 +48,7 @@ let
             "homeConfigurations.${name}.activationPackage";
       }
       // lib.optionalAttrs (type == "darwin") {
+        inherit (platformInfo) equivalentLinux;
         equivalentLinuxRunner = platforms.${platformInfo.equivalentLinux}.os;
         linuxBuilderAttr = "darwinConfigurations.${name}.config.nix.linux-builder.package.nixosConfig.system.build.toplevel";
       }
@@ -179,7 +180,7 @@ in
 
         # Build hosts directly (NixOS + home-manager on any platform)
         build = {
-          name = "build \${{ matrix.attrs.name }} (\${{ matrix.attrs.hostPlatform }})";
+          name = "\${{ matrix.attrs.name }} (\${{ matrix.attrs.hostPlatform }})";
           strategy = {
             fail-fast = false;
             matrix.attrs = directBuildHosts;
@@ -195,7 +196,7 @@ in
 
         # Build linux-builder for nix-darwin hosts (cross-compile on Linux)
         build-linux-builder = {
-          name = "build linux-builder for \${{ matrix.attrs.name }}";
+          name = "linux-builder for \${{ matrix.attrs.name }} (\${{ matrix.attrs.equivalentLinux }})";
           "if" = toString (lib.length darwinConfigs > 0);
           strategy = {
             fail-fast = false;
@@ -212,7 +213,7 @@ in
 
         # Build nix-darwin hosts (after linux-builder)
         build-darwin-host = {
-          name = "build \${{ matrix.attrs.name }} (\${{ matrix.attrs.hostPlatform }})";
+          name = "\${{ matrix.attrs.name }} (\${{ matrix.attrs.hostPlatform }})";
           "if" = toString (lib.length darwinConfigs > 0);
           needs = [ "build-linux-builder" ];
           strategy = {

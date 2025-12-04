@@ -1,6 +1,6 @@
 jobs:
   build:
-    name: build ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
+    name: ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
     runs-on: ${{ matrix.attrs.runsOn }}
     steps:
     - uses: actions/checkout@v6
@@ -65,7 +65,7 @@ jobs:
     timeout-minutes: 60
   build-darwin-host:
     if: '1'
-    name: build ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
+    name: ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
     needs:
     - build-linux-builder
     runs-on: ${{ matrix.attrs.runsOn }}
@@ -98,6 +98,7 @@ jobs:
       matrix:
         attrs:
         - attr: darwinConfigurations.poincare.config.system.build.toplevel
+          equivalentLinux: aarch64-linux
           equivalentLinuxRunner: ubuntu-22.04-arm
           hostPlatform: aarch64-darwin
           linuxBuilderAttr: darwinConfigurations.poincare.config.nix.linux-builder.package.nixosConfig.system.build.toplevel
@@ -106,7 +107,8 @@ jobs:
     timeout-minutes: 60
   build-linux-builder:
     if: '1'
-    name: build linux-builder for ${{ matrix.attrs.name }}
+    name: linux-builder for ${{ matrix.attrs.name }} (${{ matrix.attrs.equivalentLinux
+      }})
     runs-on: ${{ matrix.attrs.equivalentLinuxRunner }}
     steps:
     - uses: actions/checkout@v6
@@ -137,6 +139,7 @@ jobs:
       matrix:
         attrs:
         - attr: darwinConfigurations.poincare.config.system.build.toplevel
+          equivalentLinux: aarch64-linux
           equivalentLinuxRunner: ubuntu-22.04-arm
           hostPlatform: aarch64-darwin
           linuxBuilderAttr: darwinConfigurations.poincare.config.nix.linux-builder.package.nixosConfig.system.build.toplevel
