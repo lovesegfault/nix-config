@@ -197,6 +197,8 @@ jobs:
           platform: x86_64-linux
         - os: macos-15
           platform: aarch64-darwin
+        - os: ubuntu-22.04-arm
+          platform: aarch64-linux
     timeout-minutes: 60
 name: ci
 'on':
