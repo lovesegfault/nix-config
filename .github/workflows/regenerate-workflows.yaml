@@ -1,0 +1,33 @@
+jobs:
+  regenerate:
+    if: github.actor == 'renovate[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      with:
+        ref: ${{ github.head_ref }}
+        token: ${{ secrets.PAT }}
+    - uses: DeterminateSystems/nix-installer-action@c5a866b6ab867e88becbed4467b93592bce69f8a
+      with:
+        extra-conf: |-
+          accept-flake-config = true
+          always-allow-substitutes = true
+          builders-use-substitutes = true
+          max-jobs = auto
+    - name: Regenerate workflows
+      run: nix run .#render-workflows
+    - name: Amend commit with regenerated workflows
+      run: |-
+        git config user.name "hatesegfault"
+        git config user.email "bernardo+hatesegfault@meurer.org"
+        git add .github/workflows/
+        git diff --staged --quiet || git commit --amend --no-edit
+        git push --force-with-lease
+    timeout-minutes: 60
+name: regenerate-workflows
+'on':
+  pull_request:
+    paths:
+    - modules/flake-parts/actions.nix
+permissions:
+  contents: write

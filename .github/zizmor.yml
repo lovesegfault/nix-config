@@ -1,0 +1,11 @@
+# zizmor configuration - suppress intentional security warnings
+rules:
+  # regenerate-workflows needs credentials to push amended commits
+  artipacked:
+    ignore:
+      - regenerate-workflows.yaml
+  # Checking for renovate[bot] actor is intentional - this workflow
+  # only runs for Renovate PRs to regenerate workflow YAML files
+  bot-conditions:
+    ignore:
+      - regenerate-workflows.yaml
