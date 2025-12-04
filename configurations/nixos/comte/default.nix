@@ -26,10 +26,11 @@ in
 
     # Internal modules via flake outputs
     self.nixosModules.default
-    self.nixosModules.users-bemeurer
     self.nixosModules.hardware-fast-networking
     self.nixosModules.hardware-no-mitigations
     self.nixosModules.pam-limits
+    self.nixosModules.services-podman
+    self.nixosModules.users-bemeurer
   ];
 
   # Host-specific home-manager user config
@@ -37,8 +38,6 @@ in
     imports = [ self.homeModules.trusted ];
     programs.git.settings.user.email = lib.mkForce "beme@anthropic.com";
   };
-
-  # SSH target for remote activation
 
   # Platform
   nixpkgs.hostPlatform = "x86_64-linux";
@@ -55,6 +54,8 @@ in
     keyMap = "us";
     packages = with pkgs; [ terminus_font ];
   };
+
+  environment.persistence."/nix/state".enable = false;
 
   hardware.enableRedistributableFirmware = true;
 
