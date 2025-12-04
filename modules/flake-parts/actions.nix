@@ -61,9 +61,7 @@ let
     cache = "actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830"; # v4
     cachix = "cachix/cachix-action@0fc020193b5a1fa3ac4575aa3a7d3aa6a35435ad"; # v16
     checkout = "actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8"; # v6.0.1
-    enable-automerge = "peter-evans/enable-pull-request-automerge@a660677d5469627102a1c1e11409dd063606628d"; # v3
     nix-installer = "DeterminateSystems/nix-installer-action@c5a866b6ab867e88becbed4467b93592bce69f8a"; # v21
-    update-flake-lock = "DeterminateSystems/update-flake-lock@834c491b2ece4de0bbd00d85214bb5e83b4da5c6"; # v28
   };
 
   # Reusable step definitions
@@ -235,52 +233,6 @@ in
               }
             ];
           };
-        };
-      };
-
-      # Daily flake.lock updates
-      ".github/workflows/update-flakes.yaml" = {
-        name = "update-flakes";
-
-        on = {
-          schedule = [ { cron = "0 0 * * *"; } ];
-          workflow_dispatch = { };
-        };
-
-        permissions = {
-          contents = "write";
-          pull-requests = "write";
-        };
-
-        jobs.update-flake-lock = {
-          runs-on = "ubuntu-24.04";
-          steps = [
-            steps.checkout
-            steps.nixInstaller
-            {
-              uses = actions.update-flake-lock;
-              id = "update";
-              "with" = {
-                commit-msg = "chore(flake): update inputs";
-                git-author-email = "bernardo+hatesegfault@meurer.org";
-                git-author-name = "hatesegfault";
-                git-committer-email = "bernardo+hatesegfault@meurer.org";
-                git-committer-name = "hatesegfault";
-                pr-labels = "dependencies,automated";
-                pr-title = "chore(flake): update inputs";
-                token = "\${{ secrets.PAT }}";
-              };
-            }
-            {
-              uses = actions.enable-automerge;
-              "if" = "steps.update.outputs.pull-request-number != ''";
-              "with" = {
-                token = "\${{ secrets.PAT }}";
-                pull-request-number = "\${{ steps.update.outputs.pull-request-number }}";
-                merge-method = "rebase";
-              };
-            }
-          ];
         };
       };
 

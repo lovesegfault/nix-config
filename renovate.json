@@ -6,6 +6,17 @@
   "github-actions": {
     "enabled": false
   },
+  "nix": {
+    "enabled": true
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["after 10pm on sunday"],
+    "commitMessageAction": "update",
+    "prBodyDefinitions": {
+      "Change": "All flake inputs updated"
+    }
+  },
   "customManagers": [
     {
       "customType": "regex",
@@ -30,6 +41,31 @@
       "automerge": false,
       "pinDigests": true,
       "commitMessagePrefix": "chore(actions):"
+    },
+    {
+      "matchManagers": [
+        "nix"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "rebase",
+      "commitMessagePrefix": "chore(flake):",
+      "prBodyNotes": [
+        "This PR updates nix flake inputs."
+      ]
+    },
+    {
+      "matchUpdateTypes": [
+        "lockFileMaintenance"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "rebase",
+      "commitMessagePrefix": "chore(flake):",
+      "addLabels": [
+        "dependencies",
+        "automated"
+      ]
     }
   ]
 }
