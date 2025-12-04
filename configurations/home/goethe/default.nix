@@ -1,7 +1,7 @@
 # Home-manager configuration for goethe
 { flake, ... }:
 let
-  inherit (flake) inputs self;
+  inherit (flake) self;
 in
 {
   imports = [

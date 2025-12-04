@@ -1,4 +1,3 @@
-{ config, lib, ... }:
 {
   plugins = {
     navic = {

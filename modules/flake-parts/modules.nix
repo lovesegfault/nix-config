@@ -5,7 +5,7 @@
 #   - subdirectory files: subdir/foo.nix -> subdir-foo
 #   - directories with default.nix: subdir/ -> subdir (imports default.nix)
 # Shared modules are exposed under all outputs (nixos, darwin, home)
-{ inputs, self, ... }:
+{ inputs, ... }:
 let
   inherit (inputs.nixpkgs) lib;
 

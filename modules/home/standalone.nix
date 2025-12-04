@@ -3,7 +3,6 @@
 {
   config,
   flake,
-  lib,
   pkgs,
   ...
 }:

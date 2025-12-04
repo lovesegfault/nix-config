@@ -1,5 +1,5 @@
 final: prev: {
-  nix-output-monitor = prev.nix-output-monitor.overrideAttrs (old: {
+  nix-output-monitor = prev.nix-output-monitor.overrideAttrs (_: {
     src = final.fetchFromGitHub {
       owner = "maralorn";
       repo = "nix-output-monitor";

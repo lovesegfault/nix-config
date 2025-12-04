@@ -12,11 +12,11 @@ in
     default = lib.composeManyExtensions (
       [
         inputs.agenix.overlays.default
-        (final: prev: {
+        (final: _: {
           inherit (inputs.nix-fast-build.packages.${final.stdenv.hostPlatform.system}) nix-fast-build;
         })
         (
-          final: prev:
+          final: _:
           let
             nixvimPkgs = inputs.nixvim.legacyPackages.${final.stdenv.hostPlatform.system};
             nixvimModule = {
@@ -34,7 +34,7 @@ in
   };
 
   perSystem =
-    { pkgs, system, ... }:
+    { system, ... }:
     {
       _module.args.pkgs = import inputs.nixpkgs {
         inherit system;

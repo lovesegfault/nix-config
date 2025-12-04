@@ -7,7 +7,7 @@
   ...
 }:
 let
-  inherit (flake) inputs self;
+  inherit (flake) self;
 in
 {
   imports = [

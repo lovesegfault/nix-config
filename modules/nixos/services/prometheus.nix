@@ -1,4 +1,3 @@
-{ pkgs, ... }:
 {
   environment.persistence."/nix/state".directories = [
     {

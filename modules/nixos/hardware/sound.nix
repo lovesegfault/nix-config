@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, ... }:
 {
   environment.systemPackages = [ config.services.pipewire.package ];
 

@@ -6,7 +6,7 @@
   ...
 }:
 let
-  inherit (flake) inputs self;
+  inherit (flake) self;
 in
 {
   imports = [
@@ -38,14 +38,12 @@ in
     linux-builder = {
       enable = true;
       ephemeral = true;
-      config =
-        { ... }:
-        {
-          imports = [ self.nixosModules.nix ];
-          virtualisation.host.pkgs = lib.mkForce (
-            pkgs.extend (final: _: { nix = final.nixVersions.latest; })
-          );
-        };
+      config = {
+        imports = [ self.nixosModules.nix ];
+        virtualisation.host.pkgs = lib.mkForce (
+          pkgs.extend (final: _: { nix = final.nixVersions.latest; })
+        );
+      };
       maxJobs = 4;
       protocol = "ssh-ng";
     };

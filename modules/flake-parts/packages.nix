@@ -1,10 +1,9 @@
 # Package definitions - exports host configurations for CI builds
 # Merges with nixos-unified's packages (activate, update) via config.packages
-{ inputs, self, ... }:
+{ self, ... }:
 {
   perSystem =
     {
-      config,
       pkgs,
       lib,
       system,

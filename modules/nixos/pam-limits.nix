@@ -1,7 +1,7 @@
 # PAM login limits for workstation/server hosts
 # Provides generous limits for memory locking, file descriptors, and processes.
 # Platform: NixOS only
-_: {
+{
   security.pam.loginLimits = [
     {
       domain = "*";
