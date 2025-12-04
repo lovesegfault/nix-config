@@ -24,6 +24,7 @@ in
     self.nixosModules.hardware-fast-networking
     self.nixosModules.hardware-no-mitigations
     self.nixosModules.hardware-nvidia
+    self.nixosModules.pam-limits
     self.nixosModules.hardware-secureboot
     self.nixosModules.services-blocky
     self.nixosModules.services-grafana
@@ -99,27 +100,6 @@ in
   };
 
   powerManagement.cpuFreqGovernor = "performance";
-
-  security.pam.loginLimits = [
-    {
-      domain = "*";
-      type = "-";
-      item = "memlock";
-      value = "unlimited";
-    }
-    {
-      domain = "*";
-      type = "-";
-      item = "nofile";
-      value = "1048576";
-    }
-    {
-      domain = "*";
-      type = "-";
-      item = "nproc";
-      value = "unlimited";
-    }
-  ];
 
   services = {
     chrony = {

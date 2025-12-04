@@ -14,13 +14,14 @@ in
     # Internal modules via flake outputs
     self.nixosModules.default
     self.nixosModules.users-bemeurer
+    self.nixosModules.graphical
+    self.nixosModules.graphical-trusted
+    self.nixosModules.pam-limits
     self.nixosModules.hardware-secureboot
     self.nixosModules.hardware-thinkpad-z13
     self.nixosModules.hardware-yubikey
-    self.nixosModules.graphical
-    self.nixosModules.graphical-trusted
-    self.nixosModules.services-virt-manager
     self.nixosModules.services-podman
+    self.nixosModules.services-virt-manager
 
     # Host-specific files
     ./state.nix
@@ -156,29 +157,7 @@ in
 
   nix.settings.max-substitution-jobs = 32;
 
-  security = {
-    pam.loginLimits = [
-      {
-        domain = "*";
-        type = "-";
-        item = "memlock";
-        value = "unlimited";
-      }
-      {
-        domain = "*";
-        type = "-";
-        item = "nofile";
-        value = "1048576";
-      }
-      {
-        domain = "*";
-        type = "-";
-        item = "nproc";
-        value = "unlimited";
-      }
-    ];
-    sudo.wheelNeedsPassword = true;
-  };
+  security.sudo.wheelNeedsPassword = true;
 
   services = {
     btrfs.autoScrub = {
