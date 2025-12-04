@@ -12,19 +12,16 @@ let
     aarch64-linux.os = "ubuntu-22.04-arm";
     aarch64-darwin = {
       os = "macos-15";
-      equivalentLinux = "aarch64-linux";
+      equivalentLinuxPlatform = "aarch64-linux";
     };
   };
-
-  # Helper to get system from a configuration
-  getSystem = cfg: cfg.pkgs.stdenv.hostPlatform.system;
 
   # Build matrix entry from configuration (autodiscovery)
   # Returns data in the exact shape needed for GitHub Actions matrix
   mkHostInfo =
-    type: name: cfg:
+    kind: name: cfg:
     let
-      platform = getSystem cfg;
+      platform = cfg.pkgs.stdenv.hostPlatform.system;
       platformInfo = platforms.${platform} or null;
     in
     lib.optionalAttrs (platformInfo != null) (
@@ -33,16 +30,16 @@ let
         hostPlatform = platform;
         runsOn = platformInfo.os;
         attr =
-          if type == "nixos" then
+          if kind == "nixos" then
             "nixosConfigurations.${name}.config.system.build.toplevel"
-          else if type == "darwin" then
+          else if kind == "darwin" then
             "darwinConfigurations.${name}.config.system.build.toplevel"
           else
             "homeConfigurations.${name}.activationPackage";
       }
-      // lib.optionalAttrs (type == "darwin") {
-        inherit (platformInfo) equivalentLinux;
-        equivalentLinuxRunner = platforms.${platformInfo.equivalentLinux}.os;
+      // lib.optionalAttrs (kind == "darwin") rec {
+        inherit (platformInfo) equivalentLinuxPlatform;
+        equivalentLinuxRunner = platforms.${equivalentLinuxPlatform}.os;
         linuxBuilderAttr = "darwinConfigurations.${name}.config.nix.linux-builder.package.nixosConfig.system.build.toplevel";
       }
     );
@@ -58,18 +55,6 @@ let
     lib.mapAttrsToList (mkHostInfo "home") (self.homeConfigurations or { })
   );
 
-  # Hosts built directly on their platform (no linux-builder needed)
-  # This includes: NixOS hosts, home-manager hosts (both Linux and darwin)
-  directBuildHosts = nixosHosts ++ homeHosts;
-
-  # Common Nix configuration
-  nixConf = ''
-    accept-flake-config = true
-    always-allow-substitutes = true
-    builders-use-substitutes = true
-    max-jobs = auto
-  '';
-
   # Reusable step definitions
   steps = {
     checkout = {
@@ -78,7 +63,12 @@ let
 
     nixInstaller = {
       uses = "DeterminateSystems/nix-installer-action@v21";
-      "with".extra-conf = nixConf;
+      "with".extra-conf = ''
+        accept-flake-config = true
+        always-allow-substitutes = true
+        builders-use-substitutes = true
+        max-jobs = auto
+      '';
     };
 
     nixCache = {
@@ -100,9 +90,9 @@ let
     };
 
     # Helper to create nix-fast-build step for a given attribute expression
-    nfb = attrExpr: {
+    nix-fast-build = flakeAttr: {
       name = "nix-fast-build";
-      run = "nix run '${flakeRef}#nix-fast-build' -- --no-nom --skip-cached --retries=3 --option accept-flake-config true --flake='${flakeRef}#${attrExpr}'";
+      run = "nix run '${flakeRef}#nix-fast-build' -- --no-nom --skip-cached --retries=3 --option accept-flake-config true --flake='${flakeRef}#${flakeAttr}'";
     };
   };
 
@@ -181,22 +171,22 @@ in
           name = "\${{ matrix.attrs.name }} (\${{ matrix.attrs.hostPlatform }})";
           strategy = {
             fail-fast = false;
-            matrix.attrs = directBuildHosts;
+            matrix.attrs = nixosHosts ++ homeHosts;
           };
           runs-on = "\${{ matrix.attrs.runsOn }}";
-          steps = setupSteps ++ [ (steps.nfb "\${{ matrix.attrs.attr }}") ];
+          steps = setupSteps ++ [ (steps.nix-fast-build "\${{ matrix.attrs.attr }}") ];
         };
 
         # Build linux-builder for nix-darwin hosts (cross-compile on Linux)
         build-linux-builder = {
-          name = "linux-builder for \${{ matrix.attrs.name }} (\${{ matrix.attrs.equivalentLinux }})";
+          name = "linux-builder for \${{ matrix.attrs.name }} (\${{ matrix.attrs.equivalentLinuxPlatform }})";
           "if" = toString (lib.length darwinHosts > 0);
           strategy = {
             fail-fast = false;
             matrix.attrs = darwinHosts;
           };
           runs-on = "\${{ matrix.attrs.equivalentLinuxRunner }}";
-          steps = setupSteps ++ [ (steps.nfb "\${{ matrix.attrs.linuxBuilderAttr }}") ];
+          steps = setupSteps ++ [ (steps.nix-fast-build "\${{ matrix.attrs.linuxBuilderAttr }}") ];
         };
 
         # Build nix-darwin hosts (after linux-builder)
@@ -209,7 +199,7 @@ in
             matrix.attrs = darwinHosts;
           };
           runs-on = "\${{ matrix.attrs.runsOn }}";
-          steps = setupSteps ++ [ (steps.nfb "\${{ matrix.attrs.attr }}") ];
+          steps = setupSteps ++ [ (steps.nix-fast-build "\${{ matrix.attrs.attr }}") ];
         };
 
         # Final check job - aggregates all results

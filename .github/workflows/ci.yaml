@@ -101,7 +101,7 @@ jobs:
       matrix:
         attrs:
         - attr: darwinConfigurations.poincare.config.system.build.toplevel
-          equivalentLinux: aarch64-linux
+          equivalentLinuxPlatform: aarch64-linux
           equivalentLinuxRunner: ubuntu-22.04-arm
           hostPlatform: aarch64-darwin
           linuxBuilderAttr: darwinConfigurations.poincare.config.nix.linux-builder.package.nixosConfig.system.build.toplevel
@@ -110,7 +110,7 @@ jobs:
     timeout-minutes: 60
   build-linux-builder:
     if: '1'
-    name: linux-builder for ${{ matrix.attrs.name }} (${{ matrix.attrs.equivalentLinux
+    name: linux-builder for ${{ matrix.attrs.name }} (${{ matrix.attrs.equivalentLinuxPlatform
       }})
     runs-on: ${{ matrix.attrs.equivalentLinuxRunner }}
     steps:
@@ -142,7 +142,7 @@ jobs:
       matrix:
         attrs:
         - attr: darwinConfigurations.poincare.config.system.build.toplevel
-          equivalentLinux: aarch64-linux
+          equivalentLinuxPlatform: aarch64-linux
           equivalentLinuxRunner: ubuntu-22.04-arm
           hostPlatform: aarch64-darwin
           linuxBuilderAttr: darwinConfigurations.poincare.config.nix.linux-builder.package.nixosConfig.system.build.toplevel
