@@ -13,8 +13,17 @@ let
   mkNixos = mkLinuxSystem { home-manager = false; };
   mkDarwin = mkMacosSystem { home-manager = false; };
 
-  # Helper to get pkgs for a given system
-  pkgsFor = system: import inputs.nixpkgs { inherit system; };
+  # Helper to get pkgs for a given system (matches perSystem in overlays.nix)
+  pkgsFor =
+    system:
+    import inputs.nixpkgs {
+      inherit system;
+      overlays = [ self.overlays.default ];
+      config = {
+        allowUnfree = true;
+        allowAliases = true;
+      };
+    };
 
   # Wrapper for mkHomeConfiguration that takes hostname and system
   mkHome =
@@ -37,7 +46,7 @@ in
     homeConfigurations = {
       goethe = mkHome "goethe" "x86_64-linux";
       hilbert = mkHome "hilbert" "x86_64-linux";
-      popper = mkHome "popper" "x86_64-linux";
+      popper = mkHome "popper" "aarch64-linux";
     };
   };
 }
