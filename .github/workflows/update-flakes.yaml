@@ -16,11 +16,11 @@ jobs:
         with:
           extra-conf: accept-flake-config = true
 
-      - uses: DeterminateSystems/update-flake-lock@v3
+      - uses: DeterminateSystems/update-flake-lock@v28
         id: update
         with:
           token: ${{ secrets.PAT }}
-          pr-title: "flake.lock: update inputs"
+          pr-title: "chore(flake): update inputs"
           pr-labels: dependencies,automated
           git-author-name: hatesegfault
           git-author-email: bernardo+hatesegfault@meurer.org
