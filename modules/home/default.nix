@@ -17,7 +17,6 @@ in
   imports = with self.homeModules; [
     bash
     btop
-    custom
     dev
     fish
     git
