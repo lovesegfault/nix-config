@@ -1,12 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
+  "github-actions": {
+    "enabled": false
+  },
   "customManagers": [
     {
       "customType": "regex",
       "fileMatch": ["modules/flake-parts/actions\\.nix$"],
       "matchStrings": [
-        "(?<attrName>[a-z-]+)\\s*=\\s*\"(?<depName>[^@]+)@(?<currentDigest>[a-f0-9]+)\"\\s*;\\s*#\\s*(?<currentValue>v?[\\d.]+|release/v?[\\d.]+)"
+        "(?<attrName>[a-z][-a-z]*)\\s*=\\s*\"(?<depName>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@(?<currentDigest>[a-f0-9]+)\";\\s*#\\s*(?<currentValue>v?[\\d.]+|release/v?[\\d.]+)"
       ],
       "datasourceTemplate": "github-tags",
       "autoReplaceStringTemplate": "{{{attrName}}} = \"{{{depName}}}@{{{newDigest}}}\"; # {{{newValue}}}"
