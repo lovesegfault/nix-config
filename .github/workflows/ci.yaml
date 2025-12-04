@@ -22,6 +22,7 @@ jobs:
   flake-check:
     name: flake check (${{ matrix.systems.platform }})
     runs-on: ${{ matrix.systems.os }}
+    needs: [get-attrs]
     strategy:
       matrix:
         systems:
@@ -35,6 +36,11 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v21
         with:
           extra-conf: ${{ env.nix-conf }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/nix
+          key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ needs.get-attrs.outputs.flake-lock-hash }}
+          restore-keys: nix-eval-${{ runner.os }}-${{ runner.arch }}-
       - uses: cachix/cachix-action@v16
         with:
           name: nix-config
@@ -45,6 +51,7 @@ jobs:
   flake-show:
     name: flake show (${{ matrix.systems.platform }})
     runs-on: ${{ matrix.systems.os }}
+    needs: [get-attrs]
     strategy:
       matrix:
         systems:
@@ -58,6 +65,11 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v21
         with:
           extra-conf: ${{ env.nix-conf }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/nix
+          key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ needs.get-attrs.outputs.flake-lock-hash }}
+          restore-keys: nix-eval-${{ runner.os }}-${{ runner.arch }}-
       - uses: cachix/cachix-action@v16
         with:
           name: nix-config
@@ -71,18 +83,26 @@ jobs:
       build: ${{ steps.get-attrs.outputs.build }}
       eval: ${{ steps.get-attrs.outputs.eval }}
       darwin-hosts: ${{ steps.get-attrs.outputs.darwin-hosts }}
+      flake-lock-hash: ${{ steps.flake-lock-hash.outputs.hash }}
     steps:
       - uses: actions/checkout@v6
+      - id: flake-lock-hash
+        run: echo "hash=${{ hashFiles('flake.lock') }}" >> "$GITHUB_OUTPUT"
       - uses: DeterminateSystems/nix-installer-action@v21
         with:
           extra-conf: ${{ env.nix-conf }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/nix
+          key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ steps.flake-lock-hash.outputs.hash }}
+          restore-keys: nix-eval-${{ runner.os }}-${{ runner.arch }}-
       - id: get-attrs
         run: ./.github/workflows/get-attrs.py
   eval:
     name: eval ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
     if: ${{ fromJson(needs.get-attrs.outputs.eval)[0] != null }}
     runs-on: ${{ matrix.attrs.runsOn }}
-    needs: [ get-attrs ]
+    needs: [get-attrs]
     strategy:
       fail-fast: false
       matrix:
@@ -93,6 +113,11 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v21
         with:
           extra-conf: ${{ env.nix-conf }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/nix
+          key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ needs.get-attrs.outputs.flake-lock-hash }}
+          restore-keys: nix-eval-${{ runner.os }}-${{ runner.arch }}-
       - uses: cachix/cachix-action@v16
         with:
           name: nix-config
@@ -105,7 +130,7 @@ jobs:
     name: build linux-builder for ${{ matrix.attrs.name }} (${{ matrix.attrs.equivalentLinuxPlatform }})
     if: ${{ fromJson(needs.get-attrs.outputs.darwin-hosts)[0] != null }}
     runs-on: ${{ matrix.attrs.equivalentLinuxRunner }}
-    needs: [ get-attrs ]
+    needs: [get-attrs]
     strategy:
       fail-fast: false
       matrix:
@@ -116,6 +141,11 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v21
         with:
           extra-conf: ${{ env.nix-conf }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/nix
+          key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ needs.get-attrs.outputs.flake-lock-hash }}
+          restore-keys: nix-eval-${{ runner.os }}-${{ runner.arch }}-
       - uses: cachix/cachix-action@v16
         with:
           name: nix-config
@@ -128,7 +158,7 @@ jobs:
     name: build ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
     if: ${{ fromJson(needs.get-attrs.outputs.darwin-hosts)[0] != null }}
     runs-on: ${{ matrix.attrs.runsOn }}
-    needs: [ get-attrs, build-linux-builder ]
+    needs: [get-attrs, build-linux-builder]
     strategy:
       fail-fast: false
       matrix:
@@ -139,6 +169,11 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v21
         with:
           extra-conf: ${{ env.nix-conf }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/nix
+          key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ needs.get-attrs.outputs.flake-lock-hash }}
+          restore-keys: nix-eval-${{ runner.os }}-${{ runner.arch }}-
       - uses: cachix/cachix-action@v16
         with:
           name: nix-config
@@ -149,7 +184,7 @@ jobs:
   build:
     name: build ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
     runs-on: ${{ matrix.attrs.runsOn }}
-    needs: [ get-attrs ]
+    needs: [get-attrs]
     strategy:
       fail-fast: false
       matrix:
@@ -160,6 +195,11 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v21
         with:
           extra-conf: ${{ env.nix-conf }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/nix
+          key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ needs.get-attrs.outputs.flake-lock-hash }}
+          restore-keys: nix-eval-${{ runner.os }}-${{ runner.arch }}-
       - uses: cachix/cachix-action@v16
         with:
           name: nix-config
