@@ -13,10 +13,10 @@
         "/modules/flake-parts/actions\\.nix$/"
       ],
       "matchStrings": [
-        "(?<attrName>[a-z][-a-z]*)\\s*=\\s*\"(?<depName>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@(?<currentDigest>[a-f0-9]+)\";\\s*#\\s*(?<currentValue>v?[\\d.]+)"
+        "\"(?<depName>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@(?<currentDigest>[a-f0-9]+)\";\\s*#\\s*(?<currentValue>v?[\\d.]+)"
       ],
       "datasourceTemplate": "github-tags",
-      "autoReplaceStringTemplate": "{{{attrName}}} = \"{{{depName}}}@{{{newDigest}}}\"; # {{{newValue}}}"
+      "autoReplaceStringTemplate": "\"{{{depName}}}@{{{newDigest}}}\"; # {{{newValue}}}"
     }
   ],
   "packageRules": [
