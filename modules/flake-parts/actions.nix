@@ -85,11 +85,11 @@ let
   # Reusable step definitions
   steps = {
     checkout = {
-      uses = "actions/checkout@v4";
+      uses = "actions/checkout@v6";
     };
 
     nixInstaller = {
-      uses = "DeterminateSystems/nix-installer-action@v16";
+      uses = "DeterminateSystems/nix-installer-action@v21";
       "with".extra-conf = nixConf;
     };
 
@@ -97,13 +97,13 @@ let
       uses = "actions/cache@v4";
       "with" = {
         path = "~/.cache/nix";
-        key = "nix-eval-\${{ runner.os }}-\${{ runner.arch }}-\${{ needs.setup.outputs.flake-lock-hash }}";
+        key = "nix-eval-\${{ runner.os }}-\${{ runner.arch }}-\${{ hashFiles('flake.lock') }}";
         restore-keys = "nix-eval-\${{ runner.os }}-\${{ runner.arch }}-";
       };
     };
 
     cachix = {
-      uses = "cachix/cachix-action@v15";
+      uses = "cachix/cachix-action@v16";
       "with" = {
         name = "nix-config";
         authToken = "\${{ secrets.CACHIX_AUTH_TOKEN }}";
@@ -132,7 +132,7 @@ let
     }
   ];
 
-  flakeRef = "github:\${{ github.repository }}/\${{ github.sha }}";
+  flakeRef = "git+file://.";
 in
 {
   imports = [ inputs.actions-nix.flakeModules.default ];
@@ -165,23 +165,9 @@ in
       };
 
       jobs = {
-        # Setup job - gets flake.lock hash for caching
-        setup = {
-          runs-on = "ubuntu-24.04";
-          outputs.flake-lock-hash = "\${{ steps.flake-lock-hash.outputs.hash }}";
-          steps = [
-            steps.checkout
-            {
-              id = "flake-lock-hash";
-              run = ''echo "hash=''${{ hashFiles('flake.lock') }}" >> "$GITHUB_OUTPUT"'';
-            }
-          ];
-        };
-
         # Flake check on all platforms
         flake-check = {
           name = "flake check (\${{ matrix.systems.platform }})";
-          needs = [ "setup" ];
           strategy.matrix.systems = checkPlatforms;
           runs-on = "\${{ matrix.systems.os }}";
           steps = setupSteps ++ [
@@ -189,16 +175,6 @@ in
               name = "nix flake check";
               run = "nix flake check '\${{ env.flake }}'";
             }
-          ];
-        };
-
-        # Flake show on all platforms
-        flake-show = {
-          name = "flake show (\${{ matrix.systems.platform }})";
-          needs = [ "setup" ];
-          strategy.matrix.systems = checkPlatforms;
-          runs-on = "\${{ matrix.systems.os }}";
-          steps = setupSteps ++ [
             {
               name = "nix flake show";
               run = "nix flake show '\${{ env.flake }}'";
@@ -209,7 +185,6 @@ in
         # Build hosts directly (NixOS + home-manager on any platform)
         build = {
           name = "build \${{ matrix.attrs.name }} (\${{ matrix.attrs.hostPlatform }})";
-          needs = [ "setup" ];
           strategy = {
             fail-fast = false;
             matrix.attrs = directBuildHosts;
@@ -227,7 +202,6 @@ in
         build-linux-builder = {
           name = "build linux-builder for \${{ matrix.attrs.name }}";
           "if" = toString (lib.length darwinConfigs > 0);
-          needs = [ "setup" ];
           strategy = {
             fail-fast = false;
             matrix.attrs = darwinConfigs;
@@ -245,10 +219,7 @@ in
         build-darwin-host = {
           name = "build \${{ matrix.attrs.name }} (\${{ matrix.attrs.hostPlatform }})";
           "if" = toString (lib.length darwinConfigs > 0);
-          needs = [
-            "setup"
-            "build-linux-builder"
-          ];
+          needs = [ "build-linux-builder" ];
           strategy = {
             fail-fast = false;
             matrix.attrs = darwinConfigs;
@@ -267,7 +238,6 @@ in
           runs-on = "ubuntu-24.04";
           needs = [
             "flake-check"
-            "flake-show"
             "build"
             "build-linux-builder"
             "build-darwin-host"
