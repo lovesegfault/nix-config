@@ -69,9 +69,6 @@ let
   # This includes: NixOS hosts, home-manager hosts (both Linux and darwin)
   directBuildHosts = nixosHosts ++ homeHosts;
 
-  # nix-darwin configurations need linux-builder for cross-compilation
-  darwinConfigs = darwinHosts;
-
   # All hosts combined
   allHosts = nixosHosts ++ darwinHosts ++ homeHosts;
 
@@ -197,10 +194,10 @@ in
         # Build linux-builder for nix-darwin hosts (cross-compile on Linux)
         build-linux-builder = {
           name = "linux-builder for \${{ matrix.attrs.name }} (\${{ matrix.attrs.equivalentLinux }})";
-          "if" = toString (lib.length darwinConfigs > 0);
+          "if" = toString (lib.length darwinHosts > 0);
           strategy = {
             fail-fast = false;
-            matrix.attrs = darwinConfigs;
+            matrix.attrs = darwinHosts;
           };
           runs-on = "\${{ matrix.attrs.equivalentLinuxRunner }}";
           steps = setupSteps ++ [
@@ -214,11 +211,11 @@ in
         # Build nix-darwin hosts (after linux-builder)
         build-darwin-host = {
           name = "\${{ matrix.attrs.name }} (\${{ matrix.attrs.hostPlatform }})";
-          "if" = toString (lib.length darwinConfigs > 0);
+          "if" = toString (lib.length darwinHosts > 0);
           needs = [ "build-linux-builder" ];
           strategy = {
             fail-fast = false;
-            matrix.attrs = darwinConfigs;
+            matrix.attrs = darwinHosts;
           };
           runs-on = "\${{ matrix.attrs.runsOn }}";
           steps = setupSteps ++ [
