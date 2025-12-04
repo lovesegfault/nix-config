@@ -41,9 +41,6 @@ in
     variables = {
       SHELL = lib.getExe pkgs.zsh;
     };
-    extraSetup = ''
-      ln -sv ${pkgs.path} $out/nixpkgs
-    '';
   };
 
   homebrew = {
