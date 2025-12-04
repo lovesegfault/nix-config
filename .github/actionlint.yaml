@@ -1,7 +1,6 @@
 self-hosted-runner:
   # Labels of self-hosted runner in array of strings.
-  # FIXME: Remove once the upstream list is updated
-  labels: ["ubuntu-22.04-arm", "ubuntu-24.04-arm"]
+  labels: []
 
 # Configuration variables in array of strings defined in your repository or
 # organization. `null` means disabling configuration variables check.

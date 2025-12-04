@@ -73,11 +73,9 @@ jobs:
       darwin-hosts: ${{ steps.get-attrs.outputs.darwin-hosts }}
     steps:
       - uses: actions/checkout@v6
+      - uses: DeterminateSystems/nix-installer-action@v21
         with:
-          sparse-checkout: |
-            nix/hosts.nix
-            .github/workflows/get-attrs.py
-      - uses: nixbuild/nix-quick-install-action@v34
+          extra-conf: ${{ env.nix-conf }}
       - id: get-attrs
         run: ./.github/workflows/get-attrs.py
   eval:
