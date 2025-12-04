@@ -70,9 +70,6 @@ let
     max-jobs = auto
   '';
 
-  # nix-fast-build arguments
-  nfbArgs = "--no-nom --skip-cached --retries=3 --option accept-flake-config true";
-
   # Reusable step definitions
   steps = {
     checkout = {
@@ -100,6 +97,12 @@ let
         authToken = "\${{ secrets.CACHIX_AUTH_TOKEN }}";
         extraPullNames = "nix-community";
       };
+    };
+
+    # Helper to create nix-fast-build step for a given attribute expression
+    nfb = attrExpr: {
+      name = "nix-fast-build";
+      run = "nix run '${flakeRef}#nix-fast-build' -- --no-nom --skip-cached --retries=3 --option accept-flake-config true --flake='${flakeRef}#${attrExpr}'";
     };
   };
 
@@ -180,12 +183,7 @@ in
             matrix.attrs = directBuildHosts;
           };
           runs-on = "\${{ matrix.attrs.runsOn }}";
-          steps = setupSteps ++ [
-            {
-              name = "nix-fast-build";
-              run = "nix run '${flakeRef}#nix-fast-build' -- ${nfbArgs} --flake='${flakeRef}#\${{ matrix.attrs.attr }}'";
-            }
-          ];
+          steps = setupSteps ++ [ (steps.nfb "\${{ matrix.attrs.attr }}") ];
         };
 
         # Build linux-builder for nix-darwin hosts (cross-compile on Linux)
@@ -197,12 +195,7 @@ in
             matrix.attrs = darwinHosts;
           };
           runs-on = "\${{ matrix.attrs.equivalentLinuxRunner }}";
-          steps = setupSteps ++ [
-            {
-              name = "nix-fast-build";
-              run = "nix run '${flakeRef}#nix-fast-build' -- ${nfbArgs} --flake='${flakeRef}#\${{ matrix.attrs.linuxBuilderAttr }}'";
-            }
-          ];
+          steps = setupSteps ++ [ (steps.nfb "\${{ matrix.attrs.linuxBuilderAttr }}") ];
         };
 
         # Build nix-darwin hosts (after linux-builder)
@@ -215,12 +208,7 @@ in
             matrix.attrs = darwinHosts;
           };
           runs-on = "\${{ matrix.attrs.runsOn }}";
-          steps = setupSteps ++ [
-            {
-              name = "nix-fast-build";
-              run = "nix run '${flakeRef}#nix-fast-build' -- ${nfbArgs} --flake='${flakeRef}#\${{ matrix.attrs.attr }}'";
-            }
-          ];
+          steps = setupSteps ++ [ (steps.nfb "\${{ matrix.attrs.attr }}") ];
         };
 
         # Final check job - aggregates all results
