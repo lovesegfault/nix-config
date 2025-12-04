@@ -1,4 +1,3 @@
-# Development shell for the nix-config repository
 { inputs, ... }:
 {
   imports = [
@@ -21,21 +20,15 @@
           [
             # Nix
             config.agenix-rekey.package
+            config.treefmt.build.wrapper
+            cachix
             nil
             nix-output-monitor
             nix-tree
-            cachix
             nix-fast-build
-            config.treefmt.build.wrapper
-            statix
-
-            # Shell
-            shellcheck
-            shfmt
 
             # GitHub Actions
             act
-            actionlint
             python3
             python3Packages.pyflakes
 
@@ -44,7 +37,8 @@
             pre-commit
             rage
           ]
-          ++ (builtins.attrValues config.treefmt.build.programs);
+          ++ (builtins.attrValues config.treefmt.build.programs)
+          ++ config.pre-commit.settings.enabledPackages;
 
         shellHook = ''
           ${config.pre-commit.installationScript}
