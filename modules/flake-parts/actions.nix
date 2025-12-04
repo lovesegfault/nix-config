@@ -71,6 +71,9 @@ let
   # nix-darwin configurations need linux-builder for cross-compilation
   darwinConfigs = darwinHosts;
 
+  # All hosts combined
+  allHosts = nixosHosts ++ darwinHosts ++ homeHosts;
+
   # Common Nix configuration
   nixConf = ''
     accept-flake-config = true
@@ -120,17 +123,15 @@ let
     steps.cachix
   ];
 
-  # Platforms to run flake check/show on
-  checkPlatforms = [
-    {
-      os = "ubuntu-24.04";
-      platform = "x86_64-linux";
-    }
-    {
-      os = "macos-15";
-      platform = "aarch64-darwin";
-    }
-  ];
+  # Platforms to run flake check/show on (derived from all hosts)
+  checkPlatforms =
+    let
+      hostPlatforms = lib.unique (map (h: h.hostPlatform) allHosts);
+    in
+    map (p: {
+      platform = p;
+      inherit (platforms.${p}) os;
+    }) hostPlatforms;
 
   flakeRef = "git+file://.";
 in
