@@ -19,11 +19,14 @@ jobs:
       - uses: DeterminateSystems/update-flake-lock@v28
         id: update
         with:
-          token: ${{ secrets.PAT }}
-          pr-title: "chore(flake): update inputs"
-          pr-labels: dependencies,automated
-          git-author-name: hatesegfault
+          commit-msg: "chore(flake): update inputs"
           git-author-email: bernardo+hatesegfault@meurer.org
+          git-author-name: hatesegfault
+          git-committer-email: bernardo+hatesegfault@meurer.org
+          git-committer-name: hatesegfault
+          pr-labels: dependencies,automated
+          pr-title: "chore(flake): update inputs"
+          token: ${{ secrets.PAT }}
 
       - uses: peter-evans/enable-pull-request-automerge@v3
         if: steps.update.outputs.pull-request-number != ''
