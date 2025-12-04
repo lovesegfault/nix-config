@@ -13,8 +13,7 @@ in
   imports = [
     self.homeModules.graphical-kitty
   ]
-  ++ lib.optionals isLinux [ self.homeModules.graphical-linux ]
-  ++ lib.optionals isDarwin [ self.homeModules.graphical-darwin ];
+  ++ lib.optionals isLinux [ self.homeModules.graphical-linux ];
 
   home.packages =
     with pkgs;
