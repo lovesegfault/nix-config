@@ -1,46 +1,33 @@
 name: update-flakes
 on:
   schedule:
-    - cron:  '0 0 * * *'
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 permissions: {}
 
 jobs:
-  get-flake-inputs:
+  update-flake-lock:
     runs-on: ubuntu-latest
-    outputs:
-      flake-inputs: ${{ steps.get-flake-inputs.outputs.flake-inputs }}
     steps:
       - uses: actions/checkout@v6
-        with:
-          sparse-checkout: flake.lock
-      - id: get-flake-inputs
-        run: |
-          flake_inputs="$(jq -c '.nodes.root.inputs | {flake: keys}' flake.lock)"
-          echo "flake-inputs=${flake_inputs}" >> "$GITHUB_OUTPUT"
-  update-flake:
-    name: update-${{ matrix.flake }}
-    runs-on: ubuntu-latest
-    needs: get-flake-inputs
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJson(needs.get-flake-inputs.outputs.flake-inputs) }}
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          lfs: false
+
       - uses: DeterminateSystems/nix-installer-action@v21
         with:
           extra-conf: accept-flake-config = true
-      - run: git config --global user.email "bernardo+hatesegfault@meurer.org"
-      - run: git config --global user.name "hatesegfault"
-      - uses: cpcloud/flake-update-action@v2.0.1
+
+      - uses: DeterminateSystems/update-flake-lock@v3
+        id: update
         with:
-          dependency: ${{ matrix.flake }}
-          pull-request-token: ${{ secrets.PAT }}
-          pull-request-author: hatesegfault <bernardo+hatesegfault@meurer.org>
-          delete-branch: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request-branch-prefix: update-
-          automerge: true
+          token: ${{ secrets.PAT }}
+          pr-title: "flake.lock: update inputs"
+          pr-labels: dependencies,automated
+          git-author-name: hatesegfault
+          git-author-email: bernardo+hatesegfault@meurer.org
+
+      - uses: peter-evans/enable-pull-request-automerge@v3
+        if: steps.update.outputs.pull-request-number != ''
+        with:
+          token: ${{ secrets.PAT }}
+          pull-request-number: ${{ steps.update.outputs.pull-request-number }}
+          merge-method: rebase
