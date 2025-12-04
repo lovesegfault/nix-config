@@ -60,9 +60,6 @@ in
   };
 
   system = {
-    systemBuilderCommands = ''
-      ln -sv ${pkgs.path} $out/nixpkgs
-    '';
     rebuild.enableNg = true;
     stateVersion = lib.mkDefault "25.11";
   };

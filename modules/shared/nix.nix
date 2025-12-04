@@ -53,7 +53,6 @@ in
       channel.enable = false;
       daemonCPUSchedPolicy = "batch";
       daemonIOSchedPriority = 5;
-      nixPath = [ "nixpkgs=/run/current-system/nixpkgs" ];
       optimise = {
         automatic = true;
         dates = [ "03:00" ];
@@ -67,7 +66,6 @@ in
         auto-optimise-store = false;
         sandbox = false;
       };
-      nixPath = [ "nixpkgs=/run/current-system/sw/nixpkgs" ];
       daemonIOLowPriority = false;
     })
   ];
