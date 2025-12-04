@@ -146,6 +146,11 @@ in
         pull_request = { };
       };
 
+      concurrency = {
+        group = "ci-\${{ github.head_ref || github.ref_name }}";
+        cancel-in-progress = "\${{ github.event_name == 'pull_request' }}";
+      };
+
       permissions = { };
 
       jobs = {
