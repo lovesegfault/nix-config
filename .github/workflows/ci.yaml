@@ -1,5 +1,5 @@
 env:
-  flake: github:${{ github.repository }}/${{ github.sha }}
+  flake: git+file://.
   nix-conf: |-
     accept-flake-config = true
     always-allow-substitutes = true
@@ -10,12 +10,10 @@ env:
 jobs:
   build:
     name: build ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
-    needs:
-    - setup
     runs-on: ${{ matrix.attrs.runsOn }}
     steps:
-    - uses: actions/checkout@v4
-    - uses: DeterminateSystems/nix-installer-action@v16
+    - uses: actions/checkout@v6
+    - uses: DeterminateSystems/nix-installer-action@v21
       with:
         extra-conf: |-
           accept-flake-config = true
@@ -24,11 +22,11 @@ jobs:
           max-jobs = auto
     - uses: actions/cache@v4
       with:
-        key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ needs.setup.outputs.flake-lock-hash
+        key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('flake.lock')
           }}
         path: ~/.cache/nix
         restore-keys: nix-eval-${{ runner.os }}-${{ runner.arch }}-
-    - uses: cachix/cachix-action@v15
+    - uses: cachix/cachix-action@v16
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: nix-community
@@ -69,20 +67,19 @@ jobs:
           name: hilbert
           runsOn: ubuntu-24.04
         - attr: homeConfigurations.popper.activationPackage
-          hostPlatform: x86_64-linux
+          hostPlatform: aarch64-linux
           name: popper
-          runsOn: ubuntu-24.04
+          runsOn: ubuntu-22.04-arm
     timeout-minutes: 60
   build-darwin-host:
     if: '1'
     name: build ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
     needs:
-    - setup
     - build-linux-builder
     runs-on: ${{ matrix.attrs.runsOn }}
     steps:
-    - uses: actions/checkout@v4
-    - uses: DeterminateSystems/nix-installer-action@v16
+    - uses: actions/checkout@v6
+    - uses: DeterminateSystems/nix-installer-action@v21
       with:
         extra-conf: |-
           accept-flake-config = true
@@ -91,11 +88,11 @@ jobs:
           max-jobs = auto
     - uses: actions/cache@v4
       with:
-        key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ needs.setup.outputs.flake-lock-hash
+        key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('flake.lock')
           }}
         path: ~/.cache/nix
         restore-keys: nix-eval-${{ runner.os }}-${{ runner.arch }}-
-    - uses: cachix/cachix-action@v15
+    - uses: cachix/cachix-action@v16
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: nix-community
@@ -117,12 +114,10 @@ jobs:
   build-linux-builder:
     if: '1'
     name: build linux-builder for ${{ matrix.attrs.name }}
-    needs:
-    - setup
     runs-on: ${{ matrix.attrs.equivalentLinuxRunner }}
     steps:
-    - uses: actions/checkout@v4
-    - uses: DeterminateSystems/nix-installer-action@v16
+    - uses: actions/checkout@v6
+    - uses: DeterminateSystems/nix-installer-action@v21
       with:
         extra-conf: |-
           accept-flake-config = true
@@ -131,11 +126,11 @@ jobs:
           max-jobs = auto
     - uses: actions/cache@v4
       with:
-        key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ needs.setup.outputs.flake-lock-hash
+        key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('flake.lock')
           }}
         path: ~/.cache/nix
         restore-keys: nix-eval-${{ runner.os }}-${{ runner.arch }}-
-    - uses: cachix/cachix-action@v15
+    - uses: cachix/cachix-action@v16
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: nix-community
@@ -158,7 +153,6 @@ jobs:
     if: always()
     needs:
     - flake-check
-    - flake-show
     - build
     - build-linux-builder
     - build-darwin-host
@@ -171,12 +165,10 @@ jobs:
     timeout-minutes: 60
   flake-check:
     name: flake check (${{ matrix.systems.platform }})
-    needs:
-    - setup
     runs-on: ${{ matrix.systems.os }}
     steps:
-    - uses: actions/checkout@v4
-    - uses: DeterminateSystems/nix-installer-action@v16
+    - uses: actions/checkout@v6
+    - uses: DeterminateSystems/nix-installer-action@v21
       with:
         extra-conf: |-
           accept-flake-config = true
@@ -185,50 +177,17 @@ jobs:
           max-jobs = auto
     - uses: actions/cache@v4
       with:
-        key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ needs.setup.outputs.flake-lock-hash
+        key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('flake.lock')
           }}
         path: ~/.cache/nix
         restore-keys: nix-eval-${{ runner.os }}-${{ runner.arch }}-
-    - uses: cachix/cachix-action@v15
+    - uses: cachix/cachix-action@v16
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: nix-community
         name: nix-config
     - name: nix flake check
       run: nix flake check '${{ env.flake }}'
-    strategy:
-      matrix:
-        systems:
-        - os: ubuntu-24.04
-          platform: x86_64-linux
-        - os: macos-15
-          platform: aarch64-darwin
-    timeout-minutes: 60
-  flake-show:
-    name: flake show (${{ matrix.systems.platform }})
-    needs:
-    - setup
-    runs-on: ${{ matrix.systems.os }}
-    steps:
-    - uses: actions/checkout@v4
-    - uses: DeterminateSystems/nix-installer-action@v16
-      with:
-        extra-conf: |-
-          accept-flake-config = true
-          always-allow-substitutes = true
-          builders-use-substitutes = true
-          max-jobs = auto
-    - uses: actions/cache@v4
-      with:
-        key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ needs.setup.outputs.flake-lock-hash
-          }}
-        path: ~/.cache/nix
-        restore-keys: nix-eval-${{ runner.os }}-${{ runner.arch }}-
-    - uses: cachix/cachix-action@v15
-      with:
-        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-        extraPullNames: nix-community
-        name: nix-config
     - name: nix flake show
       run: nix flake show '${{ env.flake }}'
     strategy:
@@ -238,15 +197,6 @@ jobs:
           platform: x86_64-linux
         - os: macos-15
           platform: aarch64-darwin
-    timeout-minutes: 60
-  setup:
-    outputs:
-      flake-lock-hash: ${{ steps.flake-lock-hash.outputs.hash }}
-    runs-on: ubuntu-24.04
-    steps:
-    - uses: actions/checkout@v4
-    - id: flake-lock-hash
-      run: echo "hash=${{ hashFiles('flake.lock') }}" >> "$GITHUB_OUTPUT"
     timeout-minutes: 60
 name: ci
 'on':
