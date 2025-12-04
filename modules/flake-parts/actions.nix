@@ -144,6 +144,7 @@ in
           "try"
         ];
         pull_request = { };
+        workflow_dispatch = { };
       };
 
       concurrency = {
