@@ -14,6 +14,17 @@ jobs:
           always-allow-substitutes = true
           builders-use-substitutes = true
           max-jobs = auto
+    - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+      with:
+        key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('flake.lock')
+          }}
+        path: ~/.cache/nix
+        restore-keys: nix-eval-${{ runner.os }}-${{ runner.arch }}-
+    - uses: cachix/cachix-action@0fc020193b5a1fa3ac4575aa3a7d3aa6a35435ad
+      with:
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: nix-community
+        name: nix-config
     - name: Regenerate workflows
       run: nix run .#render-workflows
     - name: Amend commit with regenerated workflows

@@ -307,6 +307,8 @@ in
               }
             )
             steps.nixInstaller
+            steps.nixCache
+            steps.cachix
             {
               name = "Regenerate workflows";
               run = "nix run .#render-workflows";
