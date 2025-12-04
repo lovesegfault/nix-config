@@ -57,7 +57,7 @@ let
 
   # GitHub Actions references - all versions consolidated here for Renovate
   actions = {
-    alls-green = "re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe"; # release/v1
+    alls-green = "re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe"; # v1.2.2
     cache = "actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830"; # v4
     cachix = "cachix/cachix-action@0fc020193b5a1fa3ac4575aa3a7d3aa6a35435ad"; # v16
     checkout = "actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8"; # v6
