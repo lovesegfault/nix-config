@@ -29,6 +29,7 @@ in
     self.nixosModules.users-bemeurer
     self.nixosModules.hardware-fast-networking
     self.nixosModules.hardware-no-mitigations
+    self.nixosModules.pam-limits
   ];
 
   # Host-specific home-manager user config
@@ -82,27 +83,6 @@ in
   };
 
   powerManagement.cpuFreqGovernor = "performance";
-
-  security.pam.loginLimits = [
-    {
-      domain = "*";
-      type = "-";
-      item = "memlock";
-      value = "unlimited";
-    }
-    {
-      domain = "*";
-      type = "-";
-      item = "nofile";
-      value = "1048576";
-    }
-    {
-      domain = "*";
-      type = "-";
-      item = "nproc";
-      value = "unlimited";
-    }
-  ];
 
   stylix.targets.grub.enable = false;
 

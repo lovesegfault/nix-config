@@ -22,6 +22,7 @@ in
     self.nixosModules.users-bemeurer
     self.nixosModules.hardware-efi
     self.nixosModules.hardware-fast-networking
+    self.nixosModules.pam-limits
     self.nixosModules.services-grafana
     self.nixosModules.services-nginx
     self.nixosModules.services-oauth2
@@ -141,27 +142,6 @@ in
   };
 
   powerManagement.cpuFreqGovernor = "performance";
-
-  security.pam.loginLimits = [
-    {
-      domain = "*";
-      type = "-";
-      item = "memlock";
-      value = "unlimited";
-    }
-    {
-      domain = "*";
-      type = "-";
-      item = "nofile";
-      value = "1048576";
-    }
-    {
-      domain = "*";
-      type = "-";
-      item = "nproc";
-      value = "unlimited";
-    }
-  ];
 
   services = {
     fwupd.enable = true;
