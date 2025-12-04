@@ -8,8 +8,6 @@ _: {
         nil.enable = true;
         shellcheck.enable = true;
         statix.enable = true;
-        ruff.enable = true;
-        pyright.enable = true;
         treefmt.enable = true;
       };
     };
