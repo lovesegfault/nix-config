@@ -11,7 +11,7 @@
   },
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["after 10pm on sunday"],
+    "schedule": ["before 1am"],
     "commitMessageAction": "update",
     "prBodyDefinitions": {
       "Change": "All flake inputs updated"
