@@ -38,6 +38,7 @@ in
     packages = lib.filter (lib.meta.availableOn pkgs.stdenv.hostPlatform) (
       with pkgs;
       [
+        ccinit
         mosh
         nix-closure-size
         nix-output-monitor
