@@ -170,6 +170,7 @@ in
     name = "ccinit";
     inputs = with final; [
       coreutils
+      gawk
       gnugrep
     ];
     fake.external = [ "claude" ];
