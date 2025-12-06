@@ -56,6 +56,9 @@ in
         export ANT_PRISTINE_SHELL=1
         source /root/code/config/remote/zshrc
       '')
+      (lib.mkOrder 99999 ''
+        export PATH="/root/.local/state/nix/profile/bin:$PATH"
+      '')
     ];
   };
 }
