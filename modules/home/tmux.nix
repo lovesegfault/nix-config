@@ -6,7 +6,10 @@
     aggressiveResize = true;
     clock24 = true;
     escapeTime = 0;
-    newSession = true;
+    # Use idempotent new-session to avoid creating duplicate sessions when both
+    # NixOS (/etc/tmux.conf) and home-manager configs are loaded. The -A flag
+    # attaches if the session exists, otherwise creates it.
+    newSession = false;
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
     ];
@@ -16,6 +19,8 @@
     keyMode = "vi";
     prefix = "C-a";
     extraConfig = ''
+      new-session -A -s 0
+
       # update the env when attaching to an existing session
       set -g update-environment -r
 

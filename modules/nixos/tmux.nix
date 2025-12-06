@@ -7,7 +7,13 @@
     clock24 = true;
     escapeTime = 0;
     historyLimit = 30000;
-    newSession = true;
+    # Use idempotent new-session to avoid creating duplicate sessions when both
+    # NixOS and home-manager configs are loaded. The -A flag attaches if the
+    # session exists, otherwise creates it.
+    newSession = false;
+    extraConfigBeforePlugins = ''
+      new-session -A -s 0
+    '';
     secureSocket = false;
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
