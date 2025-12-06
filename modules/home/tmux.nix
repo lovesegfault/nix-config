@@ -19,11 +19,15 @@
       # update the env when attaching to an existing session
       set -g update-environment -r
 
-      set -ag terminal-overrides ",alacritty*:Tc,foot*:Tc,xterm-kitty*:Tc,xterm-256color:Tc"
+      set -ag terminal-overrides ",alacritty*:Tc,foot*:Tc,xterm-kitty*:Tc,xterm-ghostty:Tc"
 
-      set -as terminal-features ",alacritty*:RGB,foot*:RGB,xterm-kitty*:RGB,xterm-256color:RGB"
-      set -as terminal-features ",alacritty*:hyperlinks,foot*:hyperlinks,xterm-kitty*:hyperlinks"
-      set -as terminal-features ",alacritty*:usstyle,foot*:usstyle,xterm-kitty*:usstyle"
+      set -as terminal-features ",alacritty*:RGB,foot*:RGB,xterm-kitty*:RGB,xterm-ghostty:RGB"
+      set -as terminal-features ",alacritty*:hyperlinks,foot*:hyperlinks,xterm-kitty*:hyperlinks,xterm-ghostty*:hyperlinks"
+      set -as terminal-features ",alacritty*:usstyle,foot*:usstyle,xterm-kitty*:usstyle,xterm-ghostty*:usstyle"
+
+
+      # recommended by vim.health
+      set-option -g focus-events on
 
       # automatically renumber windows
       set -g renumber-windows on
