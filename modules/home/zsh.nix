@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   programs.zsh = {
     enable = true;
@@ -20,7 +25,8 @@
       {
         name = "nix-zsh-completions";
         src = pkgs.nix-zsh-completions;
-        file = "share/zsh/plugins/nix-zsh-completions/nix-zsh-completions.plugin.zsh";
+        file = "share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh";
+        completions = [ "share/zsh/site-functions" ];
       }
       {
         name = "vi-mode";
@@ -47,34 +53,42 @@
       export LESSHISTFILE="${config.xdg.dataHome}/less_history"
       export CARGO_HOME="${config.xdg.cacheHome}/cargo"
     '';
-    initContent = ''
-      # 1Password CLI
-      if [ -e "$HOME/.config/op/plugins.sh" ]; then
-        source "$HOME/.config/op/plugins.sh"
-      fi
+    initContent = lib.mkMerge [
+      # Workaround for home-manager#2562: completions from home.packages aren't in fpath
+      (lib.mkOrder 561 ''
+        fpath+=("${config.home.profileDirectory}"/share/zsh/site-functions \
+                "${config.home.profileDirectory}"/share/zsh/$ZSH_VERSION/functions \
+                "${config.home.profileDirectory}"/share/zsh/vendor-completions)
+      '')
+      ''
+        # 1Password CLI
+        if [ -e "$HOME/.config/op/plugins.sh" ]; then
+          source "$HOME/.config/op/plugins.sh"
+        fi
 
-      bindkey "''${terminfo[kcuu1]}" history-substring-search-up
-      bindkey '^[[A' history-substring-search-up
-      bindkey "''${terminfo[kcud1]}" history-substring-search-down
-      bindkey '^[[B' history-substring-search-down
+        bindkey "''${terminfo[kcuu1]}" history-substring-search-up
+        bindkey '^[[A' history-substring-search-up
+        bindkey "''${terminfo[kcud1]}" history-substring-search-down
+        bindkey '^[[B' history-substring-search-down
 
-      ${pkgs.nix-your-shell}/bin/nix-your-shell --nom zsh | source /dev/stdin
+        ${pkgs.nix-your-shell}/bin/nix-your-shell --nom zsh | source /dev/stdin
 
-      bindkey "''${terminfo[khome]}" beginning-of-line
-      bindkey "''${terminfo[kend]}" end-of-line
-      bindkey "''${terminfo[kdch1]}" delete-char
-      bindkey "^[[1;5C" forward-word
-      bindkey "^[[1;3C" forward-word
-      bindkey "^[[1;5D" backward-word
-      bindkey "^[[1;3D" backward-word
+        bindkey "''${terminfo[khome]}" beginning-of-line
+        bindkey "''${terminfo[kend]}" end-of-line
+        bindkey "''${terminfo[kdch1]}" delete-char
+        bindkey "^[[1;5C" forward-word
+        bindkey "^[[1;3C" forward-word
+        bindkey "^[[1;5D" backward-word
+        bindkey "^[[1;3D" backward-word
 
-      local CONST_SSH_SOCK="$HOME/.ssh/ssh-auth-sock"
-      if [ ! -z ''${SSH_AUTH_SOCK+x} ] && [ "$SSH_AUTH_SOCK" != "$CONST_SSH_SOCK" ]; then
-        rm -f "$CONST_SSH_SOCK"
-        ln -sf "$SSH_AUTH_SOCK" "$CONST_SSH_SOCK"
-        export SSH_AUTH_SOCK="$CONST_SSH_SOCK"
-      fi
-    '';
+        local CONST_SSH_SOCK="$HOME/.ssh/ssh-auth-sock"
+        if [ ! -z ''${SSH_AUTH_SOCK+x} ] && [ "$SSH_AUTH_SOCK" != "$CONST_SSH_SOCK" ]; then
+          rm -f "$CONST_SSH_SOCK"
+          ln -sf "$SSH_AUTH_SOCK" "$CONST_SSH_SOCK"
+          export SSH_AUTH_SOCK="$CONST_SSH_SOCK"
+        fi
+      ''
+    ];
     sessionVariables = {
       RPROMPT = "";
     };
