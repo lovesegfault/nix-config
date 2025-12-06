@@ -18,6 +18,11 @@
     };
     plugins = [
       {
+        name = "nix-zsh-completions";
+        src = pkgs.nix-zsh-completions;
+        file = "share/zsh/plugins/nix-zsh-completions/nix-zsh-completions.plugin.zsh";
+      }
+      {
         name = "vi-mode";
         src = pkgs.zsh-vi-mode;
         file = "share/zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
