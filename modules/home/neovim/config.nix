@@ -19,6 +19,7 @@
 
   luaLoader.enable = true;
 
+  globals.clipboard = "osc52";
   clipboard = {
     register = "unnamedplus";
     providers = {
