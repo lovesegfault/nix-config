@@ -19,11 +19,12 @@
       # update the env when attaching to an existing session
       set -g update-environment -r
 
-      set -ag terminal-overrides ",alacritty*:Tc,foot*:Tc,xterm-kitty*:Tc,xterm-ghostty:Tc"
+      set -ag terminal-overrides ",alacritty*:Tc,foot*:Tc,xterm*:Tc"
 
-      set -as terminal-features ",alacritty*:RGB,foot*:RGB,xterm-kitty*:RGB,xterm-ghostty:RGB"
-      set -as terminal-features ",alacritty*:hyperlinks,foot*:hyperlinks,xterm-kitty*:hyperlinks,xterm-ghostty*:hyperlinks"
-      set -as terminal-features ",alacritty*:usstyle,foot*:usstyle,xterm-kitty*:usstyle,xterm-ghostty*:usstyle"
+      set -as terminal-features ",alacritty*:RGB,foot*:RGB,xterm*:RGB"
+      set -as terminal-features ",alacritty*:hyperlinks,foot*:hyperlinks,xterm*:hyperlinks"
+      set -as terminal-features ",alacritty*:usstyle,foot*:usstyle,xterm*:usstyle"
+      set -as terminal-features ",alacritty*:extkeys,foot*:extkeys,xterm*:extkeys"
 
 
       # recommended by vim.health
