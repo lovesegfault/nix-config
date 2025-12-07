@@ -36,6 +36,7 @@ in
         http-connections = 0;
         flake-registry = "/etc/nix/registry.json";
         always-allow-substitutes = true;
+        impure-env = [ "NIXPKGS_ALLOW_UNFREE" ];
       };
 
       distributedBuilds = true;
