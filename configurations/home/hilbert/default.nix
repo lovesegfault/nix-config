@@ -58,7 +58,6 @@ in
       '')
       (lib.mkOrder 99999 ''
         export PATH="/root/.local/state/nix/profile/bin:$PATH"
-        cd "$HOME"
       '')
     ];
   };
