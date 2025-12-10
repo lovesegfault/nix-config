@@ -240,7 +240,10 @@ in
       ".github/workflows/regenerate-workflows.yaml" = {
         name = "regenerate-workflows";
 
-        on.pull_request.paths = [ "modules/flake-parts/actions.nix" ];
+        on.pull_request.paths = [
+          "modules/flake-parts/actions.nix"
+          "flake.lock"
+        ];
 
         permissions.contents = "write";
 
