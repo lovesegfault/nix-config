@@ -5,7 +5,7 @@ jobs:
     steps:
     - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       with:
-        ref: ${{ github.event.inputs.branch || github.head_ref }}
+        ref: ${{ github.head_ref || github.ref_name }}
         token: ${{ secrets.PAT }}
     - uses: DeterminateSystems/nix-installer-action@c5a866b6ab867e88becbed4467b93592bce69f8a
       with:
@@ -41,11 +41,6 @@ name: regenerate-workflows
     paths:
     - modules/flake-parts/actions.nix
     - flake.lock
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: Branch to regenerate workflows on
-        required: true
-        type: string
+  workflow_dispatch: {}
 permissions:
   contents: write

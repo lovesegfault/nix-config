@@ -245,11 +245,7 @@ in
             "modules/flake-parts/actions.nix"
             "flake.lock"
           ];
-          workflow_dispatch.inputs.branch = {
-            description = "Branch to regenerate workflows on";
-            required = true;
-            type = "string";
-          };
+          workflow_dispatch = { };
         };
 
         permissions.contents = "write";
@@ -263,7 +259,7 @@ in
               steps.checkout
               // {
                 "with" = {
-                  ref = "\${{ github.event.inputs.branch || github.head_ref }}";
+                  ref = "\${{ github.head_ref || github.ref_name }}";
                   token = "\${{ secrets.PAT }}";
                 };
               }
