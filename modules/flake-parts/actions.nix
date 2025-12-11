@@ -261,6 +261,7 @@ in
                 "with" = {
                   ref = "\${{ github.head_ref || github.ref_name }}";
                   token = "\${{ secrets.PAT }}";
+                  fetch-depth = 2;
                 };
               }
             )
