@@ -1,0 +1,71 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "github-actions": {
+    "enabled": false
+  },
+  "nix": {
+    "enabled": true
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 1am"],
+    "commitMessageAction": "update",
+    "prBodyDefinitions": {
+      "Change": "All flake inputs updated"
+    }
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/modules/flake-parts/actions\\.nix$/"
+      ],
+      "matchStrings": [
+        "\"(?<depName>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@(?<currentDigest>[a-f0-9]+)\";\\s*#\\s*(?<currentValue>v?[\\d.]+)"
+      ],
+      "datasourceTemplate": "github-tags",
+      "autoReplaceStringTemplate": "\"{{{depName}}}@{{{newDigest}}}\"; # {{{newValue}}}"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": [
+        "custom.regex"
+      ],
+      "matchDatasources": [
+        "github-tags"
+      ],
+      "automerge": false,
+      "pinDigests": true,
+      "commitMessagePrefix": "chore(actions):"
+    },
+    {
+      "matchManagers": [
+        "nix"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "rebase",
+      "commitMessagePrefix": "chore(flake):",
+      "prBodyNotes": [
+        "This PR updates nix flake inputs."
+      ]
+    },
+    {
+      "matchUpdateTypes": [
+        "lockFileMaintenance"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "rebase",
+      "commitMessagePrefix": "chore(flake):",
+      "addLabels": [
+        "dependencies",
+        "automated"
+      ]
+    }
+  ]
+}
