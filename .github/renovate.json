@@ -3,6 +3,9 @@
   "extends": [
     "config:recommended"
   ],
+  "gitIgnoredAuthors": [
+    "bernardo+hatesegfault@meurer.org"
+  ],
   "github-actions": {
     "enabled": false
   },
