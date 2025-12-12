@@ -40,6 +40,11 @@ jobs:
         git add .github/workflows/
         git diff --staged --quiet || git commit --amend --no-edit
         git push --force-with-lease
+    - uses: peter-evans/enable-pull-request-automerge@a660677d5469627102a1c1e11409dd063606628d
+      with:
+        merge-method: rebase
+        pull-request-number: ${{ github.event.pull_request.number }}
+        token: ${{ secrets.PAT }}
     timeout-minutes: 60
 name: regenerate-workflows
 'on':
@@ -50,3 +55,4 @@ name: regenerate-workflows
   workflow_dispatch: {}
 permissions:
   contents: write
+  pull-requests: write
