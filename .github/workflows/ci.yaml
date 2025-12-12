@@ -21,7 +21,7 @@ jobs:
           always-allow-substitutes = true
           builders-use-substitutes = true
           max-jobs = auto
-    - uses: actions/cache@a7833574556fa59680c1b7cb190c1735db73ebf0
+    - uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb
       with:
         key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('flake.lock')
           }}
@@ -90,7 +90,7 @@ jobs:
           always-allow-substitutes = true
           builders-use-substitutes = true
           max-jobs = auto
-    - uses: actions/cache@a7833574556fa59680c1b7cb190c1735db73ebf0
+    - uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb
       with:
         key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('flake.lock')
           }}
@@ -133,7 +133,7 @@ jobs:
           always-allow-substitutes = true
           builders-use-substitutes = true
           max-jobs = auto
-    - uses: actions/cache@a7833574556fa59680c1b7cb190c1735db73ebf0
+    - uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb
       with:
         key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('flake.lock')
           }}
@@ -188,7 +188,7 @@ jobs:
           always-allow-substitutes = true
           builders-use-substitutes = true
           max-jobs = auto
-    - uses: actions/cache@a7833574556fa59680c1b7cb190c1735db73ebf0
+    - uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb
       with:
         key: nix-eval-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('flake.lock')
           }}
