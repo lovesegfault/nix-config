@@ -50,6 +50,12 @@
 
       bind space next-window
       bind bspace previous-window
+
+      # C-b C-b for previous window, C-n C-n for next window (no prefix needed)
+      bind -n C-b switch-client -T ctrl-b-table
+      bind -T ctrl-b-table C-b previous-window
+      bind -n C-n switch-client -T ctrl-n-table
+      bind -T ctrl-n-table C-n next-window
       bind enter next-layout
 
       bind v  split-window -h -c "#{pane_current_path}"
