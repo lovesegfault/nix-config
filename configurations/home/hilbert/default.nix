@@ -27,6 +27,9 @@ in
   };
 
   programs = {
+    atuin = {
+      settings.auto_sync = lib.mkForce true;
+    };
     bash = {
       bashrcExtra = ''
         if [ -f /etc/bashrc ]; then
