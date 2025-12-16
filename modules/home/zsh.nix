@@ -51,7 +51,6 @@
     ];
     envExtra = ''
       export LESSHISTFILE="${config.xdg.dataHome}/less_history"
-      export CARGO_HOME="${config.xdg.cacheHome}/cargo"
     '';
     initContent = lib.mkMerge [
       # Workaround for home-manager#2562: completions from home.packages aren't in fpath
