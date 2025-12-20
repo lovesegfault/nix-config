@@ -59,10 +59,7 @@ in
     fwupd.daemonSettings.EspLocation = config.boot.loader.efi.efiSysMountPoint;
   };
 
-  system = {
-    rebuild.enableNg = true;
-    stateVersion = lib.mkDefault "25.11";
-  };
+  system.stateVersion = lib.mkDefault "25.11";
 
   systemd = {
     network.wait-online.anyInterface = true;
