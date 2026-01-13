@@ -1,12 +1,12 @@
 final: prev: {
-  transmission_4 = prev.transmission_4.overrideAttrs (old: {
-    version = "unstable-2025-11-02";
+  transmission_4 = prev.transmission_4.overrideAttrs (old: rec {
+    version = "4.1.0-beta.5";
 
     src = final.fetchFromGitHub {
       owner = "transmission";
       repo = "transmission";
-      rev = "90b52bc65cbe0e406642937f6c7a5b84acd95030";
-      hash = "sha256-gBwdQl1zw1ncCgFW5IQmYGcdts9i5EZ6nCWvyyTjvzk=";
+      rev = version;
+      hash = "sha256-zl1S5fmSXcDB3cYJk89DpMVi7pCptaShpm9hMXBIWWU=";
       fetchSubmodules = true;
     };
 
