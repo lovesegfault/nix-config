@@ -74,7 +74,6 @@ jobs:
           runsOn: ubuntu-22.04-arm
     timeout-minutes: 60
   build-darwin-host:
-    if: '1'
     name: ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
     needs:
     - build-linux-builder
@@ -118,7 +117,6 @@ jobs:
           runsOn: macos-15
     timeout-minutes: 60
   build-linux-builder:
-    if: '1'
     name: linux-builder for ${{ matrix.attrs.name }} (${{ matrix.attrs.equivalentLinuxPlatform
       }})
     runs-on: ${{ matrix.attrs.equivalentLinuxRunner }}

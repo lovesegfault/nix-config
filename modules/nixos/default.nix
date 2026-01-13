@@ -29,7 +29,6 @@ in
     useUserPackages = true;
     extraSpecialArgs = { inherit flake; };
     sharedModules = [
-      inputs.impermanence.homeManagerModules.impermanence
       inputs.nix-index-database.homeModules.nix-index
       inputs.nixvim.homeModules.nixvim
       self.homeModules.default

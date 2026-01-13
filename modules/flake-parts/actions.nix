@@ -189,31 +189,6 @@ in
             steps = setupSteps ++ [ (steps.nix-fast-build "\${{ matrix.attrs.attr }}") ];
           };
 
-          # Build linux-builder for nix-darwin hosts (cross-compile on Linux)
-          build-linux-builder = {
-            name = "linux-builder for \${{ matrix.attrs.name }} (\${{ matrix.attrs.equivalentLinuxPlatform }})";
-            "if" = toString (lib.length darwinHosts > 0);
-            strategy = {
-              fail-fast = false;
-              matrix.attrs = darwinHosts;
-            };
-            runs-on = "\${{ matrix.attrs.equivalentLinuxRunner }}";
-            steps = setupSteps ++ [ (steps.nix-fast-build "\${{ matrix.attrs.linuxBuilderAttr }}") ];
-          };
-
-          # Build nix-darwin hosts (after linux-builder)
-          build-darwin-host = {
-            name = "\${{ matrix.attrs.name }} (\${{ matrix.attrs.hostPlatform }})";
-            "if" = toString (lib.length darwinHosts > 0);
-            needs = [ "build-linux-builder" ];
-            strategy = {
-              fail-fast = false;
-              matrix.attrs = darwinHosts;
-            };
-            runs-on = "\${{ matrix.attrs.runsOn }}";
-            steps = setupSteps ++ [ (steps.nix-fast-build "\${{ matrix.attrs.attr }}") ];
-          };
-
           # Final check job - aggregates all results
           check = {
             runs-on = "ubuntu-24.04";
@@ -234,7 +209,31 @@ in
               }
             ];
           };
-        };
+        }
+        // (lib.optionalAttrs (lib.length darwinHosts > 0) {
+          # Build linux-builder for nix-darwin hosts (cross-compile on Linux)
+          build-linux-builder = {
+            name = "linux-builder for \${{ matrix.attrs.name }} (\${{ matrix.attrs.equivalentLinuxPlatform }})";
+            strategy = {
+              fail-fast = false;
+              matrix.attrs = darwinHosts;
+            };
+            runs-on = "\${{ matrix.attrs.equivalentLinuxRunner }}";
+            steps = setupSteps ++ [ (steps.nix-fast-build "\${{ matrix.attrs.linuxBuilderAttr }}") ];
+          };
+
+          # Build nix-darwin hosts (after linux-builder)
+          build-darwin-host = {
+            name = "\${{ matrix.attrs.name }} (\${{ matrix.attrs.hostPlatform }})";
+            needs = [ "build-linux-builder" ];
+            strategy = {
+              fail-fast = false;
+              matrix.attrs = darwinHosts;
+            };
+            runs-on = "\${{ matrix.attrs.runsOn }}";
+            steps = setupSteps ++ [ (steps.nix-fast-build "\${{ matrix.attrs.attr }}") ];
+          };
+        });
       };
 
       # Regenerate workflows for Renovate PRs or manual trigger
