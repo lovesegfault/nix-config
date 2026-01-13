@@ -30,6 +30,10 @@ in
         umask = 0;
         rpc-whitelist = "127.0.0.1,100.*.*.*";
         rpc-host-whitelist = "${hostName},${hostName}.meurer.org,transmission.${hostName}.meurer.org";
+        download_queue_size = 15;
+        queue_stalled_minutes = 5;
+        ratio_limit = 3.0;
+        ratio_limit_enabled = true;
       };
     };
     nginx.virtualHosts."transmission.${hostName}.meurer.org" = {
