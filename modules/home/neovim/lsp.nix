@@ -9,7 +9,7 @@
   dependencies.rust-analyzer.enable = false;
 
   extraPackages = with pkgs; [
-    nixfmt-rfc-style
+    nixfmt
   ];
 
   # XXX: The upstream crates-nvim module doesn't support the in-process LSP, so
