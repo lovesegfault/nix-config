@@ -49,11 +49,11 @@ in
   # Host-specific configuration
   boot = {
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages_6_17; # FIXME: move back to _latest once zfs supports it
+    kernelPackages = pkgs.linuxPackages_6_18;
     kernelParams = [ "rfkill.default_state=0" ];
     lanzaboote.pkiBundle = lib.mkForce "/var/lib/sbctl";
     tmp.useTmpfs = true;
-    zfs.package = pkgs.zfs_unstable;
+    zfs.package = pkgs.zfs_2_4;
   };
 
   console = {
@@ -65,7 +65,7 @@ in
   environment.systemPackages = with pkgs; [
     dig
     smartmontools
-    zfs_unstable
+    config.boot.zfs.package
   ];
 
   hardware.enableRedistributableFirmware = true;
