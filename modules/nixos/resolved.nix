@@ -1,4 +1,3 @@
-# systemd-resolved configuration - NixOS only
 { lib, ... }:
 {
   networking = {
@@ -14,18 +13,18 @@
 
   services.resolved = {
     enable = true;
-    dnssec = "allow-downgrade";
-    fallbackDns = [
-      "1.1.1.1"
-      "2606:4700:4700::1111"
-      "8.8.8.8"
-      "2001:4860:4860::8844"
-    ];
-    llmnr = "true";
-    extraConfig = ''
-      Domains=~.
-      MulticastDNS=true
-    '';
+    settings.Resolve = {
+      DNSSEC = "allow-downgrade";
+      Domains = "~.";
+      LLMNR = "true";
+      MulticastDNS = true;
+      FallbackDns = [
+        "1.1.1.1"
+        "2606:4700:4700::1111"
+        "8.8.8.8"
+        "2001:4860:4860::8844"
+      ];
+    };
   };
 
   system.nssDatabases.hosts = lib.mkMerge [
