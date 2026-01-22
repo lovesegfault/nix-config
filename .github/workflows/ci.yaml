@@ -11,7 +11,7 @@ jobs:
     name: ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
     runs-on: ${{ matrix.attrs.runsOn }}
     steps:
-    - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       with:
         persist-credentials: false
     - uses: DeterminateSystems/nix-installer-action@c5a866b6ab867e88becbed4467b93592bce69f8a
@@ -79,7 +79,7 @@ jobs:
     - build-linux-builder
     runs-on: ${{ matrix.attrs.runsOn }}
     steps:
-    - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       with:
         persist-credentials: false
     - uses: DeterminateSystems/nix-installer-action@c5a866b6ab867e88becbed4467b93592bce69f8a
@@ -121,7 +121,7 @@ jobs:
       }})
     runs-on: ${{ matrix.attrs.equivalentLinuxRunner }}
     steps:
-    - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       with:
         persist-credentials: false
     - uses: DeterminateSystems/nix-installer-action@c5a866b6ab867e88becbed4467b93592bce69f8a
@@ -176,7 +176,7 @@ jobs:
     name: flake check (${{ matrix.systems.platform }})
     runs-on: ${{ matrix.systems.os }}
     steps:
-    - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       with:
         persist-credentials: false
     - uses: DeterminateSystems/nix-installer-action@c5a866b6ab867e88becbed4467b93592bce69f8a
