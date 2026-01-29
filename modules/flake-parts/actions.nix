@@ -59,7 +59,7 @@ let
   actions = {
     alls-green = "re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe"; # v1.2.2
     automerge = "peter-evans/enable-pull-request-automerge@a660677d5469627102a1c1e11409dd063606628d"; # v3.0.0
-    cache = "actions/cache@8b402f58fbc84540c8b491a91e594a4576fec3d7"; # v5.0.2
+    cache = "actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306"; # v5.0.3
     cachix = "cachix/cachix-action@3ba601ff5bbb07c7220846facfa2cd81eeee15a1"; # v16
     checkout = "actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd"; # v6.0.2
     nix-installer = "DeterminateSystems/nix-installer-action@c5a866b6ab867e88becbed4467b93592bce69f8a"; # v21
