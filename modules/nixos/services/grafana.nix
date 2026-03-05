@@ -1,6 +1,12 @@
 { config, ... }:
 with config.networking;
 {
+  age.secrets.grafanaSecretKey = {
+    rekeyFile = ../../../secrets/grafana-secret-key.age;
+    owner = "grafana";
+    group = "grafana";
+  };
+
   environment.persistence."/nix/state".directories = [
     {
       directory = "/var/lib/grafana";
@@ -16,6 +22,7 @@ with config.networking;
       enable = true;
       provision.enable = true;
       settings = {
+        security.secret_key = "$__file{${config.age.secrets.grafanaSecretKey.path}}";
         server = {
           http_addr = "127.0.0.1";
           domain = "grafana.${hostName}.meurer.org";
