@@ -5,9 +5,10 @@
 #   - subdirectory files: subdir/foo.nix -> subdir-foo
 #   - directories with default.nix: subdir/ -> subdir (imports default.nix)
 # Shared modules are exposed under all outputs (nixos, darwin, home)
-{ inputs, ... }:
+{ inputs, moduleLocation, ... }:
 let
   inherit (inputs.nixpkgs) lib;
+  inherit (lib) mapAttrs mkOption types;
 
   # Recursively discover modules in a directory
   # Returns an attrset of { name = path; }
@@ -55,7 +56,38 @@ let
   flakeModulesDiscovered = discoverModules ../../modules/flake-parts "";
 in
 {
-  flake = {
+  # flake-parts only defines `flake.nixosModules` with a `deferredModule` type
+  # that wraps paths into attrsets. Define matching options for darwin/home so
+  # the raw paths we discover get the same treatment (fixes Determinate Nix's
+  # `isFunctionOrAttrs` schema check in `nix flake check`).
+  options.flake = {
+    darwinModules = mkOption {
+      type = types.lazyAttrsOf types.deferredModule;
+      default = { };
+      apply = mapAttrs (
+        k: v: {
+          _class = "darwin";
+          _file = "${toString moduleLocation}#darwinModules.${k}";
+          imports = [ v ];
+        }
+      );
+      description = "nix-darwin modules.";
+    };
+    homeModules = mkOption {
+      type = types.lazyAttrsOf types.deferredModule;
+      default = { };
+      apply = mapAttrs (
+        k: v: {
+          _class = "homeManager";
+          _file = "${toString moduleLocation}#homeModules.${k}";
+          imports = [ v ];
+        }
+      );
+      description = "Home Manager modules.";
+    };
+  };
+
+  config.flake = {
     flakeModules = flakeModulesDiscovered;
     nixosModules = sharedModulesDiscovered // nixosModulesDiscovered;
     darwinModules = sharedModulesDiscovered // darwinModulesDiscovered;
