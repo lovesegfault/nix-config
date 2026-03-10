@@ -123,9 +123,7 @@ in
         "hybrid-sleep.target"
       ];
     };
-    sleep.extraConfig = ''
-      HibernateMode=shutdown
-    '';
+    sleep.settings.Sleep.HibernateMode = "shutdown";
     tmpfiles.rules = [ "w /sys/power/image_size - - - - 0" ];
   };
 }
