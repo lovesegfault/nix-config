@@ -60,7 +60,7 @@ in
         source /root/code/config/remote/zshrc
       '')
       (lib.mkOrder 99999 ''
-        export PATH="/root/.local/state/nix/profile/bin:$PATH"
+        export PATH="/root/.local/bin-overrides:/root/.local/state/nix/profile/bin:$PATH"
         unsetopt EXTENDED_GLOB
       '')
     ];
