@@ -31,6 +31,7 @@ in
     self.nixosModules.services-nginx
     self.nixosModules.services-oauth2
     self.nixosModules.services-prometheus
+    self.nixosModules.services-jellyfin
 
     # Host-specific files
     ./disko.nix
@@ -112,6 +113,28 @@ in
       ];
       extraConfig = "allow 10.0.0.0/24";
     };
+    jellyfin = {
+      hardwareAcceleration = {
+        enable = true;
+        device = "/dev/dri/renderD129";
+        type = "nvenc";
+      };
+      transcoding = {
+        enableHardwareEncoding = true;
+        enableToneMapping = true;
+        hardwareDecodingCodecs = {
+          h264 = true;
+          hevc = true;
+          av1 = true;
+          vp8 = true;
+          vp9 = true;
+        };
+        hardwareEncodingCodecs = {
+          hevc = true;
+          av1 = true;
+        };
+      };
+    };
     nginx.resolver.addresses = [ "127.0.0.1:5335" ];
     fwupd.enable = true;
     smartd.enable = true;
@@ -142,6 +165,7 @@ in
     members = [
       "bemeurer"
       config.services.syncthing.user
+      config.services.jellyfin.user
     ];
   };
 
