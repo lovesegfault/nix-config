@@ -36,6 +36,7 @@ in
       hegel = mkNixos (self + "/configurations/nixos/hegel");
       jung = mkNixos (self + "/configurations/nixos/jung");
       plato = mkNixos (self + "/configurations/nixos/plato");
+      putnam = mkNixos (self + "/configurations/nixos/putnam");
       spinoza = mkNixos (self + "/configurations/nixos/spinoza");
     };
 
