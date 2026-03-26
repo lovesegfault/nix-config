@@ -35,6 +35,9 @@ in
 
   home = {
     stateVersion = lib.mkDefault "25.11";
+    sessionPath = [
+      "$HOME/.local/bin"
+    ];
     sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
     packages = lib.filter (lib.meta.availableOn pkgs.stdenv.hostPlatform) (
       with pkgs;
