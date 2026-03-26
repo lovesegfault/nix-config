@@ -33,7 +33,7 @@ in
           "nix-command"
         ];
         connect-timeout = 5;
-        http-connections = 0;
+        http-connections = 32;
         flake-registry = "/etc/nix/registry.json";
         always-allow-substitutes = true;
         impure-env = [ "NIXPKGS_ALLOW_UNFREE" ];
