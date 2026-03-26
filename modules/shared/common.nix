@@ -20,7 +20,7 @@ in
     }
     (lib.optionalAttrs (!isDarwin) {
       dev.enable = true;
-      man.generateCaches = true;
+      man.cache.enable = true;
     })
   ];
 
