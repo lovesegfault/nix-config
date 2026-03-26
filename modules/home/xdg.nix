@@ -5,6 +5,7 @@
     mimeApps.enable = pkgs.stdenv.isLinux;
     userDirs = {
       enable = pkgs.stdenv.isLinux;
+      setSessionVariables = true;
       desktop = "$HOME/opt";
       documents = "$HOME/doc";
       download = "$HOME/tmp";
