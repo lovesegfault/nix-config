@@ -73,17 +73,54 @@ in
     nftables.enable = true;
   };
 
-  nix.settings = {
-    download-buffer-size = 268435456; # 256MiB
-    max-jobs = lib.mkForce 64;
-    max-substitution-jobs = 32;
-    system-features = [
-      "benchmark"
-      "nixos-test"
-      "big-parallel"
-      "kvm"
-      "gccarch-znver5"
+  nix = {
+    settings = {
+      download-buffer-size = 268435456; # 256MiB
+      max-jobs = lib.mkForce 64;
+      max-substitution-jobs = 32;
+      system-features = [
+        "benchmark"
+        "nixos-test"
+        "big-parallel"
+        "kvm"
+        "gccarch-znver5"
+      ];
+    };
+    buildMachines = [
+      {
+        hostName = "putnam";
+        system = "aarch64-linux";
+        protocol = "ssh-ng";
+        sshUser = "root";
+        sshKey = "/etc/ssh/ssh_host_ed25519_key";
+        maxJobs = 192;
+        speedFactor = 2;
+        supportedFeatures = [
+          "benchmark"
+          "big-parallel"
+          "kvm"
+          "nixos-test"
+          "gccarch-neoverse-v2"
+        ];
+      }
     ];
+  };
+
+  programs.ssh = {
+    extraConfig = ''
+      Host putnam
+        HostName ip-172-31-40-156.ec2.internal
+        User root
+        IdentitiesOnly yes
+        IdentityFile /etc/ssh/ssh_host_ed25519_key
+    '';
+    knownHosts.putnam = {
+      hostNames = [
+        "putnam"
+        "ip-172-31-40-156.ec2.internal"
+      ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDjT1p1pwoQ48meY+qSOICOaEEFnA9fZd3UPvCsa/Orw";
+    };
   };
 
   powerManagement.cpuFreqGovernor = "performance";

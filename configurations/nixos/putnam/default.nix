@@ -1,4 +1,4 @@
-# AWS EC2 instance (Graviton 4 / c8gd.metal-48xl) used as a remote builder.
+# AWS EC2 instance (Graviton 4 / c8g.metal-48xl) used as a remote builder.
 # Key differences from physical hosts:
 #   - Uses amazon-image.nix for EC2-specific configuration
 #   - networking.hostName is set dynamically by EC2, not in this config
@@ -157,5 +157,11 @@ in
   time.timeZone = "America/New_York";
 
   age.secrets.rootPassword.rekeyFile = ../../../secrets/putnam-root-password.age;
-  users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
+  users.users.root = {
+    hashedPasswordFile = config.age.secrets.rootPassword.path;
+    # Allow comte to dispatch aarch64 builds here
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdXiTjpN4zgnC8x9d0LLhWwKLohHkPchuORcus0zWAa root@comte"
+    ];
+  };
 }
