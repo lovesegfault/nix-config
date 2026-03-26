@@ -85,6 +85,8 @@ in
 
   powerManagement.cpuFreqGovernor = "performance";
 
+  programs.nix-ld.enable = true;
+
   stylix.targets.grub.enable = false;
 
   systemd.network.networks.ens130 = {
