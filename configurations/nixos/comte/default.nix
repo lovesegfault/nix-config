@@ -57,6 +57,8 @@ in
 
   environment.persistence."/nix/state".enable = false;
 
+  environment.systemPackages = with pkgs; [ awscli2 ];
+
   hardware.enableRedistributableFirmware = true;
 
   # agenix-rekey host pubkey (localStorageDir override since hostName is not set)
