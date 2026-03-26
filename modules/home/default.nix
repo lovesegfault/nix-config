@@ -1,6 +1,7 @@
 # Shared home-manager configuration for all platforms
 # External modules (impermanence, nix-index-database, nixvim, stylix) are imported in configurations/
 {
+  config,
   flake,
   lib,
   osConfig ? null,
@@ -84,6 +85,8 @@ in
     ripgrep.enable = true;
     zoxide.enable = true;
   };
+
+  gtk.gtk4.theme = config.gtk.theme;
 
   stylix.targets = {
     # Only enable GNOME/GTK when integrated with NixOS (not standalone home-manager)
