@@ -103,7 +103,10 @@ in
   # etserver forks user shells, so those shells inherit these restrictions —
   # options that would break interactive sessions (ProtectSystem, ProtectHome,
   # MemoryDenyWriteExecute, tight capability bounding) are deliberately
-  # omitted.
+  # omitted. PrivateTmp is also omitted: etserver writes the SSH agent
+  # forwarding socket to /tmp, and the user session (handed off to logind)
+  # lands outside the service's mount namespace, so SSH_AUTH_SOCK would point
+  # to a path that doesn't exist from the shell's view.
   systemd.services.eternal-terminal.serviceConfig =
     let
       etCfg = config.services.eternal-terminal;
@@ -120,7 +123,6 @@ in
     {
       Type = lib.mkForce "exec";
       ExecStart = lib.mkForce "${pkgs.eternal-terminal}/bin/etserver --logtostdout --cfgfile=${cfgFile}";
-      PrivateTmp = true;
       ProtectClock = true;
       ProtectControlGroups = true;
       ProtectHostname = true;
