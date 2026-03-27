@@ -37,10 +37,7 @@ in
   ];
 
   # Host-specific home-manager config
-  home-manager = {
-    verbose = true;
-    users.bemeurer.imports = [ self.homeModules.music ];
-  };
+  home-manager.users.bemeurer.imports = [ self.homeModules.music ];
 
   # SSH target for remote activation
 
