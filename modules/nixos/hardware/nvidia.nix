@@ -24,6 +24,4 @@
       open = true;
     };
   };
-
-  virtualisation.docker.enableNvidia = true;
 }
