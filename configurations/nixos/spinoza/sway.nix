@@ -2,6 +2,10 @@
 {
   programs.sway.enable = true;
 
+  # Set via pam_env so GDM-launched sessions inherit it. extraSessionCommands
+  # would bake it into the sway wrapper and break the sandbox config check.
+  environment.sessionVariables.WLR_RENDERER = "vulkan";
+
   home-manager.users.bemeurer = {
     wayland.windowManager.sway = {
       config = {
