@@ -43,7 +43,7 @@ in
     hashedPasswordFile = config.age.secrets.rootPassword.path;
     # Allow comte to dispatch aarch64 builds here
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdXiTjpN4zgnC8x9d0LLhWwKLohHkPchuORcus0zWAa root@comte"
+      ''command="nix-daemon --stdio",restrict ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdXiTjpN4zgnC8x9d0LLhWwKLohHkPchuORcus0zWAa root@comte''
     ];
   };
 }
