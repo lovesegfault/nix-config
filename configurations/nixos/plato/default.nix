@@ -43,8 +43,6 @@ in
   nixpkgs.hostPlatform = "x86_64-linux";
 
   # Host-specific configuration
-  age.secrets.rootPassword.rekeyFile = ../../../secrets/plato-root-password.age;
-
   boot = {
     initrd = {
       availableKernelModules = [
@@ -70,7 +68,6 @@ in
       };
     };
     kernelModules = [ "kvm-amd" ];
-    tmp.useTmpfs = true;
     zfs.requestEncryptionCredentials = lib.mkForce [ ];
   };
 
@@ -82,12 +79,9 @@ in
   # agenix-rekey host pubkey
   age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDMExNPuG3+sl9qozno4cTmPEJSH8GGhoaReQsnpFaih";
 
-  hardware.enableRedistributableFirmware = true;
-
   networking = {
     hostId = "e4c9bd10";
     hostName = "plato";
-    nftables.enable = true;
   };
 
   nix = {
@@ -184,8 +178,6 @@ in
     };
   };
 
-  powerManagement.cpuFreqGovernor = "performance";
-
   systemd.network.networks = {
     eth0 = {
       enable = false;
@@ -202,14 +194,11 @@ in
 
   time.timeZone = "Etc/UTC";
 
-  users = {
-    users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
-    groups.media.members = [
-      "bemeurer"
-      config.services.syncthing.user
-      config.services.jellyfin.user
-    ];
-  };
+  users.groups.media.members = [
+    "bemeurer"
+    config.services.syncthing.user
+    config.services.jellyfin.user
+  ];
 
   virtualisation = {
     containers = {

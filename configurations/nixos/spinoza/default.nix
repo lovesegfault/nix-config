@@ -1,7 +1,6 @@
 # NixOS configuration for spinoza
 {
   flake,
-  config,
   lib,
   pkgs,
   ...
@@ -155,8 +154,6 @@ in
     };
   };
 
-  nix.settings.max-substitution-jobs = 32;
-
   security.sudo-rs.wheelNeedsPassword = true;
 
   services = {
@@ -231,7 +228,4 @@ in
   ];
 
   swapDevices = [ { device = "/dev/disk/by-uuid/898fb6e1-bba3-40ce-8f79-8deb2e2d4f37"; } ];
-
-  age.secrets.rootPassword.rekeyFile = ../../../secrets/spinoza-root-password.age;
-  users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
 }

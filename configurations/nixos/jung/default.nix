@@ -52,17 +52,12 @@ in
     kernel.sysctl."vm.swappiness" = 1;
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    tmp.useTmpfs = true;
     swraid.enable = true;
   };
 
   environment.etc."mdadm.conf".text = "MAILADDR bernardo@meurer.org";
 
-  console = {
-    font = "ter-v28n";
-    keyMap = "us";
-    packages = with pkgs; [ terminus_font ];
-  };
+  console.font = "ter-v28n";
 
   fileSystems = {
     "/" = {
@@ -111,14 +106,12 @@ in
   # agenix-rekey host pubkey
   age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHws1wwXYHDmU+Bjcbw8IZv2V+fbxaTDQc44XoUQ604t";
 
-  hardware = {
-    enableRedistributableFirmware = true;
-    graphics.enable = true;
-  };
+  hardware.graphics.enable = true;
 
   networking = {
     hostId = "55a088f6";
     hostName = "jung";
+    nftables.enable = false;
     wireless.iwd.enable = true;
   };
 
@@ -129,7 +122,6 @@ in
       options = "-d";
     };
     settings = {
-      max-substitution-jobs = 32;
       system-features = [
         "nixos-test"
         "benchmark"
@@ -139,8 +131,6 @@ in
       ];
     };
   };
-
-  powerManagement.cpuFreqGovernor = "performance";
 
   services = {
     fwupd.enable = true;
@@ -197,9 +187,6 @@ in
       config.services.syncthing.user
     ];
   };
-
-  age.secrets.rootPassword.rekeyFile = ../../../secrets/jung-root-password.age;
-  users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
 
   virtualisation = {
     containers.containersConf.settings.engine.helper_binaries_dir = [ "${pkgs.netavark}/bin" ];

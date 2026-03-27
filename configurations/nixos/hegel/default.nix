@@ -51,15 +51,10 @@ in
     kernelPackages = pkgs.linuxPackages_6_18;
     kernelParams = [ "rfkill.default_state=0" ];
     lanzaboote.pkiBundle = lib.mkForce "/var/lib/sbctl";
-    tmp.useTmpfs = true;
     zfs.package = pkgs.zfs_2_4;
   };
 
-  console = {
-    font = "ter-v28n";
-    keyMap = "us";
-    packages = with pkgs; [ terminus_font ];
-  };
+  console.font = "ter-v28n";
 
   environment.systemPackages = with pkgs; [
     dig
@@ -67,15 +62,12 @@ in
     config.boot.zfs.package
   ];
 
-  hardware.enableRedistributableFirmware = true;
-
   # agenix-rekey host pubkey
   age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbG3jf2G3BJCIiL51Kfa9gfXGLiyU71IwW0siMQtf+7";
 
   networking = {
     hostId = "65618eec";
     hostName = "hegel";
-    nftables.enable = true;
     tailscaleAddress = "100.109.168.118";
   };
 
@@ -85,9 +77,7 @@ in
       options = "-d";
     };
     settings = {
-      download-buffer-size = 268435456;
       max-jobs = lib.mkForce 12;
-      max-substitution-jobs = 32;
       system-features = [
         "benchmark"
         "nixos-test"
@@ -97,8 +87,6 @@ in
       ];
     };
   };
-
-  powerManagement.cpuFreqGovernor = "performance";
 
   services = {
     chrony = {
@@ -166,9 +154,6 @@ in
       config.services.jellyfin.user
     ];
   };
-
-  age.secrets.rootPassword.rekeyFile = ../../../secrets/hegel-root-password.age;
-  users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
 
   virtualisation = {
     containers = {

@@ -42,22 +42,11 @@ in
   nixpkgs.hostPlatform = "aarch64-linux";
 
   # Host-specific configuration
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    tmp.useTmpfs = true;
-  };
-
-  console = {
-    font = "ter-v24n";
-    keyMap = "us";
-    packages = with pkgs; [ terminus_font ];
-  };
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   environment.persistence."/nix/state".enable = false;
 
   environment.systemPackages = with pkgs; [ awscli2 ];
-
-  hardware.enableRedistributableFirmware = true;
 
   # agenix-rekey host pubkey (localStorageDir override since hostName is not set)
   age.rekey = {
@@ -65,15 +54,10 @@ in
     localStorageDir = self + "/secrets/rekeyed/putnam";
   };
 
-  networking = {
-    hostId = "a8f2c7d1";
-    nftables.enable = true;
-  };
+  networking.hostId = "a8f2c7d1";
 
   nix.settings = {
-    download-buffer-size = 268435456; # 256MiB
     max-jobs = lib.mkForce 192;
-    max-substitution-jobs = 32;
     system-features = [
       "benchmark"
       "nixos-test"
@@ -82,8 +66,6 @@ in
       "gccarch-neoverse-v2"
     ];
   };
-
-  powerManagement.cpuFreqGovernor = "performance";
 
   programs.nix-ld.enable = true;
 

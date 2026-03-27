@@ -47,20 +47,11 @@ in
   boot = {
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    tmp.useTmpfs = true;
-  };
-
-  console = {
-    font = "ter-v24n";
-    keyMap = "us";
-    packages = with pkgs; [ terminus_font ];
   };
 
   environment.persistence."/nix/state".enable = false;
 
   environment.systemPackages = with pkgs; [ awscli2 ];
-
-  hardware.enableRedistributableFirmware = true;
 
   # agenix-rekey host pubkey (localStorageDir override since hostName is not set)
   age.rekey = {
@@ -68,16 +59,11 @@ in
     localStorageDir = self + "/secrets/rekeyed/comte";
   };
 
-  networking = {
-    hostId = "ec21dbce";
-    nftables.enable = true;
-  };
+  networking.hostId = "ec21dbce";
 
   nix = {
     settings = {
-      download-buffer-size = 268435456; # 256MiB
       max-jobs = lib.mkForce 64;
-      max-substitution-jobs = 32;
       system-features = [
         "benchmark"
         "nixos-test"
@@ -122,8 +108,6 @@ in
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDjT1p1pwoQ48meY+qSOICOaEEFnA9fZd3UPvCsa/Orw";
     };
   };
-
-  powerManagement.cpuFreqGovernor = "performance";
 
   programs.nix-ld.enable = true;
 
