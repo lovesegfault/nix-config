@@ -44,6 +44,10 @@
 
       bind space next-window
       bind bspace previous-window
+
+      # Alt+h/l for prefix-less window navigation (Ctrl+hjkl is panes via vim-tmux-navigator)
+      bind -n M-h previous-window
+      bind -n M-l next-window
       bind enter next-layout
 
       bind v  split-window -h -c "#{pane_current_path}"
@@ -60,7 +64,7 @@
       bind + select-layout main-horizontal
       bind = select-layout main-vertical
 
-      bind a last-pane
+      bind ';' last-pane
       bind q display-panes
       bind c new-window
       bind t next-window

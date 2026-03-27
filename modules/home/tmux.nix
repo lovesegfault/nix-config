@@ -51,11 +51,9 @@
       bind space next-window
       bind bspace previous-window
 
-      # C-b C-b for previous window, C-n C-n for next window (no prefix needed)
-      bind -n C-b switch-client -T ctrl-b-table
-      bind -T ctrl-b-table C-b previous-window
-      bind -n C-n switch-client -T ctrl-n-table
-      bind -T ctrl-n-table C-n next-window
+      # Alt+h/l for prefix-less window navigation (Ctrl+hjkl is panes via vim-tmux-navigator)
+      bind -n M-h previous-window
+      bind -n M-l next-window
       bind enter next-layout
 
       bind v  split-window -h -c "#{pane_current_path}"
@@ -72,7 +70,7 @@
       bind + select-layout main-horizontal
       bind = select-layout main-vertical
 
-      bind a last-pane
+      bind ';' last-pane
       bind q display-panes
       bind c new-window
       bind t next-window
