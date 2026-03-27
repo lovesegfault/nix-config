@@ -37,8 +37,6 @@ in
     self.homeModules.trusted-graphical
   ];
 
-  # SSH target for remote activation
-
   # Platform
   nixpkgs.hostPlatform = "x86_64-linux";
 

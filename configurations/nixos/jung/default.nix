@@ -37,8 +37,6 @@ in
   # Host-specific home-manager user config
   home-manager.users.bemeurer.imports = [ self.homeModules.music ];
 
-  # SSH target for remote activation
-
   # Platform
   nixpkgs.hostPlatform = "x86_64-linux";
 
