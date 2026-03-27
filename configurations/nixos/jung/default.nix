@@ -128,6 +128,7 @@ in
     gc = {
       automatic = true;
       dates = "02:30";
+      options = "-d";
     };
     settings = {
       max-substitution-jobs = 32;
