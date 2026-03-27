@@ -1,5 +1,7 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
+  home.sessionVariables.LESSHISTFILE = "${config.xdg.dataHome}/less_history";
+
   xdg = {
     enable = true;
     mimeApps.enable = pkgs.stdenv.isLinux;
