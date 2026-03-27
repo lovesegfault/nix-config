@@ -3,7 +3,7 @@
   systemd.user.services.waybar.Service.Restart = lib.mkForce "always";
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar.override { pulseSupport = true; };
+    package = pkgs.waybar;
     settings.main = {
       gtk-layer-shell = true;
       layer = "top";
@@ -13,7 +13,7 @@
       ];
       modules-center = [ "clock" ];
       modules-right = [
-        "pulseaudio"
+        "wireplumber"
         "idle_inhibitor"
         "network"
         "temperature"
@@ -29,26 +29,14 @@
         format = ''<span style="italic">{}</span>'';
       };
 
-      pulseaudio = {
-        format = "{volume}% {icon} {format_source}";
-        format-bluetooth = "{volume}% {icon} {format_source}";
-        format-bluetooth-muted = " {icon} {format_source}";
-        format-muted = " {format_source}";
-        format-source = "{volume}% ";
-        format-source-muted = "";
-        format-icons = {
-          headphones = "";
-          handsfree = "󰋎";
-          headset = "󰋎";
-          phone = "";
-          portable = "";
-          car = "";
-          default = [
-            ""
-            ""
-            ""
-          ];
-        };
+      wireplumber = {
+        format = "{volume}% {icon}";
+        format-muted = "";
+        format-icons = [
+          ""
+          ""
+          ""
+        ];
         on-click = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
         on-scroll-up = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+";
         on-scroll-down = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-";
