@@ -76,7 +76,11 @@ in
     dbus.implementation = "broker";
     openssh = {
       enable = true;
-      settings.PermitRootLogin = lib.mkDefault "no";
+      settings = {
+        PermitRootLogin = lib.mkDefault "no";
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+      };
     };
     tailscale.enable = true;
     fwupd.daemonSettings.EspLocation = config.boot.loader.efi.efiSysMountPoint;
