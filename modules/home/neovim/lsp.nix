@@ -31,11 +31,7 @@
         lspBuf = {
           "ca" = "code_action";
           "gD" = "declaration";
-          "gd" = "definition";
           "K" = "hover";
-          "gi" = "implementation";
-          "gr" = "references";
-          "<space>D" = "type_definition";
           "<space>rn" = "rename";
         };
         extra = lib.mkMerge [
