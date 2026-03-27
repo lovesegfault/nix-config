@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   programs.bash = {
     enable = true;
@@ -16,6 +16,8 @@
         ln -sf "$SSH_AUTH_SOCK" "$CONST_SSH_SOCK"
         export SSH_AUTH_SOCK="$CONST_SSH_SOCK"
       fi
+
+      source <(${pkgs.nix-your-shell}/bin/nix-your-shell --nom bash)
     '';
   };
 }
