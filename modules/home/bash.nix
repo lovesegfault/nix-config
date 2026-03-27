@@ -18,6 +18,11 @@
       fi
 
       source <(${pkgs.nix-your-shell}/bin/nix-your-shell --nom bash)
+
+      # 1Password CLI
+      if [ -e "$HOME/.config/op/plugins.sh" ]; then
+        source "$HOME/.config/op/plugins.sh"
+      fi
     '';
   };
 }
