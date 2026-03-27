@@ -147,7 +147,6 @@ in
   networking = {
     hostId = "a8766d75";
     hostName = "spinoza";
-    wireguard.enable = true;
     wireless.iwd = {
       enable = true;
       settings.Rank = {
