@@ -1,6 +1,7 @@
 {
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     includes = [ "~/.ssh/config.host" ];
     matchBlocks = {
       "*" = {
