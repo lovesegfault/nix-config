@@ -27,7 +27,7 @@ in
         watch-dir = "/mnt/emp-watch";
         watch-dir-enabled = true;
         rpc-bind-address = "0.0.0.0";
-        umask = 0;
+        umask = 2;
         rpc-whitelist = "127.0.0.1,100.*.*.*";
         rpc-host-whitelist = "${hostName},${hostName}.meurer.org,transmission.${hostName}.meurer.org";
         download_queue_size = 15;
