@@ -1,17 +1,18 @@
 {
-  programs.mpv.enable = true;
+  programs.mpv = {
+    enable = true;
+    config = {
+      vo = "gpu";
+      hwdec = "auto";
+      profile = "high-quality";
 
-  xdg.configFile."mpv/mpv.conf".text = ''
-    vo=gpu
-    hwdec=auto
-    profile=gpu-hq
-
-    scale=ewa_lanczossharp
-    cscale=ewa_lanczossharp
-    video-sync=display-resample
-    interpolation
-    tscale=oversample
-  '';
+      scale = "ewa_lanczossharp";
+      cscale = "ewa_lanczossharp";
+      video-sync = "display-resample";
+      interpolation = true;
+      tscale = "oversample";
+    };
+  };
 
   xdg.mimeApps.defaultApplications = {
     "application/mxf" = "mpv.desktop";
