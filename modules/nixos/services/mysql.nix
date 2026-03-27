@@ -9,5 +9,6 @@
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
+    settings.mysqld.skip-networking = true;
   };
 }
