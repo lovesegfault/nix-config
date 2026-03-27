@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 {
   programs.sway.enable = true;
 
@@ -33,8 +33,8 @@
           };
         };
         startup = [
-          { command = "${lib.getExe pkgs.ponymix} -t source mute"; }
-          { command = "${lib.getExe pkgs.ponymix} -t sink mute"; }
+          { command = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1"; }
+          { command = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ 1"; }
         ];
       };
       extraConfig = ''

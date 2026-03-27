@@ -24,14 +24,18 @@ let
       "${modifier}+period" = "workspace next";
       "Mod1+Tab" = "workspace next";
       "Mod4+Tab" = "workspace prev";
-      "XF86AudioLowerVolume" = "exec --no-startup-id ${lib.getExe pkgs.ponymix} decrease 1";
-      "XF86AudioMicMute" = "exec --no-startup-id ${lib.getExe pkgs.ponymix} -t source toggle";
-      "XF86AudioMute" = "exec --no-startup-id ${lib.getExe pkgs.ponymix} -t sink toggle";
+      "XF86AudioLowerVolume" =
+        "exec --no-startup-id ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-";
+      "XF86AudioMicMute" =
+        "exec --no-startup-id ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+      "XF86AudioMute" =
+        "exec --no-startup-id ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
       "XF86AudioNext" = "exec --no-startup-id ${lib.getExe pkgs.playerctl} next";
       "XF86AudioPause" = "exec --no-startup-id ${lib.getExe pkgs.playerctl} pause";
       "XF86AudioPlay" = "exec --no-startup-id ${lib.getExe pkgs.playerctl} play";
       "XF86AudioPrev" = "exec --no-startup-id ${lib.getExe pkgs.playerctl} previous";
-      "XF86AudioRaiseVolume" = "exec --no-startup-id ${lib.getExe pkgs.ponymix} increase 1";
+      "XF86AudioRaiseVolume" =
+        "exec --no-startup-id ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+";
       "XF86MonBrightnessDown" = "exec --no-startup-id ${lib.getExe pkgs.brillo} -e -U 1";
       "XF86MonBrightnessUp" = "exec --no-startup-id ${lib.getExe pkgs.brillo} -e -A 1";
     };

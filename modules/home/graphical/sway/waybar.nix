@@ -49,9 +49,9 @@
             ""
           ];
         };
-        on-click = "${pkgs.ponymix}/bin/ponymix -t sink toggle";
-        on-scroll-up = "${pkgs.ponymix}/bin/ponymix increase 1";
-        on-scroll-down = "${pkgs.ponymix}/bin/ponymix decrease 1";
+        on-click = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+        on-scroll-up = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+";
+        on-scroll-down = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-";
       };
       idle_inhibitor = {
         format = "{icon}";
