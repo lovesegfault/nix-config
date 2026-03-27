@@ -16,12 +16,23 @@
           email = "bernardo@meurer.org";
           name = "Bernardo Meurer";
         };
+        branch.sort = "-committerdate";
         diff.colorMoved = "default";
         difftool.prompt = true;
+        fetch.prune = true;
         github.user = "lovesegfault";
         init.defaultBranch = "main";
         merge.conflictstyle = "diff3";
         mergetool.prompt = true;
+        push = {
+          autoSetupRemote = true;
+          followTags = true;
+        };
+        rebase = {
+          autoStash = true;
+          updateRefs = true;
+        };
+        rerere.enabled = true;
       };
     };
   };
