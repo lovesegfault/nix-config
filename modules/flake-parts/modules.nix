@@ -25,8 +25,8 @@ let
           nameWithoutNix = lib.removeSuffix ".nix" name;
           fullName = if prefix == "" then nameWithoutNix else "${prefix}-${nameWithoutNix}";
         in
-        if type == "regular" && lib.hasSuffix ".nix" name then
-          # .nix file -> export as module
+        if type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix" then
+          # .nix file -> export as module (default.nix handled by directory branch)
           { ${fullName} = path; }
         else if type == "directory" then
           let
