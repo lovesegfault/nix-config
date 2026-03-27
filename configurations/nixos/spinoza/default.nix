@@ -160,7 +160,7 @@ in
 
   nix.settings.max-substitution-jobs = 32;
 
-  security.sudo.wheelNeedsPassword = true;
+  security.sudo-rs.wheelNeedsPassword = true;
 
   services = {
     btrfs.autoScrub = {
