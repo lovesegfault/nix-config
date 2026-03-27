@@ -89,6 +89,11 @@ in
   system.stateVersion = lib.mkDefault "25.11";
 
   systemd = {
+    oomd = {
+      enable = true;
+      enableRootSlice = true;
+      enableUserSlices = true;
+    };
     network.wait-online.anyInterface = true;
     services.tailscaled = {
       after = [
