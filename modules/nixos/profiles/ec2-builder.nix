@@ -39,6 +39,16 @@ in
     systemPackages = with pkgs; [ awscli2 ];
   };
 
+  fileSystems."/nix/var/nix/builds" = {
+    device = "tmpfs";
+    fsType = "tmpfs";
+    options = [
+      "size=33%" # adjust for your situation and needs
+      "mode=700"
+      "huge=within_size"
+    ];
+  };
+
   programs.nix-ld.enable = true;
 
   stylix.targets.grub.enable = false;
