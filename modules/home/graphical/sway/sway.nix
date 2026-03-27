@@ -8,9 +8,6 @@
   wayland.windowManager.sway = {
     enable = true;
 
-    # https://github.com/nix-community/home-manager/issues/5311
-    checkConfig = false;
-
     config = {
       bars = [ ];
 
