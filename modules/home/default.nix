@@ -96,7 +96,5 @@ in
     xfce.enable = lib.mkDefault false;
   };
 
-  systemd.user.startServices = "sd-switch";
-
   xdg.configFile."nixpkgs/config.nix".text = "{ allowUnfree = true; }";
 }
