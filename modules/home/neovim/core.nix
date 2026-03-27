@@ -81,7 +81,7 @@
     }
     {
       action = ":tabclose<cr>";
-      key = "<leader>to";
+      key = "<leader>tq";
       options.desc = "Close the current tab";
     }
     {
