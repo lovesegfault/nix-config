@@ -46,18 +46,12 @@
 
       bind : command-prompt
       bind r refresh-client
-      bind L clear-history
-
-      bind space next-window
-      bind bspace previous-window
 
       # Alt+h/l for prefix-less window navigation (Ctrl+hjkl is panes via vim-tmux-navigator)
       bind -n M-h previous-window
       bind -n M-l next-window
-      bind enter next-layout
 
       bind v  split-window -h -c "#{pane_current_path}"
-      bind s  split-window -v -c "#{pane_current_path}"
       bind h  select-pane -L
       bind j  select-pane -D
       bind k  select-pane -U
@@ -73,8 +67,6 @@
       bind ';' last-pane
       bind q display-panes
       bind c new-window
-      bind t next-window
-      bind T previous-window
 
       bind [ copy-mode
       bind ] paste-buffer

@@ -25,33 +25,33 @@
       # update the env when attaching to an existing session
       set -g update-environment -r
 
-      set -ag terminal-overrides ",alacritty*:Tc,foot*:Tc,xterm-kitty*:Tc,xterm-256color:Tc"
+      set -g set-clipboard on
+      set -ag terminal-overrides ",alacritty*:Tc,foot*:Tc,xterm*:Tc"
 
-      set -as terminal-features ",alacritty*:RGB,foot*:RGB,xterm-kitty*:RGB"
-      set -as terminal-features ",alacritty*:hyperlinks,foot*:hyperlinks,xterm-kitty*:hyperlinks"
-      set -as terminal-features ",alacritty*:usstyle,foot*:usstyle,xterm-kitty*:usstyle"
+      set -as terminal-features ",alacritty*:RGB,foot*:RGB,xterm*:RGB"
+      set -as terminal-features ",alacritty*:hyperlinks,foot*:hyperlinks,xterm*:hyperlinks"
+      set -as terminal-features ",alacritty*:usstyle,foot*:usstyle,xterm*:usstyle"
+      set -as terminal-features ",alacritty*:extkeys,foot*:extkeys,xterm*:extkeys"
+      set -as terminal-features ",alacritty*:clipboard,foot*:clipboard,xterm*:clipboard"
+
+      # recommended by vim.health
+      set-option -g focus-events on
 
       # automatically renumber windows
       set -g renumber-windows on
 
       bind C-a last-window
       bind a send-prefix
-      bind R source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded..."
+      bind R source-file /etc/tmux.conf \; display-message "Config reloaded..."
 
       bind : command-prompt
       bind r refresh-client
-      bind L clear-history
-
-      bind space next-window
-      bind bspace previous-window
 
       # Alt+h/l for prefix-less window navigation (Ctrl+hjkl is panes via vim-tmux-navigator)
       bind -n M-h previous-window
       bind -n M-l next-window
-      bind enter next-layout
 
       bind v  split-window -h -c "#{pane_current_path}"
-      bind s  split-window -v -c "#{pane_current_path}"
       bind h  select-pane -L
       bind j  select-pane -D
       bind k  select-pane -U
@@ -67,8 +67,6 @@
       bind ';' last-pane
       bind q display-panes
       bind c new-window
-      bind t next-window
-      bind T previous-window
 
       bind [ copy-mode
       bind ] paste-buffer
