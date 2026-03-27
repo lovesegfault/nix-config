@@ -23,6 +23,7 @@ in
     self.nixosModules.hardware-fast-networking
     self.nixosModules.hardware-no-mitigations
     self.nixosModules.hardware-zfs
+    self.nixosModules.pam-limits
     self.nixosModules.services-nginx
     self.nixosModules.services-oauth2
     self.nixosModules.services-unbound
@@ -111,29 +112,7 @@ in
     };
   };
 
-  security = {
-    acme.certs."stash.${config.networking.hostName}.meurer.org" = { };
-    pam.loginLimits = [
-      {
-        domain = "*";
-        type = "-";
-        item = "memlock";
-        value = "unlimited";
-      }
-      {
-        domain = "*";
-        type = "-";
-        item = "nofile";
-        value = "1048576";
-      }
-      {
-        domain = "*";
-        type = "-";
-        item = "nproc";
-        value = "unlimited";
-      }
-    ];
-  };
+  security.acme.certs."stash.${config.networking.hostName}.meurer.org" = { };
 
   environment.etc."fail2ban/filter.d/fwdrop.conf".text = ''
     [Definition]
