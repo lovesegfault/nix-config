@@ -6,6 +6,7 @@
     aggressiveResize = true;
     clock24 = true;
     escapeTime = 0;
+    focusEvents = true;
     # Use idempotent new-session to avoid creating duplicate sessions when both
     # NixOS (/etc/tmux.conf) and home-manager configs are loaded. The -A flag
     # attaches if the session exists, otherwise creates it.
@@ -32,10 +33,6 @@
       set -as terminal-features ",alacritty*:usstyle,foot*:usstyle,xterm*:usstyle"
       set -as terminal-features ",alacritty*:extkeys,foot*:extkeys,xterm*:extkeys"
       set -as terminal-features ",alacritty*:clipboard,foot*:clipboard,xterm*:clipboard"
-
-
-      # recommended by vim.health
-      set-option -g focus-events on
 
       # automatically renumber windows
       set -g renumber-windows on
