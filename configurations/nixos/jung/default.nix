@@ -52,10 +52,11 @@ in
     kernel.sysctl."vm.swappiness" = 1;
     kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    swraid.enable = true;
+    swraid = {
+      enable = true;
+      mdadmConf = "MAILADDR bernardo@meurer.org";
+    };
   };
-
-  environment.etc."mdadm.conf".text = "MAILADDR bernardo@meurer.org";
 
   console.font = "ter-v28n";
 
