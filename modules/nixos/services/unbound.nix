@@ -58,6 +58,16 @@
             "0.0.0.0"
             "::"
           ];
+          access-control = [
+            "127.0.0.0/8 allow"
+            "::1 allow"
+            "10.0.0.0/8 allow"
+            "172.16.0.0/12 allow"
+            "192.168.0.0/16 allow"
+            "100.64.0.0/10 allow" # tailnet
+            "0.0.0.0/0 refuse"
+            "::/0 refuse"
+          ];
           key-cache-slabs = 8;
           msg-cache-size = "256m";
           msg-cache-slabs = 8;
