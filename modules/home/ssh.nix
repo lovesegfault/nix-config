@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   programs.ssh = {
     enable = true;
@@ -15,7 +16,9 @@
         match = "canonical Host *.meurer.org,*.meurer.org.beta.tailscale.net";
         forwardAgent = true;
       };
-      "canonical-all" = {
+      # Must render AFTER canonical-meurer since ssh_config is first-match-wins
+      # and `canonical Host *` would otherwise shadow the more specific rule.
+      "canonical-all" = lib.hm.dag.entryAfter [ "canonical-meurer" ] {
         match = "canonical Host *";
         forwardAgent = false;
         forwardX11 = false;
