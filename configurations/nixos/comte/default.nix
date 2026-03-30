@@ -47,7 +47,7 @@ in
         sshUser = "root";
         sshKey = "/etc/ssh/ssh_host_ed25519_key";
         maxJobs = 64;
-        speedFactor = 2;
+        speedFactor = 1;
         supportedFeatures = [
           "benchmark"
           "big-parallel"
@@ -63,7 +63,7 @@ in
         sshUser = "root";
         sshKey = "/etc/ssh/ssh_host_ed25519_key";
         maxJobs = 64;
-        speedFactor = 2;
+        speedFactor = 1;
         supportedFeatures = [
           "benchmark"
           "big-parallel"
