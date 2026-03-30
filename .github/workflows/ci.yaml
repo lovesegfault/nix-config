@@ -52,6 +52,10 @@ jobs:
           hostPlatform: x86_64-linux
           name: jung
           runsOn: ubuntu-24.04
+        - attr: nixosConfigurations.keynes.config.system.build.toplevel
+          hostPlatform: x86_64-linux
+          name: keynes
+          runsOn: ubuntu-24.04
         - attr: nixosConfigurations.plato.config.system.build.toplevel
           hostPlatform: x86_64-linux
           name: plato

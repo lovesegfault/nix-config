@@ -30,7 +30,7 @@ in
 
   nix = {
     settings = {
-      max-jobs = lib.mkForce 64;
+      max-jobs = lib.mkForce 32;
       system-features = [
         "benchmark"
         "nixos-test"
@@ -46,7 +46,7 @@ in
         protocol = "ssh-ng";
         sshUser = "root";
         sshKey = "/etc/ssh/ssh_host_ed25519_key";
-        maxJobs = 192;
+        maxJobs = 64;
         speedFactor = 2;
         supportedFeatures = [
           "benchmark"
@@ -54,6 +54,22 @@ in
           "kvm"
           "nixos-test"
           "gccarch-neoverse-v2"
+        ];
+      }
+      {
+        hostName = "keynes";
+        system = "x86_64-linux";
+        protocol = "ssh-ng";
+        sshUser = "root";
+        sshKey = "/etc/ssh/ssh_host_ed25519_key";
+        maxJobs = 64;
+        speedFactor = 2;
+        supportedFeatures = [
+          "benchmark"
+          "big-parallel"
+          "kvm"
+          "nixos-test"
+          "gccarch-znver5"
         ];
       }
     ];
@@ -66,13 +82,28 @@ in
         User root
         IdentitiesOnly yes
         IdentityFile /etc/ssh/ssh_host_ed25519_key
+
+      Host keynes
+        HostName ip-172-31-47-65.ec2.internal
+        User root
+        IdentitiesOnly yes
+        IdentityFile /etc/ssh/ssh_host_ed25519_key
     '';
-    knownHosts.putnam = {
-      hostNames = [
-        "putnam"
-        "ip-172-31-40-156.ec2.internal"
-      ];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDjT1p1pwoQ48meY+qSOICOaEEFnA9fZd3UPvCsa/Orw";
+    knownHosts = {
+      putnam = {
+        hostNames = [
+          "putnam"
+          "ip-172-31-40-156.ec2.internal"
+        ];
+        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDjT1p1pwoQ48meY+qSOICOaEEFnA9fZd3UPvCsa/Orw";
+      };
+      keynes = {
+        hostNames = [
+          "keynes"
+          "ip-172-31-47-65.ec2.internal"
+        ];
+        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGWy46fPOj5Z9oV64eC028oBQhUVpR+QZgEHxt6Zj7AM";
+      };
     };
   };
 

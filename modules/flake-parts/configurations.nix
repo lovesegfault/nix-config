@@ -35,6 +35,7 @@ in
       comte = mkNixos (self + "/configurations/nixos/comte");
       hegel = mkNixos (self + "/configurations/nixos/hegel");
       jung = mkNixos (self + "/configurations/nixos/jung");
+      keynes = mkNixos (self + "/configurations/nixos/keynes");
       plato = mkNixos (self + "/configurations/nixos/plato");
       putnam = mkNixos (self + "/configurations/nixos/putnam");
       spinoza = mkNixos (self + "/configurations/nixos/spinoza");
