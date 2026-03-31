@@ -8,6 +8,7 @@ concurrency:
   group: ci-${{ github.head_ref || github.ref_name }}
 jobs:
   build:
+    environment: ci
     name: ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
     runs-on: ${{ matrix.attrs.runsOn }}
     steps:
@@ -82,6 +83,7 @@ jobs:
           runsOn: ubuntu-22.04-arm
     timeout-minutes: 60
   build-darwin-host:
+    environment: ci
     name: ${{ matrix.attrs.name }} (${{ matrix.attrs.hostPlatform }})
     needs:
     - build-linux-builder
@@ -125,6 +127,7 @@ jobs:
           runsOn: macos-15
     timeout-minutes: 60
   build-linux-builder:
+    environment: ci
     name: linux-builder for ${{ matrix.attrs.name }} (${{ matrix.attrs.equivalentLinuxPlatform
       }})
     runs-on: ${{ matrix.attrs.equivalentLinuxRunner }}
@@ -181,6 +184,7 @@ jobs:
         jobs: ${{ toJSON(needs) }}
     timeout-minutes: 60
   flake-check:
+    environment: ci
     name: flake check (${{ matrix.systems.platform }})
     runs-on: ${{ matrix.systems.os }}
     steps:
