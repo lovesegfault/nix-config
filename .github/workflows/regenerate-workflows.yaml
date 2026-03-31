@@ -5,6 +5,7 @@
 # Or commit to trigger the pre-commit hook if enabled.
 jobs:
   regenerate:
+    environment: renovate
     if: github.actor == 'renovate[bot]' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     steps:

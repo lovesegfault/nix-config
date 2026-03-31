@@ -164,6 +164,7 @@ in
           # Flake check on all platforms
           flake-check = {
             name = "flake check (\${{ matrix.systems.platform }})";
+            environment = "ci";
             strategy.matrix.systems = checkPlatforms;
             runs-on = "\${{ matrix.systems.os }}";
             steps = setupSteps ++ [
@@ -181,6 +182,7 @@ in
           # Build hosts directly (NixOS + home-manager on any platform)
           build = {
             name = "\${{ matrix.attrs.name }} (\${{ matrix.attrs.hostPlatform }})";
+            environment = "ci";
             strategy = {
               fail-fast = false;
               matrix.attrs = nixosHosts ++ homeHosts;
@@ -214,6 +216,7 @@ in
           # Build linux-builder for nix-darwin hosts (cross-compile on Linux)
           build-linux-builder = {
             name = "linux-builder for \${{ matrix.attrs.name }} (\${{ matrix.attrs.equivalentLinuxPlatform }})";
+            environment = "ci";
             strategy = {
               fail-fast = false;
               matrix.attrs = darwinHosts;
@@ -225,6 +228,7 @@ in
           # Build nix-darwin hosts (after linux-builder)
           build-darwin-host = {
             name = "\${{ matrix.attrs.name }} (\${{ matrix.attrs.hostPlatform }})";
+            environment = "ci";
             needs = [ "build-linux-builder" ];
             strategy = {
               fail-fast = false;
@@ -255,6 +259,7 @@ in
 
         jobs.regenerate = {
           runs-on = "ubuntu-24.04";
+          environment = "renovate";
           # Only run for Renovate PRs or manual dispatch
           "if" = "github.actor == 'renovate[bot]' || github.event_name == 'workflow_dispatch'";
           steps = [
