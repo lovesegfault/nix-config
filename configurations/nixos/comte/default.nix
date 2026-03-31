@@ -46,7 +46,7 @@ in
         protocol = "ssh-ng";
         sshUser = "root";
         sshKey = "/etc/ssh/ssh_host_ed25519_key";
-        maxJobs = 64;
+        maxJobs = 32;
         speedFactor = 1;
         supportedFeatures = [
           "benchmark"
@@ -62,7 +62,7 @@ in
         protocol = "ssh-ng";
         sshUser = "root";
         sshKey = "/etc/ssh/ssh_host_ed25519_key";
-        maxJobs = 64;
+        maxJobs = 32;
         speedFactor = 1;
         supportedFeatures = [
           "benchmark"
