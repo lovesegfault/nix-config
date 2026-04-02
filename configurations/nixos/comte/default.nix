@@ -41,7 +41,7 @@ in
     };
     buildMachines = [
       {
-        hostName = "putnam";
+        hostName = "putnam?compress=true&max-connections=4";
         system = "aarch64-linux";
         protocol = "ssh-ng";
         sshUser = "root";
@@ -57,7 +57,7 @@ in
         ];
       }
       {
-        hostName = "keynes";
+        hostName = "keynes?compress=true&max-connections=4";
         system = "x86_64-linux";
         protocol = "ssh-ng";
         sshUser = "root";
