@@ -82,12 +82,16 @@ in
         User root
         IdentitiesOnly yes
         IdentityFile /etc/ssh/ssh_host_ed25519_key
+        ServerAliveInterval 30
+        ServerAliveCountMax 3
 
       Host keynes
         HostName ip-172-31-47-65.ec2.internal
         User root
         IdentitiesOnly yes
         IdentityFile /etc/ssh/ssh_host_ed25519_key
+        ServerAliveInterval 30
+        ServerAliveCountMax 3
     '';
     knownHosts = {
       putnam = {
