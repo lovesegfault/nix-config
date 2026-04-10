@@ -1,4 +1,10 @@
+{ flake, ... }:
+let
+  inherit (flake) self;
+in
 {
+  home-manager.sharedModules = [ self.homeModules.graphical-ghostty ];
+
   homebrew = {
     taps = [
       "1password/tap"

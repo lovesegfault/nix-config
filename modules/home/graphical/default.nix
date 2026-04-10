@@ -10,6 +10,7 @@ let
 in
 {
   imports = [
+    self.homeModules.graphical-ghostty
     self.homeModules.graphical-kitty
   ];
 
@@ -27,21 +28,7 @@ in
       xdg-utils
     ];
 
-  programs = {
-    alacritty.enable = true;
-    ghostty = {
-      enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableZshIntegration = true;
-      installBatSyntax = isLinux;
-      package = if isDarwin then null else pkgs.ghostty;
-      settings = {
-        clipboard-read = "ask";
-        quit-after-last-window-closed = true;
-      };
-    };
-  };
+  programs.alacritty.enable = true;
 
   stylix.fonts = {
     sansSerif = {
