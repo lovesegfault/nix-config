@@ -1,11 +1,13 @@
 # Configuration wiring using nixos-unified helpers
-# Uses mkLinuxSystem/mkMacosSystem/mkHomeConfiguration for standardized setup
+# nixos/darwin hosts are auto-discovered from configurations/{nixos,darwin}/;
+# home-manager hosts remain explicit since they need a system argument.
 {
   self,
   inputs,
   ...
 }:
 let
+  inherit (inputs.nixpkgs) lib;
   inherit (self.nixos-unified.lib) mkLinuxSystem mkMacosSystem mkHomeConfiguration;
 
   # We use home-manager = false because we have our own customized home-manager setup
@@ -28,23 +30,18 @@ let
   # Wrapper for mkHomeConfiguration that takes hostname and system
   mkHome =
     hostname: system: mkHomeConfiguration (pkgsFor system) (self + "/configurations/home/${hostname}");
+
+  # Auto-discover hosts: each subdirectory of `dir` becomes a configuration
+  discoverHosts =
+    mk: dir:
+    lib.mapAttrs (name: _: mk (dir + "/${name}")) (
+      lib.filterAttrs (_: type: type == "directory") (builtins.readDir dir)
+    );
 in
 {
   flake = {
-    nixosConfigurations = {
-      comte = mkNixos (self + "/configurations/nixos/comte");
-      hegel = mkNixos (self + "/configurations/nixos/hegel");
-      jung = mkNixos (self + "/configurations/nixos/jung");
-      keynes = mkNixos (self + "/configurations/nixos/keynes");
-      plato = mkNixos (self + "/configurations/nixos/plato");
-      putnam = mkNixos (self + "/configurations/nixos/putnam");
-      spinoza = mkNixos (self + "/configurations/nixos/spinoza");
-    };
-
-    darwinConfigurations = {
-      hayek = mkDarwin (self + "/configurations/darwin/hayek");
-      poincare = mkDarwin (self + "/configurations/darwin/poincare");
-    };
+    nixosConfigurations = discoverHosts mkNixos ../../configurations/nixos;
+    darwinConfigurations = discoverHosts mkDarwin ../../configurations/darwin;
 
     homeConfigurations = {
       goethe = mkHome "goethe" "x86_64-linux";
