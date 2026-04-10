@@ -118,6 +118,13 @@ jobs:
       fail-fast: false
       matrix:
         attrs:
+        - attr: darwinConfigurations.hayek.config.system.build.toplevel
+          equivalentLinuxPlatform: aarch64-linux
+          equivalentLinuxRunner: ubuntu-22.04-arm
+          hostPlatform: aarch64-darwin
+          linuxBuilderAttr: darwinConfigurations.hayek.config.nix.linux-builder.package.nixosConfig.system.build.toplevel
+          name: hayek
+          runsOn: macos-15
         - attr: darwinConfigurations.poincare.config.system.build.toplevel
           equivalentLinuxPlatform: aarch64-linux
           equivalentLinuxRunner: ubuntu-22.04-arm
@@ -161,6 +168,13 @@ jobs:
       fail-fast: false
       matrix:
         attrs:
+        - attr: darwinConfigurations.hayek.config.system.build.toplevel
+          equivalentLinuxPlatform: aarch64-linux
+          equivalentLinuxRunner: ubuntu-22.04-arm
+          hostPlatform: aarch64-darwin
+          linuxBuilderAttr: darwinConfigurations.hayek.config.nix.linux-builder.package.nixosConfig.system.build.toplevel
+          name: hayek
+          runsOn: macos-15
         - attr: darwinConfigurations.poincare.config.system.build.toplevel
           equivalentLinuxPlatform: aarch64-linux
           equivalentLinuxRunner: ubuntu-22.04-arm

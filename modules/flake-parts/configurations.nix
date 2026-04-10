@@ -42,6 +42,7 @@ in
     };
 
     darwinConfigurations = {
+      hayek = mkDarwin (self + "/configurations/darwin/hayek");
       poincare = mkDarwin (self + "/configurations/darwin/poincare");
     };
 
