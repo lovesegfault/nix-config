@@ -1,4 +1,4 @@
-{ flake, ... }:
+{ flake, config, ... }:
 let
   inherit (flake) self;
 in
@@ -138,15 +138,17 @@ in
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  services.skhd = {
-    enable = true;
-    skhdConfig = ''
-      cmd - return : open --new -a ghostty.app
-    '';
-  };
-
   system = {
+    # CustomUserPreferences would overwrite the entire AppleSymbolicHotKeys dict;
+    # use -dict-add to surgically disable just Spotlight (id 64) so Raycast can claim cmd+space.
+    activationScripts.postActivation.text = ''
+      printf 'disabling Spotlight ⌘Space for %s...\n' '${config.system.primaryUser}'
+      sudo -u '${config.system.primaryUser}' /usr/bin/defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '<dict><key>enabled</key><false/></dict>'
+      sudo -u '${config.system.primaryUser}' /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+    '';
+
     defaults = {
+      CustomUserPreferences."com.raycast.macos".raycastGlobalHotkey = "Command-49";
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark";
         AppleTemperatureUnit = "Celsius";
