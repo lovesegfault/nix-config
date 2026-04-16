@@ -125,6 +125,10 @@
           package = null;
         };
         texlab.enable = true;
+        tinymist = {
+          enable = true;
+          settings.formatterMode = "typstyle";
+        };
         ts_ls.enable = true;
       };
       postConfig = ''
