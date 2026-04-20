@@ -30,7 +30,7 @@ in
 
   nix = {
     settings = {
-      max-jobs = lib.mkForce 32;
+      max-jobs = lib.mkForce 64;
       system-features = [
         "benchmark"
         "nixos-test"
@@ -46,7 +46,7 @@ in
         protocol = "ssh-ng";
         sshUser = "root";
         sshKey = "/etc/ssh/ssh_host_ed25519_key";
-        maxJobs = 32;
+        maxJobs = 64;
         speedFactor = 1;
         supportedFeatures = [
           "benchmark"
@@ -62,7 +62,7 @@ in
         protocol = "ssh-ng";
         sshUser = "root";
         sshKey = "/etc/ssh/ssh_host_ed25519_key";
-        maxJobs = 32;
+        maxJobs = 64;
         speedFactor = 1;
         supportedFeatures = [
           "benchmark"
