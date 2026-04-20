@@ -148,13 +148,13 @@ in
       DHCP = "yes";
       matchConfig.MACAddress = "1c:83:41:30:ab:9b";
       dhcpV4Config.RouteMetric = 10;
-      dhcpV6Config.RouteMetric = 10;
+      ipv6AcceptRAConfig.RouteMetric = 10;
     };
     wifi = {
       DHCP = "yes";
       matchConfig.MACAddress = "60:dd:8e:12:67:bd";
       dhcpV4Config.RouteMetric = 40;
-      dhcpV6Config.RouteMetric = 40;
+      ipv6AcceptRAConfig.RouteMetric = 40;
     };
   };
 

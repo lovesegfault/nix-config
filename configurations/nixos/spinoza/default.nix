@@ -188,7 +188,7 @@ in
       DHCP = "yes";
       matchConfig.MACAddress = "f8:e4:3b:a9:9d:e2";
       dhcpV4Config.RouteMetric = 20;
-      dhcpV6Config.RouteMetric = 20;
+      ipv6AcceptRAConfig.RouteMetric = 20;
       linkConfig = {
         Multicast = true;
         RequiredForOnline = "routable";
@@ -202,7 +202,7 @@ in
       DHCP = "yes";
       matchConfig.MACAddress = "04:7b:cb:29:02:d2";
       dhcpV4Config.RouteMetric = 40;
-      dhcpV6Config.RouteMetric = 40;
+      ipv6AcceptRAConfig.RouteMetric = 40;
       linkConfig.Multicast = true;
       networkConfig = {
         MulticastDNS = true;
