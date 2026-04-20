@@ -141,7 +141,7 @@ in
     DHCP = "yes";
     matchConfig.MACAddress = "bc:fc:e7:eb:17:d4";
     dhcpV4Config.RouteMetric = 10;
-    dhcpV6Config.RouteMetric = 10;
+    ipv6AcceptRAConfig.RouteMetric = 10;
   };
 
   time.timeZone = "America/New_York";
