@@ -97,6 +97,10 @@ in
       ];
   };
 
+  systemd.tmpfiles.rules = [
+    "D /nix/var/nix/current-load 0755 root root - -"
+  ];
+
   programs.ssh = {
     extraConfig = ''
       Host putnam putnam-kvm
