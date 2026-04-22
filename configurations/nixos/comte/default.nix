@@ -84,6 +84,7 @@ in
         IdentityFile /etc/ssh/ssh_host_ed25519_key
         ServerAliveInterval 30
         ServerAliveCountMax 3
+        IPQoS throughput
 
       Host keynes
         HostName ip-172-31-47-65.ec2.internal
@@ -92,6 +93,7 @@ in
         IdentityFile /etc/ssh/ssh_host_ed25519_key
         ServerAliveInterval 30
         ServerAliveCountMax 3
+        IPQoS throughput
     '';
     knownHosts = {
       putnam = {
