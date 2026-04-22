@@ -51,7 +51,7 @@ in
           }:
           {
             inherit system maxJobs;
-            hostName = "${hostName}?compress=true&max-connections=4";
+            hostName = "${hostName}?max-connections=4";
             protocol = "ssh-ng";
             sshUser = "root";
             sshKey = "/etc/ssh/ssh_host_ed25519_key";
@@ -112,6 +112,10 @@ in
         ServerAliveInterval 30
         ServerAliveCountMax 3
         IPQoS throughput
+        Ciphers aes128-gcm@openssh.com,aes256-gcm@openssh.com
+        ControlMaster auto
+        ControlPath /run/ssh-control-%C
+        ControlPersist 10m
     '';
     knownHosts = {
       putnam = {
