@@ -1,9 +1,18 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   stylix.targets.firefox.profileNames = [ "default" ];
 
   programs.firefox = {
     enable = true;
+    # home-manager 26.05 moves the default profile location to
+    # $XDG_CONFIG_HOME/mozilla/firefox and warns until the choice is explicit.
+    # Adopt the XDG path; the on-disk move from ~/.mozilla/firefox is manual.
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
     package =
       let
         ff =
