@@ -51,7 +51,13 @@ in
     kernelPackages = pkgs.linuxPackages_6_18;
     kernelParams = [ "rfkill.default_state=0" ];
     lanzaboote.pkiBundle = lib.mkForce "/var/lib/sbctl";
-    zfs.package = pkgs.zfs_2_4;
+    zfs = {
+      package = pkgs.zfs_2_4;
+      # Single-attached pool: keep force-import. A non-forced import that
+      # failed would strand the box in the initrd, which is doubly painful
+      # behind Secure Boot (the cmdline can't be edited to add zfs_force=1).
+      forceImportRoot = true;
+    };
   };
 
   console.font = "ter-v28n";

@@ -14,7 +14,7 @@
     acceptTerms = true;
     defaults = {
       email = "bernardo@meurer.org";
-      credentialsFile = config.age.secrets.acme.path;
+      environmentFile = config.age.secrets.acme.path;
       dnsProvider = "cloudflare";
     };
   };
