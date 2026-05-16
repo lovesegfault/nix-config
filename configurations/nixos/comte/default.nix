@@ -39,60 +39,44 @@ in
         "gccarch-znver5"
       ];
     };
+    # yensid: load-balanced bare-metal pools (2× r8a.metal-48xl on :22,
+    # 2× r8g.metal-48xl on :2222). nix's ssh-ng store ignores ssh_config
+    # Port, so the arm pool's :2222 must be in the URI.
     buildMachines =
       let
-        mkBuilder =
+        yensid =
           {
-            hostName,
+            host,
             system,
             gccarch,
-            maxJobs,
-            kvm,
           }:
           {
-            inherit system maxJobs;
-            hostName = "${hostName}?max-connections=4";
+            hostName = "${host}?max-connections=4";
+            systems = [ system ];
             protocol = "ssh-ng";
-            sshUser = "root";
+            sshUser = "builder-ssh";
             sshKey = "/etc/ssh/ssh_host_ed25519_key";
-            speedFactor = 1;
+            maxJobs = 64;
+            speedFactor = 2;
             supportedFeatures = [
               "benchmark"
               "big-parallel"
+              "kvm"
+              "nixos-test"
               gccarch
-            ]
-            ++ lib.optional kvm "nixos-test";
-            mandatoryFeatures = lib.optional kvm "kvm";
+            ];
           };
       in
       [
-        (mkBuilder {
-          hostName = "putnam";
-          system = "aarch64-linux";
-          gccarch = "gccarch-neoverse-v2";
-          maxJobs = 128;
-          kvm = false;
-        })
-        (mkBuilder {
-          hostName = "putnam-kvm";
-          system = "aarch64-linux";
-          gccarch = "gccarch-neoverse-v2";
-          maxJobs = 32;
-          kvm = true;
-        })
-        (mkBuilder {
-          hostName = "keynes";
+        (yensid {
+          host = "x86-64-linux.yensid.rio-build.com";
           system = "x86_64-linux";
           gccarch = "gccarch-znver5";
-          maxJobs = 128;
-          kvm = false;
         })
-        (mkBuilder {
-          hostName = "keynes-kvm";
-          system = "x86_64-linux";
-          gccarch = "gccarch-znver5";
-          maxJobs = 32;
-          kvm = true;
+        (yensid {
+          host = "aarch64-linux.yensid.rio-build.com:2222";
+          system = "aarch64-linux";
+          gccarch = "gccarch-neoverse-v2";
         })
       ];
   };
@@ -101,43 +85,28 @@ in
     "D /nix/var/nix/current-load 0755 root root - -"
   ];
 
-  programs.ssh = {
-    extraConfig = ''
-      Host putnam putnam-kvm
-        HostName ip-172-31-40-156.ec2.internal
-
-      Host keynes keynes-kvm
-        HostName ip-172-31-47-65.ec2.internal
-
-      Host putnam putnam-kvm keynes keynes-kvm
-        User root
-        IdentitiesOnly yes
-        IdentityFile /etc/ssh/ssh_host_ed25519_key
-        ServerAliveInterval 30
-        ServerAliveCountMax 3
-        IPQoS throughput
-        Ciphers aes128-gcm@openssh.com,aes256-gcm@openssh.com
-        ControlMaster auto
-        ControlPath /run/ssh-control-%C
-        ControlPersist 10m
-    '';
-    knownHosts = {
-      putnam = {
-        hostNames = [
-          "putnam"
-          "putnam-kvm"
-          "ip-172-31-40-156.ec2.internal"
-        ];
-        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDjT1p1pwoQ48meY+qSOICOaEEFnA9fZd3UPvCsa/Orw";
-      };
-      keynes = {
-        hostNames = [
-          "keynes"
-          "keynes-kvm"
-          "ip-172-31-47-65.ec2.internal"
-        ];
-        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGWy46fPOj5Z9oV64eC028oBQhUVpR+QZgEHxt6Zj7AM";
-      };
+  # yensid's builders all present one shared host key (the SSM-fetched
+  # builder-ca-client-key) plus a CA-signed cert. Pin both: the
+  # certAuthority entry is the forward-compatible path, the plain-key
+  # pin keeps things working if cert validation fails (OpenSSH 10.2+
+  # rejects empty-principal certs — fixed on the CA side, but
+  # belt-and-suspenders).
+  programs.ssh.knownHosts = {
+    yensid-ca = {
+      certAuthority = true;
+      hostNames = [
+        "yensid.rio-build.com"
+        "*.yensid.rio-build.com"
+      ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO3TEgIFuRf18rB9tWDfNCZfprjC0hjMgSj2MTGu5jQY";
+    };
+    yensid-host = {
+      hostNames = [
+        "yensid.rio-build.com"
+        "*.yensid.rio-build.com"
+        "[*.yensid.rio-build.com]:2222"
+      ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAITrSOgy0iKn61kHpVt+eaej1swHtWSpFuR5Ci8ej8J";
     };
   };
 
