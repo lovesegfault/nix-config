@@ -110,6 +110,29 @@ in
     };
   };
 
+  # The yensid builders sit behind an NLB. NLB TCP idle timeout (350s
+  # default) silently drops a connection that goes quiet — which the
+  # ssh-ng channel always does during a long single-crate compile
+  # (codegen-units=1 + opt-level=3 → rustc emits nothing for 15-25 min;
+  # aws-sdk-ec2 is the canary). The local socket stays ESTAB because the
+  # OS TCP keepalive is 7200s, so nix __build-remote waits forever for a
+  # result that already left. ServerAliveInterval keeps the NLB flow
+  # alive (60s ≪ 350s) AND turns a dead connection into a clean failure
+  # in 3 min instead of an indefinite hang.
+  #
+  # Restores the keepalive 1ef1db4a added for putnam/keynes — d925b755
+  # dropped the whole extraConfig block when it swapped the builders
+  # because it was Host-scoped to the old names. The ControlMaster /
+  # Ciphers / IPQoS tuning that block also carried is intentionally NOT
+  # restored: ssh-ng manages its own per-build-remote ControlMaster (-S
+  # /tmp/nix-<pid>-*/ssh.sock), so a user-level ControlMaster would be
+  # shadowed; the cipher pin is perf-only and unverified on Graviton4.
+  programs.ssh.extraConfig = ''
+    Host *.yensid.rio-build.com
+        ServerAliveInterval 60
+        ServerAliveCountMax 3
+  '';
+
   systemd.network.networks.ens130 = {
     DHCP = "yes";
     matchConfig.MACAddress = "0e:1d:c4:0e:55:87";
