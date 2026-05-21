@@ -23,6 +23,7 @@ in
     self.nixosModules.hardware-efi
     self.nixosModules.hardware-fast-networking
     self.nixosModules.pam-limits
+    self.nixosModules.services-cloudflare-ddns
     self.nixosModules.services-grafana
     self.nixosModules.services-nginx
     self.nixosModules.services-oauth2

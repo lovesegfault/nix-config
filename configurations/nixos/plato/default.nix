@@ -24,6 +24,7 @@ in
     self.nixosModules.hardware-no-mitigations
     self.nixosModules.hardware-zfs
     self.nixosModules.pam-limits
+    self.nixosModules.services-cloudflare-ddns
     self.nixosModules.services-nginx
     self.nixosModules.services-oauth2
     self.nixosModules.services-unbound

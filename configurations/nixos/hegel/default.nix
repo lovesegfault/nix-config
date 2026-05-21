@@ -27,6 +27,7 @@ in
     self.nixosModules.pam-limits
     self.nixosModules.hardware-secureboot
     self.nixosModules.services-blocky
+    self.nixosModules.services-cloudflare-ddns
     self.nixosModules.services-grafana
     self.nixosModules.services-nginx
     self.nixosModules.services-oauth2
