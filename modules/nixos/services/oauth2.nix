@@ -15,6 +15,10 @@ in
       email.domains = [ "meurer.org" ];
       keyFile = config.age.secrets.oauth2.path;
       reverseProxy = true;
+      # nginx is the only reverse proxy and runs on the same host, proxying to
+      # the default httpAddress of 127.0.0.1:4180. Only loopback may supply
+      # X-Forwarded-* headers.
+      trustedProxyIP = [ "127.0.0.1" ];
       passBasicAuth = true;
       setXauthrequest = true;
       extraConfig = {
