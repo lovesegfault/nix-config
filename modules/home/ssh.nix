@@ -4,37 +4,36 @@
     enable = true;
     enableDefaultConfig = false;
     includes = [ "~/.ssh/config.host" ];
-    matchBlocks = {
-      "*" = {
-        extraOptions = {
+    settings =
+      let
+        # Named in a let-binding because the DAG ordering below must reference
+        # this block by its exact attribute name.
+        canonicalMeurer = "Match canonical Host *.meurer.org,*.meurer.org.beta.tailscale.net";
+      in
+      {
+        "*" = {
           CanonicalizeHostname = "yes";
           PermitLocalCommand = "yes";
           CanonicalDomains = "meurer.org.beta.tailscale.net";
         };
-      };
-      "canonical-meurer" = {
-        match = "canonical Host *.meurer.org,*.meurer.org.beta.tailscale.net";
-        forwardAgent = true;
-      };
-      # Must render AFTER canonical-meurer since ssh_config is first-match-wins
-      # and `canonical Host *` would otherwise shadow the more specific rule.
-      "canonical-all" = lib.hm.dag.entryAfter [ "canonical-meurer" ] {
-        match = "canonical Host *";
-        forwardAgent = false;
-        forwardX11 = false;
-        forwardX11Trusted = false;
-        hashKnownHosts = true;
-        serverAliveCountMax = 5;
-        serverAliveInterval = 60;
-        controlMaster = "auto";
-        controlPath = "~/.ssh/ssh-%r@%h:%p";
-        controlPersist = "30m";
-        extraOptions = {
+        ${canonicalMeurer} = {
+          ForwardAgent = true;
+        };
+        # Must render AFTER the *.meurer.org rule since ssh_config is
+        # first-match-wins and `Match canonical Host *` would otherwise shadow
+        # the more specific rule.
+        "Match canonical Host *" = lib.hm.dag.entryAfter [ canonicalMeurer ] {
+          ForwardAgent = false;
+          HashKnownHosts = true;
+          ServerAliveCountMax = 5;
+          ServerAliveInterval = 60;
+          ControlMaster = "auto";
+          ControlPath = "~/.ssh/ssh-%r@%h:%p";
+          ControlPersist = "30m";
           KbdInteractiveAuthentication = "no";
           StrictHostKeyChecking = "ask";
           VerifyHostKeyDNS = "yes";
         };
       };
-    };
   };
 }
