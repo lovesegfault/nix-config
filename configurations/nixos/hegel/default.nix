@@ -74,7 +74,6 @@ in
   networking = {
     hostId = "65618eec";
     hostName = "hegel";
-    tailscaleAddress = "100.109.168.118";
   };
 
   nix = {

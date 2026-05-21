@@ -1,5 +1,4 @@
 {
-  config,
   flake,
   lib,
   pkgs,
@@ -7,7 +6,6 @@
 }:
 let
   inherit (flake) self;
-  inherit (config.networking) hostName tailscaleAddress;
 in
 {
   imports = with self.nixosModules; [
@@ -116,14 +114,6 @@ in
         ];
       };
     };
-
-    nginx.virtualHosts."grafana.${hostName}.meurer.org".locations."/".extraConfig = ''
-      ${lib.optionalString (
-        tailscaleAddress != null
-      ) ''add_header Access-Control-Allow-Origin "http://${tailscaleAddress}";''}
-      add_header Access-Control-Allow-Origin "http://127.0.0.1";
-      add_header Access-Control-Allow-Origin "http://localhost";
-    '';
 
     unbound.settings.server.port = "5335";
   };

@@ -20,6 +20,5 @@ in
     agenix-rekey
     core
     home-manager-integration
-    tailscale-address
   ]);
 }
