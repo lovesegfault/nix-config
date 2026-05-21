@@ -58,7 +58,8 @@ in
           logRetentionDays = 90;
         };
         ports = {
-          dns = [ "0.0.0.0:53" ];
+          # Wildcard dual-stack listener; "0.0.0.0:53" would be IPv4-only.
+          dns = [ ":53" ];
           http = [ "4000" ];
         };
         bootstrapDns = [ "tcp+udp:1.1.1.1" ];

@@ -103,7 +103,11 @@ in
         "time.google.com"
         "tick.usnogps.navy.mil"
       ];
-      extraConfig = "allow 10.0.0.0/24";
+      extraConfig = ''
+        allow 10.0.0.0/24
+        allow fc00::/7
+        allow fe80::/10
+      '';
     };
     jellyfin = {
       hardwareAcceleration = {

@@ -64,7 +64,10 @@
             "10.0.0.0/8 allow"
             "172.16.0.0/12 allow"
             "192.168.0.0/16 allow"
+            "fc00::/7 allow" # ULA, the RFC1918 equivalent
+            "fe80::/10 allow" # link-local
             "100.64.0.0/10 allow" # tailnet
+            "fd7a:115c:a1e0::/48 allow" # tailnet
             "0.0.0.0/0 refuse"
             "::/0 refuse"
           ];

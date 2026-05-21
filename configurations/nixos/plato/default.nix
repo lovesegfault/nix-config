@@ -137,7 +137,9 @@ in
       bantime = "6min";
       ignoreIP = [
         "127.0.0.1/8"
-        "100.64.0.0/10"
+        "::1"
+        "100.64.0.0/10" # tailnet
+        "fd7a:115c:a1e0::/48" # tailnet
       ];
       banaction = "nftables[type=allports]";
       bantime-increment = {
