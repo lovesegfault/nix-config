@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 {
@@ -29,6 +30,15 @@
     kanagawa.enable = true;
     tokyonight.enable = true;
   };
+
+  # Quint (https://quint-lang.org) is not in nvim-treesitter's parser set, so its grammar is
+  # pulled from nixpkgs' standalone tree-sitter-grammars set (see treesitter.grammarPackages)
+  # and its highlight queries exposed on the runtimepath here; nvim-treesitter ships no
+  # queries for it, and without them the parser loads but nothing is highlighted.
+  extraFiles."queries/quint/highlights.scm".source =
+    "${pkgs.tree-sitter-grammars.tree-sitter-quint}/queries/highlights.scm";
+
+  filetype.extension.qnt = "quint";
 
   plugins = {
     bufferline = {
@@ -72,6 +82,9 @@
     treesitter = {
       enable = true;
       nixGrammars = true;
+      grammarPackages = config.plugins.treesitter.package.allGrammars ++ [
+        pkgs.tree-sitter-grammars.tree-sitter-quint
+      ];
       settings = {
         auto_install = false;
         highlight.enable = true;
