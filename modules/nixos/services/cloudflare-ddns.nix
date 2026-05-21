@@ -26,11 +26,22 @@ in
   };
 
   systemd.services.cloudflare-ddns = {
-    # tailscale0 must exist before interface-based detection can work. Even
-    # then the address may not be assigned yet right after boot; the daemon's
-    # internal cron retries every 5 minutes until it converges.
-    after = [ "tailscaled.service" ];
-    wants = [ "tailscaled.service" ];
+    # "tailscaled has started" does not mean tailscale0 has its addresses
+    # yet: detection right after boot finds a bare interface and the first
+    # update is pushed back a whole cron interval. Gate on the interface
+    # reaching "routable" (carrier + a global-scope address) instead.
+    # wait-online tracks explicitly named interfaces even though tailscale0
+    # is unmanaged by networkd. Wants= rather than Requires= so that a boot
+    # without connectivity still starts the daemon (after wait-online's
+    # timeout) and lets its own retry loop take over.
+    after = [
+      "tailscaled.service"
+      "systemd-networkd-wait-online@tailscale0:routable.service"
+    ];
+    wants = [
+      "tailscaled.service"
+      "systemd-networkd-wait-online@tailscale0:routable.service"
+    ];
     # Interface enumeration on Linux requires a netlink socket, which the
     # upstream module's RestrictAddressFamilies sandbox does not admit.
     serviceConfig.RestrictAddressFamilies = [ "AF_NETLINK" ];
