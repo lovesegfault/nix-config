@@ -30,7 +30,6 @@
     displayManager.gdm = {
       enable = true;
       autoSuspend = true;
-      wayland = true;
     };
     gnome.at-spi2-core.enable = true;
     speechd.enable = false;
