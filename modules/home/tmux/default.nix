@@ -1,4 +1,15 @@
 { pkgs, ... }:
+let
+  # tmux-which-key menu (prefix+Space), compiled from ./which-key.yaml with the
+  # plugin's own generator and source-file'd directly from tmux.conf below. The
+  # generated file is pure tmux commands (binds + command aliases), so we skip
+  # the plugin's runtime loader entirely — it wants writable config/data dirs
+  # and its first-run flow breaks against the read-only store.
+  whichKeyInit = pkgs.runCommand "tmux-which-key-init.tmux" { } ''
+    ${pkgs.tmuxPlugins.tmux-which-key}/share/tmux-plugins/tmux-which-key/plugin/build.py \
+      ${./which-key.yaml} "$out"
+  '';
+in
 {
   programs.tmux = {
     enable = true;
@@ -13,6 +24,20 @@
     newSession = false;
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
+      extrakto # prefix+Tab: fzf-pick text/paths/URLs from scrollback
+      fingers # prefix+F: hint labels over visible text for quick copy
+      tmux-window-name # auto-name windows by directory/program (owns automatic-rename)
+      {
+        plugin = prefix-highlight; # prefix/copy-mode indicator in status-left
+        # The plugin substitutes #{prefix_highlight} into the status options at
+        # load time, so status-left must be set before its run-shell line.
+        extraConfig = ''
+          set -g @prefix_highlight_show_copy_mode 'on'
+          set -g @prefix_highlight_show_sync_mode 'on'
+          set -g status-left-length 20
+          set -g status-left '#{prefix_highlight}[#S] '
+        '';
+      }
     ];
     secureSocket = false;
     terminal = "tmux-256color";
@@ -69,11 +94,13 @@
       bind ] paste-buffer
 
       set -g base-index 0
-      set-window-option -g automatic-rename
       setw -g monitor-activity on
       set -g visual-activity off
 
       set -g status-right '%a | %Y-%m-%d | %H:%M'
+
+      # tmux-which-key action menu (prefix+Space), pre-built from ./which-key.yaml
+      source-file ${whichKeyInit}
     '';
   };
 }

@@ -1,0 +1,244 @@
+# Menu definition for tmux-which-key, opened with prefix+Space.
+#
+# Compiled at nix build time with the plugin's generator (see whichKeyInit in
+# ./default.nix) and source-file'd directly from tmux.conf — nothing is read
+# from XDG paths at runtime. Changes here take effect after a home-manager
+# switch (then prefix+R to reload tmux).
+#
+# Convention: each item's `key` is the key pressed *inside* the popup. When the
+# action also has a real binding in our tmux config (or a stock tmux default we
+# kept), that binding is shown in the label in parentheses, so the menu doubles
+# as a cheat-sheet of the actual setup.
+#
+# Format reference: https://github.com/alexwforsythe/tmux-which-key
+command_alias_start_index: 200
+keybindings:
+  # root_table: C-Space
+  prefix_table: Space
+title:
+  style: align=centre,bold
+  prefix: tmux
+  prefix_style: fg=green,align=centre,bold
+position:
+  x: R
+  y: P
+custom_variables:
+  - name: log_info
+    value: "#[fg=green,italics] [info]#[default]#[italics]"
+macros:
+  - name: reload-config
+    commands:
+      - source-file ~/.config/tmux/tmux.conf
+      - display "Config reloaded..."
+  - name: restart-pane
+    commands:
+      - display "#{log_info} Restarting pane"
+      - "respawnp -k -c #{pane_current_path}"
+items:
+  - name: "Run command (:)"
+    key: ":"
+    command: command-prompt
+  - name: Last window (C-a)
+    key: a
+    command: last-window
+  - name: Last pane (;)
+    key: ";"
+    command: last-pane
+  - name: Copy mode ([)
+    key: "["
+    command: copy-mode
+  - name: Paste (])
+    key: "]"
+    command: paste-buffer
+  - separator: true
+  - name: +Windows
+    key: w
+    menu:
+      - name: New (c)
+        key: c
+        command: new-window
+      - name: New here
+        key: C
+        command: "neww -c #{pane_current_path}"
+      - name: Previous (M-h)
+        key: h
+        command: previous-window
+      - name: Next (M-l)
+        key: l
+        command: next-window
+      - name: Choose (w)
+        key: w
+        command: choose-tree -Zw
+      - separator: true
+      - name: +Layouts
+        key: L
+        menu:
+          - name: Main horizontal (+)
+            key: "+"
+            command: selectl main-horizontal
+          - name: Main vertical (=)
+            key: "="
+            command: selectl main-vertical
+          - name: Tiled
+            key: t
+            command: selectl tiled
+          - name: Even horizontal
+            key: h
+            command: selectl even-horizontal
+          - name: Even vertical
+            key: v
+            command: selectl even-vertical
+          - name: Next layout
+            key: n
+            command: nextl
+            transient: true
+      - separator: true
+      - name: Rename (,)
+        key: ","
+        command: command-prompt -I "#W" "renamew -- \"%%\""
+      - name: Kill (&)
+        key: "&"
+        command: 'confirm -p "Kill window #W? (y/n)" killw'
+  - name: +Panes
+    key: p
+    menu:
+      - name: 'Split right (v, \)'
+        key: v
+        command: "splitw -h -c #{pane_current_path}"
+      - name: Split below (-)
+        key: "-"
+        command: "splitw -v -c #{pane_current_path}"
+      - separator: true
+      - name: Left (h)
+        key: h
+        command: selectp -L
+      - name: Down (j)
+        key: j
+        command: selectp -D
+      - name: Up (k)
+        key: k
+        command: selectp -U
+      - name: Right (l)
+        key: l
+        command: selectp -R
+      - separator: true
+      - name: Zoom (z)
+        key: z
+        command: resizep -Z
+      - name: Rotate (C-o)
+        key: o
+        command: rotatew
+        transient: true
+      - name: Numbers (q)
+        key: q
+        command: displayp -d 0
+      - name: +Resize
+        key: r
+        menu:
+          - name: Left
+            key: h
+            command: resizep -L
+            transient: true
+          - name: Down
+            key: j
+            command: resizep -D
+            transient: true
+          - name: Up
+            key: k
+            command: resizep -U
+            transient: true
+          - name: Right
+            key: l
+            command: resizep -R
+            transient: true
+          - name: Left more
+            key: H
+            command: resizep -L 10
+            transient: true
+          - name: Down more
+            key: J
+            command: resizep -D 10
+            transient: true
+          - name: Up more
+            key: K
+            command: resizep -U 10
+            transient: true
+          - name: Right more
+            key: L
+            command: resizep -R 10
+            transient: true
+      - name: Swap left
+        key: H
+        command: swapp -t "{left-of}"
+      - name: Swap down
+        key: J
+        command: swapp -t "{down-of}"
+      - name: Swap up
+        key: K
+        command: swapp -t "{up-of}"
+      - name: Swap right
+        key: L
+        command: swapp -t "{right-of}"
+      - name: Break to window (!)
+        key: "!"
+        command: break-pane
+      - separator: true
+      - name: Mark (m)
+        key: m
+        command: selectp -m
+      - name: Unmark (M)
+        key: M
+        command: selectp -M
+      - name: Capture
+        key: C
+        command: capture-pane
+      - name: Respawn
+        key: R
+        macro: restart-pane
+      - name: Kill (x)
+        key: x
+        command: 'confirm -p "Kill pane #P? (y/n)" killp'
+  - separator: true
+  - name: +Sessions
+    key: s
+    menu:
+      - name: Choose (s)
+        key: s
+        command: choose-tree -Zs
+      - name: New
+        key: N
+        command: new
+      - name: Rename ($)
+        key: "$"
+        command: command-prompt -I "#S" "rename-session -- \"%%\""
+      - name: Detach (d)
+        key: d
+        command: detach
+  - name: +Buffers
+    key: b
+    menu:
+      - name: Choose
+        key: b
+        command: choose-buffer -Z
+      - name: List (#)
+        key: "#"
+        command: lsb
+      - name: Paste (])
+        key: p
+        command: pasteb
+  - separator: true
+  - name: Reload config (R)
+    key: R
+    macro: reload-config
+  - name: Refresh client (r)
+    key: r
+    command: refresh-client
+  - name: Time (t)
+    key: T
+    command: clock-mode
+  - name: Show messages (~)
+    key: "~"
+    command: show-messages
+  - name: Keys (?)
+    key: "?"
+    command: list-keys -N
