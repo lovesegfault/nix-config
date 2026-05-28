@@ -1,6 +1,16 @@
 # System-level tmux configuration - NixOS only
-{ pkgs, ... }:
 {
+  config,
+  flake,
+  pkgs,
+  ...
+}:
+let
+  inherit (flake) self;
+in
+{
+  imports = [ self.nixosModules.tmux-bindings ];
+
   programs.tmux = {
     enable = true;
     aggressiveResize = true;
@@ -40,36 +50,7 @@
       # automatically renumber windows
       set -g renumber-windows on
 
-      bind C-a last-window
-      bind a send-prefix
-      bind R source-file /etc/tmux.conf \; display-message "Config reloaded..."
-
-      bind : command-prompt
-      bind r refresh-client
-
-      # Alt+h/l for prefix-less window navigation (Ctrl+hjkl is panes via vim-tmux-navigator)
-      bind -n M-h previous-window
-      bind -n M-l next-window
-
-      bind v  split-window -h -c "#{pane_current_path}"
-      bind h  select-pane -L
-      bind j  select-pane -D
-      bind k  select-pane -U
-      bind l  select-pane -R
-      bind \\ split-window -h -c "#{pane_current_path}"
-      bind -  split-window -v -c "#{pane_current_path}"
-
-      bind C-o rotate-window
-
-      bind + select-layout main-horizontal
-      bind = select-layout main-vertical
-
-      bind ';' last-pane
-      bind q display-panes
-      bind c new-window
-
-      bind [ copy-mode
-      bind ] paste-buffer
+      ${config.local.tmux.bindLines.nixos}
 
       set -g base-index 0
       set-window-option -g automatic-rename

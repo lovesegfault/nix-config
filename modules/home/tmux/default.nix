@@ -1,16 +1,29 @@
-{ pkgs, ... }:
+{
+  config,
+  flake,
+  pkgs,
+  ...
+}:
 let
-  # tmux-which-key menu (prefix+Space), compiled from ./which-key.yaml with the
-  # plugin's own generator and source-file'd directly from tmux.conf below. The
-  # generated file is pure tmux commands (binds + command aliases), so we skip
-  # the plugin's runtime loader entirely — it wants writable config/data dirs
-  # and its first-run flow breaks against the read-only store.
+  inherit (flake) self;
+
+  # tmux-which-key menu (prefix+Space), generated from the shared keybinding
+  # definition (modules/shared/tmux-bindings.nix) so the menu, its labels, and
+  # the actual binds cannot drift apart. It is compiled with the plugin's own
+  # generator and source-file'd directly from tmux.conf below; the plugin's
+  # runtime loader is skipped entirely — it wants writable config/data dirs and
+  # its first-run flow breaks against the read-only store.
+  whichKeyYaml =
+    (pkgs.formats.yaml { }).generate "tmux-which-key.yaml"
+      config.local.tmux.whichKeyMenu;
   whichKeyInit = pkgs.runCommand "tmux-which-key-init.tmux" { } ''
     ${pkgs.tmuxPlugins.tmux-which-key}/share/tmux-plugins/tmux-which-key/plugin/build.py \
-      ${./which-key.yaml} "$out"
+      ${whichKeyYaml} "$out"
   '';
 in
 {
+  imports = [ self.homeModules.tmux-bindings ];
+
   programs.tmux = {
     enable = true;
     sensibleOnTop = true;
@@ -62,36 +75,7 @@ in
       # automatically renumber windows
       set -g renumber-windows on
 
-      bind C-a last-window
-      bind a send-prefix
-      bind R source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded..."
-
-      bind : command-prompt
-      bind r refresh-client
-
-      # Alt+h/l for prefix-less window navigation (Ctrl+hjkl is panes via vim-tmux-navigator)
-      bind -n M-h previous-window
-      bind -n M-l next-window
-
-      bind v  split-window -h -c "#{pane_current_path}"
-      bind h  select-pane -L
-      bind j  select-pane -D
-      bind k  select-pane -U
-      bind l  select-pane -R
-      bind \\ split-window -h -c "#{pane_current_path}"
-      bind -  split-window -v -c "#{pane_current_path}"
-
-      bind C-o rotate-window
-
-      bind + select-layout main-horizontal
-      bind = select-layout main-vertical
-
-      bind ';' last-pane
-      bind q display-panes
-      bind c new-window
-
-      bind [ copy-mode
-      bind ] paste-buffer
+      ${config.local.tmux.bindLines.home}
 
       set -g base-index 0
       setw -g monitor-activity on
@@ -99,7 +83,7 @@ in
 
       set -g status-right '%a | %Y-%m-%d | %H:%M'
 
-      # tmux-which-key action menu (prefix+Space), pre-built from ./which-key.yaml
+      # tmux-which-key action menu (prefix+Space), generated from the shared bindings
       source-file ${whichKeyInit}
     '';
   };
