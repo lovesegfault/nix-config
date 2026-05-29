@@ -74,6 +74,8 @@ let
         }
       )
       (rootBound "M-l" "l" "Next" "next-window")
+      (rootBound "M-H" "<" "Move left" "swap-window -d -t -1")
+      (rootBound "M-L" ">" "Move right" "swap-window -d -t +1")
       (stock "w" "Choose" "choose-tree -Zw")
       sep
       (submenu "L" "+Layouts" [
