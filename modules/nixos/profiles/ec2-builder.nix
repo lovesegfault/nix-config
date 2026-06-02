@@ -3,6 +3,8 @@
 #   - networking.hostName is set dynamically by EC2, not in config
 #   - age.rekey.localStorageDir must be set explicitly (hostname unknown at eval)
 #   - age.secrets.rootPassword.rekeyFile must be set explicitly
+#   - /home/bemeurer/.ssh/bemeurer must be provisioned manually (git signing,
+#     agenix-rekey master identity)
 {
   flake,
   lib,
@@ -29,7 +31,14 @@ in
 
   home-manager.users.bemeurer = {
     imports = [ self.homeModules.trusted ];
-    programs.git.settings.user.email = lib.mkForce "beme@anthropic.com";
+    programs.git.settings.user = {
+      email = lib.mkForce "beme@anthropic.com";
+      # SSH-only hosts: sign with the on-disk key (also the agenix-rekey
+      # master identity) so signing never depends on a forwarded agent.
+      # NB: lowercase "signingkey" — must match the attr set by
+      # homeModules.trusted for the mkForce to apply to it.
+      signingkey = lib.mkForce "/home/bemeurer/.ssh/bemeurer";
+    };
   };
 
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
