@@ -5,10 +5,10 @@
 #   - age.secrets.rootPassword.rekeyFile must be set explicitly
 #   - /home/bemeurer/.ssh/bemeurer must be provisioned manually (git signing,
 #     agenix-rekey master identity)
+#   - EBS-image hosts must import amazon-image.nix themselves (keynes owns its layout via disko)
 {
   flake,
   lib,
-  modulesPath,
   pkgs,
   ...
 }:
@@ -18,7 +18,6 @@ in
 {
   imports = [
     inputs.nixos-hardware.nixosModules.common-pc-ssd
-    "${modulesPath}/virtualisation/amazon-image.nix"
 
     self.nixosModules.default
     self.nixosModules.hardware-fast-networking

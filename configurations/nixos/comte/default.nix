@@ -3,6 +3,7 @@
   flake,
   config,
   lib,
+  modulesPath,
   ...
 }:
 let
@@ -12,6 +13,7 @@ in
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
+    "${modulesPath}/virtualisation/amazon-image.nix"
 
     self.nixosModules.profiles-ec2-builder
   ];
