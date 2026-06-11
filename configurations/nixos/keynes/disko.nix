@@ -1,6 +1,8 @@
-# zroot is striped across 6 io2 EBS volumes (durability tier). Instance-store
-# NVMe is attached as L2ARC at boot by zpool-l2arc-ensure, never by disko:
-# the devices are wiped on stop/start and carry fresh serials each time.
+# zroot is striped across 6 io2 EBS volumes (durability tier), each wholly
+# owned by ZFS; BIOS-boot + /boot live on a dedicated 4G gp3 volume.
+# Instance-store NVMe is attached as L2ARC at boot by zpool-l2arc-ensure,
+# never by disko: the devices are wiped on stop/start and carry fresh
+# serials each time.
 let
   zfsDisk = device: {
     type = "disk";
@@ -22,9 +24,9 @@ in
 
   disko.devices = {
     disk = {
-      ebs1 = {
+      boot = {
         type = "disk";
-        device = "/dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol06dfec82e16229fd0";
+        device = "/dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol01d32a3a4cd74823a";
         content = {
           type = "gpt";
           partitions = {
@@ -33,23 +35,17 @@ in
               type = "EF02"; # BIOS boot partition; EC2 instance boots legacy BIOS
             };
             bootfs = {
-              size = "1G";
+              size = "100%";
               content = {
                 type = "filesystem";
                 format = "ext4";
                 mountpoint = "/boot";
               };
             };
-            zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "zroot";
-              };
-            };
           };
         };
       };
+      ebs1 = zfsDisk "/dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol06dfec82e16229fd0";
       ebs2 = zfsDisk "/dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol0aa10846edf1314ab";
       ebs3 = zfsDisk "/dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol0f5a9ebeed2e69398";
       ebs4 = zfsDisk "/dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol0b9123c12dbdf04ed";
