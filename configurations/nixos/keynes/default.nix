@@ -95,6 +95,9 @@ in
       # 6 NUMA nodes (SNC-3): auto-NUMA's unmap/fault/migrate cycle never
       # pays back for seconds-lived compilers, and ARC/tmpfs dominate RAM.
       "kernel.numa_balancing" = 0;
+      # cake is a home-gateway shaper; at datacenter rates fq is the canonical
+      # BBR pairing (proper pacing, new-flow priority protects interactive ssh).
+      "net.core.default_qdisc" = lib.mkForce "fq";
     };
   };
 
@@ -117,6 +120,13 @@ in
       # nix-optimise timer below instead.
       auto-optimise-store = lib.mkForce false;
       max-jobs = lib.mkForce 64;
+      # Mass substitution: default 16 paths in flight / 32 curl connections
+      # leave most of the pipe idle when pulling 100k+ store paths.
+      max-substitution-jobs = 64;
+      http-connections = lib.mkForce 128;
+      # Don't ignore a substituter for an hour after a miss; hydra often
+      # uploads moments after we first ask.
+      narinfo-cache-negative-ttl = 60;
       system-features = [
         "benchmark"
         "nixos-test"
@@ -169,6 +179,10 @@ in
   };
 
   services = {
+    irqbalance.enable = true;
+
+    openssh.settings.ClientAliveInterval = 60;
+
     udev.extraRules = ''
       # ZFS schedules its own I/O; kernel writeback throttling underneath it
       # only fights the vdev scheduler and misclassifies ZIL writes as
@@ -182,9 +196,21 @@ in
   };
 
   systemd = {
-    network.networks.ens65 = {
-      DHCP = "yes";
-      matchConfig.MACAddress = "12:bb:73:a0:0f:b7";
+    network = {
+      links."10-ens65" = {
+        matchConfig.MACAddress = "12:bb:73:a0:0f:b7";
+        # ENA defaults: 1K rings, adaptive RX moderation off. AWS guidance for
+        # multi-10G: 8K rings + adaptive coalescing absorb substitution bursts.
+        linkConfig = {
+          RxBufferSize = 8192;
+          TxBufferSize = 8192;
+          UseAdaptiveRxCoalesce = true;
+        };
+      };
+      networks.ens65 = {
+        DHCP = "yes";
+        matchConfig.MACAddress = "12:bb:73:a0:0f:b7";
+      };
     };
 
     # Instance-store NVMe is wiped on stop/start and comes back blank under new
@@ -287,6 +313,8 @@ in
     Host *.yensid.rio-build.com
         ServerAliveInterval 60
         ServerAliveCountMax 3
+        # OpenSSH prefers chacha20 (scalar Poly1305) — AES-GCM is 2-3x faster on AVX-512.
+        Ciphers ^aes128-gcm@openssh.com
   '';
 
   # Deliberately no root authorized keys (amazon-image's EC2-metadata key
