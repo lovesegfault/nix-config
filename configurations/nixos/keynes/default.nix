@@ -48,6 +48,11 @@ in
       "zfs.l2arc_write_max=1073741824"
       "zfs.l2arc_write_boost=2147483648"
       "zfs.l2arc_noprefetch=0"
+      # zstd compresses 128K records to ~68K; the default 128K SSD aggregation
+      # limit then forbids merging, so each EBS volume stalls on queue depth at
+      # ~0.7GB/s. 1M aggregation yields ~240KiB device I/Os and ~94% of the
+      # provisioned 5K-IOPS × 256KiB envelope (measured: 4.2 → 7.0 GB/s drain).
+      "zfs.zfs_vdev_aggregation_limit_non_rotating=1048576"
     ];
     loader.grub = {
       enable = true;
