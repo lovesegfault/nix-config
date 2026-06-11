@@ -26,7 +26,7 @@
         name = "nix-zsh-completions";
         src = pkgs.nix-zsh-completions;
         file = "share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh";
-        completions = [ "share/zsh/site-functions" ];
+        functions = [ "share/zsh/site-functions" ];
       }
       {
         name = "vi-mode";
