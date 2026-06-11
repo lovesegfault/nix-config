@@ -86,6 +86,10 @@ in
     fwupd.daemonSettings.EspLocation = config.boot.loader.efi.efiSysMountPoint;
   };
 
+  # stylix's kmscon target sets the removed services.kmscon.fonts option;
+  # kmscon isn't used on any host, so keep the target off.
+  stylix.targets.kmscon.enable = false;
+
   system.stateVersion = lib.mkDefault "25.11";
 
   systemd = {
