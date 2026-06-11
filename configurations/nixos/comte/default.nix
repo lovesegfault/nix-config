@@ -30,6 +30,9 @@ in
 
   nix = {
     settings = {
+      # Hardlinking on the hot path slows builds; batch it via the
+      # nix-optimise timer below instead.
+      auto-optimise-store = lib.mkForce false;
       max-jobs = lib.mkForce 64;
       system-features = [
         "benchmark"
@@ -39,6 +42,7 @@ in
         "gccarch-znver5"
       ];
     };
+    optimise.dates = lib.mkForce [ "*-*-* 00/3:00:00" ];
     # yensid: load-balanced bare-metal pools (2× r8a.metal-48xl on :22,
     # 2× r8g.metal-48xl on :2222). nix's ssh-ng store ignores ssh_config
     # Port, so the arm pool's :2222 must be in the URI.
