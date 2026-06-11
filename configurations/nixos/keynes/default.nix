@@ -58,9 +58,23 @@ in
       # Snappier interactive sessions while hundreds of cores compile;
       # the ~1-2% batch-throughput cost is irrelevant on 384 threads.
       "preempt=full"
-      # Default headroom (2) scans too little ahead at our 1GiB/s feed rate;
-      # warm the L2ARC faster after reboots.
-      "zfs.l2arc_headroom=8"
+      # 8 is already the 2.4.2 default and bounds each 1s feed scan to
+      # 8×l2arc_write_max. 0 scans the full ARC lists so buffers evicted
+      # during build churn still reach the (pool-sized) persistent cache.
+      "zfs.l2arc_headroom=0"
+      # Wiped instance-store devices get a full-device TRIM when re-added
+      # after stop/start, keeping the FTL clean for the 1-2GiB/s refill.
+      "zfs.l2arc_trim_ahead=100"
+      # zstd shrinks logically-adjacent 128K records to ~64K blocks with
+      # small gaps; bridging gaps up to 128K merges them into one billed
+      # 256KiB EBS IOP instead of several. Write counterpart deliberately
+      # left at 4K: the write path is throughput-bound, not IOPS-bound.
+      "zfs.zfs_vdev_read_gap_limit=131072"
+      # Prefetch/L2ARC-feed reads are a separate queue class capped at 3
+      # in flight per vdev — IOPS-starved at ~1ms EBS latency. 8 ≈ the
+      # 5K-IOPS envelope with margin; sync (demand) reads untouched.
+      "zfs.zfs_vdev_async_read_max_active=8"
+      "zfs.zfs_vdev_async_read_min_active=2"
     ];
     loader.grub = {
       enable = true;
@@ -76,6 +90,12 @@ in
     # core.nix already enables tmpfs /tmp; cap it so /tmp + the 1TiB builds
     # tmpfs + the 1TiB ARC can't add up past physical RAM (no swap here).
     tmp.tmpfsSize = "256G";
+
+    kernel.sysctl = {
+      # 6 NUMA nodes (SNC-3): auto-NUMA's unmap/fault/migrate cycle never
+      # pays back for seconds-lived compilers, and ARC/tmpfs dominate RAM.
+      "kernel.numa_balancing" = 0;
+    };
   };
 
   age.rekey = {
@@ -148,9 +168,18 @@ in
       ];
   };
 
-  # EBS has no discard support, so the weekly zpool trim would only fail
-  # noisily; L2ARC devices are not covered by the trim timer anyway.
-  services.zfs.trim.enable = lib.mkForce false;
+  services = {
+    udev.extraRules = ''
+      # ZFS schedules its own I/O; kernel writeback throttling underneath it
+      # only fights the vdev scheduler and misclassifies ZIL writes as
+      # throttleable background writeback. Covers pool and L2ARC devices.
+      ACTION=="add|change", SUBSYSTEM=="block", KERNEL=="nvme*n*", ATTR{queue/wbt_lat_usec}="0"
+    '';
+
+    # EBS has no discard support, so the weekly zpool trim would only fail
+    # noisily; L2ARC devices are not covered by the trim timer anyway.
+    zfs.trim.enable = lib.mkForce false;
+  };
 
   systemd = {
     network.networks.ens65 = {
@@ -219,6 +248,9 @@ in
 
     tmpfiles.rules = [
       "D /nix/var/nix/current-load 0755 root root - -"
+      # No cmdline param exists for THP defrag; 'defer' avoids
+      # direct-compaction stalls in wide malloc-heavy compiles.
+      "w /sys/kernel/mm/transparent_hugepage/defrag - - - - defer"
     ];
   };
 
