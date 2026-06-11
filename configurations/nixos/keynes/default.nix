@@ -31,7 +31,13 @@ in
     # hegel's proven kernel+zfs combo; overrides the profile's mkDefault
     # linuxPackages_latest (ZFS lags mainline).
     kernelPackages = pkgs.linuxPackages_6_18;
-    zfs.package = pkgs.zfs_2_4;
+    zfs = {
+      package = pkgs.zfs_2_4;
+      # Import via partlabels so zpool status shows disko's disk-ebsN-zfs
+      # names instead of whichever of the ~4 by-id aliases udev's readdir
+      # order serves up first (mixed nvme-uuid/_1-suffixed serials).
+      devNodes = "/dev/disk/by-partlabel";
+    };
     kernelParams = [
       # EC2 serial console (aws ec2 get-console-output)
       "console=tty1"
