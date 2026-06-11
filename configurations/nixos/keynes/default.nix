@@ -225,6 +225,7 @@ in
       wantedBy = [ "multi-user.target" ];
       path = [
         config.boot.zfs.package
+        config.systemd.package
         pkgs.gawk
       ];
       serviceConfig = {
@@ -269,6 +270,11 @@ in
           # guarantees only instance store is ever added, and only as cache.
           zpool add -f "$pool" cache "$dev" || true
         done
+
+        # Refresh udev's filesystem-probe cache: udev probes a partition the
+        # moment it appears, racing the ZFS label write / device TRIM on
+        # freshly added cache devices and leaving lsblk's FSTYPE blank.
+        udevadm trigger --settle /dev/nvme*n1p1 2>/dev/null || true
       '';
     };
 
