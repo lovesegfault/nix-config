@@ -53,6 +53,14 @@ in
       # ~0.7GB/s. 1M aggregation yields ~240KiB device I/Os and ~94% of the
       # provisioned 5K-IOPS × 256KiB envelope (measured: 4.2 → 7.0 GB/s drain).
       "zfs.zfs_vdev_aggregation_limit_non_rotating=1048576"
+      # rustc/LLVM are heap-hungry; THP=always typically buys a few percent.
+      "transparent_hugepage=always"
+      # Snappier interactive sessions while hundreds of cores compile;
+      # the ~1-2% batch-throughput cost is irrelevant on 384 threads.
+      "preempt=full"
+      # Default headroom (2) scans too little ahead at our 1GiB/s feed rate;
+      # warm the L2ARC faster after reboots.
+      "zfs.l2arc_headroom=8"
     ];
     loader.grub = {
       enable = true;
