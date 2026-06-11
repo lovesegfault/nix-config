@@ -199,11 +199,13 @@ in
     network = {
       links."10-ens65" = {
         matchConfig.MACAddress = "12:bb:73:a0:0f:b7";
-        # ENA defaults: 1K rings, adaptive RX moderation off. AWS guidance for
-        # multi-10G: 8K rings + adaptive coalescing absorb substitution bursts.
+        # ENA defaults: 1K RX ring, adaptive RX moderation off. AWS guidance
+        # for multi-10G: 8K RX ring + adaptive coalescing absorb substitution
+        # bursts. No TxBufferSize: ENA caps TX rings at 1024 (its default) by
+        # design, and networkd applies ring sizes in one request — an invalid
+        # TX value would void the RX bump too.
         linkConfig = {
           RxBufferSize = 8192;
-          TxBufferSize = 8192;
           UseAdaptiveRxCoalesce = true;
         };
       };
@@ -212,6 +214,25 @@ in
         matchConfig.MACAddress = "12:bb:73:a0:0f:b7";
       };
     };
+
+    # irqbalance earns its keep here: the 32 ENA Tx-Rx queue IRQs (and ~800
+    # other movable IRQs, e.g. QAT bundles) are balanceable. But every NVMe
+    # queue IRQ on this box (~400) uses kernel-managed affinity and rejects
+    # writes with EPERM, so stock irqbalance logs a ~400-line error burst on
+    # each boot before banning them itself. The policyscript pre-bans any IRQ
+    # whose affinity is not writable: rewriting the current mask is a no-op
+    # for movable IRQs and fails cleanly for managed ones.
+    services.irqbalance.serviceConfig.ExecStart = [
+      ""
+      "${pkgs.irqbalance}/bin/irqbalance --journal --policyscript=${pkgs.writeShellScript "irqbalance-policy" ''
+        # $1 = sysfs device path, $2 = IRQ number (see irqbalance(1)).
+        if ! { read -r mask < "/proc/irq/$2/smp_affinity" \
+          && printf '%s\n' "$mask" > "/proc/irq/$2/smp_affinity"; } 2>/dev/null; then
+          echo "ban=true"
+        fi
+        exit 0
+      ''}"
+    ];
 
     # Instance-store NVMe is wiped on stop/start and comes back blank under new
     # serials. A missing cache vdev never blocks pool import; this re-attaches
