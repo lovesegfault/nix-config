@@ -125,10 +125,10 @@ in
       # Hardlinking on the hot path slows builds; batch it via the
       # nix-optimise timer below instead.
       auto-optimise-store = lib.mkForce false;
-      max-jobs = lib.mkForce 64;
+      max-jobs = lib.mkForce 32;
       # Mass substitution: default 16 paths in flight / 32 curl connections
       # leave most of the pipe idle when pulling 100k+ store paths.
-      max-substitution-jobs = 64;
+      max-substitution-jobs = 128;
       http-connections = lib.mkForce 128;
       # Don't ignore a substituter for an hour after a miss; hydra often
       # uploads moments after we first ask.
