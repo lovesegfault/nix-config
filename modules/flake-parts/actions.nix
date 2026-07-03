@@ -165,7 +165,10 @@ in
           flake-check = {
             name = "flake check (\${{ matrix.systems.platform }})";
             environment = "ci";
-            strategy.matrix.systems = checkPlatforms;
+            strategy = {
+              fail-fast = false;
+              matrix.systems = checkPlatforms;
+            };
             runs-on = "\${{ matrix.systems.os }}";
             steps = setupSteps ++ [
               {

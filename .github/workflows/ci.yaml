@@ -224,6 +224,7 @@ jobs:
     - name: nix flake show
       run: nix flake show 'git+file:.'
     strategy:
+      fail-fast: false
       matrix:
         systems:
         - os: ubuntu-24.04
