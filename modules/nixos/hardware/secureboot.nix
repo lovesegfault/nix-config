@@ -6,7 +6,6 @@
 }:
 {
   boot = {
-    bootspec.enable = true;
     lanzaboote = {
       enable = true;
       pkiBundle = "/etc/secureboot";
