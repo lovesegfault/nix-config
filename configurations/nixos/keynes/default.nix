@@ -133,6 +133,18 @@ in
       # Don't ignore a substituter for an hour after a miss; hydra often
       # uploads moments after we first ask.
       narinfo-cache-negative-ttl = 60;
+      netrc-file = "/etc/nix/netrc";
+      # cargo-nix-plugin (builtins.resolveCargoWorkspace). Plugins are
+      # dlopen'd into every nix process, so pick the variant built against
+      # this host's exact nix release: a nixVersions.latest bump past what
+      # the plugin supports then fails at eval instead of breaking every
+      # nix command at runtime.
+      plugin-files =
+        let
+          ver = lib.versions.majorMinor config.nix.package.version;
+          attr = "cargo-nix-plugin-nix_${lib.replaceStrings [ "." ] [ "_" ] ver}";
+        in
+        "${inputs.cargo-nix-plugin.packages.${pkgs.stdenv.hostPlatform.system}.${attr}}/lib/nix/plugins";
       system-features = [
         "benchmark"
         "nixos-test"

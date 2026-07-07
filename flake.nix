@@ -98,6 +98,12 @@
     };
 
     # Build tools
+    cargo-nix-plugin = {
+      url = "github:anthropics/cargo-nix-plugin";
+      # Plugins are dlopen'd into the nix process; building against the same
+      # nixpkgs rev as nix.package keeps the libnix* store paths identical.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-fast-build = {
       url = "github:Mic92/nix-fast-build";
       inputs = {
