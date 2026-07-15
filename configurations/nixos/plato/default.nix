@@ -30,6 +30,7 @@ in
     self.nixosModules.services-unbound
     self.nixosModules.services-syncthing
     self.nixosModules.services-jellyfin
+    self.nixosModules.services-kavita
 
     # Host-specific files
     ./disko.nix
@@ -201,6 +202,7 @@ in
     "bemeurer"
     config.services.syncthing.user
     config.services.jellyfin.user
+    config.services.kavita.user
   ];
 
   virtualisation = {
