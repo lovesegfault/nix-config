@@ -34,9 +34,9 @@ jobs:
         extraPullNames: nix-community
         name: nix-config
     - name: nix-fast-build
-      run: nix run 'git+file:.#nix-fast-build' -- --no-nom --skip-cached --retries=3
-        --option accept-flake-config true --flake='git+file:.#${{ matrix.attrs.attr
-        }}'
+      run: nix run 'git+file:.?shallow=1#nix-fast-build' -- --no-nom --skip-cached
+        --retries=3 --option accept-flake-config true --flake='git+file:.?shallow=1#${{
+        matrix.attrs.attr }}'
     strategy:
       fail-fast: false
       matrix:
@@ -107,9 +107,9 @@ jobs:
         extraPullNames: nix-community
         name: nix-config
     - name: nix-fast-build
-      run: nix run 'git+file:.#nix-fast-build' -- --no-nom --skip-cached --retries=3
-        --option accept-flake-config true --flake='git+file:.#${{ matrix.attrs.attr
-        }}'
+      run: nix run 'git+file:.?shallow=1#nix-fast-build' -- --no-nom --skip-cached
+        --retries=3 --option accept-flake-config true --flake='git+file:.?shallow=1#${{
+        matrix.attrs.attr }}'
     strategy:
       fail-fast: false
       matrix:
@@ -157,9 +157,9 @@ jobs:
         extraPullNames: nix-community
         name: nix-config
     - name: nix-fast-build
-      run: nix run 'git+file:.#nix-fast-build' -- --no-nom --skip-cached --retries=3
-        --option accept-flake-config true --flake='git+file:.#${{ matrix.attrs.linuxBuilderAttr
-        }}'
+      run: nix run 'git+file:.?shallow=1#nix-fast-build' -- --no-nom --skip-cached
+        --retries=3 --option accept-flake-config true --flake='git+file:.?shallow=1#${{
+        matrix.attrs.linuxBuilderAttr }}'
     strategy:
       fail-fast: false
       matrix:
@@ -220,9 +220,9 @@ jobs:
         extraPullNames: nix-community
         name: nix-config
     - name: nix flake check
-      run: nix flake check 'git+file:.'
+      run: nix flake check 'git+file:.?shallow=1'
     - name: nix flake show
-      run: nix flake show 'git+file:.'
+      run: nix flake show 'git+file:.?shallow=1'
     strategy:
       fail-fast: false
       matrix:
