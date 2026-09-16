@@ -5,7 +5,7 @@
   ...
 }:
 {
-  services.gpg-agent = lib.mkIf pkgs.stdenv.isLinux {
+  services.gpg-agent = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
     enable = true;
     enableExtraSocket = true;
     enableScDaemon = true;

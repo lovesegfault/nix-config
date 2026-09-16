@@ -6,7 +6,7 @@
 }:
 let
   inherit (flake) self;
-  inherit (pkgs.stdenv) isDarwin isLinux;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
 in
 {
   imports = [
