@@ -8,7 +8,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableVteIntegration = pkgs.stdenv.isLinux;
+    enableVteIntegration = pkgs.stdenv.hostPlatform.isLinux;
     autocd = true;
     autosuggestion.enable = true;
     dotDir = "${config.xdg.configHome}/zsh";

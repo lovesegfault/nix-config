@@ -4,9 +4,9 @@
 
   xdg = {
     enable = true;
-    mimeApps.enable = pkgs.stdenv.isLinux;
+    mimeApps.enable = pkgs.stdenv.hostPlatform.isLinux;
     userDirs = {
-      enable = pkgs.stdenv.isLinux;
+      enable = pkgs.stdenv.hostPlatform.isLinux;
       setSessionVariables = true;
       desktop = "$HOME/opt";
       documents = "$HOME/doc";

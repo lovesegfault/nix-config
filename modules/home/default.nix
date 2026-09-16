@@ -87,8 +87,8 @@ in
 
   stylix.targets = {
     # Only enable GNOME/GTK when integrated with NixOS (not standalone home-manager)
-    gnome.enable = isIntegrated && pkgs.stdenv.isLinux;
-    gtk.enable = isIntegrated && pkgs.stdenv.isLinux;
+    gnome.enable = isIntegrated && pkgs.stdenv.hostPlatform.isLinux;
+    gtk.enable = isIntegrated && pkgs.stdenv.hostPlatform.isLinux;
     kde.enable = lib.mkDefault false;
     xfce.enable = lib.mkDefault false;
   };

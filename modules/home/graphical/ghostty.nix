@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  inherit (pkgs.stdenv) isDarwin isLinux;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
 in
 {
   programs.ghostty = {

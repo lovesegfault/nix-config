@@ -10,7 +10,7 @@
       enable_audio_bell = false;
       update_check_interval = 0;
     }
-    // (lib.optionalAttrs pkgs.stdenv.isDarwin) {
+    // (lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin) {
       macos_show_window_title_in = "window";
       macos_colorspace = "default";
     };

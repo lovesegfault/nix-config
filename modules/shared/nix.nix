@@ -1,7 +1,7 @@
 # Shared nix settings for NixOS and Darwin
 { lib, pkgs, ... }:
 let
-  inherit (pkgs.stdenv) isDarwin;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin;
 in
 {
   nix = lib.mkMerge [
