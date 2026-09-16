@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+_: {
   programs = {
     seahorse.enable = true;
     _1password.enable = true;
@@ -8,8 +7,7 @@
 
   security.pam.services.login.enableGnomeKeyring = true;
 
-  services = {
-    dbus.packages = with pkgs; [ gcr ];
-    gnome.gnome-keyring.enable = true;
-  };
+  # NOTE: services.gnome.gnome-keyring already adds gcr_3 to services.dbus.packages,
+  # so no explicit gcr entry is needed here.
+  services.gnome.gnome-keyring.enable = true;
 }

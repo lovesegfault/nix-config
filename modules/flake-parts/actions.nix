@@ -126,7 +126,11 @@ let
       inherit (platforms.${p}) os;
     }) hostPlatforms;
 
-  flakeRef = "git+file:.";
+  # ?shallow=1 keeps nix from computing revCount, which it cannot derive from
+  # actions/checkout's depth-1 clone ("is a shallow Git repository, so
+  # 'revCount' is not available"). Nothing here consumes revCount, so this is
+  # cheaper than fetching full history in every job.
+  flakeRef = "git+file:.?shallow=1";
 in
 {
   imports = [ inputs.actions-nix.flakeModules.default ];

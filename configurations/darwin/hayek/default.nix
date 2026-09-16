@@ -43,6 +43,12 @@ in
         virtualisation.host.pkgs = lib.mkForce (
           pkgs.extend (final: _: { nix = final.nixVersions.latest; })
         );
+        # qemu-vm.nix replaced 9p with virtiofs and now unconditionally reaches
+        # for `hostPkgs.virtiofsd` to serve the default xchg/shared mounts.
+        # virtiofsd is `platforms = linux`, so on a Darwin host that fails to
+        # evaluate. A headless builder VM is driven over ssh-ng and never
+        # touches those mounts, so drop them entirely.
+        virtualisation.sharedDirectories = lib.mkForce { };
       };
       maxJobs = 16;
       protocol = "ssh-ng";
