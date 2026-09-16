@@ -73,7 +73,13 @@ in
     eza.enable = true;
     fastfetch.enable = true;
     fd.enable = true;
-    fzf.enable = true;
+    fzf = {
+      enable = true;
+      # atuin owns Ctrl-R (its integration is sourced after fzf's, and only
+      # --disable-up-arrow is set above). Drop fzf's competing binding so
+      # home-manager stops warning about the conflict.
+      historyWidget.command = "";
+    };
     gpg.enable = true;
     jq.enable = true;
     nh = {
