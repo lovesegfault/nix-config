@@ -62,7 +62,7 @@ let
     cache = "actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9"; # v6.1.0
     cachix = "cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866"; # v17
     checkout = "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1"; # v7.0.1
-    nix-installer = "DeterminateSystems/nix-installer-action@ef8a148080ab6020fd15196c2084a2eea5ff2d25"; # v22
+    nix-installer = "DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa"; # v23
   };
 
   # Reusable step definitions
