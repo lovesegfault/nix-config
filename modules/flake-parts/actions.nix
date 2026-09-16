@@ -60,7 +60,7 @@ let
     alls-green = "re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe"; # v1.2.2
     automerge = "peter-evans/enable-pull-request-automerge@a660677d5469627102a1c1e11409dd063606628d"; # v3.0.0
     cache = "actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9"; # v6.1.0
-    cachix = "cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71"; # v17
+    cachix = "cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866"; # v17
     checkout = "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1"; # v7.0.1
     nix-installer = "DeterminateSystems/nix-installer-action@ef8a148080ab6020fd15196c2084a2eea5ff2d25"; # v22
   };
