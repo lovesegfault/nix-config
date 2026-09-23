@@ -40,15 +40,17 @@ in
       ephemeral = true;
       config = {
         imports = [ self.nixosModules.nix ];
-        virtualisation.host.pkgs = lib.mkForce (
-          pkgs.extend (final: _: { nix = final.nixVersions.latest; })
-        );
-        # qemu-vm.nix replaced 9p with virtiofs and now unconditionally reaches
-        # for `hostPkgs.virtiofsd` to serve the default xchg/shared mounts.
-        # virtiofsd is `platforms = linux`, so on a Darwin host that fails to
-        # evaluate. A headless builder VM is driven over ssh-ng and never
-        # touches those mounts, so drop them entirely.
-        virtualisation.sharedDirectories = lib.mkForce { };
+        virtualisation = {
+          # Defaults are 1 core / 3GiB / 20GiB, too small for kernel builds.
+          # Leave the 4 E-cores to macOS. The disk is sparse and wiped on
+          # every restart (ephemeral).
+          cores = 10;
+          darwin-builder = {
+            diskSize = 100 * 1024;
+            memorySize = 16 * 1024;
+          };
+          host.pkgs = lib.mkForce (pkgs.extend (final: _: { nix = final.nixVersions.latest; }));
+        };
       };
       maxJobs = 4;
       protocol = "ssh-ng";
