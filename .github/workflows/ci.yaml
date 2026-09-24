@@ -61,6 +61,10 @@ jobs:
           hostPlatform: x86_64-linux
           name: plato
           runsOn: ubuntu-24.04
+        - attr: nixosConfigurations.riemann.config.system.build.toplevel
+          hostPlatform: aarch64-linux
+          name: riemann
+          runsOn: ubuntu-22.04-arm
         - attr: nixosConfigurations.spinoza.config.system.build.toplevel
           hostPlatform: x86_64-linux
           name: spinoza
@@ -229,10 +233,10 @@ jobs:
         systems:
         - os: ubuntu-24.04
           platform: x86_64-linux
-        - os: macos-15
-          platform: aarch64-darwin
         - os: ubuntu-22.04-arm
           platform: aarch64-linux
+        - os: macos-15
+          platform: aarch64-darwin
     timeout-minutes: 60
 name: ci
 'on':
