@@ -15,8 +15,6 @@
       git-lfs
       (lib.hiPrio nixpkgs-review)
       nix-update
-      tmate
-      upterm
     ];
   };
 
