@@ -96,6 +96,9 @@ in
     gnome.enable = isIntegrated && pkgs.stdenv.hostPlatform.isLinux;
     gtk.enable = isIntegrated && pkgs.stdenv.hostPlatform.isLinux;
     kde.enable = lib.mkDefault false;
+    # stylix's rofi target sets the renamed programs.rofi.font option; rofi
+    # isn't used anywhere, so keep the target off.
+    rofi.enable = false;
     xfce.enable = lib.mkDefault false;
   };
 
