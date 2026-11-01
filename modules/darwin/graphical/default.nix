@@ -3,7 +3,10 @@ let
   inherit (flake) self;
 in
 {
-  home-manager.sharedModules = [ self.homeModules.graphical-ghostty ];
+  home-manager.sharedModules = [
+    self.homeModules.graphical-ghostty
+    self.homeModules.graphical-vicinae
+  ];
 
   homebrew = {
     taps = [
@@ -32,10 +35,6 @@ in
       }
       {
         name = "balenaetcher";
-        greedy = true;
-      }
-      {
-        name = "bartender";
         greedy = true;
       }
       {
@@ -91,10 +90,6 @@ in
         greedy = true;
       }
       {
-        name = "raycast";
-        greedy = true;
-      }
-      {
         name = "roon";
         greedy = true;
       }
@@ -110,8 +105,14 @@ in
         name = "tailscale-app";
         greedy = true;
       }
+      # Thaw 3, the line that supports macOS 27, is only published as a
+      # prerelease; switch to the plain "thaw" cask once 3.x ships stable.
       {
-        name = "topnotch";
+        name = "thaw@beta";
+        greedy = true;
+      }
+      {
+        name = "vicinae";
         greedy = true;
       }
       {
@@ -140,7 +141,7 @@ in
 
   system = {
     # CustomUserPreferences would overwrite the entire AppleSymbolicHotKeys dict;
-    # use -dict-add to surgically disable just Spotlight (id 64) so Raycast can claim cmd+space.
+    # use -dict-add to surgically disable just Spotlight (id 64) so Vicinae can claim cmd+space.
     activationScripts.postActivation.text = ''
       printf 'disabling Spotlight ⌘Space for %s...\n' '${config.system.primaryUser}'
       sudo -u '${config.system.primaryUser}' /usr/bin/defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '<dict><key>enabled</key><false/></dict>'
@@ -148,7 +149,6 @@ in
     '';
 
     defaults = {
-      CustomUserPreferences."com.raycast.macos".raycastGlobalHotkey = "Command-49";
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark";
         AppleTemperatureUnit = "Celsius";
