@@ -344,8 +344,6 @@ in
   boot = {
     initrd = {
       systemd = {
-        enable = true; # Required for custom boot ordering
-
         services = {
           # Disable default ZFS import service to use our custom bare import
           "zfs-import-${poolName}".enable = false;

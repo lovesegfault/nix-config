@@ -54,7 +54,6 @@ in
         "sd_mod"
       ];
       systemd = {
-        enable = true;
         services.rollback = {
           description = "Rollback root filesystem to a pristine state on boot";
           wantedBy = [ "initrd.target" ];

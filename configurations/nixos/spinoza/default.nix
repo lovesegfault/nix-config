@@ -51,7 +51,6 @@ in
         bypassWorkqueues = true;
         device = "/dev/disk/by-uuid/75fa9c3c-3b95-479b-ad90-32d83528524d";
       };
-      systemd.enable = true;
     };
     plymouth.enable = true;
     resumeDevice = "/dev/cryptroot/swap";
