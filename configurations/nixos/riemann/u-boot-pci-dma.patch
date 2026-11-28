@@ -1,0 +1,25 @@
+Find the dma-ranges of PCI devices behind bridges without a device tree node.
+
+U-Boot binds PCI bridges without an ofnode and then takes a device's DMA offset
+from its parent's node, so anything behind a bridge gets no offset. The Pi 5's
+external PCIe port maps system memory at PCI address 0x10_0000_0000, so NVMe
+commands never complete and the drive fails to probe with -110 (ETIMEDOUT).
+
+--- a/drivers/core/device.c
++++ b/drivers/core/device.c
+@@ -459,7 +459,14 @@
+ 	u64 size = 0;
+ 	int ret;
+
+-	if (!CONFIG_IS_ENABLED(DM_DMA) || !parent || !dev_has_ofnode(parent))
++	/*
++	 * Discovered devices (e.g. PCI bridges) have no node of their own, but
++	 * their DMA still goes through the dma-ranges of the bus above them.
++	 */
++	while (parent && !dev_has_ofnode(parent))
++		parent = parent->parent;
++
++	if (!CONFIG_IS_ENABLED(DM_DMA) || !parent)
+ 		return 0;
+
+ 	/*

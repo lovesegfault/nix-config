@@ -1,7 +1,9 @@
 # Raspberry Pi 5 driving the Voron 2.4 (LDO Leviathan v1.3 + extension board).
 #
-# Boots from SD via the Pi firmware -> U-Boot -> extlinux.conf, so NixOS
-# generations show up in the U-Boot menu and rollbacks work. Build the image with
+# Boots from NVMe via the Pi firmware -> U-Boot -> extlinux.conf, so NixOS
+# generations show up in the U-Boot menu and rollbacks work. The Pi's boot order
+# tries SD before NVMe, so any SD card in the slot takes over. Build an image to
+# write to the NVMe with
 #   nix build .#nixosConfigurations.riemann.config.system.build.sdImage
 {
   flake,
@@ -47,9 +49,9 @@ in
   age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICxIQV5CtcR4kXrAC5sTw7OyyoYdOzVXnc5UPrM2TQSy";
 
   fileSystems = {
-    # btrfs with zstd:1 benchmarked best on the SD card: ~1.5x faster store
-    # writes and ~2x faster cold reads than ext4, and near-instant deletes.
-    # sd-image.nix hardcodes ext4.
+    # btrfs with zstd:1 benchmarked best on the SD card riemann started on:
+    # ~1.5x faster store writes and ~2x faster cold reads than ext4, and
+    # near-instant deletes. sd-image.nix hardcodes ext4.
     "/" = {
       fsType = lib.mkForce "btrfs";
       options = [
@@ -88,14 +90,26 @@ in
       uboot = {
         enable = true;
         # U-Boot reads extlinux.conf, the kernel and the initrd straight off
-        # the btrfs root, and rpi_arm64_defconfig only builds ext4/FAT.
-        # FS_BTRFS pulls in zstd, which the compressed extents need.
-        package = pkgs.ubootRaspberryPiAarch64.override {
-          extraConfig = ''
-            CONFIG_FS_BTRFS=y
-            CONFIG_CMD_BTRFS=y
-          '';
-        };
+        # the btrfs root on the NVMe, and rpi_arm64_defconfig only builds
+        # ext4/FAT and no NVMe driver. FS_BTRFS pulls in zstd, which the
+        # compressed extents need.
+        package =
+          (pkgs.ubootRaspberryPiAarch64.override {
+            extraConfig = ''
+              CONFIG_FS_BTRFS=y
+              CONFIG_CMD_BTRFS=y
+              CONFIG_NVME_PCI=y
+            '';
+          }).overrideAttrs
+            (old: {
+              # Without this U-Boot can't talk to the NVMe at all.
+              patches = (old.patches or [ ]) ++ [ ./u-boot-pci-dma.patch ];
+              # The default targets are only mmc, usb and the network.
+              postPatch = (old.postPatch or "") + ''
+                substituteInPlace board/raspberrypi/rpi/rpi.env \
+                  --replace-fail "boot_targets=mmc" "boot_targets=nvme mmc"
+              '';
+            });
       };
     };
   };
@@ -117,6 +131,10 @@ in
   services.resolved.settings.Resolve.DNSSEC = lib.mkForce "false";
 
   sdImage = {
+    # Not the default labels, so an SD card with a NixOS image on it can't be
+    # mistaken for the NVMe.
+    firmwarePartitionName = "RIEMANN_FW";
+    rootVolumeLabel = "riemann";
     populateRootCommands = ''
       mkdir -p ./files/boot
       ${config.boot.loader.generic-extlinux-compatible.populateCmd} -c ${config.system.build.toplevel} -d ./files/boot
