@@ -22,6 +22,9 @@ in
     # Internal modules via flake outputs
     self.nixosModules.default
     self.nixosModules.users-bemeurer
+
+    # Host-specific files
+    ./klipper.nix
   ];
 
   # Platform
